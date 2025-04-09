@@ -542,33 +542,205 @@ th, td {
             <p>基于卷界链技术构建 · 安全透明 · 多重收益</p>
         </footer>
     </div>
+  <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数字卷轴DSC - 创新数字资产平台</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* 之前的样式保持不变... */
+
+        /* 修改模态框样式 */
+        .modal-content {
+            background: linear-gradient(135deg, #ff7e00, #ff4500);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            position: relative;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .modal-header {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #ff4500, #ff7e00);
+            border-radius: 50%;
+            border: 2px solid white;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            transform: rotate(90deg);
+            background: linear-gradient(135deg, #ff7e00, #ff4500);
+        }
+        
+        .wechat-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .wechat-icon {
+            font-size: 2rem;
+            color: #07C160;
+            margin-bottom: 10px;
+        }
+        
+        .wechat-id {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            padding: 10px;
+            background-color: white;
+            border-radius: 5px;
+            border: 1px dashed #07C160;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .wechat-id:hover {
+            background-color: #f0fff0;
+            transform: scale(1.05);
+        }
+        
+        .wechat-id:active {
+            transform: scale(0.98);
+        }
+        
+        .copy-hint {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #07C160;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .wechat-id.copied .copy-hint {
+            opacity: 1;
+            top: -40px;
+        }
+        
+        .modal-footer {
+            margin-top: 20px;
+        }
+        
+        .modal-btn {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #ff4500;
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .modal-btn:hover {
+            background-color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- 之前的HTML内容保持不变... -->
+
+    <div id="contactModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">联系推荐人获取快速认证</div>
+                <div class="close-modal" onclick="hideContactModal()">×</div>
+            </div>
+            
+            <div class="wechat-container">
+                <div class="wechat-icon">微信</div>
+                <p>请添加以下微信号联系推荐人：</p>
+                <div class="wechat-id" onclick="copyWechatId(this)">
+                    dsc_2025
+                    <div class="copy-hint">已复制</div>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="modal-btn" onclick="hideContactModal()">关闭</button>
+            </div>
+        </div>
+    </div>
     
     <script>
-        // 显示指定内容区域
-        function showSection(sectionId) {
-            // 隐藏所有内容区域
-            const sections = document.querySelectorAll('.content-section');
-            sections.forEach(section => {
-                section.classList.remove('active');
-            });
+        // 之前的JavaScript代码保持不变...
+
+        // 复制微信号功能
+        function copyWechatId(element) {
+            const wechatId = 'dsc_2025';
             
-            // 显示选中的内容区域
-            document.getElementById(sectionId).classList.add('active');
+            // 创建临时textarea元素
+            const textarea = document.createElement('textarea');
+            textarea.value = wechatId;
+            textarea.style.position = 'fixed';  // 防止页面滚动
+            document.body.appendChild(textarea);
+            textarea.select();
             
-            // 平滑滚动到内容区域
-            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+            try {
+                // 执行复制命令
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    // 显示复制成功提示
+                    element.classList.add('copied');
+                    setTimeout(() => {
+                        element.classList.remove('copied');
+                    }, 2000);
+                }
+            } catch (err) {
+                console.error('复制失败:', err);
+            }
+            
+            // 移除临时元素
+            document.body.removeChild(textarea);
         }
-        
-        // 显示联系推荐人模态框
-        function showContactModal() {
-            document.getElementById('contactModal').style.display = 'flex';
-        }
-        
-        // 隐藏联系推荐人模态框
-        function hideContactModal() {
-            document.getElementById('contactModal').style.display = 'none';
-        }
-        
+    </script>
+</body>
+</html>
         // 计算并显示运行时间
         function updateRuntime() {
             const startDate = new Date('2023-09-25T00:00:00');
