@@ -4,139 +4,460 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>数字卷轴DSC - 创新数字资产平台</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        /* 修改模态框样式 */
-        .modal-content {
-            background: linear-gradient(135deg, #ff7e00, #ff4500);
-            padding: 30px;
-            border-radius: 15px;
-            max-width: 400px;
-            text-align: center;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-            position: relative;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+        :root {
+            --primary-color: #FF6B35;
+            --secondary-color: #FFA630;
+            --dark-color: #333;
+            --light-color: #fff;
+            --accent-color: #FFE74C;
         }
         
-        .modal-header {
-            position: relative;
-            margin-bottom: 20px;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', 'Microsoft YaHei', sans-serif;
         }
         
-        .modal-title {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 10px;
+        body {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--light-color);
+            min-height: 100vh;
+            padding: 0;
+            overflow-x: hidden;
         }
         
-        .close-modal {
-            position: absolute;
-            top: -15px;
-            right: -15px;
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #ff4500, #ff7e00);
-            border-radius: 50%;
-            border: 2px solid white;
-            color: white;
-            font-size: 1.2rem;
-            font-weight: bold;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-        }
-        
-        .close-modal:hover {
-            transform: rotate(90deg);
-            background: linear-gradient(135deg, #ff7e00, #ff4500);
-        }
-        
-        .wechat-container {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
             padding: 20px;
-            margin: 20px 0;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 40px 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             position: relative;
             overflow: hidden;
         }
         
-        .wechat-icon {
-            font-size: 2rem;
-            color: #07C160;
-            margin-bottom: 10px;
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+            z-index: 0;
         }
         
-        .wechat-id {
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .timer-container {
+            margin: 40px 0;
+            padding: 25px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .timer-label {
             font-size: 1.5rem;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            font-weight: 500;
+        }
+        
+        .timer {
+            font-size: 3rem;
             font-weight: bold;
-            color: #333;
-            padding: 10px;
-            background-color: white;
-            border-radius: 5px;
-            border: 1px dashed #07C160;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            animation: pulse 1.5s infinite alternate;
+            font-family: 'Montserrat', sans-serif;
             position: relative;
         }
         
-        .wechat-id:hover {
-            background-color: #f0fff0;
-            transform: scale(1.05);
+        @keyframes pulse {
+            0% { text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); }
+            100% { text-shadow: 0 0 20px rgba(255, 230, 76, 0.8), 0 0 30px rgba(255, 230, 76, 0.6); }
         }
         
-        .wechat-id:active {
-            transform: scale(0.98);
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
         }
         
-        .copy-hint {
+        .btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: var(--light-color);
+            padding: 20px;
+            font-size: 1.2rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            font-weight: 500;
+        }
+        
+        .btn::before {
+            content: '';
             position: absolute;
-            top: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #07C160;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 0.8rem;
-            opacity: 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+            z-index: -1;
             transition: all 0.3s ease;
         }
         
-        .wechat-id.copied .copy-hint {
-            opacity: 1;
-            top: -40px;
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.25);
         }
         
-        .modal-footer {
-            margin-top: 20px;
+        .btn:hover::before {
+            background: linear-gradient(45deg, rgba(255,255,255,0.2) 0%, transparent 100%);
         }
         
-        .modal-btn {
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .content-section {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            display: none;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: 
+
+translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .active {
+            display: block;
+        }
+        
+        h2 {
+            margin-bottom: 25px;
+            font-size: 2.2rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            font-family: 'Montserrat', sans-serif;
+            color: var(--accent-color);
+        }
+        
+        h3 {
+            margin: 25px 0 15px;
+            font-size: 1.6rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        th {
+            background: rgba(0, 0, 0, 0.3);
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+        
+        tr:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .highlight {
+            background: rgba(255, 230, 76, 0.2);
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-weight: bold;
             display: inline-block;
-            background-color: rgba(255, 255, 255, 0.9);
-            color: #ff4500;
-            padding: 10px 20px;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .auth-box {
+            text-align: center;
+            margin: 40px 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .auth-btn {
+            display: inline-block;
+            background: var(--light-color);
+            color: var(--primary-color);
+            padding: 18px 36px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: bold;
-            margin: 0 5px;
+            margin: 15px;
             transition: all 0.3s ease;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
             border: none;
+            font-size: 1.2rem;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
         
-        .modal-btn:hover {
-            background-color: white;
+        .auth-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 0%, rgba(255,255,255,0.3) 100%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+        
+        .auth-btn:hover {
+            background: var(--light-color);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .auth-btn:hover::after {
+            transform: translateX(100%);
+        }
+        
+        .contact-btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: var(--dark-color);
+            padding: 18px 36px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-btn:hover {
+            background: #ffdf1a;
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        #contactModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease-out;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: modalIn 0.5s ease-out;
+        }
+        
+        @keyframes modalIn {
+            0% { opacity: 0; transform: scale(0.9) translateY(20px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        
+        .wechat-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 30px 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .wechat-id {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-right: 20px;
+            letter-spacing: 1px;
+        }
+        
+        .copy-btn {
+            background: var(--accent-color);
+            color: var(--dark-color);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .copy-btn:hover {
+            background: #ffdf1a;
             transform: translateY(-3px);
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .copy-btn svg {
+            margin-right: 8px;
+        }
+        
+        .copy-status {
+            height: 25px;
+            margin: 15px 0;
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .close-btn {
+            margin-top: 25px;
+            padding: 12px 25px;
+            background: rgba(0, 0, 0, 0.3);
+            color: var(--light-color);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .close-btn:hover {
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .button-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn {
+                padding: 18px;
+                font-size: 1.1rem;
+            }
+            
+            .timer {
+                font-size: 2.2rem;
+            }
+            
+            .auth-btn, .contact-btn {
+                padding: 15px 30px;
+                font-size: 1.1rem;
+                margin: 10px;
+            }
+            
+            .modal-content {
+                width: 90%;
+                padding: 30px 20px;
+            }
         }
     </style>
-</head>
-<body>
 </head>
 <body>
     <div class="container">
@@ -150,7 +471,7 @@
             </div>
             
             <div class="auth-box">
-                <a href="https://prod.digital-scroll.org/#/pages/reg?c=182N17" class="auth-btn">立即注册/登录</a>
+                <a href="https://prod.digital-scroll.org/#/pages/reg?c=182N17"class="auth-btn">立即注册/登录</a>
                 <button class="contact-btn" onclick="showContactModal()">联系推荐人获取快速认证</button>
             </div>
         </header>
@@ -159,7 +480,9 @@
             <button class="btn" onclick="showSection('intro')">平台介绍</button>
             <button class="btn" onclick="showSection('scrolls')">卷轴收益</button>
             <button class="btn" onclick="showSection('verification')">身份验证</button>
-            <button class="btn" onclick="showSection('promotion')">推广奖励</button>
+            <button class="btn" 
+
+ onclick="showSection('promotion')">推广奖励</button>
             <button class="btn" onclick="showSection('trading')">市场交易</button>
             <button class="btn" onclick="showSection('faq')">常见问题</button>
             <button class="btn" onclick="showSection('contact')">联系我们</button>
@@ -225,7 +548,7 @@
                     <td>180天</td>
                 </tr>
                 <tr>
-<td>钻石卷轴</td>
+                    <td>钻石卷轴</td>
                     <td>10000 DSC</td>
                     <td>50.82 DSC</td>
                     <td>280天</td>
@@ -264,7 +587,7 @@
             
             <h3>刷脸验证问题解决</h3>
             <p>若APP二次刷脸无法通过，请尝试使用网页版：<br>
-            <a href="https://prod.digital-scroll.org" style="color: white; text-decoration: underline;">https://prod.digital-scroll.org</a></p>
+            <a href="https://prod.digital-scroll.org" style="color: var(--accent-color); text-decoration: underline;">https://prod.digital-scroll.org</a></p>
         </div>
         
         <div id="promotion" class="content-section">
@@ -348,7 +671,7 @@
             <p>如有任何问题，请通过以下方式联系我们：</p>
             
             <h3>官方网址</h3>
-            <p><a href="https://prod.digital-scroll.org" style="color: white; text-decoration: underline;">https://prod.digital-scroll.org</a></p>
+            <p><a href="https://prod.digital-scroll.org" style="color: var(--accent-color); text-decoration: underline;">https://prod.digital-scroll.org</a></p>
             
             <h3>重要地址</h3>
             <ul>
@@ -359,7 +682,25 @@
             </ul>
         </div>
         
-       /div
+        <div id="contactModal">
+            <div class="modal-content">
+                <h3>联系推荐人获取快速认证</h3>
+                <p>请复制以下微信号联系推荐人：</p>
+                <div class="wechat-container">
+                    <span class="wechat-id" id="wechatId">dsc_2025</span>
+                    <button class="copy-btn" onclick="copyWechatId()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                            <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                        </svg>
+                        复制
+                    </button>
+                </div>
+                <div class="copy-status" id="copyStatus"></div>
+                <button class="close-btn" onclick="hideContactModal()">关闭
+</button>
+            </div>
+        </div>
         
         <footer>
             <p>© 2023 数字卷轴DSC平台 版权所有</p>
@@ -391,6 +732,32 @@
         // 隐藏联系推荐人模态框
         function hideContactModal() {
             document.getElementById('contactModal').style.display = 'none';
+        }
+        
+        // 复制微信号到剪贴板
+        function copyWechatId() {
+            const wechatId = document.getElementById('wechatId');
+            const copyStatus = document.getElementById('copyStatus');
+            
+            // 创建临时textarea元素
+            const textarea = document.createElement('textarea');
+            textarea.value = wechatId.textContent;
+            document.body.appendChild(textarea);
+            
+            // 选中并复制文本
+            textarea.select();
+            document.execCommand('copy');
+            
+            // 移除临时元素
+            document.body.removeChild(textarea);
+            
+            // 显示复制成功提示
+            copyStatus.textContent = '微信号已复制到剪贴板！';
+            
+            // 3秒后隐藏提示
+            setTimeout(() => {
+                copyStatus.textContent = '';
+            }, 3000);
         }
         
         // 计算并显示运行时间
