@@ -150,8 +150,7 @@
             background-color: rgba(255, 255, 255, 0.1);
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
         }
-        
-th, td {
+        th, td {
             padding: 15px;
             text-align: left;
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -538,11 +537,72 @@ th, td {
         </div>
         
         <footer>
-            <p>© 2025 数字卷轴DSC平台</p>
+            <p>© 2023 数字卷轴DSC平台 版权所有</p>
             <p>基于卷界链技术构建 · 安全透明 · 多重收益</p>
         </footer>
     </div>
-  <!DOCTYPE html>
+    
+    <script>
+        // 显示指定内容区域
+        function showSection(sectionId) {
+            // 隐藏所有内容区域
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // 显示选中的内容区域
+            document.getElementById(sectionId).classList.add('active');
+            
+            // 平滑滚动到内容区域
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // 显示联系推荐人模态框
+        function showContactModal() {
+            document.getElementById('contactModal').style.display = 'flex';
+        }
+        
+        // 隐藏联系推荐人模态框
+        function hideContactModal() {
+            document.getElementById('contactModal').style.display = 'none';
+        }
+        
+        // 计算并显示运行时间
+        function updateRuntime() {
+            const startDate = new Date('2023-09-25T00:00:00');
+            const now = new Date();
+            const diff = now - startDate;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('runtimeTimer').textContent = 
+                `${days}天 ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        // 初始化页面
+        window.onload = function() {
+            updateRuntime();
+            setInterval(updateRuntime, 1000);
+            
+            // 默认显示第一个内容区域
+            showSection('intro');
+        };
+        
+        // 点击模态框外部关闭模态框
+        window.onclick = function(event) {
+            const modal = document.getElementById('contactModal');
+            if (event.target == modal) {
+                hideContactModal();
+            }
+        }
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -737,40 +797,6 @@ th, td {
             
             // 移除临时元素
             document.body.removeChild(textarea);
-        }
-    </script>
-</body>
-</html>
-        // 计算并显示运行时间
-        function updateRuntime() {
-            const startDate = new Date('2023-09-25T00:00:00');
-            const now = new Date();
-            const diff = now - startDate;
-            
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-            
-            document.getElementById('runtimeTimer').textContent = 
-                `${days}天 ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        }
-        
-        // 初始化页面
-        window.onload = function() {
-            updateRuntime();
-            setInterval(updateRuntime, 1000);
-            
-            // 默认显示第一个内容区域
-            showSection('intro');
-        };
-        
-        // 点击模态框外部关闭模态框
-        window.onclick = function(event) {
-            const modal = document.getElementById('contactModal');
-            if (event.target == modal) {
-                hideContactModal();
-            }
         }
     </script>
 </body>
