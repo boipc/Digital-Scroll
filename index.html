@@ -637,27 +637,50 @@ function displayHistory() {
             </div>`
         ).join('');
 }
+ 
+<!-- 标题区域 -->
+<header class="page-header">
+    <h1>网站标题</h1>
+    <!-- 新增计时器位置 -->
+    <div class="super-timer">
+        <div id="enhanced-running-time">DSC已稳定运行：<span class="timer-numbers">0天 00:00:00</span></div>
+    </div>
+</header>
 
-// 运行时间计算器
-function calculateRuntime() {
-    const startDate = new Date('2023-09-25T00:00:00+08:00'); // 北京时间
-    const now = new Date();
-    const diff = now - startDate;
-    
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    
-    document.getElementById('running-time').innerHTML = 
-        `🕒 DSC已稳定运行：${days} 天 ${hours} 小时 ${minutes} 分`;
+<style>
+/* 新增header样式 */
+.page-header {
+    padding: 20px 0;
+    background: #34495e;
+    position: relative;
 }
 
-// 初始化
-document.addEventListener('DOMContentLoaded', () => {
-    updateHistory();
-    calculateRuntime();
-    // 每分钟更新时间
-    setInterval(calculateRuntime, 60000);
-});
-</script>
+/* 调整计时器位置 */
+.super-timer {
+    margin: 15px auto 0;  /* 上边距隔开标题 */
+    width: 90%;
+    max-width: 1200px;
+    padding: 15px;
+    transform: translateY(10px);  /* 微调垂直位置 */
+    border-radius: 0 0 15px 15px; /* 底部圆角 */
+}
+
+/* 保持原有计时器样式 */
+#enhanced-running-time {
+    /* 原有样式保留 */
+    font-size: 2.2em;  /* 适当缩小字号 */
+}
+
+/* 移动端适配调整 */
+@media (max-width: 768px) {
+    .super-timer {
+        width: 95%;
+        padding: 10px;
+    }
+    #enhanced-running-time {
+        font-size: 1.5em;
+    }
+}
+</style>
+ 
  
