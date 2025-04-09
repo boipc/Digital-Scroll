@@ -1,0 +1,147 @@
+ 
+<!-- 添加在页面底部 -->
+<div class="web-stats">
+    <!-- 访问量统计 -->
+    <div id="visit-counter"></div>
+    
+    <!-- 分享按钮 -->
+    <div class="share-buttons">
+        <button class="wechat-btn" onclick="showWechatQR()">微信分享</button>
+        <button class="qq-btn" onclick="shareToQQ()">QQ分享</button>
+    </div>
+    
+    <!-- 微信二维码弹窗 -->
+    <div id="qr-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="qrcode"></div>
+            <p>扫码分享到微信</p>
+        </div>
+    </div>
+</div>
+
+<style>
+/* 统计样式 */
+.web-stats {
+    margin: 20px 0;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#visit-counter {
+    font-size: 14px;
+    color: #666;
+}
+
+/* 分享按钮样式 */
+.share-buttons button {
+    padding: 8px 15px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.wechat-btn {
+    background: #2dbe60;
+    color: white;
+}
+
+.qq-btn {
+    background: #12B7F5;
+    color: white;
+}
+
+/* 微信二维码弹窗 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background: white;
+    margin: 15% auto;
+    padding: 20px;
+    width: 220px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+#qrcode {
+    margin: 10px auto;
+    width: 160px;
+    height: 160px;
+}
+</style>
+
+<script>
+// 访问量计数器（PV统计）
+function updateCounter() {
+    // 总访问量（永久存储）
+    let totalVisits = localStorage.getItem('totalVisits') || 0;
+    totalVisits = parseInt(totalVisits) + 1;
+    localStorage.setItem('totalVisits', totalVisits);
+
+    // 今日访问量（按日期存储）
+    const today = new Date().toDateString();
+    let dailyVisits = localStorage.getItem(today) || 0;
+    dailyVisits = parseInt(dailyVisits) + 1;
+    localStorage.setItem(today, dailyVisits);
+
+    document.getElementById('visit-counter').innerHTML = `
+        总访问量：${totalVisits}次<br>
+        今日访问：${dailyVisits}次
+    `;
+}
+
+// 微信二维码生成
+let qrGenerated = false;
+function showWechatQR() {
+    const modal = document.getElementById('qr-modal');
+    modal.style.display = "block";
+    
+    if (!qrGenerated) {
+        new QRCode(document.getElementById("qrcode"), {
+            text: window.location.href,
+            width: 160,
+            height: 160,
+            colorDark : "#000000",
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.H
+        });
+        qrGenerated = true;
+    }
+}
+
+// QQ分享功能
+function shareToQQ() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open(`https://connect.qq.com/widget/shareqq/index.html?url=${url}&title=${title}`, '_blank', 'width=615,height=530');
+}
+
+// 关闭弹窗
+function closeModal() {
+    document.getElementById('qr-modal').style.display = "none";
+}
+
+// 初始化
+document.addEventListener('DOMContentLoaded', () => {
+    updateCounter();
+    // 加载二维码库
+    const script = document.createElement('script');
+    script.src = 'https://cdn.staticfile.org/qrcodejs/1.0.0/qrcode.min.js';
+    document.head.appendChild(script);
+});
+</script>
+ 
