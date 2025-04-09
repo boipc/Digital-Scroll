@@ -122,7 +122,7 @@
         
         .btn {
             background: rgba(255, 255, 255, 0.15);
-            border: none;
+border: none;
             color: var(--light-color);
             padding: 20px;
             font-size: 1.2rem;
@@ -178,9 +178,7 @@
         }
         
         @keyframes fadeIn {
-            from { opacity: 0; transform: 
-
-translateY(20px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
@@ -458,7 +456,7 @@ translateY(20px); }
             }
         }
     </style>
-  </head>
+</head>
 <body>
     <div class="container">
         <header>
@@ -467,11 +465,11 @@ translateY(20px); }
             
             <div class="timer-container">
                 <div class="timer-label">DSC已稳定运行</div>
-                <div class="timer" id="runtimeTimer">00天 00:00:00</div>
+<div class="timer" id="runtimeTimer">00天 00:00:00</div>
             </div>
             
             <div class="auth-box">
-                <a href="https://prod.digital-scroll.org/#/pages/reg?c=182N17"class="auth-btn">立即注册/登录</a>
+                <a href="https://prod.digital-scroll.org/#/pages/reg?c=182N17" class="auth-btn">立即注册/登录</a>
                 <button class="contact-btn" onclick="showContactModal()">联系推荐人获取快速认证</button>
             </div>
         </header>
@@ -480,9 +478,7 @@ translateY(20px); }
             <button class="btn" onclick="showSection('intro')">平台介绍</button>
             <button class="btn" onclick="showSection('scrolls')">卷轴收益</button>
             <button class="btn" onclick="showSection('verification')">身份验证</button>
-            <button class="btn" 
-
- onclick="showSection('promotion')">推广奖励</button>
+            <button class="btn" onclick="showSection('promotion')">推广奖励</button>
             <button class="btn" onclick="showSection('trading')">市场交易</button>
             <button class="btn" onclick="showSection('faq')">常见问题</button>
             <button class="btn" onclick="showSection('contact')">联系我们</button>
@@ -643,7 +639,6 @@ translateY(20px); }
             <h3>注意事项</h3>
             <p class="highlight">若连续多次交易被申诉，恐将被判定为捣乱账户，永久禁止交易，永久停产卷轴，实名信息永久无法再次上车。</p>
         </div>
-        
         <div id="faq" class="content-section">
             <h2>常见问题解答</h2>
             
@@ -684,7 +679,7 @@ translateY(20px); }
         
         <div id="contactModal">
             <div class="modal-content">
-                <h3>联系推荐人领取新人福利</h3>
+                <h3>联系推荐人获取快速认证</h3>
                 <p>请复制以下微信号联系推荐人：</p>
                 <div class="wechat-container">
                     <span class="wechat-id" id="wechatId">dsc_2025</span>
@@ -697,15 +692,17 @@ translateY(20px); }
                     </button>
                 </div>
                 <div class="copy-status" id="copyStatus"></div>
-                <button class="close-btn" onclick="hideContactModal()">关闭
-</button>
+                <button class="close-btn" onclick="hideContactModal()">关闭</button>
             </div>
         </div>
         
         <footer>
-            <p>© 2025 数字卷轴DSC</p>
+            <p>© 2023 数字卷轴DSC平台 版权所有</p>
             <p>基于卷界链技术构建 · 安全透明 · 多重收益</p>
-   
+        </footer>
+    </div>
+    
+    <script>
         // 显示指定内容区域
         function showSection(sectionId) {
             // 隐藏所有内容区域
@@ -788,5 +785,6 @@ translateY(20px); }
                 hideContactModal();
             }
         }
+    </script>
 </body>
 </html>
