@@ -458,6 +458,29 @@ translateY(20px); }
             }
         }
     </style>
+    .visitor-counter {
+        margin-top: 20px;
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.8);
+        background: rgba(0, 0, 0, 0.2);
+        padding: 10px 20px;
+        border-radius: 50px;
+        display: inline-block;
+        transition: all 0.3s ease;
+    }
+    
+    #visitCount {
+        font-weight: bold;
+        color: var(--accent-color);
+        transition: all 0.3s ease;
+    }
+    
+    .visitor-counter:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px rgba(255, 230, 76, 0.5);
+    }
+</style>
+
 </head>
 <body>
     <div class="container">
@@ -706,6 +729,9 @@ translateY(20px); }
             <p>© 2025 数字卷轴DSC</p>
             <p>基于卷界链技术构建 · 安全透明 · 多重收益</p>
         </footer>
+    <div class="visitor-counter">
+        总访问量: <span id="visitCount">0</span>
+    </div>
     </div>
     
     <script>
@@ -792,5 +818,43 @@ translateY(20px); }
             }
         }
     </script>
+    // 访问量统计
+    function updateVisitCount() {
+        // 从localStorage获取当前访问量，如果没有则从0开始
+        let count = localStorage.getItem('visitCount') || 0;
+        count = parseInt(count);
+        
+        // 随机增加3-8次访问量
+        const randomIncrement = Math.floor(Math.random() * 6) + 3; // 3-8的随机数
+        count += randomIncrement;
+        
+        // 动画效果
+        const counterElement = document.getElementById('visitCount');
+        let current = parseInt(counterElement.textContent);
+        const increment = Math.ceil(randomIncrement / 10);
+        
+        const animate = () => {
+            if (current < count) {
+                current += increment;
+                if (current > count) current = count;
+                counterElement.textContent = current;
+                setTimeout(animate, 50);
+            }
+        };
+        
+        animate();
+        
+        // 存储更新后的访问量
+        localStorage.setItem('visitCount', count);
+    }
+    
+    // 初始化页面时调用
+    window.onload = function() {
+        updateRuntime();
+        setInterval(updateRuntime, 1000);
+        updateVisitCount();
+        showSection('intro');
+    };
+</script>
 </body>
 </html>
