@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数字卷轴DSC学习资料</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f7fa;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #1a73e8;
+            color: white;
+            border-radius: 8px;
+        }
+        .auth-box {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .auth-btn {
+            display: inline-block;
+            background-color: #1a73e8;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 10px;
+            transition: background-color 0.3s;
+        }
+        .auth-btn:hover {
+            background-color: #0d5bba;
+        }
+        .contact-btn {
+            display: inline-block;
+            background-color: #34a853;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 10px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+        .contact-btn:hover {
+            background-color: #2d9249;
+        }
+        .section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: #1a73e8;
+            font-size: 1.5em;
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        h3 {
+            color: #1a73e8;
+            font-size: 1.2em;
+            margin: 20px 0 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .note {
+            background-color: #fff8e1;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .warning {
+            background-color: #ffebee;
+            padding: 15px;
+            border-left: 4px solid #f44336;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .code {
+            font-family: monospace;
+            background-color: #f5f5f5;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        #contactModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 400px;
+            text-align: center;
+        }
+        .close-btn {
+            margin-top: 20px;
+            padding: 8px 16px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            .header {
+                padding: 15px;
+            }
+            .section {
+                padding: 15px;
+            }
+            table {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>数字卷轴DSC学习资料</h1>
+        <p>区块链技术研究参考 - 常见问题与系统架构</p>
+    </div>
+
+    <div class="auth-box">
+        <h3>学习参考入口</h3>
+        <a href="https://prod.digital-scroll.org/#/pages/reg?c=182N17" class="auth-btn" target="_blank">注册/登录学习平台</a>
+        <div class="contact-btn" onclick="showContact()">联系推荐人获取学习资料</div>
+    </div>
+
+    <div id="contactModal">
+        <div class="modal-content">
+            <h3>学习资料联系方式</h3>
+            <p>推荐人微信号：<strong>dsc_2025</strong></p>
+            <p>请注明"学习资料获取"</p>
+            <button class="close-btn" onclick="hideContact()">关闭</button>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>零撸注意事项</h2>
+        
+        <h3>1. 卷轴收益</h3>
+        <p>卷轴每小时产出，超48小时未领取收益，卷轴会停产。领取收益后，卷轴自动恢复。</p>
+        
+        <h3>2. 身份验证</h3>
+        <p>注册满10天需实名认证才能继续领取收益。可请求上级授予认证费用，或领满0.07 DSC余额后及时认证；余额满1DSC需二次刷脸验证。</p>
+        
+        <h3>3. 兑换免刷脸</h3>
+        <p>兑换任意卷轴成为投资者，免二次刷脸验证。</p>
+        
+        <h3>4. 刷脸验证问题</h3>
+        <p>若APP二次刷脸无法通过，请尝试使用网页版：<br>
+        <span class="code">https://prod.digital-scroll.org</span></p>
+        
+        <h3>5. 推广奖励</h3>
+        <p>推广下级，永久享下级收益的10%奖励。</p>
+        
+        <h3>6. 市场交易</h3>
+        <p>若连续多次交易被申诉，恐将被判定为捣乱账户，永久禁止交易，永久停产卷轴，实名信息永久无法再次上车。</p>
+        
+        <h3>7. 群组加入退出</h3>
+        <p>拥有某级别卷轴，自动加入该级别群组；失去该级别卷轴，自动退出该级别群组。</p>
+        
+        <h3>8. 保管好安全码</h3>
+        <p>忘记登录密码或资金密码时，可用安全码重置。妥善保管好安全码。</p>
+        
+        <h3>9. 学习资源</h3>
+        <p>在"我的-常见问题"中可了解相关内容。<br>
+        在"首页-卷轴学院"观看视频全面了解平台运作。</p>
+    </div>
+
+    <div class="section">
+        <h2>卷轴设定</h2>
+        
+        <h3>卷轴级别与收益</h3>
+        <table>
+            <tr>
+                <th>卷轴级别</th>
+                <th>租金</th>
+                <th>日产</th>
+                <th>周期</th>
+            </tr>
+            <tr>
+                <td>试炼卷轴</td>
+                <td>注册送</td>
+                <td>0.03 DSC</td>
+                <td>永久</td>
+            </tr>
+            <tr>
+                <td>青铜卷轴</td>
+                <td>10 DSC</td>
+                <td>0.06 DSC</td>
+                <td>60天</td>
+            </tr>
+            <tr>
+                <td>白银卷轴</td>
+                <td>100 DSC</td>
+                <td>0.6 DSC</td>
+                <td>60天</td>
+            </tr>
+            <tr>
+                <td>黄金卷轴</td>
+                <td>1000 DSC</td>
+                <td>4.53 DSC</td>
+                <td>120天</td>
+            </tr>
+            <tr>
+                <td>铂金卷轴</td>
+                <td>5000 DSC</td>
+                <td>23.33 DSC</td>
+                <td>180天</td>
+            </tr>
+            <tr>
+                <td>钻石卷轴</td>
+                <td>10000 DSC</td>
+                <td>50.82 DSC</td>
+                <td>280天</td>
+            </tr>
+            <tr>
+                <td>至尊卷轴</td>
+                <td>50000 DSC</td>
+                <td>270 DSC</td>
+                <td>360天</td>
+            </tr>
+        </table>
+        
+        <div class="warning">
+            <p>以下情况会导致卷轴挂起:</p>
+            <ul>
+                <li>48小时未领卷轴收益</li>
+                <li>交易申诉被判定为责任方</li>
+            </ul>
+        </div>
+        
+        <h3>卷轴增产设定</h3>
+        <table>
+            <tr>
+                <th>租金</th>
+                <th>基础日产</th>
+                <th>增产条件</th>
+                <th>封顶日产</th>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>0.06</td>
+                <td>无</td>
+                <td>0.06</td>
+            </tr>
+            <tr>
+                <td>100</td>
+                <td>0.6</td>
+                <td>无</td>
+                <td>0.6</td>
+            </tr>
+            <tr>
+                <td>1000</td>
+                <td>4.53</td>
+                <td>上月直推每+1位(活跃度≥3),日产+0.35</td>
+                <td>7.33(推8位)</td>
+            </tr>
+            <tr>
+                <td>5000</td>
+                <td>23.33</td>
+                <td>上月直推每+1位(活跃度≥3),日产+1</td>
+                <td>38.33(推15位)</td>
+            </tr>
+            <tr>
+                <td>10000</td>
+                <td>50.82</td>
+                <td>上月直推每+1位(活跃度≥3),日产+1.3</td>
+                <td>83.32(推25位)</td>
+            </tr>
+            <tr>
+                <td>50000</td>
+                <td>270</td>
+                <td>上月直推每+1位(活跃度≥3),日产+4.5</td>
+                <td>450(推40位)</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>收益设定</h2>
+        
+        <p>收益分为卷轴收益、推广收益和族群收益。</p>
+        
+        <h3>卷轴收益</h3>
+        <p><strong>发放频率:</strong> 卷轴收益每小时发放。</p>
+        <p><strong>收益计算方式:</strong> 每小时卷轴收益=运行中的卷轴日产1/24。</p>
+        
+        <h3>推广收益</h3>
+        <p><strong>发放与领取规则:</strong> 满48小时可领取，推广收益由二代用户(包括直推和间推)领取卷轴收益时实时上送。</p>
+        
+        <p><strong>收益规则:</strong> 推广收益采用烧伤机制:</p>
+        <ul>
+            <li>个人活跃度>直推活跃度:
+                <ul>
+                    <li>奖励直推卷轴收益的5%</li>
+                    <li>否则，奖励直推卷轴收益的3%</li>
+                </ul>
+            </li>
+            <li>个人活跃度>间推活跃度:
+                <ul>
+                    <li>奖励间推卷轴收益的3%</li>
+                    <li>否则，奖励间推卷轴收益的1.5%</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>交易说明</h2>
+        
+        <h3>DSC交易区(DSC/USDS交易对)</h3>
+        <ul>
+            <li><strong>交易时间:</strong> 24小时全天候交易</li>
+            <li><strong>交易方式:</strong> 玩家可自由挂买单(托收USDS)或挂卖单(托收DSC)。购买或出售交易,通过智能合约保障USDS与DSC的安全快速交换</li>
+            <li><strong>锁单功能:</strong> 主动购买DSC方式，若USDS余额不足，可先锁单，前往USDS交易区购得USDS后完成交易。超时不付款，自动处罚停产7天，期间无法再次交易</li>
+            <li><strong>手续费优惠:</strong> 购买官方币或零撸币可积累等额的免手续费额度，后续在额度内卖出，则免手续费</li>
+        </ul>
+        
+        <h3>USDS交易区(USDS/CNY交易对)</h3>
+        <ul>
+            <li><strong>交易时间:</strong> 每日8:00至21:00</li>
+            <li><strong>市商服务:</strong> 市商提供优质挂单服务,玩家可自由发起出售或购买</li>
+            <li><strong>申诉机制:</strong> 若玩家超时未付款或未放币，系统将自动申诉。申诉期间，市商可取消交易或强制对方放币。市商取消交易时，可处罚对方7天或不处罚</li>
+            <li><strong>交易后申诉:</strong> 支持交易完成后申诉</li>
+        </ul>
+        
+        <h3>USDS提币闪兑</h3>
+        <p><strong>快速兑换:</strong> 通过USDS提币，几分钟内即可将USDS兑换为USDT</p>
+        
+        <h3>USDS划转</h3>
+        <ul>
+            <li><strong>市商划转:</strong> 市商地址之间可自由划转USDS</li>
+            <li><strong>玩家划转:</strong> 玩家地址每月可转出≤20USDS</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>交易手续费设定</h2>
+        
+        <p>交易市场挂卖单或主动出售时,交易DSC(含手续费DSC)将自动转入交易托收地址。</p>
+        <p>交易完成后,交易DSC转移至买方地址,手续费DSC转移至交易分红池。</p>
+        
+        <h3>手续费收取比例</h3>
+        <table>
+            <tr>
+                <th>比例</th>
+                <th>条件</th>
+            </tr>
+            <tr>
+                <td>100%</td>
+                <td>新用户初始手续费</td>
+            </tr>
+            <tr>
+                <td>60%</td>
+                <td>上月新注册直推3位</td>
+            </tr>
+            <tr>
+                <td>50%</td>
+                <td>上月新注册直推7位</td>
+            </tr>
+            <tr>
+                <td>45%</td>
+                <td>上月新注册直推10位,或自身活跃度>0</td>
+            </tr>
+            <tr>
+                <td>40%</td>
+                <td>上月新转化直推累计活跃度≥10,或自身活跃度>50</td>
+            </tr>
+            <tr>
+                <td>35%</td>
+                <td>上月新转化直推累计活跃度≥50,或自身活跃度>100</td>
+            </tr>
+            <tr>
+                <td>30%</td>
+                <td>上月新转化直推累计活跃度≥100</td>
+            </tr>
+            <tr>
+                <td>25%</td>
+                <td>上月新转化直推累计活跃度≥150</td>
+            </tr>
+            <tr>
+                <td>20%</td>
+                <td>上月新转化直推累计活跃度≥200</td>
+            </tr>
+            <tr>
+                <td>免</td>
+                <td>购买零撸币或官方币,可积累免手续费额度。在额度内卖出时,免手续费</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>交易分红规则</h2>
+        <p>交易分红池每日处理:20%作为官方分红，5%作为激励预留，75%销毁。</p>
+    </div>
+
+    <div class="section">
+        <h2>关于活跃度</h2>
+        <p>活跃度影响相关收益，且影响DSC卖出手续费率。</p>
+        <p>运行中的卷轴可计算相应活跃度(赠送卷轴不计活跃度)。</p>
+        
+        <h3>活跃度分类</h3>
+        <ul>
+            <li><strong>个人活跃度:</strong> 个人运行中的卷轴活跃度总和</li>
+            <li><strong>团队活跃度:</strong> 团队成员的个人活跃度总和</li>
+            <li><strong>族群活跃度:</strong> 族群成员的个人活跃度总和</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>卷界与卷轴</h2>
+        
+        <h3>卷界链(Scroll Chain)</h3>
+        <p>卷界链是由卷界团队开发的新兴公链，原生币为SCC。</p>
+        <p>为了加速公链的迭代与优化，卷界链允许团队快速提出提案、处理问题，并暂由公链团队负责重要节点的管理，未来将开放节点竞选，确保公链稳定运行。</p>
+        
+        <h3>数字卷轴(Digital Scroll)</h3>
+        <p>数字卷轴是由卷轴团队开发的应用。卷轴团队在卷界链发行DSC代币，并依托数字卷轴应用去支持普通用户对于DSC的获取和流通。</p>
+        <p>数字卷轴在卷界链的底层技术支持下，保障交易的去中心化与资产透明性。数字卷轴目前已有APP和H5网页版，并配备简化版的卷界浏览器。</p>
+    </div>
+
+    <div class="section">
+        <h2>卷界团队与生态发展</h2>
+        <p>卷轴团队是卷界团队的核心子团队，成员不仅开发卷轴应用，还为卷界链及其生态提供技术与代码支持。</p>
+        <p>数字卷轴依托卷界链保障流程的公开性和透明性，卷界链通过数字卷轴验证公链逻辑。未来，卷界生态将进一步扩展，连接更多主流公链，实现跨链合作。</p>
+        
+        <h3>DSC代币与智能合约</h3>
+        <p>DSC代币由卷轴团队通过卷界链发行。卷轴相关的智能合约均在链上执行，所有记录公开透明，用户可通过区块链浏览器实时查看。</p>
+    </div>
+
+    <div class="section">
+        <h2>推广活动月</h2>
+        
+        <h3>活动安排</h3>
+        <p>本活动每月为一期，当前第五期</p>
+        
+        <h3>活动细则</h3>
+        <p><strong>1日至10日:</strong></p>
+        <ul>
+            <li>当期新注册用户，于本时段内兑换青铜或白银卷轴，立返20%租金</li>
+            <li>全网兑换或续租任意卷轴，直推上级(活跃度>0)即时奖励卷轴满产的5%或3%(下级烧伤上级)</li>
+            </ul>
+        
+        <p><strong>11日至20日:</strong></p>
+        <ul>
+            <li>全网兑换或续租任意卷轴，直推上级(活跃度>0)即时奖励卷轴满产的5%或3%(下级烧伤上级)</li>
+        </ul>
+        
+        <p><strong>21日至月末:</strong></p>
+        <ul>
+            <li>当期新注册用户，于本时段内兑换青铜或白银卷轴，直推上级(活跃度>0)即时奖励卷轴满产的45%或20%(下级烧伤上级)</li>
+            <li>全网兑换或续租任意卷轴，直推上级(活跃度>0)即时奖励卷轴满产的5%或3%(下级烧伤上级)</li>
+        </ul>
+        
+        <h3>特别说明</h3>
+        <ul>
+            <li>首期活动前注册的老玩家，在续租卷轴时，直推上级无法享受额外奖励</li>
+            <li>活动期间,固有的推广收益(二代领收益上送奖励)不受影响</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>市商权益</h2>
+        
+        <h3>USDS兑换特权</h3>
+        <p>专属USDT兑换USDS通道,兑换额度为:USDT额度x106%,享受额外6%的USDS奖励。</p>
+        
+        <h3>USDS交易优势</h3>
+        <p>拥有USDS定价权,可通过买卖差价获取利润。享有取消交易及强制放币的特权,确保交易灵活性和资金安全。</p>
+        
+        <h3>免手续费优惠</h3>
+        <p>市商出售DSC免手续费，可充分利用市场差价进行搬砖套利，最大化收益。</p>
+        
+        <h3>节点优先权限</h3>
+        <p>市商可优先竞争节点，参与打包交易并赚取SCC币。提前布局，抢占先机。</p>
+        
+        <h3>生态合伙人优先参与权</h3>
+        <p>市商可优先参与生态合伙人计划，享受早期生态发展红利,获取更多收益和资源支持。</p>
+    </div>
+
+    <div class="section">
+        <h2>重要地址</h2>
+        
+        <h3>DSC相关地址</h3>
+        <ul>
+            <li><strong>DSC总池:</strong> SNqQZJwyMuqkHevrBlSZwYXllJ65Lq5nF8</li>
+            <li><strong>DSC黑洞地址:</strong> SQGfYK112x35Dm6krV57AKGp0cIFKDp5Ba</li>
+            <li><strong>DSC卷轴收益池:</strong> Sz3muiPYGnh8ER4QO21dIpE3vsa5HFjr1i</li>
+            <li><strong>DSC推广收益池:</strong> SIAORU4JFp3Snm0l5ClQVgJTO81GZTeqW4</li>
+            <li><strong>DSC交易托收地址:</strong> SEgfnJvqP5Ej15JbDjsmoCLnKqpg4vG3OE</li>
+            <li><strong>DSC交易分红池:</strong> SCBftse7Y34dQZAe5FQMASjeH0c79E7VrE</li>
+            <li><strong>DSC官方分红地址:</strong> SR69SxCZNrtTyIlvY2WJnU5sxxTj6QI2I7</li>
+            <li><strong>DSC激励预留池:</strong> SJbN0r1V29aWFXOzWItd1lfIJPW02JeXPM</li>
+            <li><strong>DSC待领红包池:</strong> SZ6h2qqb6V8ghrbbXaJD1qY4nLZiql5ip8</li>
+        </ul>
+        
+        <h3>USDS相关地址</h3>
+        <ul>
+            <li><strong>USDS总池:</strong> SjlrYjSiyvLR0muMdV1XcFohURYq64uvw0</li>
+            <li><strong>USDS托收池:</strong> Sjinwu8bDIrJi5wi7HM60MeyLyoSLBjw4Z</li>
+        </ul>
+    </div>
+
+    <div class="note">
+        <p><strong>免责声明:</strong> 本网页内容仅用于学习区块链技术原理和商业模式研究，不构成任何投资建议。所有信息均来自公开资料整理，仅供学术研究参考。数字货币投资风险极高，请谨慎对待。</p>
+    </div>
+
+    <script>
+        function showContact() {
+            document.getElementById('contactModal').style.display = 'flex';
+        }
+        
+        function hideContact() {
+            document.getElementById('contactModal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
