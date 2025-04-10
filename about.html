@@ -1,0 +1,39 @@
+<script>
+    // 访问量统计
+    function updateVisitCount() {
+        // 从localStorage获取当前访问量，如果没有则从0开始
+        let count = localStorage.getItem('visitCount') || 0;
+        count = parseInt(count);
+        
+        // 随机增加3-8次访问量
+        const randomIncrement = Math.floor(Math.random() * 6) + 3; // 3-8的随机数
+        count += randomIncrement;
+        
+        // 动画效果
+        const counterElement = document.getElementById('visitCount');
+        let current = parseInt(counterElement.textContent);
+        const increment = Math.ceil(randomIncrement / 10);
+        
+        const animate = () => {
+            if (current < count) {
+                current += increment;
+                if (current > count) current = count;
+                counterElement.textContent = current;
+                setTimeout(animate, 50);
+            }
+        };
+        
+        animate();
+        
+        // 存储更新后的访问量
+        localStorage.setItem('visitCount', count);
+    }
+    
+    // 初始化页面时调用
+    window.onload = function() {
+        updateRuntime();
+        setInterval(updateRuntime, 1000);
+        updateVisitCount();
+        showSection('intro');
+    };
+</script>
