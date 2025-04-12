@@ -12,7 +12,7 @@
             --dark-color: #333;
             --light-color: #fff;
             --accent-color: #FFE74C;
-            --guide-color: #4CAF50; /* 新增操作指南按钮颜色 */
+            --guide-color: #4CAF50; 
         }
         /* 新增logo与标题对齐样式 */
         .header-title-container {
@@ -286,45 +286,44 @@ border: none;
         }
         
         .auth-btn {
-            display: inline-block;
-            background: var(--light-color);
-            color: var(--primary-color);
-            padding: 18px 36px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            margin: 15px;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            border: none;
-            font-size: 1.2rem;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .auth-btn::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent 0%, rgba(255,255,255,0.3) 100%);
-            transform: translateX(-100%;
-            transition: transform 0.6s ease;
-        }
-        
-        .auth-btn:hover {
-            background: var(--light-color);
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
-        }
-        
-        .auth-btn:hover::after {
-            transform: translateX(100%);
-        }
-        
+    display: inline-block;
+    background: var(--light-color);
+    color: var(--primary-color);
+    padding: 18px 36px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent 0%, rgba(255,255,255,0.3) 100%);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.auth-btn:hover {
+    background: var(--light-color);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+}
+
+.auth-btn:hover::after {
+    transform: translateX(100%);
+}
         .contact-btn {
             display: inline-block;
             background: var(--accent-color);
@@ -541,10 +540,10 @@ border: none;
             </div>
             
             <div class="auth-box">
-                <a href="https://prod.digital-scroll.org/#/pages/reg?c=182N17" class="auth-btn">立即注册/登录</a>
-                <button class="contact-btn" onclick="showContactModal()">联系推荐人获取快速认证</button>
-                <a href="guide.html" class="guide-btn">操作指南</a>
-            </div>
+    <a href="https://prod.digital-scroll.org/#/pages/reg?c=182N17" class="auth-btn">立即注册/登录</a>
+    <a href="#" class="auth-btn" onclick="showContactModal(); return false;">联系推荐人获取快速认证</a>
+    <a href="guide.html" class="auth-btn">操作指南</a>
+</div>
         </header>
         
         <div class="button-grid">
