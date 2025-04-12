@@ -14,26 +14,27 @@
             --accent-color: #FFE74C;
         }
         /* 新增logo与标题对齐样式 */
-        .header-title-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 15px;
-            position: relative;
-            z-index: 1;
-            flex-wrap: wrap;
-        }
-        
-        .logo {
-            height: 60px;
-            border-radius: 50%;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-        }
+       .header-title-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 15px;
+        position: relative;
+        z-index: 1;
+        flex-wrap: wrap;
+    }
+    
+    .logo {
+        height: 1em; /* 与标题字体大小相同 */
+        width: auto;
+        border-radius: 5px;
+        background-color: white;
+        border: 2px solid var(--light-color);
+        padding: 5px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        object-fit: contain;
+    }
         
         .logo:hover {
             transform: scale(1.05);
@@ -97,50 +98,14 @@
         }
         
         h1 {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            font-family: 'Montserrat', sans-serif;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .subtitle {
-            font-size: 1.3rem;
-            margin-bottom: 25px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .timer-container {
-            margin: 40px 0;
-            padding: 25px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(5px);
-            position: relative;
-            z-index: 1;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .timer-label {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-            font-weight: 500;
-        }
-        
-        .timer {
-            font-size: 3rem;
-            font-weight: bold;
-            letter-spacing: 3px;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-            animation: pulse 1.5s infinite alternate;
-            font-family: 'Montserrat', sans-serif;
-            position: relative;
-        }
-        
+        font-size: 3rem;
+        margin: 0;
+        line-height: 1;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        font-family: 'Montserrat', sans-serif;
+        position: relative;
+        z-index: 1;
+    }
         @keyframes pulse {
             0% { text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); }
             100% { text-shadow: 0 0 20px rgba(255, 230, 76, 0.8), 0 0 30px rgba(255, 230, 76, 0.6); }
@@ -460,44 +425,20 @@ border: none;
         }
         
         @media (max-width: 768px) {
-              .header-title-container {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .logo {
-                height: 50px;
-            }
-           
-            h1 {
-                font-size: 2.2rem;
-            }
-            
-            .button-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .btn {
-                padding: 18px;
-                font-size: 1.1rem;
-            }
-            
-            .timer {
-                font-size: 2.2rem;
-            }
-            
-            .auth-btn, .contact-btn {
-                padding: 15px 30px;
-                font-size: 1.1rem;
-                margin: 10px;
-            }
-            
-            .modal-content {
-                width: 90%;
-                padding: 30px 20px;
-            }
+        .header-title-container {
+            flex-direction: row; /* 保持水平排列 */
+            gap: 10px;
         }
-    </style>
+        
+        h1 {
+            font-size: 2.2rem;
+        }
+        
+        .logo {
+            height: 1em; /* 保持与标题字体大小相同 */
+        }
+    }
+</style>
 </head>
 <body>
     <div class="container">
