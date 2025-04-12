@@ -703,88 +703,89 @@ border: none;
     </div>
     
     <script>
-        // 显示指定内容区域
-        function showSection(sectionId) {
-            // 隐藏所有内容区域
-            const sections = document.querySelectorAll('.content-section');
-            sections.forEach(section => {
-                section.classList.remove('active');
-            });
-            
-            // 显示选中的内容区域
-            document.getElementById(sectionId).classList.add('active');
-            
-            // 平滑滚动到内容区域
-            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
-        }
+    // 显示指定内容区域
+    function showSection(sectionId) {
+        // 隐藏所有内容区域
+        const sections = document.querySelectorAll('.content-section');
+        sections.forEach(section => {
+            section.classList.remove('active');
+        });
         
-        // 显示联系推荐人模态框
-        function showContactModal() {
-            document.getElementById('contactModal').style.display = 'flex';
-        }
+        // 显示选中的内容区域
+        document.getElementById(sectionId).classList.add('active');
+    }
+    
+    // 显示联系推荐人模态框
+    function showContactModal() {
+        document.getElementById('contactModal').style.display = 'flex';
+    }
+    
+    // 隐藏联系推荐人模态框
+    function hideContactModal() {
+        document.getElementById('contactModal').style.display = 'none';
+    }
+    
+    // 复制微信号到剪贴板
+    function copyWechatId() {
+        const wechatId = document.getElementById('wechatId');
+        const copyStatus = document.getElementById('copyStatus');
         
-        // 隐藏联系推荐人模态框
-        function hideContactModal() {
-            document.getElementById('contactModal').style.display = 'none';
-        }
+        // 创建临时textarea元素
+        const textarea = document.createElement('textarea');
+        textarea.value = wechatId.textContent;
+        document.body.appendChild(textarea);
         
-        // 复制微信号到剪贴板
-        function copyWechatId() {
-            const wechatId = document.getElementById('wechatId');
-            const copyStatus = document.getElementById('copyStatus');
-            
-            // 创建临时textarea元素
-            const textarea = document.createElement('textarea');
-            textarea.value = wechatId.textContent;
-            document.body.appendChild(textarea);
-            
-            // 选中并复制文本
-            textarea.select();
-            document.execCommand('copy');
-            
-            // 移除临时元素
-            document.body.removeChild(textarea);
-            
-            // 显示复制成功提示
-            copyStatus.textContent = '微信号已复制到剪贴板！';
-            
-            // 3秒后隐藏提示
-            setTimeout(() => {
-                copyStatus.textContent = '';
-            }, 3000);
-        }
+        // 选中并复制文本
+        textarea.select();
+        document.execCommand('copy');
         
-        // 计算并显示运行时间
-        function updateRuntime() {
-            const startDate = new Date('2023-09-25T00:00:00');
-            const now = new Date();
-            const diff = now - startDate;
-            
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-            
-            document.getElementById('runtimeTimer').textContent = 
-                `${days}天 ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        }
+        // 移除临时元素
+        document.body.removeChild(textarea);
         
-        // 初始化页面
-        window.onload = function() {
-            updateRuntime();
-            setInterval(updateRuntime, 1000);
-            
-            // 默认显示第一个内容区域
-            showSection('intro');
-        };
+        // 显示复制成功提示
+        copyStatus.textContent = '微信号已复制到剪贴板！';
         
-        // 点击模态框外部关闭模态框
-        window.onclick = function(event) {
-            const modal = document.getElementById('contactModal');
-            if (event.target == modal) {
-                hideContactModal();
-            }
+        // 3秒后隐藏提示
+        setTimeout(() => {
+            copyStatus.textContent = '';
+        }, 3000);
+    }
+    
+    // 计算并显示运行时间
+    function updateRuntime() {
+        const startDate = new Date('2023-09-25T00:00:00');
+        const now = new Date();
+        const diff = now - startDate;
+        
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        
+        document.getElementById('runtimeTimer').textContent = 
+            `${days}天 ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+    
+    // 初始化页面
+    window.onload = function() {
+        updateRuntime();
+        setInterval(updateRuntime, 1000);
+        
+        // 默认激活intro部分但不滚动
+        const sections = document.querySelectorAll('.content-section');
+        sections.forEach(section => {
+            section.classList.remove('active');
+        });
+        document.getElementById('intro').classList.add('active');
+    };
+    
+    // 点击模态框外部关闭模态框
+    window.onclick = function(event) {
+        const modal = document.getElementById('contactModal');
+        if (event.target == modal) {
+            hideContactModal();
         }
+    }
     </script>
 </body>
 </html>
