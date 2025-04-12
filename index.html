@@ -7,11 +7,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #FF6B35;
-            --secondary-color: #FFA630;
+            --primary-color: #2c3e50; /* 修改为深蓝色避免与橙色logo冲突 */
+            --secondary-color: #4a6491;
             --dark-color: #333;
             --light-color: #fff;
             --accent-color: #FFE74C;
+            --tutorial-color: #4CAF50; /* 新增教程按钮颜色 */
+            --logo-bg: rgba(255, 255, 255, 0.9); /* logo背景色 */
         }
         
         /* 新增logo与标题对齐样式 */
@@ -23,24 +25,26 @@
             margin-bottom: 15px;
             position: relative;
             z-index: 1;
+            flex-wrap: nowrap; /* 确保不换行 */
         }
         
         .header-logo {
-            height: 1.2em; /* 与标题字体大小关联 */
+            height: 1.5em; /* 与标题字体大小关联 */
             width: auto;
             min-height: 60px;
             object-fit: contain;
             vertical-align: middle;
-            filter: drop-shadow(0 0 5px rgba(0,0,0,0.3));
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
             transition: all 0.3s ease;
+            background: var(--logo-bg);
             border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            background: rgba(255, 255, 255, 0.1);
+            padding: 5px;
+            box-sizing: content-box;
         }
         
         .header-logo:hover {
             transform: scale(1.05);
-            filter: drop-shadow(0 0 10px rgba(255,230,76,0.5));
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
         }
         
         * {
@@ -194,6 +198,102 @@
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
         }
         
+        .auth-box {
+            text-align: center;
+            margin: 40px 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .auth-btn {
+            display: inline-block;
+            background: var(--light-color);
+            color: var(--primary-color);
+            padding: 18px 36px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .auth-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 0%, rgba(255,255,255,0.3) 100%);
+            transform: translateX(-100%); 
+            transition: transform 0.6s ease;
+        }
+        
+        .auth-btn:hover {
+            background: var(--light-color);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .auth-btn:hover::after {
+            transform: translateX(100%);
+        }
+        
+        .contact-btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: var(--dark-color);
+            padding: 18px 36px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-btn:hover {
+            background: #ffdf1a;
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* 新增操作教程按钮样式 */
+        .tutorial-btn {
+            display: inline-block;
+            background: var(--tutorial-color);
+            color: var(--light-color);
+            padding: 18px 36px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tutorial-btn:hover {
+            background: #3e8e41;
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
+        
         .content-section {
             background: rgba(0, 0, 0, 0.2);
             border-radius: 15px;
@@ -271,77 +371,6 @@
             font-weight: bold;
             display: inline-block;
             border-left: 4px solid var(--accent-color);
-        }
-        
-        .auth-box {
-            text-align: center;
-            margin: 40px 0;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .auth-btn {
-            display: inline-block;
-            background: var(--light-color);
-            color: var(--primary-color);
-            padding: 18px 36px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            margin: 15px;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            border: none;
-            font-size: 1.2rem;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .auth-btn::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent 0%, rgba(255,255,255,0.3) 100%);
-            transform: translateX(-100%); 
-            transition: transform 0.6s ease;
-        }
-        
-        .auth-btn:hover {
-            background: var(--light-color);
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
-        }
-        
-        .auth-btn:hover::after {
-            transform: translateX(100%);
-        }
-        
-        .contact-btn {
-            display: inline-block;
-            background: var(--accent-color);
-            color: var(--dark-color);
-            padding: 18px 36px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            margin: 15px;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            border: none;
-            font-size: 1.2rem;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .contact-btn:hover {
-            background: #ffdf1a;
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
         }
         
         #contactModal {
@@ -457,12 +486,12 @@
         
         @media (max-width: 768px) {
             .header-title-container {
-                flex-direction: column;
-                gap: 10px;
+                gap: 15px; /* 缩小间距但保持水平排列 */
             }
             
             .header-logo {
                 min-height: 50px;
+                height: 1.2em; /* 保持与标题比例 */
             }
             
             h1 {
@@ -482,7 +511,7 @@
                 font-size: 2.2rem;
             }
             
-            .auth-btn, .contact-btn {
+            .auth-btn, .contact-btn, .tutorial-btn {
                 padding: 15px 30px;
                 font-size: 1.1rem;
                 margin: 10px;
@@ -514,6 +543,8 @@
             <div class="auth-box">
                 <a href="https://prod.digital-scroll.org/#/pages/reg?c=182N17" class="auth-btn">立即注册/登录</a>
                 <button class="contact-btn" onclick="showContactModal()">联系推荐人获取快速认证</button>
+                <!-- 新增操作教程按钮 -->
+                <button class="tutorial-btn" onclick="showSection('tutorial')">操作教程</button>
             </div>
         </header>
         
@@ -601,7 +632,7 @@
             </table>
             
             <h3>卷轴增产设定</h3>
-            <p>高级别卷轴可以通过推广活跃用户增加日产收益：</p>
+            <p>高级级别卷轴可以通过推广活跃用户增加日产收益：</p>
             <ul>
                 <li>黄金卷轴：上月直推每+1位(活跃度≥3),日产+0.35，封顶7.33(推8位)</li>
                 <li>铂金卷轴：上月直推每+1位(活跃度≥3),日产+1，封顶38.33(推15位)</li>
@@ -721,6 +752,42 @@
             </ul>
         </div>
         
+        <!-- 新增操作教程内容区 -->
+        <div id="tutorial" class="content-section">
+            <h2>操作教程</h2>
+            <p>以下是数字卷轴DSC平台的详细操作指南：</p>
+            
+            <h3>注册与登录</h3>
+            <ol>
+                <li>点击"立即注册/登录"按钮</li>
+                <li>输入手机号码获取验证码</li>
+                <li>设置登录密码和安全码</li>
+                <li>完成基础信息填写</li>
+            </ol>
+            
+            <h3>卷轴操作</h3>
+            <ol>
+                <li>在"卷轴收益"页面查看可用卷轴</li>
+                <li>点击"兑换"按钮选择卷轴级别</li>
+                <li>确认支付后激活卷轴</li>
+                <li>每小时自动产生收益，需定期领取</li>
+            </ol>
+            
+            <h3>收益领取</h3>
+            <ol>
+                <li>进入"我的卷轴"页面</li>
+                <li>点击"领取收益"按钮</li>
+                <li>确认交易后收益存入账户</li>
+                <li>注意：超过48小时未领取会导致停产</li>
+            </ol>
+            
+            <h3>视频教程</h3>
+            <p>扫描下方二维码观看详细操作视频：</p>
+            <div style="text-align: center; margin: 20px 0;">
+                <img src="images/qrcode.png" alt="操作教程二维码" style="max-width: 200px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+            </div>
+        </div>
+        
         <div id="contactModal">
             <div class="modal-content">
                 <h3>联系推荐人获取快速认证</h3>
@@ -738,6 +805,7 @@
                 <div class="copy-status" id="copyStatus"></div>
                 <button class="close-btn" onclick="hideContactModal()">关闭</button>
             </div>
+        </div>
         </div>
         
         <footer>
