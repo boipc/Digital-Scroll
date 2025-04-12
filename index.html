@@ -842,7 +842,48 @@ border: none;
     window.onload = function() {
         updateRuntime();
         setInterval(updateRuntime, 1000);
+        // 更健壮的计时器实现
+let runtimeInterval;
+
+function formatTime(ms) {
+    const totalSeconds = Math.floor(ms / 1000);
+    const days = Math.floor(totalSeconds / (3600 * 24));
+    const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    
+    return `${days}天 ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+}
+
+function updateRuntime() {
+    try {
+        const startDate = new Date('2023-09-25T00:00:00');
+        const now = new Date();
+        const diff = now - startDate;
         
+        document.getElementById('runtimeTimer').textContent = formatTime(diff);
+    } catch (e) {
+        console.error("更新计时器出错:", e);
+    }
+}
+
+function initRuntimeTimer() {
+    // 清除已有定时器
+    if (runtimeInterval) clearInterval(runtimeInterval);
+    
+    // 立即更新
+    updateRuntime();
+    
+    // 设置定时器
+    runtimeInterval = setInterval(updateRuntime, 1000);
+}
+
+// 确保DOM加载完成后初始化
+if (document.readyState === 'complete') {
+    initRuntimeTimer();
+} else {
+    window.addEventListener('load', initRuntimeTimer);
+}
         // 默认激活intro部分但不滚动
         const sections = document.querySelectorAll('.content-section');
         sections.forEach(section => {
