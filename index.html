@@ -853,5 +853,11 @@ border: none;
     
     // 点击模态框外部关闭模态框
     window.onclick = function(event) {
-        const modal = document.getElementById('contactModal');
-       
+        const modal = document.getElementById('contactModal');     
+        if (event.target == modal) {
+            hideContactModal();
+        }
+    }
+</script>
+</body>
+</html>
