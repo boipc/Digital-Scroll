@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数字卷轴DSC - 操作指南</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #FF6B35;
+            --secondary-color: #FFA630;
+            --dark-color: #333;
+            --light-color: #fff;
+            --accent-color: #FFE74C;
+            --guide-color: #4CAF50;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--light-color);
+            min-height: 100vh;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 40px 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+            z-index: 0;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            z-index: 1;
+            color: var(--guide-color);
+        }
+        
+        .back-btn {
+            display: inline-block;
+            background: var(--light-color);
+            color: var(--primary-color);
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 15px 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .back-btn:hover {
+            background: #e6e6e6;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .guide-section {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--guide-color);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 10px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            margin: 20px 0 15px;
+            color: var(--accent-color);
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+        
+        ul, ol {
+            margin-bottom: 15px;
+            padding-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        .step {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--guide-color);
+        }
+        
+        .step-number {
+            display: inline-block;
+            background: var(--guide-color);
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 25px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .note {
+            background: rgba(255, 230, 76, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .note-title {
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            h3 {
+                font-size: 1.3rem;
+            }
+            
+            .guide-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>数字卷轴DSC操作指南</h1>
+            <a href="index.html" class="back-btn">返回首页</a>
+        </header>
+        
+        <div class="guide-section">
+            <h2>新手入门指南</h2>
+            
+            <div class="step">
+                <span class="step-number">1</span>
+                <h3>注册账号</h3>
+                <p>点击首页"立即注册/登录"按钮，填写手机号码获取验证码，设置登录密码和安全码。</p>
+                <p>安全码用于重置密码，请务必妥善保管。</p>
+            </div>
+            
+            <div class="step">
+                <span class="step-number">2</span>
+                <h3>实名认证</h3>
+                <p>注册后10天内需完成实名认证：</p>
+                <ul>
+                    <li>进入"我的"-"实名认证"页面</li>
+                    <li>填写真实姓名和身份证号码</li>
+                    <li>进行人脸识别验证</li>
+                </ul>
+                <p>认证费用可通过上级赠送或自行支付(0.07 DSC)。</p>
+            </div>
+            
+            <div class="step">
+                <span class="step-number">3</span>
+                <h3>激活试炼卷轴</h3>
+                <p>注册成功后系统自动赠送试炼卷轴：</p>
+                <ul>
+                    <li>进入"我的卷轴"页面查看</li>
+                    <li>每小时自动产生0.00125 DSC收益</li>
+                    <li>每48小时需领取一次收益，否则停产</li>
+                </ul>
+            </div>
+            
+            <div class="note">
+                <div class="note-title">注意事项</div>
+                <p>试炼卷轴为永久卷轴，无需租金，是了解平台运作的最佳方式。</p>
+            </div>
+        </div>
+        
+        <div class="guide-section">
+            <h2>卷轴操作指南</h2>
+            
+            <div class="step">
+                <span class="step-number">1</span>
+                <h3>领取收益</h3>
+                <p>进入"我的卷轴"页面：</p>
+                <ol>
+                    <li>查看各卷轴累计收益</li>
+                    <li>点击"领取收益"按钮</li>
+                    <li>收益将存入您的账户余额</li>
+                </ol>
+                <p>注意：超过48小时未领取，卷轴将停产。</p>
+            </div>
+            
+            <div class="step">
+                <span class="step-number">2</span>
+                <h3>兑换高级卷轴</h3>
+                <p>当余额足够时，可兑换更高级别卷轴：</p>
+                <ul>
+                    <li>进入"卷轴商城"页面</li>
+                    <li>选择想要兑换的卷轴级别</li>
+                    <li>确认支付相应DSC租金</li>
+                    <li>新卷轴立即生效并开始产出</li>
+                </ul>
+            </div>
+            
+            <div class="step">
+                <span class="step-number">3</span>
+                <h3>增产机制</h3>
+                <p>高级卷轴可通过推广活跃用户增加日产：</p>
+                <ul>
+                    <li>黄金卷轴：上月直推每+1位(活跃度≥3),日产+0.35</li>
+                    <li>铂金卷轴：上月直推每+1位(活跃度≥3),日产+1</li>
+                    <li>钻石卷轴：上月直推每+1位(活跃度≥3),日产+1.3</li>
+                    <li>至尊卷轴：上月直推每+1位(活跃度≥3),日产+4.5</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="guide-section">
+            <h2>交易操作指南</h2>
+            
+            <div class="step">
+                <span class="step-number">1</span>
+                <h3>DSC交易</h3>
+                <p>进入"市场"-"DSC交易"页面：</p>
+                <ul>
+                    <li>查看当前买卖挂单</li>
+                    <li>可自由挂买单或卖单</li>
+                    <li>智能合约保障安全交换</li>
+                </ul>
+                <p>交易时间：24小时全天候</p>
+            </div>
+            
+            <div class="step">
+                <span class="step-number">2</span>
+                <h3>USDS交易</h3>
+                <p>进入"市场"-"USDS交易"页面：</p>
+                <ul>
+                    <li>市商提供优质挂单服务</li>
+                    <li>每日8:00至21:00开放</li>
+                    <li>超时未付款或未放币将自动申诉</li>
+                </ul>
+            </div>
+            
+            <div class="note">
+                <div class="note-title">重要提示</div>
+                <p>若连续多次交易被申诉，可能被判定为捣乱账户，导致永久禁止交易。</p>
+            </div>
+        </div>
+        
+        <div class="guide-section">
+            <h2>推广奖励指南</h2>
+            
+            <div class="step">
+                <span class="step-number">1</span>
+                <h3>获取推广链接</h3>
+                <p>进入"推广中心"页面：</p>
+                <ul>
+                    <li>复制您的专属推广链接</li>
+                    <li>可通过微信、QQ等渠道分享</li>
+                    <li>下级通过您的链接注册即为您的团队成员</li>
+                </ul>
+            </div>
+            
+            <div class="step">
+                <span class="step-number">2</span>
+                <h3>推广收益规则</h3>
+                <p>推广收益采用烧伤机制：</p>
+                <ul>
+                    <li>直推收益：3%-5%</li>
+                    <li>间推收益：1.5%-3%</li>
+                    <li>活跃度越高，收益比例越高</li>
+                </ul>
+            </div>
+            
+            <div class="step">
+                <span class="step-number">3</span>
+                <h3>推广活动月</h3>
+                <p>每月分三个时段提供不同奖励：</p>
+                <ul>
+                    <li>1-10日：新用户兑换青铜/白银卷轴，立返20%租金</li>
+                    <li>11-20日：上级奖励卷轴满产的5%或3%</li>
+                    <li>21-月末：新用户兑换青铜/白银卷轴，上级奖励45%或20%</li>
+                </ul>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2023 数字卷轴DSC平台 版权所有</p>
+            <p>如有更多问题，请联系推荐人或客服</p>
+        </footer>
+    </div>
+</body>
+</html>
