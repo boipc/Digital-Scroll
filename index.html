@@ -13,26 +13,37 @@
             --light-color: #fff;
             --accent-color: #FFE74C;
         }
-        /* 新增logo与标题对齐样式 */
+        
+        /* 更新logo与标题样式 */
         .header-title-container {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 20px;
+            gap: 15px;
             margin-bottom: 15px;
             position: relative;
             z-index: 1;
             flex-wrap: wrap;
         }
         
+        .logo-title-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
         .logo {
-            height: 60px;
+            height: 1em; /* 与标题字体高度相同 */
+            width: 1em; /* 保持正方形 */
             border-radius: 50%;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            border: 2px solid rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.8);
             transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
+            background: white;
+            padding: 3px;
+            object-fit: contain;
+            display: inline-block;
+            vertical-align: middle;
         }
         
         .logo:hover {
@@ -41,12 +52,6 @@
             border-color: var(--accent-color);
         }
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Roboto', 'Microsoft YaHei', sans-serif;
-        }
         * {
             margin: 0;
             padding: 0;
@@ -103,6 +108,8 @@
             font-family: 'Montserrat', sans-serif;
             position: relative;
             z-index: 1;
+            display: inline-block;
+            margin: 0;
         }
         
         .subtitle {
@@ -155,7 +162,7 @@
         
         .btn {
             background: rgba(255, 255, 255, 0.15);
-border: none;
+            border: none;
             color: var(--light-color);
             padding: 20px;
             font-size: 1.2rem;
@@ -317,7 +324,7 @@ border: none;
         .auth-btn:hover {
             background: var(--light-color);
             transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
         }
         
         .auth-btn:hover::after {
@@ -345,7 +352,7 @@ border: none;
         .contact-btn:hover {
             background: #ffdf1a;
             transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
         }
         
         #contactModal {
@@ -460,15 +467,18 @@ border: none;
         }
         
         @media (max-width: 768px) {
-              .header-title-container {
-                flex-direction: column;
+            .header-title-container {
+                flex-direction: row; /* 保持logo和标题在同一行 */
+                align-items: center;
+                justify-content: center;
                 gap: 10px;
             }
             
             .logo {
-                height: 50px;
+                height: 1em; /* 保持与标题字体大小一致 */
+                width: 1em;
             }
-           
+            
             h1 {
                 font-size: 2.2rem;
             }
@@ -503,15 +513,17 @@ border: none;
     <div class="container">
         <header>
             <div class="header-title-container">
-                <img src="images/logo.png" alt="logo" class="logo">
-                <h1>数字卷轴DSC</h1>
+                <div class="logo-title-wrapper">
+                    <img src="images/logo.png" alt="logo" class="logo">
+                    <h1>数字卷轴DSC</h1>
+                </div>
             </div>
 
             <p class="subtitle">创新数字资产平台 · 每小时收益 · 多重获利方式</p>
             
             <div class="timer-container">
                 <div class="timer-label">DSC已稳定运行</div>
-<div class="timer" id="runtimeTimer">00天 00:00:00</div>
+                <div class="timer" id="runtimeTimer">00天 00:00:00</div>
             </div>
             
             <div class="auth-box">
