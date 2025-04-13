@@ -3,27 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DSC挖矿操作指南</title>
+    <title>DSC注册与挖矿操作指南</title>
     <style>
         :root {
-            --main-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            --card-bg: rgba(255,255,255,0.1);
-            --accent: #00ff88;
-            --warning: #ff4757;
+            --main-bg: #f5f7fb;
+            --card-bg: #ffffff;
+            --accent: #2b6cff;
+            --highlight: #ff6b35;
+            --text: #333333;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Microsoft YaHei', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
         body {
             background: var(--main-bg);
-            color: #fff;
+            color: var(--text);
             line-height: 1.6;
-            padding: 1rem;
+            padding: 20px 15px;
         }
 
         .container {
@@ -33,105 +34,139 @@
 
         h1 {
             text-align: center;
-            margin: 2rem 0;
+            margin: 1.5rem 0;
             color: var(--accent);
-            font-size: 2.2rem;
-            text-shadow: 0 0 10px rgba(0,255,136,0.3);
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 1rem;
         }
 
         .step-card {
             background: var(--card-bg);
-            border-radius: 15px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 1.2rem;
+            margin-bottom: 1.2rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
         }
 
         .step-number {
             display: inline-block;
-            width: 30px;
-            height: 30px;
+            width: 28px;
+            height: 28px;
             background: var(--accent);
-            color: #16213e;
+            color: white;
             border-radius: 50%;
             text-align: center;
-            line-height: 30px;
-            margin-right: 1rem;
-            font-weight: bold;
+            line-height: 28px;
+            margin-right: 0.8rem;
         }
 
         .highlight {
-            color: var(--accent);
-            font-weight: bold;
-            background: rgba(0,255,136,0.1);
-            padding: 0.2rem 0.5rem;
-            border-radius: 5px;
+            color: var(--highlight);
+            font-weight: 600;
+            background: rgba(255,107,53,0.1);
+            padding: 0.1rem 0.3rem;
+            border-radius: 4px;
         }
 
-        .warning {
-            color: var(--warning);
-            border-left: 3px solid var(--warning);
-            padding-left: 1rem;
+        .warning-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9100;
+            padding: 0.8rem;
             margin: 1rem 0;
+            border-radius: 4px;
         }
 
         img.preview {
             width: 100%;
-            max-width: 300px;
-            border-radius: 10px;
+            max-width: 280px;
+            border: 1px solid #eee;
+            border-radius: 8px;
             margin: 1rem 0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .code-example {
+            font-family: Monaco, Consolas, monospace;
+            background: #f8f9fa;
+            padding: 0.3rem 0.5rem;
+            border-radius: 4px;
+            border: 1px solid #ddd;
         }
 
         .important {
-            color: #ffd700;
-            font-weight: bold;
-            text-shadow: 0 0 8px rgba(255,215,0,0.3);
+            color: var(--highlight);
+            font-weight: 700;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>📱 DSC挖矿操作指南</h1>
+        <h1>DSC注册与挖矿操作指南</h1>
 
-        <!-- 注册步骤 -->
+        <!-- 一、注册账号 -->
         <div class="step-card">
-            <h2><span class="step-number">1</span>账号注册</h2>
+            <h2><span class="step-number">一</span>注册账号</h2>
             <img src="images/zuce_01.jpg" class="preview" alt="注册界面">
-            <p>▶️ 选择 <span class="highlight">手机号/邮箱</span> 注册类型</p>
-            <p>🔑 密码需<span class="important">两次输入一致</span></p>
-            <p>📨 邀请码填写：<strong class="important">182N17</strong></p>
-            <div class="warning">❗算式答案直接填数字（如0*7=0）</div>
+            <p>1. <strong>选择账号类型：</strong>手机号或邮箱（勾选其一）</p>
+            <p>2. <strong>填写账号信息：</strong><br>
+               - 输入账号（手机号或邮箱）<br>
+               - 设置登录密码（需<span class="highlight">两次输入确认</span>）</p>
+            <p>3. <strong>邀请码填写：</strong><span class="code-example">182N17</span></p>
+            <p>4. <strong>验证码：</strong>根据右侧算式输入答案（示例：0×7=? 需输入<span class="important">0</span>）</p>
+            <div class="warning-box">
+                <strong>⚠️ 注意：</strong>邀请码需与推荐人确认，填写错误无法修改
+            </div>
         </div>
 
-        <!-- 安全设置 -->
+        <!-- 二、安全设置 -->
         <div class="step-card">
-            <h2><span class="step-number">2</span>安全设置</h2>
-            <img src="images/anquanma_02.jpg" class="preview" alt="安全码">
-            <p>🔐 资金密码为<span class="important">6位纯数字</span></p>
-            <p>⚠️ 安全码示例：<strong class="important">JC2zLBvtXH</strong></p>
-            <div class="warning">❗必须截屏保存安全码！</div>
+            <h2><span class="step-number">二</span>安全设置</h2>
+            <img src="images/anquanma_02.jpg" class="preview" alt="安全码设置">
+            <p>1. 登录后进入【我的】页面 → 点击<span class="highlight">资金密码未设置？</span></p>
+            <p>2. 设置<span class="important">6位数字</span>资金密码（示例：123456）</p>
+            <p>3. 获取安全码：<br>
+               - 输入资金密码后点击获取<br>
+               - 示例安全码：<span class="code-example important">JC2zLBvtXH</span></p>
+            <div class="warning-box">
+                <strong>❗ 必须操作：</strong>截屏或复制保存安全码，丢失无法找回！
+            </div>
         </div>
 
-        <!-- 实名认证 -->
+        <!-- 三、实名认证 -->
         <div class="step-card">
-            <h2><span class="step-number">3</span>实名认证</h2>
+            <h2><span class="step-number">三</span>实名认证</h2>
             <img src="images/shiming_03.jpg" class="preview" alt="实名认证">
-            <p>📮 卷轴地址格式：<span class="highlight">DSC_XXXXXX</span></p>
-            <p>🎁 认证后获得<span class="important">4台矿机</span></p>
-            <div class="warning">❗必须本人真实信息</div>
+            <p>1. <strong>联系推荐人：</strong><br>
+               - 复制<span class="highlight">卷界地址</span>发送给推荐人<br>
+               - 待账户余额显示<span class="important">0.12DSC</span>后操作认证</p>
+            <p>2. <strong>认证流程：</strong><br>
+               - 点击【我的】→【未实名】<br>
+               - 填写真实信息 → 人脸识别 → 人证对比</p>
+            <div class="warning-box">
+                <strong>🎁 认证福利：</strong>获得4台矿机（3台来自推荐人）
+            </div>
+        </div>
+
+        <!-- 四、日常操作 -->
+        <div class="step-card">
+            <h2><span class="step-number">四</span>日常操作</h2>
+            <img src="image/chaozuo_04.jpg" class="preview" alt="操作界面">
+            <p><strong>每日必做：</strong><br>
+               1. 领取<span class="highlight">卷轴收益</span>和<span class="highlight">推广收益</span><br>
+               2. 查看<span class="important">DSC质押</span>数量<br>
+               3. 确认<span class="important">活跃度</span>状态</p>
+            <div class="warning-box">
+                <strong>⏰ 重要：</strong>48小时未领取收益将停产！
+            </div>
         </div>
 
         <!-- 注意事项 -->
-        <div class="step-card" style="background: rgba(255,71,87,0.1);">
-            <h2 style="color: var(--warning);">⚠️ 重要提醒</h2>
-            <p>🔒 安全码和密码是核心凭证！</p>
-            <p>⏰ 必须<span class="important">每日领取</span>收益！</p>
-            <p>📲 及时更新APP版本！</p>
-            <div class="warning" style="border-color: var(--accent);">
-                💡 遇到问题立即联系推荐人！
-            </div>
+        <div class="step-card" style="background:#fff8e1;">
+            <h2 style="color:#d32f2f;">⚠️ 注意事项</h2>
+            <p>1. <span class="important">安全码</span>和<span class="important">资金密码</span>是核心凭证</p>
+            <p>2. 必须使用<span class="highlight">本人真实信息</span>认证</p>
+            <p>3. 建议设置<span class="important">每日提醒</span>领取收益</p>
+            <p>4. 及时更新APP到<span class="highlight">最新版本</span></p>
         </div>
     </div>
 </body>
