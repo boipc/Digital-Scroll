@@ -7,23 +7,24 @@
     <style>
         :root {
             --primary-bg: #f5f7fb;
-            --primary-blue: #3a86ff;
+            --primary-blue: #2a7fff;
             --highlight-orange: #ff6b35;
-            --warning-orange: rgba(255, 107, 53, 0.1);
-            --attention-yellow: rgba(255, 241, 209, 0.8);
-            --code-gray: #f0f2f5;
+            --warning-bg: #fff8e6;
+            --danger-bg: #ffebee;
+            --info-bg: #e3f2fd;
+            --code-bg: #f5f5f5;
             --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.12);
+            --radius: 8px;
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--primary-bg);
-            color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             line-height: 1.6;
+            color: #333;
+            background-color: var(--primary-bg);
             font-size: 16px;
-            margin: 0;
             padding: 0;
+            margin: 0;
         }
         
         .container {
@@ -32,71 +33,56 @@
             padding: 20px;
         }
         
-        .header {
+        header {
             display: flex;
             align-items: center;
             margin-bottom: 30px;
             padding-bottom: 15px;
-            border-bottom: 1px solid #e1e4e8;
+            border-bottom: 1px solid #e0e0e0;
         }
         
         .logo {
-            width: 40px;
             height: 40px;
             margin-right: 15px;
             cursor: pointer;
-            transition: transform 0.3s;
-        }
-        
-        .logo:hover {
-            transform: scale(1.1);
         }
         
         h1 {
-            font-size: 24px;
             margin: 0;
             color: var(--primary-blue);
-            flex-grow: 1;
+            font-size: 24px;
         }
         
-        .home-btn {
+        .home-link {
+            display: inline-block;
             background-color: var(--primary-blue);
             color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
+            padding: 6px 12px;
+            border-radius: var(--radius);
             text-decoration: none;
+            margin-bottom: 20px;
+            font-size: 14px;
         }
         
-        .home-btn:hover {
-            background-color: #2667cc;
-            box-shadow: var(--shadow-hover);
-        }
-        
-        .section {
-            background-color: white;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 30px;
+        .card {
+            background: white;
+            border-radius: var(--radius);
             box-shadow: var(--shadow);
+            padding: 20px;
+            margin-bottom: 25px;
         }
         
         h2 {
             color: var(--primary-blue);
-            font-size: 20px;
             margin-top: 0;
+            font-size: 20px;
+            border-bottom: 1px solid #eee;
             padding-bottom: 10px;
-            border-bottom: 1px dashed #e1e4e8;
         }
         
         h3 {
             font-size: 18px;
-            margin: 20px 0 10px 0;
+            margin-top: 20px;
         }
         
         .highlight {
@@ -104,82 +90,37 @@
             font-weight: bold;
         }
         
-        .register-link {
-            color: var(--primary-blue);
-            text-decoration: none;
-            font-weight: bold;
-            word-break: break-all;
-        }
-        
-        .register-link:hover {
-            text-decoration: underline;
-        }
-        
         .code-block {
-            background-color: var(--code-gray);
-            padding: 8px 12px;
-            border-radius: 6px;
+            background-color: var(--code-bg);
+            padding: 12px;
+            border-radius: var(--radius);
             font-family: monospace;
-            display: inline-block;
-            margin: 5px 0;
-            font-size: 15px;
+            margin: 10px 0;
+            overflow-x: auto;
         }
         
         .warning-box {
-            background-color: var(--warning-orange);
-            border-left: 4px solid var(--highlight-orange);
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 0 6px 6px 0;
-        }
-        
-        .attention-box {
-            background-color: var(--attention-yellow);
+            background-color: var(--warning-bg);
             border-left: 4px solid #ffc107;
             padding: 15px;
             margin: 20px 0;
-            border-radius: 0 6px 6px 0;
+            border-radius: 0 var(--radius) var(--radius) 0;
         }
         
-        .wechat-id {
-            background-color: var(--code-gray);
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-family: monospace;
-            display: inline-block;
-            margin: 5px 0;
-            cursor: pointer;
-            position: relative;
+        .danger-box {
+            background-color: var(--danger-bg);
+            border-left: 4px solid #f44336;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 var(--radius) var(--radius) 0;
         }
         
-        .wechat-id:hover::after {
-            content: "点击复制";
-            position: absolute;
-            right: -60px;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: #333;
-            color: white;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-        }
-        
-        img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin: 15px 0;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            display: block;
-        }
-        
-        .img-caption {
-            font-size: 14px;
-            color: #666;
-            text-align: center;
-            margin-top: -10px;
-            margin-bottom: 20px;
+        .info-box {
+            background-color: var(--info-bg);
+            border-left: 4px solid var(--primary-blue);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 var(--radius) var(--radius) 0;
         }
         
         ol, ul {
@@ -190,51 +131,65 @@
             margin-bottom: 8px;
         }
         
-        .wechat-browser-alert {
-            display: none;
-            background-color: #fff8e6;
-            border-left: 4px solid #ffc107;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 0 6px 6px 0;
+        a {
+            color: var(--primary-blue);
+            text-decoration: none;
         }
         
-        @media (max-width: 600px) {
-            .header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .logo {
-                margin-bottom: 10px;
-            }
-            
-            .home-btn {
-                margin-top: 15px;
-                align-self: flex-end;
-            }
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        .register-link {
+            font-weight: bold;
+            color: var(--highlight-orange);
+        }
+        
+        .copy-btn {
+            background-color: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+        
+        .copy-btn:hover {
+            opacity: 0.9;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin: 15px 0;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            color: #666;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="wechat-browser-alert" id="wechatAlert">
-            <strong>提示：</strong>检测到您正在使用微信内置浏览器，部分功能可能受限。建议点击右上角菜单，选择"在浏览器打开"以获得完整体验。
-        </div>
-        
-        <div class="header">
+        <header>
             <img src="images/logo.png" alt="DSC Logo" class="logo" onclick="window.location.href='index.html'">
             <h1>DSC注册与挖矿操作图文教程</h1>
-            <a href="index.html" class="home-btn">返回首页</a>
-        </div>
+        </header>
         
-        <div class="section">
+        <a href="index.html" class="home-link">返回首页</a>
+        
+        <div class="card">
             <h2>一、注册账号</h2>
-            <img src="images/zuce_01.jpg" alt="注册账号界面">
-            <p class="img-caption">图片路径：images/zuce_01.jpg</p>
-            
-            <p><strong>注册链接：</strong><a href="https://prod.digital-scroll.org/#/pages/reg?c=182N17" class="register-link" target="_blank">https://prod.digital-scroll.org/#/pages/reg?c=182N17</a></p>
-            
+            <p>注册链接：<a href="https://prod.digital-scroll.org/#/pages/reg?c=182N17" class="register-link" target="_blank" id="registerLink">https://prod.digital-scroll.org/#/pages/reg?c=182N17</a></p>
             <ol>
                 <li><strong>选择账号类型</strong>：手机号或邮箱（勾选其一）。</li>
                 <li><strong>填写账号信息</strong>：
@@ -243,39 +198,33 @@
                         <li>设置登录密码（需输入两次确认）。</li>
                     </ul>
                 </li>
-                <li><strong>填写邀请码</strong>：输入推荐人提供的邀请码（例如：<span class="code-block">182N17</span>）。</li>
+                <li><strong>填写邀请码</strong>：输入推荐人提供的邀请码（例如：<span class="highlight">182N17</span>）。</li>
                 <li><strong>验证码</strong>：根据右侧算式输入答案（示例中算式为<code>0*7=?</code>，需输入<code>0</code>）。</li>
                 <li>提交完成注册。</li>
             </ol>
         </div>
         
-        <div class="section">
+        <div class="card">
             <h2>二、设置资金密码与保存安全码</h2>
-            <img src="images/anquanma_02.jpg" alt="安全码设置界面">
-            <p class="img-caption">图片路径：images/anquanma_02.jpg</p>
-            
             <ol>
-                <li><strong>登录后进入【我的】页面</strong>，系统会弹出"保存安全码"提示。先点击红色字体<span class="highlight">【资金密码未设置？】</span>。</li>
-                <li><strong>设置6位数字资金密码</strong>（例如：<span class="code-block">123456</span>）。</li>
+                <li><strong>登录后进入【我的】页面</strong>，系统会弹出"保存安全码"提示。先点击红色字体【资金密码未设置？】。</li>
+                <li><strong>设置6位数字资金密码</strong>（例如：<code>123456</code>）。</li>
                 <li><strong>获取安全码</strong>：
                     <ul>
-                        <li>输入资金密码点击获取安全码，系统弹出"保存安全码"提示（示例安全码：<span class="code-block">JC2zLBvtXH</span>）。</li>
-                        <li><span class="highlight">截屏或复制保存安全码</span>（用于找回密码，切勿泄露）。</li>
+                        <li>输入资金密码点击获取安全码，系统弹出"保存安全码"提示（示例安全码：<code class="code-block">JC2zLBvtXH</code>）。</li>
+                        <li><strong>截屏或复制保存安全码</strong>（用于找回密码，切勿泄露）。</li>
                     </ul>
                 </li>
-                <li>勾选<span class="highlight">【我已保存好安全码】</span>完成验证。</li>
+                <li>勾选【我已保存好安全码】完成验证。</li>
             </ol>
             
-            <div class="warning-box">
-                <strong>重要提示：</strong> 安全码是找回账户的唯一凭证，请务必妥善保存。丢失后将无法找回账户！
+            <div class="danger-box">
+                <strong>重要提示：</strong> 安全码和资金密码是账户核心凭证，丢失可能导致资产无法找回。
             </div>
         </div>
         
-        <div class="section">
+        <div class="card">
             <h2>三、完成实名认证</h2>
-            <img src="images/shiming_03.jpg" alt="实名认证界面">
-            <p class="img-caption">图片路径：images/shiming_03.jpg</p>
-            
             <ol>
                 <li><strong>联系推荐人授权认证</strong>：
                     点击你的账号进入个人信息页面，复制<strong>卷界地址</strong>发送给推荐人授权认证，等推荐人授权后，账户余额显示0.12DSC才可以认证。</li>
@@ -287,23 +236,24 @@
                 </li>
                 <li><strong>领取福利</strong>：
                     <ul>
-                        <li>实名通过后，联系推荐人，领取专属福利。<span class="highlight">（本福利为推荐人私人扶持，不定时更改或取消）</span></li>
-                        <li>推荐人将赠送<span class="highlight">3台卷轴矿机</span>，系统赠送<span class="highlight">1台卷轴矿机</span>，总计4台。</li>
+                        <li>实名通过后，联系推荐人，领取专属福利。<strong>（本福利为推荐人私人扶持，不定时更改或取消）</strong></li>
+                        <li>推荐人将赠送<strong>3台卷轴矿机</strong>，系统赠送<strong>1台卷轴矿机</strong>，总计4台。</li>
                     </ul>
                 </li>
             </ol>
+            
+            <div class="warning-box">
+                <strong>注意：</strong> 必须使用本人真实信息，否则无法通过审核。
+            </div>
         </div>
         
-        <div class="section">
+        <div class="card">
             <h2>四、日常操作与领取收益</h2>
-            <img src="images/chaozuo_04.jpg" alt="日常操作界面">
-            <p class="img-caption">图片路径：images/chaozuo_04.jpg</p>
-            
             <ol>
                 <li><strong>每日领取收益</strong>：
                     <ul>
                         <li>进入【我的】页面→ 查看"卷轴收益"和"推广收益"。</li>
-                        <li><span class="highlight">点击红色数字领取</span>（每天至少领取一次，48小时未领取将停产）。</li>
+                        <li><strong>点击红色数字领取</strong>（每天至少领取一次，48小时未领取将停产）。</li>
                     </ul>
                 </li>
                 <li><strong>查看个人资产信息</strong>：
@@ -317,64 +267,72 @@
                     </ul>
                 </li>
             </ol>
-        </div>
-        
-        <div class="section">
-            <h2>注意事项</h2>
-            <div class="attention-box">
-                <ol>
-                    <li><strong>安全码与密码</strong>：安全码和资金密码是账户核心凭证，丢失可能导致资产无法找回。</li>
-                    <li><strong>实名认证</strong>：必须使用本人真实信息，否则无法通过审核。</li>
-                    <li><strong>收益领取</strong>：每天操作避免停产，建议设置每日提醒。</li>
-                    <li><strong>推荐人联系</strong>：完成注册后，添加推荐人微信，获取后续支持。</li>
-                </ol>
-            </div>
-            
-            <h3>友情提示：</h3>
-            <ul>
-                <li>注册时需填写正确邀请码（如<span class="code-block">182N17</span>）。</li>
-                <li>安全码页面需复制或截屏保存（示例：<span class="code-block">JC2zLBvtXH</span>）。</li>
-                <li>人脸识别时需保持整个头部在识别框内，根据提示做相应的动作，不要有多余的动作，避免逆光拍摄。</li>
-            </ul>
             
             <div class="warning-box">
-                <strong>遇到问题？联系推荐人！</strong><br>
-                点击复制微信号：<span class="wechat-id" id="wechatId">dsc_2025</span>
+                <strong>收益领取提醒：</strong> 每天操作避免停产，建议设置每日提醒。
             </div>
         </div>
         
-        <div class="section" style="text-align: center; background-color: var(--primary-blue); color: white;">
-            <h2 style="color: white; border-bottom: 1px dashed rgba(255,255,255,0.3);">祝您挖矿顺利，收益倍增！</h2>
+        <div class="card">
+            <h2>注意事项</h2>
+            <ol>
+                <li><strong>安全码与密码</strong>：安全码和资金密码是账户核心凭证，丢失可能导致资产无法找回。</li>
+                <li><strong>实名认证</strong>：必须使用本人真实信息，否则无法通过审核。</li>
+                <li><strong>收益领取</strong>：每天操作避免停产，建议设置每日提醒。</li>
+                <li><strong>推荐人联系</strong>：完成注册后，添加推荐人微信，获取后续支持。</li>
+            </ol>
         </div>
+        
+        <div class="info-box">
+            <strong>友情提示：</strong>
+            <ul>
+                <li>注册时需填写正确邀请码（如<span class="highlight">182N17</span>）。</li>
+                <li>安全码页面需复制或截屏保存（示例：<code>JC2zLBvtXH</code>）。</li>
+                <li>人脸识别时需保持整个头部在识别框内，根据提示做相应的动作，不要有多余的动作，避免逆光拍摄。</li>
+            </ul>
+        </div>
+        
+        <div class="danger-box">
+            <strong>遇到问题？联系推荐人！</strong><br>
+            微信号：<span id="wechatId">dsc_2025</span>
+            <button class="copy-btn" onclick="copyWechatId()">复制</button>
+        </div>
+        
+        <footer>
+            <p>祝您挖矿顺利，收益倍增！</p>
+        </footer>
     </div>
-
+    
     <script>
         // 检测微信浏览器
-        function isWechatBrowser() {
-            return /micromessenger/i.test(navigator.userAgent);
+        function isWeixinBrowser() {
+            return /MicroMessenger/i.test(navigator.userAgent);
         }
         
-        // 显示微信浏览器提示
-        if (isWechatBrowser()) {
-            document.getElementById('wechatAlert').style.display = 'block';
+        // 复制微信号
+        function copyWechatId() {
+            const wechatId = document.getElementById('wechatId').textContent;
+            navigator.clipboard.writeText(wechatId).then(() => {
+                alert('微信号已复制: ' + wechatId);
+            }).catch(err => {
+                console.error('复制失败:', err);
+                // 备用复制方法
+                const textarea = document.createElement('textarea');
+                textarea.value = wechatId;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                alert('微信号已复制: ' + wechatId);
+            });
         }
         
-        // 复制微信号功能
-        document.getElementById('wechatId').addEventListener('click', function() {
-            const wechatId = this.textContent;
-            const textarea = document.createElement('textarea');
-            textarea.value = wechatId;
-            document.body.appendChild(textarea);
-            textarea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textarea);
-            
-            // 显示复制成功的提示
-            const originalText = this.textContent;
-            this.textContent = '已复制到剪贴板！';
-            setTimeout(() => {
-                this.textContent = originalText;
-            }, 2000);
+        // 微信浏览器中点击注册链接提示
+        document.getElementById('registerLink').addEventListener('click', function(e) {
+            if (isWeixinBrowser()) {
+                e.preventDefault();
+                alert('请点击右上角菜单，选择"在浏览器中打开"后再进行注册操作');
+            }
         });
     </script>
 </body>
