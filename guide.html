@@ -5,23 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DSC注册与挖矿操作图文教程</title>
     <style>
+        /* 颜色定义 */
         :root {
-            --primary-bg: #f5f7fb;
-            --primary-blue: #2a7fff;
-            --highlight-orange: #ff6b35;
-            --warning-bg: #fff8e6;
-            --danger-bg: #ffebee;
-            --info-bg: #e3f2fd;
-            --code-bg: #f5f5f5;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            --radius: 8px;
+            --主背景色: #f5f7fb;
+            --主蓝色: #2a7fff;
+            --高亮橙色: #ff6b35;
+            --重要红色: #ff3a30;
+            --提示绿色: #28cd41;
+            --警告背景: #fff8e6;
+            --危险背景: #ffebee;
+            --信息背景: #e3f2fd;
+            --阴影: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --圆角: 8px;
         }
         
+        /* 基础样式 */
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
             line-height: 1.6;
             color: #333;
-            background-color: var(--primary-bg);
+            background-color: var(--主背景色);
             font-size: 16px;
             padding: 0;
             margin: 0;
@@ -33,6 +36,7 @@
             padding: 20px;
         }
         
+        /* 顶部标题栏 */
         header {
             display: flex;
             align-items: center;
@@ -45,35 +49,39 @@
             height: 40px;
             margin-right: 15px;
             cursor: pointer;
+            background: none !important; /* 确保logo无背景 */
         }
         
         h1 {
             margin: 0;
-            color: var(--primary-blue);
+            color: var(--主蓝色);
             font-size: 24px;
         }
         
+        /* 返回首页按钮 */
         .home-link {
             display: inline-block;
-            background-color: var(--primary-blue);
+            background-color: var(--主蓝色);
             color: white;
             padding: 6px 12px;
-            border-radius: var(--radius);
+            border-radius: var(--圆角);
             text-decoration: none;
             margin-bottom: 20px;
             font-size: 14px;
         }
         
+        /* 卡片样式 */
         .card {
             background: white;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
+            border-radius: var(--圆角);
+            box-shadow: var(--阴影);
             padding: 20px;
             margin-bottom: 25px;
         }
         
+        /* 标题样式 */
         h2 {
-            color: var(--primary-blue);
+            color: var(--主蓝色);
             margin-top: 0;
             font-size: 20px;
             border-bottom: 1px solid #eee;
@@ -85,44 +93,48 @@
             margin-top: 20px;
         }
         
-        .highlight {
-            color: var(--highlight-orange);
+        /* 文字高亮样式 */
+        .高亮 {
+            color: var(--高亮橙色);
             font-weight: bold;
         }
         
-        .code-block {
-            background-color: var(--code-bg);
-            padding: 12px;
-            border-radius: var(--radius);
-            font-family: monospace;
-            margin: 10px 0;
-            overflow-x: auto;
+        .重要 {
+            color: var(--重要红色);
+            font-weight: bold;
         }
         
-        .warning-box {
-            background-color: var(--warning-bg);
+        .提示 {
+            color: var(--提示绿色);
+            font-weight: bold;
+        }
+        
+        /* 特殊信息框 */
+        .警告框 {
+            background-color: var(--警告背景);
             border-left: 4px solid #ffc107;
             padding: 15px;
             margin: 20px 0;
-            border-radius: 0 var(--radius) var(--radius) 0;
+            border-radius: 0 var(--圆角) var(--圆角) 0;
         }
         
-        .danger-box {
-            background-color: var(--danger-bg);
+        .危险框 {
+            background-color: var(--危险背景);
             border-left: 4px solid #f44336;
             padding: 15px;
             margin: 20px 0;
-            border-radius: 0 var(--radius) var(--radius) 0;
+            border-radius: 0 var(--圆角) var(--圆角) 0;
         }
         
-        .info-box {
-            background-color: var(--info-bg);
-            border-left: 4px solid var(--primary-blue);
+        .信息框 {
+            background-color: var(--信息背景);
+            border-left: 4px solid var(--主蓝色);
             padding: 15px;
             margin: 20px 0;
-            border-radius: 0 var(--radius) var(--radius) 0;
+            border-radius: 0 var(--圆角) var(--圆角) 0;
         }
         
+        /* 列表样式 */
         ol, ul {
             padding-left: 20px;
         }
@@ -131,8 +143,9 @@
             margin-bottom: 8px;
         }
         
+        /* 链接样式 */
         a {
-            color: var(--primary-blue);
+            color: var(--主蓝色);
             text-decoration: none;
         }
         
@@ -140,13 +153,14 @@
             text-decoration: underline;
         }
         
-        .register-link {
+        .注册链接 {
             font-weight: bold;
-            color: var(--highlight-orange);
+            color: var(--高亮橙色);
         }
         
-        .copy-btn {
-            background-color: var(--primary-blue);
+        /* 复制按钮 */
+        .复制按钮 {
+            background-color: var(--主蓝色);
             color: white;
             border: none;
             padding: 4px 8px;
@@ -156,18 +170,20 @@
             margin-left: 10px;
         }
         
-        .copy-btn:hover {
+        .复制按钮:hover {
             opacity: 0.9;
         }
         
+        /* 图片样式 */
         img {
             max-width: 100%;
             height: auto;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
+            border-radius: var(--圆角);
+            box-shadow: var(--阴影);
             margin: 15px 0;
         }
         
+        /* 页脚 */
         footer {
             text-align: center;
             margin-top: 40px;
@@ -176,160 +192,178 @@
             color: #666;
             font-size: 14px;
         }
+        
+        /* 安全码特殊样式 */
+        .安全码 {
+            font-family: monospace;
+            color: var(--重要红色);
+            font-weight: bold;
+            font-size: 1.1em;
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- 顶部标题和logo -->
         <header>
             <img src="images/logo.png" alt="DSC Logo" class="logo" onclick="window.location.href='index.html'">
             <h1>DSC注册与挖矿操作图文教程</h1>
         </header>
         
+        <!-- 返回首页链接 -->
         <a href="index.html" class="home-link">返回首页</a>
         
+        <!-- 第一部分：注册账号 -->
         <div class="card">
             <h2>一、注册账号</h2>
-            <p>注册链接：<a href="https://prod.digital-scroll.org/#/pages/reg?c=182N17" class="register-link" target="_blank" id="registerLink">https://prod.digital-scroll.org/#/pages/reg?c=182N17</a></p>
+            <p>注册链接：<a href="https://prod.digital-scroll.org/#/pages/reg?c=182N17" class="注册链接" target="_blank" id="registerLink">https://prod.digital-scroll.org/#/pages/reg?c=182N17</a></p>
             <ol>
-                <li><strong>选择账号类型</strong>：手机号或邮箱（勾选其一）。</li>
-                <li><strong>填写账号信息</strong>：
+                <li><strong class="重要">选择账号类型</strong>：手机号或邮箱（勾选其一）。</li>
+                <li><strong class="重要">填写账号信息</strong>：
                     <ul>
                         <li>输入账号（手机号或邮箱）。</li>
                         <li>设置登录密码（需输入两次确认）。</li>
                     </ul>
                 </li>
-                <li><strong>填写邀请码</strong>：输入推荐人提供的邀请码（例如：<span class="highlight">182N17</span>）。</li>
-                <li><strong>验证码</strong>：根据右侧算式输入答案（示例中算式为<code>0*7=?</code>，需输入<code>0</code>）。</li>
+                <li><strong class="重要">填写邀请码</strong>：输入推荐人提供的邀请码（例如：<span class="高亮">182N17</span>）。</li>
+                <li><strong class="重要">验证码</strong>：根据右侧算式输入答案（示例中算式为<code>0*7=?</code>，需输入<code>0</code>）。</li>
                 <li>提交完成注册。</li>
             </ol>
         </div>
         
+        <!-- 第二部分：设置资金密码 -->
         <div class="card">
             <h2>二、设置资金密码与保存安全码</h2>
             <ol>
-                <li><strong>登录后进入【我的】页面</strong>，系统会弹出"保存安全码"提示。先点击红色字体【资金密码未设置？】。</li>
-                <li><strong>设置6位数字资金密码</strong>（例如：<code>123456</code>）。</li>
-                <li><strong>获取安全码</strong>：
+                <li><strong class="重要">登录后进入【我的】页面</strong>，系统会弹出"保存安全码"提示。先点击红色字体【资金密码未设置？】。</li>
+                <li><strong class="重要">设置6位数字资金密码</strong>（例如：<code>123456</code>）。</li>
+                <li><strong class="重要">获取安全码</strong>：
                     <ul>
-                        <li>输入资金密码点击获取安全码，系统弹出"保存安全码"提示（示例安全码：<code class="code-block">JC2zLBvtXH</code>）。</li>
-                        <li><strong>截屏或复制保存安全码</strong>（用于找回密码，切勿泄露）。</li>
+                        <li>输入资金密码点击获取安全码，系统弹出"保存安全码"提示（示例安全码：<span class="安全码">JC2zLBvtXH</span>）。</li>
+                        <li><strong class="重要">截屏或复制保存安全码</strong>（用于找回密码，切勿泄露）。</li>
                     </ul>
                 </li>
                 <li>勾选【我已保存好安全码】完成验证。</li>
             </ol>
             
-            <div class="danger-box">
-                <strong>重要提示：</strong> 安全码和资金密码是账户核心凭证，丢失可能导致资产无法找回。
+            <div class="危险框">
+                <strong class="重要">重要提示：</strong> 安全码和资金密码是账户核心凭证，丢失可能导致资产无法找回。
             </div>
         </div>
         
+        <!-- 第三部分：实名认证 -->
         <div class="card">
             <h2>三、完成实名认证</h2>
             <ol>
-                <li><strong>联系推荐人授权认证</strong>：
+                <li><strong class="重要">联系推荐人授权认证</strong>：
                     点击你的账号进入个人信息页面，复制<strong>卷界地址</strong>发送给推荐人授权认证，等推荐人授权后，账户余额显示0.12DSC才可以认证。</li>
-                <li><strong>进入实名认证</strong>：
+                <li><strong class="重要">进入实名认证</strong>：
                     <ul>
                         <li>点击【我的】→【未实名】。</li>
                         <li>填写真实姓名、身份证号等信息提交。【采集人脸】完成人脸识别。最后点击【人证对比】。</li>
                     </ul>
                 </li>
-                <li><strong>领取福利</strong>：
+                <li><strong class="重要">领取福利</strong>：
                     <ul>
-                        <li>实名通过后，联系推荐人，领取专属福利。<strong>（本福利为推荐人私人扶持，不定时更改或取消）</strong></li>
-                        <li>推荐人将赠送<strong>3台卷轴矿机</strong>，系统赠送<strong>1台卷轴矿机</strong>，总计4台。</li>
+                        <li>实名通过后，联系推荐人，领取专属福利。<strong class="提示">（本福利为推荐人私人扶持，不定时更改或取消）</strong></li>
+                        <li>推荐人将赠送<strong class="高亮">3台卷轴矿机</strong>，系统赠送<strong class="高亮">1台卷轴矿机</strong>，总计4台。</li>
                     </ul>
                 </li>
             </ol>
             
-            <div class="warning-box">
-                <strong>注意：</strong> 必须使用本人真实信息，否则无法通过审核。
+            <div class="警告框">
+                <strong class="重要">注意：</strong> 必须使用本人真实信息，否则无法通过审核。
             </div>
         </div>
         
+        <!-- 第四部分：日常操作 -->
         <div class="card">
             <h2>四、日常操作与领取收益</h2>
             <ol>
-                <li><strong>每日领取收益</strong>：
+                <li><strong class="重要">每日领取收益</strong>：
                     <ul>
                         <li>进入【我的】页面→ 查看"卷轴收益"和"推广收益"。</li>
-                        <li><strong>点击红色数字领取</strong>（每天至少领取一次，48小时未领取将停产）。</li>
+                        <li><strong class="重要">点击红色数字领取</strong>（每天至少领取一次，48小时未领取将停产）。</li>
                     </ul>
                 </li>
-                <li><strong>查看个人资产信息</strong>：
+                <li><strong class="重要">查看个人资产信息</strong>：
                     <ul>
                         <li>在【我的】页面中查看当前DSC可用余额、质押数量及收益详情。点击【活跃度】或【DSC质押】可查看所有已有卷轴。</li>
                     </ul>
                 </li>
-                <li><strong>更新APP</strong>：
+                <li><strong class="重要">更新APP</strong>：
                     <ul>
                         <li>进入【系统设置】→ 【当前版本】下载最新版APP，确保功能正常。</li>
                     </ul>
                 </li>
             </ol>
             
-            <div class="warning-box">
-                <strong>收益领取提醒：</strong> 每天操作避免停产，建议设置每日提醒。
+            <div class="警告框">
+                <strong class="重要">收益领取提醒：</strong> 每天操作避免停产，建议设置每日提醒。
             </div>
         </div>
         
+        <!-- 注意事项 -->
         <div class="card">
             <h2>注意事项</h2>
             <ol>
-                <li><strong>安全码与密码</strong>：安全码和资金密码是账户核心凭证，丢失可能导致资产无法找回。</li>
-                <li><strong>实名认证</strong>：必须使用本人真实信息，否则无法通过审核。</li>
-                <li><strong>收益领取</strong>：每天操作避免停产，建议设置每日提醒。</li>
-                <li><strong>推荐人联系</strong>：完成注册后，添加推荐人微信，获取后续支持。</li>
+                <li><strong class="重要">安全码与密码</strong>：安全码和资金密码是账户核心凭证，丢失可能导致资产无法找回。</li>
+                <li><strong class="重要">实名认证</strong>：必须使用本人真实信息，否则无法通过审核。</li>
+                <li><strong class="重要">收益领取</strong>：每天操作避免停产，建议设置每日提醒。</li>
+                <li><strong class="重要">推荐人联系</strong>：完成注册后，添加推荐人微信，获取后续支持。</li>
             </ol>
         </div>
         
-        <div class="info-box">
-            <strong>友情提示：</strong>
+        <!-- 友情提示 -->
+        <div class="信息框">
+            <strong class="提示">友情提示：</strong>
             <ul>
-                <li>注册时需填写正确邀请码（如<span class="highlight">182N17</span>）。</li>
-                <li>安全码页面需复制或截屏保存（示例：<code>JC2zLBvtXH</code>）。</li>
+                <li>注册时需填写正确邀请码（如<span class="高亮">182N17</span>）。</li>
+                <li>安全码页面需复制或截屏保存（示例：<span class="安全码">JC2zLBvtXH</span>）。</li>
                 <li>人脸识别时需保持整个头部在识别框内，根据提示做相应的动作，不要有多余的动作，避免逆光拍摄。</li>
             </ul>
         </div>
         
-        <div class="danger-box">
-            <strong>遇到问题？联系推荐人！</strong><br>
+        <!-- 联系方式 -->
+        <div class="危险框">
+            <strong class="重要">遇到问题？联系推荐人！</strong><br>
             微信号：<span id="wechatId">dsc_2025</span>
-            <button class="copy-btn" onclick="copyWechatId()">复制</button>
+            <button class="复制按钮" onclick="复制微信号()">复制</button>
         </div>
         
+        <!-- 页脚 -->
         <footer>
             <p>祝您挖矿顺利，收益倍增！</p>
         </footer>
     </div>
     
     <script>
-        // 检测微信浏览器
-        function isWeixinBrowser() {
+        // 检测是否是微信浏览器
+        function 是微信浏览器吗() {
             return /MicroMessenger/i.test(navigator.userAgent);
         }
         
-        // 复制微信号
-        function copyWechatId() {
-            const wechatId = document.getElementById('wechatId').textContent;
-            navigator.clipboard.writeText(wechatId).then(() => {
-                alert('微信号已复制: ' + wechatId);
+        // 复制微信号功能
+        function 复制微信号() {
+            const 微信号 = document.getElementById('wechatId').textContent;
+            navigator.clipboard.writeText(微信号).then(() => {
+                alert('微信号已复制: ' + 微信号);
             }).catch(err => {
                 console.error('复制失败:', err);
                 // 备用复制方法
-                const textarea = document.createElement('textarea');
-                textarea.value = wechatId;
-                document.body.appendChild(textarea);
-                textarea.select();
+                const 文本域 = document.createElement('textarea');
+                文本域.value = 微信号;
+                document.body.appendChild(文本域);
+                文本域.select();
                 document.execCommand('copy');
-                document.body.removeChild(textarea);
-                alert('微信号已复制: ' + wechatId);
+                document.body.removeChild(文本域);
+                alert('微信号已复制: ' + 微信号);
             });
         }
         
         // 微信浏览器中点击注册链接提示
         document.getElementById('registerLink').addEventListener('click', function(e) {
-            if (isWeixinBrowser()) {
+            if (是微信浏览器吗()) {
                 e.preventDefault();
                 alert('请点击右上角菜单，选择"在浏览器中打开"后再进行注册操作');
             }
