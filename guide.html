@@ -3,349 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>数字卷轴DSC - 操作指南</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <title>DSC挖矿操作指南</title>
     <style>
         :root {
-            --primary-color: #FF6B35;
-            --secondary-color: #FFA630;
-            --dark-color: #333;
-            --light-color: #fff;
-            --accent-color: #FFE74C;
-            --guide-color: #4CAF50;
+            --main-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            --card-bg: rgba(255,255,255,0.1);
+            --accent: #00ff88;
+            --warning: #ff4757;
         }
-        
+
         * {
-            margin: 0;
-            padding: 0;
             box-sizing: border-box;
-            font-family: 'Roboto', 'Microsoft YaHei', sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: var(--light-color);
-            min-height: 100vh;
-            padding: 0;
-            overflow-x: hidden;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 40px 20px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        /* 更新logo与标题样式 */
-        .header-title-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 15px;
-            position: relative;
-            z-index: 1;
-            flex-wrap: wrap;
-        }
-        
-        .logo-title-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .logo {
-            height: 1.2em; /* 与标题字体高度相同 */
-            width: auto; /* 保持原始比例 */
-            transition: all 0.3s ease;
-            object-fit: contain;
-            display: inline-block;
-            vertical-align: middle;
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            font-family: 'Montserrat', sans-serif;
-            position: relative;
-            z-index: 1;
-            color: var(--accent-color);
-            display: inline-block;
             margin: 0;
+            padding: 0;
+            font-family: 'Microsoft YaHei', sans-serif;
         }
-        
-        .back-btn {
-            display: inline-block;
-            background: var(--light-color);
-            color: var(--primary-color);
-            padding: 12px 25px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            margin: 15px 0;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            border: none;
-            font-size: 1rem;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .back-btn:hover {
-            background: #e6e6e6;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .guide-section {
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 30px;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        h2 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            color: var(--guide-color);
-            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-            padding-bottom: 10px;
-            font-family: 'Montserrat', sans-serif;
-        }
-        
-        h3 {
-            font-size: 1.4rem;
-            margin: 20px 0 15px;
-            color: var(--accent-color);
-            font-family: 'Montserrat', sans-serif;
-        }
-        
-        p {
-            margin-bottom: 15px;
-            line-height: 1.7;
-            font-size: 1.1rem;
-        }
-        
-        ul, ol {
-            margin-bottom: 15px;
-            padding-left: 20px;
-        }
-        
-        li {
-            margin-bottom: 10px;
+
+        body {
+            background: var(--main-bg);
+            color: #fff;
             line-height: 1.6;
+            padding: 1rem;
         }
-        
-        .step {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-left: 4px solid var(--guide-color);
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
         }
-        
+
+        h1 {
+            text-align: center;
+            margin: 2rem 0;
+            color: var(--accent);
+            font-size: 2.2rem;
+            text-shadow: 0 0 10px rgba(0,255,136,0.3);
+        }
+
+        .step-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
         .step-number {
             display: inline-block;
-            background: var(--guide-color);
-            color: white;
-            width: 25px;
-            height: 25px;
+            width: 30px;
+            height: 30px;
+            background: var(--accent);
+            color: #16213e;
             border-radius: 50%;
             text-align: center;
-            line-height: 25px;
-            margin-right: 10px;
+            line-height: 30px;
+            margin-right: 1rem;
             font-weight: bold;
         }
-        
-        .note {
-            background: rgba(255, 230, 76, 0.2);
-            padding: 15px;
-            border-radius: 8px;
-            margin: 20px 0;
-            border-left: 4px solid var(--accent-color);
-        }
-        
-        .note-title {
+
+        .highlight {
+            color: var(--accent);
             font-weight: bold;
-            color: var(--accent-color);
-            margin-bottom: 10px;
+            background: rgba(0,255,136,0.1);
+            padding: 0.2rem 0.5rem;
+            border-radius: 5px;
         }
-        
-        .guide-image {
-            max-width: 100%;
+
+        .warning {
+            color: var(--warning);
+            border-left: 3px solid var(--warning);
+            padding-left: 1rem;
+            margin: 1rem 0;
+        }
+
+        img.preview {
+            width: 100%;
+            max-width: 300px;
             border-radius: 10px;
-            margin: 15px 0;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin: 1rem 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
-        
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            
-            h2 {
-                font-size: 1.5rem;
-            }
-            
-            h3 {
-                font-size: 1.3rem;
-            }
-            
-            .guide-section {
-                padding: 20px;
-            }
-            
-            .logo {
-                height: 1em;
-            }
+
+        .important {
+            color: #ffd700;
+            font-weight: bold;
+            text-shadow: 0 0 8px rgba(255,215,0,0.3);
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <div class="header-title-container">
-                <div class="logo-title-wrapper">
-                    <img src="images/logo.png" alt="logo" class="logo">
-                    <h1>数字卷轴DSC操作指南</h1>
-                </div>
-            </div>
-            <a href="index.html" class="back-btn">返回首页</a>
-        </header>
-        
-        <div class="guide-section">
-            <h2>DSC注册与挖矿操作图文教程</h2>
-            
-            <div class="step">
-                <span class="step-number">1</span>
-                <h3>注册账号</h3>
-                <img src="images/zuce_01.jpg" alt="注册账号" class="guide-image">
-                <ol>
-                    <li><strong>选择账号类型</strong>：手机号或邮箱（勾选其一）</li>
-                    <li><strong>填写账号信息</strong>：
-                        <ul>
-                            <li>输入账号（手机号或邮箱）</li>
-                            <li>设置登录密码（需输入两次确认）</li>
-                        </ul>
-                    </li>
-                    <li><strong>填写邀请码</strong>：输入推荐人提供的邀请码（例如：<code>182N17</code>）</li>
-                    <li><strong>验证码</strong>：根据右侧算式输入答案（示例中算式为<code>0*7=?</code>，需输入<code>0</code>）</li>
-                    <li>提交完成注册</li>
-                </ol>
-            </div>
-            
-            <div class="step">
-                <span class="step-number">2</span>
-                <h3>设置资金密码与保存安全码</h3>
-                <img src="images/anquanma_02.jpg" alt="安全码设置" class="guide-image">
-                <ol>
-                    <li><strong>登录后进入【我的】页面</strong>，系统会弹出"保存安全码"提示。先点击红色字体【资金密码未设置？】</li>
-                    <li><strong>设置6位数字资金密码</strong>（例如：<code>123456</code>）</li>
-                    <li><strong>获取安全码</strong>：
-                        <ul>
-                            <li>输入资金密码点击获取安全码，系统弹出"保存安全码"提示（示例安全码：<code>JC2zLBvtXH</code>）</li>
-                            <li><strong>截屏或复制保存安全码</strong>（用于找回密码，切勿泄露）</li>
-                        </ul>
-                    </li>
-                    <li>勾选【我已保存好安全码】完成验证</li>
-                </ol>
-            </div>
-            
-            <div class="step">
-                <span class="step-number">3</span>
-                <h3>完成实名认证</h3>
-                <img src="images/shiming_03.jpg" alt="实名认证" class="guide-image">
-                <ol>
-                    <li><strong>联系推荐人授权认证</strong>：
-                        <ul>
-                            <li>点击你的账号进入个人信息页面，复制<strong>卷界地址</strong>发送给推荐人授权认证</li>
-                            <li>等推荐人授权后，账户余额显示0.12DSC才可以认证</li>
-                        </ul>
-                    </li>
-                    <li><strong>进入实名认证</strong>：
-                        <ul>
-                            <li>点击【我的】→【未实名】</li>
-                            <li>填写真实姓名、身份证号等信息提交</li>
-                            <li>【采集人脸】完成人脸识别</li>
-                            <li>最后点击【人证对比】</li>
-                        </ul>
-                    </li>
-                    <li><strong>领取福利</strong>：
-                        <ul>
-                            <li>实名通过后，联系推荐人（本福利为推荐人自费扶持的）</li>
-                            <li>推荐人将赠送<strong>3台卷轴矿机</strong>，系统赠送<strong>1台卷轴矿机</strong>，总计4台</li>
-                        </ul>
-                    </li>
-                </ol>
-            </div>
-            
-            <div class="step">
-                <span class="step-number">4</span>
-                <h3>日常操作与领取收益</h3>
-                <img src="images/chaozuo_04.jpg" alt="日常操作" class="guide-image">
-                <ol>
-                    <li><strong>每日领取收益</strong>：
-                        <ul>
-                            <li>进入【我的】页面→ 查看"卷轴收益"和"推广收益"</li>
-                            <li><strong>点击红色数字领取</strong>（每天至少领取一次，48小时未领取将停产）</li>
-                        </ul>
-                    </li>
-                    <li><strong>查看个人资产信息</strong>：
-                        <ul>
-                            <li>在【我的】页面中查看当前DSC可用余额、质押数量及收益详情</li>
-                            <li>点击【活跃度】或【DSC质押】可查看所有已有卷轴</li>
-                        </ul>
-                    </li>
-                    <li><strong>更新APP</strong>：
-                        <ul>
-                            <li>进入【系统设置】→ 【当前版本】下载最新版APP，确保功能正常</li>
-                        </ul>
-                    </li>
-                </ol>
-            </div>
-            
-            <div class="note">
-                <div class="note-title">注意事项</div>
-                <ul>
-                    <li><strong>安全码与密码</strong>：安全码和资金密码是账户核心凭证，丢失可能导致资产无法找回</li>
-                    <li><strong>实名认证</strong>：必须使用本人真实信息，否则无法通过审核</li>
-                    <li><strong>收益领取</strong>：每天操作避免停产，建议设置每日提醒</li>
-                    <li><strong>推荐人联系</strong>：完成注册后，添加推荐人微信，获取后续支持</li>
-                </ul>
-            </div>
-            
-            <div class="note">
-                <div class="note-title">图文示例提示</div>
-                <ul>
-                    <li>注册时需填写正确邀请码（如<code>182N17</code>）</li>
-                    <li>安全码页面需复制或截屏保存（示例：<code>JC2zLBvtXH</code>）</li>
-                    <li>人脸识别时需保持整个头部在识别框内，根据提示做相应的动作，不要有多余的动作，避免逆光拍摄</li>
-                </ul>
-                <p><strong>遇到问题？联系推荐人！</strong> 祝您挖矿顺利，收益倍增！</p>
+        <h1>📱 DSC挖矿操作指南</h1>
+
+        <!-- 注册步骤 -->
+        <div class="step-card">
+            <h2><span class="step-number">1</span>账号注册</h2>
+            <img src="images/zuce_01.jpg" class="preview" alt="注册界面">
+            <p>▶️ 选择 <span class="highlight">手机号/邮箱</span> 注册类型</p>
+            <p>🔑 密码需<span class="important">两次输入一致</span></p>
+            <p>📨 邀请码填写：<strong class="important">182N17</strong></p>
+            <div class="warning">❗算式答案直接填数字（如0*7=0）</div>
+        </div>
+
+        <!-- 安全设置 -->
+        <div class="step-card">
+            <h2><span class="step-number">2</span>安全设置</h2>
+            <img src="images/anquanma_02.jpg" class="preview" alt="安全码">
+            <p>🔐 资金密码为<span class="important">6位纯数字</span></p>
+            <p>⚠️ 安全码示例：<strong class="important">JC2zLBvtXH</strong></p>
+            <div class="warning">❗必须截屏保存安全码！</div>
+        </div>
+
+        <!-- 实名认证 -->
+        <div class="step-card">
+            <h2><span class="step-number">3</span>实名认证</h2>
+            <img src="images/shiming_03.jpg" class="preview" alt="实名认证">
+            <p>📮 卷轴地址格式：<span class="highlight">DSC_XXXXXX</span></p>
+            <p>🎁 认证后获得<span class="important">4台矿机</span></p>
+            <div class="warning">❗必须本人真实信息</div>
+        </div>
+
+        <!-- 注意事项 -->
+        <div class="step-card" style="background: rgba(255,71,87,0.1);">
+            <h2 style="color: var(--warning);">⚠️ 重要提醒</h2>
+            <p>🔒 安全码和密码是核心凭证！</p>
+            <p>⏰ 必须<span class="important">每日领取</span>收益！</p>
+            <p>📲 及时更新APP版本！</p>
+            <div class="warning" style="border-color: var(--accent);">
+                💡 遇到问题立即联系推荐人！
             </div>
         </div>
-        
-        <footer>
-            <p>© 2023 数字卷轴DSC平台 版权所有</p>
-            <p>基于卷界链技术构建 · 安全透明 · 多重收益</p>
-        </footer>
     </div>
 </body>
 </html>
