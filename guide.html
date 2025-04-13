@@ -47,21 +47,31 @@
             overflow: hidden;
         }
         
-        header::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
-            z-index: 0;
+        /* 更新logo与标题样式 */
+        .header-title-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+            flex-wrap: wrap;
         }
         
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .logo-title-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo {
+            height: 1.2em; /* 与标题字体高度相同 */
+            width: auto; /* 保持原始比例 */
+            transition: all 0.3s ease;
+            object-fit: contain;
+            display: inline-block;
+            vertical-align: middle;
         }
         
         h1 {
@@ -71,7 +81,9 @@
             font-family: 'Montserrat', sans-serif;
             position: relative;
             z-index: 1;
-            color: var(--guide-color);
+            color: var(--accent-color);
+            display: inline-block;
+            margin: 0;
         }
         
         .back-btn {
@@ -175,6 +187,14 @@
             margin-bottom: 10px;
         }
         
+        .guide-image {
+            max-width: 100%;
+            border-radius: 10px;
+            margin: 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
         @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
@@ -191,167 +211,140 @@
             .guide-section {
                 padding: 20px;
             }
+            
+            .logo {
+                height: 1em;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>数字卷轴DSC操作指南</h1>
+            <div class="header-title-container">
+                <div class="logo-title-wrapper">
+                    <img src="images/logo.png" alt="logo" class="logo">
+                    <h1>数字卷轴DSC操作指南</h1>
+                </div>
+            </div>
             <a href="index.html" class="back-btn">返回首页</a>
         </header>
         
         <div class="guide-section">
-            <h2>新手入门指南</h2>
+            <h2>DSC注册与挖矿操作图文教程</h2>
             
             <div class="step">
                 <span class="step-number">1</span>
                 <h3>注册账号</h3>
-                <p>点击首页"立即注册/登录"按钮，填写手机号码获取验证码，设置登录密码和安全码。</p>
-                <p>安全码用于重置密码，请务必妥善保管。</p>
+                <img src="images/zuce_01.jpg" alt="注册账号" class="guide-image">
+                <ol>
+                    <li><strong>选择账号类型</strong>：手机号或邮箱（勾选其一）</li>
+                    <li><strong>填写账号信息</strong>：
+                        <ul>
+                            <li>输入账号（手机号或邮箱）</li>
+                            <li>设置登录密码（需输入两次确认）</li>
+                        </ul>
+                    </li>
+                    <li><strong>填写邀请码</strong>：输入推荐人提供的邀请码（例如：<code>182N17</code>）</li>
+                    <li><strong>验证码</strong>：根据右侧算式输入答案（示例中算式为<code>0*7=?</code>，需输入<code>0</code>）</li>
+                    <li>提交完成注册</li>
+                </ol>
             </div>
             
             <div class="step">
                 <span class="step-number">2</span>
-                <h3>实名认证</h3>
-                <p>注册后10天内需完成实名认证：</p>
-                <ul>
-                    <li>进入"我的"-"实名认证"页面</li>
-                    <li>填写真实姓名和身份证号码</li>
-                    <li>进行人脸识别验证</li>
-                </ul>
-                <p>认证费用可通过上级赠送或自行支付(0.07 DSC)。</p>
+                <h3>设置资金密码与保存安全码</h3>
+                <img src="images/anquanma_02.jpg" alt="安全码设置" class="guide-image">
+                <ol>
+                    <li><strong>登录后进入【我的】页面</strong>，系统会弹出"保存安全码"提示。先点击红色字体【资金密码未设置？】</li>
+                    <li><strong>设置6位数字资金密码</strong>（例如：<code>123456</code>）</li>
+                    <li><strong>获取安全码</strong>：
+                        <ul>
+                            <li>输入资金密码点击获取安全码，系统弹出"保存安全码"提示（示例安全码：<code>JC2zLBvtXH</code>）</li>
+                            <li><strong>截屏或复制保存安全码</strong>（用于找回密码，切勿泄露）</li>
+                        </ul>
+                    </li>
+                    <li>勾选【我已保存好安全码】完成验证</li>
+                </ol>
             </div>
             
             <div class="step">
                 <span class="step-number">3</span>
-                <h3>激活试炼卷轴</h3>
-                <p>注册成功后系统自动赠送试炼卷轴：</p>
-                <ul>
-                    <li>进入"我的卷轴"页面查看</li>
-                    <li>每小时自动产生0.00125 DSC收益</li>
-                    <li>每48小时需领取一次收益，否则停产</li>
-                </ul>
+                <h3>完成实名认证</h3>
+                <img src="images/shiming_03.jpg" alt="实名认证" class="guide-image">
+                <ol>
+                    <li><strong>联系推荐人授权认证</strong>：
+                        <ul>
+                            <li>点击你的账号进入个人信息页面，复制<strong>卷界地址</strong>发送给推荐人授权认证</li>
+                            <li>等推荐人授权后，账户余额显示0.12DSC才可以认证</li>
+                        </ul>
+                    </li>
+                    <li><strong>进入实名认证</strong>：
+                        <ul>
+                            <li>点击【我的】→【未实名】</li>
+                            <li>填写真实姓名、身份证号等信息提交</li>
+                            <li>【采集人脸】完成人脸识别</li>
+                            <li>最后点击【人证对比】</li>
+                        </ul>
+                    </li>
+                    <li><strong>领取福利</strong>：
+                        <ul>
+                            <li>实名通过后，联系推荐人（本福利为推荐人自费扶持的）</li>
+                            <li>推荐人将赠送<strong>3台卷轴矿机</strong>，系统赠送<strong>1台卷轴矿机</strong>，总计4台</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+            
+            <div class="step">
+                <span class="step-number">4</span>
+                <h3>日常操作与领取收益</h3>
+                <img src="images/chaozuo_04.jpg" alt="日常操作" class="guide-image">
+                <ol>
+                    <li><strong>每日领取收益</strong>：
+                        <ul>
+                            <li>进入【我的】页面→ 查看"卷轴收益"和"推广收益"</li>
+                            <li><strong>点击红色数字领取</strong>（每天至少领取一次，48小时未领取将停产）</li>
+                        </ul>
+                    </li>
+                    <li><strong>查看个人资产信息</strong>：
+                        <ul>
+                            <li>在【我的】页面中查看当前DSC可用余额、质押数量及收益详情</li>
+                            <li>点击【活跃度】或【DSC质押】可查看所有已有卷轴</li>
+                        </ul>
+                    </li>
+                    <li><strong>更新APP</strong>：
+                        <ul>
+                            <li>进入【系统设置】→ 【当前版本】下载最新版APP，确保功能正常</li>
+                        </ul>
+                    </li>
+                </ol>
             </div>
             
             <div class="note">
                 <div class="note-title">注意事项</div>
-                <p>试炼卷轴为永久卷轴，无需租金，是了解平台运作的最佳方式。</p>
-            </div>
-        </div>
-        
-        <div class="guide-section">
-            <h2>卷轴操作指南</h2>
-            
-            <div class="step">
-                <span class="step-number">1</span>
-                <h3>领取收益</h3>
-                <p>进入"我的卷轴"页面：</p>
-                <ol>
-                    <li>查看各卷轴累计收益</li>
-                    <li>点击"领取收益"按钮</li>
-                    <li>收益将存入您的账户余额</li>
-                </ol>
-                <p>注意：超过48小时未领取，卷轴将停产。</p>
-            </div>
-            
-            <div class="step">
-                <span class="step-number">2</span>
-                <h3>兑换高级卷轴</h3>
-                <p>当余额足够时，可兑换更高级别卷轴：</p>
                 <ul>
-                    <li>进入"卷轴商城"页面</li>
-                    <li>选择想要兑换的卷轴级别</li>
-                    <li>确认支付相应DSC租金</li>
-                    <li>新卷轴立即生效并开始产出</li>
-                </ul>
-            </div>
-            
-            <div class="step">
-                <span class="step-number">3</span>
-                <h3>增产机制</h3>
-                <p>高级卷轴可通过推广活跃用户增加日产：</p>
-                <ul>
-                    <li>黄金卷轴：上月直推每+1位(活跃度≥3),日产+0.35</li>
-                    <li>铂金卷轴：上月直推每+1位(活跃度≥3),日产+1</li>
-                    <li>钻石卷轴：上月直推每+1位(活跃度≥3),日产+1.3</li>
-                    <li>至尊卷轴：上月直推每+1位(活跃度≥3),日产+4.5</li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="guide-section">
-            <h2>交易操作指南</h2>
-            
-            <div class="step">
-                <span class="step-number">1</span>
-                <h3>DSC交易</h3>
-                <p>进入"市场"-"DSC交易"页面：</p>
-                <ul>
-                    <li>查看当前买卖挂单</li>
-                    <li>可自由挂买单或卖单</li>
-                    <li>智能合约保障安全交换</li>
-                </ul>
-                <p>交易时间：24小时全天候</p>
-            </div>
-            
-            <div class="step">
-                <span class="step-number">2</span>
-                <h3>USDS交易</h3>
-                <p>进入"市场"-"USDS交易"页面：</p>
-                <ul>
-                    <li>市商提供优质挂单服务</li>
-                    <li>每日8:00至21:00开放</li>
-                    <li>超时未付款或未放币将自动申诉</li>
+                    <li><strong>安全码与密码</strong>：安全码和资金密码是账户核心凭证，丢失可能导致资产无法找回</li>
+                    <li><strong>实名认证</strong>：必须使用本人真实信息，否则无法通过审核</li>
+                    <li><strong>收益领取</strong>：每天操作避免停产，建议设置每日提醒</li>
+                    <li><strong>推荐人联系</strong>：完成注册后，添加推荐人微信，获取后续支持</li>
                 </ul>
             </div>
             
             <div class="note">
-                <div class="note-title">重要提示</div>
-                <p>若连续多次交易被申诉，可能被判定为捣乱账户，导致永久禁止交易。</p>
-            </div>
-        </div>
-        
-        <div class="guide-section">
-            <h2>推广奖励指南</h2>
-            
-            <div class="step">
-                <span class="step-number">1</span>
-                <h3>获取推广链接</h3>
-                <p>进入"推广中心"页面：</p>
+                <div class="note-title">图文示例提示</div>
                 <ul>
-                    <li>复制您的专属推广链接</li>
-                    <li>可通过微信、QQ等渠道分享</li>
-                    <li>下级通过您的链接注册即为您的团队成员</li>
+                    <li>注册时需填写正确邀请码（如<code>182N17</code>）</li>
+                    <li>安全码页面需复制或截屏保存（示例：<code>JC2zLBvtXH</code>）</li>
+                    <li>人脸识别时需保持整个头部在识别框内，根据提示做相应的动作，不要有多余的动作，避免逆光拍摄</li>
                 </ul>
-            </div>
-            
-            <div class="step">
-                <span class="step-number">2</span>
-                <h3>推广收益规则</h3>
-                <p>推广收益采用烧伤机制：</p>
-                <ul>
-                    <li>直推收益：3%-5%</li>
-                    <li>间推收益：1.5%-3%</li>
-                    <li>活跃度越高，收益比例越高</li>
-                </ul>
-            </div>
-            
-            <div class="step">
-                <span class="step-number">3</span>
-                <h3>推广活动月</h3>
-                <p>每月分三个时段提供不同奖励：</p>
-                <ul>
-                    <li>1-10日：新用户兑换青铜/白银卷轴，立返20%租金</li>
-                    <li>11-20日：上级奖励卷轴满产的5%或3%</li>
-                    <li>21-月末：新用户兑换青铜/白银卷轴，上级奖励45%或20%</li>
-                </ul>
+                <p><strong>遇到问题？联系推荐人！</strong> 祝您挖矿顺利，收益倍增！</p>
             </div>
         </div>
         
         <footer>
             <p>© 2023 数字卷轴DSC平台 版权所有</p>
-            <p>如有更多问题，请联系推荐人或客服</p>
+            <p>基于卷界链技术构建 · 安全透明 · 多重收益</p>
         </footer>
     </div>
 </body>
