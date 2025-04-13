@@ -3,86 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DSC注册与挖矿操作指南</title>
+    <title>DSC操作指南</title>
     <style>
         :root {
-            --primary-color: #1a5a99;
-            --accent-color: #ff6b35;
+            --primary-color: #007bff;
+            --highlight-color: #ff6b35;
             --bg-color: #f5f7fb;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
         body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             line-height: 1.6;
             background-color: var(--bg-color);
             color: #333;
-            font-size: 16px;
-            padding: 20px 15px;
-        }
-
-        .container {
+            padding: 20px;
             max-width: 800px;
             margin: 0 auto;
         }
 
         .nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: white;
-            padding: 10px 15px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
         }
 
         .home-btn {
-            color: var(--primary-color);
+            background: var(--primary-color);
+            color: white!important;
+            padding: 8px 15px;
+            border-radius: 20px;
             text-decoration: none;
-            font-weight: bold;
+            margin-right: 15px;
         }
 
-        .card {
+        .logo {
+            height: 40px;
+        }
+
+        .section {
             background: white;
-            border-radius: 10px;
+            border-radius: 12px;
             padding: 20px;
-            margin: 50px 0 20px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
         }
 
         h2 {
             color: var(--primary-color);
-            margin-bottom: 15px;
-            border-left: 4px solid var(--accent-color);
-            padding-left: 10px;
+            border-left: 4px solid var(--highlight-color);
+            padding-left: 12px;
+            margin: 25px 0;
         }
 
-        .code-block {
-            background: #f3f3f3;
-            padding: 3px 6px;
+        code {
+            background: #f8f9fa;
+            padding: 2px 6px;
             border-radius: 4px;
-            border: 1px solid #ddd;
+            border: 1px solid #dee2e6;
             font-family: monospace;
         }
 
         .alert {
-            background: var(--accent-color);
-            color: white;
             padding: 15px;
-            border-radius: 6px;
-            margin: 15px 0;
+            border-radius: 8px;
+            margin: 20px 0;
         }
 
-        .notice {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 15px;
-            margin: 15px 0;
+        .alert-warning {
+            background: #fff3e6;
+            border: 1px solid #ffd8b3;
+        }
+
+        .alert-info {
+            background: #e6f3ff;
+            border: 1px solid #b3d8ff;
         }
 
         img {
@@ -92,89 +86,89 @@
             border-radius: 8px;
         }
 
-        ul {
-            padding-left: 20px;
+        .highlight {
+            color: var(--highlight-color);
+            font-weight: 500;
         }
 
-        li {
-            margin-bottom: 10px;
-        }
-
-        strong {
-            color: var(--accent-color);
+        @media (max-width: 480px) {
+            body {
+                font-size: 16px;
+                padding: 15px;
+            }
+            
+            .section {
+                padding: 15px;
+            }
         }
     </style>
 </head>
 <body>
     <nav class="nav">
-        <a href="/" class="home-btn">← 返回首页</a>
+        <a href="index.html" class="home-btn">首页</a>
+        <img src="images/logo.png" alt="DSC Logo" class="logo">
     </nav>
 
-    <div class="container">
-        <div class="card">
-            <h2>一、注册账号</h2>
-            <img src="images/zuce_01.jpg" alt="注册界面">
-            <ul>
-                <li><strong>选择账号类型</strong>：手机号或邮箱（勾选其一）</li>
-                <li><strong>填写账号信息</strong>：
-                    <ul>
-                        <li>输入账号（手机号或邮箱）</li>
-                        <li>设置登录密码（需输入两次确认）</li>
-                    </ul>
-                </li>
-                <li><strong>填写邀请码</strong>：输入 <code class="code-block">182N17</code></li>
-                <li><strong>验证码</strong>：根据右侧算式输入答案（示例答案：<span style="color:var(--accent-color)">0</span>）</li>
-            </ul>
-        </div>
+    <h1>DSC注册与挖矿操作指南</h1>
 
-        <div class="card">
-            <h2>二、设置资金密码与保存安全码</h2>
-            <img src="images/anquanma_02.jpg" alt="安全码设置">
-            <ul>
-                <li><strong>登录后进入【我的】页面</strong> → 点击<span style="color:var(--accent-color)">【资金密码未设置？】</span></li>
-                <li><strong>设置6位数字资金密码</strong>（示例：<code class="code-block">123456</code>）</li>
-                <li><strong>获取安全码</strong>：<code class="code-block">JC2zLBvtXH</code>（截屏保存）</li>
-            </ul>
-        </div>
+    <div class="section">
+        <h2>一、注册账号</h2>
+        <img src="images/zuce_01.jpg" alt="注册步骤">
+        <p>1. <span class="highlight">选择账号类型</span>：手机号或邮箱（勾选其一）</p>
+        <p>2. <span class="highlight">填写账号信息</span>：</p>
+        <ul>
+            <li>输入账号（手机号或邮箱）</li>
+            <li>设置登录密码（需输入两次确认）</li>
+        </ul>
+        <p>3. <span class="highlight">填写邀请码</span>：<code>182N17</code></p>
+        <p>4. 验证码：根据右侧算式输入答案（示例：<code>0*7=?</code> 输入<code>0</code>）</p>
+    </div>
 
-        <div class="card">
-            <h2>三、完成实名认证</h2>
-            <img src="images/shiming_03.jpg" alt="实名认证">
-            <div class="alert">必须使用本人真实信息！</div>
-            <ul>
-                <li><strong>联系推荐人授权认证</strong> → 复制<span style="color:var(--primary-color)">卷界地址</span></li>
-                <li><strong>人脸识别要求</strong>：
-                    <ul>
-                        <li>保持头部在识别框内</li>
-                        <li>避免逆光拍摄</li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
+    <div class="section">
+        <h2>二、设置资金密码与安全码</h2>
+        <img src="images/anquanma_02.jpg" alt="安全设置">
+        <p>1. 登录后点击<span class="highlight">【资金密码未设置？】</span></p>
+        <p>2. 设置6位数字资金密码（示例：<code>123456</code>）</p>
+        <p>3. 获取安全码：<code>JC2zLBvtXH</code></p>
+    </div>
 
-        <div class="card">
-            <h2>四、日常操作与领取收益</h2>
-            <img src="image/chaozuo_04.jpg" alt="操作界面">
-            <ul>
-                <li><strong>每日必须操作</strong>：
-                    <ul>
-                        <li>领取<span style="color:var(--accent-color)">红色数字</span>收益</li>
-                        <li>超过48小时未领取会停产</li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
+    <div class="alert alert-warning">
+        <strong>重要提示：</strong>安全码必须通过截图或纸质备份，丢失将无法找回账户！
+    </div>
 
-        <div class="card">
-            <h2>注意事项</h2>
-            <div class="notice">
-                <ul>
-                    <li>安全码和资金密码是核心凭证！</li>
-                    <li>建议设置每日领取提醒</li>
-                    <li>必须添加推荐人微信获取支持</li>
-                </ul>
-            </div>
-        </div>
+    <div class="section">
+        <h2>三、实名认证</h2>
+        <img src="images/shiming_03.jpg" alt="实名认证">
+        <p>1. 联系推荐人授权认证，需要提供<span class="highlight">卷界地址</span></p>
+        <p>2. 完成人脸识别时注意：</p>
+        <ul>
+            <li>保持正对光源</li>
+            <li>头部完整显示在识别框内</li>
+        </ul>
+    </div>
+
+    <div class="alert alert-info">
+        <strong>福利说明：</strong>完成认证可获得4台卷轴矿机（3台来自推荐人+1台系统赠送）
+    </div>
+
+    <div class="section">
+        <h2>四、日常操作</h2>
+        <img src="image/chaozuo_04.jpg" alt="日常操作">
+        <p>每日必须操作：</p>
+        <ol>
+            <li>领取<span class="highlight">红色数字</span>收益</li>
+            <li>检查DSC质押状态</li>
+            <li>查看活跃度变化</li>
+        </ol>
+    </div>
+
+    <div class="alert alert-warning">
+        <h3>注意事项</h3>
+        <ul>
+            <li>48小时未领取收益将导致停产</li>
+            <li>推荐人微信必须及时添加</li>
+            <li>APP需保持最新版本</li>
+        </ul>
     </div>
 </body>
 </html>
