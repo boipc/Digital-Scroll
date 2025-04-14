@@ -513,7 +513,7 @@
             
             <div class="auth-box">
                 <a href="https://prod.digital-scroll.org/#/pages/reg?c=182N17" class="auth-btn register-btn" id="registerBtn">立即注册/登录</a>
-                <button class="auth-btn contact-btn" onclick="showContactModal()">联系推荐人获取快速认证</button>
+                <button class="auth-btn contact-btn" onclick="showContactModal()">联系上级授权认证</button>
                 <a href="guide.html" class="auth-btn guide-btn">操作指南</a>
             </div>
         </header>
@@ -714,8 +714,8 @@
         
         <div id="contactModal">
             <div class="modal-content">
-                <h3>联系推荐人获取快速认证</h3>
-                <p>请复制以下微信号联系推荐人：</p>
+                <h3>联系上级领取专属福利</h3>
+                <p>请复制以下微信号联系上级：</p>
                 <div class="wechat-container">
                     <span class="wechat-id" id="wechatId">dsc_2025</span>
                     <button class="copy-btn" onclick="copyWechatId()">
@@ -776,12 +776,12 @@
             document.getElementById(sectionId).classList.add('active');
         }
         
-        // 显示联系推荐人模态框
+        // 显示联系上级模态框
         function showContactModal() {
             document.getElementById('contactModal').style.display = 'flex';
         }
         
-        // 隐藏联系推荐人模态框
+        // 隐藏联系上级模态框
         function hideContactModal() {
             document.getElementById('contactModal').style.display = 'none';
         }
