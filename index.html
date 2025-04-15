@@ -22,6 +22,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Roboto', 'Microsoft YaHei', sans-serif;
+            font-size: 16px; /* 基础字体大小增大 */
         }
         
         body {
@@ -30,6 +31,7 @@
             min-height: 100vh;
             padding: 0;
             overflow-x: hidden;
+            font-size: 1.05rem; /* 整体字体增大5% */
         }
         
         .container {
@@ -81,8 +83,8 @@
             margin-right: 15px;
         }
         
-        h1 {
-            font-size: 2.8rem;
+         h1 {
+            font-size: 3.2rem; /* 从2.8rem增大到3.2rem */
             margin: 0;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
             font-family: 'Montserrat', sans-serif;
@@ -93,13 +95,13 @@
         }
         
         .subtitle {
-            font-size: 1.3rem;
+            font-size: 1.4rem; /* 从1.3rem增大到1.4rem */
             margin-bottom: 15px;
             position: relative;
             z-index: 1;
             width: 100%;
         }
-
+        
         /* 修改后的计时器样式 */
         .timer-container {
             margin: 25px 0;
@@ -926,11 +928,12 @@
             link.addEventListener('click', function(e) {
                 if(isWeixinBrowser()) {
                     e.preventDefault();
-                    alert('请在浏览器中打开: ' + this.href);
+                    alert('请点击右上角菜单，选择"在浏览器打开"后再进行注册/登录操作');
                 }
             });
         });
     };
+
     
     // 点击模态框外部关闭
     window.onclick = function(event) {
