@@ -105,7 +105,7 @@
             background: rgba(0, 0, 0, 0.3);
             border-radius: 15px;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px);
             position: relative;
             z-index: 1;
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -668,7 +668,7 @@
             </table>
             
             <h3>卷轴增产设定</h3>
-            <p>高级别卷轴可以通过推广活跃用户增加日产收益：</p>
+            <p>高级级别卷轴可以通过推广活跃用户增加日产收益：</p>
             <ul>
                 <li>黄金卷轴：上月直推每+1位(活跃度≥3),日产+0.35，封顶7.33(推8位)</li>
                 <li>铂金卷轴：上月直推每+1位(活跃度≥3),日产+1，封顶38.33(推15位)</li>
@@ -822,7 +822,11 @@
         });
         
         // 显示选中的内容区域
-        document.getElementById(sectionId).classList.add('active');
+        const activeSection = document.getElementById(sectionId);
+        activeSection.classList.add('active');
+        
+        // 平滑滚动到该区域
+        activeSection.scrollIntoView({ behavior: 'smooth' });
     }
     
     // 显示联系推荐人模态框
