@@ -99,10 +99,11 @@
             z-index: 1;
             width: 100%;
         }
-        
+
+        /* 修改后的计时器样式 */
         .timer-container {
             margin: 25px 0;
-            padding: 15px;
+            padding: 20px 15px;
             background: rgba(0, 0, 0, 0.3);
             border-radius: 15px;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
@@ -110,25 +111,35 @@
             position: relative;
             z-index: 1;
             border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
         }
-        
+
         .timer-label {
             font-size: 1.5rem;
             margin-bottom: 15px;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
             font-weight: 500;
         }
-        
+
         .timer {
-            font-size: 3rem;
-            font-weight: bold;
-            letter-spacing: 3px;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-            animation: pulse 1.5s infinite alternate;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
             font-family: 'Montserrat', sans-serif;
-            position: relative;
+            animation: pulse 1.5s infinite alternate;
         }
-        
+
+        .days {
+            font-size: 1.8em;
+            line-height: 1.2;
+            letter-spacing: 2px;
+        }
+
+        .time {
+            font-size: 2.2em;
+            letter-spacing: 3px;
+        }
+
         @keyframes pulse {
             0% { text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); }
             100% { text-shadow: 0 0 20px rgba(255, 230, 76, 0.8), 0 0 30px rgba(255, 230, 76, 0.6); }
@@ -520,6 +531,14 @@
                 font-size: 1.8rem;
             }
             
+            .days {
+                font-size: 1.2em;
+            }
+            
+            .time {
+                font-size: 1.4em;
+            }
+            
             .auth-btn, .contact-btn, .guide-btn {
                 padding: 12px;
                 font-size: 0.9rem;
@@ -565,7 +584,16 @@
             }
             
             .timer {
-                font-size: 1.6rem;
+                font-size: 1.4rem;
+                gap: 5px;
+            }
+            
+            .days {
+                font-size: 1em;
+            }
+            
+            .time {
+                font-size: 1.1em;
             }
             
             .modal-content {
@@ -586,7 +614,10 @@
             
             <div class="timer-container">
                 <div class="timer-label">DSC已稳定运行</div>
-                <div class="timer" id="runtimeTimer">00天 00:00:00</div>
+                <div class="timer" id="runtimeTimer">
+                    <div class="days" id="days">00天</div>
+                    <div class="time" id="time">00:00:00</div>
+                </div>
             </div>
             
             <div class="auth-box">
@@ -827,17 +858,13 @@
     <script>
     // 显示指定内容区域
     function showSection(sectionId) {
-        // 隐藏所有内容区域
         const sections = document.querySelectorAll('.content-section');
         sections.forEach(section => {
             section.classList.remove('active');
         });
         
-        // 显示选中的内容区域
         const activeSection = document.getElementById(sectionId);
         activeSection.classList.add('active');
-        
-        // 平滑滚动到该区域
         activeSection.scrollIntoView({ behavior: 'smooth' });
     }
     
@@ -856,28 +883,18 @@
         const wechatId = document.getElementById('wechatId');
         const copyStatus = document.getElementById('copyStatus');
         
-        // 创建临时textarea元素
         const textarea = document.createElement('textarea');
         textarea.value = wechatId.textContent;
         document.body.appendChild(textarea);
-        
-        // 选中并复制文本
         textarea.select();
         document.execCommand('copy');
-        
-        // 移除临时元素
         document.body.removeChild(textarea);
         
-        // 显示复制成功提示
         copyStatus.textContent = '微信号已复制到剪贴板！';
-        
-        // 3秒后隐藏提示
-        setTimeout(() => {
-            copyStatus.textContent = '';
-        }, 3000);
+        setTimeout(() => { copyStatus.textContent = ''; }, 3000);
     }
     
-    // 计算并显示运行时间
+    // 更新垂直计时器
     function updateRuntime() {
         const startDate = new Date('2023-09-25T00:00:00');
         const now = new Date();
@@ -888,24 +905,14 @@
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
         
-        document.getElementById('runtimeTimer').textContent = 
-            `${days}天 ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        document.getElementById('days').textContent = `${days}天`;
+        document.getElementById('time').textContent = 
+            `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     }
     
-     // 检测是否在微信浏览器中
+    // 微信浏览器检测
     function isWeixinBrowser() {
-        const ua = navigator.userAgent.toLowerCase();
-        return ua.indexOf('micromessenger') !== -1;
-    }
-    
-    // 处理外部链接点击
-    function handleExternalLinkClick(e) {
-        if (isWeixinBrowser()) {
-            e.preventDefault();
-            const url = e.currentTarget.href;
-            alert('请在浏览器中打开: ' + url);
-        }
-        // 如果不是微信浏览器，默认行为会正常跳转
+        return navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1;
     }
     
     // 初始化页面
@@ -913,27 +920,24 @@
         updateRuntime();
         setInterval(updateRuntime, 1000);
         
-        // 默认激活intro部分但不滚动
-        const sections = document.querySelectorAll('.content-section');
-        sections.forEach(section => {
-            section.classList.remove('active');
-        });
         document.getElementById('intro').classList.add('active');
         
-        // 为所有外部链接添加点击事件处理
-        const externalLinks = document.querySelectorAll('.external-link, #registerBtn');
-        externalLinks.forEach(link => {
-            link.addEventListener('click', handleExternalLinkClick);
+        document.querySelectorAll('.external-link, #registerBtn').forEach(link => {
+            link.addEventListener('click', function(e) {
+                if(isWeixinBrowser()) {
+                    e.preventDefault();
+                    alert('请在浏览器中打开: ' + this.href);
+                }
+            });
         });
     };
     
-    // 点击模态框外部关闭模态框
+    // 点击模态框外部关闭
     window.onclick = function(event) {
         const modal = document.getElementById('contactModal');
-        if (event.target == modal) {
-            hideContactModal();
-        }
+        if (event.target == modal) hideContactModal();
     }
     </script>
 </body>
 </html>
+
