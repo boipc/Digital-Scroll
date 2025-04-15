@@ -12,6 +12,9 @@
             --dark-color: #333;
             --light-color: #fff;
             --accent-color: #FFE74C;
+            --register-btn: #4CAF50;
+            --contact-btn: #2196F3;
+            --guide-btn: #9C27B0;
         }
         
         * {
@@ -70,20 +73,22 @@
             position: relative;
             z-index: 1;
             flex-wrap: wrap;
+            margin-bottom: 15px;
         }
         
         .logo {
-            height: 3rem;
+            height: 2.8rem;
             margin-right: 15px;
         }
         
         h1 {
-            font-size: 3rem;
-            margin-bottom: 15px;
+            font-size: 2.8rem;
+            margin: 0;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
             font-family: 'Montserrat', sans-serif;
             position: relative;
             z-index: 1;
+            line-height: 1;
         }
         
         .subtitle {
@@ -260,21 +265,23 @@
         }
         
         .auth-box {
-            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
             margin: 40px 0;
             position: relative;
             z-index: 1;
+            width: 100%;
         }
         
         .auth-btn {
-            display: inline-block;
-            background: var(--light-color);
-            color: var(--primary-color);
-            padding: 18px 36px;
-            border-radius: 50px;
+            display: block;
+            background: var(--register-btn);
+            color: var(--light-color);
+            padding: 18px;
+            border-radius: 12px;
             text-decoration: none;
             font-weight: bold;
-            margin: 15px;
             transition: all 0.3s ease;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
             border: none;
@@ -282,6 +289,8 @@
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            width: 100%;
+            text-align: center;
         }
         
         .auth-btn::after {
@@ -297,7 +306,7 @@
         }
         
         .auth-btn:hover {
-            background: var(--light-color);
+            background: #3e8e41;
             transform: translateY(-5px);
             box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
         }
@@ -307,14 +316,13 @@
         }
         
         .contact-btn {
-            display: inline-block;
-            background: var(--accent-color);
-            color: var(--dark-color);
-            padding: 18px 36px;
-            border-radius: 50px;
+            display: block;
+            background: var(--contact-btn);
+            color: var(--light-color);
+            padding: 18px;
+            border-radius: 12px;
             text-decoration: none;
             font-weight: bold;
-            margin: 15px;
             transition: all 0.3s ease;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
             border: none;
@@ -322,23 +330,24 @@
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            width: 100%;
+            text-align: center;
         }
         
         .contact-btn:hover {
-            background: #ffdf1a;
+            background: #0b7dda;
             transform: translateY(-5px);
             box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
         }
 
         .guide-btn {
-            display: inline-block;
-            background: var(--primary-color);
+            display: block;
+            background: var(--guide-btn);
             color: var(--light-color);
-            padding: 18px 36px;
-            border-radius: 50px;
+            padding: 18px;
+            border-radius: 12px;
             text-decoration: none;
             font-weight: bold;
-            margin: 15px;
             transition: all 0.3s ease;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
             border: none;
@@ -346,10 +355,12 @@
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            width: 100%;
+            text-align: center;
         }
         
         .guide-btn:hover {
-            background: #ff5a1f;
+            background: #7b1fa2;
             transform: translateY(-5px);
             box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
         }
@@ -473,6 +484,7 @@
             .logo {
                 margin-right: 0;
                 margin-bottom: 15px;
+                height: 2.5rem;
             }
             
             h1 {
@@ -493,14 +505,60 @@
             }
             
             .auth-btn, .contact-btn, .guide-btn {
-                padding: 15px 30px;
+                padding: 15px;
                 font-size: 1.1rem;
-                margin: 10px;
             }
             
             .modal-content {
                 width: 90%;
                 padding: 30px 20px;
+            }
+            
+            .content-section {
+                padding: 20px;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            h3 {
+                font-size: 1.4rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+            
+            header {
+                padding: 30px 15px;
+            }
+            
+            .logo {
+                height: 2rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .timer-container {
+                padding: 20px 15px;
+                margin: 30px 0;
+            }
+            
+            .timer-label {
+                font-size: 1.2rem;
+            }
+            
+            .timer {
+                font-size: 1.8rem;
             }
         }
     </style>
@@ -818,7 +876,7 @@
             `${days}天 ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     }
     
-    // 检测是否在微信浏览器中
+     // 检测是否在微信浏览器中
     function isWeixinBrowser() {
         const ua = navigator.userAgent.toLowerCase();
         return ua.indexOf('micromessenger') !== -1;
