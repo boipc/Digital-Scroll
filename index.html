@@ -63,6 +63,20 @@
             100% { transform: rotate(360deg); }
         }
         
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            height: 3rem;
+            margin-right: 15px;
+        }
+        
         h1 {
             font-size: 3rem;
             margin-bottom: 15px;
@@ -77,6 +91,7 @@
             margin-bottom: 25px;
             position: relative;
             z-index: 1;
+            width: 100%;
         }
         
         .timer-container {
@@ -122,7 +137,7 @@
         
         .btn {
             background: rgba(255, 255, 255, 0.15);
-border: none;
+            border: none;
             color: var(--light-color);
             padding: 20px;
             font-size: 1.2rem;
@@ -314,6 +329,30 @@ border: none;
             transform: translateY(-5px);
             box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
         }
+
+        .guide-btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: var(--light-color);
+            padding: 18px 36px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .guide-btn:hover {
+            background: #ff5a1f;
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
         
         #contactModal {
             display: none;
@@ -427,6 +466,15 @@ border: none;
         }
         
         @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+            
+            .logo {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
             h1 {
                 font-size: 2.2rem;
             }
@@ -444,7 +492,7 @@ border: none;
                 font-size: 2.2rem;
             }
             
-            .auth-btn, .contact-btn {
+            .auth-btn, .contact-btn, .guide-btn {
                 padding: 15px 30px;
                 font-size: 1.1rem;
                 margin: 10px;
@@ -460,17 +508,21 @@ border: none;
 <body>
     <div class="container">
         <header>
-            <h1>数字卷轴DSC</h1>
+            <div class="header-content">
+                <img src="images/logo01.png" alt="数字卷轴DSC Logo" class="logo">
+                <h1>数字卷轴DSC</h1>
+            </div>
             <p class="subtitle">创新数字资产平台 · 每小时收益 · 多重获利方式</p>
             
             <div class="timer-container">
                 <div class="timer-label">DSC已稳定运行</div>
-<div class="timer" id="runtimeTimer">00天 00:00:00</div>
+                <div class="timer" id="runtimeTimer">00天 00:00:00</div>
             </div>
             
             <div class="auth-box">
-                <a href="https://prod.digital-scroll.org/#/pages/reg?c=182N17" class="auth-btn">立即注册/登录</a>
+                <a href="https://prod.digital-scroll.org/#/pages/reg?c=182N17" class="auth-btn" id="registerBtn">立即注册/登录</a>
                 <button class="contact-btn" onclick="showContactModal()">联系推荐人获取快速认证</button>
+                <a href="guide.html" class="guide-btn">操作指南</a>
             </div>
         </header>
         
@@ -583,7 +635,7 @@ border: none;
             
             <h3>刷脸验证问题解决</h3>
             <p>若APP二次刷脸无法通过，请尝试使用网页版：<br>
-            <a href="https://prod.digital-scroll.org" style="color: var(--accent-color); text-decoration: underline;">https://prod.digital-scroll.org</a></p>
+            <a href="https://prod.digital-scroll.org" style="color: var(--accent-color); text-decoration: underline;" class="external-link">https://prod.digital-scroll.org</a></p>
         </div>
         
         <div id="promotion" class="content-section">
@@ -666,7 +718,7 @@ border: none;
             <p>如有任何问题，请通过以下方式联系我们：</p>
             
             <h3>官方网址</h3>
-            <p><a href="https://prod.digital-scroll.org" style="color: var(--accent-color); text-decoration: underline;">https://prod.digital-scroll.org</a></p>
+            <p><a href="https://prod.digital-scroll.org" style="color: var(--accent-color); text-decoration: underline;" class="external-link">https://prod.digital-scroll.org</a></p>
             
             <h3>重要地址</h3>
             <ul>
@@ -766,6 +818,22 @@ border: none;
             `${days}天 ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     }
     
+    // 检测是否在微信浏览器中
+    function isWeixinBrowser() {
+        const ua = navigator.userAgent.toLowerCase();
+        return ua.indexOf('micromessenger') !== -1;
+    }
+    
+    // 处理外部链接点击
+    function handleExternalLinkClick(e) {
+        if (isWeixinBrowser()) {
+            e.preventDefault();
+            const url = e.currentTarget.href;
+            alert('请在浏览器中打开: ' + url);
+        }
+        // 如果不是微信浏览器，默认行为会正常跳转
+    }
+    
     // 初始化页面
     window.onload = function() {
         updateRuntime();
@@ -777,6 +845,12 @@ border: none;
             section.classList.remove('active');
         });
         document.getElementById('intro').classList.add('active');
+        
+        // 为所有外部链接添加点击事件处理
+        const externalLinks = document.querySelectorAll('.external-link, #registerBtn');
+        externalLinks.forEach(link => {
+            link.addEventListener('click', handleExternalLinkClick);
+        });
     };
     
     // 点击模态框外部关闭模态框
