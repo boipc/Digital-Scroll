@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数字卷轴DSC - 经济模型</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #FF6B35;
+            --secondary-color: #FFA630;
+            --dark-color: #333;
+            --light-color: #fff;
+            --accent-color: #FFE74C;
+            --register-btn: #4CAF50;
+            --contact-btn: #2196F3;
+            --guide-btn: #9C27B0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--light-color);
+            min-height: 100vh;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+            flex-wrap: nowrap;
+            margin-bottom: 10px;
+        }
+        
+        .logo {
+            height: 4.48rem;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+        
+        h1 {
+            font-size: 4.48rem;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            z-index: 1;
+            line-height: 1;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+        
+        .home-btn {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: var(--light-color);
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .home-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .content-section {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        h2 {
+            margin-bottom: 25px;
+            font-size: 2.5rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            font-family: 'Montserrat', sans-serif;
+            color: var(--accent-color);
+            text-align: center;
+        }
+        
+        h3 {
+            margin: 30px 0 15px;
+            font-size: 1.8rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            font-family: 'Montserrat', sans-serif;
+            color: var(--accent-color);
+        }
+        
+        p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        .highlight-box {
+            background: rgba(255, 230, 76, 0.15);
+            border-left: 4px solid var(--accent-color);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+        }
+        
+        .chart-container {
+            width: 100%;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            margin: 30px 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .chart-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .eco-cycle {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 40px 0;
+        }
+        
+        .cycle-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            width: 100%;
+            max-width: 800px;
+        }
+        
+        .step-number {
+            background: var(--accent-color);
+            color: var(--dark-color);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        
+        .step-content {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 12px;
+            flex-grow: 1;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        th {
+            background: rgba(0, 0, 0, 0.3);
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+        
+        tr:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .value-prop {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 40px 0;
+        }
+        
+        .value-card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 25px;
+            width: calc(33.333% - 20px);
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.4);
+        }
+        
+        .value-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 40px auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background: rgba(255, 255, 255, 0.3);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 3px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+        }
+        
+        .left {
+            left: 0;
+        }
+        
+        .right {
+            left: 50%;
+        }
+        
+        .left::after {
+            right: -12px;
+        }
+        
+        .right::after {
+            left: -12px;
+        }
+        
+        .timeline-content {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .timeline-date {
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+        
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .logo {
+                height: 3.2rem;
+            }
+            
+            h1 {
+                font-size: 2.56rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            h3 {
+                font-size: 1.5rem;
+            }
+            
+            .content-section {
+                padding: 20px;
+            }
+            
+            .value-card {
+                width: 100%;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::after {
+                left: 18px;
+            }
+            
+            .left::after, .right::after {
+                left: 18px;
+            }
+            
+            .right {
+                left: 0;
+            }
+            
+            .cycle-step {
+                flex-direction: column;
+            }
+            
+            .step-number {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo {
+                height: 2.88rem;
+            }
+            
+            h1 {
+                font-size: 2.24rem;
+            }
+            
+            .home-btn {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+            
+            .chart-container {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="home-btn" onclick="window.location.href='index.html'">返回首页</button>
+        
+        <div class="header-content">
+            <img src="images/logo01.png" alt="数字卷轴DSC Logo" class="logo" onclick="window.location.href='index.html'">
+            <h1 onclick="window.location.href='index.html'">数字卷轴DSC</h1>
+        </div>
+        
+        <div class="content-section">
+            <h2>DSC经济模型与通缩机制</h2>
+            <p>数字卷轴DSC构建了一个基于区块链技术的创新经济模型，通过燃料消耗机制实现DSC通缩增值的闭环系统。</p>
+            
+            <div class="highlight-box">
+                <h3>核心价值主张</h3>
+                <p>DSC通过SCC燃料消耗机制实现通缩增值，构建了"生产-消耗-销毁-增值"的经济闭环。随着生态发展，DSC将实现从"数字资产"到"生态核心"的跨越式发展。</p>
+            </div>
+            
+            <div class="chart-container">
+                <div class="chart-placeholder">[此处为动态图表，展示DSC通缩增值闭环系统]</div>
+            </div>
+            
+            <h3>SCC经济模型详解</h3>
+            
+            <div class="eco-cycle">
+                <div class="cycle-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>SCC生成机制</h4>
+                        <ul>
+                            <li>节点每10秒打包1个区块，恒定生成1 SCC</li>
+                            <li>日产量固定：8,640 SCC（全部进入SCC总池）</li>
+                            <li>总量控制：通过燃料消耗实现动态平衡</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="cycle-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>SCC消耗场景</h4>
+                        <ul>
+                            <li>玩家领取卷轴收益时需支付SCC作为燃料费</li>
+                            <li>燃料费计算公式：领收益燃烧SCC量 = (待领收益 ÷ 2) × DSC兑SCC的兑换比</li>
+                            <li>兑换比 = 日产SCC量 ÷ (日产DSC量 × 2)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="cycle-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>SCC获取途径</h4>
+                        <ul>
+                            <li>用DSC/USDS兑换SCC</li>
+                            <li>兑换/复投卷轴获赠SCC（T+1发放）</li>
+                            <li>节点奖励：参与区块打包和交易验证获得SCC激励</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="cycle-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>兑换沉淀分红池</h4>
+                        <p>兑换SCC投入的DSC/USDS，沉淀出DSC/USDS分红池，分配比例如下：</p>
+                        
+                        <table>
+                            <tr>
+                                <th>分红池</th>
+                                <th>销毁</th>
+                                <th>兑换卷轴上级用户</th>
+                                <th>复投卷轴上级用户</th>
+                                <th>节点</th>
+                                <th>市商</th>
+                                <th>运营</th>
+                            </tr>
+                            <tr>
+                                <td>DSC</td>
+                                <td>70%</td>
+                                <td>20%</td>
+                                <td>3%</td>
+                                <td>5%</td>
+                                <td>1%</td>
+                                <td>1%</td>
+                            </tr>
+                            <tr>
+                                <td>USDS</td>
+                                <td>70%</td>
+                                <td>20%</td>
+                                <td>3%</td>
+                                <td>5%</td>
+                                <td>1%</td>
+                                <td>1%</td>
+                            </tr>
+                        </table>
+                        
+                        <p>USDS分红池的70%属于间接销毁，转入炒币地址，由炒币地址回购销毁DSC。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>节点治理与生态发展</h3>
+            
+            <div class="value-prop">
+                <div class="value-card">
+                    <h4>节点设置</h4>
+                    <ul>
+                        <li>总节点数：45个（当前运行27个）</li>
+                        <li>5个节点由官方预留</li>
+                        <li>40个节点开放给全网玩家竞争</li>
+                        <li>通过季度推广排名动态分配</li>
+                    </ul>
+                </div>
+                
+                <div class="value-card">
+                    <h4>节点权益</h4>
+                    <ul>
+                        <li>治理权：参与公链治理，拥有公链更新的投票权</li>
+                        <li>提案投票通过率需≥75%才能更新公链</li>
+                        <li>激励收益：每日获得SCC原生币激励</li>
+                    </ul>
+                </div>
+                
+                <div class="value-card">
+                    <h4>节点动态更新</h4>
+                    <ul>
+                        <li>更新周期：每年1月1日、4月1日、7月1日、10月1日</li>
+                        <li>淘汰机制：推广排名掉出前40名将失去节点资格</li>
+                        <li>新晋排名者自动取代淘汰节点</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3>DSC通缩增值路径</h3>
+            
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2023年9月</div>
+                        <p>DSC平台上线，建立基础经济模型</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2024年</div>
+                        <p>SCC燃料机制全面实施，开始通缩进程</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2025年4月20日</div>
+                        <p>DSC引力公约日：实现DAO高度自治</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2025年</div>
+                        <p>SCC突破燃料功能边界，构建生态价值矩阵</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="timeline-date">未来规划</div>
+                        <p>SCC作为交易所核心通证启动流通</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="highlight-box">
+                <h3>DSC价值展望</h3>
+                <p>纯静态复投一年2.8倍，动态最高可达18倍。DSC卷轴大小就像汽车排量，排量越大，油费(SCC)消耗越大。目前SCC仅在领取收益时消耗，未来将由节点决策其他消耗场景，实现完全去中心化治理。</p>
+                
+                <p>官方炒币地址每天出售1000 DSC，所得资金积累用来护盘托底。官方收益地址锁仓4万 DSC至2026年5月1号后出售，确保市场稳定。</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 点击logo或标题返回首页
+        document.querySelector('.logo').addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+        
+        document.querySelector('h1').addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+        
+        // 这里可以添加动态图表代码，如使用Chart.js等库
+        // 示例代码：
+        /*
+        const ctx = document.createElement('canvas');
+        document.querySelector('.chart-placeholder').replaceWith(ctx);
+        
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['2023Q3', '2023Q4', '2024Q1', '2024Q2', '2024Q3', '2024Q4', '2025Q1'],
+                datasets: [{
+                    label: 'DSC流通量',
+                    data: [1000000, 850000, 720000, 650000, 600000, 550000, 500000],
+                    borderColor: '#FFE74C',
+                    backgroundColor: 'rgba(255, 231, 76, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            color: '#FFF'
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        ticks: {
+                            color: '#FFF'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        ticks: {
+                            color: '#FFF'
+                        }
+                    }
+                }
+            }
+        });
+        */
+    </script>
+</body>
+</html>
