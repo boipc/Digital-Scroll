@@ -15,6 +15,7 @@
             --register-btn: #4CAF50;
             --contact-btn: #2196F3;
             --guide-btn: #9C27B0;
+            --model-btn: #D32F2F;
         }
         
         * {
@@ -23,7 +24,30 @@
             box-sizing: border-box;
             font-family: 'Roboto', 'Microsoft YaHei', sans-serif;
         }
-        
+         .model-btn {
+            display: block;
+            background: var(--model-btn);
+            color: var(--light-color);
+            padding: 12px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            text-align: center;
+        }
+
+        .model-btn:hover {
+            background: #B71C1C;
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
         body {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: var(--light-color);
@@ -509,6 +533,10 @@
         
         /* 移动端适配 */
         @media (max-width: 768px) {
+            .auth-btn, .contact-btn, .guide-btn, .model-btn { /* 新增选择器 */
+                padding: 12px;
+                font-size: 1.2rem;
+            }
             .container {
                 padding: 15px;
             }
@@ -644,6 +672,7 @@
                 <a href="https://prod.digital-scroll.org/#/pages/reg?c=182N17" class="auth-btn" id="registerBtn">立即注册/登录</a>
                 <button class="contact-btn" onclick="showContactModal()">联系推荐人获取快速认证</button>
                 <a href="guide.html" class="guide-btn">操作指南</a>
+                <a href="moxing.htm" class="model-btn">经济模型</a> <!-- 新增按钮 -->
             </div>
         </header>
         
