@@ -15,6 +15,7 @@
             --chart-color-1: #4ECDC4;
             --chart-color-2: #FF6B6B;
             --chart-color-3: #45B7D1;
+            --light-text: rgba(255, 255, 255, 0.9); /* 新增浅色文本变量 */
         }
         
         * {
@@ -77,16 +78,17 @@
         }
         
         .logo {
-            height: 80px;
+            height: 60px; /* 调整logo高度与标题一致 */
             margin-right: 15px;
         }
         
         h1 {
-            font-size: 2.5rem;
+            font-size: 2.2rem; /* 调整标题大小 */
             margin: 0;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
             font-family: 'Montserrat', sans-serif;
             color: var(--accent-color);
+            line-height: 60px; /* 与logo高度一致 */
         }
         
         .subtitle {
@@ -258,7 +260,7 @@
         }
         
         .value-chain h4 {
-            color: steelblue;
+            color: var(--light-text); /* 改为浅色文本 */
             margin-bottom: 10px;
             font-size: 1.3rem;
         }
@@ -278,6 +280,7 @@
             border-radius: 8px;
             text-align: center;
             position: relative;
+            color: var(--light-text); /* 改为浅色文本 */
         }
         
         .value-step:not(:last-child)::after {
@@ -286,7 +289,7 @@
             right: -15px;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--accent-color);
+            color: var(--light-text); /* 改为浅色文本 */
         }
         
         .node-address {
@@ -494,8 +497,8 @@
             
             <h3>节点设置与竞争规则</h3>
             <ul>
-                <li>总节点数：45个（5个官方预留，40个开放竞争）</li>
-                <li>当前已分配16个节点（8个推广节点，8个市商节点）</li>
+                <li>总节点数：45个（5个官方预留，40个开放竞争)</li>
+                <li>当前已分配16个节点（8个推广节点，8个市商节点)</li>
                 <li>剩余24个节点通过季度推广排名角逐</li>
             </ul>
             
