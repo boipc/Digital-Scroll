@@ -99,51 +99,70 @@
             z-index: 1;
             width: 100%;
         }
+      
+        
+/* 修改后的计时器样式 */
+.timer-container {
+    margin: 25px 0;
+    padding: 20px 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 1;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
 
-        /* 修改后的计时器样式 */
-        .timer-container {
-            margin: 25px 0;
-            padding: 20px 15px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-            position: relative;
-            z-index: 1;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-        }
+.timer-label {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    font-weight: 500;
+}
 
-        .timer-label {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-            font-weight: 500;
-        }
+.timer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-family: 'Montserrat', sans-serif;
+}
 
-        .timer {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            font-family: 'Montserrat', sans-serif;
-            animation: pulse 1.5s infinite alternate;
-        }
+.days {
+    font-size: 3.6em; /* 从1.8em增大1倍到3.6em */
+    line-height: 1.2;
+    letter-spacing: 2px;
+    color: #FFD700; /* 金色文字 */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
 
-        .days {
-            font-size: 1.8em;
-            line-height: 1.2;
-            letter-spacing: 2px;
-        }
+.time {
+    font-size: 2.2em;
+    letter-spacing: 3px;
+    color: var(--light-color);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
 
-        .time {
-            font-size: 2.2em;
-            letter-spacing: 3px;
-        }
+.timer-motto {
+    font-size: 0.9rem;
+    margin-top: 15px;
+    color: #fff; /* 白色文字 */
+    letter-spacing: 1px;
+}
 
-        @keyframes pulse {
-            0% { text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); }
-            100% { text-shadow: 0 0 20px rgba(255, 230, 76, 0.8), 0 0 30px rgba(255, 230, 76, 0.6); }
-        }
+@keyframes pulse {
+    0% { 
+        text-shadow: 
+            0 0 5px rgba(255, 255, 255, 0.5),
+            0 0 10px rgba(255, 215, 0, 0.5);
+    }
+    100% { 
+        text-shadow: 
+            0 0 20px rgba(255, 230, 76, 0.8), 
+            0 0 30px rgba(255, 230, 76, 0.6);
+    }
+}
         
         .button-grid {
             display: grid;
@@ -532,7 +551,7 @@
             }
             
             .days {
-                font-size: 1.2em;
+                font-size: 2.4em;
             }
             
             .time {
@@ -589,7 +608,7 @@
             }
             
             .days {
-                font-size: 1em;
+                font-size: 2em;
             }
             
             .time {
@@ -612,13 +631,14 @@
             </div>
             <p class="subtitle">创新数字资产平台 · 每小时收益 · 多重获利方式</p>
             
-            <div class="timer-container">
-                <div class="timer-label">DSC已稳定运行</div>
-                <div class="timer" id="runtimeTimer">
-                    <div class="days" id="days">00天</div>
-                    <div class="time" id="time">00:00:00</div>
-                </div>
-            </div>
+           <div class="timer-container">
+    <div class="timer-label">DSC已稳定运行</div>
+    <div class="timer" id="runtimeTimer">
+        <div class="days" id="days">00天</div>
+        <div class="time" id="time">00:00:00</div>
+    </div>
+    <div class="timer-motto">无人扶我青云志，我自踏雪至巅峰</div>
+</div>
             
             <div class="auth-box">
                 <a href="https://prod.digital-scroll.org/#/pages/reg?c=182N17" class="auth-btn" id="registerBtn">立即注册/登录</a>
@@ -965,4 +985,3 @@
     </script>
 </body>
 </html>
-
