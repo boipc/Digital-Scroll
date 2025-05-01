@@ -15,7 +15,8 @@
     --register-btn: #4CAF50;
     --contact-btn: #2196F3;
     --guide-btn: #9C27B0;
-    --model-btn: #000080; /* 已修改为深蓝色 */
+    --model-btn: #D32F2F;
+    --game-btn: #1A237E; /* 新增的生态游戏按钮颜色 */
 }
         
         * {
@@ -42,9 +43,33 @@
             width: 100%;
             text-align: center;
         }
+        .game-btn {
+    display: block;
+    background: var(--game-btn);
+    color: var(--light-color);
+    padding: 12px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    text-align: center;
+}
+
+.game-btn:hover {
+    background: #0d1a6b;
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+}
 
         .model-btn:hover {
-            background: #00004B;
+            background: #B71C1C;
             transform: translateY(-5px);
             box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
         }
@@ -533,7 +558,7 @@
         
         /* 移动端适配 */
         @media (max-width: 768px) {
-            .auth-btn, .contact-btn, .guide-btn, .model-btn { /* 新增选择器 */
+            .auth-btn, .contact-btn, .guide-btn, .model-btn , .game-btn { /* 新增选择器 */
                 padding: 12px;
                 font-size: 1.2rem;
             }
@@ -673,7 +698,7 @@
                 <button class="contact-btn" onclick="showContactModal()">快速认证</button>
                 <a href="guide.html" class="guide-btn">操作指南</a>
                 <a href="moxing.html" class="model-btn">经济模型</a> 
-                <a href="youxi.html" class="model-btn">生态游戏</a>
+                <a href="youxi.html" class="game-btn">生态游戏</a> <!-- 新增的生态游戏按钮 -->
             </div>
         </header>
         
