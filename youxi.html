@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DSC生态游戏中心</title>
+    <title>生态游戏 - DSC数字卷轴</title>
     <style>
         * {
             margin: 0;
@@ -11,65 +11,63 @@
             box-sizing: border-box;
             font-family: 'Inter', sans-serif;
             list-style: none;
-            text-decoration: none;
+            line-height: 1.6;
         }
 
         body {
-            background: #f5f7fa;
+            background: #f0f2f5;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
 
-        /* 头部区域 */
+        /* 头部区域（简化设计） */
         .header {
-            padding: 40px 20px 30px;
+            padding: 30px 20px;
             text-align: center;
             background: #1a73e8;
-            color: white;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         .header-logo {
-            height: 50px;
+            height: 40px;
             margin-bottom: 15px;
-            display: inline-block;
             filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
         }
 
         .header-title {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
+            color: white;
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
         .header-desc {
-            font-size: 1.1rem;
             color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
             max-width: 600px;
             margin: 0 auto;
         }
 
-        /* 游戏列表容器 */
-        .game-list {
+        /* 主内容区域 */
+        .main-content {
             max-width: 800px;
             margin: 0 auto 40px;
             padding: 0 20px;
         }
 
-        /* 游戏卡片 */
+        /* 游戏卡片（单展开设计） */
         .game-card {
             background: white;
-            border-radius: 18px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
             margin-bottom: 20px;
             overflow: hidden;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: transform 0.2s ease;
         }
 
         .game-card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transform: scale(1.01);
         }
 
         .game-header {
@@ -94,9 +92,6 @@
             border-radius: 24px;
             font-size: 0.9rem;
             margin-left: 10px;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
         }
 
         .arrow {
@@ -106,22 +101,40 @@
         }
 
         .game-content {
-            padding: 20px 25px 25px;
+            padding: 0 25px 25px;
             font-size: 1rem;
             color: #4b5563;
-            line-height: 1.6;
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease, padding 0.3s ease;
-        }
-
-        .game-content p {
-            margin-bottom: 15px;
+            transition: max-height 0.3s ease;
         }
 
         .game-content.active {
             max-height: 1000px;
-            padding-bottom: 25px;
+            padding-top: 20px;
+        }
+
+        .section-title {
+            color: #1a73e8;
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin: 20px 0 10px;
+            border-bottom: 2px solid #1a73e820;
+            padding-bottom: 5px;
+        }
+
+        .game-feature li {
+            list-style: disc;
+            margin-left: 20px;
+            color: #4b5563;
+        }
+
+        .game-tips {
+            background: #fff3d9;
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 15px;
+            border-left: 4px solid #f59e0b;
         }
 
         /* 底部区域 */
@@ -130,48 +143,40 @@
             text-align: center;
             background: #1f2937;
             color: white;
+            margin-top: auto;
         }
 
         .footer p {
             margin-bottom: 8px;
             color: rgba(255, 255, 255, 0.8);
-            font-size: 0.95rem;
         }
 
         /* 响应式设计 */
         @media (max-width: 768px) {
-            .header {
-                padding: 30px 20px 20px;
-            }
-
             .header-title {
-                font-size: 1.5rem;
+                font-size: 1.3rem;
             }
-
+            
             .game-header {
                 padding: 18px 20px;
             }
-
+            
             .game-name {
                 font-size: 1.1rem;
-            }
-
-            .arrow {
-                font-size: 1.2rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- 头部 -->
+    <!-- 头部区域 -->
     <header class="header">
-        <img src="https://via.placeholder.com/150" alt="DSC Logo" class="header-logo">
-        <h1 class="header-title">DSC生态游戏中心</h1>
-        <p class="header-desc">探索区块链与游戏结合的无限可能，开启边玩边赚新体验</p>
+        <img src="images/logo01.png" alt="DSC数字卷轴" class="header-logo">
+        <h1 class="header-title">生态游戏</h1>
+        <p class="header-desc">体验基于区块链技术的创新游戏生态，参与游戏获取额外收益，享受游戏乐趣的同时增加数字资产</p>
     </header>
 
-    <!-- 游戏列表 -->
-    <div class="game-list">
+    <!-- 主内容区域 -->
+    <div class="main-content">
         <!-- 哈希竞猜游戏 -->
         <div class="game-card">
             <div class="game-header" onclick="toggleGame(this)">
@@ -179,59 +184,102 @@
                 <span class="arrow">▶</span>
             </div>
             <div class="game-content">
-                <p>基于区块链哈希值的即时预测游戏，包含猜单双、猜大小、猜特码三种玩法，每20分钟开奖一次，链上数据可追溯，确保公平透明。</p>
-                <p>• 单数/双数赔率：1.85<br>• 大小盘赔率：1.80<br>• 特码直选赔率：46x</p>
+                <div class="game-section">
+                    <h3 class="section-title">游戏概述</h3>
+                    <p class="game-desc">哈希游戏是基于区块链哈希值的预测游戏，玩家可以参与猜单双、猜大小和猜特码三种玩法，体验区块链技术的公平透明。</p>
+                </div>
+                
+                <div class="game-section">
+                    <h3 class="section-title">游戏类型</h3>
+                    
+                    <div class="game-feature">
+                        <h4>1. 猜单双</h4>
+                        <ul>
+                            <li>玩法：预测特别号码是单数还是双数</li>
+                            <li>单数赔率：1.8</li>
+                            <li>双数赔率：1.85</li>
+                            <li>开奖频率：每20分钟一次</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="game-feature">
+                        <h4>2. 猜大小</h4>
+                        <ul>
+                            <li>玩法：预测特别号码的大小</li>
+                            <li>1-24为"小"，25-49为"大"</li>
+                            <li>大数赔率：1.8</li>
+                            <li>小数赔率：1.85</li>
+                            <li>开奖频率：每20分钟一次</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="game-feature">
+                        <h4>3. 猜特码</h4>
+                        <ul>
+                            <li>玩法：直接预测1-49之间的特码数字</li>
+                            <li>赔率：46</li>
+                            <li>开奖频率：每24小时一次</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="game-section">
+                    <h3 class="section-title">开奖规则</h3>
+                    <p class="game-desc">系统从指定区块哈希值右至左取连续2位数字，若在1-49范围内则为特别号码，超出则继续向左寻找。</p>
+                </div>
+                
+                <div class="game-section">
+                    <h3 class="section-title">游戏特点</h3>
+                    <ul class="game-feature">
+                        <li>基于区块链技术，公平透明</li>
+                        <li>多种玩法选择，满足不同偏好</li>
+                        <li>高中奖率与高赔率并存</li>
+                    </ul>
+                </div>
+                
+                <div class="game-tips">
+                    <p class="tips-title">温馨提示</p>
+                    <p>哈希游戏是一种娱乐方式，请理性参与。建议玩家在了解游戏规则后再进行参与。</p>
+                </div>
             </div>
         </div>
 
         <!-- 掘金引擎游戏 -->
         <div class="game-card">
             <div class="game-header" onclick="toggleGame(this)">
-                <span class="game-name">掘金引擎 <span class="coming-soon">即将上线</span></span>
+                <span class="game-name">掘金引擎 <span class="coming-soon">近期上线</span></span>
                 <span class="arrow">▶</span>
             </div>
             <div class="game-content">
-                <p>首款链上挖矿策略游戏，玩家通过升级矿机、组建算力网络获取数字资产奖励，支持跨平台资产互通，你的每一次操作都将写入区块链。</p>
-            </div>
-        </div>
-
-        <!-- 链上农场游戏 -->
-        <div class="game-card">
-            <div class="game-header" onclick="toggleGame(this)">
-                <span class="game-name">链上农场</span>
-                <span class="arrow">▶</span>
-            </div>
-            <div class="game-content">
-                <p>在虚拟世界中经营你的农场，种植去中心化作物，通过智能合约进行交易，边游戏边积累数字资产，支持多人协作与资源掠夺玩法。</p>
+                <div class="game-section">
+                    <h3 class="section-title">游戏简介</h3>
+                    <div class="game-tips">
+                        <p class="tips-title">温馨提示</p>
+                        <p>掘金引擎正在紧张开发中，即将与大家见面，敬请期待！</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- 底部 -->
+    <!-- 底部区域 -->
     <footer class="footer">
-        <p>© 2023 DSC数字卷轴 | 粤ICP备2023000000号</p>
-        <p>联系我们：contact@dsc.com | 加入社区：Telegram/Discord</p>
+        <p>© 2023 数字卷轴DSC 卷界链 | 基于区块链技术的创新游戏平台</p>
     </footer>
 
     <script>
         function toggleGame(trigger) {
-            // 关闭所有已展开的内容
+            // 关闭所有展开的内容
             const allContents = document.querySelectorAll('.game-content');
             allContents.forEach(content => {
                 content.classList.remove('active');
                 content.previousElementSibling.querySelector('.arrow').style.transform = 'rotate(0deg)';
             });
-
-            // 展开当前点击的内容
-            const content = trigger.nextElementSibling;
-            content.classList.toggle('active');
-            const arrow = trigger.querySelector('.arrow');
             
-            if (content.classList.contains('active')) {
-                arrow.style.transform = 'rotate(90deg)';
-            } else {
-                arrow.style.transform = 'rotate(0deg)';
-            }
+            // 展开当前内容
+            const content = trigger.nextElementSibling;
+            content.classList.add('active');
+            trigger.querySelector('.arrow').style.transform = 'rotate(90deg)';
         }
     </script>
 </body>
