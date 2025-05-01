@@ -14,8 +14,9 @@
         }
         
         body {
-            background-color: #f5f7fa;
-            color: #333;
+            background: linear-gradient(135deg, #FF6B35, #FFA630);
+            color: #fff;
+            min-height: 100vh;
             line-height: 1.6;
         }
         
@@ -25,13 +26,36 @@
             align-items: center;
             justify-content: space-between;
             padding: 15px 20px;
-            background-color: #fff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+            z-index: 0;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         
         .header-title {
             display: flex;
             align-items: center;
+            position: relative;
+            z-index: 1;
         }
         
         .header-logo {
@@ -42,23 +66,69 @@
         .header-text {
             font-size: 20px;
             font-weight: bold;
-            color: #1565C0;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
         
         .home-btn {
             padding: 8px 16px;
-            background-color: #1565C0;
+            background: #1565C0;
             color: white;
             border: none;
             border-radius: 4px;
             font-size: 14px;
             cursor: pointer;
             transition: all 0.3s;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
         
         .home-btn:hover {
-            background-color: #0D47A1;
+            background: #0D47A1;
             transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* 主标题区域 */
+        .main-title {
+            text-align: center;
+            padding: 30px 20px;
+            margin: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .main-title::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+            z-index: 0;
+        }
+        
+        .main-title h2 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+            color: #FFE74C;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .main-title p {
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
         }
         
         /* 游戏列表容器 */
@@ -70,31 +140,48 @@
         
         /* 游戏卡片样式 */
         .game-card {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             margin-bottom: 20px;
             overflow: hidden;
+            position: relative;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .game-card::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+            z-index: 0;
         }
         
         .game-header {
             padding: 15px 20px;
-            background-color: #f0f4f8;
+            background: rgba(0, 0, 0, 0.3);
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
             transition: all 0.3s;
+            position: relative;
+            z-index: 1;
         }
         
         .game-header:hover {
-            background-color: #e1e8f0;
+            background: rgba(0, 0, 0, 0.4);
         }
         
         .game-name {
             font-size: 18px;
             font-weight: bold;
-            color: #1565C0;
+            color: #fff;
         }
         
         .coming-soon {
@@ -111,6 +198,8 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease-out;
+            position: relative;
+            z-index: 1;
         }
         
         .game-content.active {
@@ -126,10 +215,10 @@
         .section-title {
             font-size: 16px;
             font-weight: bold;
-            color: #1565C0;
+            color: #FFE74C;
             margin-bottom: 10px;
             padding-bottom: 5px;
-            border-bottom: 1px solid #e0e0e0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
         
         .game-desc {
@@ -144,21 +233,98 @@
         
         .game-feature li {
             margin-bottom: 8px;
+            list-style-type: disc;
         }
         
         /* 温馨提示样式 */
         .game-tips {
-            background-color: #fff8e1;
+            background: rgba(255, 248, 225, 0.2);
             padding: 15px;
-            border-radius: 4px;
+            border-radius: 8px;
             margin-top: 20px;
-            border-left: 4px solid #ffc107;
+            border-left: 4px solid #FFE74C;
         }
         
         .tips-title {
             font-weight: bold;
             margin-bottom: 8px;
-            color: #ff6f00;
+            color: #FFE74C;
+        }
+        
+        /* 底部区域 */
+        .page-footer {
+            text-align: center;
+            padding: 30px 20px;
+            margin: 30px 20px 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-footer::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+            z-index: 0;
+        }
+        
+        .footer-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+            color: #FFE74C;
+        }
+        
+        .footer-desc {
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .footer-copyright {
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .main-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .main-title p {
+                font-size: 1rem;
+            }
+            
+            .header-text {
+                font-size: 16px;
+            }
+            
+            .home-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .game-name {
+                font-size: 16px;
+            }
+            
+            .footer-title {
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
@@ -171,6 +337,12 @@
         </div>
         <button class="home-btn">返回首页</button>
     </header>
+    
+    <!-- 主标题区域 -->
+    <div class="main-title">
+        <h2>DSC生态游戏中心</h2>
+        <p>体验基于区块链技术的创新游戏生态，参与游戏获取额外收益，享受游戏乐趣的同时增加数字资产</p>
+    </div>
     
     <!-- 游戏列表 -->
     <div class="game-container">
@@ -250,26 +422,21 @@
             <div class="game-content" id="miningGame">
                 <div class="game-section">
                     <h3 class="section-title">游戏简介</h3>
-                    <p class="game-desc">掘金引擎是一款基于区块链技术的创新挖矿模拟游戏，玩家可以通过策略布局和资源管理，体验虚拟挖矿的乐趣。</p>
-                </div>
-                
-                <div class="game-section">
-                    <h3 class="section-title">游戏特点</h3>
-                    <ul class="game-feature">
-                        <li>模拟真实挖矿环境，沉浸式体验</li>
-                        <li>多种矿机设备可供选择，自由组合</li>
-                        <li>动态市场系统，考验玩家策略</li>
-                        <li>区块链技术保障，资产安全透明</li>
-                    </ul>
-                </div>
-                
-                <div class="game-tips">
+                   
                     <p class="tips-title">温馨提示</p>
                     <p>掘金引擎正在紧张开发中，即将与大家见面，敬请期待！</p>
                 </div>
             </div>
         </div>
     </div>
+    
+    <!-- 底部区域 -->
+    <footer class="page-footer">
+        <h3 class="footer-title">加入DSC生态游戏</h3>
+        <p class="footer-desc">数字卷轴DSC致力于打造完整的区块链游戏生态系统，未来将推出更多创新游戏，为用户提供更多元的娱乐和收益方式。</p>
+        <p class="footer-desc">关注本站，获取最新游戏上线信息。</p>
+        <p class="footer-copyright">© 2023 数字卷轴DSC 卷界链 | 基于区块链技术的创新游戏平台</p>
+    </footer>
     
     <script>
         // 切换游戏详情显示/隐藏
