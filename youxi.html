@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>生态游戏 - DSC数字卷轴</title>
     <style>
-        /* 全局样式 */
         * {
             margin: 0;
             padding: 0;
@@ -20,24 +19,17 @@
             line-height: 1.6;
         }
 
-        /* 主标题区域（修改顶部 margin 和背景） */
         .main-title {
-            text-align: center;
-            padding: 40px 20px; /* 增加顶部内边距 */
-            margin: 0; /* 去除顶部外边距 */
-            background: linear-gradient(45deg, rgba(0,0,0,0.3), rgba(0,0,0,0.2)); /* 修改背景为渐变 */
-            border-radius: 0 0 15px 15px; /* 只保留底部圆角 */
+            text-align: left;
+            padding: 40px 20px 60px;
+            margin: 0;
+            background: linear-gradient(45deg, rgba(0,0,0,0.3), rgba(0,0,0,0.2));
+            border-radius: 0 0 15px 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             position: relative;
             overflow: hidden;
         }
 
-        /* 移除原头部相关样式（可删除或注释） */
-        /* .page-header { display: none; } 也可以直接删除整个 header 相关的 CSS */
-
-        /* 其他样式保持不变... */
-        /* （以下样式与原代码相同，仅删除了 .page-header 相关的 CSS 部分） */
-        
         .main-title::before {
             content: "";
             position: absolute;
@@ -49,37 +41,68 @@
             animation: rotate 20s linear infinite;
             z-index: 0;
         }
-        
+
         @keyframes rotate {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        
+
+        .logo-title-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .main-logo {
+            height: 45px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+
         .main-title h2 {
             font-size: 2.2rem;
-            margin-bottom: 15px;
-            position: relative;
-            z-index: 1;
             color: #FFE74C;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        
-        .main-title p {
-            font-size: 1.1rem;
             position: relative;
             z-index: 1;
-            max-width: 800px;
-            margin: 0 auto;
         }
-        
-        /* 游戏列表容器 */
+
+        .main-title p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .home-btn {
+            display: block;
+            margin: 0 auto;
+            padding: 10px 20px;
+            background: #1565C0;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .home-btn:hover {
+            background: #0D47A1;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
         .game-container {
             max-width: 1000px;
             margin: 30px auto;
             padding: 0 20px;
         }
-        
-        /* 游戏卡片样式 */
+
         .game-card {
             background: rgba(0, 0, 0, 0.2);
             border-radius: 15px;
@@ -90,24 +113,210 @@
             backdrop-filter: blur(5px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
+
+        .game-card::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+            z-index: 0;
+        }
+
+        .game-header {
+            padding: 15px 20px;
+            background: rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+            position: relative;
+            z-index: 1;
+        }
+
+        .game-header:hover {
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .game-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .coming-soon {
+            background-color: #ff7043;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+        .game-content {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            position: relative;
+            z-index: 1;
+        }
+
+        .game-content.active {
+            padding: 20px;
+            max-height: 2000px;
+        }
+
+        .game-section {
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #FFE74C;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .game-desc {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+
+        .game-feature {
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+
+        .game-feature li {
+            margin-bottom: 8px;
+            list-style-type: disc;
+        }
+
+        .game-tips {
+            background: rgba(255, 248, 225, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #FFE74C;
+        }
+
+        .tips-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #FFE74C;
+        }
+
+        .page-footer {
+            text-align: center;
+            padding: 30px 20px;
+            margin: 30px 20px 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-footer::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+            z-index: 0;
+        }
+
+        .footer-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+            color: #FFE74C;
+        }
+
+        .footer-desc {
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer-copyright {
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        @media (max-width: 768px) {
+            .logo-title-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+
+            .main-logo {
+                height: 40px;
+            }
+
+            .main-title h2 {
+                font-size: 1.8rem;
+            }
+
+            .main-title p {
+                font-size: 1rem;
+            }
+
+            .home-btn {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+
+            .game-name {
+                font-size: 16px;
+            }
+
+            .footer-title {
+                font-size: 1.2rem;
+            }
+        }
     </style>
 </head>
 <body>
-
-<div class="main-title">
-        <h2>DSC生态游戏中心</h2>
+    <div class="main-title">
+        <div class="logo-title-container">
+            <img src="images/logo01.png" alt="DSC数字卷轴" class="main-logo">
+            <h2>DSC生态游戏中心</h2>
+        </div>
         <p>体验基于区块链技术的创新游戏生态，参与游戏获取额外收益，享受游戏乐趣的同时增加数字资产</p>
+        <button class="home-btn">返回首页</button>
     </div>
     
-    <!-- 游戏列表 -->
     <div class="game-container">
-        <!-- 哈希竞猜游戏 -->
         <div class="game-card">
             <div class="game-header" onclick="toggleGame('hashGame')">
                 <span class="game-name">哈希竞猜</span>
                 <span>▼</span>
             </div>
             <div class="game-content" id="hashGame">
+                <div class="game-section">
+                    <h3 class="section-title">游戏概述</h3>
+                    <p class="game-desc">哈希游戏是基于区块链哈希值的预测游戏，玩家可以参与猜单双、猜大小和猜特码三种玩法，体验区块链技术的公平透明。</p>
+                </div>
+                
+                <div class="game-section">
                     <h3 class="section-title">游戏类型</h3>
                     
                     <div class="game-feature">
@@ -162,7 +371,6 @@
             </div>
         </div>
         
-        <!-- 掘金引擎游戏 -->
         <div class="game-card">
             <div class="game-header" onclick="toggleGame('miningGame')">
                 <span class="game-name">掘金引擎 <span class="coming-soon">近期上线</span></span>
@@ -171,15 +379,15 @@
             <div class="game-content" id="miningGame">
                 <div class="game-section">
                     <h3 class="section-title">游戏简介</h3>
-                   
-                    <p class="tips-title">温馨提示</p>
-                    <p>掘金引擎正在紧张开发中，即将与大家见面，敬请期待！</p>
+                    <div class="game-tips">
+                        <p class="tips-title">温馨提示</p>
+                        <p>掘金引擎正在紧张开发中，即将与大家见面，敬请期待！</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     
-    <!-- 底部区域 -->
     <footer class="page-footer">
         <h3 class="footer-title">加入DSC生态游戏</h3>
         <p class="footer-desc">数字卷轴DSC致力于打造完整的区块链游戏生态系统，未来将推出更多创新游戏，为用户提供更多元的娱乐和收益方式。</p>
@@ -188,24 +396,17 @@
     </footer>
     
     <script>
-        // 切换游戏详情显示/隐藏
         function toggleGame(gameId) {
             const content = document.getElementById(gameId);
             content.classList.toggle('active');
             
-            // 切换箭头方向
             const header = content.previousElementSibling;
             const arrow = header.querySelector('span:last-child');
-            if (content.classList.contains('active')) {
-                arrow.textContent = '▲';
-            } else {
-                arrow.textContent = '▼';
-            }
+            arrow.textContent = content.classList.contains('active') ? '▲' : '▼';
         }
-        
-        // 返回首页按钮
+
         document.querySelector('.home-btn').addEventListener('click', function() {
-            window.location.href = 'index.html';
+            window.location.href = 'index.html'; // 请替换为实际首页链接
         });
     </script>
 </body>
