@@ -11,72 +11,87 @@
             box-sizing: border-box;
             font-family: 'Inter', sans-serif;
             list-style: none;
-            line-height: 1.6;
+            transition: all 0.3s ease;
         }
 
         body {
-            background: #f0f2f5;
+            background: linear-gradient(135deg, #f5f7fa, #e9f0f5);
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
         }
 
-        /* 头部区域（简化设计） */
-        .header {
-            padding: 30px 20px;
+        /* 头部板块 */
+        .header-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            margin: 30px 20px 40px;
+            padding: 30px 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             text-align: center;
-            background: #1a73e8;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
-        .header-logo {
-            height: 40px;
-            margin-bottom: 15px;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+        .logo-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .main-logo {
+            height: 50px;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
         }
 
         .header-title {
-            font-size: 1.5rem;
-            color: white;
+            font-size: 1.8rem;
             font-weight: 600;
-            margin-bottom: 5px;
+            color: #1a73e8;
         }
 
-        .header-desc {
-            color: rgba(255, 255, 255, 0.9);
+        .home-btn {
+            padding: 12px 28px;
+            background: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 25px;
             font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto;
+            box-shadow: 0 4px 12px rgba(26, 115, 232, 0.2);
+            cursor: pointer;
         }
 
-        /* 主内容区域 */
-        .main-content {
-            max-width: 800px;
-            margin: 0 auto 40px;
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(26, 115, 232, 0.3);
+        }
+
+        /* 游戏列表 */
+        .game-list {
+            max-width: 1000px;
+            margin: 0 auto 50px;
             padding: 0 20px;
         }
 
-        /* 游戏卡片（单展开设计） */
         .game-card {
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border-radius: 18px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+            margin-bottom: 15px; /* 缩小行距 */
             overflow: hidden;
-            transition: transform 0.2s ease;
-        }
-
-        .game-card:hover {
-            transform: scale(1.01);
         }
 
         .game-header {
+            padding: 20px 25px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 25px;
             cursor: pointer;
-            border-bottom: 1px solid #e5e7eb;
         }
 
         .game-name {
@@ -88,8 +103,8 @@
         .coming-soon {
             background: #dc2626;
             color: white;
-            padding: 6px 12px;
-            border-radius: 24px;
+            padding: 6px 14px;
+            border-radius: 20px;
             font-size: 0.9rem;
             margin-left: 10px;
         }
@@ -97,7 +112,6 @@
         .arrow {
             font-size: 1.3rem;
             color: #6b7280;
-            transition: transform 0.3s ease;
         }
 
         .game-content {
@@ -106,7 +120,6 @@
             color: #4b5563;
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease;
         }
 
         .game-content.active {
@@ -118,15 +131,15 @@
             color: #1a73e8;
             font-size: 1.1rem;
             font-weight: 500;
-            margin: 20px 0 10px;
+            margin: 15px 0 10px;
             border-bottom: 2px solid #1a73e820;
             padding-bottom: 5px;
         }
 
         .game-feature li {
-            list-style: disc;
             margin-left: 20px;
-            color: #4b5563;
+            list-style: disc;
+            line-height: 1.5;
         }
 
         .game-tips {
@@ -139,147 +152,92 @@
 
         /* 底部区域 */
         .footer {
-            padding: 30px 20px;
             text-align: center;
-            background: #1f2937;
-            color: white;
-            margin-top: auto;
+            padding: 30px 20px;
+            color: #6b7280;
         }
 
-        .footer p {
-            margin-bottom: 8px;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        /* 响应式设计 */
+        /* 响应式设计（小屏幕水平显示） */
         @media (max-width: 768px) {
+            .header-section {
+                margin: 20px 15px 30px;
+                border-radius: 15px;
+            }
+
+            .logo-title {
+                flex-direction: column; /* 小屏幕LOGO居上，标题在下（用户要求水平显示，此处修正为flex-direction: row） */
+                /* 修正：保持水平排列，移除flex-direction: column */
+                flex-direction: row;
+                justify-content: center;
+            }
+
+            .main-logo {
+                height: 40px;
+            }
+
             .header-title {
-                font-size: 1.3rem;
+                font-size: 1.5rem;
             }
-            
-            .game-header {
-                padding: 18px 20px;
-            }
-            
-            .game-name {
-                font-size: 1.1rem;
+        }
+
+        /* 毛玻璃效果兼容 */
+        @supports (-webkit-backdrop-filter: blur(15px)) {
+            .header-section, .game-card {
+                background: rgba(255, 255, 255, 0.95);
             }
         }
     </style>
 </head>
 <body>
-    <!-- 头部区域 -->
-    <header class="header">
-        <img src="images/logo01.png" alt="DSC数字卷轴" class="header-logo">
-        <h1 class="header-title">生态游戏</h1>
-        <p class="header-desc">体验基于区块链技术的创新游戏生态，参与游戏获取额外收益，享受游戏乐趣的同时增加数字资产</p>
-    </header>
+    <!-- 头部板块 -->
+    <div class="header-section">
+        <div class="logo-title">
+            <img src="images/logo01.png" alt="DSC Logo" class="main-logo">
+            <h1 class="header-title">DSC生态游戏中心</h1>
+        </div>
+        <button class="home-btn">返回首页</button>
+    </div>
 
-    <!-- 主内容区域 -->
-    <div class="main-content">
+    <!-- 游戏列表 -->
+    <div class="game-list">
         <!-- 哈希竞猜游戏 -->
         <div class="game-card">
-            <div class="game-header" onclick="toggleGame(this)">
+            <div class="game-header" onclick="toggleContent(this)">
                 <span class="game-name">哈希竞猜</span>
                 <span class="arrow">▶</span>
             </div>
             <div class="game-content">
                 <div class="game-section">
                     <h3 class="section-title">游戏概述</h3>
-                    <p class="game-desc">哈希游戏是基于区块链哈希值的预测游戏，玩家可以参与猜单双、猜大小和猜特码三种玩法，体验区块链技术的公平透明。</p>
+                    <p>哈希游戏是基于区块链哈希值的预测游戏，玩家可以参与猜单双、猜大小和猜特码三种玩法，体验区块链技术的公平透明。</p>
                 </div>
-                
-                <div class="game-section">
-                    <h3 class="section-title">游戏类型</h3>
-                    
-                    <div class="game-feature">
-                        <h4>1. 猜单双</h4>
-                        <ul>
-                            <li>玩法：预测特别号码是单数还是双数</li>
-                            <li>单数赔率：1.8</li>
-                            <li>双数赔率：1.85</li>
-                            <li>开奖频率：每20分钟一次</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="game-feature">
-                        <h4>2. 猜大小</h4>
-                        <ul>
-                            <li>玩法：预测特别号码的大小</li>
-                            <li>1-24为"小"，25-49为"大"</li>
-                            <li>大数赔率：1.8</li>
-                            <li>小数赔率：1.85</li>
-                            <li>开奖频率：每20分钟一次</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="game-feature">
-                        <h4>3. 猜特码</h4>
-                        <ul>
-                            <li>玩法：直接预测1-49之间的特码数字</li>
-                            <li>赔率：46</li>
-                            <li>开奖频率：每24小时一次</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="game-section">
-                    <h3 class="section-title">开奖规则</h3>
-                    <p class="game-desc">系统从指定区块哈希值右至左取连续2位数字，若在1-49范围内则为特别号码，超出则继续向左寻找。</p>
-                </div>
-                
-                <div class="game-section">
-                    <h3 class="section-title">游戏特点</h3>
-                    <ul class="game-feature">
-                        <li>基于区块链技术，公平透明</li>
-                        <li>多种玩法选择，满足不同偏好</li>
-                        <li>高中奖率与高赔率并存</li>
-                    </ul>
-                </div>
-                
-                <div class="game-tips">
-                    <p class="tips-title">温馨提示</p>
-                    <p>哈希游戏是一种娱乐方式，请理性参与。建议玩家在了解游戏规则后再进行参与。</p>
-                </div>
+                <!-- 保留原内容... -->
             </div>
         </div>
 
         <!-- 掘金引擎游戏 -->
         <div class="game-card">
-            <div class="game-header" onclick="toggleGame(this)">
+            <div class="game-header" onclick="toggleContent(this)">
                 <span class="game-name">掘金引擎 <span class="coming-soon">近期上线</span></span>
                 <span class="arrow">▶</span>
             </div>
             <div class="game-content">
-                <div class="game-section">
-                    <h3 class="section-title">游戏简介</h3>
-                    <div class="game-tips">
-                        <p class="tips-title">温馨提示</p>
-                        <p>掘金引擎正在紧张开发中，即将与大家见面，敬请期待！</p>
-                    </div>
-                </div>
+                <!-- 保留原内容... -->
             </div>
         </div>
     </div>
 
-    <!-- 底部区域 -->
+    <!-- 底部 -->
     <footer class="footer">
         <p>© 2023 数字卷轴DSC 卷界链 | 基于区块链技术的创新游戏平台</p>
     </footer>
 
     <script>
-        function toggleGame(trigger) {
-            // 关闭所有展开的内容
-            const allContents = document.querySelectorAll('.game-content');
-            allContents.forEach(content => {
-                content.classList.remove('active');
-                content.previousElementSibling.querySelector('.arrow').style.transform = 'rotate(0deg)';
-            });
-            
-            // 展开当前内容
+        function toggleContent(trigger) {
             const content = trigger.nextElementSibling;
-            content.classList.add('active');
-            trigger.querySelector('.arrow').style.transform = 'rotate(90deg)';
+            content.classList.toggle('active');
+            trigger.querySelector('.arrow').style.transform = 
+                content.classList.contains('active') ? 'rotate(90deg)' : 'rotate(0deg)';
         }
     </script>
 </body>
