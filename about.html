@@ -1,39 +1,296 @@
-<script>
-    // 访问量统计
-    function updateVisitCount() {
-        // 从localStorage获取当前访问量，如果没有则从0开始
-        let count = localStorage.getItem('visitCount') || 0;
-        count = parseInt(count);
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生态游戏 - DSC数字卷轴</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+        }
         
-        // 随机增加3-8次访问量
-        const randomIncrement = Math.floor(Math.random() * 6) + 3; // 3-8的随机数
-        count += randomIncrement;
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
         
-        // 动画效果
-        const counterElement = document.getElementById('visitCount');
-        let current = parseInt(counterElement.textContent);
-        const increment = Math.ceil(randomIncrement / 10);
+        /* 头部样式 */
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
         
-        const animate = () => {
-            if (current < count) {
-                current += increment;
-                if (current > count) current = count;
-                counterElement.textContent = current;
-                setTimeout(animate, 50);
-            }
-        };
+        .header-title {
+            display: flex;
+            align-items: center;
+        }
         
-        animate();
+        .header-logo {
+            height: 40px;
+            margin-right: 15px;
+        }
         
-        // 存储更新后的访问量
-        localStorage.setItem('visitCount', count);
-    }
+        .header-text {
+            font-size: 20px;
+            font-weight: bold;
+            color: #1565C0;
+        }
+        
+        .home-btn {
+            padding: 8px 16px;
+            background-color: #1565C0;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover {
+            background-color: #0D47A1;
+            transform: translateY(-2px);
+        }
+        
+        /* 游戏列表容器 */
+        .game-container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        
+        /* 游戏卡片样式 */
+        .game-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .game-header {
+            padding: 15px 20px;
+            background-color: #f0f4f8;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        
+        .game-header:hover {
+            background-color: #e1e8f0;
+        }
+        
+        .game-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1565C0;
+        }
+        
+        .coming-soon {
+            background-color: #ff7043;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        
+        .game-content {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .game-content.active {
+            padding: 20px;
+            max-height: 2000px;
+        }
+        
+        /* 游戏详情样式 */
+        .game-section {
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1565C0;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .game-desc {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+        
+        .game-feature {
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .game-feature li {
+            margin-bottom: 8px;
+        }
+        
+        /* 温馨提示样式 */
+        .game-tips {
+            background-color: #fff8e1;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .tips-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #ff6f00;
+        }
+    </style>
+</head>
+<body>
+    <!-- 页面头部 -->
+    <header class="page-header">
+        <div class="header-title">
+            <img src="images/logo01.png" alt="DSC数字卷轴" class="header-logo">
+            <h1 class="header-text">生态游戏</h1>
+        </div>
+        <button class="home-btn">返回首页</button>
+    </header>
     
-    // 初始化页面时调用
-    window.onload = function() {
-        updateRuntime();
-        setInterval(updateRuntime, 1000);
-        updateVisitCount();
-        showSection('intro');
-    };
-</script>
+    <!-- 游戏列表 -->
+    <div class="game-container">
+        <!-- 哈希竞猜游戏 -->
+        <div class="game-card">
+            <div class="game-header" onclick="toggleGame('hashGame')">
+                <span class="game-name">哈希竞猜</span>
+                <span>▼</span>
+            </div>
+            <div class="game-content" id="hashGame">
+                <div class="game-section">
+                    <h3 class="section-title">游戏概述</h3>
+                    <p class="game-desc">哈希游戏是基于区块链哈希值的预测游戏，玩家可以参与猜单双、猜大小和猜特码三种玩法，体验区块链技术的公平透明。</p>
+                </div>
+                
+                <div class="game-section">
+                    <h3 class="section-title">游戏类型</h3>
+                    
+                    <div class="game-feature">
+                        <h4>1. 猜单双</h4>
+                        <ul>
+                            <li>玩法：预测特别号码是单数还是双数</li>
+                            <li>单数赔率：1.8</li>
+                            <li>双数赔率：1.85</li>
+                            <li>开奖频率：每20分钟一次</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="game-feature">
+                        <h4>2. 猜大小</h4>
+                        <ul>
+                            <li>玩法：预测特别号码的大小</li>
+                            <li>1-24为"小"，25-49为"大"</li>
+                            <li>大数赔率：1.8</li>
+                            <li>小数赔率：1.85</li>
+                            <li>开奖频率：每20分钟一次</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="game-feature">
+                        <h4>3. 猜特码</h4>
+                        <ul>
+                            <li>玩法：直接预测1-49之间的特码数字</li>
+                            <li>赔率：46</li>
+                            <li>开奖频率：每24小时一次</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="game-section">
+                    <h3 class="section-title">开奖规则</h3>
+                    <p class="game-desc">系统从指定区块哈希值右至左取连续2位数字，若在1-49范围内则为特别号码，超出则继续向左寻找。</p>
+                </div>
+                
+                <div class="game-section">
+                    <h3 class="section-title">游戏特点</h3>
+                    <ul class="game-feature">
+                        <li>基于区块链技术，公平透明</li>
+                        <li>多种玩法选择，满足不同偏好</li>
+                        <li>高中奖率与高赔率并存</li>
+                    </ul>
+                </div>
+                
+                <div class="game-tips">
+                    <p class="tips-title">温馨提示</p>
+                    <p>哈希游戏是一种娱乐方式，请理性参与。建议玩家在了解游戏规则后再进行参与。</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 掘金引擎游戏 -->
+        <div class="game-card">
+            <div class="game-header" onclick="toggleGame('miningGame')">
+                <span class="game-name">掘金引擎 <span class="coming-soon">近期上线</span></span>
+                <span>▼</span>
+            </div>
+            <div class="game-content" id="miningGame">
+                <div class="game-section">
+                    <h3 class="section-title">游戏简介</h3>
+                    <p class="game-desc">掘金引擎是一款基于区块链技术的创新挖矿模拟游戏，玩家可以通过策略布局和资源管理，体验虚拟挖矿的乐趣。</p>
+                </div>
+                
+                <div class="game-section">
+                    <h3 class="section-title">游戏特点</h3>
+                    <ul class="game-feature">
+                        <li>模拟真实挖矿环境，沉浸式体验</li>
+                        <li>多种矿机设备可供选择，自由组合</li>
+                        <li>动态市场系统，考验玩家策略</li>
+                        <li>区块链技术保障，资产安全透明</li>
+                    </ul>
+                </div>
+                
+                <div class="game-tips">
+                    <p class="tips-title">温馨提示</p>
+                    <p>掘金引擎正在紧张开发中，即将与大家见面，敬请期待！</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 切换游戏详情显示/隐藏
+        function toggleGame(gameId) {
+            const content = document.getElementById(gameId);
+            content.classList.toggle('active');
+            
+            // 切换箭头方向
+            const header = content.previousElementSibling;
+            const arrow = header.querySelector('span:last-child');
+            if (content.classList.contains('active')) {
+                arrow.textContent = '▲';
+            } else {
+                arrow.textContent = '▼';
+            }
+        }
+        
+        // 返回首页按钮
+        document.querySelector('.home-btn').addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
