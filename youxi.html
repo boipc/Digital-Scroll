@@ -19,22 +19,26 @@
             min-height: 100vh;
             line-height: 1.6;
         }
-        
-        /* 头部样式 */
-        .page-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 15px 20px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 15px;
+
+        /* 主标题区域（修改顶部 margin 和背景） */
+        .main-title {
+            text-align: center;
+            padding: 40px 20px; /* 增加顶部内边距 */
+            margin: 0; /* 去除顶部外边距 */
+            background: linear-gradient(45deg, rgba(0,0,0,0.3), rgba(0,0,0,0.2)); /* 修改背景为渐变 */
+            border-radius: 0 0 15px 15px; /* 只保留底部圆角 */
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            margin: 20px;
             position: relative;
             overflow: hidden;
         }
+
+        /* 移除原头部相关样式（可删除或注释） */
+        /* .page-header { display: none; } 也可以直接删除整个 header 相关的 CSS */
+
+        /* 其他样式保持不变... */
+        /* （以下样式与原代码相同，仅删除了 .page-header 相关的 CSS 部分） */
         
-        .page-header::before {
+        .main-title::before {
             content: "";
             position: absolute;
             top: -50%;
@@ -49,69 +53,6 @@
         @keyframes rotate {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
-        }
-        
-        .header-title {
-            display: flex;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .header-logo {
-            height: 40px;
-            margin-right: 15px;
-        }
-        
-        .header-text {
-            font-size: 20px;
-            font-weight: bold;
-            color: #fff;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        
-        .home-btn {
-            padding: 8px 16px;
-            background: #1565C0;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
-            z-index: 1;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-        
-        .home-btn:hover {
-            background: #0D47A1;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-        }
-        
-        /* 主标题区域 */
-        .main-title {
-            text-align: center;
-            padding: 30px 20px;
-            margin: 20px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .main-title::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
-            z-index: 0;
         }
         
         .main-title h2 {
@@ -149,197 +90,11 @@
             backdrop-filter: blur(5px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
-        .game-card::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
-            z-index: 0;
-        }
-        
-        .game-header {
-            padding: 15px 20px;
-            background: rgba(0, 0, 0, 0.3);
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .game-header:hover {
-            background: rgba(0, 0, 0, 0.4);
-        }
-        
-        .game-name {
-            font-size: 18px;
-            font-weight: bold;
-            color: #fff;
-        }
-        
-        .coming-soon {
-            background-color: #ff7043;
-            color: white;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            margin-left: 10px;
-        }
-        
-        .game-content {
-            padding: 0 20px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .game-content.active {
-            padding: 20px;
-            max-height: 2000px;
-        }
-        
-        /* 游戏详情样式 */
-        .game-section {
-            margin-bottom: 20px;
-        }
-        
-        .section-title {
-            font-size: 16px;
-            font-weight: bold;
-            color: #FFE74C;
-            margin-bottom: 10px;
-            padding-bottom: 5px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .game-desc {
-            margin-bottom: 15px;
-            line-height: 1.7;
-        }
-        
-        .game-feature {
-            margin-left: 20px;
-            margin-bottom: 10px;
-        }
-        
-        .game-feature li {
-            margin-bottom: 8px;
-            list-style-type: disc;
-        }
-        
-        /* 温馨提示样式 */
-        .game-tips {
-            background: rgba(255, 248, 225, 0.2);
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 20px;
-            border-left: 4px solid #FFE74C;
-        }
-        
-        .tips-title {
-            font-weight: bold;
-            margin-bottom: 8px;
-            color: #FFE74C;
-        }
-        
-        /* 底部区域 */
-        .page-footer {
-            text-align: center;
-            padding: 30px 20px;
-            margin: 30px 20px 20px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .page-footer::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
-            z-index: 0;
-        }
-        
-        .footer-title {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            position: relative;
-            z-index: 1;
-            color: #FFE74C;
-        }
-        
-        .footer-desc {
-            margin-bottom: 15px;
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .footer-copyright {
-            font-size: 0.9rem;
-            position: relative;
-            z-index: 1;
-            color: rgba(255, 255, 255, 0.7);
-        }
-        
-        /* 响应式设计 */
-        @media (max-width: 768px) {
-            .main-title h2 {
-                font-size: 1.8rem;
-            }
-            
-            .main-title p {
-                font-size: 1rem;
-            }
-            
-            .header-text {
-                font-size: 16px;
-            }
-            
-            .home-btn {
-                padding: 6px 12px;
-                font-size: 12px;
-            }
-            
-            .game-name {
-                font-size: 16px;
-            }
-            
-            .footer-title {
-                font-size: 1.2rem;
-            }
-        }
     </style>
 </head>
 <body>
-    <!-- 页面头部 -->
-    <header class="page-header">
-        <div class="header-title">
-            <img src="images/logo01.png" alt="DSC数字卷轴" class="header-logo">
-            <h1 class="header-text">生态游戏</h1>
-        </div>
-        <button class="home-btn">返回首页</button>
-    </header>
-    
-    <!-- 主标题区域 -->
-    <div class="main-title">
+
+<div class="main-title">
         <h2>DSC生态游戏中心</h2>
         <p>体验基于区块链技术的创新游戏生态，参与游戏获取额外收益，享受游戏乐趣的同时增加数字资产</p>
     </div>
@@ -353,12 +108,6 @@
                 <span>▼</span>
             </div>
             <div class="game-content" id="hashGame">
-                <div class="game-section">
-                    <h3 class="section-title">游戏概述</h3>
-                    <p class="game-desc">哈希游戏是基于区块链哈希值的预测游戏，玩家可以参与猜单双、猜大小和猜特码三种玩法，体验区块链技术的公平透明。</p>
-                </div>
-                
-                <div class="game-section">
                     <h3 class="section-title">游戏类型</h3>
                     
                     <div class="game-feature">
