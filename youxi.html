@@ -11,23 +11,23 @@
             box-sizing: border-box;
             font-family: 'Microsoft YaHei', Arial, sans-serif;
         }
-        
+
         body {
             background: linear-gradient(135deg, #FF6B35, #FFA630);
-            color: #fff;
             min-height: 100vh;
-            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
         }
 
+        /* 标题板块卡片设计 */
         .main-title {
-            text-align: left;
-            padding: 40px 20px 60px;
-            margin: 0;
-            background: linear-gradient(45deg, rgba(0,0,0,0.3), rgba(0,0,0,0.2));
-            border-radius: 0 0 15px 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 5px 15px rgba(0, 0, 0, 0.2);
+            margin: 30px 20px 40px;
+            padding: 30px 25px;
             position: relative;
-            overflow: hidden;
+            z-index: 1;
         }
 
         .main-title::before {
@@ -39,7 +39,7 @@
             height: 200%;
             background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
             animation: rotate 20s linear infinite;
-            z-index: 0;
+            z-index: -1;
         }
 
         @keyframes rotate {
@@ -55,59 +55,60 @@
         }
 
         .main-logo {
-            height: 45px;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+            height: 40px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
         }
 
+        /* 标题白色黑色描边 */
         .main-title h2 {
-            font-size: 2.2rem;
-            color: #FFE74C;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            position: relative;
-            z-index: 1;
+            font-size: 1.8rem;
+            color: #fff;
+            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, 
+                        -1px 1px 0 #000, 1px 1px 0 #000;
+            letter-spacing: 1px;
         }
 
         .main-title p {
             font-size: 1.1rem;
-            max-width: 800px;
-            margin: 0 auto 30px;
-            position: relative;
-            z-index: 1;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.5;
+            margin-bottom: 25px;
         }
 
+        /* 返回按钮圆角设计 */
         .home-btn {
-            display: block;
-            margin: 0 auto;
             padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin: 0 auto;
+            display: block;
+            max-width: 180px;
             background: #1565C0;
             color: white;
             border: none;
-            border-radius: 4px;
-            font-size: 14px;
             cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            position: relative;
-            z-index: 1;
         }
 
         .home-btn:hover {
-            background: #0D47A1;
             transform: translateY(-2px);
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
         }
 
+        /* 游戏列表容器 */
         .game-container {
             max-width: 1000px;
-            margin: 30px auto;
+            margin: 0 auto 30px;
             padding: 0 20px;
         }
 
+        /* 游戏卡片样式 */
         .game-card {
             background: rgba(0, 0, 0, 0.2);
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            margin-bottom: 15px;
             overflow: hidden;
             position: relative;
             backdrop-filter: blur(5px);
@@ -123,19 +124,18 @@
             height: 200%;
             background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
             animation: rotate 20s linear infinite;
-            z-index: 0;
+            z-index: -1;
         }
 
         .game-header {
-            padding: 15px 20px;
+            padding: 12px 20px;
             background: rgba(0, 0, 0, 0.3);
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
             transition: all 0.3s;
-            position: relative;
-            z-index: 1;
+            font-size: 16px;
         }
 
         .game-header:hover {
@@ -143,7 +143,6 @@
         }
 
         .game-name {
-            font-size: 18px;
             font-weight: bold;
             color: #fff;
         }
@@ -151,8 +150,8 @@
         .coming-soon {
             background-color: #ff7043;
             color: white;
-            padding: 3px 8px;
-            border-radius: 4px;
+            padding: 4px 10px;
+            border-radius: 20px;
             font-size: 12px;
             margin-left: 10px;
         }
@@ -162,12 +161,10 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease-out;
-            position: relative;
-            z-index: 1;
         }
 
         .game-content.active {
-            padding: 20px;
+            padding: 15px 20px;
             max-height: 2000px;
         }
 
@@ -181,12 +178,13 @@
             color: #FFE74C;
             margin-bottom: 10px;
             padding-bottom: 5px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .game-desc {
             margin-bottom: 15px;
             line-height: 1.7;
+            color: rgba(255, 255, 255, 0.9);
         }
 
         .game-feature {
@@ -197,11 +195,12 @@
         .game-feature li {
             margin-bottom: 8px;
             list-style-type: disc;
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .game-tips {
             background: rgba(255, 248, 225, 0.2);
-            padding: 15px;
+            padding: 12px 15px;
             border-radius: 8px;
             margin-top: 20px;
             border-left: 4px solid #FFE74C;
@@ -213,13 +212,14 @@
             color: #FFE74C;
         }
 
+        /* 底部区域 */
         .page-footer {
             text-align: center;
-            padding: 30px 20px;
-            margin: 30px 20px 20px;
             background: rgba(0, 0, 0, 0.2);
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin: 30px 20px 20px;
+            padding: 25px 20px;
             position: relative;
             overflow: hidden;
         }
@@ -233,59 +233,49 @@
             height: 200%;
             background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
             animation: rotate 20s linear infinite;
-            z-index: 0;
+            z-index: -1;
         }
 
         .footer-title {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             margin-bottom: 15px;
-            position: relative;
-            z-index: 1;
             color: #FFE74C;
         }
 
         .footer-desc {
             margin-bottom: 15px;
-            position: relative;
-            z-index: 1;
+            color: rgba(255, 255, 255, 0.9);
             max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 0 auto 15px;
         }
 
         .footer-copyright {
             font-size: 0.9rem;
-            position: relative;
-            z-index: 1;
             color: rgba(255, 255, 255, 0.7);
         }
 
+        /* 响应式设计（保持LOGO水平排列） */
         @media (max-width: 768px) {
-            .logo-title-container {
-                flex-direction: column;
-                text-align: center;
-                gap: 10px;
-            }
-
-            .main-logo {
-                height: 40px;
+            .main-title {
+                margin: 20px 15px 30px;
+                padding: 25px 20px;
             }
 
             .main-title h2 {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
             }
 
-            .main-title p {
-                font-size: 1rem;
+            .main-logo {
+                height: 35px;
             }
 
             .home-btn {
-                padding: 8px 16px;
-                font-size: 12px;
+                padding: 8px 18px;
+                font-size: 13px;
             }
 
-            .game-name {
-                font-size: 16px;
+            .game-header {
+                font-size: 15px;
             }
 
             .footer-title {
@@ -295,6 +285,7 @@
     </style>
 </head>
 <body>
+    <!-- 标题板块 -->
     <div class="main-title">
         <div class="logo-title-container">
             <img src="images/logo01.png" alt="DSC数字卷轴" class="main-logo">
@@ -304,7 +295,9 @@
         <button class="home-btn">返回首页</button>
     </div>
     
+    <!-- 游戏列表 -->
     <div class="game-container">
+        <!-- 哈希竞猜游戏 -->
         <div class="game-card">
             <div class="game-header" onclick="toggleGame('hashGame')">
                 <span class="game-name">哈希竞猜</span>
@@ -371,6 +364,7 @@
             </div>
         </div>
         
+        <!-- 掘金引擎游戏 -->
         <div class="game-card">
             <div class="game-header" onclick="toggleGame('miningGame')">
                 <span class="game-name">掘金引擎 <span class="coming-soon">近期上线</span></span>
@@ -388,6 +382,7 @@
         </div>
     </div>
     
+    <!-- 底部区域 -->
     <footer class="page-footer">
         <h3 class="footer-title">加入DSC生态游戏</h3>
         <p class="footer-desc">数字卷轴DSC致力于打造完整的区块链游戏生态系统，未来将推出更多创新游戏，为用户提供更多元的娱乐和收益方式。</p>
@@ -396,18 +391,13 @@
     </footer>
     
     <script>
+        // 游戏卡片展开/收起功能
         function toggleGame(gameId) {
             const content = document.getElementById(gameId);
             content.classList.toggle('active');
-            
-            const header = content.previousElementSibling;
-            const arrow = header.querySelector('span:last-child');
+            const arrow = content.previousElementSibling.querySelector('span:last-child');
             arrow.textContent = content.classList.contains('active') ? '▲' : '▼';
         }
-
-        document.querySelector('.home-btn').addEventListener('click', function() {
-            window.location.href = 'index.html'; // 请替换为实际首页链接
-        });
     </script>
 </body>
 </html>
