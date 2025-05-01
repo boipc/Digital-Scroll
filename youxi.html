@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="zh - CN">
-
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF - 8">
-    <meta name="viewport" content="width=device - width, initial - scale = 1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>生态游戏 - DSC数字卷轴</title>
     <style>
         /* 全局样式 */
@@ -13,302 +12,409 @@
             box-sizing: border-box;
             font-family: 'Microsoft YaHei', Arial, sans-serif;
         }
-
+        
         body {
             background: linear-gradient(135deg, #FF6B35, #FFA630);
             color: #fff;
             min-height: 100vh;
             line-height: 1.6;
         }
-
-        /* 主标题区域 */
-       .main - title {
+        
+        /* 头部样式 */
+        .page-header {
             display: flex;
             align-items: center;
-            justify-content: space - between;
+            justify-content: space-between;
             padding: 15px 20px;
-            margin: 20px;
             background: rgba(0, 0, 0, 0.2);
-            border - radius: 15px;
-            box - shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin: 20px;
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(10px);
         }
-
-       .main - title::before {
+        
+        .page-header::before {
             content: "";
             position: absolute;
             top: -50%;
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial - gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
             animation: rotate 20s linear infinite;
-            z - index: 0;
+            z-index: 0;
         }
-
+        
         @keyframes rotate {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
-
-       .main - title - logo {
+        
+        .header-title {
+            display: flex;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header-logo {
             height: 40px;
+            margin-right: 15px;
         }
-
-       .main - title - text {
-            font - size: 20px;
-            font - weight: bold;
+        
+        .header-text {
+            font-size: 20px;
+            font-weight: bold;
             color: #fff;
-            text - shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            margin - left: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
-
-       .home - btn {
+        
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header-btn {
             padding: 8px 16px;
-            background: #1565C0;
+            background: rgba(21, 101, 192, 0.8);
             color: white;
             border: none;
-            border - radius: 4px;
-            font - size: 14px;
+            border-radius: 4px;
+            font-size: 14px;
             cursor: pointer;
             transition: all 0.3s;
-            position: relative;
-            z - index: 1;
-            box - shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-
-       .home - btn:hover {
-            background: #0D47A1;
+        
+        .header-btn:hover {
+            background: rgba(13, 71, 161, 0.9);
             transform: translateY(-2px);
-            box - shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
         }
-
+        
+        /* 主标题区域 */
+        .main-title {
+            text-align: center;
+            padding: 30px 20px;
+            margin: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        
+        .main-title::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+            z-index: 0;
+        }
+        
+        .main-title-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+            flex-wrap: wrap;
+        }
+        
+        .main-logo {
+            height: 50px;
+            margin-right: 15px;
+        }
+        
+        .main-title h2 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+            color: #FFE74C;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .main-title p {
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .home-btn-container {
+            width: 100%;
+            margin-top: 20px;
+        }
+        
         /* 游戏列表容器 */
-       .game - container {
-            max - width: 1000px;
+        .game-container {
+            max-width: 1000px;
             margin: 30px auto;
             padding: 0 20px;
         }
-
+        
         /* 游戏卡片样式 */
-       .game - card {
-            background: rgba(255, 255, 255, 0.1);
-            border - radius: 15px;
-            box - shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            margin - bottom: 20px;
+        .game-card {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-bottom: 15px;
             overflow: hidden;
             position: relative;
-            backdrop - filter: blur(5px);
+            backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-
-       .game - card::before {
+        
+        .game-card::before {
             content: "";
             position: absolute;
             top: -50%;
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial - gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
             animation: rotate 20s linear infinite;
-            z - index: 0;
+            z-index: 0;
         }
-
-       .game - header {
+        
+        .game-header {
             padding: 15px 20px;
             background: rgba(0, 0, 0, 0.3);
             cursor: pointer;
             display: flex;
-            justify - content: space - between;
-            align - items: center;
+            justify-content: space-between;
+            align-items: center;
             transition: all 0.3s;
             position: relative;
-            z - index: 1;
+            z-index: 1;
         }
-
-       .game - header:hover {
+        
+        .game-header:hover {
             background: rgba(0, 0, 0, 0.4);
         }
-
-       .game - name {
-            font - size: 18px;
-            font - weight: bold;
+        
+        .game-name {
+            font-size: 18px;
+            font-weight: bold;
             color: #fff;
+            display: flex;
+            align-items: center;
         }
-
-       .coming - soon {
-            background - color: #ff7043;
+        
+        .game-name img {
+            height: 24px;
+            margin-right: 10px;
+        }
+        
+        .coming-soon {
+            background-color: #ff7043;
             color: white;
             padding: 3px 8px;
-            border - radius: 4px;
-            font - size: 12px;
-            margin - left: 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-left: 10px;
         }
-
-       .game - content {
+        
+        .game-content {
             padding: 0 20px;
-            max - height: 0;
+            max-height: 0;
             overflow: hidden;
-            transition: max - height 0.3s ease - out;
+            transition: max-height 0.3s ease-out;
             position: relative;
-            z - index: 1;
+            z-index: 1;
         }
-
-       .game - content.active {
+        
+        .game-content.active {
             padding: 20px;
-            max - height: 2000px;
+            max-height: 2000px;
         }
-
+        
         /* 游戏详情样式 */
-       .game - section {
-            margin - bottom: 20px;
+        .game-section {
+            margin-bottom: 15px;
         }
-
-       .section - title {
-            font - size: 16px;
-            font - weight: bold;
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: bold;
             color: #FFE74C;
-            margin - bottom: 10px;
-            padding - bottom: 5px;
-            border - bottom: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 8px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
-
-       .game - desc {
-            margin - bottom: 15px;
-            line - height: 1.7;
+        
+        .game-desc {
+            margin-bottom: 12px;
+            line-height: 1.7;
         }
-
-       .game - feature {
-            margin - left: 20px;
-            margin - bottom: 10px;
+        
+        .game-feature {
+            margin-left: 20px;
+            margin-bottom: 8px;
         }
-
-       .game - feature li {
-            margin - bottom: 8px;
-            list - style - type: disc;
+        
+        .game-feature li {
+            margin-bottom: 6px;
+            list-style-type: disc;
         }
-
+        
         /* 温馨提示样式 */
-       .game - tips {
+        .game-tips {
             background: rgba(255, 248, 225, 0.2);
             padding: 15px;
-            border - radius: 8px;
-            margin - top: 20px;
-            border - left: 4px solid #FFE74C;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 4px solid #FFE74C;
         }
-
-       .tips - title {
-            font - weight: bold;
-            margin - bottom: 8px;
+        
+        .tips-title {
+            font-weight: bold;
+            margin-bottom: 8px;
             color: #FFE74C;
         }
-
+        
         /* 底部区域 */
-       .page - footer {
-            text - align: center;
+        .page-footer {
+            text-align: center;
             padding: 30px 20px;
             margin: 30px 20px 20px;
             background: rgba(0, 0, 0, 0.2);
-            border - radius: 15px;
-            box - shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(10px);
         }
-
-       .page - footer::before {
+        
+        .page-footer::before {
             content: "";
             position: absolute;
             top: -50%;
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial - gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
             animation: rotate 20s linear infinite;
-            z - index: 0;
+            z-index: 0;
         }
-
-       .footer - title {
-            font - size: 1.5rem;
-            margin - bottom: 15px;
+        
+        .footer-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
             position: relative;
-            z - index: 1;
+            z-index: 1;
             color: #FFE74C;
         }
-
-       .footer - desc {
-            margin - bottom: 15px;
+        
+        .footer-desc {
+            margin-bottom: 15px;
             position: relative;
-            z - index: 1;
-            max - width: 800px;
-            margin - left: auto;
-            margin - right: auto;
+            z-index: 1;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
-
-       .footer - copyright {
-            font - size: 0.9rem;
+        
+        .footer-copyright {
+            font-size: 0.9rem;
             position: relative;
-            z - index: 1;
+            z-index: 1;
             color: rgba(255, 255, 255, 0.7);
         }
-
+        
         /* 响应式设计 */
-        @media (max - width: 768px) {
-           .main - title - text {
-                font - size: 16px;
+        @media (max-width: 768px) {
+            .main-title h2 {
+                font-size: 1.8rem;
             }
-
-           .main - title - logo {
-                height: 30px;
+            
+            .main-title p {
+                font-size: 1rem;
             }
-
-           .home - btn {
+            
+            .header-text {
+                font-size: 16px;
+            }
+            
+            .header-btn {
                 padding: 6px 12px;
-                font - size: 12px;
+                font-size: 12px;
             }
-
-           .game - name {
-                font - size: 16px;
+            
+            .game-name {
+                font-size: 16px;
             }
-
-           .footer - title {
-                font - size: 1.2rem;
+            
+            .footer-title {
+                font-size: 1.2rem;
+            }
+            
+            .main-logo {
+                height: 40px;
+                margin-right: 10px;
             }
         }
     </style>
 </head>
-
 <body>
+    <!-- 页面头部 -->
+    <header class="page-header">
+        <div class="header-title">
+            <img src="images/logo01.png" alt="DSC数字卷轴" class="header-logo">
+            <h1 class="header-text">生态游戏</h1>
+        </div>
+        <div class="header-buttons">
+            <button class="header-btn">登录</button>
+            <button class="header-btn">注册</button>
+        </div>
+    </header>
+    
     <!-- 主标题区域 -->
-    <div class="main - title">
-        <img src="images/logo01.png" alt="DSC数字卷轴" class="main - title - logo">
-        <h1 class="main - title - text">DSC生态游戏中心</h1>
-        <button class="home - btn">返回首页</button>
+    <div class="main-title">
+        <div class="main-title-content">
+            <img src="images/logo01.png" alt="DSC数字卷轴" class="main-logo">
+            <h2>DSC生态游戏中心</h2>
+        </div>
+        <p>体验基于区块链技术的创新游戏生态，参与游戏获取额外收益，享受游戏乐趣的同时增加数字资产</p>
+        <div class="home-btn-container">
+            <button class="header-btn">返回首页</button>
+        </div>
     </div>
-
+    
     <!-- 游戏列表 -->
-    <div class="game - container">
+    <div class="game-container">
         <!-- 哈希竞猜游戏 -->
-        <div class="game - card">
-            <div class="game - header" onclick="toggleGame('hashGame')">
-                <span class="game - name">哈希竞猜</span>
+        <div class="game-card">
+            <div class="game-header" onclick="toggleGame('hashGame')">
+                <span class="game-name">
+                    <img src="images/game1.png" alt="哈希竞猜">
+                    哈希竞猜
+                </span>
                 <span>▼</span>
             </div>
-            <div class="game - content" id="hashGame">
-                <div class="game - section">
-                    <h3 class="section - title">游戏概述</h3>
-                    <p class="game - desc">哈希游戏是基于区块链哈希值的预测游戏，玩家可以参与猜单双、猜大小和猜特码三种玩法，体验区块链技术的公平透明。</p>
+            <div class="game-content" id="hashGame">
+                <div class="game-section">
+                    <h3 class="section-title">游戏概述</h3>
+                    <p class="game-desc">哈希游戏是基于区块链哈希值的预测游戏，玩家可以参与猜单双、猜大小和猜特码三种玩法，体验区块链技术的公平透明。</p>
                 </div>
-
-                <div class="game - section">
-                    <h3 class="section - title">游戏类型</h3>
-
-                    <div class="game - feature">
+                
+                <div class="game-section">
+                    <h3 class="section-title">游戏类型</h3>
+                    
+                    <div class="game-feature">
                         <h4>1. 猜单双</h4>
                         <ul>
                             <li>玩法：预测特别号码是单数还是双数</li>
@@ -317,106 +423,145 @@
                             <li>开奖频率：每20分钟一次</li>
                         </ul>
                     </div>
-
-                    <div class="game - feature">
+                    
+                    <div class="game-feature">
                         <h4>2. 猜大小</h4>
                         <ul>
                             <li>玩法：预测特别号码的大小</li>
-                            <li>1 - 24为"小"，25 - 49为"大"</li>
+                            <li>1-24为"小"，25-49为"大"</li>
                             <li>大数赔率：1.8</li>
                             <li>小数赔率：1.85</li>
                             <li>开奖频率：每20分钟一次</li>
                         </ul>
                     </div>
-
-                    <div class="game - feature">
+                    
+                    <div class="game-feature">
                         <h4>3. 猜特码</h4>
                         <ul>
-                            <li>玩法：直接预测1 - 49之间的特码数字</li>
+                            <li>玩法：直接预测1-49之间的特码数字</li>
                             <li>赔率：46</li>
                             <li>开奖频率：每24小时一次</li>
                         </ul>
                     </div>
                 </div>
-
-                <div class="game - section">
-                    <h3 class="section - title">开奖规则</h3>
-                    <p class="game - desc">系统从指定区块哈希值右至左取连续2位数字，若在1 - 49范围内则为特别号码，超出则继续向左寻找。</p>
+                
+                <div class="game-section">
+                    <h3 class="section-title">开奖规则</h3>
+                    <p class="game-desc">系统从指定区块哈希值右至左取连续2位数字，若在1-49范围内则为特别号码，超出则继续向左寻找。</p>
                 </div>
-
-                <div class="game - section">
-                    <h3 class="section - title">游戏特点</h3>
-                    <ul class="game - feature">
+                
+                <div class="game-section">
+                    <h3 class="section-title">游戏特点</h3>
+                    <ul class="game-feature">
                         <li>基于区块链技术，公平透明</li>
                         <li>多种玩法选择，满足不同偏好</li>
                         <li>高中奖率与高赔率并存</li>
                     </ul>
                 </div>
-
-                <div class="game - tips">
-                    <p class="tips - title">温馨提示</p>
+                
+                <div class="game-tips">
+                    <p class="tips-title">温馨提示</p>
                     <p>哈希游戏是一种娱乐方式，请理性参与。建议玩家在了解游戏规则后再进行参与。</p>
                 </div>
             </div>
         </div>
-
+        
         <!-- 掘金引擎游戏 -->
-        <div class="game - card">
-            <div class="game - header" onclick="toggleGame('miningGame')">
-                <span class="game - name">掘金引擎 <span class="coming - soon">近期上线</span></span>
+        <div class="game-card">
+            <div class="game-header" onclick="toggleGame('miningGame')">
+                <span class="game-name">
+                    <img src="images/game2.png" alt="掘金引擎">
+                    掘金引擎 <span class="coming-soon">近期上线</span>
+                </span>
                 <span>▼</span>
             </div>
-            <div class="game - content" id="miningGame">
-                <div class="game - section">
-                    <h3 class="section - title">游戏简介</h3>
-
-                    <p class="tips - title">温馨提示</p>
+            <div class="game-content" id="miningGame">
+                <div class="game-section">
+                    <h3 class="section-title">游戏简介</h3>
+                    <p class="game-desc">掘金引擎是一款基于区块链技术的挖矿模拟游戏，玩家可以通过策略布局和资源管理，在虚拟矿场中获得最大收益。</p>
+                    
+                    <h3 class="section-title">游戏特点</h3>
+                    <ul class="game-feature">
+                        <li>真实模拟矿场运营环境</li>
+                        <li>多种矿机可供选择，各有特色</li>
+                        <li>动态市场调节机制</li>
+                        <li>团队协作挖矿模式</li>
+                    </ul>
+                </div>
+               
+                <div class="game-tips">
+                    <p class="tips-title">温馨提示</p>
                     <p>掘金引擎正在紧张开发中，即将与大家见面，敬请期待！</p>
                 </div>
             </div>
         </div>
+        
+        <!-- 数字农场游戏 -->
+        <div class="game-card">
+            <div class="game-header" onclick="toggleGame('farmGame')">
+                <span class="game-name">
+                    <img src="images/game3.png" alt="数字农场">
+                    数字农场 <span class="coming-soon">开发中</span>
+                </span>
+                <span>▼</span>
+            </div>
+            <div class="game-content" id="farmGame">
+                <div class="game-section">
+                    <h3 class="section-title">游戏简介</h3>
+                    <p class="game-desc">数字农场是一款结合NFT和DeFi的区块链农场游戏，玩家可以种植、收获、交易虚拟作物，体验区块链农业的乐趣。</p>
+                    
+                    <h3 class="section-title">游戏特点</h3>
+                    <ul class="game-feature">
+                        <li>独特的NFT作物系统</li>
+                        <li>真实的生长周期和环境影响</li>
+                        <li>去中心化交易市场</li>
+                        <li>土地所有权证明</li>
+                    </ul>
+                </div>
+               
+                <div class="game-tips">
+                    <p class="tips-title">温馨提示</p>
+                    <p>数字农场正在开发中，预计2024年第一季度上线，敬请期待！</p>
+                </div>
+            </div>
+        </div>
     </div>
-
+    
     <!-- 底部区域 -->
-    <footer class="page - footer">
-        <h3 class="footer - title">加入DSC生态游戏</h3>
-        <p class="footer - desc">数字卷轴DSC致力于打造完整的区块链游戏生态系统，未来将推出更多创新游戏，为用户提供更多元的娱乐和收益方式。</p>
-        <p class="footer - desc">关注本站，获取最新游戏上线信息。</p>
-        <p class="footer - copyright">© 2023数字卷轴DSC卷界链 | 基于区块链技术的创新游戏平台</p>
+    <footer class="page-footer">
+        <h3 class="footer-title">加入DSC生态游戏</h3>
+        <p class="footer-desc">数字卷轴DSC致力于打造完整的区块链游戏生态系统，未来将推出更多创新游戏，为用户提供更多元的娱乐和收益方式。</p>
+        <p class="footer-desc">关注本站，获取最新游戏上线信息。</p>
+        <p class="footer-copyright">© 2023 数字卷轴DSC 卷界链 | 基于区块链技术的创新游戏平台</p>
     </footer>
-
+    
     <script>
-        let currentActiveGame = null;
         // 切换游戏详情显示/隐藏
         function toggleGame(gameId) {
-            if (currentActiveGame && currentActiveGame!== gameId) {
-                const prevContent = document.getElementById(currentActiveGame);
-                prevContent.classList.remove('active');
-                const prevHeader = prevContent.previousElementSibling;
-                const prevArrow = prevHeader.querySelector('span:last - child');
-                prevArrow.textContent = '▼';
-            }
             const content = document.getElementById(gameId);
             content.classList.toggle('active');
+            
             // 切换箭头方向
             const header = content.previousElementSibling;
-            const arrow = header.querySelector('span:last - child');
+            const arrow = header.querySelector('span:last-child');
             if (content.classList.contains('active')) {
                 arrow.textContent = '▲';
-                currentActiveGame = gameId;
             } else {
                 arrow.textContent = '▼';
-                if (currentActiveGame === gameId) {
-                    currentActiveGame = null;
-                }
             }
         }
-
+        
         // 返回首页按钮
-        document.querySelector('.home - btn').addEventListener('click', function () {
+        document.querySelector('.home-btn-container .header-btn').addEventListener('click', function() {
             window.location.href = 'index.html';
+        });
+        
+        // 登录注册按钮
+        document.querySelectorAll('.header-buttons .header-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                alert('功能即将开放，敬请期待！');
+            });
         });
     </script>
 </body>
-
 </html>
