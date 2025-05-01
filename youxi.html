@@ -348,7 +348,6 @@
         <div class="game-card">
             <div class="game-header" onclick="toggleGame(this, 'hashGame')">
                 <span class="game-name">
-                    <img src="images/game1.png" alt="哈希竞猜">
                     哈希竞猜
                 </span>
                 <span>▼</span>
@@ -413,34 +412,152 @@
                 </div>
             </div>
         </div>
-        
         <!-- 掘金引擎游戏 -->
         <div class="game-card">
             <div class="game-header" onclick="toggleGame(this, 'miningGame')">
                 <span class="game-name">
-                    <img src="images/game2.png" alt="掘金引擎">
-                    掘金引擎 <span class="coming-soon">近期上线</span>
+                    掘金引擎
                 </span>
                 <span>▼</span>
             </div>
             <div class="game-content" id="miningGame">
                 <div class="game-section">
-                    <h3 class="section-title">游戏简介</h3>
-                    <p class="game-desc">掘金引擎是一款基于区块链技术的挖矿模拟游戏，玩家可以通过策略布局和资源管理获得收益。</p>
+                    <h3 class="section-title">游戏阶段参数表</h3>
+                    <table class="game-table">
+                        <thead>
+                            <tr>
+                                <th>游戏阶段</th>
+                                <th>奖池区间</th>
+                                <th>单次投注额</th>
+                                <th>开奖延迟</th>
+                                <th>游戏晋阶投注次数</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>阶段1</td>
+                                <td>1,000-1,999</td>
+                                <td>1币</td>
+                                <td>+5分钟</td>
+                                <td>1,000次</td>
+                            </tr>
+                            <tr>
+                                <td>阶段2</td>
+                                <td>2,000-4,999</td>
+                                <td>2币</td>
+                                <td>+4分钟</td>
+                                <td>1,500次</td>
+                            </tr>
+                            <tr>
+                                <td>阶段3</td>
+                                <td>5,000-9,999</td>
+                                <td>5币</td>
+                                <td>+3分钟</td>
+                                <td>1,000次</td>
+                            </tr>
+                            <tr>
+                                <td>阶段4</td>
+                                <td>10,000-14,999</td>
+                                <td>10币</td>
+                                <td>+2分钟</td>
+                                <td>500次</td>
+                            </tr>
+                            <tr>
+                                <td>阶段5</td>
+                                <td>15,000-19,999</td>
+                                <td>20币</td>
+                                <td>+1分钟</td>
+                                <td>250次</td>
+                            </tr>
+                            <tr>
+                                <td>决胜阶段</td>
+                                <td>≥20,000</td>
+                                <td>30币</td>
+                                <td>+30秒</td>
+                                <td>-</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 
                 <div class="game-section">
-                    <h3 class="section-title">游戏特点</h3>
+                    <h3 class="section-title">核心规则</h3>
                     <ul class="game-feature">
-                        <li>模拟真实挖矿过程，体验矿工生活</li>
-                        <li>策略性资源分配，考验玩家决策能力</li>
-                        <li>每日收益结算，稳定获取回报</li>
+                        <li><strong>初始设置</strong>
+                            <ul>
+                                <li>初始奖池：1,000币</li>
+                                <li>初始开奖倒计时：12小时</li>
+                            </ul>
+                        </li>
+                        <li><strong>倒计时机制</strong>
+                            <ul>
+                                <li>每次投注根据阶段延长倒计时（见上表），倒计时归零即开奖。</li>
+                            </ul>
+                        </li>
+                        <li><strong>决胜阶段投注条件</strong>
+                            <ul>
+                                <li>1至5阶段均有参与投注者，方可参与决胜局的投注意竞争。</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="game-section">
+                    <h3 class="section-title">奖池分配规则</h3>
+                    <ul class="game-feature">
+                        <li><strong>开奖后，先进行阶段投注资金返还，再进行奖池资金分配</strong>
+                            <ul>
+                                <li><strong>阶段投注资金返还（仅阶段1-4）</strong>
+                                    <table class="game-table">
+                                        <thead>
+                                            <tr>
+                                                <th>返还比例</th>
+                                                <th>覆盖范围（按投注顺序）</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>100%</td>
+                                                <td>阶段前10%投注者</td>
+                                            </tr>
+                                            <tr>
+                                                <td>70%</td>
+                                                <td>阶段前30%投注者</td>
+                                            </tr>
+                                            <tr>
+                                                <td>50%</td>
+                                                <td>阶段前50%投注者</td>
+                                            </tr>
+                                            <tr>
+                                                <td>30%</td>
+                                                <td>阶段前70%投注者</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </li>
+                                <li><strong>幸运返还</strong>：5%（随机抽取阶段5的投注者进行全额返还）</li>
+                            </ul>
+                        </li>
+                        <li><strong>奖池资金分配</strong>
+                            <ul>
+                                <li><strong>预留资金</strong>：1,000币（作为下一轮种子）</li>
+                                <li><strong>剩余分配</strong>：
+                                    <ul>
+                                        <li>最后投注者：45%</li>
+                                        <li>倒数2-10名投注者：8%（均分）</li>
+                                        <li>运营方：7%</li>
+                                        <li>销毁：25%</li>
+                                        <li>推荐奖励：10%</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
                 
                 <div class="game-tips">
                     <p class="tips-title">温馨提示</p>
-                    <p class="tips-content">掘金引擎正在紧张开发中，即将与大家见面，敬请期待！</p>
+                    <p>掘金引擎是一种创新游戏模式，请仔细阅读规则后再参与。游戏即将上线，敬请期待！</p>
                 </div>
             </div>
         </div>
