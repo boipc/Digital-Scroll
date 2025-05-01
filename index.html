@@ -4,16 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>数字卷轴DSC - 创新数字资产项目</title>
-    <!-- 微信分享Meta信息 -->
-    <meta property="og:title" content="数字卷轴DSC - 创新数字资产项目">
-    <meta property="og:description" content="每小时收益 | 多重获利模式 | 透明区块链技术 | 立即加入获取数字资产收益">
-    <meta property="og:image" content="https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/logo.png">
-    <meta property="og:url" content="https://boipc.github.io/Digital-Scroll">
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="zh_CN">
-    <!-- 多组动态摘要 -->
-    <meta name="description" content="数字卷轴DSC - 创新区块链项目，提供每小时稳定收益、多重获利方式，安全透明的数字资产管理，立即注册领取免费卷轴！">
-    
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -683,7 +673,7 @@
                 <button class="contact-btn" onclick="showContactModal()">快速认证</button>
                 <a href="guide.html" class="guide-btn">操作指南</a>
                 <a href="moxing.html" class="model-btn">经济模型</a> 
-                <a href="youxi.html" class="model-btn" style="background:var(--guide-btn);">生态游戏</a>
+                <a href="youxi.html" class="model-btn">生态游戏</a>
             </div>
         </header>
         
@@ -1021,33 +1011,6 @@
     window.onclick = function(event) {
         const modal = document.getElementById('contactModal');
         if (event.target == modal) hideContactModal();
-     // 在微信环境显示定制分享提示
-    function wechatShareTips() {
-        if(isWeixinBrowser()) {
-            const shareInfo = [
-                "🔥 每小时自动生息！立即领取免费数字卷轴",
-                "📈 多重收益模式，区块链技术保障资产安全",
-                "💎 注册即送试炼卷轴，开启数字资产增值之旅",
-                "🚀 加入万人社区，共享区块链经济红利"
-            ];
-            const randomIndex = Math.floor(Math.random() * shareInfo.length);
-            alert("点击右上角『...』分享到朋友圈\n" + shareInfo[randomIndex]);
-        }
-    }
-
-    // 初始化时加入微信检测
-    window.onload = function() {
-        updateRuntime();
-        setInterval(updateRuntime, 1000);
-        wechatShareTips();
-        
-        document.getElementById('intro').classList.add('active');
-        
-        document.querySelectorAll('.external-link, #registerBtn').forEach(link => {
-            link.addEventListener('click', function(e) {
-                if(isWeixinBrowser()) {
-                    e.preventDefault();
-                    alert('请点击右上角菜单，选择"在浏览器打开"后再进行操作');   
     }
     </script>
 </body>
