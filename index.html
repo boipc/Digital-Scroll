@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>数字卷轴DSC - 创新数字资产项目</title>
-    <!-- 微信分享meta标签 -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="数字卷轴DSC - 每小时收益的多重获利项目">
-    <meta property="og:description" content="数字卷轴DSC创新项目，三重收益模式，稳定运行580+天，注册即送卷轴！">
+    <!-- 微信分享Meta信息 -->
+    <meta property="og:title" content="数字卷轴DSC - 创新数字资产项目">
+    <meta property="og:description" content="每小时收益 | 多重获利模式 | 透明区块链技术 | 立即加入获取数字资产收益">
     <meta property="og:image" content="https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/logo.png">
-    <meta property="og:image:width" content="200">
-    <meta property="og:image:height" content="200">
-    <meta property="og:url" content="https://boipc.github.io/Digital-Scroll/index.html">
-    <meta name="description" content="数字卷轴DSC创新数字资产项目，基于区块链技术，提供每小时自动收益、多重获利方式和透明公开的资产管理。">
+    <meta property="og:url" content="https://boipc.github.io/Digital-Scroll">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_CN">
+    <!-- 多组动态摘要 -->
+    <meta name="description" content="数字卷轴DSC - 创新区块链项目，提供每小时稳定收益、多重获利方式，安全透明的数字资产管理，立即注册领取免费卷轴！">
     
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <style>
@@ -26,7 +26,6 @@
             --contact-btn: #2196F3;
             --guide-btn: #9C27B0;
             --model-btn: #D32F2F;
-            --game-btn: #4A148C; /* 新增游戏按钮颜色 */
         }
         
         * {
@@ -35,8 +34,7 @@
             box-sizing: border-box;
             font-family: 'Roboto', 'Microsoft YaHei', sans-serif;
         }
-        
-        .model-btn, .game-btn {
+         .model-btn {
             display: block;
             background: var(--model-btn);
             color: var(--light-color);
@@ -55,22 +53,11 @@
             text-align: center;
         }
 
-        .game-btn {
-            background: var(--game-btn);
-        }
-
         .model-btn:hover {
             background: #B71C1C;
             transform: translateY(-5px);
             box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
         }
-
-        .game-btn:hover {
-            background: #7B1FA2;
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
-        }
-
         body {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: var(--light-color);
@@ -124,12 +111,12 @@
         }
         
         .logo {
-            height: 4.48rem;
+            height: 4.48rem; /* 从2.8rem增大60%到4.48rem */
             margin-right: 15px;
         }
         
         h1 {
-            font-size: 4.48rem;
+            font-size: 4.48rem; /* 从2.8rem增大60%到4.48rem */
             margin: 0;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
             font-family: 'Montserrat', sans-serif;
@@ -146,68 +133,70 @@
             z-index: 1;
             width: 100%;
         }
+      
         
-        .timer-container {
-            margin: 25px 0;
-            padding: 20px 15px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-            position: relative;
-            z-index: 1;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-        }
+/* 修改后的计时器样式 */
+.timer-container {
+    margin: 25px 0;
+    padding: 20px 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 1;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
 
-        .timer-label {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-            font-weight: 500;
-        }
+.timer-label {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    font-weight: 500;
+}
 
-        .timer {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            font-family: 'Montserrat', sans-serif;
-        }
+.timer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-family: 'Montserrat', sans-serif;
+}
 
-        .days {
-            font-size: 3.6em;
-            line-height: 1.2;
-            letter-spacing: 2px;
-            color: #FFD700;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-        }
+.days {
+    font-size: 3.6em; /* 从1.8em增大1倍到3.6em */
+    line-height: 1.2;
+    letter-spacing: 2px;
+    color: #FFD700; /* 金色文字 */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
 
-        .time {
-            font-size: 2.2em;
-            letter-spacing: 3px;
-            color: var(--light-color);
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-        }
+.time {
+    font-size: 2.2em;
+    letter-spacing: 3px;
+    color: var(--light-color);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
 
-        .timer-motto {
-            font-size: 0.9rem;
-            margin-top: 15px;
-            color: #fff;
-            letter-spacing: 1px;
-        }
+.timer-motto {
+    font-size: 0.9rem;
+    margin-top: 15px;
+    color: #fff; /* 白色文字 */
+    letter-spacing: 1px;
+}
 
-        @keyframes pulse {
-            0% { 
-                text-shadow: 
-                    0 0 5px rgba(255, 255, 255, 0.5),
-                    0 0 10px rgba(255, 215, 0, 0.5);
-            }
-            100% { 
-                text-shadow: 
-                    0 0 20px rgba(255, 230, 76, 0.8), 
-                    0 0 30px rgba(255, 230, 76, 0.6);
-            }
-        }
+@keyframes pulse {
+    0% { 
+        text-shadow: 
+            0 0 5px rgba(255, 255, 255, 0.5),
+            0 0 10px rgba(255, 215, 0, 0.5);
+    }
+    100% { 
+        text-shadow: 
+            0 0 20px rgba(255, 230, 76, 0.8), 
+            0 0 30px rgba(255, 230, 76, 0.6);
+    }
+}
         
         .button-grid {
             display: grid;
@@ -221,7 +210,7 @@
             border: none;
             color: var(--light-color);
             padding: 15px;
-            font-size: 1.5rem;
+            font-size: 1.5rem; /* 从1rem增大50%到1.5rem */
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -361,7 +350,7 @@
             transition: all 0.3s ease;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
             border: none;
-            font-size: 1.5rem;
+            font-size: 1.5rem; /* 从1rem增大50%到1.5rem */
             cursor: button;
             position: relative;
             overflow: hidden;
@@ -402,7 +391,7 @@
             transition: all 0.3s ease;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
             border: none;
-            font-size: 1.5rem;
+            font-size: 1.5rem; /* 从1rem增大50%到1.5rem */
             cursor: button;
             position: relative;
             overflow: hidden;
@@ -427,7 +416,7 @@
             transition: all 0.3s ease;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
             border: none;
-            font-size: 1.5rem;
+            font-size: 1.5rem; /* 从1rem增大50%到1.5rem */
             cursor: button;
             position: relative;
             overflow: hidden;
@@ -554,7 +543,7 @@
         
         /* 移动端适配 */
         @media (max-width: 768px) {
-            .auth-btn, .contact-btn, .guide-btn, .model-btn, .game-btn {
+            .auth-btn, .contact-btn, .guide-btn, .model-btn { /* 新增选择器 */
                 padding: 12px;
                 font-size: 1.2rem;
             }
@@ -572,13 +561,13 @@
             }
             
             .logo {
-                height: 3.2rem;
+                height: 3.2rem; /* 从2rem增大60%到3.2rem */
                 margin-right: 10px;
                 margin-bottom: 0;
             }
             
             h1 {
-                font-size: 2.56rem;
+                font-size: 2.56rem; /* 从1.6rem增大60%到2.56rem */
             }
             
             .subtitle {
@@ -592,7 +581,7 @@
             
             .btn {
                 padding: 12px;
-                font-size: 1.2rem;
+                font-size: 1.2rem; /* 从0.9rem增大50%到1.35rem，但考虑到移动端显示，调整为1.2rem */
             }
             
             .timer {
@@ -609,7 +598,7 @@
             
             .auth-btn, .contact-btn, .guide-btn {
                 padding: 12px;
-                font-size: 1.2rem;
+                font-size: 1.2rem; /* 从0.9rem增大50%到1.35rem，但考虑到移动端显示，调整为1.2rem */
             }
             
             .content-section {
@@ -644,11 +633,11 @@
             }
             
             .logo {
-                height: 2.88rem;
+                height: 2.88rem; /* 从1.8rem增大60%到2.88rem */
             }
             
             h1 {
-                font-size: 2.24rem;
+                font-size: 2.24rem; /* 从1.4rem增大60%到2.24rem */
             }
             
             .timer {
@@ -680,21 +669,21 @@
             </div>
             <p class="subtitle">创新数字资产项目 · 每小时收益 · 多重获利方式</p>
             
-            <div class="timer-container">
-                <div class="timer-label">DSC已稳定运行</div>
-                <div class="timer" id="runtimeTimer">
-                    <div class="days" id="days">00天</div>
-                    <div class="time" id="time">00:00:00</div>
-                </div>
-                <div class="timer-motto">无人扶我青云志，我自踏雪至巅峰</div>
-            </div>
+           <div class="timer-container">
+    <div class="timer-label">DSC已稳定运行</div>
+    <div class="timer" id="runtimeTimer">
+        <div class="days" id="days">00天</div>
+        <div class="time" id="time">00:00:00</div>
+    </div>
+    <div class="timer-motto">无人扶我青云志，我自踏雪至巅峰</div>
+</div>
             
             <div class="auth-box">
                 <a href="https://prod.digital-scroll.org/#/pages/reg?c=182N17" class="auth-btn" id="registerBtn">注册/登录</a>
                 <button class="contact-btn" onclick="showContactModal()">快速认证</button>
                 <a href="guide.html" class="guide-btn">操作指南</a>
-                <a href="moxing.html" class="model-btn">经济模型</a>
-                <a href="youxi.html" class="game-btn">生态游戏</a> <!-- 新增的生态游戏按钮 -->
+                <a href="moxing.html" class="model-btn">经济模型</a> 
+                <a href="youxi.html" class="model-btn" style="background:var(--guide-btn);">生态游戏</a>
             </div>
         </header>
         
@@ -719,9 +708,13 @@
             <h3>SCC燃料通证</h3>
 
             <ul>
-                <li>燃料费用：玩家领取卷轴收益需消耗SCC作为网络燃料费</li>
-                <li>获取方式：通过DSC/USDS兑换或参与卷轴复投获得</li>
-                <li>经济模型：日产量固定8,640 SCC，用于维护网络运行和激励参与者</li>
+
+            <li>燃料费用：玩家领取卷轴收益需消耗SCC作为网络燃料费</li>
+
+            <li>获取方式：通过DSC/USDS兑换或参与卷轴复投获得</li>
+
+            <li>经济模型：日产量固定8,640 SCC，用于维护网络运行和激励参与者</li>
+
             </ul>
 
             <h3>生态核心</h3>
@@ -872,12 +865,12 @@
                 <li>普通玩家DSC卖出手续费为25%</li>
                 <li>玩家购买官方币，可积累免手续费额度。于额度内卖出，免手续费</li>
                 <li>市商免手续费，官方免手续</li>
+
             </ul>
             
             <h3>注意事项</h3>
             <p class="highlight">若连续多次交易被申诉，恐将被判定为捣乱账户，永久禁止交易，永久停产卷轴，实名信息永久无法再次上车。</p>
         </div>
-        
         <div id="faq" class="content-section">
             <h2>常见问题解答</h2>
             
@@ -909,15 +902,15 @@
             
             <h3>重要地址</h3>
             <ul>
-                <li>DSC总池: SNqQZJwyMuqkHevrBlSZwYXllJ65Lq5nF8</li>
-                <li>DSC黑洞地址: SQGfYK112x35Dm6krV57AKGp0cIFKDp5Ba</li>
-                <li>DSC卷轴收益池: Sz3muiPYGnh8ER4QO21dIpE3vsa5HFjr1i</li>
-                <li>DSC推广收益池: SIAORU4JFp3Snm0l5ClQVgJTO81GZTeqW4</li>
-                <li>SCC总池：SUJP6kdCRltUJuHWUIcB8y6JU58NqDay3W</li>
-                <li>SCC兑换分红池：Sp0fgF2Dz6gE7EQ9pDA5OAggX33cuIcjzp</li>
-                <li>SCC销毁地址：Ss5vwf8yTtswUFMLzKZ0eoDeMc6hZ0GIdH</li> 
-                <li>USDS总池：SjlrYjSiyvLR0muMdV1XcFohURYq64uvw0</li>
-                <li>USDS托收池：Sjinwu8bDIrJi5wi7HM60MeyLyoSLBjw4Z</li>
+                 <li>DSC总池: SNqQZJwyMuqkHevrBlSZwYXllJ65Lq5nF8</li>
+                 <li>DSC黑洞地址: SQGfYK112x35Dm6krV57AKGp0cIFKDp5Ba</li>
+                 <li>DSC卷轴收益池: Sz3muiPYGnh8ER4QO21dIpE3vsa5HFjr1i</li>
+                 <li>DSC推广收益池: SIAORU4JFp3Snm0l5ClQVgJTO81GZTeqW4</li>
+                 <li>SCC总池：SUJP6kdCRltUJuHWUIcB8y6JU58NqDay3W</li>
+                 <li>SCC兑换分红池：Sp0fgF2Dz6gE7EQ9pDA5OAggX33cuIcjzp</li>
+                 <li>SCC销毁地址：Ss5vwf8yTtswUFMLzKZ0eoDeMc6hZ0GIdH</li> 
+                 <li>USDS总池：SjlrYjSiyvLR0muMdV1XcFohURYq64uvw0</li>
+                 <li>USDS托收池：Sjinwu8bDIrJi5wi7HM60MeyLyoSLBjw4Z</li>
             </ul>
         </div>
         
@@ -1018,36 +1011,6 @@
                 if(isWeixinBrowser()) {
                     e.preventDefault();
                     alert('请点击右上角菜单，选择"在浏览器打开"后再进行注册/登录操作');
-
-     // 微信分享自定义内容
-         document.addEventListener('WeixinJSBridgeReady', function() {
-          WeixinJSBridge.on('menu:share:appmessage', function(argv){
-           WeixinJSBridge.invoke('sendAppMessage', {
-                "appid": "",
-                "img_url": "https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/logo.png",
-                "img_width": "200",
-                "img_height": "200",
-                "link": "https://yourdomain.com/index.html",
-                "desc": "数字卷轴DSC创新项目，每小时自动产生收益，多重获利方式，注册即送卷轴，快来加入吧！",
-                "title": "数字卷轴DSC - 每小时收益的多重获利项目"
-            }, function(res) {
-                if(res.err_msg == "send_app_msg:ok") {
-                    // 分享成功
-                }
-            });
-        });
-        
-        WeixinJSBridge.on('menu:share:timeline', function(argv){
-            WeixinJSBridge.invoke('shareTimeline', {
-                "img_url": "https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/logo.png",
-                "img_width": "200",
-                "img_height": "200",
-                "link": "https://boipc.github.io/Digital-Scroll/index.html",
-                "desc": "数字卷轴DSC创新项目，基于区块链技术，透明公开，稳定运行超过580天，快来了解详情！",
-                "title": "数字卷轴DSC - 创新数字资产项目"
-            }, function(res) {
-                if(res.err_msg == "share_timeline:ok") {
-                    // 分享成功
                 }
             });
         });
@@ -1058,6 +1021,33 @@
     window.onclick = function(event) {
         const modal = document.getElementById('contactModal');
         if (event.target == modal) hideContactModal();
+     // 在微信环境显示定制分享提示
+    function wechatShareTips() {
+        if(isWeixinBrowser()) {
+            const shareInfo = [
+                "🔥 每小时自动生息！立即领取免费数字卷轴",
+                "📈 多重收益模式，区块链技术保障资产安全",
+                "💎 注册即送试炼卷轴，开启数字资产增值之旅",
+                "🚀 加入万人社区，共享区块链经济红利"
+            ];
+            const randomIndex = Math.floor(Math.random() * shareInfo.length);
+            alert("点击右上角『...』分享到朋友圈\n" + shareInfo[randomIndex]);
+        }
+    }
+
+    // 初始化时加入微信检测
+    window.onload = function() {
+        updateRuntime();
+        setInterval(updateRuntime, 1000);
+        wechatShareTips();
+        
+        document.getElementById('intro').classList.add('active');
+        
+        document.querySelectorAll('.external-link, #registerBtn').forEach(link => {
+            link.addEventListener('click', function(e) {
+                if(isWeixinBrowser()) {
+                    e.preventDefault();
+                    alert('请点击右上角菜单，选择"在浏览器打开"后再进行操作');   
     }
     </script>
 </body>
