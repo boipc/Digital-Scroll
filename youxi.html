@@ -342,6 +342,90 @@
         </div>
     </div>
     
+    <!-- 掘金引擎游戏 -->
+        <div class="game-card">
+            <div class="game-header" onclick="toggleGame(this, 'miningGame')">
+                <span class="game-name">
+                    掘金Fomo3D
+                  <span class="coming-soon">新上线</span>
+                </span>
+                <span>▼</span>
+            </div>
+            <div class="game-content" id="miningGame">
+                <div class="game-section">
+                    <h3 class="section-title">阶段参数表</h3>
+                    <div class="table-responsive-wrapper"><table class="game-table">
+                        <thead>
+                            <tr>
+                                <th>阶段</th>
+                                <th>奖池区间</th>
+                                <th>投注额</th>
+                                <th>计时延迟</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>阶段一</td><td>1,000-1,999</td><td>1币</td><td>+3分钟</td></tr>
+                            <tr><td>阶段二</td><td>2,000-4,999</td><td>2币</td><td>+2分钟</td></tr>
+                            <tr><td>阶段三</td><td>5,000-9,999</td><td>5币</td><td>+2分钟</td></tr>
+                            <tr><td>阶段四</td><td>10,000-14,999</td><td>10币</td><td>+2分钟</td></tr>
+                            <tr><td>阶段五</td><td>15,000-19,999</td><td>20币</td><td>+2分钟</td></tr>
+                            <tr><td>决胜局</td><td>≥20,000</td><td>30币</td><td>+1分钟</td></tr>
+                        </tbody>
+                    </table></div>
+                </div>
+                <div class="game-section">
+                    <h3 class="section-title">核心规则</h3>
+                    <h4>1. 初始设置</h4>
+                    <ul class="game-feature-detail">
+                        <li>初始奖池: 1,000币</li>
+                        <li>初始开奖倒计时: 6小时</li>
+                    </ul>
+                    <h4>2. 进阶机制</h4>
+                    <ul class="game-feature-detail">
+                        <li>投注积累奖池, 自动进阶一下阶段 (见上表)</li>
+                    </ul>
+                    <h4>3. 计时机制</h4>
+                    <ul class="game-feature-detail">
+                        <li>每次投注延长倒计时 (见上表), 倒计时归零, 游戏结束。</li>
+                    </ul>
+                    <h4>4. 决胜条件</h4>
+                    <ul class="game-feature-detail">
+                        <li>玩家前五阶段都参与了投注, 方可参与决胜局投注竞争。</li>
+                    </ul>
+                </div>
+                <div class="game-section">
+                    <h3 class="section-title">奖池分配</h3>
+                    <p style="margin-left: 20px; margin-top: 10px; margin-bottom: 10px;">游戏结束后, 先进行阶段投注资金返还, 再进行奖池资金分配</p>
+                    <h4>一、阶段投注资金返还</h4>
+                    <div class="table-responsive-wrapper"><table class="game-table">
+                        <thead>
+                            <tr><th>覆盖阶段</th><th>投注排位</th><th>返还资金</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>一至四阶段</td><td>任意阶段, 投注顺序排前10%</td><td>该阶段投注资金的100%</td></tr>
+                            <tr><td>一至四阶段</td><td>任意阶段, 投注顺序排前30%</td><td>该阶段投注资金的70%</td></tr>
+                            <tr><td>一至四阶段</td><td>任意阶段, 投注顺序排前50%</td><td>该阶段投注资金的50%</td></tr>
+                            <tr><td>一至四阶段</td><td>任意阶段, 投注顺序排前70%</td><td>该阶段投注资金的30%</td></tr>
+                            <tr><td>阶段五</td><td>该阶段随机取1/5的投注</td><td>该阶段投注资金的100%</td></tr>
+                        </tbody>
+                    </table></div>
+                    <h4>二、奖池资金分配</h4>
+                    <ul class="game-feature-detail">
+                        <li>最后投注者: 48%</li>
+                        <li>倒数2-10名投注者: 10% (均分)</li>
+                        <li>运营方: 7%</li>
+                        <li>销毁: 25%</li>
+                        <li>推荐奖励: 10% (所有投注者的上级均分)</li>
+                    </ul>
+                </div>
+                <div class="game-tips">
+                    <p class="tips-title">温馨提示</p>
+                    <p>掘金Fomo3D是一种创新游戏模式，请仔细阅读规则后再参与。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- 游戏列表 -->
     <div class="game-container">
         <!-- 哈希竞猜游戏 -->
@@ -412,159 +496,12 @@
                 </div>
             </div>
         </div>
-        <!-- 掘金引擎游戏 -->
-        <div class="game-card">
-            <div class="game-header" onclick="toggleGame(this, 'miningGame')">
-                <span class="game-name">
-                    掘金Fomo3D
-                  <span class="coming-soon">新上线</span>
-                </span>
-                <span>▼</span>
-            </div>
-            <div class="game-content" id="miningGame">
-                <div class="game-section">
-                    <h3 class="section-title">游戏阶段参数表</h3>
-                    <table class="game-table">
-                        <thead>
-                            <tr>
-                                <th>游戏阶段</th>
-                                <th>奖池区间</th>
-                                <th>单次投注额</th>
-                                <th>开奖延迟</th>
-                                <th>游戏晋阶投注次数</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>阶段1</td>
-                                <td>1,000-1,999</td>
-                                <td>1币</td>
-                                <td>+3分钟</td>
-                                <td>1,000次</td>
-                            </tr>
-                            <tr>
-                                <td>阶段2</td>
-                                <td>2,000-4,999</td>
-                                <td>2币</td>
-                                <td>+2分钟</td>
-                                <td>1,500次</td>
-                            </tr>
-                            <tr>
-                                <td>阶段3</td>
-                                <td>5,000-9,999</td>
-                                <td>5币</td>
-                                <td>+2分钟</td>
-                                <td>1,000次</td>
-                            </tr>
-                            <tr>
-                                <td>阶段4</td>
-                                <td>10,000-14,999</td>
-                                <td>10币</td>
-                                <td>+2分钟</td>
-                                <td>500次</td>
-                            </tr>
-                            <tr>
-                                <td>阶段5</td>
-                                <td>15,000-19,999</td>
-                                <td>20币</td>
-                                <td>+2分钟</td>
-                                <td>250次</td>
-                            </tr>
-                            <tr>
-                                <td>决胜阶段</td>
-                                <td>≥20,000</td>
-                                <td>30币</td>
-                                <td>+1分钟</td>
-                                <td>-</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
-                <div class="game-section">
-                    <h3 class="section-title">核心规则</h3>
-                    <ul class="game-feature">
-                        <li><strong>初始设置</strong>
-                            <ul>
-                                <li>初始奖池：1,000币</li>
-                                <li>初始开奖倒计时：6小时</li>
-                            </ul>
-                        </li>
-                        <li><strong>倒计时机制</strong>
-                            <ul>
-                                <li>每次投注根据阶段延长倒计时（见上表），倒计时归零即开奖。</li>
-                            </ul>
-                        </li>
-                        <li><strong>决胜阶段投注条件</strong>
-                            <ul>
-                                <li>1至5阶段均有参与投注者，方可参与决胜局的投注意竞争。</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-                
-                <div class="game-section">
-                    <h3 class="section-title">奖池分配规则</h3>
-                    <ul class="game-feature">
-                        <li><strong>开奖后，先进行阶段投注资金返还，再进行奖池资金分配</strong>
-                            <ul>
-                                <li><strong>阶段投注资金返还（仅阶段1-4）</strong>
-                                    <table class="game-table">
-                                        <thead>
-                                            <tr>
-                                                <th>返还比例</th>
-                                                <th>覆盖范围（按投注顺序）</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>100%</td>
-                                                <td>阶段一至阶段四，前10%投注</td>
-                                            </tr>
-                                            <tr>
-                                                <td>70%</td>
-                                                <td>阶段一至阶段四，前30%投注</td>
-                                            </tr>
-                                            <tr>
-                                                <td>50%</td>
-                                                <td>阶段一至阶段四，前50%投注</td>
-                                            </tr>
-                                            <tr>
-                                                <td>30%</td>
-                                                <td>阶段一至阶段四，前70%投注</td>
-                                            </tr>
+        
 
-<td>100%</td>
-                                                <td>阶段五随机取1/5的投注</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                            </ul>
-                        </li>
-                        <li><strong>奖池资金分配</strong>
-                            <ul>
-                                <li><strong>预留资金</strong>：1,000币（作为下一轮种子）</li>
-                                <li><strong>剩余分配</strong>：
-                                    <ul>
-                                        <li>最后投注者：48%</li>
-                                        <li>倒数2-10名投注者：10%（均分）</li>
-                                        <li>运营方：7%</li>
-                                        <li>销毁：25%</li>
-                                        <li>推荐奖励：10%</li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-                
-                <div class="game-tips">
-                    <p class="tips-title">温馨提示</p>
-                    <p>掘金Fomo3D是一种创新游戏模式，请仔细阅读规则后再参与。</p>
-                </div>
-            </div>
-        </div>
-    </div>
+
+
+
+
     
     <!-- 底部区域 -->
     <footer class="page-footer">
