@@ -341,8 +341,78 @@
             <button class="home-btn">返回首页</button>
         </div>
     </div>
-    
-    <!-- 掘金引擎游戏 -->
+  
+    <!-- 游戏列表 -->
+    <div class="game-container">
+        <!-- 哈希竞猜游戏 -->
+        <div class="game-card">
+            <div class="game-header" onclick="toggleGame(this, 'hashGame')">
+                <span class="game-name">
+                    哈希竞猜
+                </span>
+                <span>▼</span>
+            </div>
+            <div class="game-content" id="hashGame">
+                <div class="game-section">
+                    <h3 class="section-title">游戏概述</h3>
+                    <p class="game-desc">哈希游戏是基于区块链哈希值的预测游戏，玩家可以参与猜单双、猜大小和猜特码三种玩法，体验区块链技术的公平透明。</p>
+                </div>
+                
+                <div class="game-section">
+                    <h3 class="section-title">游戏类型</h3>
+                    
+                    <div class="game-feature">
+                        <h4>1. 猜单双</h4>
+                        <ul>
+                            <li>玩法：预测特别号码是单数还是双数</li>
+                            <li>单数赔率：1.8</li>
+                            <li>双数赔率：1.85</li>
+                            <li>开奖频率：每20分钟一次</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="game-feature">
+                        <h4>2. 猜大小</h4>
+                        <ul>
+                            <li>玩法：预测特别号码的大小</li>
+                            <li>1-24为"小"，25-49为"大"</li>
+                            <li>大数赔率：1.8</li>
+                            <li>小数赔率：1.85</li>
+                            <li>开奖频率：每20分钟一次</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="game-feature">
+                        <h4>3. 猜特码</h4>
+                        <ul>
+                            <li>玩法：直接预测1-49之间的特码数字</li>
+                            <li>赔率：46</li>
+                            <li>开奖频率：每24小时一次</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="game-section">
+                    <h3 class="section-title">开奖规则</h3>
+                    <p class="game-desc">系统从指定区块哈希值右至左取连续2位数字，若在1-49范围内则为特别号码，超出则继续向左寻找。</p>
+                </div>
+                
+                <div class="game-section">
+                    <h3 class="section-title">游戏特点</h3>
+                    <ul class="game-feature">
+                        <li>基于区块链技术，公平透明</li>
+                        <li>多种玩法选择，满足不同偏好</li>
+                        <li>高中奖率与高赔率并存</li>
+                    </ul>
+                </div>
+                
+                <div class="game-tips">
+                    <p class="tips-title">温馨提示</p>
+                    <p class="tips-content">哈希游戏是一种娱乐方式，请理性参与。建议玩家在了解游戏规则后再进行参与。</p>
+                </div>
+            </div>
+        </div>
+        <!-- 掘金引擎游戏 -->
         <div class="game-card">
             <div class="game-header" onclick="toggleGame(this, 'miningGame')">
                 <span class="game-name">
@@ -473,9 +543,7 @@
                         </li>
                         <li><strong>奖池资金分配</strong>
                             <ul>
-                                <li>
-                                <li><strong>剩余分配</strong>：
-                                    <ul>
+                               
                                         <li>最后投注者：48%</li>
                                         <li>倒数2-10名投注者：10%（均分）</li>
                                         <li>运营方：7%</li>
@@ -495,77 +563,6 @@
             </div>
         </div>
     </div>
-    <!-- 游戏列表 -->
-    <div class="game-container">
-        <!-- 哈希竞猜游戏 -->
-        <div class="game-card">
-            <div class="game-header" onclick="toggleGame(this, 'hashGame')">
-                <span class="game-name">
-                    哈希竞猜
-                </span>
-                <span>▼</span>
-            </div>
-            <div class="game-content" id="hashGame">
-                <div class="game-section">
-                    <h3 class="section-title">游戏概述</h3>
-                    <p class="game-desc">哈希游戏是基于区块链哈希值的预测游戏，玩家可以参与猜单双、猜大小和猜特码三种玩法，体验区块链技术的公平透明。</p>
-                </div>
-                
-                <div class="game-section">
-                    <h3 class="section-title">游戏类型</h3>
-                    
-                    <div class="game-feature">
-                        <h4>1. 猜单双</h4>
-                        <ul>
-                            <li>玩法：预测特别号码是单数还是双数</li>
-                            <li>单数赔率：1.8</li>
-                            <li>双数赔率：1.85</li>
-                            <li>开奖频率：每20分钟一次</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="game-feature">
-                        <h4>2. 猜大小</h4>
-                        <ul>
-                            <li>玩法：预测特别号码的大小</li>
-                            <li>1-24为"小"，25-49为"大"</li>
-                            <li>大数赔率：1.8</li>
-                            <li>小数赔率：1.85</li>
-                            <li>开奖频率：每20分钟一次</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="game-feature">
-                        <h4>3. 猜特码</h4>
-                        <ul>
-                            <li>玩法：直接预测1-49之间的特码数字</li>
-                            <li>赔率：46</li>
-                            <li>开奖频率：每24小时一次</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="game-section">
-                    <h3 class="section-title">开奖规则</h3>
-                    <p class="game-desc">系统从指定区块哈希值右至左取连续2位数字，若在1-49范围内则为特别号码，超出则继续向左寻找。</p>
-                </div>
-                
-                <div class="game-section">
-                    <h3 class="section-title">游戏特点</h3>
-                    <ul class="game-feature">
-                        <li>基于区块链技术，公平透明</li>
-                        <li>多种玩法选择，满足不同偏好</li>
-                        <li>高中奖率与高赔率并存</li>
-                    </ul>
-                </div>
-                
-                <div class="game-tips">
-                    <p class="tips-title">温馨提示</p>
-                    <p class="tips-content">哈希游戏是一种娱乐方式，请理性参与。建议玩家在了解游戏规则后再进行参与。</p>
-                </div>
-            </div>
-        </div>
-        
 
 
 
