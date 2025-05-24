@@ -672,8 +672,105 @@
                 width: 95%;
                 padding: 15px 10px;
             }
-        }
-    </style>
+          
+           /* 治理流程图 */
+           .governance-flow {
+    display: flex;
+    gap: 10px;
+    margin: 25px 0;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+            .flow-step {
+    background: rgba(255,255,255,0.1);
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+    flex: 1;
+    min-width: 160px;
+}
+            .step-number {
+    width: 40px;
+    height: 40px;
+    background: var(--accent-color);
+    color: #333;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+.flow-arrow {
+    color: var(--accent-color);
+    align-self: center;
+    margin: 0 -5px;
+}
+/* 节点结构 */
+.node-structure {
+    display: grid;
+    gap: 15px;
+    margin: 20px 0;
+}
+.node-card {
+    padding: 20px;
+    border-radius: 12px;
+}
+.node-card.official {
+    background: rgba(255,76,76,0.1);
+    border-left: 4px solid var(--primary-color);
+}
+.node-card.community {
+    background: rgba(76,175,80,0.1);
+    border-left: 4px solid var(--accent-color);
+}
+.node-type {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: var(--accent-color);
+}
+.count {
+    font-size: 2em;
+    font-family: 'Montserrat';
+    color: var(--accent-color);
+}
+/* 治理规则 */
+.rules-container {
+    display: grid;
+    gap: 15px;
+    margin: 20px 0;
+}
+.rule-box {
+    padding: 15px;
+    border-radius: 8px;
+}
+.rule-box.critical {
+    background: rgba(255,76,76,0.1);
+    border: 1px solid #ff4c4c;
+}
+.rule-box.normal {
+    background: rgba(76,175,80,0.1);
+    border: 1px solid #4CAF50;
+}
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .governance-flow {
+        flex-direction: column;
+    }
+    .flow-arrow {
+        display: none;
+    }
+    .node-structure {
+        grid-template-columns: 1fr;
+    }
+    .rules-container {
+        grid-template-columns: 1fr;
+    }
+    .count {
+        font-size: 1.5em;
+    }
+}
+</style>
 </head>
 <body>
     <div class="container">
@@ -704,6 +801,7 @@
         
         <div class="button-grid">
             <button class="btn" onclick="showSection('intro')">项目介绍</button>
+            <button class="btn" onclick="showSection('governance')">链上治理</button> 
             <button class="btn" onclick="showSection('scrolls')">卷轴收益</button>
             <button class="btn" onclick="showSection('verification')">身份验证</button>
             <button class="btn" onclick="showSection('promotion')">推广奖励</button>
@@ -748,7 +846,87 @@
             <h3>技术基础</h3>
             <p>数字卷轴依托卷界链保障流程的公开性和透明性，所有智能合约均在链上执行，所有记录公开透明，用户可通过区块链浏览器实时查看。</p>
         </div>
-        
+        <!-- 步骤3：新增链上治理模块 -->
+<div id="governance" class="content-section">
+    <h2>链上治理体系</h2>
+    <div class="highlight">45节点共识网络 | 提案机制 | 季度席位竞选</div>
+    <!-- 治理流程图 -->
+    <div class="governance-flow">
+        <div class="flow-step">
+            <div class="step-number">1</div>
+            <h4>提案发起</h4>
+            <p>节点/社区提交优化方案</p>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+            <div class="step-number">2</div>
+            <h4>社区投票</h4>
+            <p>需≥75%节点通过</p>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+            <div class="step-number">3</div>
+            <h4>技术开发</h4>
+            <p>部署智能合约升级</p>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+            <div class="step-number">4</div>
+            <h4>节点升级</h4>
+            <p>72小时内完成更新</p>
+        </div>
+    </div>
+    <!-- 节点体系 -->
+    <h3>节点分布结构</h3>
+    <div class="node-structure">
+        <div class="node-card official">
+            <div class="node-type">官方节点</div>
+            <div class="node-info">
+                <span class="count">5席位</span>
+                <ul>
+                    <li>网络基础运维</li>
+                    <li>紧急事件处置</li>
+                </ul>
+            </div>
+        </div>
+        <div class="node-card community">
+            <div class="node-type">社区节点</div>
+            <div class="node-info">
+                <span class="count">40席位</span>
+                <ul>
+                    <li>季度推广前40名</li>
+                    <li>提案与表决权限</li>
+                </ul>
+            </div>
+          </div>
+    </div>
+
+    <!-- 治理规则 -->
+
+    <h3>治理规则说明</h3>
+    <div class="rules-container">
+        <div class="rule-box critical">
+            <h4>核心治理领域</h4>
+            <ul>
+                <li>卷轴产出规则调整</li>
+                <li>智能合约升级</li>
+                <li>链上资产分配</li>
+            </ul>
+        </div>
+        <div class="rule-box normal">
+            <h4>技术自治领域</h4>
+            <ul>
+                <li>前端界面更新</li>
+                <li>游戏参数调整</li>
+                <li>运维策略优化</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
         <div id="scrolls" class="content-section">
             <h2>卷轴收益详情</h2>
             <p>卷轴每小时产出收益，超过48小时未领取收益，卷轴会停产。领取收益后，卷轴自动恢复生产。</p>
@@ -901,15 +1079,6 @@
             <h3>学习资源</h3>
             <p>在"我的-常见问题"中可了解更多相关内容。<br>
             在"首页-卷轴学院"观看视频全面了解项目运作。</p>
-        </div>
-        
-        <div id="contact" class="content-section">
-            <h2>技术支持</h2>
-            <p>如有任何问题，请通过以下方式联系我们：</p>
-            
-            <h3>官方网址</h3>
-            <p><a href="https://prod.digital-scroll.org" style="color: var(--accent-color); text-decoration: underline;" class="external-link">https://prod.digital-scroll.org</a></p>
-            
             <h3>重要地址</h3>
             <ul>
                  <li>DSC总池: SNqQZJwyMuqkHevrBlSZwYXllJ65Lq5nF8</li>
