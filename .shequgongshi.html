@@ -1,1 +1,790 @@
-2
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数字卷轴DSC社区共识</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a202c, #2d3748);
+            color: #fff;
+            min-height: 100vh;
+            padding: 10px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+        
+        /* 顶部导航栏 */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo {
+            height: 50px;
+            width: 50px;
+            background: linear-gradient(135deg, #3498db, #1e40af);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(to right, #3498db, #1e40af);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-tools {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .home-link {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            padding: 8px 16px;
+            background: rgba(52, 152, 219, 0.2);
+            border-radius: 20px;
+            transition: all 0.3s;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+        }
+        
+        .home-link:hover {
+            background: rgba(52, 152, 219, 0.3);
+        }
+        
+        .search-box {
+            display: flex;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 8px 15px;
+            width: 200px;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .search-box input {
+            background: transparent;
+            border: none;
+            color: #fff;
+            padding: 4px;
+            width: 100%;
+            outline: none;
+            font-size: 13px;
+        }
+        
+        .search-box input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .search-icon {
+            margin-right: 8px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* 标题区域 */
+        .header-content {
+            text-align: center;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+            margin: 5px 0;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            font-weight: 700;
+            color: #3498db;
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            color: #a0aec0;
+        }
+        
+        /* 共识表格 */
+        .consensus-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            overflow: hidden;
+            font-size: 12px;
+        }
+        
+        .consensus-table th, 
+        .consensus-table td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .consensus-table th {
+            background: rgba(26, 32, 44, 0.7);
+            font-weight: bold;
+            color: #3498db;
+            font-size: 12px;
+            position: sticky;
+            top: 0;
+            cursor: pointer;
+        }
+        
+        .consensus-table th:hover {
+            background: rgba(26, 32, 44, 0.9);
+        }
+        
+        .consensus-table tr:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .consensus-table .highlight {
+            font-weight: bold;
+            color: #48bb78;
+        }
+        
+        .address-cell {
+            max-width: 120px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+        }
+        
+        .copy-icon {
+            margin-left: 5px;
+            cursor: pointer;
+            color: #3498db;
+            font-size: 12px;
+            transition: all 0.3s;
+        }
+        
+        .copy-icon:hover {
+            color: #48bb78;
+            transform: scale(1.1);
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 15px;
+            gap: 5px;
+        }
+        
+        .page-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s;
+        }
+        
+        .page-btn.active {
+            background: #3498db;
+            font-weight: bold;
+        }
+        
+        .page-btn:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .stats-bar {
+            display: flex;
+            justify-content: space-between;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-size: 12px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .stat-value {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #48bb78;
+        }
+        
+        .stat-label {
+            color: #a0aec0;
+            font-size: 0.85rem;
+        }
+        
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 140px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -75px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 12px;
+        }
+        
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: rgba(0, 0, 0, 0.8) transparent transparent transparent;
+        }
+        
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        .table-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .sort-controls {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .sort-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .sort-btn.active {
+            background: #3498db;
+        }
+        
+        .sort-btn:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .results-info {
+            color: #a0aec0;
+            font-size: 12px;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            background: rgba(26, 32, 44, 0.9);
+            border-left: 4px solid #48bb78;
+            border-radius: 4px;
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transform: translateX(120%);
+            transition: transform 0.3s ease-in-out;
+            z-index: 1000;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            .top-nav {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .logo-container {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .logo-text {
+                font-size: 1.5rem;
+            }
+            
+            .nav-tools {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .search-box {
+                margin-top: 0;
+                width: 100%;
+            }
+            
+            .consensus-table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            h1 {
+                font-size: 1.6rem;
+            }
+            
+            .stats-bar {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .consensus-table th, 
+            .consensus-table td {
+                padding: 8px 10px;
+                font-size: 11px;
+            }
+            
+            .address-cell {
+                max-width: 100px;
+            }
+            
+            .table-controls {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 顶部导航栏 -->
+        <div class="top-nav">
+            <div class="logo-container">
+                <div class="logo">DSC</div>
+                <div class="logo-text">数字卷轴</div>
+            </div>
+            <div class="nav-tools">
+                <a href="index.html" class="home-link">首页</a>
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="searchInput" placeholder="搜索共识信息...">
+                </div>
+            </div>
+        </div>
+        
+        <!-- 标题区域 -->
+        <div class="header-content">
+            <h1>数字卷轴DSC社区共识</h1>
+            <p class="subtitle">共识日期：2023年6月3日</p>
+        </div>
+        
+        <!-- 统计信息栏 -->
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-value">72</div>
+                <div class="stat-label">共识成员</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">1,245,380</div>
+                <div class="stat-label">DSC总质押</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">38,726.54</div>
+                <div class="stat-label">SCC总质押</div>
+            </div>
+        </div>
+        
+        <!-- 表格控制区域 -->
+        <div class="table-controls">
+            <div class="sort-controls">
+                <button class="sort-btn" id="sortByStake">
+                    <i class="fas fa-sort-amount-down-alt"></i> 按质押排序
+                </button>
+                <button class="sort-btn" id="sortByName">
+                    <i class="fas fa-sort-alpha-down"></i> 按名称排序
+                </button>
+            </div>
+            <div class="results-info" id="resultsInfo">
+                显示 1-10 条，共 50 条记录
+            </div>
+        </div>
+        
+        <!-- 共识表格 -->
+        <table class="consensus-table" id="consensusTable">
+            <thead>
+                <tr>
+                    <th data-sort="id">序号 <i class="fas fa-sort"></i></th>
+                    <th data-sort="wechatName">共识微信群昵称 <i class="fas fa-sort"></i></th>
+                    <th data-sort="dscName">DSC昵称 <i class="fas fa-sort"></i></th>
+                    <th data-sort="address">卷界地址 <i class="fas fa-sort"></i></th>
+                    <th data-sort="dscStaked">DSC质押 <i class="fas fa-sort"></i></th>
+                    <th data-sort="dscAvailable">DSC可用 <i class="fas fa-sort"></i></th>
+                    <th data-sort="sccAvailable">SCC可用 <i class="fas fa-sort"></i></th>
+                    <th data-sort="usdsBalance">USDS余额 <i class="fas fa-sort"></i></th>
+                    <th data-sort="sccStaked">SCC质押 <i class="fas fa-sort"></i></th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 数据将通过JavaScript填充 -->
+            </tbody>
+        </table>
+        
+        <!-- 分页控件 -->
+        <div class="pagination" id="pagination">
+            <!-- 分页按钮将通过JavaScript生成 -->
+        </div>
+    </div>
+
+    <!-- 通知弹窗 -->
+    <div class="notification" id="notification">
+        地址已复制到剪贴板
+    </div>
+
+    <script>
+        // 模拟数据 - 实际应用中应从服务器获取
+        const consensusData = [
+            { id: 1, wechatName: "行云流水", dscName: "行云流水", address: "SiDvPqx3zXcIwqVOXgK4ffgIkcU02va5nN", dscStaked: 72100, dscAvailable: 14436.56854, sccAvailable: 2906.246324, usdsBalance: 19.681434, sccStaked: 0 },
+            { id: 2, wechatName: "大海", dscName: "无语伦比", address: "SjSVgZnbFH5JjqhEAj14gIqi0d2K0gp0KT", dscStaked: 48870, dscAvailable: 6788.147687, sccAvailable: 454.448618, usdsBalance: 11.77819, sccStaked: 0 },
+            { id: 3, wechatName: "丽丽", dscName: "恭喜发财", address: "SWog3ML7kfsYIVVbdNSFToAS9LxcPaY7wd", dscStaked: 31180, dscAvailable: 137.637723, sccAvailable: 2276.811497, usdsBalance: 9.545586, sccStaked: 0 },
+            { id: 4, wechatName: "奔跑的小蜗牛", dscName: "扬帆起航", address: "SyICADDDG5vCv8sLZoHuXbRpAbF1XwUv5W", dscStaked: 32400, dscAvailable: 526.734448, sccAvailable: 2501.118983, usdsBalance: 0.744792, sccStaked: 0 },
+            { id: 5, wechatName: "轻度", dscName: "随心所欲", address: "SuzwaXLWVKJyhoChainxV294rh0odWiQtE", dscStaked: 32000, dscAvailable: 1595.824882, sccAvailable: 752.395527, usdsBalance: 150.247271, sccStaked: 0 },
+            { id: 6, wechatName: "张青安", dscName: "DSC", address: "ShCQFbo4xm1k40Ih7g4byWAEpgoBYvYkhz", dscStaked: 30010, dscAvailable: 1.550416, sccAvailable: 3139.321006, usdsBalance: 1.210904, sccStaked: 0 },
+            { id: 7, wechatName: "心想事成-1", dscName: "搬砖猫", address: "SAeWZ9qhvky6Iv9SsZRWZMUg9q2CZGuqYL", dscStaked: 25100, dscAvailable: 17.432499, sccAvailable: 766.60701, usdsBalance: 0.002388, sccStaked: 0 },
+            { id: 8, wechatName: "惠亿佳建材", dscName: "惠亿佳", address: "SRgu7AMTBSXHncZ3ZQe9J7L5d8qH1fXBRf", dscStaked: 27100, dscAvailable: 2005.394084, sccAvailable: 1494.02685, usdsBalance: 0.631151, sccStaked: 0 },
+            { id: 9, wechatName: "徐总", dscName: "百炼", address: "SKjqgj59BUQ8eKgZGvmXmvbW8GSZFczxdF", dscStaked: 24000, dscAvailable: 51.609003, sccAvailable: 158.396676, usdsBalance: 4.915081, sccStaked: 0 },
+            { id: 10, wechatName: "华洋商行林迎民", dscName: "131419", address: "SXC2q0kcn2Tku9M4yXMoPVouMPc4EbxzpO", dscStaked: 13990, dscAvailable: 29.585365, sccAvailable: 992.626114, usdsBalance: 0.652435, sccStaked: 0 },
+            { id: 11, wechatName: "杨杨得亿", dscName: "杨杨得亿", address: "SCzd35daZ1Ljohhu5ZndOMYi6tIUonmJ3b", dscStaked: 13110, dscAvailable: 610.750238, sccAvailable: 107.681343, usdsBalance: 0.154508, sccStaked: 0 },
+            { id: 12, wechatName: "张JP", dscName: "DSC", address: "SuZ7g38uw9FNE3mGHI9ii0r4uB8ZXqi6ze", dscStaked: 11100, dscAvailable: 337.963151, sccAvailable: 990.305489, usdsBalance: 0.315493, sccStaked: 0 },
+            { id: 13, wechatName: "DSC小礼(李俊杰)", dscName: "俊杰", address: "Szqa9GZZzcxnkV0MYLTf1Z1WWHOWih9TqH", dscStaked: 11060, dscAvailable: 310.905755, sccAvailable: 3.526697, usdsBalance: 34.385402, sccStaked: 0 },
+            { id: 14, wechatName: "寒夜", dscName: "扬帆起航", address: "SbGdtXBzR4o8AY25uQZuH3G0raYnv00ZmX", dscStaked: 15320, dscAvailable: 55.452792, sccAvailable: 113.648829, usdsBalance: 41.669146, sccStaked: 0 },
+            { id: 15, wechatName: "韩雪-2", dscName: "璀璨雪", address: "Sy5VgXg7s0Bwdbn8X92rYYcwA0pitJJ5PF", dscStaked: 12660, dscAvailable: 745.123807, sccAvailable: 313.218267, usdsBalance: 0.092991, sccStaked: 0 },
+            { id: 16, wechatName: "攒钱小猪", dscName: "半夏微凉", address: "SsJLG4HSNZIFw4ia1mDaVEcjDI5vwOqvpM", dscStaked: 12100, dscAvailable: 659.649667, sccAvailable: 204.150674, usdsBalance: 1.28, sccStaked: 0 },
+            { id: 17, wechatName: "飞跃", dscName: "耀眼", address: "SbdpoIcUR4qECuHYyFIPWKevRqYkbZrzWP", dscStaked: 21400, dscAvailable: 195.467477, sccAvailable: 155.721826, usdsBalance: 206.64, sccStaked: 0 },
+            { id: 18, wechatName: "黄纲禹", dscName: "合理就好", address: "SFttEHTAhE6k65dadsGe1yo8quBJmdwa6S", dscStaked: 20200, dscAvailable: 126.272668, sccAvailable: 150.887889, usdsBalance: 0.277278, sccStaked: 0 },
+            { id: 19, wechatName: "国国", dscName: "超越二饼", address: "SCTfAeZOdRtVHsQ5SiuAtQyTHQAwXZuPGn", dscStaked: 21060, dscAvailable: 6.389715, sccAvailable: 476.377654, usdsBalance: 0.05, sccStaked: 0 },
+            { id: 20, wechatName: "宋彦达", dscName: "阿喆", address: "Sbty9Kki99CQReY4TmJTNS2duOvaGT4wEu", dscStaked: 6000, dscAvailable: 1225.733583, sccAvailable: 163.185854, usdsBalance: 46.871576, sccStaked: 0 },
+            { id: 21, wechatName: "耶民", dscName: "福禄平安", address: "SBqafxaI3XrzkcOxf8pjMr1QjShS4kN72S", dscStaked: 9100, dscAvailable: 3040.956286, sccAvailable: 1247.05733, usdsBalance: 120.828723, sccStaked: 0 },
+            { id: 22, wechatName: "阿贤", dscName: "阿贤", address: "SpD8HIWc3FCjV65Ez6QLxFw13GW4I7VqXB", dscStaked: 9100, dscAvailable: 1140.073373, sccAvailable: 1174.379916, usdsBalance: 0.72, sccStaked: 0 },
+            { id: 23, wechatName: "刘晓君", dscName: "金喜善", address: "SK29ePauuURrtlfCTHyzfksCbcMMnu5yRR", dscStaked: 9260, dscAvailable: 311.221277, sccAvailable: 18.35843, usdsBalance: 0.641532, sccStaked: 0 },
+            { id: 24, wechatName: "韩雪-1", dscName: "明明", address: "ShFYcDzExSCj3cYK82LE5D1DuHgz2NPm9m", dscStaked: 6100, dscAvailable: 18.42375, sccAvailable: 172.557555, usdsBalance: 0.7, sccStaked: 0 },
+            { id: 25, wechatName: "香钦怀-1", dscName: "美好日子", address: "SdYDgZEf0x0oEmcxO7WA25VxaPdXH01SNE", dscStaked: 4220, dscAvailable: 344.375998, sccAvailable: 17.973349, usdsBalance: 1.695675, sccStaked: 0 },
+            { id: 26, wechatName: "香钦怀-2", dscName: "IPC8866", address: "SjzsSdC4eNjK4Bw2gd4bLaoMVrCrcNvv01", dscStaked: 3700, dscAvailable: 253.791761, sccAvailable: 27.19963, usdsBalance: 0.182346, sccStaked: 0 },
+            { id: 27, wechatName: "野火", dscName: "晚风", address: "SQZIqm4dHvRORSDSwDO9xZg13rTS66NSIJ", dscStaked: 2100, dscAvailable: 1163.05684, sccAvailable: 1.726722, usdsBalance: 0.006871, sccStaked: 0 },
+            { id: 28, wechatName: "彼岸半夏", dscName: "诗和远方", address: "SZMRBvLJdXWJ6yfDGP5bBOE5C14z1ZCchE", dscStaked: 2410, dscAvailable: 2.27825, sccAvailable: 219.293045, usdsBalance: 0.165197, sccStaked: 0 },
+            { id: 29, wechatName: "坦坦荡荡", dscName: "小五", address: "ShS8P9V0n3hdM1yzqZ1MPa2TkrRURVFXGK", dscStaked: 4100, dscAvailable: 1955.590549, sccAvailable: 26.532371, usdsBalance: 5.750096, sccStaked: 0 },
+            { id: 30, wechatName: "A.0凤辉", dscName: "辉", address: "SH1KVPYBtWRsC1luu6vZIt6ZGWnJJMbCLh", dscStaked: 2100, dscAvailable: 2.860711, sccAvailable: 504.922774, usdsBalance: 0.292718, sccStaked: 0 },
+            { id: 31, wechatName: "竹笛爱好者-1", dscName: "竹笛飘音", address: "SvMOhN1b2Btw3oZhgDqViLZgksxR5Pr8aj", dscStaked: 1970, dscAvailable: 1.301767, sccAvailable: 7.650572, usdsBalance: 0.046948, sccStaked: 0 },
+            { id: 32, wechatName: "竹笛爱好者-2", dscName: "CiKZ-果果", address: "SWqsRnDlfwdz1H91DCDToTolaQ9S44Nbqr", dscStaked: 900, dscAvailable: 13.22, sccAvailable: 61.771362, usdsBalance: 2.9, sccStaked: 0 },
+            { id: 33, wechatName: "李吉清", dscName: "DSC小玩家", address: "ShEFUaNUrvC9fPWlmlH5IbiLY25kTAyFyc", dscStaked: 2470, dscAvailable: 139.035987, sccAvailable: 1118.342206, usdsBalance: 8.31, sccStaked: 0 },
+            { id: 34, wechatName: "左右逢源", dscName: "持之以恒", address: "SROAdci6tkI4ec9Mpuf6Fhv1NxdDH6L441", dscStaked: 5390, dscAvailable: 369.721114, sccAvailable: 269.824216, usdsBalance: 29.73, sccStaked: 0 },
+            { id: 35, wechatName: "诚信商家-1", dscName: "二罗", address: "SZRtulCq2lxbs3pZsejvRuZY0xvmb3GNaR", dscStaked: 2470, dscAvailable: 1.287261, sccAvailable: 10.067571, usdsBalance: 0.28, sccStaked: 0 },
+            { id: 36, wechatName: "诚信商家-2", dscName: "诚信玩家", address: "SQisZSAMVjIFUIm1KkdjZ1tn9M705wEzYk", dscStaked: 2990, dscAvailable: 3.532199, sccAvailable: 0.034745, usdsBalance: 0.151523, sccStaked: 0 },
+            { id: 37, wechatName: "诚信商家-3", dscName: "金色太阳", address: "SupcwEnYaNGitcReY7bnmxArugueNcfkAV", dscStaked: 2440, dscAvailable: 3.075126, sccAvailable: 27.941647, usdsBalance: 0, sccStaked: 0 },
+            { id: 38, wechatName: "本性(张人中)", dscName: "本性", address: "Sseg2IT8eSsRivUaXfEdtnhdXMW1gmq5Pb", dscStaked: 4010, dscAvailable: 0.008314, sccAvailable: 159.545471, usdsBalance: 0.072929, sccStaked: 0 },
+            { id: 39, wechatName: "林东方", dscName: "东方", address: "StnX4cJGU268ys941j4KKwzohsOQGVF5Q5", dscStaked: 6340, dscAvailable: 202.917381, sccAvailable: 100.304492, usdsBalance: 71.292072, sccStaked: 0 },
+            { id: 40, wechatName: "平淡", dscName: "平淡", address: "SyPEpeMI9c5Y1QWfWghpLOI1LOQQE0DkHY", dscStaked: 9110, dscAvailable: 40.037857, sccAvailable: 460.532474, usdsBalance: 100.163109, sccStaked: 0 },
+            { id: 41, wechatName: "1", dscName: "趁草", address: "SF34S0NS4mEq9NXjZTiUsUfY307W8Y1KJt", dscStaked: 1000, dscAvailable: 63.816785, sccAvailable: 0.817647, usdsBalance: 0.274774, sccStaked: 0 },
+            { id: 42, wechatName: "A1幕墙铝单板", dscName: "DSC马上飞翔", address: "SSsvkfoyNYmBYuGsdojgeR0v1xFnMLoiVD", dscStaked: 2890, dscAvailable: 612.244264, sccAvailable: 69.591032, usdsBalance: 0.08764, sccStaked: 0 },
+            { id: 43, wechatName: "以琳", dscName: "唯美意境", address: "STrjYC7c1Fo2qwxhaGxG8OJKWyRDtKhQqh", dscStaked: 3100, dscAvailable: 206.9025, sccAvailable: 47.094493, usdsBalance: 0, sccStaked: 0 },
+            { id: 44, wechatName: "吕吕", dscName: "吕吕", address: "SSlgogDGFd1IqX5Xu6tAAt3P9FUyR9WMkQ", dscStaked: 1770, dscAvailable: 21.896114, sccAvailable: 60.864208, usdsBalance: 6.529675, sccStaked: 0 },
+            { id: 45, wechatName: "彩虹依然", dscName: "彩虹依然", address: "Sdc1wIewadk5JL0B3k0QIMueaesBeESBZm", dscStaked: 7010, dscAvailable: 0.157069, sccAvailable: 3.55275, usdsBalance: 0, sccStaked: 0 },
+            { id: 46, wechatName: "点亮幸福", dscName: "点亮幸福", address: "SGX9LzJqOH6kTDaKocxy78RQdVbh6uZilf", dscStaked: 5100, dscAvailable: 49.560776, sccAvailable: 44.136464, usdsBalance: 0, sccStaked: 0 },
+            { id: 47, wechatName: "宋小群", dscName: "七八九", address: "Sgms2EkrE9fby9tnPfVoWwdNVR6ZIF1CXb", dscStaked: 2100, dscAvailable: 10.7325, sccAvailable: 141.5424, usdsBalance: 0, sccStaked: 0 },
+            { id: 48, wechatName: "R", dscName: "嗯", address: "SMqCWySwooIRXunyHrPMusgq40ReFgtDGI", dscStaked: 1500, dscAvailable: 83.966987, sccAvailable: 127.472141, usdsBalance: 0.006916, sccStaked: 0 },
+            { id: 49, wechatName: "心想事成-2", dscName: "七仔", address: "SB3Z6BgS91hrwNBSfXxX2jAsOGrkT5E5UN", dscStaked: 1100, dscAvailable: 0, sccAvailable: 164.317122, usdsBalance: 0, sccStaked: 0 },
+            { id: 50, wechatName: "老狗", dscName: "小可爱", address: "SNQ1pwxzsItFzu30cdCeDOq86Bfc7uUopd", dscStaked: 2100, dscAvailable: 220.285409, sccAvailable: 5.097084, usdsBalance: 0.005135, sccStaked: 0 },
+        ];
+
+        // 页面变量
+        const itemsPerPage = 10;
+        let currentPage = 1;
+        let currentSort = { key: 'dscStaked', direction: 'desc' };
+        let filteredData = [...consensusData];
+        
+        // 初始化页面
+        document.addEventListener('DOMContentLoaded', () => {
+            // 初始渲染
+            renderTable(filteredData);
+            
+            // 搜索功能
+            document.getElementById('searchInput').addEventListener('input', handleSearch);
+            
+            // 排序按钮
+            document.getElementById('sortByStake').addEventListener('click', () => {
+                sortData('dscStaked', 'desc');
+            });
+            
+            document.getElementById('sortByName').addEventListener('click', () => {
+                sortData('dscName', 'asc');
+            });
+            
+            // 表头排序
+            const tableHeaders = document.querySelectorAll('.consensus-table th[data-sort]');
+            tableHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const sortKey = header.getAttribute('data-sort');
+                    sortData(sortKey, currentSort.key === sortKey && currentSort.direction === 'asc' ? 'desc' : 'asc');
+                });
+            });
+        });
+        
+        // 处理搜索
+        function handleSearch(e) {
+            const searchTerm = e.target.value.toLowerCase().trim();
+            
+            if (searchTerm === '') {
+                filteredData = [...consensusData];
+            } else {
+                filteredData = consensusData.filter(item => 
+                    item.wechatName.toLowerCase().includes(searchTerm) || 
+                    item.dscName.toLowerCase().includes(searchTerm) || 
+                    item.address.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            currentPage = 1;
+            renderTable(filteredData);
+        }
+        
+        // 排序数据
+        function sortData(key, direction) {
+            currentSort = { key, direction };
+            
+            filteredData.sort((a, b) => {
+                let valueA = a[key];
+                let valueB = b[key];
+                
+                if (typeof valueA === 'string') {
+                    valueA = valueA.toLowerCase();
+                    valueB = valueB.toLowerCase();
+                }
+                
+                if (valueA < valueB) {
+                    return direction === 'asc' ? -1 : 1;
+                }
+                if (valueA > valueB) {
+                    return direction === 'asc' ? 1 : -1;
+                }
+                return 0;
+            });
+            
+            renderTable(filteredData);
+        }
+        
+        // 渲染表格数据
+        function renderTable(data, page = currentPage) {
+            const tbody = document.querySelector('#consensusTable tbody');
+            tbody.innerHTML = '';
+            
+            const start = (page - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const paginatedData = data.slice(start, end);
+            
+            paginatedData.forEach(item => {
+                const row = document.createElement('tr');
+                
+                row.innerHTML = `
+                    <td>${item.id}</td>
+                    <td>${item.wechatName}</td>
+                    <td>${item.dscName}</td>
+                    <td class="address-cell">
+                        <span class="tooltip">
+                            ${item.address.substring(0, 12)}...
+                            <span class="tooltiptext">${item.address}</span>
+                        </span>
+                        <span class="copy-icon" onclick="copyToClipboard('${item.address}')">📋</span>
+                    </td>
+                    <td>${item.dscStaked.toLocaleString()}</td>
+                    <td>${item.dscAvailable.toFixed(6)}</td>
+                    <td>${item.sccAvailable.toFixed(6)}</td>
+                    <td>${item.usdsBalance.toFixed(6)}</td>
+                    <td>${item.sccStaked}</td>
+                `;
+                
+                tbody.appendChild(row);
+            });
+            
+            // 更新结果信息
+            const totalItems = data.length;
+            const startItem = Math.min(totalItems, start + 1);
+            const endItem = Math.min(totalItems, end);
+            document.getElementById('resultsInfo').textContent = `显示 ${startItem}-${endItem} 条，共 ${totalItems} 条记录`;
+            
+            renderPagination(totalItems);
+        }
+        
+        // 渲染分页控件
+        function renderPagination(totalItems) {
+            const totalPages = Math.ceil(totalItems / itemsPerPage);
+            const paginationEl = document.getElementById('pagination');
+            paginationEl.innerHTML = '';
+            
+            if (totalPages <= 1) return;
+            
+            // 上一页按钮
+            if (currentPage > 1) {
+                const prevBtn = document.createElement('button');
+                prevBtn.className = 'page-btn';
+                prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i> 上一页';
+                prevBtn.addEventListener('click', () => {
+                    currentPage--;
+                    renderTable(filteredData);
+                });
+                paginationEl.appendChild(prevBtn);
+            }
+            
+            // 页码按钮
+            const startPage = Math.max(1, currentPage - 2);
+            const endPage = Math.min(totalPages, currentPage + 2);
+            
+            // 第一页
+            if (startPage > 1) {
+                const firstBtn = document.createElement('button');
+                firstBtn.className = 'page-btn';
+                firstBtn.textContent = '1';
+                firstBtn.addEventListener('click', () => {
+                    currentPage = 1;
+                    renderTable(filteredData);
+                });
+                paginationEl.appendChild(firstBtn);
+                
+                if (startPage > 2) {
+                    const ellipsis = document.createElement('span');
+                    ellipsis.textContent = '...';
+                    ellipsis.style.padding = '0 10px';
+                    paginationEl.appendChild(ellipsis);
+                }
+            }
+            
+            for (let i = startPage; i <= endPage; i++) {
+                const pageBtn = document.createElement('button');
+                pageBtn.className = 'page-btn';
+                if (i === currentPage) {
+                    pageBtn.classList.add('active');
+                }
+                pageBtn.textContent = i;
+                pageBtn.addEventListener('click', () => {
+                    currentPage = i;
+                    renderTable(filteredData);
+                });
+                paginationEl.appendChild(pageBtn);
+            }
+            
+            // 最后一页
+            if (endPage < totalPages) {
+                if (endPage < totalPages - 1) {
+                    const ellipsis = document.createElement('span');
+                    ellipsis.textContent = '...';
+                    ellipsis.style.padding = '0 10px';
+                    paginationEl.appendChild(ellipsis);
+                }
+                
+                const lastBtn = document.createElement('button');
+                lastBtn.className = 'page-btn';
+                lastBtn.textContent = totalPages;
+                lastBtn.addEventListener('click', () => {
+                    currentPage = totalPages;
+                    renderTable(filteredData);
+                });
+                paginationEl.appendChild(lastBtn);
+            }
+            
+            // 下一页按钮
+            if (currentPage < totalPages) {
+                const nextBtn = document.createElement('button');
+                nextBtn.className = 'page-btn';
+                nextBtn.innerHTML = '下一页 <i class="fas fa-chevron-right"></i>';
+                nextBtn.addEventListener('click', () => {
+                    currentPage++;
+                    renderTable(filteredData);
+                });
+                paginationEl.appendChild(nextBtn);
+            }
+        }
+        
+        // 复制地址到剪贴板
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showNotification('地址已复制到剪贴板');
+            }).catch(err => {
+                showNotification('复制失败，请手动复制');
+                console.error('复制失败:', err);
+            });
+        }
+        
+        // 显示通知
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
