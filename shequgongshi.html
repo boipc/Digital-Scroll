@@ -29,49 +29,30 @@
             padding: 10px;
         }
         
-        /* 顶部导航栏 */
+                /* 顶部导航栏 */
         .top-nav {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
+            gap: 15px;
             padding: 15px 0;
             margin-bottom: 15px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
+
         .logo-title-container {
             display: flex;
             align-items: center;
             gap: 15px;
         }
-        
-        .logo {
-            height: 60px;
-            width: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            background: #1e40af;
-            overflow: hidden;
-        }
-        
-        .logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
+
         .title-container {
             display: flex;
             flex-direction: column;
         }
-        
+
         .main-title {
-            font-size: 1.5rem; /* 缩小字号 */
+            font-size: 2.2rem; /* 增大主标题字号 */
             font-weight: bold;
             background: linear-gradient(to right, #ff9d00, #ff5e00); /* 橙色渐变 */
             -webkit-background-clip: text;
@@ -79,146 +60,27 @@
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
             line-height: 1.2;
         }
-        
+
         .subtitle {
-            font-size: 0.9rem; /* 缩小字号 */
+            font-size: 1.1rem;
             color: #a0aec0;
+            text-align: center; /* 居中 */
             margin-top: 5px;
         }
-        
-        /* 导航工具区域 */
-        .nav-tools {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 15px;
-        }
-        
-        .tools-row {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .home-link {
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 12px; /* 缩小字号 */
-            padding: 6px 12px; /* 缩小20% */
-            background: rgba(52, 152, 219, 0.2);
-            border-radius: 20px;
-            transition: all 0.3s;
-            border: 1px solid rgba(52, 152, 219, 0.3);
-            white-space: nowrap;
-        }
-        
-        .home-link:hover {
-            background: rgba(52, 152, 219, 0.3);
-        }
-        
-        .search-box {
-            display: flex;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 20px;
-            padding: 5px 10px; /* 缩小20% */
-            width: 180px; /* 缩小20% */
-            align-items: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .search-box input {
-            background: transparent;
-            border: none;
-            color: #fff;
-            padding: 4px;
-            width: 100%;
-            outline: none;
-            font-size: 12px; /* 缩小字号 */
-        }
-        
-        .search-box input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
-        
-        .search-icon {
-            margin-right: 8px;
-            font-size: 12px; /* 缩小字号 */
-            color: rgba(255, 255, 255, 0.7);
-        }
-        
-        /* 标题区域 */
-        .header-content {
+
+        /* 共识语样式 */
+        .consensus-statement {
+            font-size: 1rem; /* 调小字号 */
+            line-height: 1.7;
             text-align: center;
-            margin-bottom: 15px;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .header-title {
-            font-size: 1.5rem; /* 缩小字号 */
-            margin: 5px 0;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-            font-weight: 700;
-            color: #3498db;
-        }
-        
-        .header-subtitle {
-            font-size: 0.9rem; /* 缩小字号 */
-            margin-bottom: 10px;
-            color: #a0aec0;
-            text-align: center; /* 居中显示 */
-        }
-        
-        /* 共识表格 */
-        .consensus-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 10px 0;
-            background: rgba(255, 255, 255, 0.05);
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.15);
             border-radius: 8px;
-            overflow: hidden;
-            font-size: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1); /* 添加表格边框 */
+            color: #a0aec0; /* 与副标题颜色一致 */
         }
-        
-        .consensus-table th, 
-        .consensus-table td {
-            padding: 8px 10px; /* 减小高度 */
-            text-align: left;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* 更明显的边框线 */
-            border-right: 1px solid rgba(255, 255, 255, 0.1); /* 添加单元格边框 */
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        
-        .consensus-table th {
-            background: rgba(26, 32, 44, 0.7);
-            font-weight: bold;
-            color: #3498db;
-            font-size: 12px;
-            position: sticky;
-            top: 0;
-            cursor: pointer;
-        }
-        
-        .consensus-table th:hover {
-            background: rgba(26, 32, 44, 0.9);
-        }
-        
-        .consensus-table tr:hover {
-            background: rgba(255, 255, 255, 0.08);
-        }
-        
-        .consensus-table .highlight {
-            font-weight: bold;
-            color: #48bb78;
-        }
-        
+
+        /* 地址单元格 */
         .address-cell {
             max-width: 150px;
             overflow: hidden;
@@ -229,219 +91,44 @@
             outline: none !important; /* 移除黑框 */
             user-select: none; /* 防止选中 */
         }
-        
-        .pagination {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 15px;
-            gap: 5px;
-        }
-        
-        .page-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            color: #fff;
-            padding: 6px 12px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 12px;
-            transition: all 0.3s;
-        }
-        
-        .page-btn.active {
-            background: #3498db;
-            font-weight: bold;
-        }
-        
-        .page-btn:hover:not(.active) {
-            background: rgba(255, 255, 255, 0.2);
-        }
-        
-        .stats-bar {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin: 15px 0;
-        }
-        
-        .stat-row {
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
-        }
-        
-        .stat-item {
-            flex: 1;
-            background: rgba(0, 0, 0, 0.2);
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-        }
-        
-        .stat-value {
-            font-weight: bold;
-            font-size: 1.4rem;
-            color: #48bb78;
-            margin-bottom: 5px;
-        }
-        
-        .stat-label {
-            color: #a0aec0;
-            font-size: 0.9rem;
-        }
-        
-        .consensus-statement {
-            font-size: 1rem; /* 缩小字号 */
-            line-height: 1.7;
-            text-align: center;
-            margin: 20px 0;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.15);
-            border-radius: 8px;
-            /* 移除斜体 */
-        }
-        
-        .tooltip {
-            position: relative;
-            display: inline-block;
-        }
-        
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 140px;
-            background-color: rgba(0, 0, 0, 0.8);
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 5px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -75px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            font-size: 12px;
-        }
-        
-        .tooltip .tooltiptext::after {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -5px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: rgba(0, 0, 0, 0.8) transparent transparent transparent;
-        }
-        
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
-        }
-        
-        .table-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        .results-info {
-            color: #a0aec0;
-            font-size: 12px;
-        }
-        
+
+        /* 通知弹窗居中 */
         .notification {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) translateX(120%);
             padding: 15px 25px;
             background: rgba(26, 32, 44, 0.9);
             border-left: 4px solid #48bb78;
             border-radius: 4px;
             color: #fff;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transform: translateX(120%);
             transition: transform 0.3s ease-in-out;
             z-index: 1000;
         }
-        
+
         .notification.show {
-            transform: translateX(0);
+            transform: translate(-50%, -50%) translateX(0);
         }
-        
+
+        /* 表格行高 */
+        .consensus-table td {
+            padding: 8px 10px; /* 减小行高 */
+        }
+
         /* 移动端适配 */
         @media (max-width: 768px) {
-            .top-nav {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
-            }
-            
-            .logo-title-container {
-                width: 100%;
-                justify-content: center;
-                flex-direction: row; /* 水平排列 */
-                text-align: center;
-                gap: 10px;
-            }
-            
-            .nav-tools {
-                width: 100%;
-                align-items: center;
-            }
-            
-            .tools-row {
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .search-box {
-                width: 100%;
-            }
-            
-            .consensus-table {
-                display: block;
-                overflow-x: auto;
-            }
-            
-            .header-title {
-                font-size: 1.3rem;
-            }
-            
-            .stats-bar {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .consensus-table th, 
-            .consensus-table td {
-                padding: 6px 8px; /* 更小的内边距 */
-                font-size: 11px;
-            }
-            
-            .address-cell {
-                max-width: 100px;
-            }
-            
-            .table-controls {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
             .main-title {
-                font-size: 1.3rem; /* 移动端更小字号 */
+                font-size: 1.8rem; /* 移动端调整 */
             }
+            /* ... 其他移动端样式 ... */
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- 顶部导航栏 -->
+        <!-- 修改后的顶部导航栏 -->
         <div class="top-nav">
             <div class="logo-title-container">
                 <div class="logo">
@@ -449,9 +136,9 @@
                 </div>
                 <div class="title-container">
                     <div class="main-title">数字卷轴DSC社区共识</div>
-                    <p class="subtitle">构建去中心化未来 · 共享数字经济价值</p>
                 </div>
             </div>
+            <p class="subtitle">构建去中心化未来 · 共享数字经济价值</p>
             <div class="nav-tools">
                 <div class="tools-row">
                     <a href="index.html" class="home-link">首页</a>
@@ -473,8 +160,8 @@
         
         <!-- 标题区域 -->
         <div class="header-content">
-            <h1 class="header-title">社区共识成员列表</h1>
-            <p class="header-subtitle">共识统计时间：2025年6月3日</p> <!-- 修改文字 -->
+            <h1 class="header-title">共识统计时间</h1>
+            <p class="header-subtitle">2025年6月3日</p>
         </div>
         
         <!-- 统计信息栏 -->
@@ -515,7 +202,7 @@
         <!-- 表格控制区域 -->
         <div class="table-controls">
             <div class="results-info" id="resultsInfo">
-                显示 1-10 条，共 50 条记录
+                显示 1-20 条，共 50 条记录
             </div>
         </div>
         
@@ -606,7 +293,7 @@
         ];
 
                 // 页面变量
-        const itemsPerPage = 10;
+        const itemsPerPage = 20;
         let currentPage = 1;
         let currentSort = { key: 'dscStaked', direction: 'desc' };
         let filteredData = [...consensusData];
