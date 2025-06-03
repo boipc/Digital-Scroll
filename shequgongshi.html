@@ -29,30 +29,49 @@
             padding: 10px;
         }
         
-                /* 顶部导航栏 */
+        /* 顶部导航栏 */
         .top-nav {
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            gap: 15px;
             padding: 15px 0;
             margin-bottom: 15px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-
+        
         .logo-title-container {
             display: flex;
             align-items: center;
             gap: 15px;
         }
-
+        
+        .logo {
+            height: 70px; /* 增大高度 */
+            width: 70px;  /* 增大宽度 */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            background: #1e40af;
+            overflow: hidden;
+        }
+        
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
         .title-container {
             display: flex;
             flex-direction: column;
         }
-
+        
         .main-title {
-            font-size: 2.2rem; /* 增大主标题字号 */
+            font-size: 2.2rem; /* 增大字号 */
             font-weight: bold;
             background: linear-gradient(to right, #ff9d00, #ff5e00); /* 橙色渐变 */
             -webkit-background-clip: text;
@@ -60,27 +79,146 @@
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
             line-height: 1.2;
         }
-
+        
         .subtitle {
             font-size: 1.1rem;
             color: #a0aec0;
-            text-align: center; /* 居中 */
             margin-top: 5px;
+            text-align: center; /* 居中显示 */
         }
-
-        /* 共识语样式 */
-        .consensus-statement {
-            font-size: 1rem; /* 调小字号 */
-            line-height: 1.7;
+        
+        /* 导航工具区域 */
+        .nav-tools {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 15px;
+        }
+        
+        .tools-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .home-link {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            padding: 8px 16px;
+            background: rgba(52, 152, 219, 0.2);
+            border-radius: 20px;
+            transition: all 0.3s;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            white-space: nowrap;
+        }
+        
+        .home-link:hover {
+            background: rgba(52, 152, 219, 0.3);
+        }
+        
+        .search-box {
+            display: flex;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 6px 12px;
+            width: 200px;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .search-box input {
+            background: transparent;
+            border: none;
+            color: #fff;
+            padding: 4px;
+            width: 100%;
+            outline: none;
+            font-size: 13px;
+        }
+        
+        .search-box input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .search-icon {
+            margin-right: 8px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* 标题区域 */
+        .header-content {
             text-align: center;
-            margin: 20px 0;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.15);
-            border-radius: 8px;
-            color: #a0aec0; /* 与副标题颜色一致 */
+            margin-bottom: 15px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
-
-        /* 地址单元格 */
+        
+        .header-title {
+            font-size: 1.8rem;
+            margin: 5px 0;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            font-weight: 700;
+            color: #3498db;
+        }
+        
+        .header-subtitle {
+            font-size: 0.9rem; /* 调小字号 */
+            margin-bottom: 10px;
+            color: #a0aec0; /* 与共识语相同颜色 */
+        }
+        
+        /* 共识表格 */
+        .consensus-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            overflow: hidden;
+            font-size: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2); /* 添加表格边框线 */
+        }
+        
+        .consensus-table th, 
+        .consensus-table td {
+            padding: 8px 10px; /* 减小高度 */
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* 更明显的边框线 */
+            border-right: 1px solid rgba(255, 255, 255, 0.1); /* 添加单元格边框 */
+            white-space: nowrap; /* 禁止换行 */
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .consensus-table th {
+            background: rgba(26, 32, 44, 0.7);
+            font-weight: bold;
+            color: #3498db;
+            font-size: 12px;
+            position: sticky;
+            top: 0;
+            cursor: pointer;
+        }
+        
+        .consensus-table th:hover {
+            background: rgba(26, 32, 44, 0.9);
+        }
+        
+        .consensus-table tr:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .consensus-table .highlight {
+            font-weight: bold;
+            color: #48bb78;
+        }
+        
         .address-cell {
             max-width: 150px;
             overflow: hidden;
@@ -91,13 +229,137 @@
             outline: none !important; /* 移除黑框 */
             user-select: none; /* 防止选中 */
         }
-
-        /* 通知弹窗居中 */
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 15px;
+            gap: 5px;
+        }
+        
+        .page-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s;
+        }
+        
+        .page-btn.active {
+            background: #3498db;
+            font-weight: bold;
+        }
+        
+        .page-btn:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .stats-bar {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        
+        .stat-item {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-weight: bold;
+            font-size: 1.4rem;
+            color: #48bb78;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: #a0aec0;
+            font-size: 0.9rem;
+        }
+        
+        .consensus-statement {
+            font-size: 0.95rem; /* 调小字号 */
+            line-height: 1.7;
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            color: #a0aec0; /* 与副标题相同颜色 */
+        }
+        
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 140px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -75px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 12px;
+        }
+        
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: rgba(0, 极 0, 0, 0.8) transparent transparent transparent;
+        }
+        
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        .table-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .results-info {
+            color: #a0aec0;
+            font-size: 12px;
+        }
+        
         .notification {
             position: fixed;
-            top: 50%;
+            top: 50%; /* 居中显示 */
             left: 50%;
-            transform: translate(-50%, -50%) translateX(120%);
+            transform: translate(-50%, -50%) translateY(120%);
             padding: 15px 25px;
             background: rgba(26, 32, 44, 0.9);
             border-left: 4px solid #48bb78;
@@ -107,28 +369,79 @@
             transition: transform 0.3s ease-in-out;
             z-index: 1000;
         }
-
+        
         .notification.show {
-            transform: translate(-50%, -50%) translateX(0);
+            transform: translate(-50%, -50%) translateY(0);
         }
-
-        /* 表格行高 */
-        .consensus-table td {
-            padding: 8px 10px; /* 减小行高 */
-        }
-
+        
         /* 移动端适配 */
         @media (max-width: 768px) {
+            .top-nav {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .logo-title-container {
+                width: 100%;
+                justify-content: center;
+                flex-direction: row; /* 水平显示 */
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .nav-tools {
+                width: 100%;
+                align-items: center;
+            }
+            
+            .tools-row {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .search-box {
+                width: 100%;
+            }
+            
+            .consensus-table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .header-title {
+                font-size: 1.6rem;
+            }
+            
+            .stats-bar {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .consensus-table th, 
+            .consensus-table td {
+                padding: 6px 8px;
+                font-size: 11px;
+            }
+            
+            .address-cell {
+                max-width: 100px;
+            }
+            
+            .table-controls {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
             .main-title {
                 font-size: 1.8rem; /* 移动端调整 */
             }
-            /* ... 其他移动端样式 ... */
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- 修改后的顶部导航栏 -->
+        <!-- 顶部导航栏 -->
         <div class="top-nav">
             <div class="logo-title-container">
                 <div class="logo">
@@ -136,12 +449,12 @@
                 </div>
                 <div class="title-container">
                     <div class="main-title">数字卷轴DSC社区共识</div>
+                    <p class="subtitle">构建去中心化未来 · 共享数字经济价值</p>
                 </div>
             </div>
-            <p class="subtitle">构建去中心化未来 · 共享数字经济价值</p>
             <div class="nav-tools">
                 <div class="tools-row">
-                    <a href="index.html" class="home-link">首页</a>
+                    <a href="index.html"极 class="home-link">首页</a>
                     <div class="search-box">
                         <span class="search-icon">🔍</span>
                         <input type="text" id="searchInput" placeholder="搜索共识信息...">
@@ -160,8 +473,8 @@
         
         <!-- 标题区域 -->
         <div class="header-content">
-            <h1 class="header-title">共识统计时间</h1>
-            <p class="header-subtitle">2025年6月3日</p>
+            <h1 class="header-title">社区共识成员列表</h1>
+            <p class="header-subtitle">共识统计时间：2025年6月3日</p> <!-- 修改文字 -->
         </div>
         
         <!-- 统计信息栏 -->
@@ -188,7 +501,7 @@
             
             <!-- 第三行：SCC和USDS -->
             <div class="stat-row">
-                <div class="stat-item">
+                <div class="stat极 item">
                     <div class="stat-value" id="sccAvailableTotal">0</div>
                     <div class="stat-label">SCC总流通</div>
                 </div>
@@ -238,12 +551,12 @@
     </div>
 
     <script>
-        //  数据自己编写
+        // 真实数据 - 手动编写
         const consensusData = [
             { id: 1, wechatName: "行云流水", dscName: "行云流水", address: "SiDvPqx3zXcIwqVOXgK4ffgIkcU02va5nN", dscStaked: 72100, dscAvailable: 14436.56854, sccAvailable: 2906.246324, usdsBalance: 19.681434, sccStaked: 0 },
             { id: 2, wechatName: "大海", dscName: "无语伦比", address: "SjSVgZnbFH5JjqhEAj14gIqi0d2K0gp0KT", dscStaked: 48870, dscAvailable: 6788.147687, sccAvailable: 454.448618, usdsBalance: 11.77819, sccStaked: 0 },
             { id: 3, wechatName: "丽丽", dscName: "恭喜发财", address: "SWog3ML7kfsYIVVbdNSFToAS9LxcPaY7wd", dscStaked: 31180, dscAvailable: 137.637723, sccAvailable: 2276.811497, usdsBalance: 9.545586, sccStaked: 0 },
-            { id: 4, wechatName: "奔跑的小蜗牛", dscName: "扬帆起航", address: "SyICADDDG5vCv8sLZoHuXbRpAbF1XwUv5W", dscStaked: 32400, dscAvailable: 526.734448, sccAvailable: 2501.118983, usdsBalance: 0.744792, sccStaked: 0 },
+            { id: 4, wechatName: "奔跑的小蜗牛", dscName: "扬帆起航", address: "SyICADDDG5vCv8sLZoHuXbRpAb极 F1XwUv5W", dscStaked: 32400, dscAvailable: 526.734448, sccAvailable: 2501.118983, usdsBalance: 0.744792, sccStaked: 0 },
             { id: 5, wechatName: "轻度", dscName: "随心所欲", address: "SuzwaXLWVKJyhoChainxV294rh0odWiQtE", dscStaked: 32000, dscAvailable: 1595.824882, sccAvailable: 752.395527, usdsBalance: 150.247271, sccStaked: 0 },
             { id: 6, wechatName: "张青安", dscName: "DSC", address: "ShCQFbo4xm1k40Ih7g4byWAEpgoBYvYkhz", dscStaked: 30010, dscAvailable: 1.550416, sccAvailable: 3139.321006, usdsBalance: 1.210904, sccStaked: 0 },
             { id: 7, wechatName: "心想事成-1", dscName: "搬砖猫", address: "SAeWZ9qhvky6Iv9SsZRWZMUg9q2CZGuqYL", dscStaked: 25100, dscAvailable: 17.432499, sccAvailable: 766.60701, usdsBalance: 0.002388, sccStaked: 0 },
@@ -292,7 +605,8 @@
             { id: 50, wechatName: "老狗", dscName: "小可爱", address: "SNQ1pwxzsItFzu30cdCeDOq86Bfc7uUopd", dscStaked: 2100, dscAvailable: 220.285409, sccAvailable: 5.097084, usdsBalance: 0.005135, sccStaked: 0 },
         ];
 
-                // 页面变量
+        
+        // 页面变量
         const itemsPerPage = 20;
         let currentPage = 1;
         let currentSort = { key: 'dscStaked', direction: 'desc' };
