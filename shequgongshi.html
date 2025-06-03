@@ -39,16 +39,15 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        .logo-container {
+        .logo-title-container {
             display: flex;
             align-items: center;
             gap: 15px;
         }
         
         .logo {
-            height: 50px;
-            width: 50px;
-            background: linear-gradient(135deg, #3498db, #1e40af);
+            height: 60px;
+            width: 60px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -56,18 +55,46 @@
             font-weight: bold;
             font-size: 20px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            background: #1e40af;
+            overflow: hidden;
         }
         
-        .logo-text {
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .title-container {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .main-title {
             font-size: 1.8rem;
             font-weight: bold;
             background: linear-gradient(to right, #3498db, #1e40af);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+            line-height: 1.2;
         }
         
+        .subtitle {
+            font-size: 1rem;
+            color: #a0aec0;
+            margin-top: 5px;
+        }
+        
+        /* 导航工具区域 */
         .nav-tools {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 15px;
+        }
+        
+        .tools-row {
             display: flex;
             align-items: center;
             gap: 15px;
@@ -83,6 +110,7 @@
             border-radius: 20px;
             transition: all 0.3s;
             border: 1px solid rgba(52, 152, 219, 0.3);
+            white-space: nowrap;
         }
         
         .home-link:hover {
@@ -93,7 +121,7 @@
             display: flex;
             background: rgba(255, 255, 255, 0.15);
             border-radius: 20px;
-            padding: 8px 15px;
+            padding: 6px 12px; /* 减小高度 */
             width: 200px;
             align-items: center;
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -129,7 +157,7 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         
-        h1 {
+        .header-title {
             font-size: 1.8rem;
             margin: 5px 0;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
@@ -137,7 +165,7 @@
             color: #3498db;
         }
         
-        .subtitle {
+        .header-subtitle {
             font-size: 1rem;
             margin-bottom: 10px;
             color: #a0aec0;
@@ -160,6 +188,9 @@
             padding: 10px 12px;
             text-align: left;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            white-space: nowrap; /* 禁止换行 */
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
         .consensus-table th {
@@ -186,25 +217,12 @@
         }
         
         .address-cell {
-            max-width: 120px;
+            max-width: 150px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
             display: flex;
             align-items: center;
-        }
-        
-        .copy-icon {
-            margin-left: 5px;
-            cursor: pointer;
-            color: #3498db;
-            font-size: 12px;
-            transition: all 0.3s;
-        }
-        
-        .copy-icon:hover {
-            color: #48bb78;
-            transform: scale(1.1);
         }
         
         .pagination {
@@ -309,33 +327,6 @@
             gap: 10px;
         }
         
-        .sort-controls {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .sort-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            color: #fff;
-            padding: 8px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 12px;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .sort-btn.active {
-            background: #3498db;
-        }
-        
-        .sort-btn:hover:not(.active) {
-            background: rgba(255, 255, 255, 0.2);
-        }
-        
         .results-info {
             color: #a0aec0;
             font-size: 12px;
@@ -368,22 +359,24 @@
                 gap: 15px;
             }
             
-            .logo-container {
+            .logo-title-container {
                 width: 100%;
                 justify-content: center;
-            }
-            
-            .logo-text {
-                font-size: 1.5rem;
+                flex-direction: column;
+                text-align: center;
             }
             
             .nav-tools {
                 width: 100%;
-                justify-content: space-between;
+                align-items: center;
+            }
+            
+            .tools-row {
+                width: 100%;
+                justify-content: center;
             }
             
             .search-box {
-                margin-top: 0;
                 width: 100%;
             }
             
@@ -392,7 +385,7 @@
                 overflow-x: auto;
             }
             
-            h1 {
+            .header-title {
                 font-size: 1.6rem;
             }
             
@@ -422,30 +415,37 @@
     <div class="container">
         <!-- 顶部导航栏 -->
         <div class="top-nav">
-            <div class="logo-container">
-                <div class="logo">DSC</div>
-                <div class="logo-text">数字卷轴</div>
+            <div class="logo-title-container">
+                <div class="logo">
+                    <img src="images/logo01.png" alt="数字卷轴DSC社区共识">
+                </div>
+                <div class="title-container">
+                    <div class="main-title">数字卷轴DSC社区共识</div>
+                    <p class="subtitle">构建去中心化未来 · 共享数字经济价值</p>
+                </div>
             </div>
             <div class="nav-tools">
-                <a href="index.html" class="home-link">首页</a>
-                <div class="search-box">
-                    <span class="search-icon">🔍</span>
-                    <input type="text" id="searchInput" placeholder="搜索共识信息...">
+                <div class="tools-row">
+                    <a href="index.html" class="home-link">首页</a>
+                    <div class="search-box">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" id="searchInput" placeholder="搜索共识信息...">
+                    </div>
                 </div>
             </div>
         </div>
         
         <!-- 标题区域 -->
         <div class="header-content">
-            <h1>数字卷轴DSC社区共识</h1>
-            <p class="subtitle">共识日期：2025年6月3日</p>
+            <h1 class="header-title">社区共识成员列表</h1>
+            <p class="header-subtitle">共识日期：2025年6月3日</p>
         </div>
         
         <!-- 统计信息栏 -->
         <div class="stats-bar">
             <div class="stat-item">
                 <div class="stat-value">72</div>
-                <div class="stat-label">共识成员(陆续增加中)</div>
+                <div class="stat-label">共识成员(持续增加中)</div>
             </div>
             <div class="stat-item">
                 <div class="stat-value">1,245,380</div>
@@ -453,20 +453,12 @@
             </div>
             <div class="stat-item">
                 <div class="stat-value">38,726.54</div>
-                <div class="stat-label">SCC共识总余额</div>
+                <div class="stat-label">SCC共识总流通</div>
             </div>
         </div>
         
         <!-- 表格控制区域 -->
         <div class="table-controls">
-            <div class="sort-controls">
-                <button class="sort-btn" id="sortByStake">
-                    <i class="fas fa-sort-amount-down-alt"></i> 按质押排序
-                </button>
-                <button class="sort-btn" id="sortByName">
-                    <i class="fas fa-sort-alpha-down"></i> 按名称排序
-                </button>
-            </div>
             <div class="results-info" id="resultsInfo">
                 显示 1-10 条，共 50 条记录
             </div>
@@ -477,7 +469,7 @@
             <thead>
                 <tr>
                     <th data-sort="id">序号 <i class="fas fa-sort"></i></th>
-                    <th data-sort="wechatName">共识微信群昵称 <i class="fas fa-sort"></i></th>
+                    <th data-sort="wechatName">微信昵称 <i class="fas fa-sort"></i></th>
                     <th data-sort="dscName">DSC昵称 <i class="fas fa-sort"></i></th>
                     <th data-sort="address">卷界地址 <i class="fas fa-sort"></i></th>
                     <th data-sort="dscStaked">DSC质押 <i class="fas fa-sort"></i></th>
@@ -564,6 +556,18 @@
         let currentSort = { key: 'dscStaked', direction: 'desc' };
         let filteredData = [...consensusData];
         
+        // 格式化昵称显示：只显示头尾1个字，中间隐藏
+        function formatName(name) {
+            if (!name || name.length <= 2) return name;
+            return name.charAt(0) + '***' + name.charAt(name.length - 1);
+        }
+        
+        // 格式化地址显示：头5个字符 + ... + 尾5个字符
+        function formatAddress(address) {
+            if (!address || address.length <= 10) return address;
+            return address.substring(0, 5) + '...' + address.substring(address.length - 5);
+        }
+        
         // 初始化页面
         document.addEventListener('DOMContentLoaded', () => {
             // 初始渲染
@@ -571,15 +575,6 @@
             
             // 搜索功能
             document.getElementById('searchInput').addEventListener('input', handleSearch);
-            
-            // 排序按钮
-            document.getElementById('sortByStake').addEventListener('click', () => {
-                sortData('dscStaked', 'desc');
-            });
-            
-            document.getElementById('sortByName').addEventListener('click', () => {
-                sortData('dscName', 'asc');
-            });
             
             // 表头排序
             const tableHeaders = document.querySelectorAll('.consensus-table th[data-sort]');
@@ -648,14 +643,13 @@
                 
                 row.innerHTML = `
                     <td>${item.id}</td>
-                    <td>${item.wechatName}</td>
-                    <td>${item.dscName}</td>
-                    <td class="address-cell">
+                    <td>${formatName(item.wechatName)}</td>
+                    <td>${formatName(item.dscName)}</td>
+                    <td class="address-cell" ondblclick="copyToClipboard('${item.address}')">
                         <span class="tooltip">
-                            ${item.address.substring(0, 12)}...
+                            ${formatAddress(item.address)}
                             <span class="tooltiptext">${item.address}</span>
                         </span>
-                        <span class="copy-icon" onclick="copyToClipboard('${item.address}')">📋</span>
                     </td>
                     <td>${item.dscStaked.toLocaleString()}</td>
                     <td>${item.dscAvailable.toFixed(6)}</td>
