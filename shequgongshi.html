@@ -408,7 +408,51 @@
                 flex-direction: column;
                 align-items: flex-start;
             }
+        /* 新增统计栏样式 */
+        .stats-bar {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 15px 0;
         }
+        
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        
+        .stat-item {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-weight: bold;
+            font-size: 1.4rem;
+            color: #48bb78;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: #a0aec0;
+            font-size: 0.9rem;
+        }
+        
+        .consensus-statement {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            font-style: italic;
+        }
+        
     </style>
 </head>
 <body>
@@ -435,27 +479,51 @@
             </div>
         </div>
         
-        <!-- 标题区域 -->
-        <div class="header-content">
-            <h1 class="header-title">社区共识成员列表</h1>
+        <!-- 社区共识语 -->
+        <div class="consensus-statement">
+            我们，数字卷轴DSC社区成员，秉持开放、共享、协作的精神，共同承诺：<br>
+            构建去中心化生态，推动数字经济价值流动；<br>
+            坚持公平透明原则，维护社区成员共同利益；<br>
+            持续创新勇于探索，携手创造数字未来新纪元。
+        </div>
             <p class="header-subtitle">共识日期：2025年6月3日</p>
         </div>
         
         <!-- 统计信息栏 -->
         <div class="stats-bar">
-            <div class="stat-item">
-                <div class="stat-value">72</div>
-                <div class="stat-label">共识成员(持续增加中)</div>
+            <!-- 第一行：共识成员 -->
+            <div class="stat-row">
+                <div class="stat-item">
+                    <div class="stat-value" id="membersCount">0</div>
+                    <div class="stat-label">共识成员(持续增加中)</div>
+                </div>
             </div>
-            <div class="stat-item">
-                <div class="stat-value">1,245,380</div>
-                <div class="stat-label">DSC共识总质押</div>
+            
+            <!-- 第二行：DSC相关 -->
+            <div class="stat-row">
+                <div class="stat-item">
+                    <div class="stat-value" id="dscStakedTotal">0</div>
+                    <div class="stat-label">DSC总质押</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="dscAvailableTotal">0</div>
+                    <div class="stat-label">DSC总流通</div>
+                </div>
             </div>
-            <div class="stat-item">
-                <div class="stat-value">38,726.54</div>
-                <div class="stat-label">SCC共识总流通</div>
+            
+            <!-- 第三行：SCC和USDS -->
+            <div class="stat-row">
+                <div class="stat-item">
+                    <div class="stat-value" id="sccAvailableTotal">0</div>
+                    <div class="stat-label">SCC总流通</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="usdsBalanceTotal">0</div>
+                    <div class="stat-label">USDS总流通</div>
+                </div>
             </div>
         </div>
+        
         
         <!-- 表格控制区域 -->
         <div class="table-controls">
@@ -568,10 +636,36 @@
             return address.substring(0, 5) + '...' + address.substring(address.length - 5);
         }
         
+                // 计算统计数据
+        function calculateStatistics() {
+            // 共识成员数量
+            const membersCount = consensusData.length;
+            
+            // DSC总质押
+            const dscStakedTotal = consensusData.reduce((sum, item) => sum + item.dscStaked, 0);
+            
+            // DSC总流通
+            const dscAvailableTotal = consensusData.reduce((sum, item) => sum + item.dscAvailable, 0);
+            
+            // SCC总流通
+            const sccAvailableTotal = consensusData.reduce((sum, item) => sum + item.sccAvailable, 0);
+            
+            // USDS总流通
+            const usdsBalanceTotal = consensusData.reduce((sum, item) => sum + item.usdsBalance, 0);
+            
+            // 更新DOM
+            document.getElementById('membersCount').textContent = membersCount;
+            document.getElementById('dscStakedTotal').textContent = dscStakedTotal.toLocaleString();
+            document.getElementById('dscAvailableTotal').textContent = dscAvailableTotal.toFixed(2);
+            document.getElementById('sccAvailableTotal').textContent = sccAvailableTotal.toFixed(2);
+            document.getElementById('usdsBalanceTotal').textContent = usdsBalanceTotal.toFixed(2);
+        }
+        
         // 初始化页面
         document.addEventListener('DOMContentLoaded', () => {
             // 初始渲染
             renderTable(filteredData);
+            calculateStatistics(); // 计算并显示统计数据
             
             // 搜索功能
             document.getElementById('searchInput').addEventListener('input', handleSearch);
