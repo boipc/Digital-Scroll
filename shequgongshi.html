@@ -1,25 +1,3 @@
-
-Skip to content
-Navigation Menu
-
-Code
-Issues
-Pull requests
-Actions
-Projects
-Digital-Scroll
-/shequgongshi.html
-boipc
-boipc
-Update shequgongshi.html
-7cf27b9
- · 
-3 minutes ago
-1066 lines (953 loc) · 45.7 KB
-
-Code
-
-Blame
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -28,7 +6,6 @@ Blame
     <title>数字卷轴DSC社区共识</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<script src="js/chart.umd.js"></script>
     <style>
         * {
             margin: 0;
@@ -53,23 +30,22 @@ Blame
         }
         
         /* 顶部导航栏 - 重构布局 */
-.top-nav {
-    display: flex;
-    flex-direction: column;   /* 子元素垂直排列（原代码已有，若没有需添加） */
-    align-items: center;      /* 子元素水平居中 */
-    padding: 15px 0;
-    margin-bottom: 15px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
+        .top-nav {
+            display: flex;
+            flex-direction: column;
+            padding: 15px 0;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
         
         /* 顶部标题行 - logo和主标题水平排列 */
-  .header-top {
-    display: flex;
-    justify-content: center;  /* 内部元素水平居中 */
-    align-items: center;
-    width: 100%;
-    margin-bottom: 10px;      /* 主标题与副标题之间的间距（可按需调整） */
-}
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 10px;
+        }
         
         /* Logo和标题容器 */
         .logo-title-container {
@@ -111,10 +87,12 @@ Blame
         
         /* 副标题 - 在下方居中显示 */
         .subtitle {
-    font-size: 1.1rem;
-    color: #a0aec0;
-    text-align: center;
-}
+            font-size: 1.1rem;
+            color: #a0aec0;
+            text-align: center;
+            width: 100%;
+            margin-top: 5px;
+        }
         
         /* 导航工具区域 */
         .nav-tools {
@@ -304,13 +282,6 @@ Blame
             padding: 15px;
             border-radius: 8px;
             text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .stat-item:hover {
-            background: rgba(0, 0, 0, 0.3);
-            transform: translateY(-3px);
         }
         
         .stat-value {
@@ -367,54 +338,6 @@ Blame
         
         .notification.show {
             transform: translateX(0);
-        }
-        
-        /* 图表容器样式 */
-        .chart-container {
-            margin-top: 20px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-            padding: 15px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-            position: relative;
-            height: 300px;
-        }
-        
-        .chart-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        
-        .chart-title {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #3498db;
-        }
-        
-        .chart-controls {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .chart-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #fff;
-            padding: 5px 12px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 11px;
-            transition: all 0.3s;
-        }
-        
-        .chart-btn:hover {
-            background: rgba(52, 152, 219, 0.3);
-        }
-        
-        .chart-btn.active {
-            background: #3498db;
         }
         
         /* 移动端适配 */
@@ -476,15 +399,6 @@ Blame
             .main-title {
                 font-size: 1.3rem;
             }
-            
-            .chart-container {
-                height: 250px;
-            }
-            
-            .chart-controls {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
         }
     </style>
 </head>
@@ -533,47 +447,34 @@ Blame
         <!-- 统计信息栏 -->
         <div class="stats-bar">
             <div class="stat-row">
-                <div class="stat-item" data-type="members">
+                <div class="stat-item">
                     <div class="stat-value" id="membersCount">0</div>
                     <div class="stat-label">共识成员(持续增加中)</div>
                 </div>
             </div>
             
             <div class="stat-row">
-                <div class="stat-item" data-type="dscStaked">
+                <div class="stat-item">
                     <div class="stat-value" id="dscStakedTotal">0</div>
                     <div class="stat-label">DSC总质押</div>
                 </div>
-                <div class="stat-item" data-type="dscAvailable">
+                <div class="stat-item">
                     <div class="stat-value" id="dscAvailableTotal">0</div>
                     <div class="stat-label">DSC总流通</div>
                 </div>
             </div>
             
             <div class="stat-row">
-                <div class="stat-item" data-type="sccAvailable">
+                <div class="stat-item">
                     <!-- 修复SCC总流通的ID -->
                     <div class="stat-value" id="sccAvailableTotal">0</div>
                     <div class="stat-label">SCC总流通</div>
                 </div>
-                <div class="stat-item" data-type="usdsBalance">
+                <div class="stat-item">
                     <div class="stat-value" id="usdsBalanceTotal">0</div>
                     <div class="stat-label">USDS总流通</div>
                 </div>
             </div>
-        </div>
-        
-        <!-- 图表区域 -->
-        <div class="chart-container">
-            <div class="chart-header">
-                <div class="chart-title" id="chartTitle">资产分布图</div>
-                <div class="chart-controls">
-                    <button class="chart-btn active" data-type="bar">柱状图</button>
-                    <button class="chart-btn" data-type="pie">饼图</button>
-                    <button class="chart-btn" data-type="line">折线图</button>
-                </div>
-            </div>
-            <canvas id="statsChart"></canvas>
         </div>
         
         <!-- 表格控制区域 -->
@@ -615,7 +516,7 @@ Blame
 
     <script>
         // 真实数据
-        const consensusData = [
+       const consensusData = [
             { id: 1, wechatName: "行云流水", dscName: "行云流水", address: "SiDvPqx3zXcIwqVOXgK4ffgIkcU02va5nN", dscStaked: 72100, dscAvailable: 14436.56854, sccAvailable: 2906.246324, usdsBalance: 19.681434, sccStaked: 0 },
             { id: 2, wechatName: "大海", dscName: "无语伦比", address: "SjSVgZnbFH5JjqhEAj14gIqi0d2K0gp0KT", dscStaked: 48870, dscAvailable: 6788.147687, sccAvailable: 454.448618, usdsBalance: 11.77819, sccStaked: 0 },
             { id: 3, wechatName: "丽丽", dscName: "恭喜发财", address: "SWog3ML7kfsYIVVbdNSFToAS9LxcPaY7wd", dscStaked: 31180, dscAvailable: 137.637723, sccAvailable: 2276.811497, usdsBalance: 9.545586, sccStaked: 0 },
@@ -668,13 +569,13 @@ Blame
             { id: 50, wechatName: "老狗", dscName: "小可爱", address: "SNQ1pwxzsItFzu30cdCeDOq86Bfc7uUopd", dscStaked: 2100, dscAvailable: 220.285409, sccAvailable: 5.097084, usdsBalance: 0.005135, sccStaked: 0 },
         ];
 
-        // 页面变量
+       
+
+ // 页面变量
         const itemsPerPage = 20;
         let currentPage = 1;
         let currentSort = { key: 'dscStaked', direction: 'desc' };
         let filteredData = [...consensusData];
-        let chartInstance = null; // 存储图表实例
-        let currentChartType = 'bar'; // 当前图表类型
         
         // 格式化昵称显示：只显示第一个字，后面用***
         function formatName(name) {
@@ -722,215 +623,13 @@ Blame
             document.getElementById('dscAvailableTotal').textContent = dscAvailableTotal.toFixed(2);
             document.getElementById('sccAvailableTotal').textContent = sccAvailableTotal.toFixed(2);
             document.getElementById('usdsBalanceTotal').textContent = usdsBalanceTotal.toFixed(2);
-            
-            // 返回统计数据用于图表
-            return {
-                membersCount,
-                dscStakedTotal,
-                dscAvailableTotal,
-                sccAvailableTotal,
-                usdsBalanceTotal
-            };
-        }
-        
-        // 创建图表
-        function createChart(stats, type = 'bar') {
-            const ctx = document.getElementById('statsChart').getContext('2d');
-            
-            // 销毁现有图表实例
-            if (chartInstance) {
-                chartInstance.destroy();
-            }
-            
-            // 根据类型创建不同图表
-            if (type === 'pie') {
-                chartInstance = new Chart(ctx, {
-                    type: 'pie',
-                    data: {
-                        labels: ['DSC总质押', 'DSC总流通', 'SCC总流通', 'USDS总流通'],
-                        datasets: [{
-                            data: [
-                                stats.dscStakedTotal,
-                                stats.dscAvailableTotal,
-                                stats.sccAvailableTotal,
-                                stats.usdsBalanceTotal
-                            ],
-                            backgroundColor: [
-                                'rgba(54, 162, 235, 0.7)',
-                                'rgba(75, 192, 192, 0.7)',
-                                'rgba(255, 159, 64, 0.7)',
-                                'rgba(153, 102, 255, 0.7)'
-                            ],
-                            borderColor: [
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(255, 159, 64, 1)',
-                                'rgba(153, 102, 255, 1)'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                labels: {
-                                    color: '#a0aec0',
-                                    font: {
-                                        size: 12
-                                    }
-                                }
-                            },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        const label = context.label || '';
-                                        const value = context.parsed || 0;
-                                        return `${label}: ${value.toLocaleString()}`;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
-            } else if (type === 'line') {
-                // 为折线图准备数据（这里使用随机数据模拟变化）
-                const labels = Array.from({length: 7}, (_, i) => `第${i+1}天`);
-                const dscData = Array.from({length: 7}, () => Math.random() * stats.dscStakedTotal * 0.1 + stats.dscStakedTotal * 0.9);
-                
-                chartInstance = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: labels,
-                        datasets: [{
-                            label: 'DSC总质押变化',
-                            data: dscData,
-                            fill: false,
-                            borderColor: 'rgb(75, 192, 192)',
-                            tension: 0.1,
-                            pointBackgroundColor: 'rgb(75, 192, 192)'
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: {
-                                beginAtZero: false,
-                                ticks: {
-                                    color: '#a0aec0'
-                                },
-                                grid: {
-                                    color: 'rgba(255, 255, 255, 0.1)'
-                                }
-                            },
-                            x: {
-                                ticks: {
-                                    color: '#a0aec0'
-                                },
-                                grid: {
-                                    color: 'rgba(255, 255, 255, 0.1)'
-                                }
-                            }
-                        },
-                        plugins: {
-                            legend: {
-                                labels: {
-                                    color: '#a0aec0',
-                                    font: {
-                                        size: 12
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
-            } else {
-                // 默认柱状图
-                chartInstance = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['DSC总质押', 'DSC总流通', 'SCC总流通', 'USDS总流通'],
-                        datasets: [{
-                            label: '资产分布',
-                            data: [
-                                stats.dscStakedTotal,
-                                stats.dscAvailableTotal,
-                                stats.sccAvailableTotal,
-                                stats.usdsBalanceTotal
-                            ],
-                            backgroundColor: [
-                                'rgba(54, 162, 235, 0.7)',
-                                'rgba(75, 192, 192, 0.7)',
-                                'rgba(255, 159, 64, 0.7)',
-                                'rgba(153, 102, 255, 0.7)'
-                            ],
-                            borderColor: [
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(255, 159, 64, 1)',
-                                'rgba(153, 102, 255, 1)'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                ticks: {
-                                    color: '#a0aec0',
-                                    callback: function(value) {
-                                        if (value >= 1000000) {
-                                            return (value / 1000000).toFixed(1) + 'M';
-                                        }
-                                        if (value >= 1000) {
-                                            return (value / 1000).toFixed(1) + 'K';
-                                        }
-                                        return value;
-                                    }
-                                },
-                                grid: {
-                                    color: 'rgba(255, 255, 255, 0.1)'
-                                }
-                            },
-                            x: {
-                                ticks: {
-                                    color: '#a0aec0'
-                                },
-                                grid: {
-                                    display: false
-                                }
-                            }
-                        },
-                        plugins: {
-                            legend: {
-                                display: false
-                            },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        const label = context.dataset.label || '';
-                                        const value = context.parsed.y || 0;
-                                        return `${label}: ${value.toLocaleString()}`;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
-            }
         }
         
         // 初始化页面
         document.addEventListener('DOMContentLoaded', () => {
             // 初始渲染
             renderTable(filteredData);
-            const stats = calculateStatistics(); // 计算统计数据
-            createChart(stats); // 创建初始图表
+            calculateStatistics(); // 计算并显示统计数据
             
             // 搜索功能
             document.getElementById('searchInput').addEventListener('input', handleSearch);
@@ -943,42 +642,7 @@ Blame
                     sortData(sortKey, currentSort.key === sortKey && currentSort.direction === 'asc' ? 'desc' : 'asc');
                 });
             });
-            
-            // 图表类型切换
-            document.querySelectorAll('.chart-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    document.querySelectorAll('.chart-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    currentChartType = this.getAttribute('data-type');
-                    createChart(stats, currentChartType);
-                });
-            });
-            
-            // 统计项点击高亮
-            document.querySelectorAll('.stat-item').forEach(item => {
-                item.addEventListener('click', function() {
-                    const type = this.getAttribute('data-type');
-                    highlightStat(type);
-                });
-            });
         });
-        
-        // 高亮显示特定统计项
-        function highlightStat(type) {
-            // 移除所有高亮
-            document.querySelectorAll('.stat-item').forEach(item => {
-                item.style.boxShadow = 'none';
-            });
-            
-            // 高亮当前项
-            const item = document.querySelector(`.stat-item[data-type="${type}"]`);
-            if (item) {
-                item.style.boxShadow = '0 0 15px rgba(52, 152, 219, 0.5)';
-                setTimeout(() => {
-                    item.style.boxShadow = 'none';
-                }, 1000);
-            }
-        }
         
         // 处理搜索
         function handleSearch(e) {
@@ -1086,4 +750,3 @@ Blame
     </script>
 </body>
 </html>
-Digital-Scroll/shequgongshi.html at main · boipc/Digital-Scroll
