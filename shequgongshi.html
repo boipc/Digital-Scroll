@@ -29,7 +29,7 @@
             padding: 10px;
         }
         
-        /* 顶部导航栏 - 修改了布局 */
+        /* 顶部导航栏 - 重构布局 */
         .top-nav {
             display: flex;
             flex-direction: column;
@@ -38,12 +38,20 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        /* Logo和标题容器 - 确保垂直居中对齐 */
+        /* 顶部标题行 - logo和主标题水平排列 */
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        
+        /* Logo和标题容器 */
         .logo-title-container {
             display: flex;
-            align-items: center; /* 垂直居中 */
+            align-items: center;
             gap: 15px;
-            margin-bottom: 15px;
         }
         
         .logo {
@@ -58,17 +66,13 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             background: #1e40af;
             overflow: hidden;
-            flex-shrink: 0; /* 防止缩小 */
+            flex-shrink: 0;
         }
         
         .logo img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-        }
-        
-        .title-container {
-            flex: 1;
         }
         
         .main-title {
@@ -81,9 +85,12 @@
             line-height: 1.2;
         }
         
-         .subtitle {
+        /* 副标题 - 在下方居中显示 */
+        .subtitle {
             font-size: 1.1rem;
             color: #a0aec0;
+            text-align: center;
+            width: 100%;
             margin-top: 5px;
         }
         
@@ -117,14 +124,16 @@
             background: rgba(52, 152, 219, 0.3);
         }
         
+        /* 搜索框高度缩小 */
         .search-box {
             display: flex;
             background: rgba(255, 255, 255, 0.15);
             border-radius: 20px;
-            padding: 2px 16px;
+            padding: 3px 12px; /* 高度缩小 */
             width: 180px;
             align-items: center;
             border: 1px solid rgba(255, 255, 255, 0.1);
+            height: 32px; /* 固定高度 */
         }
         
         .search-box input {
@@ -333,13 +342,20 @@
         
         /* 移动端适配 */
         @media (max-width: 768px) {
-            .logo-title-container {
-                flex-direction: row;
+            .header-top {
+                flex-direction: column;
                 align-items: center;
+                gap: 10px;
+            }
+            
+            .logo-title-container {
+                justify-content: center;
+                width: 100%;
             }
             
             .nav-tools {
                 width: 100%;
+                align-items: center;
             }
             
             .tools-row {
@@ -388,32 +404,34 @@
 </head>
 <body>
     <div class="container">
-        <!-- 顶部导航栏 -->
+        <!-- 修改后的顶部导航栏 -->
         <div class="top-nav">
-            <div class="logo-title-container">
-                <div class="logo">
-                    <img src="images/logo01.png" alt="数字卷轴DSC社区共识">
-                </div>
-                <div class="title-container">
+            <div class="header-top">
+                <div class="logo-title-container">
+                    <div class="logo">
+                        <img src="images/logo01.png" alt="数字卷轴DSC社区共识">
+                    </div>
                     <div class="main-title">数字卷轴DSC社区共识</div>
-                    <p class="subtitle">构建去中心化未来 · 共享数字经济价值</p>
                 </div>
-            </div>
-            
-            <div class="nav-tools">
-                <div class="tools-row">
-                    <a href="index.html" class="home-link">首页</a>
-                    <div class="search-box">
-                        <span class="search-icon">🔍</span>
-                        <input type="text" id="searchInput" placeholder="搜索共识信息...">
+                
+                <div class="nav-tools">
+                    <div class="tools-row">
+                        <a href="index.html" class="home-link">首页</a>
+                        <div class="search-box">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" id="searchInput" placeholder="搜索共识信息...">
+                        </div>
                     </div>
                 </div>
             </div>
+            
+            <!-- 副标题在下方居中显示 -->
+            <p class="subtitle">构建去中心化未来 · 共享数字经济价值</p>
         </div>
         
         <!-- 社区共识语 -->
         <div class="consensus-statement">
-            数字卷轴DSC社区成员，秉持开放、共享、协作的精神，共同承诺：<br>
+            我们，数字卷轴DSC社区成员，秉持开放、共享、协作的精神，共同承诺：<br>
             坚守共识低价，保障生态稳定；<br>
             推动价值流通，促进社区繁荣；<br>
             坚持公平透明，维护成员权益；<br>
@@ -448,7 +466,8 @@
             
             <div class="stat-row">
                 <div class="stat-item">
-                    <div class="stat-value极" id="sccAvailableTotal">0</div>
+                    <!-- 修复SCC总流通的ID -->
+                    <div class="stat-value" id="sccAvailableTotal">0</div>
                     <div class="stat-label">SCC总流通</div>
                 </div>
                 <div class="stat-item">
@@ -462,7 +481,7 @@
         <div class="table-controls">
             <div class="results-info" id="resultsInfo">
                 显示 1-20 条，共 50 条记录
-            </极div>
+            </div>
         </div>
         
         <!-- 共识表格 -->
@@ -550,7 +569,9 @@
             { id: 50, wechatName: "老狗", dscName: "小可爱", address: "SNQ1pwxzsItFzu30cdCeDOq86Bfc7uUopd", dscStaked: 2100, dscAvailable: 220.285409, sccAvailable: 5.097084, usdsBalance: 0.005135, sccStaked: 0 },
         ];
 
-        // 页面变量
+       
+
+ // 页面变量
         const itemsPerPage = 20;
         let currentPage = 1;
         let currentSort = { key: 'dscStaked', direction: 'desc' };
