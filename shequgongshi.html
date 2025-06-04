@@ -485,7 +485,7 @@
         <!-- 表格控制区域 -->
         <div class="table-controls">
             <div class="results-info" id="resultsInfo">
-                显示 1-20 条，共 50 条记录
+                显示 1-20 条，共 0 条记录
             </div>
         </div>
         
@@ -519,16 +519,15 @@
         地址已复制到剪贴板
     </div>
     <script>
-
- // 页面变量
+        // 页面变量
         const itemsPerPage = 20;
         let currentPage = 1;
         let currentSort = { key: 'dscStaked', direction: 'desc' };
         let filteredData = [];
         let consensusData = [];
         
-       // 在JavaScript部分找到这行代码
-const CSV_URL = 'https://raw.githubusercontent.com/Doipc/Digital-Scroll/main/data.csv';
+        // 使用正确的CSV URL
+        const CSV_URL = 'https://raw.githubusercontent.com/Doipc/Digital-Scroll/main/data.csv';
         
         // 格式化昵称显示：只显示第一个字，后面用***
         function formatName(name) {
@@ -559,36 +558,42 @@ const CSV_URL = 'https://raw.githubusercontent.com/Doipc/Digital-Scroll/main/dat
                 Papa.parse(CSV_URL, {
                     download: true,
                     header: true,
-                    dynamicTyping: true, // 自动转换数字类型
+                    dynamicTyping: true,
                     skipEmptyLines: true,
                     complete: function(results) {
-                        consensusData = results.data;
-                        filteredData = [...consensusData];
-                        resolve();
+                        if (results.data && results.data.length > 0) {
+                            consensusData = results.data;
+                            filteredData = [...consensusData];
+                            resolve();
+                        } else {
+                            reject(new Error('CSV数据为空或格式不正确'));
+                        }
                     },
                     error: function(error) {
-                        console.error('Error loading CSV:', error);
                         reject(error);
                     }
                 });
             });
         }
+        
         // 计算统计数据
         function calculateStatistics() {
+            if (consensusData.length === 0) return;
+            
             // 共识成员数量
             const membersCount = consensusData.length;
             
             // DSC总质押
-            const dscStakedTotal = consensusData.reduce((sum, item) => sum + item.dscStaked, 0);
+            const dscStakedTotal = consensusData.reduce((sum, item) => sum + (item.dscStaked || 0), 0);
             
             // DSC总流通
-            const dscAvailableTotal = consensusData.reduce((sum, item) => sum + item.dscAvailable, 0);
+            const dscAvailableTotal = consensusData.reduce((sum, item) => sum + (item.dscAvailable || 0), 0);
             
             // SCC总流通
-            const sccAvailableTotal = consensusData.reduce((sum, item) => sum + item.sccAvailable, 0);
+            const sccAvailableTotal = consensusData.reduce((sum, item) => sum + (item.sccAvailable || 0), 0);
             
             // USDS总流通
-            const usdsBalanceTotal = consensusData.reduce((sum, item) => sum + item.usdsBalance, 0);
+            const usdsBalanceTotal = consensusData.reduce((sum, item) => sum + (item.usdsBalance || 0), 0);
             
             // 更新DOM
             document.getElementById('membersCount').textContent = membersCount;
@@ -598,28 +603,6 @@ const CSV_URL = 'https://raw.githubusercontent.com/Doipc/Digital-Scroll/main/dat
             document.getElementById('usdsBalanceTotal').textContent = usdsBalanceTotal.toFixed(2);
         }
         
-        // 初始化页面
-        document.addEventListener('DOMContentLoaded', () => {
-            // 初始渲染
-            renderTable(filteredData);
-            calculateStatistics(); // 计算并显示统计数据
-            
-            // 搜索功能
-                document.getElementById('searchInput').addEventListener('input', handleSearch);
-                
-                // 表头排序
-                const tableHeaders = document.querySelectorAll('.consensus-table th[data-sort]');
-                tableHeaders.forEach(header => {
-                    header.addEventListener('click', () => {
-                        const sortKey = header.getAttribute('data-sort');
-                        sortData(sortKey, currentSort.key === sortKey && currentSort.direction === 'asc' ? 'desc' : 'asc');
-                    });
-                });
-            } catch (error) {
-                console.error('Initialization failed:', error);
-            }
-        });
-        
         // 处理搜索
         function handleSearch(e) {
             const searchTerm = e.target.value.toLowerCase().trim();
@@ -628,9 +611,9 @@ const CSV_URL = 'https://raw.githubusercontent.com/Doipc/Digital-Scroll/main/dat
                 filteredData = [...consensusData];
             } else {
                 filteredData = consensusData.filter(item => 
-                    item.wechatName.toLowerCase().includes(searchTerm) || 
-                    item.dscName.toLowerCase().includes(searchTerm) || 
-                    item.address.toLowerCase().includes(searchTerm)
+                    (item.wechatName && item.wechatName.toLowerCase().includes(searchTerm)) || 
+                    (item.dscName && item.dscName.toLowerCase().includes(searchTerm)) || 
+                    (item.address && item.address.toLowerCase().includes(searchTerm))
                 );
             }
             
@@ -645,6 +628,9 @@ const CSV_URL = 'https://raw.githubusercontent.com/Doipc/Digital-Scroll/main/dat
             filteredData.sort((a, b) => {
                 let valueA = a[key];
                 let valueB = b[key];
+                
+                if (valueA === undefined || valueA === null) valueA = '';
+                if (valueB === undefined || valueB === null) valueB = '';
                 
                 if (typeof valueA === 'string') {
                     valueA = valueA.toLowerCase();
@@ -668,6 +654,14 @@ const CSV_URL = 'https://raw.githubusercontent.com/Doipc/Digital-Scroll/main/dat
             const tbody = document.querySelector('#consensusTable tbody');
             tbody.innerHTML = '';
             
+            if (!data || data.length === 0) {
+                // 添加空数据提示
+                const row = document.createElement('tr');
+                row.innerHTML = `<td colspan="8" style="text-align: center;">暂无数据</td>`;
+                tbody.appendChild(row);
+                return;
+            }
+            
             const start = (page - 1) * itemsPerPage;
             const end = start + itemsPerPage;
             const paginatedData = data.slice(start, end);
@@ -681,26 +675,41 @@ const CSV_URL = 'https://raw.githubusercontent.com/Doipc/Digital-Scroll/main/dat
                     <td class="address-cell" ondblclick="copyToClipboard('${item.address}')">
                         ${formatAddress(item.address)}
                     </td>
-                    <td>${item.dscStaked.toLocaleString()}</td>
-                    <td>${item.dscAvailable.toFixed(2)}</td>
-                    <td>${item.sccAvailable.toFixed(2)}</td>
-                    <td>${item.usdsBalance.toFixed(2)}</td>
-                    <td>${item.sccStaked.toFixed(2)}</td>
+                    <td>${item.dscStaked ? item.dscStaked.toLocaleString() : '0'}</td>
+                    <td>${item.dscAvailable ? item.dscAvailable.toFixed(2) : '0.00'}</td>
+                    <td>${item.sccAvailable ? item.sccAvailable.toFixed(2) : '0.00'}</td>
+                    <td>${item.usdsBalance ? item.usdsBalance.toFixed(2) : '0.00'}</td>
+                    <td>${item.sccStaked ? item.sccStaked.toFixed(2) : '0.00'}</td>
                 `;
                 tbody.appendChild(row);
             });
             
             // 更新分页信息
-            updatePaginationControls(data.length);
+            renderPagination(data.length);
             updateResultsInfo(data.length);
         }
         
         // 更新分页控件
-        function updatePaginationControls(totalItems) {
+        function renderPagination(totalItems) {
             const totalPages = Math.ceil(totalItems / itemsPerPage);
             const paginationContainer = document.getElementById('pagination');
             paginationContainer.innerHTML = '';
             
+            if (totalPages <= 1) return;
+            
+            // 上一页按钮
+            if (currentPage > 1) {
+                const prevBtn = document.createElement('button');
+                prevBtn.className = 'page-btn';
+                prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i> 上一页';
+                prevBtn.addEventListener('click', () => {
+                    currentPage--;
+                    renderTable(filteredData);
+                });
+                paginationContainer.appendChild(prevBtn);
+            }
+            
+            // 页码按钮
             for (let i = 1; i <= totalPages; i++) {
                 const button = document.createElement('button');
                 button.classList.add('page-btn');
@@ -714,15 +723,56 @@ const CSV_URL = 'https://raw.githubusercontent.com/Doipc/Digital-Scroll/main/dat
                 });
                 paginationContainer.appendChild(button);
             }
+            
+            // 下一页按钮
+            if (currentPage < totalPages) {
+                const nextBtn = document.createElement('button');
+                nextBtn.className = 'page-btn';
+                nextBtn.innerHTML = '下一页 <i class="fas fa-chevron-right"></i>';
+                nextBtn.addEventListener('click', () => {
+                    currentPage++;
+                    renderTable(filteredData);
+                });
+                paginationContainer.appendChild(nextBtn);
+            }
         }
         
         // 更新结果信息
         function updateResultsInfo(totalItems) {
-            const start = (currentPage - 1) * itemsPerPage + 1;
-            const end = Math.min(currentPage * itemsPerPage, totalItems);
+            const start = Math.min(totalItems, (currentPage - 1) * itemsPerPage + 1);
+            const end = Math.min(totalItems, currentPage * itemsPerPage);
             document.getElementById('resultsInfo').textContent = 
                 `显示 ${start}-${end} 条，共 ${totalItems} 条记录`;
         }
+        
+        // 初始化页面
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                // 加载CSV数据
+                await loadCSVData();
+                
+                // 初始渲染
+                renderTable(filteredData);
+                calculateStatistics();
+                
+                // 搜索功能
+                document.getElementById('searchInput').addEventListener('input', handleSearch);
+                
+                // 表头排序
+                const tableHeaders = document.querySelectorAll('.consensus-table th[data-sort]');
+                tableHeaders.forEach(header => {
+                    header.addEventListener('click', () => {
+                        const sortKey = header.getAttribute('data-sort');
+                        sortData(sortKey, currentSort.key === sortKey && currentSort.direction === 'asc' ? 'desc' : 'asc');
+                    });
+                });
+            } catch (error) {
+                console.error('初始化失败:', error);
+                // 显示错误信息
+                const tbody = document.querySelector('#consensusTable tbody');
+                tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: #e53e3e;">数据加载失败: ${error.message}</td></tr>`;
+            }
+        });
     </script>
 </body>
 </html>
