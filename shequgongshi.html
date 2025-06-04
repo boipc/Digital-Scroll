@@ -6,7 +6,7 @@
     <title>数字卷轴DSC社区共识</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<script src="js/chart.umd.min.js"></script>
+<script src="js/chart.umd.js"></script>
     <style>
         * {
             margin: 0;
@@ -31,22 +31,23 @@
         }
         
         /* 顶部导航栏 - 重构布局 */
-        .top-nav {
-            display: flex;
-            flex-direction: column;
-            padding: 15px 0;
-            margin-bottom: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
+.top-nav {
+    display: flex;
+    flex-direction: column;   /* 子元素垂直排列（原代码已有，若没有需添加） */
+    align-items: center;      /* 子元素水平居中 */
+    padding: 15px 0;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
         
         /* 顶部标题行 - logo和主标题水平排列 */
-        .header-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            margin-bottom: 10px;
-        }
+  .header-top {
+    display: flex;
+    justify-content: center;  /* 内部元素水平居中 */
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;      /* 主标题与副标题之间的间距（可按需调整） */
+}
         
         /* Logo和标题容器 */
         .logo-title-container {
@@ -88,12 +89,10 @@
         
         /* 副标题 - 在下方居中显示 */
         .subtitle {
-            font-size: 1.1rem;
-            color: #a0aec0;
-            text-align: center;
-            width: 100%;
-            margin-top: 5px;
-        }
+    font-size: 1.1rem;
+    color: #a0aec0;
+    text-align: center;
+}
         
         /* 导航工具区域 */
         .nav-tools {
