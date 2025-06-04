@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=极1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>数字卷轴DSC社区共识</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -46,15 +46,15 @@
         }
         
         .logo {
-            height: 70px; /* 增大高度 */
-            width: 70px;  /* 增大宽度 */
+            height: 50px;
+            width: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
             font-size: 20px;
-            box-shadow: 0 5px 极15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             background: #1e40af;
             overflow: hidden;
         }
@@ -71,7 +71,7 @@
         }
         
         .main-title {
-            font-size: 2.2rem; /* 增大字号 */
+            font-size: 2.2rem; /* 缩小字号 */
             font-weight: bold;
             background: linear-gradient(to right, #ff9d00, #ff5e00); /* 橙色渐变 */
             -webkit-background-clip: text;
@@ -80,11 +80,12 @@
             line-height: 1.2;
         }
         
-        .subtitle {
+         .subtitle {
             font-size: 1.1rem;
             color: #a0aec0;
+            text-align: center; /* 居中 */
             margin-top: 5px;
-            text-align: center; /* 居中显示 */
+            width: 100%; /* 确保副标题占据整行 */
         }
         
         /* 导航工具区域 */
@@ -105,12 +106,12 @@
             color: #fff;
             text-decoration: none;
             font-weight: bold;
-            font-size: 14px;
-            padding: 8px 16px;
+            font-size: 12px; /* 首页缩小字号 */
+            padding: 5px 16px; /* 首页边框缩小20% */
             background: rgba(52, 152, 219, 0.2);
             border-radius: 20px;
             transition: all 0.3s;
-            border: 1px solid rgba(52, 152, 219, 0.3);
+            border: 1px solid rgba(52, 552, 359, 0.3);
             white-space: nowrap;
         }
         
@@ -122,8 +123,8 @@
             display: flex;
             background: rgba(255, 255, 255, 0.15);
             border-radius: 20px;
-            padding: 6px 12px;
-            width: 200px;
+            padding: 2px 16px; /* 搜索框缩小20% */
+            width: 180px; /* 缩小20% */
             align-items: center;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
@@ -135,7 +136,7 @@
             padding: 4px;
             width: 100%;
             outline: none;
-            font-size: 13px;
+            font-size: 12px; /* 缩小字号 */
         }
         
         .search-box input::placeholder {
@@ -144,7 +145,7 @@
         
         .search-icon {
             margin-right: 8px;
-            font-size: 14px;
+            font-size: 12px; /* 缩小字号 */
             color: rgba(255, 255, 255, 0.7);
         }
         
@@ -159,7 +160,7 @@
         }
         
         .header-title {
-            font-size: 1.8rem;
+            font-size: 1.5rem; /* 缩小字号 */
             margin: 5px 0;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
             font-weight: 700;
@@ -167,9 +168,10 @@
         }
         
         .header-subtitle {
-            font-size: 0.9rem; /* 调小字号 */
+            font-size: 0.9rem; /* 缩小字号 */
             margin-bottom: 10px;
-            color: #a0aec0; /* 与共识语相同颜色 */
+            color: #a0aec0;
+            text-align: center; /* 居中显示 */
         }
         
         /* 共识表格 */
@@ -182,7 +184,7 @@
             border-radius: 8px;
             overflow: hidden;
             font-size: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.2); /* 添加表格边框线 */
+            border: 1px solid rgba(255, 255, 255, 0.1); /* 添加表格边框 */
         }
         
         .consensus-table th, 
@@ -191,7 +193,7 @@
             text-align: left;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* 更明显的边框线 */
             border-right: 1px solid rgba(255, 255, 255, 0.1); /* 添加单元格边框 */
-            white-space: nowrap; /* 禁止换行 */
+            white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
@@ -218,7 +220,17 @@
             font-weight: bold;
             color: #48bb78;
         }
-        
+        .copy-cell {
+            max-width: 150px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            outline: none !important; /* 移除黑框 */
+            user-select: none; /* 防止选中 */
+            cursor: pointer; /* 添加指针样式 */
+        }
         .address-cell {
             max-width: 150px;
             overflow: hidden;
@@ -235,7 +247,7 @@
             justify-content: center;
             align-items: center;
             margin-top: 15px;
-            gap: 5极px;
+            gap: 5px;
         }
         
         .page-btn {
@@ -292,14 +304,15 @@
         }
         
         .consensus-statement {
-            font-size: 0.95rem; /* 调小字号 */
+            font-size: 1rem; /* 缩小字号 */
             line-height: 1.7;
             text-align: center;
             margin: 20px 0;
-            padding: 20px;
+            padding: 10px;
             background: rgba(0, 0, 0, 0.15);
             border-radius: 8px;
-            color: #a0aec0; /* 与副标题相同颜色 */
+            /* 移除斜体 */
+           color: #a0aec0; /* 与副标题相同颜色 */
         }
         
         .tooltip {
@@ -357,35 +370,35 @@
         
         .notification {
             position: fixed;
-            top: 50%; /* 居中显示 */
-            left: 50%;
-            transform: translate(-50%, -50%) translateY(120%);
+            top: 20px;
+            right: 20px;
             padding: 15px 25px;
             background: rgba(26, 32, 44, 0.9);
             border-left: 4px solid #48bb78;
             border-radius: 4px;
             color: #fff;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transform: translateX(120%);
             transition: transform 0.3s ease-in-out;
             z-index: 1000;
         }
         
         .notification.show {
-            transform: translate(-50%, -50%) translateY(0);
+            transform: translateX(0);
         }
         
         /* 移动端适配 */
         @media (max-width: 768px) {
             .top-nav {
                 flex-direction: column;
-                align-items: center;
+                align-items: flex-start;
                 gap: 15px;
             }
             
             .logo-title-container {
                 width: 100%;
                 justify-content: center;
-                flex-direction: row; /* 水平显示 */
+                flex-direction: row; /* 水平排列 */
                 text-align: center;
                 gap: 10px;
             }
@@ -410,7 +423,7 @@
             }
             
             .header-title {
-                font-size: 1.6rem;
+                font-size: 1.3rem;
             }
             
             .stats-bar {
@@ -420,7 +433,7 @@
             
             .consensus-table th, 
             .consensus-table td {
-                padding: 6px 8px;
+                padding: 6px 8px; /* 更小的内边距 */
                 font-size: 11px;
             }
             
@@ -434,14 +447,14 @@
             }
             
             .main-title {
-                font-size: 1.8rem; /* 移动端调整 */
+                font-size: 1.3rem; /* 移动端更小字号 */
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- 顶部导航栏 -->
+        <!-- 修改后的顶部导航栏 -->
         <div class="top-nav">
             <div class="logo-title-container">
                 <div class="logo">
@@ -449,9 +462,9 @@
                 </div>
                 <div class="title-container">
                     <div class="main-title">数字卷轴DSC社区共识</div>
-                    <p class="subtitle">构建去中心化未来 · 共享数字经济价值</p>
                 </div>
             </div>
+            <p class="subtitle">构建去中心化未来 · 共享数字经济价值</p>
             <div class="nav-tools">
                 <div class="tools-row">
                     <a href="index.html" class="home-link">首页</a>
@@ -466,24 +479,26 @@
         <!-- 社区共识语 -->
         <div class="consensus-statement">
             我们，数字卷轴DSC社区成员，秉持开放、共享、协作的精神，共同承诺：<br>
-            构建去中心化生态，推动数字经济价值流动；<br>
-            坚持公平透明原则，维护社区成员共同利益；<br>
-            持续创新勇于探索，携手创造数字未来新纪元。
+            坚守共识低价，保障生态稳定；<br>
+            推动价值流通，促进社区繁荣；<br>
+            坚持公平透明，维护成员权益；<br>
+            持续创新探索，共创数字未来。
         </div>
         
         <!-- 标题区域 -->
         <div class="header-content">
-            <h1 class="header-title">社区共识成员列表</h1>
-            <p class="header-subtitle">共识统计时间：2025年6月3日</p> <!-- 修改文字 -->
+            <h1 class="header-title">共识统计时间</h1>
+            <p class="header-subtitle">2025年6月4日</p>
         </div>
         
+       
         <!-- 统计信息栏 -->
         <div class="stats-bar">
             <!-- 第一行：共识成员 -->
             <div class="stat-row">
                 <div class="stat-item">
                     <div class="stat-value" id="membersCount">0</div>
-                    <div class="stat-label">共识成员(持续增加中)</极div>
+                    <div class="stat-label">共识成员(持续增加中)</div>
                 </div>
             </div>
             
@@ -550,18 +565,19 @@
         地址已复制到剪贴板
     </div>
 
+   
     <script>
-        // 模拟数据 - 实际应用中应从服务器获取
+        // 真实数据，手动更新 
         const consensusData = [
             { id: 1, wechatName: "行云流水", dscName: "行云流水", address: "SiDvPqx3zXcIwqVOXgK4ffgIkcU02va5nN", dscStaked: 72100, dscAvailable: 14436.56854, sccAvailable: 2906.246324, usdsBalance: 19.681434, sccStaked: 0 },
             { id: 2, wechatName: "大海", dscName: "无语伦比", address: "SjSVgZnbFH5JjqhEAj14gIqi0d2K0gp0KT", dscStaked: 48870, dscAvailable: 6788.147687, sccAvailable: 454.448618, usdsBalance: 11.77819, sccStaked: 0 },
             { id: 3, wechatName: "丽丽", dscName: "恭喜发财", address: "SWog3ML7kfsYIVVbdNSFToAS9LxcPaY7wd", dscStaked: 31180, dscAvailable: 137.637723, sccAvailable: 2276.811497, usdsBalance: 9.545586, sccStaked: 0 },
             { id: 4, wechatName: "奔跑的小蜗牛", dscName: "扬帆起航", address: "SyICADDDG5vCv8sLZoHuXbRpAbF1XwUv5W", dscStaked: 32400, dscAvailable: 526.734448, sccAvailable: 2501.118983, usdsBalance: 0.744792, sccStaked: 0 },
             { id: 5, wechatName: "轻度", dscName: "随心所欲", address: "SuzwaXLWVKJyhoChainxV294rh0odWiQtE", dscStaked: 32000, dscAvailable: 1595.824882, sccAvailable: 752.395527, usdsBalance: 150.247271, sccStaked: 0 },
-            { id: 6, wechatName: "张青安", dscName: "DSC", address: "ShCQFbo4xm1k40I极h7g4byWAEpgoBYvYkhz", dscStaked: 30010, dscAvailable: 1.550416, s极ccAvailable: 3139.321006, usdsBalance: 1.210904, sccStaked: 0 },
+            { id: 6, wechatName: "张青安", dscName: "DSC", address: "ShCQFbo4xm1k40Ih7g4byWAEpgoBYvYkhz", dscStaked: 30010, dscAvailable: 1.550416, sccAvailable: 3139.321006, usdsBalance: 1.210904, sccStaked: 0 },
             { id: 7, wechatName: "心想事成-1", dscName: "搬砖猫", address: "SAeWZ9qhvky6Iv9SsZRWZMUg9q2CZGuqYL", dscStaked: 25100, dscAvailable: 17.432499, sccAvailable: 766.60701, usdsBalance: 0.002388, sccStaked: 0 },
             { id: 8, wechatName: "惠亿佳建材", dscName: "惠亿佳", address: "SRgu7AMTBSXHncZ3ZQe9J7L5d8qH1fXBRf", dscStaked: 27100, dscAvailable: 2005.394084, sccAvailable: 1494.02685, usdsBalance: 0.631151, sccStaked: 0 },
-            { id: 9, wechatName: "徐总", dscName: "百炼", address: "SKjqgj59BUQ8eKgZGvmXmvbW8GSZFczxdF", dscStaked: 24000, dscAvailable: 51.609003, sccAvailable: 158.396676, usdsBalance: 4.915081, sccStaked极: 0 },
+            { id: 9, wechatName: "徐总", dscName: "百炼", address: "SKjqgj59BUQ8eKgZGvmXmvbW8GSZFczxdF", dscStaked: 24000, dscAvailable: 51.609003, sccAvailable: 158.396676, usdsBalance: 4.915081, sccStaked: 0 },
             { id: 10, wechatName: "华洋商行林迎民", dscName: "131419", address: "SXC2q0kcn2Tku9M4yXMoPVouMPc4EbxzpO", dscStaked: 13990, dscAvailable: 29.585365, sccAvailable: 992.626114, usdsBalance: 0.652435, sccStaked: 0 },
             { id: 11, wechatName: "杨杨得亿", dscName: "杨杨得亿", address: "SCzd35daZ1Ljohhu5ZndOMYi6tIUonmJ3b", dscStaked: 13110, dscAvailable: 610.750238, sccAvailable: 107.681343, usdsBalance: 0.154508, sccStaked: 0 },
             { id: 12, wechatName: "张JP", dscName: "DSC", address: "SuZ7g38uw9FNE3mGHI9ii0r4uB8ZXqi6ze", dscStaked: 11100, dscAvailable: 337.963151, sccAvailable: 990.305489, usdsBalance: 0.315493, sccStaked: 0 },
@@ -579,7 +595,7 @@
             { id: 24, wechatName: "韩雪-1", dscName: "明明", address: "ShFYcDzExSCj3cYK82LE5D1DuHgz2NPm9m", dscStaked: 6100, dscAvailable: 18.42375, sccAvailable: 172.557555, usdsBalance: 0.7, sccStaked: 0 },
             { id: 25, wechatName: "香钦怀-1", dscName: "美好日子", address: "SdYDgZEf0x0oEmcxO7WA25VxaPdXH01SNE", dscStaked: 4220, dscAvailable: 344.375998, sccAvailable: 17.973349, usdsBalance: 1.695675, sccStaked: 0 },
             { id: 26, wechatName: "香钦怀-2", dscName: "IPC8866", address: "SjzsSdC4eNjK4Bw2gd4bLaoMVrCrcNvv01", dscStaked: 3700, dscAvailable: 253.791761, sccAvailable: 27.19963, usdsBalance: 0.182346, sccStaked: 0 },
-            { id: 27, wechatName: "野火", dscName: "晚风", address: "SQZIqm4dHvRORSDSwDO9xZg13rTS极66NSIJ", dscStaked: 2100, dscAvailable: 1163.05684, sccAvailable: 1.726722, usdsBalance: 0.006871, sccStaked: 0 },
+            { id: 27, wechatName: "野火", dscName: "晚风", address: "SQZIqm4dHvRORSDSwDO9xZg13rTS66NSIJ", dscStaked: 2100, dscAvailable: 1163.05684, sccAvailable: 1.726722, usdsBalance: 0.006871, sccStaked: 0 },
             { id: 28, wechatName: "彼岸半夏", dscName: "诗和远方", address: "SZMRBvLJdXWJ6yfDGP5bBOE5C14z1ZCchE", dscStaked: 2410, dscAvailable: 2.27825, sccAvailable: 219.293045, usdsBalance: 0.165197, sccStaked: 0 },
             { id: 29, wechatName: "坦坦荡荡", dscName: "小五", address: "ShS8P9V0n3hdM1yzqZ1MPa2TkrRURVFXGK", dscStaked: 4100, dscAvailable: 1955.590549, sccAvailable: 26.532371, usdsBalance: 5.750096, sccStaked: 0 },
             { id: 30, wechatName: "A.0凤辉", dscName: "辉", address: "SH1KVPYBtWRsC1luu6vZIt6ZGWnJJMbCLh", dscStaked: 2100, dscAvailable: 2.860711, sccAvailable: 504.922774, usdsBalance: 0.292718, sccStaked: 0 },
@@ -605,7 +621,6 @@
             { id: 50, wechatName: "老狗", dscName: "小可爱", address: "SNQ1pwxzsItFzu30cdCeDOq86Bfc7uUopd", dscStaked: 2100, dscAvailable: 220.285409, sccAvailable: 5.097084, usdsBalance: 0.005135, sccStaked: 0 },
         ];
 
-        
         // 页面变量
         const itemsPerPage = 20;
         let currentPage = 1;
