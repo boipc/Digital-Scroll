@@ -6,7 +6,6 @@
     <title>数字卷轴DSC社区共识</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -485,7 +484,7 @@
         <!-- 表格控制区域 -->
         <div class="table-controls">
             <div class="results-info" id="resultsInfo">
-                显示 1-20 条，共 0 条记录
+                显示 1-20 条，共 50 条记录
             </div>
         </div>
         
@@ -519,15 +518,67 @@
         地址已复制到剪贴板
     </div>
     <script>
-        // 页面变量
+        // 真实数据
+       const consensusData = [
+            { id: 1, wechatName: "行云流水", dscName: "行云流水", address: "SiDvPqx3zXcIwqVOXgK4ffgIkcU02va5nN", dscStaked: 72100, dscAvailable: 14436.56854, sccAvailable: 2906.246324, usdsBalance: 19.681434, sccStaked: 0 },
+            { id: 2, wechatName: "大海", dscName: "无语伦比", address: "SjSVgZnbFH5JjqhEAj14gIqi0d2K0gp0KT", dscStaked: 48870, dscAvailable: 6788.147687, sccAvailable: 454.448618, usdsBalance: 11.77819, sccStaked: 0 },
+            { id: 3, wechatName: "丽丽", dscName: "恭喜发财", address: "SWog3ML7kfsYIVVbdNSFToAS9LxcPaY7wd", dscStaked: 31180, dscAvailable: 137.637723, sccAvailable: 2276.811497, usdsBalance: 9.545586, sccStaked: 0 },
+            { id: 4, wechatName: "奔跑的小蜗牛", dscName: "扬帆起航", address: "SyICADDDG5vCv8sLZoHuXbRpAbF1XwUv5W", dscStaked: 32400, dscAvailable: 526.734448, sccAvailable: 2501.118983, usdsBalance: 0.744792, sccStaked: 0 },
+            { id: 5, wechatName: "轻度", dscName: "随心所欲", address: "SuzwaXLWVKJyhoChainxV294rh0odWiQtE", dscStaked: 32000, dscAvailable: 1595.824882, sccAvailable: 752.395527, usdsBalance: 150.247271, sccStaked: 0 },
+            { id: 6, wechatName: "张青安", dscName: "DSC", address: "ShCQFbo4xm1k40Ih7g4byWAEpgoBYvYkhz", dscStaked: 30010, dscAvailable: 1.550416, sccAvailable: 3139.321006, usdsBalance: 1.210904, sccStaked: 0 },
+            { id: 7, wechatName: "心想事成-1", dscName: "搬砖猫", address: "SAeWZ9qhvky6Iv9SsZRWZMUg9q2CZGuqYL", dscStaked: 25100, dscAvailable: 17.432499, sccAvailable: 766.60701, usdsBalance: 0.002388, sccStaked: 0 },
+            { id: 8, wechatName: "惠亿佳建材", dscName: "惠亿佳", address: "SRgu7AMTBSXHncZ3ZQe9J7L5d8qH1fXBRf", dscStaked: 27100, dscAvailable: 2005.394084, sccAvailable: 1494.02685, usdsBalance: 0.631151, sccStaked: 0 },
+            { id: 9, wechatName: "徐总", dscName: "百炼", address: "SKjqgj59BUQ8eKgZGvmXmvbW8GSZFczxdF", dscStaked: 24000, dscAvailable: 51.609003, sccAvailable: 158.396676, usdsBalance: 4.915081, sccStaked: 0 },
+            { id: 10, wechatName: "华洋商行林迎民", dscName: "131419", address: "SXC2q0kcn2Tku9M4yXMoPVouMPc4EbxzpO", dscStaked: 13990, dscAvailable: 29.585365, sccAvailable: 992.626114, usdsBalance: 0.652435, sccStaked: 0 },
+            { id: 11, wechatName: "杨杨得亿", dscName: "杨杨得亿", address: "SCzd35daZ1Ljohhu5ZndOMYi6tIUonmJ3b", dscStaked: 13110, dscAvailable: 610.750238, sccAvailable: 107.681343, usdsBalance: 0.154508, sccStaked: 0 },
+            { id: 12, wechatName: "张JP", dscName: "DSC", address: "SuZ7g38uw9FNE3mGHI9ii0r4uB8ZXqi6ze", dscStaked: 11100, dscAvailable: 337.963151, sccAvailable: 990.305489, usdsBalance: 0.315493, sccStaked: 0 },
+            { id: 13, wechatName: "DSC小礼(李俊杰)", dscName: "俊杰", address: "Szqa9GZZzcxnkV0MYLTf1Z1WWHOWih9TqH", dscStaked: 11060, dscAvailable: 310.905755, sccAvailable: 3.526697, usdsBalance: 34.385402, sccStaked: 0 },
+            { id: 14, wechatName: "寒夜", dscName: "扬帆起航", address: "SbGdtXBzR4o8AY25uQZuH3G0raYnv00ZmX", dscStaked: 15320, dscAvailable: 55.452792, sccAvailable: 113.648829, usdsBalance: 41.669146, sccStaked: 0 },
+            { id: 15, wechatName: "韩雪-2", dscName: "璀璨雪", address: "Sy5VgXg7s0Bwdbn8X92rYYcwA0pitJJ5PF", dscStaked: 12660, dscAvailable: 745.123807, sccAvailable: 313.218267, usdsBalance: 0.092991, sccStaked: 0 },
+            { id: 16, wechatName: "攒钱小猪", dscName: "半夏微凉", address: "SsJLG4HSNZIFw4ia1mDaVEcjDI5vwOqvpM", dscStaked: 12100, dscAvailable: 659.649667, sccAvailable: 204.150674, usdsBalance: 1.28, sccStaked: 0 },
+            { id: 17, wechatName: "飞跃", dscName: "耀眼", address: "SbdpoIcUR4qECuHYyFIPWKevRqYkbZrzWP", dscStaked: 21400, dscAvailable: 195.467477, sccAvailable: 155.721826, usdsBalance: 206.64, sccStaked: 0 },
+            { id: 18, wechatName: "黄纲禹", dscName: "合理就好", address: "SFttEHTAhE6k65dadsGe1yo8quBJmdwa6S", dscStaked: 20200, dscAvailable: 126.272668, sccAvailable: 150.887889, usdsBalance: 0.277278, sccStaked: 0 },
+            { id: 19, wechatName: "国国", dscName: "超越二饼", address: "SCTfAeZOdRtVHsQ5SiuAtQyTHQAwXZuPGn", dscStaked: 21060, dscAvailable: 6.389715, sccAvailable: 476.377654, usdsBalance: 0.05, sccStaked: 0 },
+            { id: 20, wechatName: "宋彦达", dscName: "阿喆", address: "Sbty9Kki99CQReY4TmJTNS2duOvaGT4wEu", dscStaked: 6000, dscAvailable: 1225.733583, sccAvailable: 163.185854, usdsBalance: 46.871576, sccStaked: 0 },
+            { id: 21, wechatName: "耶民", dscName: "福禄平安", address: "SBqafxaI3XrzkcOxf8pjMr1QjShS4kN72S", dscStaked: 9100, dscAvailable: 3040.956286, sccAvailable: 1247.05733, usdsBalance: 120.828723, sccStaked: 0 },
+            { id: 22, wechatName: "阿贤", dscName: "阿贤", address: "SpD8HIWc3FCjV65Ez6QLxFw13GW4I7VqXB", dscStaked: 9100, dscAvailable: 1140.073373, sccAvailable: 1174.379916, usdsBalance: 0.72, sccStaked: 0 },
+            { id: 23, wechatName: "刘晓君", dscName: "金喜善", address: "SK29ePauuURrtlfCTHyzfksCbcMMnu5yRR", dscStaked: 9260, dscAvailable: 311.221277, sccAvailable: 18.35843, usdsBalance: 0.641532, sccStaked: 0 },
+            { id: 24, wechatName: "韩雪-1", dscName: "明明", address: "ShFYcDzExSCj3cYK82LE5D1DuHgz2NPm9m", dscStaked: 6100, dscAvailable: 18.42375, sccAvailable: 172.557555, usdsBalance: 0.7, sccStaked: 0 },
+            { id: 25, wechatName: "香钦怀-1", dscName: "美好日子", address: "SdYDgZEf0x0oEmcxO7WA25VxaPdXH01SNE", dscStaked: 4220, dscAvailable: 344.375998, sccAvailable: 17.973349, usdsBalance: 1.695675, sccStaked: 0 },
+            { id: 26, wechatName: "香钦怀-2", dscName: "IPC8866", address: "SjzsSdC4eNjK4Bw2gd4bLaoMVrCrcNvv01", dscStaked: 3700, dscAvailable: 253.791761, sccAvailable: 27.19963, usdsBalance: 0.182346, sccStaked: 0 },
+            { id: 27, wechatName: "野火", dscName: "晚风", address: "SQZIqm4dHvRORSDSwDO9xZg13rTS66NSIJ", dscStaked: 2100, dscAvailable: 1163.05684, sccAvailable: 1.726722, usdsBalance: 0.006871, sccStaked: 0 },
+            { id: 28, wechatName: "彼岸半夏", dscName: "诗和远方", address: "SZMRBvLJdXWJ6yfDGP5bBOE5C14z1ZCchE", dscStaked: 2410, dscAvailable: 2.27825, sccAvailable: 219.293045, usdsBalance: 0.165197, sccStaked: 0 },
+            { id: 29, wechatName: "坦坦荡荡", dscName: "小五", address: "ShS8P9V0n3hdM1yzqZ1MPa2TkrRURVFXGK", dscStaked: 4100, dscAvailable: 1955.590549, sccAvailable: 26.532371, usdsBalance: 5.750096, sccStaked: 0 },
+            { id: 30, wechatName: "A.0凤辉", dscName: "辉", address: "SH1KVPYBtWRsC1luu6vZIt6ZGWnJJMbCLh", dscStaked: 2100, dscAvailable: 2.860711, sccAvailable: 504.922774, usdsBalance: 0.292718, sccStaked: 0 },
+            { id: 31, wechatName: "竹笛爱好者-1", dscName: "竹笛飘音", address: "SvMOhN1b2Btw3oZhgDqViLZgksxR5Pr8aj", dscStaked: 1970, dscAvailable: 1.301767, sccAvailable: 7.650572, usdsBalance: 0.046948, sccStaked: 0 },
+            { id: 32, wechatName: "竹笛爱好者-2", dscName: "CiKZ-果果", address: "SWqsRnDlfwdz1H91DCDToTolaQ9S44Nbqr", dscStaked: 900, dscAvailable: 13.22, sccAvailable: 61.771362, usdsBalance: 2.9, sccStaked: 0 },
+            { id: 33, wechatName: "李吉清", dscName: "DSC小玩家", address: "ShEFUaNUrvC9fPWlmlH5IbiLY25kTAyFyc", dscStaked: 2470, dscAvailable: 139.035987, sccAvailable: 1118.342206, usdsBalance: 8.31, sccStaked: 0 },
+            { id: 34, wechatName: "左右逢源", dscName: "持之以恒", address: "SROAdci6tkI4ec9Mpuf6Fhv1NxdDH6L441", dscStaked: 5390, dscAvailable: 369.721114, sccAvailable: 269.824216, usdsBalance: 29.73, sccStaked: 0 },
+            { id: 35, wechatName: "诚信商家-1", dscName: "二罗", address: "SZRtulCq2lxbs3pZsejvRuZY0xvmb3GNaR", dscStaked: 2470, dscAvailable: 1.287261, sccAvailable: 10.067571, usdsBalance: 0.28, sccStaked: 0 },
+            { id: 36, wechatName: "诚信商家-2", dscName: "诚信玩家", address: "SQisZSAMVjIFUIm1KkdjZ1tn9M705wEzYk", dscStaked: 2990, dscAvailable: 3.532199, sccAvailable: 0.034745, usdsBalance: 0.151523, sccStaked: 0 },
+            { id: 37, wechatName: "诚信商家-3", dscName: "金色太阳", address: "SupcwEnYaNGitcReY7bnmxArugueNcfkAV", dscStaked: 2440, dscAvailable: 3.075126, sccAvailable: 27.941647, usdsBalance: 0, sccStaked: 0 },
+            { id: 38, wechatName: "本性(张人中)", dscName: "本性", address: "Sseg2IT8eSsRivUaXfEdtnhdXMW1gmq5Pb", dscStaked: 4010, dscAvailable: 0.008314, sccAvailable: 159.545471, usdsBalance: 0.072929, sccStaked: 0 },
+            { id: 39, wechatName: "林东方", dscName: "东方", address: "StnX4cJGU268ys941j4KKwzohsOQGVF5Q5", dscStaked: 6340, dscAvailable: 202.917381, sccAvailable: 100.304492, usdsBalance: 71.292072, sccStaked: 0 },
+            { id: 40, wechatName: "平淡", dscName: "平淡", address: "SyPEpeMI9c5Y1QWfWghpLOI1LOQQE0DkHY", dscStaked: 9110, dscAvailable: 40.037857, sccAvailable: 460.532474, usdsBalance: 100.163109, sccStaked: 0 },
+            { id: 41, wechatName: "1", dscName: "趁草", address: "SF34S0NS4mEq9NXjZTiUsUfY307W8Y1KJt", dscStaked: 1000, dscAvailable: 63.816785, sccAvailable: 0.817647, usdsBalance: 0.274774, sccStaked: 0 },
+            { id: 42, wechatName: "A1幕墙铝单板", dscName: "DSC马上飞翔", address: "SSsvkfoyNYmBYuGsdojgeR0v1xFnMLoiVD", dscStaked: 2890, dscAvailable: 612.244264, sccAvailable: 69.591032, usdsBalance: 0.08764, sccStaked: 0 },
+            { id: 43, wechatName: "以琳", dscName: "唯美意境", address: "STrjYC7c1Fo2qwxhaGxG8OJKWyRDtKhQqh", dscStaked: 3100, dscAvailable: 206.9025, sccAvailable: 47.094493, usdsBalance: 0, sccStaked: 0 },
+            { id: 44, wechatName: "吕吕", dscName: "吕吕", address: "SSlgogDGFd1IqX5Xu6tAAt3P9FUyR9WMkQ", dscStaked: 1770, dscAvailable: 21.896114, sccAvailable: 60.864208, usdsBalance: 6.529675, sccStaked: 0 },
+            { id: 45, wechatName: "彩虹依然", dscName: "彩虹依然", address: "Sdc1wIewadk5JL0B3k0QIMueaesBeESBZm", dscStaked: 7010, dscAvailable: 0.157069, sccAvailable: 3.55275, usdsBalance: 0, sccStaked: 0 },
+            { id: 46, wechatName: "点亮幸福", dscName: "点亮幸福", address: "SGX9LzJqOH6kTDaKocxy78RQdVbh6uZilf", dscStaked: 5100, dscAvailable: 49.560776, sccAvailable: 44.136464, usdsBalance: 0, sccStaked: 0 },
+            { id: 47, wechatName: "宋小群", dscName: "七八九", address: "Sgms2EkrE9fby9tnPfVoWwdNVR6ZIF1CXb", dscStaked: 2100, dscAvailable: 10.7325, sccAvailable: 141.5424, usdsBalance: 0, sccStaked: 0 },
+            { id: 48, wechatName: "R", dscName: "嗯", address: "SMqCWySwooIRXunyHrPMusgq40ReFgtDGI", dscStaked: 1500, dscAvailable: 83.966987, sccAvailable: 127.472141, usdsBalance: 0.006916, sccStaked: 0 },
+            { id: 49, wechatName: "心想事成-2", dscName: "七仔", address: "SB3Z6BgS91hrwNBSfXxX2jAsOGrkT5E5UN", dscStaked: 1100, dscAvailable: 0, sccAvailable: 164.317122, usdsBalance: 0, sccStaked: 0 },
+            { id: 50, wechatName: "老狗", dscName: "小可爱", address: "SNQ1pwxzsItFzu30cdCeDOq86Bfc7uUopd", dscStaked: 2100, dscAvailable: 220.285409, sccAvailable: 5.097084, usdsBalance: 0.005135, sccStaked: 0 },
+        ];
+
+       
+
+ // 页面变量
         const itemsPerPage = 20;
         let currentPage = 1;
         let currentSort = { key: 'dscStaked', direction: 'desc' };
-        let filteredData = [];
-        let consensusData = [];
-        
-        // 使用正确的CSV URL
-        const CSV_URL = 'https://raw.githubusercontent.com/Doipc/Digital-Scroll/main/data.csv';
+        let filteredData = [...consensusData];
         
         // 格式化昵称显示：只显示第一个字，后面用***
         function formatName(name) {
@@ -551,49 +602,23 @@
                 }, 2000);
             });
         }
-
-        // 从CSV加载数据
-        function loadCSVData() {
-            return new Promise((resolve, reject) => {
-                Papa.parse(CSV_URL, {
-                    download: true,
-                    header: true,
-                    dynamicTyping: true,
-                    skipEmptyLines: true,
-                    complete: function(results) {
-                        if (results.data && results.data.length > 0) {
-                            consensusData = results.data;
-                            filteredData = [...consensusData];
-                            resolve();
-                        } else {
-                            reject(new Error('CSV数据为空或格式不正确'));
-                        }
-                    },
-                    error: function(error) {
-                        reject(error);
-                    }
-                });
-            });
-        }
         
         // 计算统计数据
         function calculateStatistics() {
-            if (consensusData.length === 0) return;
-            
             // 共识成员数量
             const membersCount = consensusData.length;
             
             // DSC总质押
-            const dscStakedTotal = consensusData.reduce((sum, item) => sum + (item.dscStaked || 0), 0);
+            const dscStakedTotal = consensusData.reduce((sum, item) => sum + item.dscStaked, 0);
             
             // DSC总流通
-            const dscAvailableTotal = consensusData.reduce((sum, item) => sum + (item.dscAvailable || 0), 0);
+            const dscAvailableTotal = consensusData.reduce((sum, item) => sum + item.dscAvailable, 0);
             
             // SCC总流通
-            const sccAvailableTotal = consensusData.reduce((sum, item) => sum + (item.sccAvailable || 0), 0);
+            const sccAvailableTotal = consensusData.reduce((sum, item) => sum + item.sccAvailable, 0);
             
             // USDS总流通
-            const usdsBalanceTotal = consensusData.reduce((sum, item) => sum + (item.usdsBalance || 0), 0);
+            const usdsBalanceTotal = consensusData.reduce((sum, item) => sum + item.usdsBalance, 0);
             
             // 更新DOM
             document.getElementById('membersCount').textContent = membersCount;
@@ -603,6 +628,25 @@
             document.getElementById('usdsBalanceTotal').textContent = usdsBalanceTotal.toFixed(2);
         }
         
+        // 初始化页面
+        document.addEventListener('DOMContentLoaded', () => {
+            // 初始渲染
+            renderTable(filteredData);
+            calculateStatistics(); // 计算并显示统计数据
+            
+            // 搜索功能
+            document.getElementById('searchInput').addEventListener('input', handleSearch);
+            
+            // 表头排序
+            const tableHeaders = document.querySelectorAll('.consensus-table th[data-sort]');
+            tableHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const sortKey = header.getAttribute('data-sort');
+                    sortData(sortKey, currentSort.key === sortKey && currentSort.direction === 'asc' ? 'desc' : 'asc');
+                });
+            });
+        });
+        
         // 处理搜索
         function handleSearch(e) {
             const searchTerm = e.target.value.toLowerCase().trim();
@@ -611,9 +655,9 @@
                 filteredData = [...consensusData];
             } else {
                 filteredData = consensusData.filter(item => 
-                    (item.wechatName && item.wechatName.toLowerCase().includes(searchTerm)) || 
-                    (item.dscName && item.dscName.toLowerCase().includes(searchTerm)) || 
-                    (item.address && item.address.toLowerCase().includes(searchTerm))
+                    item.wechatName.toLowerCase().includes(searchTerm) || 
+                    item.dscName.toLowerCase().includes(searchTerm) || 
+                    item.address.toLowerCase().includes(searchTerm)
                 );
             }
             
@@ -628,9 +672,6 @@
             filteredData.sort((a, b) => {
                 let valueA = a[key];
                 let valueB = b[key];
-                
-                if (valueA === undefined || valueA === null) valueA = '';
-                if (valueB === undefined || valueB === null) valueB = '';
                 
                 if (typeof valueA === 'string') {
                     valueA = valueA.toLowerCase();
@@ -649,18 +690,10 @@
             renderTable(filteredData);
         }
         
-        // 渲染表格数据
+        // 渲染表格数据 - 修改了昵称显示和地址列
         function renderTable(data, page = currentPage) {
             const tbody = document.querySelector('#consensusTable tbody');
             tbody.innerHTML = '';
-            
-            if (!data || data.length === 0) {
-                // 添加空数据提示
-                const row = document.createElement('tr');
-                row.innerHTML = `<td colspan="8" style="text-align: center;">暂无数据</td>`;
-                tbody.appendChild(row);
-                return;
-            }
             
             const start = (page - 1) * itemsPerPage;
             const end = start + itemsPerPage;
@@ -675,41 +708,26 @@
                     <td class="address-cell" ondblclick="copyToClipboard('${item.address}')">
                         ${formatAddress(item.address)}
                     </td>
-                    <td>${item.dscStaked ? item.dscStaked.toLocaleString() : '0'}</td>
-                    <td>${item.dscAvailable ? item.dscAvailable.toFixed(2) : '0.00'}</td>
-                    <td>${item.sccAvailable ? item.sccAvailable.toFixed(2) : '0.00'}</td>
-                    <td>${item.usdsBalance ? item.usdsBalance.toFixed(2) : '0.00'}</td>
-                    <td>${item.sccStaked ? item.sccStaked.toFixed(2) : '0.00'}</td>
+                    <td>${item.dscStaked.toLocaleString()}</td>
+                    <td>${item.dscAvailable.toFixed(2)}</td>
+                    <td>${item.sccAvailable.toFixed(2)}</td>
+                    <td>${item.usdsBalance.toFixed(2)}</td>
+                    <td>${item.sccStaked.toFixed(2)}</td>
                 `;
                 tbody.appendChild(row);
             });
             
             // 更新分页信息
-            renderPagination(data.length);
+            updatePaginationControls(data.length);
             updateResultsInfo(data.length);
         }
         
         // 更新分页控件
-        function renderPagination(totalItems) {
+        function updatePaginationControls(totalItems) {
             const totalPages = Math.ceil(totalItems / itemsPerPage);
             const paginationContainer = document.getElementById('pagination');
             paginationContainer.innerHTML = '';
             
-            if (totalPages <= 1) return;
-            
-            // 上一页按钮
-            if (currentPage > 1) {
-                const prevBtn = document.createElement('button');
-                prevBtn.className = 'page-btn';
-                prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i> 上一页';
-                prevBtn.addEventListener('click', () => {
-                    currentPage--;
-                    renderTable(filteredData);
-                });
-                paginationContainer.appendChild(prevBtn);
-            }
-            
-            // 页码按钮
             for (let i = 1; i <= totalPages; i++) {
                 const button = document.createElement('button');
                 button.classList.add('page-btn');
@@ -723,56 +741,15 @@
                 });
                 paginationContainer.appendChild(button);
             }
-            
-            // 下一页按钮
-            if (currentPage < totalPages) {
-                const nextBtn = document.createElement('button');
-                nextBtn.className = 'page-btn';
-                nextBtn.innerHTML = '下一页 <i class="fas fa-chevron-right"></i>';
-                nextBtn.addEventListener('click', () => {
-                    currentPage++;
-                    renderTable(filteredData);
-                });
-                paginationContainer.appendChild(nextBtn);
-            }
         }
         
         // 更新结果信息
         function updateResultsInfo(totalItems) {
-            const start = Math.min(totalItems, (currentPage - 1) * itemsPerPage + 1);
-            const end = Math.min(totalItems, currentPage * itemsPerPage);
+            const start = (currentPage - 1) * itemsPerPage + 1;
+            const end = Math.min(currentPage * itemsPerPage, totalItems);
             document.getElementById('resultsInfo').textContent = 
                 `显示 ${start}-${end} 条，共 ${totalItems} 条记录`;
         }
-        
-        // 初始化页面
-        document.addEventListener('DOMContentLoaded', async () => {
-            try {
-                // 加载CSV数据
-                await loadCSVData();
-                
-                // 初始渲染
-                renderTable(filteredData);
-                calculateStatistics();
-                
-                // 搜索功能
-                document.getElementById('searchInput').addEventListener('input', handleSearch);
-                
-                // 表头排序
-                const tableHeaders = document.querySelectorAll('.consensus-table th[data-sort]');
-                tableHeaders.forEach(header => {
-                    header.addEventListener('click', () => {
-                        const sortKey = header.getAttribute('data-sort');
-                        sortData(sortKey, currentSort.key === sortKey && currentSort.direction === 'asc' ? 'desc' : 'asc');
-                    });
-                });
-            } catch (error) {
-                console.error('初始化失败:', error);
-                // 显示错误信息
-                const tbody = document.querySelector('#consensusTable tbody');
-                tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: #e53e3e;">数据加载失败: ${error.message}</td></tr>`;
-            }
-        });
     </script>
 </body>
 </html>
