@@ -29,20 +29,21 @@
             padding: 10px;
         }
         
-        /* 顶部导航栏 */
+        /* 顶部导航栏 - 修改了布局 */
         .top-nav {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
             padding: 15px 0;
             margin-bottom: 15px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
+        /* Logo和标题容器 - 确保垂直居中对齐 */
         .logo-title-container {
             display: flex;
-            align-items: center;
+            align-items: center; /* 垂直居中 */
             gap: 15px;
+            margin-bottom: 15px;
         }
         
         .logo {
@@ -57,6 +58,7 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             background: #1e40af;
             overflow: hidden;
+            flex-shrink: 0; /* 防止缩小 */
         }
         
         .logo img {
@@ -66,14 +68,13 @@
         }
         
         .title-container {
-            display: flex;
-            flex-direction: column;
+            flex: 1;
         }
         
         .main-title {
-            font-size: 2.2rem; /* 缩小字号 */
+            font-size: 2.2rem;
             font-weight: bold;
-            background: linear-gradient(to right, #ff9d00, #ff5e00); /* 橙色渐变 */
+            background: linear-gradient(to right, #ff9d00, #ff5e00);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
@@ -83,16 +84,13 @@
          .subtitle {
             font-size: 1.1rem;
             color: #a0aec0;
-            text-align: center; /* 居中 */
             margin-top: 5px;
-            width: 100%; /* 确保副标题占据整行 */
         }
         
         /* 导航工具区域 */
         .nav-tools {
             display: flex;
             flex-direction: column;
-            align-items: flex-end;
             gap: 15px;
         }
         
@@ -106,8 +104,8 @@
             color: #fff;
             text-decoration: none;
             font-weight: bold;
-            font-size: 12px; /* 首页缩小字号 */
-            padding: 5px 16px; /* 首页边框缩小20% */
+            font-size: 12px;
+            padding: 5px 16px;
             background: rgba(52, 152, 219, 0.2);
             border-radius: 20px;
             transition: all 0.3s;
@@ -123,8 +121,8 @@
             display: flex;
             background: rgba(255, 255, 255, 0.15);
             border-radius: 20px;
-            padding: 2px 16px; /* 搜索框缩小20% */
-            width: 180px; /* 缩小20% */
+            padding: 2px 16px;
+            width: 180px;
             align-items: center;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
@@ -136,7 +134,7 @@
             padding: 4px;
             width: 100%;
             outline: none;
-            font-size: 12px; /* 缩小字号 */
+            font-size: 12px;
         }
         
         .search-box input::placeholder {
@@ -145,7 +143,7 @@
         
         .search-icon {
             margin-right: 8px;
-            font-size: 12px; /* 缩小字号 */
+            font-size: 12px;
             color: rgba(255, 255, 255, 0.7);
         }
         
@@ -160,7 +158,7 @@
         }
         
         .header-title {
-            font-size: 1.5rem; /* 缩小字号 */
+            font-size: 1.5rem;
             margin: 5px 0;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
             font-weight: 700;
@@ -168,10 +166,10 @@
         }
         
         .header-subtitle {
-            font-size: 0.9rem; /* 缩小字号 */
+            font-size: 0.9rem;
             margin-bottom: 10px;
             color: #a0aec0;
-            text-align: center; /* 居中显示 */
+            text-align: center;
         }
         
         /* 共识表格 */
@@ -184,15 +182,15 @@
             border-radius: 8px;
             overflow: hidden;
             font-size: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1); /* 添加表格边框 */
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .consensus-table th, 
         .consensus-table td {
-            padding: 8px 10px; /* 减小高度 */
+            padding: 8px 10px;
             text-align: left;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* 更明显的边框线 */
-            border-right: 1px solid rgba(255, 255, 255, 0.1); /* 添加单元格边框 */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -216,21 +214,6 @@
             background: rgba(255, 255, 255, 0.08);
         }
         
-        .consensus-table .highlight {
-            font-weight: bold;
-            color: #48bb78;
-        }
-        .copy-cell {
-            max-width: 150px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            display: flex;
-            align-items: center;
-            outline: none !important; /* 移除黑框 */
-            user-select: none; /* 防止选中 */
-            cursor: pointer; /* 添加指针样式 */
-        }
         .address-cell {
             max-width: 150px;
             overflow: hidden;
@@ -238,8 +221,9 @@
             white-space: nowrap;
             display: flex;
             align-items: center;
-            outline: none !important; /* 移除黑框 */
-            user-select: none; /* 防止选中 */
+            outline: none !important;
+            user-select: none;
+            cursor: pointer;
         }
         
         .pagination {
@@ -304,54 +288,14 @@
         }
         
         .consensus-statement {
-            font-size: 1rem; /* 缩小字号 */
+            font-size: 1rem;
             line-height: 1.7;
             text-align: center;
             margin: 20px 0;
             padding: 10px;
             background: rgba(0, 0, 0, 0.15);
             border-radius: 8px;
-            /* 移除斜体 */
-           color: #a0aec0; /* 与副标题相同颜色 */
-        }
-        
-        .tooltip {
-            position: relative;
-            display: inline-block;
-        }
-        
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 140px;
-            background-color: rgba(0, 0, 0, 0.8);
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 5px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -75px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            font-size: 12px;
-        }
-        
-        .tooltip .tooltiptext::after {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -5px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: rgba(0, 0, 0, 0.8) transparent transparent transparent;
-        }
-        
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
+           color: #a0aec0;
         }
         
         .table-controls {
@@ -389,23 +333,13 @@
         
         /* 移动端适配 */
         @media (max-width: 768px) {
-            .top-nav {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
-            }
-            
             .logo-title-container {
-                width: 100%;
-                justify-content: center;
-                flex-direction: row; /* 水平排列 */
-                text-align: center;
-                gap: 10px;
+                flex-direction: row;
+                align-items: center;
             }
             
             .nav-tools {
                 width: 100%;
-                align-items: center;
             }
             
             .tools-row {
@@ -433,7 +367,7 @@
             
             .consensus-table th, 
             .consensus-table td {
-                padding: 6px 8px; /* 更小的内边距 */
+                padding: 6px 8px;
                 font-size: 11px;
             }
             
@@ -447,14 +381,14 @@
             }
             
             .main-title {
-                font-size: 1.3rem; /* 移动端更小字号 */
+                font-size: 1.3rem;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- 修改后的顶部导航栏 -->
+        <!-- 顶部导航栏 -->
         <div class="top-nav">
             <div class="logo-title-container">
                 <div class="logo">
@@ -462,9 +396,10 @@
                 </div>
                 <div class="title-container">
                     <div class="main-title">数字卷轴DSC社区共识</div>
+                    <p class="subtitle">构建去中心化未来 · 共享数字经济价值</p>
                 </div>
             </div>
-            <p class="subtitle">构建去中心化未来 · 共享数字经济价值</p>
+            
             <div class="nav-tools">
                 <div class="tools-row">
                     <a href="index.html" class="home-link">首页</a>
@@ -478,7 +413,7 @@
         
         <!-- 社区共识语 -->
         <div class="consensus-statement">
-            我们，数字卷轴DSC社区成员，秉持开放、共享、协作的精神，共同承诺：<br>
+            数字卷轴DSC社区成员，秉持开放、共享、协作的精神，共同承诺：<br>
             坚守共识低价，保障生态稳定；<br>
             推动价值流通，促进社区繁荣；<br>
             坚持公平透明，维护成员权益；<br>
@@ -491,10 +426,8 @@
             <p class="header-subtitle">2025年6月4日</p>
         </div>
         
-       
         <!-- 统计信息栏 -->
         <div class="stats-bar">
-            <!-- 第一行：共识成员 -->
             <div class="stat-row">
                 <div class="stat-item">
                     <div class="stat-value" id="membersCount">0</div>
@@ -502,7 +435,6 @@
                 </div>
             </div>
             
-            <!-- 第二行：DSC相关 -->
             <div class="stat-row">
                 <div class="stat-item">
                     <div class="stat-value" id="dscStakedTotal">0</div>
@@ -514,10 +446,9 @@
                 </div>
             </div>
             
-            <!-- 第三行：SCC和USDS -->
             <div class="stat-row">
                 <div class="stat-item">
-                    <div class="stat-value" id="sccAvailableTotal">0</div>
+                    <div class="stat-value极" id="sccAvailableTotal">0</div>
                     <div class="stat-label">SCC总流通</div>
                 </div>
                 <div class="stat-item">
@@ -531,14 +462,13 @@
         <div class="table-controls">
             <div class="results-info" id="resultsInfo">
                 显示 1-20 条，共 50 条记录
-            </div>
+            </极div>
         </div>
         
-        <!-- 共识表格 - 移除了序号列 -->
+        <!-- 共识表格 -->
         <table class="consensus-table" id="consensusTable">
             <thead>
                 <tr>
-                    <!-- 删除了序号列 -->
                     <th data-sort="wechatName">微信昵称 <i class="fas fa-sort"></i></th>
                     <th data-sort="dscName">DSC昵称 <i class="fas fa-sort"></i></th>
                     <th data-sort="address">卷界地址 <i class="fas fa-sort"></i></th>
@@ -565,10 +495,9 @@
         地址已复制到剪贴板
     </div>
 
-   
     <script>
-        // 真实数据，手动更新 
-        const consensusData = [
+        // 真实数据
+       const consensusData = [
             { id: 1, wechatName: "行云流水", dscName: "行云流水", address: "SiDvPqx3zXcIwqVOXgK4ffgIkcU02va5nN", dscStaked: 72100, dscAvailable: 14436.56854, sccAvailable: 2906.246324, usdsBalance: 19.681434, sccStaked: 0 },
             { id: 2, wechatName: "大海", dscName: "无语伦比", address: "SjSVgZnbFH5JjqhEAj14gIqi0d2K0gp0KT", dscStaked: 48870, dscAvailable: 6788.147687, sccAvailable: 454.448618, usdsBalance: 11.77819, sccStaked: 0 },
             { id: 3, wechatName: "丽丽", dscName: "恭喜发财", address: "SWog3ML7kfsYIVVbdNSFToAS9LxcPaY7wd", dscStaked: 31180, dscAvailable: 137.637723, sccAvailable: 2276.811497, usdsBalance: 9.545586, sccStaked: 0 },
@@ -627,13 +556,13 @@
         let currentSort = { key: 'dscStaked', direction: 'desc' };
         let filteredData = [...consensusData];
         
-        // 格式化昵称显示：只显示头尾1个字，中间隐藏
+        // 格式化昵称显示：只显示第一个字，后面用***
         function formatName(name) {
-            if (!name || name.length <= 2) return name;
-            return name.charAt(0) + '***' + name.charAt(name.length - 1);
+            if (!name || name.length === 0) return '';
+            return name.charAt(0) + '***';
         }
         
-        // 格式化地址显示：头5个字符 + ... + 尾5个字符
+        // 格式化地址显示
         function formatAddress(address) {
             if (!address || address.length <= 10) return address;
             return address.substring(0, 5) + '...' + address.substring(address.length - 5);
@@ -737,7 +666,7 @@
             renderTable(filteredData);
         }
         
-        // 渲染表格数据
+        // 渲染表格数据 - 修改了昵称显示和地址列
         function renderTable(data, page = currentPage) {
             const tbody = document.querySelector('#consensusTable tbody');
             tbody.innerHTML = '';
@@ -749,15 +678,11 @@
             paginatedData.forEach(item => {
                 const row = document.createElement('tr');
                 
-                // 移除了序号列
                 row.innerHTML = `
                     <td>${formatName(item.wechatName)}</td>
                     <td>${formatName(item.dscName)}</td>
                     <td class="address-cell" ondblclick="copyToClipboard('${item.address}')">
-                        <span class="tooltip">
-                            ${formatAddress(item.address)}
-                            <span class="tooltiptext">双击复制地址</span>
-                        </span>
+                        ${formatAddress(item.address)}
                     </td>
                     <td>${item.dscStaked.toLocaleString()}</td>
                     <td>${item.dscAvailable.toFixed(2)}</td>
