@@ -94,11 +94,13 @@
             margin-top: 5px;
         }
         
-        /* 导航工具区域 */
+        /* 导航工具区域 - 移动到副标题下方 */
         .nav-tools {
             display: flex;
-            flex-direction: column;
-            gap: 15px;
+            justify-content: center;
+            width: 100%;
+            margin-top: 15px;
+            margin-bottom: 5px;
         }
         
         .tools-row {
@@ -129,7 +131,7 @@
             display: flex;
             background: rgba(255, 255, 255, 0.15);
             border-radius: 20px;
-            padding: 3px 12px; /* 高度缩小 */
+            padding: 1px 12px; /* 高度缩小 */
             width: 180px;
             align-items: center;
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -355,12 +357,13 @@
             
             .nav-tools {
                 width: 100%;
-                align-items: center;
+                margin-top: 10px;
             }
             
             .tools-row {
                 width: 100%;
                 justify-content: center;
+                flex-direction: column;
             }
             
             .search-box {
@@ -413,20 +416,21 @@
                     </div>
                     <div class="main-title">数字卷轴DSC社区共识</div>
                 </div>
-                
-                <div class="nav-tools">
-                    <div class="tools-row">
-                        <a href="index.html" class="home-link">首页</a>
-                        <div class="search-box">
-                            <span class="search-icon">🔍</span>
-                            <input type="text" id="searchInput" placeholder="搜索共识信息...">
-                        </div>
-                    </div>
-                </div>
             </div>
             
             <!-- 副标题在下方居中显示 -->
             <p class="subtitle">构建去中心化未来 · 共享数字经济价值</p>
+            
+            <!-- 导航工具区域移动到副标题下方 -->
+            <div class="nav-tools">
+                <div class="tools-row">
+                    <a href="index.html" class="home-link">首页</a>
+                    <div class="search-box">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" id="searchInput" placeholder="搜索共识信息...">
+                    </div>
+                </div>
+            </div>
         </div>
         
         <!-- 社区共识语 -->
@@ -513,7 +517,6 @@
     <div class="notification" id="notification">
         地址已复制到剪贴板
     </div>
-
     <script>
         // 真实数据
        const consensusData = [
