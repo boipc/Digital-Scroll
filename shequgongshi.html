@@ -376,7 +376,7 @@
             .tools-row {
                 width: 100%;
                 justify-content: center;
-                flex-direction: column;
+                flex-direction: row;
             }
             
             .search-box {
@@ -495,7 +495,7 @@
         <!-- 表格控制区域 -->
         <div class="table-controls">
             <div class="results-info" id="resultsInfo">
-                显示 1-20 条，共 50 条记录
+                显示 1-15 条
             </div>
         </div>
         
@@ -622,7 +622,7 @@
        
 
  // 页面变量
-        const itemsPerPage = 20;
+        const itemsPerPage = 15;
         let currentPage = 1;
         let currentSort = { key: 'dscStaked', direction: 'desc' };
         let filteredData = [...consensusData];
