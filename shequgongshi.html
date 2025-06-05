@@ -21,12 +21,16 @@
             padding: 10px;
             font-size: 13px;
             line-height: 1.5;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 10px;
+            flex: 1;
         }
         
         /* 顶部导航栏 - 重构布局 */
@@ -297,13 +301,13 @@
             color: #a0aec0;
             font-size: 0.9rem;
         }
-        
+        /*共识语*/
         .consensus-statement {
             font-size: 1rem;
             line-height: 1.7;
-            text-align: center;
+            text-align: center;/* 修改为左对齐center改为left */
             margin: 20px 0;
-            padding: 10px;
+            padding: 10px;/* 增加左右内边距 */
             background: rgba(0, 0, 0, 0.15);
             border-radius: 8px;
            color: #a0aec0;
@@ -402,7 +406,27 @@
             .main-title {
                 font-size: 1.3rem;
             }
+             /* 页脚样式 */
+        .footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px 0;
+            text-align: center;
+            font-size: 1.1rem;
+            color: #a0aec0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 20px;
+            position: relative;
+            z-index: 10;
         }
+        
+        .footer-slogan {
+            font-weight: 500;
+            letter-spacing: 1px;
+            color: #3498db;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        
+        
     </style>
 </head>
 <body>
@@ -435,11 +459,8 @@
         
         <!-- 社区共识语 -->
         <div class="consensus-statement">
-            数字卷轴DSC社区成员，秉持开放、共享、协作的精神，共同承诺：
-            坚守共识低价，保障生态稳定；
-            推动价值流通，促进社区繁荣；
-            坚持公平透明，维护成员权益；
-            持续创新探索，共创数字未来。
+            共识凝聚力量 · 价值创造未来<br>
+        共建去中心化生态 · 共享数字经济红利<br>
         </div>
         
         <!-- 标题区域 -->
@@ -512,7 +533,11 @@
             <!-- 分页按钮将通过JavaScript生成 -->
         </div>
     </div>
-
+     <!-- 新增的页脚 -->
+    <footer class="footer">
+        <div class="footer-slogan">共识筑基 · 价值流通 · 共创未来</div>
+    </footer>
+    
     <!-- 通知弹窗 -->
     <div class="notification" id="notification">
         地址已复制到剪贴板
