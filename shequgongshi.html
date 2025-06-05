@@ -435,7 +435,7 @@
         
         <!-- 社区共识语 -->
         <div class="consensus-statement">
-            数字卷轴DSC社区成员，秉持开放、共享、协作的精神，共同承诺：<br>
+            我们，数字卷轴DSC社区成员，秉持开放、共享、协作的精神，共同承诺：<br>
             坚守共识低价，保障生态稳定；<br>
             推动价值流通，促进社区繁荣；<br>
             坚持公平透明，维护成员权益；<br>
@@ -492,7 +492,7 @@
         <table class="consensus-table" id="consensusTable">
             <thead>
                 <tr>
-              <!-- <th data-sort="wechatName">微信昵称 <i class="fas fa-sort"></i></th> 
+                    
                     <th data-sort="dscName">DSC昵称 <i class="fas fa-sort"></i></th>
                     <th data-sort="address">卷界地址 <i class="fas fa-sort"></i></th>
                     <th data-sort="dscStaked">DSC质押 <i class="fas fa-sort"></i></th>
@@ -687,6 +687,7 @@
                 filteredData = [...consensusData];
             } else {
                 filteredData = consensusData.filter(item => 
+                    item.wechatName.toLowerCase().includes(searchTerm) || 
                     item.dscName.toLowerCase().includes(searchTerm) || 
                     item.address.toLowerCase().includes(searchTerm)
                 );
@@ -734,9 +735,10 @@
                 const row = document.createElement('tr');
                 
                 row.innerHTML = `
-    <td>${formatName(item.dscName)}</td>
-    <td class="address-cell" ondblclick="copyToClipboard('${item.address}')">
-        ${formatAddress(item.address)}
+                    
+                    <td>${formatName(item.dscName)}</td>
+                    <td class="address-cell" ondblclick="copyToClipboard('${item.address}')">
+                        ${formatAddress(item.address)}
                     </td>
                     <td>${item.dscStaked.toLocaleString()}</td>
                     <td>${item.dscAvailable.toFixed(2)}</td>
@@ -747,28 +749,27 @@
                 tbody.appendChild(row);
             });
             
-            // 更新分页信息
+             // 更新分页信息
             updatePaginationControls(data.length);
             updateResultsInfo(data.length);
         }
         
-        // 更新分页控件
-        function updatePaginationControls(totalItems) {
-            const totalPages = Math.ceil(totalItems / itemsPerPage);
-            const paginationContainer = document.getElementById('pagination');
-            paginationContainer.innerHTML = '';
+        // 处理搜索 - 已移除微信昵称搜索
+        function handleSearch(e) {
+            const searchTerm = e.target.value.toLowerCase().trim();
             
-            for (let i = 1; i <= totalPages; i++) {
-                const button = document.createElement('button');
-                button.classList.add('page-btn');
-                if (i === currentPage) {
-                    button.classList.add('active');
-                }
-                button.textContent = i;
-                button.addEventListener('click', () => {
-                    currentPage = i;
-                    renderTable(filteredData);
-                });
+            if (searchTerm === '') {
+                filteredData = [...consensusData];
+            } else {
+                filteredData = consensusData.filter(item => 
+                    item.dscName.toLowerCase().includes(searchTerm) || 
+                    item.address.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            currentPage = 1;
+            renderTable(filteredData);
+        }
                 paginationContainer.appendChild(button);
             }
         }
