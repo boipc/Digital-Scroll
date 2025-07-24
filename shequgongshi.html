@@ -3,800 +3,575 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>数字卷轴DSC社区共识</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>DSC股东分红系统</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Noto Sans SC', sans-serif;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
         }
         
         body {
-            background: linear-gradient(135deg, #1a202c, #2d3748);
+            background: linear-gradient(135deg, #0a0c24, #131844, #0a0c24);
             color: #fff;
             min-height: 100vh;
-            padding: 10px;
-            font-size: 13px;
-            line-height: 1.5;
-        }
-           .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 10px;
+            padding: 15px;
+            overflow-x: hidden;
+            position: relative;
         }
         
-        /* 顶部导航栏 - 重构布局 */
-        .top-nav {
-            display: flex;
-            flex-direction: column;
-            padding: 15px 0;
-            margin-bottom: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        /* 顶部标题行 - logo和主标题水平排列 */
-        .header-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        /* 粒子背景效果 */
+        #particles-js {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            padding-bottom: 25px;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 15px 0;
+            position: relative;
             margin-bottom: 10px;
         }
         
-        /* Logo和标题容器 */
-        .logo-title-container {
-            display: flex;
-            align-items: center;
-            gap: 15px;
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 160px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #00c6ff, #0072ff, transparent);
+            border-radius: 2px;
         }
         
         .logo {
-            height: 50px;
-            width: 50px;
-            border-radius: 50%;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            font-size: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            background: #1e40af;
-            overflow: hidden;
-            flex-shrink: 0;
+            margin-bottom: 10px;
         }
         
-        .logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .logo-icon {
+            font-size: 42px;
+            color: #00c6ff;
+            margin-bottom: 3px;
+            text-shadow: 0 0 15px rgba(0, 198, 255, 0.8);
         }
         
-        .main-title {
-            font-size: 2.2rem;
-            font-weight: bold;
-            background: linear-gradient(to right, #ff9d00, #ff5e00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
-            line-height: 1.2;
-        }
-        
-        /* 副标题 - 在下方居中显示 */
-        .subtitle {
-            font-size: 1.1rem;
-            color: #a0aec0;
-            text-align: center;
-            width: 100%;
-            margin-top: 5px;
-        }
-        
-        /* 导航工具区域 - 移动到副标题下方 */
-        .nav-tools {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            margin-top: 15px;
+        h1 {
+            font-size: 28px;
+            letter-spacing: 1px;
             margin-bottom: 5px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
         }
         
-        .tools-row {
-            display: flex;
-            align-items: center;
-            gap: 15px;
+        .subtitle {
+            font-size: 16px;
+            color: #00c6ff;
+            letter-spacing: 0.5px;
+            margin-bottom: 3px;
         }
         
-        .home-link {
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 12px;
-            padding: 5px 16px;
-            background: rgba(52, 152, 219, 0.2);
-            border-radius: 20px;
+        .info-text {
+            font-size: 13px;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+        
+        .date {
+            background: rgba(0, 114, 255, 0.25);
+            padding: 6px 12px;
+            border-radius: 18px;
+            font-size: 13px;
+            display: inline-block;
+            margin-top: 6px;
+            border: 1px solid rgba(0, 198, 255, 0.4);
+            cursor: pointer;
             transition: all 0.3s;
-            border: 1px solid rgba(52, 552, 359, 0.3);
-            white-space: nowrap;
         }
         
-        .home-link:hover {
-            background: rgba(52, 152, 219, 0.3);
+        .date:hover {
+            background: rgba(0, 114, 255, 0.35);
+            box-shadow: 0 0 12px rgba(0, 198, 255, 0.5);
         }
         
-        /* 搜索框高度缩小 */
-        .search-box {
-            display: flex;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 20px;
-            padding: 1px 12px; /* 高度缩小 */
-            width: 180px;
-            align-items: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            height: 32px; /* 固定高度 */
-        }
-        
-        .search-box input {
+        .date-input {
             background: transparent;
             border: none;
-            color: #fff;
-            padding: 4px;
-            width: 100%;
+            color: white;
+            font-size: 13px;
+            width: 100px;
+            text-align: center;
             outline: none;
-            font-size: 12px;
         }
         
-        .search-box input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
-        
-        .search-icon {
-            margin-right: 8px;
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.7);
-        }
-        
-        /* 标题区域 */
-        .header-content {
-            text-align: center;
-            margin-bottom: 15px;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .header-title {
-            font-size: 1.5rem;
-            margin: 5px 0;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-            font-weight: 700;
-            color: #3498db;
-        }
-        
-        .header-subtitle {
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-            color: #a0aec0;
-            text-align: center;
-        }
-         /* 新增页脚样式 */
-    .footer {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 20px 0;
-        text-align: center;
-    }
-    
-    .footer-slogan {
-        font-size: 1.2rem;
-        color: #3498db;
-        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-        letter-spacing: 1px;
-        font-weight: 500;
-    }
-        /* 共识表格 */
-        .consensus-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 10px 0;
-            background: rgba(255, 255, 255, 0.05);
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-            border-radius: 8px;
-            overflow: hidden;
-            font-size: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .consensus-table th, 
-        .consensus-table td {
-            padding: 8px 10px;
-            text-align: left;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        
-        .consensus-table th {
-            background: rgba(26, 32, 44, 0.7);
-            font-weight: bold;
-            color: #3498db;
-            font-size: 12px;
-            position: sticky;
-            top: 0;
-            cursor: pointer;
-        }
-        
-        .consensus-table th:hover {
-            background: rgba(26, 32, 44, 0.9);
-        }
-        
-        .consensus-table tr:hover {
-            background: rgba(255, 255, 255, 0.08);
-        }
-        
-        .address-cell {
-            max-width: 150px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            display: flex;
-            align-items: center;
-            outline: none !important;
-            user-select: none;
-            cursor: pointer;
-        }
-        
-        .pagination {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 15px;
-            gap: 5px;
-        }
-        
-        .page-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            color: #fff;
-            padding: 6px 12px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 12px;
-            transition: all 0.3s;
-        }
-        
-        .page-btn.active {
-            background: #3498db;
-            font-weight: bold;
-        }
-        
-        .page-btn:hover:not(.active) {
-            background: rgba(255, 255, 255, 0.2);
-        }
-        
-        .stats-bar {
+        .card-container {
             display: flex;
             flex-direction: column;
             gap: 10px;
-            margin: 15px 0;
+            margin-top: 8px;
         }
         
-        .stat-row {
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
+        .card {
+            border-radius: 16px;
+            padding: 10px 14px; /* 缩小高度 */
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(6px);
+            transition: all 0.3s;
+            min-height: 80px; /* 减小最小高度 */
         }
         
-        .stat-item {
-            flex: 1;
-            background: rgba(0, 0, 0, 0.2);
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 114, 255, 0.5);
         }
         
-        .stat-value {
-            font-weight: bold;
-            font-size: 1.4rem;
-            color: #48bb78;
-            margin-bottom: 5px;
-        }
-        
-        .stat-label {
-            color: #a0aec0;
-            font-size: 0.9rem;
-        }
-        /*共识语*/
-        .consensus-statement {
-            font-size: 1rem;
-            line-height: 1.7;
-            text-align: center;/* 修改为左对齐center改为left */
-            margin: 20px 0;
-            padding: 10px;/* 增加左右内边距 */
-            background: rgba(0, 0, 0, 0.15);
-            border-radius: 8px;
-           color: #a0aec0;
-        }
-        
-        .table-controls {
+        .card-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-            gap: 10px;
+            margin-bottom: 5px; /* 减小间距 */
         }
         
-        .results-info {
-            color: #a0aec0;
-            font-size: 12px;
+        .level {
+            font-size: 17px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
         }
         
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 25px;
-            background: rgba(26, 32, 44, 0.9);
-            border-left: 4px solid #48bb78;
-            border-radius: 4px;
-            color: #fff;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transform: translateX(120%);
-            transition: transform 0.3s ease-in-out;
-            z-index: 1000;
+        .stars {
+            display: flex;
         }
         
-        .notification.show {
-            transform: translateX(0);
+        .stars i {
+            color: #ffd700;
+            text-shadow: 0 0 6px rgba(255, 215, 0, 0.7);
+            margin-left: 2px;
+            font-size: 13px;
         }
         
-        /* 移动端适配 */
-        @media (max-width: 768px) {
-            .header-top {
-                flex-direction: column;
-                align-items: center;
-                gap: 10px;
-            }
-            
-            .logo-title-container {
-                justify-content: center;
-                width: 100%;
-            }
-            
-            .nav-tools {
-                width: 100%;
-                margin-top: 10px;
-            }
-            
-            .tools-row {
-                width: 100%;
-                justify-content: center;
-                flex-direction: row;
-            }
-            
-            .search-box {
-                width: 100%;
-            }
-            
-            .consensus-table {
-                display: block;
-                overflow-x: auto;
-            }
-            
-            .header-title {
-                font-size: 1.3rem;
-            }
-            
-            .stats-bar {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .consensus-table th, 
-            .consensus-table td {
-                padding: 6px 8px;
-                font-size: 11px;
-            }
-            
-            .address-cell {
-                max-width: 100px;
-            }
-            
-            .table-controls {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .main-title {
-                font-size: 1.3rem;
-            }
+        .reward-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3px; /* 减小间距 */
         }
         
+        .reward-label {
+            font-size: 14px;
+            color: #bbb;
+            flex: 1;
+        }
+        
+        .reward-value {
+            display: flex;
+            align-items: center;
+            min-width: 120px;
+            justify-content: flex-end;
+        }
+        
+        /* 修改数字显示样式 */
+        .virtual {
+            color: #ff0000; /* 红色数字 */
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            min-width: 100px;
+            text-align: right;
+            background: transparent !important; /* 移除背景 */
+            border: none !important; /* 移除边框 */
+            padding: 0 !important; /* 移除内边距 */
+        }
+        
+        .virtual:hover {
+            color: #ff6666; /* 悬停时变为浅红 */
+        }
+        
+        .dsc-unit {
+            font-size: 14px;
+            color: #00c6ff;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+        
+        .reward-input {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .reward-input input {
+            background: rgba(0, 0, 0, 0.25);
+            border: 2px solid #00c6ff;
+            border-radius: 10px;
+            padding: 6px 10px; /* 减小输入框内边距 */
+            color: #ff0000; /* 红色数字 */
+            font-size: 15px;
+            font-weight: bold;
+            width: 100px;
+            outline: none;
+            transition: all 0.3s;
+            text-align: right;
+        }
+        
+        .reward-input input:focus {
+            background: rgba(0, 198, 255, 0.15);
+            box-shadow: 0 0 12px rgba(0, 198, 255, 0.5);
+        }
+        
+        /* 卡片渐变效果 */
+        .level1-card {
+            background: linear-gradient(135deg, rgba(0, 114, 255, 0.15), rgba(0, 198, 255, 0.1));
+        }
+        
+        .level2-card {
+            background: linear-gradient(135deg, rgba(0, 114, 255, 0.22), rgba(0, 198, 255, 0.17));
+        }
+        
+        .level3-card {
+            background: linear-gradient(135deg, rgba(0, 114, 255, 0.3), rgba(0, 198, 255, 0.25));
+        }
+        
+        .level4-card {
+            background: linear-gradient(135deg, rgba(106, 27, 154, 0.28), rgba(49, 27, 146, 0.23));
+        }
+        
+        .level5-card {
+            background: linear-gradient(135deg, rgba(106, 27, 154, 0.38), rgba(49, 27, 146, 0.33));
+            border: 1px solid rgba(186, 104, 200, 0.4);
+            /* 移除浮动动画 */
+        }
+        
+        .level5-card:hover {
+            box-shadow: 0 10px 25px rgba(186, 104, 200, 0.6);
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 18px;
+            font-size: 15px;
+            color: #ff4081;
+            font-weight: bold;
+            text-shadow: 0 0 8px rgba(255, 64, 129, 0.5);
+            padding: 10px;
+            background: rgba(255, 64, 129, 0.1);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 64, 129, 0.3);
+        }
+        
+        .glow {
+            position: absolute;
+            width: 160px;
+            height: 160px;
+            background: radial-gradient(circle, rgba(0, 198, 255, 0.4), transparent 70%);
+            border-radius: 50%;
+            filter: blur(20px);
+            z-index: -1;
+        }
+        
+        .glow-1 {
+            top: 8%;
+            left: 8%;
+        }
+        
+        .glow-2 {
+            bottom: 8%;
+            right: 8%;
+            background: radial-gradient(circle, rgba(106, 27, 154, 0.5), transparent 70%);
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 8px 15px;
+            }
+            
+            .header {
+                padding: 12px 0;
+            }
+            
+            .logo-icon {
+                font-size: 38px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .subtitle {
+                font-size: 14px;
+            }
+            
+            .card {
+                padding: 10px;
+                min-height: 75px;
+            }
+            
+            .level {
+                font-size: 15px;
+            }
+            
+            .virtual {
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- 修改后的顶部导航栏 -->
-        <div class="top-nav">
-            <div class="header-top">
-                <div class="logo-title-container">
-                    <div class="logo">
-                        <img src="images/logo01.png" alt="数字卷轴DSC社区共识">
-                    </div>
-                    <div class="main-title">数字卷轴DSC社区共识</div>
-                </div>
-            </div>
-            
-            <!-- 副标题在下方居中显示 -->
-            <p class="subtitle">构建去中心化未来 · 共享数字经济价值</p>
-            
-            <!-- 导航工具区域移动到副标题下方 -->
-            <div class="nav-tools">
-                <div class="tools-row">
-                    <a href="index.html" class="home-link">首页</a>
-                    <div class="search-box">
-                        <span class="search-icon">🔍</span>
-                        <input type="text" id="searchInput" placeholder="搜索共识信息...">
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- 社区共识语 -->
-        <div class="consensus-statement">
-            共识凝聚力量 · 价值创造未来<br>
-        共建去中心化生态 · 共享数字经济红利<br>
-        </div>
-        
-        <!-- 标题区域 -->
-        <div class="header-content">
-            <h1 class="header-title">共识统计时间</h1>
-            <p class="header-subtitle">2025年6月4日</p>
-        </div>
-        
-        <!-- 统计信息栏 -->
-        <div class="stats-bar">
-            <div class="stat-row">
-                <div class="stat-item">
-                    <div class="stat-value" id="membersCount">0</div>
-                    <div class="stat-label">共识成员(持续增加中)</div>
-                </div>
-            </div>
-            
-            <div class="stat-row">
-                <div class="stat-item">
-                    <div class="stat-value" id="dscStakedTotal">0</div>
-                    <div class="stat-label">DSC总质押</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value" id="dscAvailableTotal">0</div>
-                    <div class="stat-label">DSC总流通</div>
-                </div>
-            </div>
-            
-            <div class="stat-row">
-                <div class="stat-item">
-                    <!-- 修复SCC总流通的ID -->
-                    <div class="stat-value" id="sccAvailableTotal">0</div>
-                    <div class="stat-label">SCC总流通</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value" id="usdsBalanceTotal">0</div>
-                    <div class="stat-label">USDS总流通</div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- 表格控制区域 -->
-        <div class="table-controls">
-            <div class="results-info" id="resultsInfo">
-                显示 1-15 条
-            </div>
-        </div>
-        
-        <!-- 共识表格 -->
-        <table class="consensus-table" id="consensusTable">
-            <thead>
-                <tr>
-                    
-                    <th data-sort="dscName">DSC昵称 <i class="fas fa-sort"></i></th>
-                    <th data-sort="address">卷界地址 <i class="fas fa-sort"></i></th>
-                    <th data-sort="dscStaked">DSC质押 <i class="fas fa-sort"></i></th>
-                    <th data-sort="dscAvailable">DSC可用 <i class="fas fa-sort"></i></th>
-                    <th data-sort="sccAvailable">SCC可用 <i class="fas fa-sort"></i></th>
-                    <th data-sort="usdsBalance">USDS余额 <i class="fas fa-sort"></i></th>
-                    <th data-sort="sccStaked">SCC质押 <i class="fas fa-sort"></i></th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- 数据将通过JavaScript填充 -->
-            </tbody>
-        </table>
-        
-        <!-- 分页控件 -->
-        <div class="pagination" id="pagination">
-            <!-- 分页按钮将通过JavaScript生成 -->
-        </div>
-    </div>
-     <!-- 新增的页脚 -->
-    <footer class="footer">
-        <div class="footer-slogan">共识筑基 · 价值流通 · 共创未来</div>
-    </footer>
+    <!-- 粒子背景 -->
+    <div id="particles-js"></div>
     
-    <!-- 通知弹窗 -->
-    <div class="notification" id="notification">
-        地址已复制到剪贴板
+    <!-- 炫光效果 -->
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-crown logo-icon"></i>
+                <h1>DSC股东分红</h1>
+            </div>
+            <div class="subtitle">五级股东尊享计划</div>
+            <div class="info-text">每日分红奖励</div>
+            <div class="date" id="dateDisplay">2025年8月1日</div>
+        </div>
+        
+        <div class="card-container">
+            <!-- 一级股东 -->
+            <div class="card level1-card">
+                <div class="card-header">
+                    <div class="level">一级股东</div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="reward-row">
+                    <div class="reward-label">分红奖励</div>
+                    <div class="reward-value">
+                        <div class="virtual" data-level="1">点击输入数量</div>
+                        <span class="dsc-unit">DSC</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 二级股东 -->
+            <div class="card level2-card">
+                <div class="card-header">
+                    <div class="level">二级股东</div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="reward-row">
+                    <div class="reward-label">分红奖励</div>
+                    <div class="reward-value">
+                        <div class="virtual" data-level="2">点击输入数量</div>
+                        <span class="dsc-unit">DSC</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 三级股东 -->
+            <div class="card level3-card">
+                <div class="card-header">
+                    <div class="level">三级股东</div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="reward-row">
+                    <div class="reward-label">分红奖励</div>
+                    <div class="reward-value">
+                        <div class="virtual" data-level="3">点击输入数量</div>
+                        <span class="dsc-unit">DSC</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 四级股东 -->
+            <div class="card level4-card">
+                <div class="card-header">
+                    <div class="level">四级股东</div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="reward-row">
+                    <div class="reward-label">分红奖励</div>
+                    <div class="reward-value">
+                        <div class="virtual" data-level="4">点击输入数量</div>
+                        <span class="dsc-unit">DSC</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 五级股东 -->
+            <div class="card level5-card">
+                <div class="card-header">
+                    <div class="level">五级股东</div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="reward-row">
+                    <div class="reward-label">分红奖励</div>
+                    <div class="reward-value">
+                        <div class="virtual" data-level="5">点击输入数量</div>
+                        <span class="dsc-unit">DSC</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            星级达人升红计划 · 尊享每日分红
+        </div>
     </div>
+
+    <!-- 粒子背景库 -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // 真实数据
-       const consensusData = [
-           { id: 1, wechatName: "幸运数字伍五个壹善解人意", dscName: "善解人意", address: "SC7nPR4FNDVXVtQNlVGUo4GWrGMW4rzerK", dscStaked: 14070.0000, dscAvailable: 0.0000, sccAvailable: 758.7201, usdsBalance: 0.1942, sccStaked: 0 },
-{ id: 2, wechatName: "阿喆", dscName: "阿喆", address: "Sbty9Kki99CQReY4TmJTNS2duOvaGT4wEu", dscStaked: 6000.0000, dscAvailable: 1078.6517, sccAvailable: 324.2840, usdsBalance: 46.8716, sccStaked: 0 },
-{ id: 3, wechatName: "小可爱", dscName: "小可爱", address: "SNQ1pwxzsItFzu3OcdCeDOq86Bfc7uUopd", dscStaked: 2100.0000, dscAvailable: 1090.7950, sccAvailable: 0.6641, usdsBalance: 0.0951, sccStaked: 0 },
-{ id: 4, wechatName: "金喜善", dscName: "金喜善", address: "SK29ePauuURrtlfCTHyzfksCbcMMnu5yRR", dscStaked: 9260.0000, dscAvailable: 1232.1680, sccAvailable: 222.1963, usdsBalance: 2.7945, sccStaked: 0 },
-{ id: 5, wechatName: "美好日子", dscName: "美好日子", address: "SdYDgZEf0xOoEmcxO7WA25VxaPdXH01SNE", dscStaked: 4220.0000, dscAvailable: 334.2213, sccAvailable: 38.0479, usdsBalance: 2.1230, sccStaked: 0 },
-{ id: 6, wechatName: "IPC8866", dscName: "IPC8866", address: "SjzsSdC4eNjK4Bw2gd4bLaoMVrCrcNvv01", dscStaked: 3700.0000, dscAvailable: 41.1860, sccAvailable: 13.2202, usdsBalance: 0.1862, sccStaked: 0 },
-{ id: 7, wechatName: "明明", dscName: "明明", address: "ShFYcDzExSCj3cYK82LE5D1DuHgz2NPm9m", dscStaked: 6100.0000, dscAvailable: 1023.3800, sccAvailable: 150.8976, usdsBalance: 0.7000, sccStaked: 0 },
-{ id: 8, wechatName: "璀璨雪", dscName: "璀璨雪", address: "Sy5VgXg7s0Bwdbn8X92rYYcwA0pitJJ5PF", dscStaked: 12660.0000, dscAvailable: 395.4437, sccAvailable: 247.9048, usdsBalance: 0.0566, sccStaked: 0 },
-{ id: 9, wechatName: "晚风", dscName: "晚风", address: "SQZIqm4dHvRORSDSwDO9xZg13rTS66NSIJ", dscStaked: 2100.0000, dscAvailable: 1170.6742, sccAvailable: 4.6042, usdsBalance: 0.0069, sccStaked: 0 },
-{ id: 10, wechatName: "诗和远方", dscName: "诗和远方", address: "SZMRBvLJdXWJ6yfDGP5bBOE5C14z1ZCchE", dscStaked: 2410.0000, dscAvailable: 1.5061, sccAvailable: 233.9776, usdsBalance: 0.1675, sccStaked: 0 },
-{ id: 11, wechatName: "小五", dscName: "小五", address: "ShS8P9VOn3hdM1yzqZ1MPa2TkrRURVFXGK", dscStaked: 4100.0000, dscAvailable: 2025.5216, sccAvailable: 10.5582, usdsBalance: 0.0527, sccStaked: 0 },
-{ id: 12, wechatName: "辉", dscName: "辉", address: "SH1KVPYBtWRsC1luu6vZIt6ZGWnJJMbCLh", dscStaked: 2100.0000, dscAvailable: 25.2917, sccAvailable: 496.0988, usdsBalance: 0.2927, sccStaked: 0 },
-{ id: 13, wechatName: "DSC", dscName: "DSC", address: "SuZ7g38uw9FNE3mGHI9ii0r4uB8ZXqi6ze", dscStaked: 11100.0000, dscAvailable: 450.4107, sccAvailable: 945.9899, usdsBalance: 2.3155, sccStaked: 0 },
-{ id: 14, wechatName: "竹笛爱好者-1竹笛飘音", dscName: "竹笛飘音", address: "SvMOhN1b2Btw3oZhgDqViLZgksxR5Pr8aj", dscStaked: 1990.0000, dscAvailable: 0.0000, sccAvailable: 6.4814, usdsBalance: 0.0057, sccStaked: 0 },
-{ id: 15, wechatName: "竹笛爱好者-2CiKZ-果果", dscName: "CiKZ--果果", address: "SWqsRnDlfwdzlH9lDCDToTolaQ9S44Nbqr", dscStaked: 970.0000, dscAvailable: 29.6550, sccAvailable: 59.4016, usdsBalance: 0.1300, sccStaked: 0 },
-{ id: 16, wechatName: "杨杨得亿", dscName: "杨杨得亿", address: "SCzd35daZ1Ljohhu5ZndOMYi6tIUonmJ3b", dscStaked: 13220.0000, dscAvailable: 600.8189, sccAvailable: 87.5359, usdsBalance: 0.1545, sccStaked: 0 },
-{ id: 17, wechatName: "扬帆起航", dscName: "扬帆起航", address: "SbGdtXBzR4o8AY25uQZuH3G0raYnv0OZmX", dscStaked: 15530.0000, dscAvailable: 94.9476, sccAvailable: 29.0238, usdsBalance: 55.6954, sccStaked: 0 },
-{ id: 18, wechatName: "DSC", dscName: "DSC", address: "ShCQFbo4xm1k4OIh7g4byWAEpgoBYvYkhz", dscStaked: 30010.0000, dscAvailable: 43.4601, sccAvailable: 3226.7813, usdsBalance: 1.2132, sccStaked: 0 },
-{ id: 19, wechatName: "DSC小玩家", dscName: "DSC小玩家", address: "ShEFUaNUrvC9fPWlmlH5IbiLY25kTAyFyc", dscStaked: 2470.0000, dscAvailable: 164.7760, sccAvailable: 1108.1927, usdsBalance: 8.3100, sccStaked: 0 },
-{ id: 20, wechatName: "持之以恒", dscName: "持之以恒", address: "SROAdci6tkI4ec9Mpuf6Fhv1NxdDH6L44l", dscStaked: 5390.0000, dscAvailable: 416.9773, sccAvailable: 250.8517, usdsBalance: 9.7300, sccStaked: 0 },
-{ id: 21, wechatName: "二罗", dscName: "二罗", address: "SZRtulCq2lxbs3pZsejvRuZY0xvmb3GNaR", dscStaked: 2490.0000, dscAvailable: 2.6323, sccAvailable: 2.8422, usdsBalance: 0.2800, sccStaked: 0 },
-{ id: 22, wechatName: "诚信玩家", dscName: "诚信商家", address: "SQisZSAMVjIFUIm1KkdjZ1tn9M7O5wEzYk", dscStaked: 3000.0000, dscAvailable: 0.9842, sccAvailable: 11.3755, usdsBalance: 0.1577, sccStaked: 0 },
-{ id: 23, wechatName: "金色太阳", dscName: "金色太阳", address: "SupcwEnYaNGitcReY7bnmxArugueNcfkAV", dscStaked: 2460.0000, dscAvailable: 2.1476, sccAvailable: 22.2712, usdsBalance: 0.0000, sccStaked: 0 },
-{ id: 24, wechatName: "DSC小礼（李俊杰）俊杰", dscName: "俊杰", address: "Szqa9GZZzcxnkV0MYLTf1Z1WWHOWih9TqH", dscStaked: 11060.0000, dscAvailable: 510.7555, sccAvailable: 7.6612, usdsBalance: 3.3486, sccStaked: 0 },
-{ id: 25, wechatName: "百炼", dscName: "百炼", address: "SKjqgj59BUQ8eKgZGvmXmvbW8GSZFczxdF", dscStaked: 24500.0000, dscAvailable: 50.0597, sccAvailable: 64.4839, usdsBalance: 5.1343, sccStaked: 0 },
-{ id: 26, wechatName: "本性（张人中）本性", dscName: "本性", address: "Sseg2IT8eSsRivUaXfEdtnhdXMW1gmq5Pb", dscStaked: 4020.0000, dscAvailable: 6.5745, sccAvailable: 160.7430, usdsBalance: 0.0744, sccStaked: 0 },
-{ id: 27, wechatName: "合理就好", dscName: "合理就好", address: "SFttEHTAhE6k65dadsGe1yo8quBJmdwa6S", dscStaked: 20200.0000, dscAvailable: 332.9022, sccAvailable: 69.7626, usdsBalance: 0.2773, sccStaked: 0 },
-{ id: 28, wechatName: "阿贤", dscName: "阿贤", address: "SpD8HIWc3FCjV65Ez6QLxFw13GW4I7VqXB", dscStaked: 9100.0000, dscAvailable: 1229.3271, sccAvailable: 1139.1925, usdsBalance: 0.7200, sccStaked: 0 },
-{ id: 29, wechatName: "恭喜发财", dscName: "恭喜发财", address: "SWog3ML7kfsYIVVbdNSFToAS9LxcPaY7wd", dscStaked: 31180.0000, dscAvailable: 60.9642, sccAvailable: 2687.8030, usdsBalance: 9.7157, sccStaked: 0 },
-{ id: 30, wechatName: "华洋商行林迎民131419", dscName: "131419", address: "SXC2q0kcn2Tku9M4yXMoPVouMPc4EbxzpO", dscStaked: 13990.0000, dscAvailable: 179.0791, sccAvailable: 933.7738, usdsBalance: 0.6524, sccStaked: 0 },
-{ id: 31, wechatName: "搬砖猫", dscName: "搬砖猫", address: "SAeWZ9qhvky6Iv9SsZRWZMUg9q2CZGuqYL", dscStaked: 25100.0000, dscAvailable: 36.8550, sccAvailable: 861.0676, usdsBalance: 0.0246, sccStaked: 0 },
-{ id: 32, wechatName: "七仔", dscName: "七仔", address: "SB3Z6BgS9lhrwNBSfXxX2jAs0GrkT5E5UN", dscStaked: 1100.0000, dscAvailable: 2.2000, sccAvailable: 168.2655, usdsBalance: 0.0000, sccStaked: 0 },
-{ id: 33, wechatName: "半夏微凉", dscName: "半夏微凉", address: "SsJLG4HSNZIFw4ia1mDaVEcjDI5vwOqvpM", dscStaked: 12100.0000, dscAvailable: 786.1309, sccAvailable: 154.2594, usdsBalance: 1.2800, sccStaked: 0 },
-{ id: 34, wechatName: "惠亿佳", dscName: "惠亿佳", address: "SRgu7AMTBSXHncZ3ZQe9J7L5d8qHlfXBRf", dscStaked: 27100.0000, dscAvailable: 2378.8141, sccAvailable: 1388.9069, usdsBalance: 0.6763, sccStaked: 0 },
-{ id: 35, wechatName: "无语伦比", dscName: "无语伦比", address: "SjSVgZnbFH5JjqhEAj14gIqiOd2K0gp0KT", dscStaked: 48870.0000, dscAvailable: 7712.9627, sccAvailable: 151.2482, usdsBalance: 12.0460, sccStaked: 0 },
-{ id: 36, wechatName: "奔跑的小蜗牛扬帆起航", dscName: "扬帆起航", address: "SyICADDDG5vCv8sLZoHuXbRpAbFlXwUv5W", dscStaked: 32400.0000, dscAvailable: 1012.5913, sccAvailable: 2383.6375, usdsBalance: 0.9040, sccStaked: 0 },
-{ id: 37, wechatName: "彩虹依然", dscName: "彩虹依然", address: "SdclwIewadk5JL0B3k0QIMueaesBeESBZm", dscStaked: 7060.0000, dscAvailable: 0.0608, sccAvailable: 4.6663, usdsBalance: 3.0900, sccStaked: 0 },
-{ id: 38, wechatName: "行云流水", dscName: "行云流水", address: "SiDvPqx3zXcIwqVOXgK4ffgIkcUO2va5nN", dscStaked: 72100.0000, dscAvailable: 10352.8906, sccAvailable: 6533.9048, usdsBalance: 19.8407, sccStaked: 0 },
-{ id: 39, wechatName: "东方", dscName: "东方", address: "StnX4cJGU268ys94lj4KKwzohsOQGVF5Q5", dscStaked: 6440.0000, dscAvailable: 158.3412, sccAvailable: 85.1178, usdsBalance: 71.2945, sccStaked: 0 },
-{ id: 40, wechatName: "平淡", dscName: "平淡", address: "SyPEpeMI9c5YlQWfWghpLOI1L0QQE0DkHY", dscStaked: 9210.0000, dscAvailable: 36.8001, sccAvailable: 436.5352, usdsBalance: 100.1734, sccStaked: 0 },
-{ id: 41, wechatName: "趁草", dscName: "趁早", address: "SF34S0NS4mEq9NXjZTiUsUfY307W8Y1KJt", dscStaked: 1000.0000, dscAvailable: 69.0668, sccAvailable: 1.1146, usdsBalance: 0.2748, sccStaked: 0 },
-{ id: 42, wechatName: "A1幕墙铝单板DSC马上飞翔", dscName: "哦", address: "SSsvkfoyNYmBYuGsdojgeR0v1xFnMLoiVD", dscStaked: 2890.0000, dscAvailable: 644.7346, sccAvailable: 58.2316, usdsBalance: 0.0876, sccStaked: 0 },
-{ id: 43, wechatName: "唯美意境", dscName: "唯美意境", address: "STrjYC7c1Fo2qwxhaGxG8OJKWyRDtKhQqh", dscStaked: 3100.0000, dscAvailable: 239.5275, sccAvailable: 34.2244, usdsBalance: 0.0000, sccStaked: 0 },
-{ id: 44, wechatName: "吕吕", dscName: "吕吕", address: "SSlgogDGFdlIqX5Xu6tAAt3P9FUyR9WMkQ", dscStaked: 1770.0000, dscAvailable: 38.5341, sccAvailable: 55.1562, usdsBalance: 6.5320, sccStaked: 0 },
-{ id: 45, wechatName: "福禄平安", dscName: "福禄平安", address: "SBqafxaI3XrzkcOxf8pjMr1QjShS4kN72S", dscStaked: 9100.0000, dscAvailable: 3246.4402, sccAvailable: 1212.1983, usdsBalance: 115.8603, sccStaked: 0 },
-{ id: 46, wechatName: "随心所欲", dscName: "随心所欲", address: "SuzwaXLWVKJyhoChainxV294rhOodWiQtE", dscStaked: 33330.0000, dscAvailable: 642.9433, sccAvailable: 667.1131, usdsBalance: 150.2504, sccStaked: 0 },
-{ id: 47, wechatName: "点亮幸福", dscName: "点亮幸福", address: "SGX9LzJqOH6kTDaKocxy78RQdVbh6uZilf", dscStaked: 5100.0000, dscAvailable: 101.1183, sccAvailable: 24.5770, usdsBalance: 0.0000, sccStaked: 0 },
-{ id: 48, wechatName: "七八九", dscName: "七八九", address: "Sgms2EkrE9fby9tnPfVoWwdNVR6ZIF1CXb", dscStaked: 2100.0000, dscAvailable: 0.0025, sccAvailable: 158.9464, usdsBalance: 0.0000, sccStaked: 0 },
-{ id: 49, wechatName: "耀眼", dscName: "耀眼", address: "SbdpoIcUR4qECuHYyFIPWKevRqYkbZrzWP", dscStaked: 21400.0000, dscAvailable: 322.1325, sccAvailable: 105.9551, usdsBalance: 206.6400, sccStaked: 0 },
-{ id: 50, wechatName: "嗯", dscName: "嗯", address: "SMqCWySwooIRXunyHrPMusgq40ReFgtDGI", dscStaked: 1500.0000, dscAvailable: 100.7282, sccAvailable: 120.8526, usdsBalance: 0.0069, sccStaked: 0 },
-{ id: 51, wechatName: "超越二饼", dscName: "超越二饼", address: "SCTfAeZOdRtVHsQ5SiuAtQyTHQAwXZuPGn", dscStaked: 21270.0000, dscAvailable: 3.0010, sccAvailable: 407.1727, usdsBalance: 0.0500, sccStaked: 0 },
-{ id: 52, wechatName: "李来财", dscName: "李来财", address: "SHPzo7S90DZJfcGjNoiIKCHcKyGN4q5XOo", dscStaked: 1240.0000, dscAvailable: 7.1360, sccAvailable: 2.7207, usdsBalance: 0.2539, sccStaked: 0 },
-{ id: 53, wechatName: "王小二", dscName: "王小二", address: "SG8gyusiGlyRlWREU7GAp90uAz9GVtf5di", dscStaked: 31100.0000, dscAvailable: 1073.7224, sccAvailable: 15.9187, usdsBalance: 62.1354, sccStaked: 0 },
-{ id: 54, wechatName: "爽爽", dscName: "爽爽", address: "SgmqSahm24FVIaKCBDBgbPGXBVZZuhqwAd", dscStaked: 510.0000, dscAvailable: 7.6341, sccAvailable: 1.0967, usdsBalance: 0.0000, sccStaked: 0 },
-{ id: 55, wechatName: "坚持到底", dscName: "坚持到底", address: "SigwWSZi7uA7f1Xx4Ft3mnp3Ucx2wQbnjK", dscStaked: 1090.0000, dscAvailable: 11.4865, sccAvailable: 254.4024, usdsBalance: 0.0083, sccStaked: 0 },
-{ id: 56, wechatName: "暖男", dscName: "暖男", address: "ShqZmaHuSt3PaJN0KsHd8OytoIUXpxtI6v", dscStaked: 3720.0000, dscAvailable: 72.9715, sccAvailable: 46.8424, usdsBalance: 0.1489, sccStaked: 0 },
-{ id: 57, wechatName: "幸运天使", dscName: "幸运天使", address: "SZ5retROCGi2tVVde2vW30PNDqRRKEZm0l", dscStaked: 2100.0000, dscAvailable: 491.6458, sccAvailable: 31.8987, usdsBalance: 6.1133, sccStaked: 0 },
-{ id: 58, wechatName: "吃棒棒哒棒棒糖棒棒糖", dscName: "棒棒糖", address: "SCoYvbNB3mcTwi86blzljvSIyElBsYRUN0", dscStaked: 1250.0000, dscAvailable: 46.5914, sccAvailable: 0.5413, usdsBalance: 0.0000, sccStaked: 0 },
-{ id: 59, wechatName: "陈德源", dscName: "陈德源", address: "SY0CGVZpx38OrsQumuDK3cj57hhhjutYZF", dscStaked: 1620.0000, dscAvailable: 3.1526, sccAvailable: 134.9954, usdsBalance: 0.2000, sccStaked: 0 },
-{ id: 60, wechatName: "九鹏", dscName: "九鹏", address: "SEnAtNA8CmSNkbTvQEPtW38Ic2EzglrrdK", dscStaked: 2600.0000, dscAvailable: 30.1160, sccAvailable: 13.0150, usdsBalance: 0.0256, sccStaked: 0 },
-{ id: 61, wechatName: "或许", dscName: "或许", address: "SU2A8JG0LkR5teymdscITWf7RDBeqzetn6", dscStaked: 10110.0000, dscAvailable: 59.4415, sccAvailable: 732.3780, usdsBalance: 0.2100, sccStaked: 0 },
-{ id: 62, wechatName: "舒塔和贝克", dscName: "舒塔和贝克", address: "SQGwMYm0S5xDJTXlDjPgm8dTbrDfsXLFX6", dscStaked: 6100.0000, dscAvailable: 1612.9950, sccAvailable: 3.1646, usdsBalance: 0.2539, sccStaked: 0 },
-{ id: 63, wechatName: "秒付", dscName: "秒付", address: "SGHuw6hMCa4WxKSCXmVQjs7hUk5NfXlB8i", dscStaked: 5100.0000, dscAvailable: 403.0877, sccAvailable: 119.7885, usdsBalance: 0.0395, sccStaked: 0 },
-{ id: 64, wechatName: "杰瑞", dscName: "杰瑞", address: "SmsV9316DGtrkdVYcyBEVdSIHTV3cs7jDi", dscStaked: 5010.0000, dscAvailable: 192.8519, sccAvailable: 144.7970, usdsBalance: 0.5782, sccStaked: 0 },
-{ id: 65, wechatName: "老金（公链）", dscName: "老金(公链)", address: "SBr75jVqK3I2MOL78SzT0Q9mhevqvKO2kt", dscStaked: 5100.0000, dscAvailable: 23.8020, sccAvailable: 21.8342, usdsBalance: 2.6218, sccStaked: 0 },
-{ id: 66, wechatName: "向日葵", dscName: "向日葵", address: "SZe6y10l48bCaFVE87cUkZNU3S5QThna1n", dscStaked: 1270.0000, dscAvailable: 4.9263, sccAvailable: 50.2062, usdsBalance: 0.0000, sccStaked: 0 },
-{ id: 67, wechatName: "高兴", dscName: "高兴", address: "SIRXvUEWeacB02sqX427opygsZ7zcQxLt9", dscStaked: 5740.0000, dscAvailable: 563.8556, sccAvailable: 12.7468, usdsBalance: 0.7533, sccStaked: 0 },
-{ id: 68, wechatName: "流年岁月", dscName: "流年岁月", address: "SdjkfWy0qoLRpMGvzT1RJa9uiI5Bs8J0W1", dscStaked: 1100.0000, dscAvailable: 82.1088, sccAvailable: 448.6158, usdsBalance: 0.8502, sccStaked: 0 },
-{ id: 69, wechatName: "留声机", dscName: "留声机", address: "SU2nUpRJOq6hUF7YKBG07BCus660r9ZaLg", dscStaked: 5490.0000, dscAvailable: 0.0000, sccAvailable: 4.8314, usdsBalance: 0.0038, sccStaked: 0 },
-{ id: 70, wechatName: "匹配了打电话", dscName: "匹配了打电话", address: "SIc5hf17gvqXAVqqWaTqFcBkVjJBqxhbhe", dscStaked: 7180.0000, dscAvailable: 0.0000, sccAvailable: 1.4474, usdsBalance: 11.0847, sccStaked: 0 },
-{ id: 71, wechatName: "林哥", dscName: "林哥", address: "SRvDXs1dkKdJxIHd1V9EM1xahFCYWT4ZKZ", dscStaked: 1600.0000, dscAvailable: 162.0668, sccAvailable: 169.1055, usdsBalance: 100.1603, sccStaked: 0 },
-{ id: 72, wechatName: "幸福人生", dscName: "幸福人生", address: "SORzBUvDrTUohMjrST7Xdx2HJWTpiIH1YA", dscStaked: 1000.0000, dscAvailable: 20.2107, sccAvailable: 3.6184, usdsBalance: 0.0600, sccStaked: 0 },
-{ id: 73, wechatName: "DSC忠实粉丝", dscName: "DSC忠实粉丝", address: "SHS8sOlX6XRNWrSlLJ2ndFa6fUXXMVuMGB", dscStaked: 1720.0000, dscAvailable: 118.4653, sccAvailable: 4.4316, usdsBalance: 0.1649, sccStaked: 0 },
-{ id: 74, wechatName: "春", dscName: "春", address: "SUtps7FAOudUTrbu3boZjrw3UkfTH24oFW", dscStaked: 1340.0000, dscAvailable: 0.8994, sccAvailable: 2.4558, usdsBalance: 2.8609, sccStaked: 0 },
-{ id: 75, wechatName: "月下伊人醉", dscName: "大龙", address: "SkXBKxRQtrJ8FWIyC2uJucQVwzMFRFMJZp", dscStaked: 6100.0000, dscAvailable: 545.9763, sccAvailable: 73.6837, usdsBalance: 1.2000, sccStaked: 0 },
-{ id: 76, wechatName: "dsc⼩礼", dscName: "俊杰", address: "Szqa9GZZzcxnkV0MYLTf1Z1WWHOWih9TqH", dscStaked: 11060.0000, dscAvailable: 510.7555, sccAvailable: 7.6612, usdsBalance: 3.3486, sccStaked: 0 },
-{ id: 77, wechatName: "坦克", dscName: "今晚打老虎", address: "SyOPoOqZn184M7J4FyEpWYSDc0JH2dS5KM", dscStaked: 4020.0000, dscAvailable: 234.2067, sccAvailable: 34.0210, usdsBalance: 0.0033, sccStaked: 0 },
-{ id: 78, wechatName: "Biubiu_zxh", dscName: "彩虹", address: "STKLOWJdtaslGi61ojryL2v2SvanAhme4t", dscStaked: 1730.0000, dscAvailable: 5.7800, sccAvailable: 1.9769, usdsBalance: 2.9400, sccStaked: 0 },
-{ id: 79, wechatName: "安逸", dscName: "币多为王", address: "SEhm0PO0ZwehdmYllVsjkLHvmIM7wYSniI", dscStaked: 3100.0000, dscAvailable: 1159.1633, sccAvailable: 3.5893, usdsBalance: 0.9991, sccStaked: 0 },
-{ id: 80, wechatName: "秦时明⽉", dscName: "Dsc一战成名", address: "Sva2d83lMdQf1Tei3EpCQUdTXIdVtp0R63", dscStaked: 2000.0000, dscAvailable: 67.1185, sccAvailable: 17.7947, usdsBalance: 0.1949, sccStaked: 0 },
-{ id: 81, wechatName: "红苹果", dscName: "鸿", address: "SMEY56JqPFkUQLVxj6mge2IkbTh7K1mY6y", dscStaked: 10210.0000, dscAvailable: 201.9067, sccAvailable: 1.4908, usdsBalance: 0.2470, sccStaked: 0 },
-{ id: 82, wechatName: "天涯", dscName: "支持u换鸡", address:
-"Sxk6QVufwLe5wMvgYX0Xh1xzmaZGEC8kK4", dscStaked: 1440.0000, dscAvailable: 3.8035, sccAvailable: 25.6138, usdsBalance: 0.5849, sccStaked: 0 }
-
-
-];
-       
-
- // 页面变量
-        const itemsPerPage = 15;
-        let currentPage = 1;
-        let currentSort = { key: 'dscStaked', direction: 'desc' };
-        let filteredData = [...consensusData];
+        // 粒子背景配置
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 65, density: { enable: true, value_area: 650 } },
+                color: { value: "#ffffff" },
+                shape: { type: "circle" },
+                opacity: { value: 0.2, random: true },
+                size: { value: 3, random: true },
+                line_linked: {
+                    enable: true,
+                    distance: 130,
+                    color: "#00c6ff",
+                    opacity: 0.2,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 1.0,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "grab" },
+                    onclick: { enable: true, mode: "push" },
+                    resize: true
+                },
+                modes: {
+                    grab: { distance: 120, line_linked: { opacity: 0.3 } },
+                    push: { particles_nb: 4 }
+                }
+            },
+            retina_detect: true
+        });
         
-        // 格式化昵称显示：只显示第一个字，后面用***
-        function formatName(name) {
-            if (!name || name.length === 0) return '';
-            return name.charAt(0) + '***';
-        }
+        // 日期编辑功能
+        const dateDisplay = document.getElementById('dateDisplay');
+        let isEditing = false;
         
-        // 格式化地址显示
-        function formatAddress(address) {
-            if (!address || address.length <= 10) return address;
-            return address.substring(0, 5) + '...' + address.substring(address.length - 5);
-        }
+        dateDisplay.addEventListener('click', function() {
+            if (!isEditing) {
+                isEditing = true;
+                const currentDate = this.innerText;
+                this.innerHTML = `<input type="text" class="date-input" value="${currentDate}" placeholder="输入日期">`;
+                const input = this.querySelector('.date-input');
+                input.focus();
+                
+                input.addEventListener('blur', function() {
+                    const newDate = this.value.trim() || currentDate;
+                    dateDisplay.innerHTML = newDate;
+                    isEditing = false;
+                });
+                
+                input.addEventListener('keyup', function(e) {
+                    if (e.key === 'Enter') {
+                        this.blur();
+                    }
+                });
+            }
+        });
         
-        // 复制到剪贴板
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                const notification = document.getElementById('notification');
-                notification.classList.add('show');
-                setTimeout(() => {
-                    notification.classList.remove('show');
-                }, 2000);
-            });
-        }
+        // 股东奖励编辑功能
+        const virtualElements = document.querySelectorAll('.virtual');
         
-        // 计算统计数据
-        function calculateStatistics() {
-            // 共识成员数量
-            const membersCount = consensusData.length;
-            
-            // DSC总质押
-            const dscStakedTotal = consensusData.reduce((sum, item) => sum + item.dscStaked, 0);
-            
-            // DSC总流通
-            const dscAvailableTotal = consensusData.reduce((sum, item) => sum + item.dscAvailable, 0);
-            
-            // SCC总流通
-            const sccAvailableTotal = consensusData.reduce((sum, item) => sum + item.sccAvailable, 0);
-            
-            // USDS总流通
-            const usdsBalanceTotal = consensusData.reduce((sum, item) => sum + item.usdsBalance, 0);
-            
-            // 更新DOM
-            document.getElementById('membersCount').textContent = membersCount;
-            document.getElementById('dscStakedTotal').textContent = dscStakedTotal.toLocaleString();
-            document.getElementById('dscAvailableTotal').textContent = dscAvailableTotal.toFixed(2);
-            document.getElementById('sccAvailableTotal').textContent = sccAvailableTotal.toFixed(2);
-            document.getElementById('usdsBalanceTotal').textContent = usdsBalanceTotal.toFixed(2);
-        }
-        
-        // 初始化页面
-        document.addEventListener('DOMContentLoaded', () => {
-            // 初始渲染
-            renderTable(filteredData);
-            calculateStatistics(); // 计算并显示统计数据
-            
-            // 搜索功能
-            document.getElementById('searchInput').addEventListener('input', handleSearch);
-            
-            // 表头排序
-            const tableHeaders = document.querySelectorAll('.consensus-table th[data-sort]');
-            tableHeaders.forEach(header => {
-                header.addEventListener('click', () => {
-                    const sortKey = header.getAttribute('data-sort');
-                    sortData(sortKey, currentSort.key === sortKey && currentSort.direction === 'asc' ? 'desc' : 'asc');
+        virtualElements.forEach(element => {
+            element.addEventListener('click', function() {
+                const level = this.getAttribute('data-level');
+                const currentValue = this.innerText === '点击输入数量' ? '' : this.innerText;
+                
+                this.innerHTML = `<input type="number" value="${currentValue === '点击输入数量' ? '' : currentValue}" placeholder="输入数量" step="any">`;
+                
+                const input = this.querySelector('input');
+                input.focus();
+                
+                // 全选文本
+                input.select();
+                
+                input.addEventListener('blur', function() {
+                    const value = this.value.trim();
+                    if (value) {
+                        element.innerHTML = value;
+                    } else {
+                        element.innerHTML = '点击输入数量';
+                    }
+                });
+                
+                input.addEventListener('keyup', function(e) {
+                    if (e.key === 'Enter') {
+                        this.blur();
+                    }
                 });
             });
         });
         
-        // 处理搜索
-        function handleSearch(e) {
-            const searchTerm = e.target.value.toLowerCase().trim();
-            
-            if (searchTerm === '') {
-                filteredData = [...consensusData];
-            } else {
-                filteredData = consensusData.filter(item =>  
-                    item.dscName.toLowerCase().includes(searchTerm) || 
-                    item.address.toLowerCase().includes(searchTerm)
-                );
-            }
-            
-            currentPage = 1;
-            renderTable(filteredData);
-        }
+        // 初始化五级股东数据
+        setTimeout(() => {
+            document.querySelector('[data-level="5"]').innerHTML = "257";
+        }, 1000);
         
-        // 排序数据
-        function sortData(key, direction) {
-            currentSort = { key, direction };
-            
-            filteredData.sort((a, b) => {
-                let valueA = a[key];
-                let valueB = b[key];
-                
-                if (typeof valueA === 'string') {
-                    valueA = valueA.toLowerCase();
-                    valueB = valueB.toLowerCase();
-                }
-                
-                if (valueA < valueB) {
-                    return direction === 'asc' ? -1 : 1;
-                }
-                if (valueA > valueB) {
-                    return direction === 'asc' ? 1 : -1;
-                }
-                return 0;
-            });
-            
-            renderTable(filteredData);
-        }
-        
-        // 渲染表格数据 - 修改了昵称显示和地址列
-        function renderTable(data, page = currentPage) {
-            const tbody = document.querySelector('#consensusTable tbody');
-            tbody.innerHTML = '';
-            
-            const start = (page - 1) * itemsPerPage;
-            const end = start + itemsPerPage;
-            const paginatedData = data.slice(start, end);
-            
-            paginatedData.forEach(item => {
-                const row = document.createElement('tr');
-                
-                row.innerHTML = `
-                    <td>${formatName(item.dscName)}</td>
-                    <td class="address-cell" ondblclick="copyToClipboard('${item.address}')">
-                        ${formatAddress(item.address)}
-                    </td>
-                    <td>${item.dscStaked.toLocaleString()}</td>
-                    <td>${item.dscAvailable.toFixed(2)}</td>
-                    <td>${item.sccAvailable.toFixed(2)}</td>
-                    <td>${item.usdsBalance.toFixed(2)}</td>
-                    <td>${item.sccStaked.toFixed(2)}</td>
-                `;
-                tbody.appendChild(row);
-            });
-            
-            // 更新分页信息
-            updatePaginationControls(data.length);
-            updateResultsInfo(data.length);
-        }
-        
-        // 更新分页控件
-        function updatePaginationControls(totalItems) {
-            const totalPages = Math.ceil(totalItems / itemsPerPage);
-            const paginationContainer = document.getElementById('pagination');
-            paginationContainer.innerHTML = '';
-            
-            for (let i = 1; i <= totalPages; i++) {
-                const button = document.createElement('button');
-                button.classList.add('page-btn');
-                if (i === currentPage) {
-                    button.classList.add('active');
-                }
-                button.textContent = i;
-                button.addEventListener('click', () => {
-                    currentPage = i;
-                    renderTable(filteredData);
-                });
-                paginationContainer.appendChild(button);
-            }
-        }
-        
-        // 更新结果信息
-        function updateResultsInfo(totalItems) {
-            const start = (currentPage - 1) * itemsPerPage + 1;
-            const end = Math.min(currentPage * itemsPerPage, totalItems);
-            document.getElementById('resultsInfo').textContent = 
-                `显示 ${start}-${end} 条，共 ${totalItems} 条记录`;
-        }
+        // 初始化示例数据
+        setTimeout(() => {
+            document.querySelector('[data-level="1"]').innerHTML = "16";
+            document.querySelector('[data-level="2"]').innerHTML = "93";
+            document.querySelector('[data-level="3"]').innerHTML = "403";
+            document.querySelector('[data-level="4"]').innerHTML = "1206";
+        }, 1500);
     </script>
 </body>
 </html>
