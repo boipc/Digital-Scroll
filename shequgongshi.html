@@ -136,6 +136,7 @@
             text-align: center;
             outline: none;
             z-index: 100; /* 确保输入框在顶层 */
+            pointer-events: auto; /* 确保可交互 */
         }
         
         /* 股东卡片容器样式 */
@@ -256,6 +257,7 @@
             text-align: center;
             position: relative;
             z-index: 100; /* 确保可点击区域在顶层 */
+            pointer-events: auto; /* 确保可交互 */
         }
         
         .virtual.placeholder {
@@ -291,6 +293,7 @@
             width: 100%;
             justify-content: center;
             z-index: 100; /* 确保输入框在顶层 */
+            pointer-events: auto; /* 确保可交互 */
         }
         
         .data-input input {
@@ -306,6 +309,7 @@
             transition: all 0.3s;
             text-align: right;
             z-index: 100; /* 确保输入框在顶层 */
+            pointer-events: auto; /* 确保可交互 */
         }
         
         .data-input input:focus {
@@ -692,7 +696,7 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
+            z-index: 10000; /* 增加z-index确保在顶层 */
             align-items: center;
             justify-content: center;
             backdrop-filter: blur(4px);
@@ -708,9 +712,15 @@
             border: 1px solid rgba(186, 104, 200, 0.4);
             position: relative;
             animation: modalAppear 0.4s ease-out;
+            z-index: 10001; /* 确保在顶层 */
         }
         
         @keyframes modalAppear {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @-webkit-keyframes modalAppear {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
@@ -789,10 +799,25 @@
             font-size: 1.5rem;
             cursor: pointer;
             transition: color 0.3s;
+            z-index: 10002; /* 确保在顶层 */
         }
         
         .modal-close:hover {
             color: #ff4081;
+        }
+        
+        /* 新增主页链接样式 */
+        .logo-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .logo-link:hover {
+            cursor: pointer;
         }
     </style>
 </head>
@@ -802,7 +827,7 @@
         <div class="modal-content">
             <span class="modal-close">&times;</span>
             <div class="modal-header">
-                <h2><i class="fas fa-info-circle"></i> 网页说明</h2>
+                <h2><i class="fas fa-info-circle"></i> 操作指南</h2>
             </div>
             <div class="modal-body">
                 <div class="modal-tip">
@@ -811,7 +836,7 @@
                 </div>
                 <div class="modal-tip">
                     <i class="fas fa-coins"></i>
-                    <div>点击分红池可输入当天DSC手续费分红总量，系统将自动计算各级股东分红</div>
+                    <div>点击分红池可输入DSC总金额，系统将自动计算各级股东分红</div>
                 </div>
                 <div class="modal-tip">
                     <i class="fas fa-users"></i>
@@ -827,7 +852,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="modal-btn">我知道了</button>
+                <button class="modal-btn">开始使用</button>
             </div>
         </div>
     </div>
@@ -841,15 +866,18 @@
     
     <div class="container">
         <div class="header">
-            <div class="logo">
-                <i class="fas fa-crown logo-icon"></i>
-                <h1>DSC股东分红</h1>
-            </div>
+            <!-- 添加主页链接 -->
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <i class="fas fa-crown logo-icon"></i>
+                    <h1>DSC股东分红</h1>
+                </div>
+            </a>
             <div class="subtitle">五级股东尊享计划</div>
             <div class="info-text">每日分红奖励</div>
             <div class="date-container">
                 <div class="date" id="dateDisplay">2025年8月1日</div>
-                <div class="dividend-pool" id="poolDisplay">手续费分红池: 0 DSC</div>
+                <div class="dividend-pool" id="poolDisplay">分红池: 0DSC</div>
             </div>
         </div>
         
@@ -1164,6 +1192,23 @@
                             <span class="highlight">团队活跃度：</span>1级股东不作要求，因此标记为"-"
                         </div>
                     </div>
+                    <!-- 新增活跃度解释 -->
+                    <div class="note-item">
+                        <div class="note-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div>
+                            <span class="highlight">团队活跃度定义：</span>指二代以内直推用户的活跃度总和
+                        </div>
+                    </div>
+                    <div class="note-item">
+                        <div class="note-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <div>
+                            <span class="highlight">族群活跃度定义：</span>指十代以内所有用户的活跃度总和
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1172,7 +1217,7 @@
     <!-- 粒子背景库 -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // 粒子背景配置
+        // 粒子背景配置 - 修复事件检测
         particlesJS("particles-js", {
             particles: {
                 number: { value: 65, density: { enable: true, value_area: 650 } },
@@ -1198,7 +1243,7 @@
                 }
             },
             interactivity: {
-                detect_on: "canvas",
+                detectOn: "window", // 修复事件检测问题
                 events: {
                     onhover: { enable: true, mode: "grab" },
                     onclick: { enable: true, mode: "push" },
