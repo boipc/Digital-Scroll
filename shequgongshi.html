@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DSC股东分红制度</title>
+    <title>DSC股东分红系统</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -38,10 +38,6 @@
             position: relative;
             z-index: 2;
             padding-bottom: 25px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-top: 8px;
         }
 
         .header {
@@ -106,10 +102,13 @@
         .date-container {
             display: flex;
             justify-content: center;
+            gap: 10px;
             margin-top: 6px;
+            flex-wrap: wrap;
         }
 
-        .date {
+        /* 统一日期和分红池的样式 */
+        .date, .dividend-pool {
             background: rgba(106, 27, 154, 0.25);
             padding: 6px 12px;
             border-radius: 18px;
@@ -119,16 +118,16 @@
             cursor: pointer;
             transition: all 0.3s;
             user-select: none;
-            min-width: 160px;
+            min-width: 120px;
             text-align: center;
         }
 
-        .date:hover {
+        .date:hover, .dividend-pool:hover {
             background: rgba(106, 27, 154, 0.35);
             box-shadow: 0 0 12px rgba(186, 104, 200, 0.5);
         }
 
-        .date-input {
+        .date-input, .pool-input {
             background: transparent;
             border: none;
             color: white;
@@ -136,22 +135,27 @@
             width: 100%;
             text-align: center;
             outline: none;
-            z-index: 100;
-            pointer-events: auto;
+            z-index: 100; /* 确保输入框在顶层 */
+            pointer-events: auto; /* 确保可交互 */
         }
 
-        .card {
-            border-radius: 16px;
-            padding: 8px 12px;
+        /* 股东卡片容器样式 - 已移除 */
+        .card-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px; /* 缩小间隙 */
+            margin-top: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(186, 104, 200, 0.2);
+            border-radius: 20px;
+            padding: 12px;
+            margin: 15px 0;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(6px);
-            margin-bottom: 8px;
         }
 
-        .card::before {
+        .card-container::before {
             content: '';
             position: absolute;
             top: 0;
@@ -162,12 +166,22 @@
             opacity: 0.7;
         }
 
+        .card {
+            border-radius: 16px;
+            padding: 8px 12px; /* 减小内边距 */
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(6px);
+        }
+
         .card-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 6px;
-            padding-bottom: 4px;
+            margin-bottom: 6px; /* 减小下边距 */
+            padding-bottom: 4px; /* 减小内边距 */
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
@@ -189,7 +203,7 @@
         }
 
         .level {
-            font-size: 16px;
+            font-size: 16px; /* 稍微减小字体 */
             font-weight: bold;
             letter-spacing: 0.5px;
         }
@@ -206,29 +220,28 @@
         .card-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 6px;
+            gap: 6px; /* 减小间隙 */
         }
 
         .data-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 5px 3px;
+            padding: 5px 3px; /* 减小内边距 */
             border-radius: 10px;
             background: rgba(255, 255, 255, 0.03);
         }
 
         .data-label {
-            font-size: 11px;
+            font-size: 11px; /* 减小字体 */
             color: #bbb;
-            margin-bottom: 3px;
-            text-align: center;
+            margin-bottom: 3px; /* 减小下边距 */
         }
 
         .data-value {
             display: flex;
             align-items: center;
-            font-size: 14px;
+            font-size: 14px; /* 减小字体 */
             font-weight: bold;
         }
 
@@ -239,8 +252,8 @@
             color: #ffffff;
             text-align: center;
             position: relative;
-            z-index: 100;
-            pointer-events: auto;
+            z-index: 100; /* 确保可点击区域在顶层 */
+            pointer-events: auto; /* 确保可交互 */
         }
 
         .virtual.placeholder {
@@ -252,20 +265,20 @@
         }
 
         .virtual.empty-state {
-            color: #888;
+            color: #888; /* 修改为灰色 */
             font-style: italic;
         }
 
         .dsc-unit {
-            font-size: 12px;
+            font-size: 12px; /* 减小字体 */
             color: #0072ff;
             font-weight: bold;
             margin-left: 5px;
         }
 
         .person-unit {
-            font-size: 12px;
-            color: #0072ff;
+            font-size: 12px; /* 减小字体 */
+            color: #0072ff; /* 修改为蓝色 */
             font-weight: bold;
             margin-left: 5px;
         }
@@ -275,8 +288,8 @@
             align-items: center;
             width: 100%;
             justify-content: center;
-            z-index: 100;
-            pointer-events: auto;
+            z-index: 100; /* 确保输入框在顶层 */
+            pointer-events: auto; /* 确保可交互 */
         }
 
         .data-input input {
@@ -291,8 +304,8 @@
             outline: none;
             transition: all 0.3s;
             text-align: right;
-            z-index: 100;
-            pointer-events: auto;
+            z-index: 100; /* 确保输入框在顶层 */
+            pointer-events: auto; /* 确保可交互 */
         }
 
         .data-input input:focus {
@@ -300,7 +313,7 @@
             box-shadow: 0 0 12px rgba(186, 104, 200, 0.5);
         }
 
-        /* 卡片渐变效果 */
+        /* 卡片渐变效果 - 重新设计 */
         .level1-card {
             background: linear-gradient(135deg, rgba(30, 30, 70, 0.3), rgba(20, 20, 50, 0.25));
             border: 1px solid rgba(66, 133, 244, 0.4);
@@ -418,6 +431,7 @@
             word-break: break-word;
         }
 
+        /* 表头颜色与对应股东级别卡片颜色一致 */
         .responsive-table thead th:nth-child(2) {
             background: linear-gradient(135deg, rgba(30, 30, 70, 0.3), rgba(20, 20, 50, 0.25));
             color: #e0e0e0;
@@ -455,6 +469,7 @@
             font-size: 0.7rem;
         }
 
+        /* 矿机奖励和手续费分红行的文字颜色 */
         .mining-reward-header, .fee-dividend-header, .scc-limit-header {
             color: #ba68c8 !important;
             font-weight: 600 !important;
@@ -478,6 +493,7 @@
             background-color: rgba(255, 255, 255, 0.03);
         }
 
+        /* 不同股东级别的列样式 */
         .level-1 {
             background: linear-gradient(135deg, rgba(30, 30, 70, 0.2), rgba(20, 20, 50, 0.15));
             border-left: 3px solid #4285f4;
@@ -544,7 +560,6 @@
             align-items: flex-start;
             font-size: 0.85rem;
             color: #ddd;
-            text-align: left;
         }
 
         .note-icon {
@@ -603,6 +618,7 @@
                 text-stroke: 0.2px rgba(255, 215, 0, 0.2);
             }
 
+            /* 股东卡片高度进一步减小 */
             .card {
                 padding: 8px 10px;
             }
@@ -623,6 +639,7 @@
                 font-size: 11px;
             }
 
+            /* 表格手机端优化 */
             .responsive-table {
                 font-size: 0.62rem;
             }
@@ -642,6 +659,7 @@
                 font-size: 1.1rem;
             }
 
+            /* 表格下方文字大小减小 */
             .note-item {
                 font-size: 0.75rem;
             }
@@ -658,13 +676,14 @@
                 font-size: 0.75rem;
             }
 
+            /* 表格容器贴近屏幕边缘 */
             .table-container {
                 padding: 0 2px;
                 margin: 0 -5px;
             }
         }
 
-        /* 模态框样式 */
+        /* 新增模态框样式 */
         .modal {
             display: none;
             position: fixed;
@@ -673,7 +692,7 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.8);
-            z-index: 10000;
+            z-index: 10000; /* 增加z-index确保在顶层 */
             align-items: center;
             justify-content: center;
             backdrop-filter: blur(4px);
@@ -689,7 +708,7 @@
             border: 1px solid rgba(186, 104, 200, 0.4);
             position: relative;
             animation: modalAppear 0.4s ease-out;
-            z-index: 10001;
+            z-index: 10001; /* 确保在顶层 */
         }
 
         @keyframes modalAppear {
@@ -727,7 +746,6 @@
             color: #ddd;
             font-size: 0.9rem;
             line-height: 1.6;
-            text-align: left;
         }
 
         .modal-tip {
@@ -744,11 +762,6 @@
             margin-right: 10px;
             margin-top: 3px;
             font-size: 1.2rem;
-        }
-
-        .modal-tip div {
-            flex: 1;
-            text-align: left;
         }
 
         .modal-footer {
@@ -782,14 +795,14 @@
             font-size: 1.5rem;
             cursor: pointer;
             transition: color 0.3s;
-            z-index: 10002;
+            z-index: 10002; /* 确保在顶层 */
         }
 
         .modal-close:hover {
             color: #ff4081;
         }
 
-        /* 主页链接样式 */
+        /* 新增主页链接样式 */
         .logo-link {
             display: flex;
             align-items: center;
@@ -803,12 +816,12 @@
             cursor: pointer;
         }
         
-        /* 倒计时提示 */
-        .countdown {
-            text-align: center;
-            margin-top: 15px;
+        /* 新增提示样式 */
+        .hint-text {
+            font-size: 11px;
             color: #ba68c8;
-            font-size: 0.9rem;
+            margin-top: 5px;
+            text-align: center;
         }
     </style>
 </head>
@@ -823,21 +836,28 @@
             <div class="modal-body">
                 <div class="modal-tip">
                     <i class="fas fa-calendar-alt"></i>
-                    <div>点击日期可修改当前分红日期</div>
+                    <div>点击日期可修改当前分红日期，格式为：YYYY年MM月DD日</div>
+                </div>
+                <div class="modal-tip">
+                    <i class="fas fa-coins"></i>
+                    <div>点击分红池可输入5个级别股东分红的总和，系统将自动计算各级股东人数</div>
                 </div>
                 <div class="modal-tip">
                     <i class="fas fa-users"></i>
-                    <div>点击股东人数可修改人数</div>
+                    <div>点击股东人均分红可修改数值，系统将重新计算股东人数</div>
                 </div>
                 <div class="modal-tip">
                     <i class="fas fa-hand-holding-usd"></i>
-                    <div>点击分红奖励可修改分红数量</div>
+                    <div>股东人数 = (分红池 × 该级别比例) ÷ 该级别人均分红</div>
                 </div>
                 <div class="modal-tip">
                     <i class="fas fa-lightbulb"></i>
-                    <div>所有数据修改好后就可以截图发圈了</div>
+                    <div>输入分红池和人均分红后，系统将自动计算股东人数</div>
                 </div>
-                <div class="countdown" id="countdown">10秒后自动关闭</div>
+                <div class="modal-tip">
+                    <i class="fas fa-user-plus"></i>
+                    <div>当股东人数为0时，系统会自动设置为1人独享该级别全部分红</div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button class="modal-btn">我知道了</button>
@@ -864,161 +884,165 @@
             <div class="subtitle">五级股东尊享计划</div>
             <div class="info-text">每日分红奖励</div>
             <div class="date-container">
-                <div class="date" id="dateDisplay">2025年8月1日</div>
+                <div class="date" id="dateDisplay">2025年7月28日</div>
+                <div class="dividend-pool" id="poolDisplay">分红池: 0 DSC</div>
             </div>
+            <div class="hint-text">点击分红池输入总金额，系统将自动计算各股东分红</div>
         </div>
 
-        <!-- 股东卡片 -->
-        <!-- 一级股东 -->
-        <div class="card level1-card">
-            <div class="card-header">
-                <div class="level-info">
-                    <div class="level">一级股东</div>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
+        <!-- 股东卡片容器（已移除外层容器） -->
+        <div class="card-container">
+            <!-- 一级股东 -->
+            <div class="card level1-card">
+                <div class="card-header">
+                    <div class="level-info">
+                        <div class="level">一级股东</div>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="percentage-badge">5% 分红</div>
+                </div>
+                <div class="card-content">
+                    <div class="data-item">
+                        <div class="data-label">股东人数</div>
+                        <div class="data-value">
+                            <div class="virtual placeholder" data-level="1" data-type="count">0</div>
+                            <span class="person-unit">人</span>
+                        </div>
+                    </div>
+                    <div class="data-item">
+                        <div class="data-label">人均分红</div>
+                        <div class="data-value">
+                            <div class="virtual placeholder" data-level="1" data-type="dividend" data-percentage="5">0</div>
+                            <span class="dsc-unit">DSC</span>
+                        </div>
                     </div>
                 </div>
-                <div class="percentage-badge">5% 分红</div>
             </div>
-            <div class="card-content">
-                <div class="data-item">
-                    <div class="data-label">股东人数</div>
-                    <div class="data-value">
-                        <div class="virtual placeholder" data-level="1" data-type="count">0</div>
-                        <span class="person-unit">人</span>
-                    </div>
-                </div>
-                <div class="data-item">
-                    <div class="data-label">分红奖励</div>
-                    <div class="data-value">
-                        <div class="virtual placeholder" data-level="1" data-type="dividend">0</div>
-                        <span class="dsc-unit">DSC</span>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- 二级股东 -->
-        <div class="card level2-card">
-            <div class="card-header">
-                <div class="level-info">
-                    <div class="level">二级股东</div>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+            <!-- 二级股东 -->
+            <div class="card level2-card">
+                <div class="card-header">
+                    <div class="level-info">
+                        <div class="level">二级股东</div>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="percentage-badge">15% 分红</div>
+                </div>
+                <div class="card-content">
+                    <div class="data-item">
+                        <div class="data-label">股东人数</div>
+                        <div class="data-value">
+                            <div class="virtual placeholder" data-level="2" data-type="count">0</div>
+                            <span class="person-unit">人</span>
+                        </div>
+                    </div>
+                    <div class="data-item">
+                        <div class="data-label">人均分红</div>
+                        <div class="data-value">
+                            <div class="virtual placeholder" data-level="2" data-type="dividend" data-percentage="15">0</div>
+                            <span class="dsc-unit">DSC</span>
+                        </div>
                     </div>
                 </div>
-                <div class="percentage-badge">15% 分红</div>
             </div>
-            <div class="card-content">
-                <div class="data-item">
-                    <div class="data-label">股东人数</div>
-                    <div class="data-value">
-                        <div class="virtual placeholder" data-level="2" data-type="count">0</div>
-                        <span class="person-unit">人</span>
-                    </div>
-                </div>
-                <div class="data-item">
-                    <div class="data-label">分红奖励</div>
-                    <div class="data-value">
-                        <div class="virtual placeholder" data-level="2" data-type="dividend">0</div>
-                        <span class="dsc-unit">DSC</span>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- 三级股东 -->
-        <div class="card level3-card">
-            <div class="card-header">
-                <div class="level-info">
-                    <div class="level">三级股东</div>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+            <!-- 三级股东 -->
+            <div class="card level3-card">
+                <div class="card-header">
+                    <div class="level-info">
+                        <div class="level">三级股东</div>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="percentage-badge">20% 分红</div>
+                </div>
+                <div class="card-content">
+                    <div class="data-item">
+                        <div class="data-label">股东人数</div>
+                        <div class="data-value">
+                            <div class="virtual placeholder" data-level="3" data-type="count">0</div>
+                            <span class="person-unit">人</span>
+                        </div>
+                    </div>
+                    <div class="data-item">
+                        <div class="data-label">人均分红</div>
+                        <div class="data-value">
+                            <div class="virtual placeholder" data-level="3" data-type="dividend" data-percentage="20">0</div>
+                            <span class="dsc-unit">DSC</span>
+                        </div>
                     </div>
                 </div>
-                <div class="percentage-badge">20% 分红</div>
             </div>
-            <div class="card-content">
-                <div class="data-item">
-                    <div class="data-label">股东人数</div>
-                    <div class="data-value">
-                        <div class="virtual placeholder" data-level="3" data-type="count">0</div>
-                        <span class="person-unit">人</span>
-                    </div>
-                </div>
-                <div class="data-item">
-                    <div class="data-label">分红奖励</div>
-                    <div class="data-value">
-                        <div class="virtual placeholder" data-level="3" data-type="dividend">0</div>
-                        <span class="dsc-unit">DSC</span>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- 四级股东 -->
-        <div class="card level4-card">
-            <div class="card-header">
-                <div class="level-info">
-                    <div class="level">四级股东</div>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+            <!-- 四级股东 -->
+            <div class="card level4-card">
+                <div class="card-header">
+                    <div class="level-info">
+                        <div class="level">四级股东</div>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="percentage-badge">15% 分红</div>
+                </div>
+                <div class="card-content">
+                    <div class="data-item">
+                        <div class="data-label">股东人数</div>
+                        <div class="data-value">
+                            <div class="virtual placeholder" data-level="4" data-type="count">0</div>
+                            <span class="person-unit">人</span>
+                        </div>
+                    </div>
+                    <div class="data-item">
+                        <div class="data-label">人均分红</div>
+                        <div class="data-value">
+                            <div class="virtual placeholder" data-level="4" data-type="dividend" data-percentage="15">0</div>
+                            <span class="dsc-unit">DSC</span>
+                        </div>
                     </div>
                 </div>
-                <div class="percentage-badge">15% 分红</div>
             </div>
-            <div class="card-content">
-                <div class="data-item">
-                    <div class="data-label">股东人数</div>
-                    <div class="data-value">
-                        <div class="virtual placeholder" data-level="4" data-type="count">0</div>
-                        <span class="person-unit">人</span>
-                    </div>
-                </div>
-                <div class="data-item">
-                    <div class="data-label">分红奖励</div>
-                    <div class="data-value">
-                        <div class="virtual placeholder" data-level="4" data-type="dividend">0</div>
-                        <span class="dsc-unit">DSC</span>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- 五级股东 -->
-        <div class="card level5-card">
-            <div class="card-header">
-                <div class="level-info">
-                    <div class="level">五级股东</div>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+            <!-- 五级股东 -->
+            <div class="card level5-card">
+                <div class="card-header">
+                    <div class="level-info">
+                        <div class="level">五级股东</div>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
                     </div>
+                    <div class="percentage-badge">15% 分红</div>
                 </div>
-                <div class="percentage-badge">15% 分红</div>
-            </div>
-            <div class="card-content">
-                <div class="data-item">
-                    <div class="data-label">股东人数</div>
-                    <div class="data-value">
-                        <div class="virtual placeholder" data-level="5" data-type="count">0</div>
-                        <span class="person-unit">人</span>
+                <div class="card-content">
+                    <div class="data-item">
+                        <div class="data-label">股东人数</div>
+                        <div class="data-value">
+                            <div class="virtual placeholder" data-level="5" data-type="count">0</div>
+                            <span class="person-unit">人</span>
+                        </div>
                     </div>
-                </div>
-                <div class="data-item">
-                    <div class="data-label">分红奖励</div>
-                    <div class="data-value">
-                        <div class="virtual placeholder" data-level="5" data-type="dividend">0</div>
-                        <span class="dsc-unit">DSC</span>
+                    <div class="data-item">
+                        <div class="data-label">人均分红</div>
+                        <div class="data-value">
+                            <div class="virtual placeholder" data-level="5" data-type="dividend" data-percentage="15">0</div>
+                            <span class="dsc-unit">DSC</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1191,7 +1215,7 @@
     <!-- 粒子背景库 -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // 粒子背景配置
+        // 粒子背景配置 - 修复事件检测
         particlesJS("particles-js", {
             particles: {
                 number: { value: 65, density: { enable: true, value_area: 650 } },
@@ -1217,7 +1241,7 @@
                 }
             },
             interactivity: {
-                detectOn: "window",
+                detectOn: "window", // 修复事件检测问题
                 events: {
                     onhover: { enable: true, mode: "grab" },
                     onclick: { enable: true, mode: "push" },
@@ -1231,33 +1255,6 @@
             retina_detect: true
         });
 
-        // 获取当前日期并格式化为中文格式
-        function getCurrentDate() {
-            const now = new Date();
-            const year = now.getFullYear();
-            const month = String(now.getMonth() + 1).padStart(2, '0');
-            const day = String(now.getDate()).padStart(2, '0');
-            return `${year}年${month}月${day}日`;
-        }
-
-        // 设置倒计时
-        function startCountdown(seconds) {
-            const countdownElement = document.getElementById('countdown');
-            let remaining = seconds;
-            
-            countdownElement.textContent = `${remaining}秒后自动关闭`;
-            
-            const interval = setInterval(() => {
-                remaining--;
-                countdownElement.textContent = `${remaining}秒后自动关闭`;
-                
-                if (remaining <= 0) {
-                    clearInterval(interval);
-                    closeModal();
-                }
-            }, 1000);
-        }
-
         // 显示模态框
         const modal = document.getElementById('infoModal');
         const closeBtn = document.querySelector('.modal-close');
@@ -1267,7 +1264,6 @@
         window.addEventListener('load', function() {
             setTimeout(() => {
                 modal.style.display = 'flex';
-                startCountdown(10);
             }, 500);
         });
 
@@ -1286,12 +1282,95 @@
             }
         });
 
-        // 设置默认日期为当前日期
-        const dateDisplay = document.getElementById('dateDisplay');
-        dateDisplay.textContent = getCurrentDate();
+        // 股东级别比例
+        const levelPercentages = {
+            1: 0.05,
+            2: 0.15,
+            3: 0.20,
+            4: 0.15,
+            5: 0.15
+        };
+
+        // 保存当前分红池总金额
+        let currentPoolAmount = 0;
+
+        // 格式化数字（保留2位小数）
+        function formatNumber(num) {
+            if (isNaN(num)) return "0";
+            const rounded = Math.round(num * 100) / 100;
+            return Number.isInteger(rounded) ? rounded.toString() : rounded.toFixed(2);
+        }
+
+        // 更新空状态显示
+        function updateEmptyState(level) {
+            const countElement = document.querySelector(`.virtual[data-level="${level}"][data-type="count"]`);
+            const count = parseInt(countElement.textContent) || 0;
+
+            if (count === 0) {
+                countElement.textContent = "虚位以待";
+                countElement.className = 'virtual empty-state';
+            } else {
+                countElement.textContent = count;
+                countElement.className = 'virtual input-value';
+            }
+        }
+
+        // 根据分红池计算股东分红
+        function calculateDividendsFromPool() {
+            for (let level = 1; level <= 5; level++) {
+                const total = currentPoolAmount * levelPercentages[level];
+                const countElement = document.querySelector(`.virtual[data-level="${level}"][data-type="count"]`);
+                const dividendElement = document.querySelector(`.virtual[data-level="${level}"][data-type="dividend"]`);
+                
+                // 获取当前股东人数
+                let currentCount = 0;
+                if (countElement.textContent !== "虚位以待") {
+                    currentCount = parseInt(countElement.textContent) || 0;
+                }
+                
+                // 如果股东人数为0，则设置为1人独享
+                if (currentCount === 0) {
+                    currentCount = 1;
+                    countElement.textContent = currentCount;
+                    countElement.className = 'virtual input-value';
+                }
+                
+                // 计算人均分红
+                let perDividend = total / currentCount;
+                dividendElement.textContent = formatNumber(perDividend);
+                dividendElement.className = 'virtual input-value';
+            }
+        }
+
+        // 根据人均分红反推股东人数
+        function calculateCountFromDividend(level) {
+            const total = currentPoolAmount * levelPercentages[level];
+            const dividendElement = document.querySelector(`.virtual[data-level="${level}"][data-type="dividend"]`);
+            const perDividend = parseFloat(dividendElement.textContent) || 0;
+            const countElement = document.querySelector(`.virtual[data-level="${level}"][data-type="count"]`);
+            
+            // 计算股东人数
+            let count = 0;
+            if (perDividend > 0) {
+                count = Math.floor(total / perDividend);
+            }
+            
+            // 更新股东人数
+            countElement.textContent = count;
+            updateEmptyState(level);
+        }
 
         // 日期编辑功能
+        const dateDisplay = document.getElementById('dateDisplay');
         let isDateEditing = false;
+
+        // 设置真实日期
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = now.getMonth() + 1;
+        const day = now.getDate();
+        dateDisplay.textContent = `${year}年${month}月${day}日`;
+
         if (dateDisplay) {
             dateDisplay.addEventListener('click', function(e) {
                 e.stopPropagation();
@@ -1344,39 +1423,74 @@
             });
         }
 
-        // 辅助函数：格式化数字，最多保留2位小数
-        function formatNumber(num) {
-            if (isNaN(num)) return "0";
+        // 分红池编辑功能
+        const poolDisplay = document.getElementById('poolDisplay');
+        let isPoolEditing = false;
 
-            // 四舍五入保留2位小数
-            const rounded = Math.round(num * 100) / 100;
+        if (poolDisplay) {
+            poolDisplay.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (!isPoolEditing) {
+                    isPoolEditing = true;
+                    // 提取当前分红池数值
+                    const currentText = this.textContent.trim();
+                    const currentValue = currentText.replace(/[^0-9.]/g, '');
 
-            // 检查是否为整数
-            if (Number.isInteger(rounded)) {
-                return rounded.toString();
-            } else {
-                return rounded.toFixed(2);
-            }
-        }
+                    // 移除任何已存在的输入框
+                    const existingInput = this.querySelector('input');
+                    if (existingInput) {
+                        existingInput.remove();
+                    }
 
-        // 更新空状态显示
-        function updateEmptyState(level) {
-            const countElement = document.querySelector(`.virtual[data-level="${level}"][data-type="count"]`);
-            
-            let count = 0;
-            if (countElement.textContent !== "虚位以待") {
-                count = parseInt(countElement.textContent) || 0;
-            }
+                    const input = document.createElement('input');
+                    input.type = 'number';
+                    input.className = 'pool-input';
+                    input.value = currentValue;
+                    input.placeholder = '输入数量';
+                    input.step = 'any'; // 允许任意小数位数
+                    input.min = '0';
 
-            if (count === 0) {
-                // 人数为0时显示"虚位以待"
-                countElement.textContent = "虚位以待";
-                countElement.className = 'virtual empty-state';
-            } else {
-                // 人数不为0时显示人数
-                countElement.textContent = count;
-                countElement.className = 'virtual input-value';
-            }
+                    this.textContent = '';
+                    this.appendChild(input);
+
+                    // 确保输入框获得焦点
+                    setTimeout(() => {
+                        input.focus();
+                        input.select();
+                    }, 10);
+
+                    const handleBlur = function() {
+                        // 根据输入值是否为整数显示不同格式
+                        const value = parseFloat(input.value.trim()) || 0;
+                        currentPoolAmount = value;
+                        const formattedValue = formatNumber(value);
+                        poolDisplay.textContent = `分红池: ${formattedValue} DSC`;
+                        isPoolEditing = false;
+
+                        // 计算并更新股东分红
+                        calculateDividendsFromPool();
+
+                        input.removeEventListener('blur', handleBlur);
+                        input.removeEventListener('keyup', handleKeyUp);
+                    };
+
+                    const handleKeyUp = function(e) {
+                        if (e.key === 'Enter') {
+                            input.blur();
+                        } else if (e.key === 'Escape') {
+                            const currentValueNum = parseFloat(currentValue) || 0;
+                            const currentValueFormatted = formatNumber(currentValueNum);
+                            poolDisplay.textContent = `分红池: ${currentValueFormatted} DSC`;
+                            isPoolEditing = false;
+                            input.removeEventListener('blur', handleBlur);
+                            input.removeEventListener('keyup', handleKeyUp);
+                        }
+                    };
+
+                    input.addEventListener('blur', handleBlur);
+                    input.addEventListener('keyup', handleKeyUp);
+                }
+            });
         }
 
         // 处理股东人数和分红金额的点击编辑功能
@@ -1456,14 +1570,22 @@
                         newDiv.setAttribute('data-level', level);
                         newDiv.setAttribute('data-type', type);
 
+                        if (type === 'dividend') {
+                            newDiv.setAttribute('data-percentage', element.getAttribute('data-percentage'));
+                        }
+
                         // 替换回div元素
                         parent.replaceChild(newDiv, input);
 
                         // 重新绑定事件
                         setupEditableElement(newDiv);
 
-                        // 更新空状态显示
-                        updateEmptyState(level);
+                        // 如果是修改了人均分红，则重新计算该级别人数
+                        if (type === 'dividend') {
+                            calculateCountFromDividend(level);
+                        } else if (type === 'count') {
+                            updateEmptyState(level);
+                        }
                     };
 
                     // 处理按键
@@ -1477,6 +1599,10 @@
                             newDiv.textContent = currentValue === "0" && type === 'count' ? "虚位以待" : currentValue;
                             newDiv.setAttribute('data-level', level);
                             newDiv.setAttribute('data-type', type);
+
+                            if (type === 'dividend') {
+                                newDiv.setAttribute('data-percentage', element.getAttribute('data-percentage'));
+                            }
 
                             parent.replaceChild(newDiv, input);
                             setupEditableElement(newDiv);
