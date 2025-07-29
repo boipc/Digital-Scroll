@@ -823,6 +823,22 @@
             margin-top: 5px;
             text-align: center;
         }
+
+        /* 股东人数不可编辑 */
+        .virtual[data-type="count"] {
+            pointer-events: none;
+        }
+        
+        .validation-error {
+            color: #ff6666;
+            font-size: 12px;
+            text-align: center;
+            margin-top: 10px;
+            padding: 5px;
+            background: rgba(255, 102, 102, 0.1);
+            border-radius: 8px;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -884,10 +900,11 @@
             <div class="subtitle">五级股东尊享计划</div>
             <div class="info-text">每日分红奖励</div>
             <div class="date-container">
-                <div class="date" id="dateDisplay">2025年7月28日</div>
+                <div class="date" id="dateDisplay">2025年7月30日</div>
                 <div class="dividend-pool" id="poolDisplay">分红池: 0 DSC</div>
             </div>
             <div class="hint-text">点击分红池输入总金额，系统将自动计算各股东分红</div>
+            <div class="validation-error" id="validationError"></div>
         </div>
 
         <!-- 股东卡片容器（已移除外层容器） -->
@@ -1293,6 +1310,10 @@
 
         // 保存当前分红池总金额
         let currentPoolAmount = 0;
+        // 存储手动修改过的级别
+        const manualDividendSet = {1: false, 2: false, 3: false, 4: false, 5: false};
+        // 存储各级别分红总额
+        const levelTotals = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0};
 
         // 格式化数字（保留2位小数）
         function formatNumber(num) {
@@ -1315,10 +1336,35 @@
             }
         }
 
+        // 反向验算分红总额
+        function validateTotal() {
+            const errorElement = document.getElementById('validationError');
+            let totalCalculated = 0;
+            
+            for (let level = 1; level <= 5; level++) {
+                totalCalculated += levelTotals[level];
+            }
+            
+            // 计算理论分红池（总手续费的70%）
+            const theoreticalPool = totalCalculated;
+            
+            // 计算误差
+            const error = Math.abs(currentPoolAmount - theoreticalPool);
+            
+            if (error > 0.01) {
+                errorElement.textContent = `验算误差：${formatNumber(error)} DSC (输入: ${formatNumber(currentPoolAmount)} DSC, 计算: ${formatNumber(theoreticalPool)} DSC)`;
+                errorElement.style.display = 'block';
+            } else {
+                errorElement.style.display = 'none';
+            }
+        }
+
         // 根据分红池计算股东分红
         function calculateDividendsFromPool() {
             for (let level = 1; level <= 5; level++) {
-                const total = currentPoolAmount * levelPercentages[level];
+                // 计算该级别分红总额 = (分红池 ÷ 70%) × 对应比例
+                levelTotals[level] = (currentPoolAmount / 0.7) * levelPercentages[level];
+                
                 const countElement = document.querySelector(`.virtual[data-level="${level}"][data-type="count"]`);
                 const dividendElement = document.querySelector(`.virtual[data-level="${level}"][data-type="dividend"]`);
                 
@@ -1328,36 +1374,70 @@
                     currentCount = parseInt(countElement.textContent) || 0;
                 }
                 
-                // 如果股东人数为0，则设置为1人独享
-                if (currentCount === 0) {
-                    currentCount = 1;
-                    countElement.textContent = currentCount;
-                    countElement.className = 'virtual input-value';
+                if (!manualDividendSet[level]) {
+                    // 未手动修改过人均分红
+                    if (levelTotals[level] > 0) {
+                        // 如果股东人数为0，则设置为1人独享
+                        if (currentCount === 0) {
+                            currentCount = 1;
+                            countElement.textContent = currentCount;
+                            countElement.className = 'virtual input-value';
+                        }
+                        
+                        // 计算人均分红 = 分红总额 / 股东人数
+                        const perDividend = levelTotals[level] / currentCount;
+                        dividendElement.textContent = formatNumber(perDividend);
+                        dividendElement.className = 'virtual input-value';
+                    } else {
+                        // 分红总额为0
+                        dividendElement.textContent = '0';
+                        dividendElement.className = 'virtual input-value';
+                        countElement.textContent = '0';
+                        updateEmptyState(level);
+                    }
+                } else {
+                    // 手动修改过人均分红，重新计算股东人数
+                    const perDividend = parseFloat(dividendElement.textContent) || 0;
+                    let newCount = 0;
+                    
+                    if (perDividend > 0) {
+                        newCount = Math.floor(levelTotals[level] / perDividend);
+                        // 确保至少1人
+                        if (newCount === 0 && levelTotals[level] > 0) {
+                            newCount = 1;
+                        }
+                    }
+                    
+                    countElement.textContent = newCount;
+                    updateEmptyState(level);
                 }
-                
-                // 计算人均分红
-                let perDividend = total / currentCount;
-                dividendElement.textContent = formatNumber(perDividend);
-                dividendElement.className = 'virtual input-value';
             }
+            
+            // 反向验算
+            validateTotal();
         }
 
-        // 根据人均分红反推股东人数
+        // 根据人均分红计算股东人数
         function calculateCountFromDividend(level) {
-            const total = currentPoolAmount * levelPercentages[level];
             const dividendElement = document.querySelector(`.virtual[data-level="${level}"][data-type="dividend"]`);
             const perDividend = parseFloat(dividendElement.textContent) || 0;
             const countElement = document.querySelector(`.virtual[data-level="${level}"][data-type="count"]`);
             
-            // 计算股东人数
-            let count = 0;
+            let newCount = 0;
+            
             if (perDividend > 0) {
-                count = Math.floor(total / perDividend);
+                newCount = Math.floor(levelTotals[level] / perDividend);
+                // 确保至少1人
+                if (newCount === 0 && levelTotals[level] > 0) {
+                    newCount = 1;
+                }
             }
             
-            // 更新股东人数
-            countElement.textContent = count;
+            countElement.textContent = newCount;
             updateEmptyState(level);
+            
+            // 反向验算
+            validateTotal();
         }
 
         // 日期编辑功能
@@ -1493,8 +1573,8 @@
             });
         }
 
-        // 处理股东人数和分红金额的点击编辑功能
-        document.querySelectorAll('.virtual').forEach(element => {
+        // 处理人均分红点击编辑功能
+        document.querySelectorAll('.virtual[data-type="dividend"]').forEach(element => {
             setupEditableElement(element);
         });
 
@@ -1508,65 +1588,75 @@
                 const currentValue = this.textContent.trim() === "虚位以待" ? "0" : this.textContent.trim();
                 const parent = this.parentElement;
 
-                // 只允许编辑数字，"虚位以待"状态也可以点击编辑
-                if (type === 'count' || type === 'dividend') {
-                    // 创建输入框
-                    const input = document.createElement('input');
-                    input.className = 'data-input';
-                    input.value = currentValue;
-                    input.placeholder = type === 'count' ? '输入人数' : '输入数量';
-                    input.min = type === 'count' ? '0' : '0';
+                // 创建输入框
+                const input = document.createElement('input');
+                input.className = 'data-input';
+                input.value = currentValue;
+                input.placeholder = '输入数量';
+                input.min = '0';
+                input.step = 'any';
 
-                    // 根据类型设置输入框属性
-                    if (type === 'count') {
-                        input.type = 'number';
-                        input.step = '1'; // 只能输入整数
-                    } else {
-                        input.type = 'number';
-                        input.step = 'any'; // 可以输入小数
+                // 保存当前元素的引用和类名
+                const originalClass = this.className;
+
+                // 替换为输入框
+                parent.replaceChild(input, this);
+
+                // 确保输入框获得焦点
+                setTimeout(() => {
+                    input.focus();
+                    input.select();
+                }, 10);
+
+                // 处理失去焦点
+                const handleBlur = () => {
+                    let value = input.value.trim();
+
+                    if (value === '') {
+                        value = '0';
                     }
 
-                    // 保存当前元素的引用和类名
-                    const originalClass = this.className;
+                    // 处理数值
+                    let numValue = parseFloat(value);
 
-                    // 替换为输入框
-                    parent.replaceChild(input, this);
+                    if (isNaN(numValue)) {
+                        numValue = 0;
+                    }
 
-                    // 确保输入框获得焦点
-                    setTimeout(() => {
-                        input.focus();
-                        input.select();
-                    }, 10);
+                    // 对于分红，保留2位小数
+                    numValue = Math.max(0, Math.round(numValue * 100) / 100);
+                    value = formatNumber(numValue);
 
-                    // 处理失去焦点
-                    const handleBlur = () => {
-                        let value = input.value.trim();
+                    // 创建新的div元素
+                    const newDiv = document.createElement('div');
+                    newDiv.className = 'virtual input-value';
+                    newDiv.textContent = value;
+                    newDiv.setAttribute('data-level', level);
+                    newDiv.setAttribute('data-type', type);
+                    newDiv.setAttribute('data-percentage', element.getAttribute('data-percentage'));
 
-                        if (value === '') {
-                            value = '0';
-                        }
+                    // 替换回div元素
+                    parent.replaceChild(newDiv, input);
 
-                        // 处理数值
-                        let numValue = parseFloat(value);
+                    // 重新绑定事件
+                    setupEditableElement(newDiv);
 
-                        if (isNaN(numValue)) {
-                            numValue = 0;
-                        }
+                    // 标记该级别为手动修改
+                    manualDividendSet[level] = true;
+                    
+                    // 重新计算该级别股东人数
+                    calculateCountFromDividend(level);
+                };
 
-                        // 对于人数，确保是整数
-                        if (type === 'count') {
-                            numValue = Math.max(0, Math.floor(numValue));
-                            value = numValue.toString();
-                        } else {
-                            // 对于分红，保留2位小数
-                            numValue = Math.max(0, Math.round(numValue * 100) / 100);
-                            value = formatNumber(numValue);
-                        }
-
-                        // 创建新的div元素
+                // 处理按键
+                const handleKeyUp = (e) => {
+                    if (e.key === 'Enter') {
+                        input.blur();
+                    } else if (e.key === 'Escape') {
+                        // 取消编辑，恢复原值
                         const newDiv = document.createElement('div');
-                        newDiv.className = 'virtual input-value';
-                        newDiv.textContent = value;
+                        newDiv.className = originalClass;
+                        newDiv.textContent = currentValue === "0" && type === 'count' ? "虚位以待" : currentValue;
                         newDiv.setAttribute('data-level', level);
                         newDiv.setAttribute('data-type', type);
 
@@ -1574,44 +1664,13 @@
                             newDiv.setAttribute('data-percentage', element.getAttribute('data-percentage'));
                         }
 
-                        // 替换回div元素
                         parent.replaceChild(newDiv, input);
-
-                        // 重新绑定事件
                         setupEditableElement(newDiv);
+                    }
+                };
 
-                        // 如果是修改了人均分红，则重新计算该级别人数
-                        if (type === 'dividend') {
-                            calculateCountFromDividend(level);
-                        } else if (type === 'count') {
-                            updateEmptyState(level);
-                        }
-                    };
-
-                    // 处理按键
-                    const handleKeyUp = (e) => {
-                        if (e.key === 'Enter') {
-                            input.blur();
-                        } else if (e.key === 'Escape') {
-                            // 取消编辑，恢复原值
-                            const newDiv = document.createElement('div');
-                            newDiv.className = originalClass;
-                            newDiv.textContent = currentValue === "0" && type === 'count' ? "虚位以待" : currentValue;
-                            newDiv.setAttribute('data-level', level);
-                            newDiv.setAttribute('data-type', type);
-
-                            if (type === 'dividend') {
-                                newDiv.setAttribute('data-percentage', element.getAttribute('data-percentage'));
-                            }
-
-                            parent.replaceChild(newDiv, input);
-                            setupEditableElement(newDiv);
-                        }
-                    };
-
-                    input.addEventListener('blur', handleBlur);
-                    input.addEventListener('keyup', handleKeyUp);
-                }
+                input.addEventListener('blur', handleBlur);
+                input.addEventListener('keyup', handleKeyUp);
             });
         }
 
