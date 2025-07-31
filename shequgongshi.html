@@ -14,10 +14,10 @@
         }
 
         body {
-            background: linear-gradient(135deg, #0a0c24, #131844, #0a0c24);
-            color: #fff;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #e6e6e6;
             min-height: 100vh;
-            padding: 15px;
+            padding: 10px;
             overflow-x: hidden;
             position: relative;
         }
@@ -33,70 +33,48 @@
         }
 
         .container {
-            max-width: 480px;
+            max-width: 500px;
             margin: 0 auto;
             position: relative;
             z-index: 2;
-            padding-bottom: 25px;
+            padding-bottom: 15px;
         }
 
         .header {
             text-align: center;
-            padding: 15px 0;
+            padding: 10px 0;
             position: relative;
-            margin-bottom: 10px;
-        }
-
-        .header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 160px;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #ba68c8, #9c27b0, transparent);
-            border-radius: 2px;
+            margin-bottom: 8px;
         }
 
         .logo {
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 10px;
-            gap: 10px;
+            margin-bottom: 6px;
+            gap: 8px;
         }
 
         .logo-icon {
-            font-size: 42px;
-            color: #ffd700;
-            text-shadow: 0 0 3px rgba(255, 215, 0, 0.7), 0 0 6px rgba(255, 215, 0, 0.4);
+            font-size: 36px;
+            color: #d4af37;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
         }
 
         h1 {
-            font-size: 28px;
-            letter-spacing: 1px;
+            font-size: 24px;
+            letter-spacing: 0.8px;
             margin-bottom: 0;
-            color: #ffd700;
-            text-shadow: 0 0 3px rgba(255, 215, 0, 0.7), 0 0 6px rgba(255, 215, 0, 0.4);
-            -webkit-text-stroke: 0.5px rgba(255, 215, 0, 0.3);
-            text-stroke: 0.5px rgba(255, 215, 0, 0.3);
+            color: #4cc9f0;
+            font-weight: 700;
         }
 
         .subtitle {
-            font-size: 16px;
-            color: #ffd700;
-            text-shadow: 0 0 3px rgba(255, 215, 0, 0.6), 0 0 6px rgba(255, 215, 0, 0.3);
-            letter-spacing: 0.5px;
-            margin-bottom: 3px;
-            -webkit-text-stroke: 0.3px rgba(255, 215, 0, 0.2);
-            text-stroke: 0.3px rgba(255, 215, 0, 0.2);
-        }
-
-        .info-text {
-            font-size: 13px;
-            color: #aaa;
-            margin-bottom: 10px;
+            font-size: 14px;
+            color: #a9d6e5;
+            letter-spacing: 0.3px;
+            margin: 8px 0;
+            font-weight: 500;
         }
 
         .date-container {
@@ -105,83 +83,45 @@
             gap: 10px;
             margin-top: 6px;
             flex-wrap: wrap;
+            align-items: center;
         }
 
-        /* 统一日期和分红池的样式 */
+        /* 日期和分红池样式调整 */
         .date, .dividend-pool {
-            background: rgba(106, 27, 154, 0.25);
-            padding: 6px 12px;
+            background: rgba(25, 55, 109, 0.6);
+            padding: 4px 10px;
             border-radius: 18px;
             font-size: 13px;
             display: inline-block;
-            border: 1px solid rgba(186, 104, 200, 0.4);
-            cursor: pointer;
-            transition: all 0.3s;
+            border: 1px solid rgba(52, 152, 219, 0.4);
             user-select: none;
             min-width: 120px;
             text-align: center;
+            color: #ffffff;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
 
-        .date:hover, .dividend-pool:hover {
-            background: rgba(106, 27, 154, 0.35);
-            box-shadow: 0 0 12px rgba(186, 104, 200, 0.5);
-        }
-
-        .date-input, .pool-input {
-            background: transparent;
-            border: none;
-            color: white;
-            font-size: 13px;
-            width: 100%;
-            text-align: center;
-            outline: none;
-            z-index: 100; /* 确保输入框在顶层 */
-            pointer-events: auto; /* 确保可交互 */
-        }
-
-        /* 股东卡片容器样式 - 已移除 */
-        .card-container {
-            display: flex;
-            flex-direction: column;
-            gap: 8px; /* 缩小间隙 */
-            margin-top: 8px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(186, 104, 200, 0.2);
-            border-radius: 20px;
-            padding: 12px;
-            margin: 15px 0;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, #0072ff, #ba68c8, #0072ff);
-            opacity: 0.7;
-        }
-
+        /* 股东卡片样式 - 深色半透明背景 */
         .card {
             border-radius: 16px;
-            padding: 8px 12px; /* 减小内边距 */
+            padding: 8px 12px;
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(6px);
+            margin-bottom: 8px;
+            background: rgba(30, 30, 46, 0.8);
+            color: #ffffff;
         }
 
         .card-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 6px; /* 减小下边距 */
-            padding-bottom: 4px; /* 减小内边距 */
+            margin-bottom: 6px;
+            padding-bottom: 4px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
@@ -196,53 +136,62 @@
         }
 
         .stars i {
-            color: #ffd700;
             margin-left: 2px;
-            font-size: 15px;
-            text-shadow: 0 0 4px rgba(255, 215, 0, 0.9), 0 0 8px rgba(255, 215, 0, 0.6);
+            font-size: 14px;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
         }
 
         .level {
-            font-size: 16px; /* 稍微减小字体 */
-            font-weight: bold;
+            font-size: 15px;
+            font-weight: 700;
             letter-spacing: 0.5px;
+            color: #ffffff;
         }
 
+        /* 分红比例样式调整 - 无边框无背景 */
         .percentage-badge {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 3px 10px;
-            font-size: 12px;
-            color: #ba68c8;
+            border-radius: 8px;
+            padding: 2px 8px;
+            font-size: 10px;
             font-weight: 600;
+            background: transparent !important;
+            color: #ffffff !important;
+            border: none !important;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            min-width: 60px;
         }
 
         .card-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 6px; /* 减小间隙 */
+            gap: 6px;
         }
 
         .data-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 5px 3px; /* 减小内边距 */
+            padding: 5px 3px;
             border-radius: 10px;
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.05);
         }
 
         .data-label {
-            font-size: 11px; /* 减小字体 */
-            color: #bbb;
-            margin-bottom: 3px; /* 减小下边距 */
+            font-size: 11px;
+            color: #b8c2cc;
+            margin-bottom: 3px;
+            font-weight: 500;
         }
 
         .data-value {
             display: flex;
             align-items: center;
-            font-size: 14px; /* 减小字体 */
-            font-weight: bold;
+            font-size: 14px;
+            font-weight: 700;
+            color: #ffffff;
         }
 
         .virtual {
@@ -252,12 +201,12 @@
             color: #ffffff;
             text-align: center;
             position: relative;
-            z-index: 100; /* 确保可点击区域在顶层 */
-            pointer-events: auto; /* 确保可交互 */
+            z-index: 100;
+            pointer-events: auto;
         }
 
         .virtual.placeholder {
-            color: #888;
+            color: #95a5a6;
         }
 
         .virtual.input-value {
@@ -265,22 +214,16 @@
         }
 
         .virtual.empty-state {
-            color: #888; /* 修改为灰色 */
+            color: #95a5a6;
             font-style: italic;
         }
 
-        .dsc-unit {
-            font-size: 12px; /* 减小字体 */
-            color: #0072ff;
-            font-weight: bold;
+        /* 单位样式 */
+        .dsc-unit, .person-unit {
+            font-size: 11px;
+            font-weight: 600;
             margin-left: 5px;
-        }
-
-        .person-unit {
-            font-size: 12px; /* 减小字体 */
-            color: #0072ff; /* 修改为蓝色 */
-            font-weight: bold;
-            margin-left: 5px;
+            color: #b8c2cc;
         }
 
         .data-input {
@@ -288,235 +231,232 @@
             align-items: center;
             width: 100%;
             justify-content: center;
-            z-index: 100; /* 确保输入框在顶层 */
-            pointer-events: auto; /* 确保可交互 */
+            z-index: 100;
+            pointer-events: auto;
         }
 
         .data-input input {
-            background: rgba(0, 0, 0, 0.25);
-            border: 2px solid #ba68c8;
-            border-radius: 10px;
-            padding: 6px 10px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 5px 8px;
             color: #ffffff;
             font-size: 14px;
             font-weight: bold;
-            width: 80px;
+            width: 70px;
             outline: none;
             transition: all 0.3s;
             text-align: right;
-            z-index: 100; /* 确保输入框在顶层 */
-            pointer-events: auto; /* 确保可交互 */
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .data-input input:focus {
-            background: rgba(186, 104, 200, 0.15);
-            box-shadow: 0 0 12px rgba(186, 104, 200, 0.5);
+            box-shadow: 0 0 8px rgba(0, 114, 255, 0.5);
+            border-color: #0072ff;
         }
 
-        /* 卡片渐变效果 - 重新设计 */
+        /* 卡片背景颜色 - 深色设计 */
         .level1-card {
-            background: linear-gradient(135deg, rgba(30, 30, 70, 0.3), rgba(20, 20, 50, 0.25));
-            border: 1px solid rgba(66, 133, 244, 0.4);
-            box-shadow: 0 4px 15px rgba(0, 114, 255, 0.2);
+            border: 1px solid #3498db;
+            background: linear-gradient(135deg, rgba(25, 55, 109, 0.8), rgba(10, 30, 70, 0.8));
         }
+        .level1-card .stars i { color: #3498db; }
+        .level1-card .data-input input { border: 1px solid #3498db; }
 
         .level2-card {
-            background: linear-gradient(135deg, rgba(25, 85, 140, 0.35), rgba(20, 70, 120, 0.3));
-            border: 1px solid rgba(0, 188, 212, 0.5);
-            box-shadow: 0 4px 15px rgba(0, 188, 212, 0.25);
+            border: 1px solid #1abc9c;
+            background: linear-gradient(135deg, rgba(0, 77, 64, 0.8), rgba(0, 40, 33, 0.8));
         }
+        .level2-card .stars i { color: #1abc9c; }
+        .level2-card .data-input input { border: 1px solid #1abc9c; }
 
         .level3-card {
-            background: linear-gradient(135deg, rgba(20, 110, 166, 0.4), rgba(15, 90, 140, 0.35));
-            border: 1px solid rgba(0, 230, 118, 0.5);
-            box-shadow: 0 4px 15px rgba(0, 230, 118, 0.25);
+            border: 1px solid #f1c40f;
+            background: linear-gradient(135deg, rgba(128, 102, 0, 0.8), rgba(77, 61, 0, 0.8));
         }
+        .level3-card .stars i { color: #f1c40f; }
+        .level3-card .data-input input { border: 1px solid #f1c40f; }
 
         .level4-card {
-            background: linear-gradient(135deg, rgba(100, 30, 150, 0.35), rgba(80, 20, 120, 0.3));
-            border: 1px solid rgba(186, 104, 200, 0.6);
-            box-shadow: 0 4px 15px rgba(156, 39, 176, 0.3);
+            border: 1px solid #e74c3c;
+            background: linear-gradient(135deg, rgba(128, 29, 29, 0.8), rgba(77, 17, 17, 0.8));
         }
+        .level4-card .stars i { color: #e74c3c; }
+        .level4-card .data-input input { border: 1px solid #e74c3c; }
 
+        /* 五级股东卡片增加底部间距 */
         .level5-card {
-            background: linear-gradient(135deg, rgba(180, 100, 20, 0.35), rgba(150, 80, 10, 0.3));
-            border: 1px solid rgba(255, 171, 64, 0.6);
-            box-shadow: 0 4px 15px rgba(255, 145, 0, 0.3);
+            border: 1px solid #9b59b6;
+            background: linear-gradient(135deg, rgba(60, 29, 83, 0.8), rgba(37, 18, 51, 0.8));
+            margin-bottom: 20px; /* 增加底部行距 */
         }
+        .level5-card .stars i { color: #9b59b6; }
+        .level5-card .data-input input { border: 1px solid #9b59b6; }
 
         .footer {
             text-align: center;
-            margin-top: 15px;
-            font-size: 14px;
-            color: #ff4081;
-            font-weight: bold;
-            padding: 8px;
-            background: rgba(255, 64, 129, 0.1);
+            margin-top: 8.4px;
+            font-size: 13px;
+            color: #4cc9f0;
+            font-weight: 700;
+            padding: 6px;
+            background: rgba(0, 114, 255, 0.1);
             border-radius: 12px;
-            border: 1px solid rgba(255, 64, 129, 0.3);
+            border: 1px solid rgba(0, 114, 255, 0.2);
         }
 
         .glow {
             position: absolute;
-            width: 160px;
-            height: 160px;
-            background: radial-gradient(circle, rgba(186, 104, 200, 0.4), transparent 70%);
+            width: 140px;
+            height: 140px;
+            background: radial-gradient(circle, rgba(0, 114, 255, 0.15), transparent 70%);
             border-radius: 50%;
-            filter: blur(20px);
+            filter: blur(15px);
             z-index: -1;
         }
 
         .glow-1 {
-            top: 8%;
-            left: 8%;
+            top: 5%;
+            left: 5%;
         }
 
         .glow-2 {
-            bottom: 8%;
-            right: 8%;
-            background: radial-gradient(circle, rgba(106, 27, 154, 0.5), transparent 70%);
+            bottom: 5%;
+            right: 5%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.15), transparent 70%);
         }
 
         /* 股东制度表格样式 */
         .shareholder-system {
-            margin-top: 25px;
-            padding: 12px 0;
+            margin-top: 14px;
+            padding: 10px 0;
             border-radius: 16px;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(30, 30, 46, 0.8);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(6px);
         }
 
         .system-title {
             text-align: center;
-            margin-bottom: 12px;
-            color: #ffd700;
-            text-shadow: 0 0 3px rgba(255, 215, 0, 0.7), 0 0 6px rgba(255, 215, 0, 0.4);
-            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #4cc9f0;
+            font-size: 1.2rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            padding: 0 15px;
-            -webkit-text-stroke: 0.3px rgba(255, 215, 0, 0.2);
-            text-stroke: 0.3px rgba(255, 215, 0, 0.2);
+            gap: 8px;
+            padding: 0 12px;
+            font-weight: 700;
         }
 
         .system-title i {
-            color: #ffd700;
-            text-shadow: 0 0 3px rgba(255, 215, 0, 0.7), 0 0 6px rgba(255, 215, 0, 0.4);
+            color: #d4af37;
         }
 
         .table-container {
-            padding: 0 5px;
+            padding: 0 4px;
             overflow-x: hidden;
         }
 
         .responsive-table {
             width: 100%;
-            border-radius: 12px;
+            border-radius: 10px;
             overflow: hidden;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             border-collapse: collapse;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            color: #e6e6e6;
         }
 
         .responsive-table th, 
         .responsive-table td {
-            padding: 5px 3px;
+            padding: 4px 2px;
             text-align: center;
             border: 1px solid rgba(255, 255, 255, 0.1);
             white-space: normal;
             word-break: break-word;
         }
 
-        /* 表头颜色与对应股东级别卡片颜色一致 */
+        /* 表头颜色调整 */
         .responsive-table thead th:nth-child(2) {
-            background: linear-gradient(135deg, rgba(30, 30, 70, 0.3), rgba(20, 20, 50, 0.25));
-            color: #e0e0e0;
+            background: rgba(52, 152, 219, 0.2);
         }
 
         .responsive-table thead th:nth-child(3) {
-            background: linear-gradient(135deg, rgba(25, 85, 140, 0.35), rgba(20, 70, 120, 0.3));
-            color: #e0e0e0;
+            background: rgba(26, 188, 156, 0.2);
         }
 
         .responsive-table thead th:nth-child(4) {
-            background: linear-gradient(135deg, rgba(20, 110, 166, 0.4), rgba(15, 90, 140, 0.35));
-            color: #e0e0e0;
+            background: rgba(241, 196, 15, 0.2);
         }
 
         .responsive-table thead th:nth-child(5) {
-            background: linear-gradient(135deg, rgba(100, 30, 150, 0.35), rgba(80, 20, 120, 0.3));
-            color: #e0e0e0;
+            background: rgba(231, 76, 60, 0.2);
         }
 
         .responsive-table thead th:nth-child(6) {
-            background: linear-gradient(135deg, rgba(180, 100, 20, 0.35), rgba(150, 80, 10, 0.3));
-            color: #e0e0e0;
+            background: rgba(155, 89, 182, 0.2);
         }
 
         .responsive-table thead th:first-child {
-            background-color: rgba(0, 114, 255, 0.1);
-            color: #e0e0e0;
+            background-color: rgba(0, 114, 255, 0.2);
         }
 
         .responsive-table thead th {
             font-weight: 600;
             position: sticky;
             top: 0;
-            font-size: 0.7rem;
+            font-size: 0.68rem;
         }
 
-        /* 矿机奖励和手续费分红行的文字颜色 */
+        /* 特殊行样式 */
         .mining-reward-header, .fee-dividend-header, .scc-limit-header {
-            color: #ba68c8 !important;
+            color: #ff6b6b !important;
             font-weight: 600 !important;
         }
 
         .mining-reward-cell, .fee-dividend-cell, .scc-limit-cell {
-            color: #ba68c8 !important;
+            color: #ff6b6b !important;
             font-weight: 600 !important;
         }
 
         .responsive-table tbody th {
-            background-color: rgba(0, 114, 255, 0.1);
+            background-color: rgba(0, 114, 255, 0.2);
             font-weight: 600;
             text-align: left;
             padding-left: 5px;
-            color: #e0e0e0;
-            font-size: 0.7rem;
+            font-size: 0.68rem;
         }
 
         .responsive-table tbody tr:nth-child(even) {
-            background-color: rgba(255, 255, 255, 0.03);
+            background-color: rgba(255, 255, 255, 0.05);
         }
 
         /* 不同股东级别的列样式 */
         .level-1 {
-            background: linear-gradient(135deg, rgba(30, 30, 70, 0.2), rgba(20, 20, 50, 0.15));
-            border-left: 3px solid #4285f4;
+            background: rgba(52, 152, 219, 0.15);
+            border-left: 2px solid #3498db;
         }
 
         .level-2 {
-            background: linear-gradient(135deg, rgba(25, 85, 140, 0.25), rgba(20, 70, 120, 0.2));
-            border-left: 3px solid #00bcd4;
+            background: rgba(26, 188, 156, 0.15);
+            border-left: 2px solid #1abc9c;
         }
 
         .level-3 {
-            background: linear-gradient(135deg, rgba(20, 110, 166, 0.3), rgba(15, 90, 140, 0.25));
-            border-left: 3px solid #00e676;
+            background: rgba(241, 196, 15, 0.15);
+            border-left: 2px solid #f1c40f;
         }
 
         .level-4 {
-            background: linear-gradient(135deg, rgba(100, 30, 150, 0.28), rgba(80, 20, 120, 0.23));
-            border-left: 3px solid #9c27b0;
+            background: rgba(231, 76, 60, 0.15);
+            border-left: 2px solid #e74c3c;
         }
 
         .level-5 {
-            background: linear-gradient(135deg, rgba(180, 100, 20, 0.38), rgba(150, 80, 10, 0.33));
-            border-left: 3px solid #ffab40;
+            background: rgba(155, 89, 182, 0.15);
+            border-left: 2px solid #9b59b6;
         }
 
         .level-header {
@@ -528,162 +468,64 @@
 
         .level-title {
             font-weight: 600;
-            font-size: 0.65rem;
+            font-size: 0.62rem;
         }
 
         .note-box {
-            background: rgba(186, 104, 200, 0.1);
-            border-left: 4px solid #ba68c8;
-            padding: 12px;
-            border-radius: 0 12px 12px 0;
-            margin: 12px;
+            background: rgba(25, 55, 109, 0.3);
+            border-left: 3px solid #4cc9f0;
+            padding: 10px;
+            border-radius: 0 10px 10px 0;
+            margin: 10px;
         }
 
         .note-title {
             display: flex;
             align-items: center;
-            gap: 10px;
-            color: #ba68c8;
-            margin-bottom: 8px;
-            font-size: 1rem;
+            gap: 8px;
+            color: #4cc9f0;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
         }
 
         .note-content {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 6px;
+            gap: 5px;
         }
 
         .note-item {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             align-items: flex-start;
-            font-size: 0.85rem;
-            color: #ddd;
+            font-size: 0.8rem;
+            color: #e6e6e6;
         }
 
         .note-icon {
-            color: #ba68c8;
+            color: #4cc9f0;
             margin-top: 3px;
             flex-shrink: 0;
         }
 
         .highlight {
             font-weight: 700;
-            color: #ff6666;
+            color: #ff9e44;
         }
 
         .common-formula {
-            background-color: rgba(186, 104, 200, 0.1);
+            background-color: rgba(25, 55, 109, 0.3);
             font-weight: 600;
-            color: #ba68c8;
+            color: #ff6b6b;
             text-align: center;
-            padding: 8px;
-            border-radius: 8px;
-            margin: 8px 12px 0;
-            font-size: 0.85rem;
+            padding: 6px;
+            border-radius: 6px;
+            margin: 6px 10px 0;
+            font-size: 0.8rem;
         }
 
-        /* 响应式调整 */
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 5px 15px;
-                width: 100%;
-            }
-
-            .header {
-                padding: 10px 0;
-            }
-
-            .logo {
-                gap: 5px;
-            }
-
-            .logo-icon {
-                font-size: 30px;
-                text-shadow: 0 0 2px rgba(255, 215, 0, 0.7), 0 0 4px rgba(255, 215, 0, 0.4);
-            }
-
-            h1 {
-                font-size: 20px;
-                text-shadow: 0 0 2px rgba(255, 215, 0, 0.7), 0 0 4px rgba(255, 215, 0, 0.4);
-                -webkit-text-stroke: 0.3px rgba(255, 215, 0, 0.3);
-                text-stroke: 0.3px rgba(255, 215, 0, 0.3);
-            }
-
-            .subtitle {
-                font-size: 13px;
-                text-shadow: 0 0 2px rgba(255, 215, 0, 0.6), 0 0 4px rgba(255, 215, 0, 0.3);
-                -webkit-text-stroke: 0.2px rgba(255, 215, 0, 0.2);
-                text-stroke: 0.2px rgba(255, 215, 0, 0.2);
-            }
-
-            /* 股东卡片高度进一步减小 */
-            .card {
-                padding: 8px 10px;
-            }
-
-            .level {
-                font-size: 15px;
-            }
-
-            .virtual {
-                font-size: 13px;
-            }
-
-            .data-item {
-                padding: 5px 3px;
-            }
-
-            .data-label {
-                font-size: 11px;
-            }
-
-            /* 表格手机端优化 */
-            .responsive-table {
-                font-size: 0.62rem;
-            }
-
-            .responsive-table th, 
-            .responsive-table td {
-                padding: 3px 1px;
-            }
-
-            .level-header {
-                flex-direction: row;
-                justify-content: center;
-                gap: 2px;
-            }
-
-            .system-title {
-                font-size: 1.1rem;
-            }
-
-            /* 表格下方文字大小减小 */
-            .note-item {
-                font-size: 0.75rem;
-            }
-
-            .common-formula {
-                font-size: 0.75rem;
-            }
-
-            .note-title {
-                font-size: 0.95rem;
-            }
-
-            .highlight {
-                font-size: 0.75rem;
-            }
-
-            /* 表格容器贴近屏幕边缘 */
-            .table-container {
-                padding: 0 2px;
-                margin: 0 -5px;
-            }
-        }
-
-        /* 新增模态框样式 */
+        /* 模态框样式 */
         .modal {
             display: none;
             position: fixed;
@@ -691,24 +533,25 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 10000; /* 增加z-index确保在顶层 */
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 10000;
             align-items: center;
             justify-content: center;
             backdrop-filter: blur(4px);
         }
 
         .modal-content {
-            background: linear-gradient(135deg, #1a1d42, #252a5e);
-            border-radius: 16px;
+            background: linear-gradient(135deg, #1e1e2e, #1a1a2e);
+            border-radius: 14px;
             width: 90%;
-            max-width: 400px;
-            padding: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(186, 104, 200, 0.4);
+            max-width: 350px;
+            padding: 18px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(76, 201, 240, 0.3);
             position: relative;
             animation: modalAppear 0.4s ease-out;
-            z-index: 10001; /* 确保在顶层 */
+            z-index: 10001;
+            color: #e6e6e6;
         }
 
         @keyframes modalAppear {
@@ -716,98 +559,92 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @-webkit-keyframes modalAppear {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         .modal-header {
             text-align: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
+            margin-bottom: 15px;
+            padding-bottom: 12px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .modal-header h2 {
-            color: #ffd700;
-            font-size: 1.5rem;
+            color: #4cc9f0;
+            font-size: 1.3rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .modal-header i {
-            color: #ffd700;
-            font-size: 1.8rem;
+            color: #d4af37;
+            font-size: 1.5rem;
         }
 
         .modal-body {
-            color: #ddd;
-            font-size: 0.9rem;
-            line-height: 1.6;
+            font-size: 0.85rem;
+            line-height: 1.5;
         }
 
         .modal-tip {
             display: flex;
             align-items: flex-start;
-            margin-bottom: 12px;
-            padding: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
+            margin-bottom: 10px;
+            padding: 6px;
+            background: rgba(25, 55, 109, 0.3);
+            border-radius: 8px;
         }
 
         .modal-tip i {
-            color: #ba68c8;
-            margin-right: 10px;
+            color: #4cc9f0;
+            margin-right: 8px;
             margin-top: 3px;
-            font-size: 1.2rem;
+            font-size: 1.0rem;
         }
 
         .modal-footer {
-            margin-top: 20px;
+            margin-top: 15px;
             text-align: center;
         }
 
         .modal-btn {
-            background: linear-gradient(90deg, #9c27b0, #ba68c8);
+            background: linear-gradient(90deg, #4361ee, #4cc9f0);
             color: white;
             border: none;
-            border-radius: 30px;
-            padding: 12px 30px;
-            font-size: 1rem;
-            font-weight: bold;
+            border-radius: 25px;
+            padding: 10px 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(156, 39, 176, 0.4);
+            box-shadow: 0 3px 10px rgba(76, 201, 240, 0.3);
         }
 
         .modal-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(156, 39, 176, 0.6);
+            box-shadow: 0 5px 15px rgba(76, 201, 240, 0.4);
         }
 
         .modal-close {
             position: absolute;
-            top: 15px;
-            right: 15px;
-            color: #aaa;
-            font-size: 1.5rem;
+            top: 12px;
+            right: 12px;
+            color: #b8c2cc;
+            font-size: 1.3rem;
             cursor: pointer;
             transition: color 0.3s;
-            z-index: 10002; /* 确保在顶层 */
+            z-index: 10002;
         }
 
         .modal-close:hover {
-            color: #ff4081;
+            color: #ff9e44;
         }
 
-        /* 新增主页链接样式 */
+        /* 主页链接样式 */
         .logo-link {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             text-decoration: none;
             color: inherit;
         }
@@ -816,33 +653,33 @@
             cursor: pointer;
         }
         
-        /* 新增提示样式 */
+        /* 提示样式 */
         .hint-text {
-            font-size: 11px;
-            color: #ba68c8;
-            margin-top: 5px;
+            font-size: 10px;
+            color: #4cc9f0;
+            margin-top: 4px;
             text-align: center;
         }
-
+        
         /* 股东人数不可编辑 */
         .virtual[data-type="count"] {
             pointer-events: none;
         }
         
         .validation-error {
-            color: #ff6666;
-            font-size: 12px;
+            color: #ff6b6b;
+            font-size: 11px;
             text-align: center;
-            margin-top: 10px;
-            padding: 5px;
-            background: rgba(255, 102, 102, 0.1);
-            border-radius: 8px;
+            margin-top: 8px;
+            padding: 4px;
+            background: rgba(231, 76, 60, 0.1);
+            border-radius: 6px;
             display: none;
         }
     </style>
 </head>
 <body>
-    <!-- 模态框 -->
+    <!-- 信息模态框 -->
     <div id="infoModal" class="modal">
         <div class="modal-content">
             <span class="modal-close">&times;</span>
@@ -898,7 +735,6 @@
                 </div>
             </a>
             <div class="subtitle">五级股东尊享计划</div>
-            <div class="info-text">每日分红奖励</div>
             <div class="date-container">
                 <div class="date" id="dateDisplay">2025年7月30日</div>
                 <div class="dividend-pool" id="poolDisplay">分红池: 0 DSC</div>
@@ -906,159 +742,157 @@
             <div class="validation-error" id="validationError"></div>
         </div>
 
-        <!-- 股东卡片容器（已移除外层容器） -->
-        <div class="card-container">
-            <!-- 一级股东 -->
-            <div class="card level1-card">
-                <div class="card-header">
-                    <div class="level-info">
-                        <div class="level">一级股东</div>
-                        <div class="stars">
-                            <i class="fas fa-star"></i>
-                        </div>
+        <!-- 股东卡片（直接显示） -->
+        <!-- 一级股东 - 蓝色 -->
+        <div class="card level1-card">
+            <div class="card-header">
+                <div class="level-info">
+                    <div class="level">一级股东</div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
                     </div>
-                    <div class="percentage-badge">5% 分红</div>
                 </div>
-                <div class="card-content">
-                    <div class="data-item">
-                        <div class="data-label">股东人数</div>
-                        <div class="data-value">
-                            <div class="virtual placeholder" data-level="1" data-type="count">0</div>
-                            <span class="person-unit">人</span>
-                        </div>
+                <div class="percentage-badge">5% 分红</div>
+            </div>
+            <div class="card-content">
+                <div class="data-item">
+                    <div class="data-label">股东人数</div>
+                    <div class="data-value">
+                        <div class="virtual placeholder" data-level="1" data-type="count">0</div>
+                        <span class="person-unit">人</span>
                     </div>
-                    <div class="data-item">
-                        <div class="data-label">人均分红</div>
-                        <div class="data-value">
-                            <div class="virtual placeholder" data-level="1" data-type="dividend" data-percentage="5">0</div>
-                            <span class="dsc-unit">DSC</span>
-                        </div>
+                </div>
+                <div class="data-item">
+                    <div class="data-label">人均分红</div>
+                    <div class="data-value">
+                        <div class="virtual placeholder" data-level="1" data-type="dividend" data-percentage="5">0</div>
+                        <span class="dsc-unit">DSC</span>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- 二级股东 -->
-            <div class="card level2-card">
-                <div class="card-header">
-                    <div class="level-info">
-                        <div class="level">二级股东</div>
-                        <div class="stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
+        <!-- 二级股东 - 青色 -->
+        <div class="card level2-card">
+            <div class="card-header">
+                <div class="level-info">
+                    <div class="level">二级股东</div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
                     </div>
-                    <div class="percentage-badge">15% 分红</div>
                 </div>
-                <div class="card-content">
-                    <div class="data-item">
-                        <div class="data-label">股东人数</div>
-                        <div class="data-value">
-                            <div class="virtual placeholder" data-level="2" data-type="count">0</div>
-                            <span class="person-unit">人</span>
-                        </div>
+                <div class="percentage-badge">15% 分红</div>
+            </div>
+            <div class="card-content">
+                <div class="data-item">
+                    <div class="data-label">股东人数</div>
+                    <div class="data-value">
+                        <div class="virtual placeholder" data-level="2" data-type="count">0</div>
+                        <span class="person-unit">人</span>
                     </div>
-                    <div class="data-item">
-                        <div class="data-label">人均分红</div>
-                        <div class="data-value">
-                            <div class="virtual placeholder" data-level="2" data-type="dividend" data-percentage="15">0</div>
-                            <span class="dsc-unit">DSC</span>
-                        </div>
+                </div>
+                <div class="data-item">
+                    <div class="data-label">人均分红</div>
+                    <div class="data-value">
+                        <div class="virtual placeholder" data-level="2" data-type="dividend" data-percentage="15">0</div>
+                        <span class="dsc-unit">DSC</span>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- 三级股东 -->
-            <div class="card level3-card">
-                <div class="card-header">
-                    <div class="level-info">
-                        <div class="level">三级股东</div>
-                        <div class="stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
+        <!-- 三级股东 - 黄色 -->
+        <div class="card level3-card">
+            <div class="card-header">
+                <div class="level-info">
+                    <div class="level">三级股东</div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
                     </div>
-                    <div class="percentage-badge">20% 分红</div>
                 </div>
-                <div class="card-content">
-                    <div class="data-item">
-                        <div class="data-label">股东人数</div>
-                        <div class="data-value">
-                            <div class="virtual placeholder" data-level="3" data-type="count">0</div>
-                            <span class="person-unit">人</span>
-                        </div>
+                <div class="percentage-badge">20% 分红</div>
+            </div>
+            <div class="card-content">
+                <div class="data-item">
+                    <div class="data-label">股东人数</div>
+                    <div class="data-value">
+                        <div class="virtual placeholder" data-level="3" data-type="count">0</div>
+                        <span class="person-unit">人</span>
                     </div>
-                    <div class="data-item">
-                        <div class="data-label">人均分红</div>
-                        <div class="data-value">
-                            <div class="virtual placeholder" data-level="3" data-type="dividend" data-percentage="20">0</div>
-                            <span class="dsc-unit">DSC</span>
-                        </div>
+                </div>
+                <div class="data-item">
+                    <div class="data-label">人均分红</div>
+                    <div class="data-value">
+                        <div class="virtual placeholder" data-level="3" data-type="dividend" data-percentage="20">0</div>
+                        <span class="dsc-unit">DSC</span>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- 四级股东 -->
-            <div class="card level4-card">
-                <div class="card-header">
-                    <div class="level-info">
-                        <div class="level">四级股东</div>
-                        <div class="stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
+        <!-- 四级股东 - 红色 -->
+        <div class="card level4-card">
+            <div class="card-header">
+                <div class="level-info">
+                    <div class="level">四级股东</div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
                     </div>
-                    <div class="percentage-badge">15% 分红</div>
                 </div>
-                <div class="card-content">
-                    <div class="data-item">
-                        <div class="data-label">股东人数</div>
-                        <div class="data-value">
-                            <div class="virtual placeholder" data-level="4" data-type="count">0</div>
-                            <span class="person-unit">人</span>
-                        </div>
+                <div class="percentage-badge">15% 分红</div>
+            </div>
+            <div class="card-content">
+                <div class="data-item">
+                    <div class="data-label">股东人数</div>
+                    <div class="data-value">
+                        <div class="virtual placeholder" data-level="4" data-type="count">0</div>
+                        <span class="person-unit">人</span>
                     </div>
-                    <div class="data-item">
-                        <div class="data-label">人均分红</div>
-                        <div class="data-value">
-                            <div class="virtual placeholder" data-level="4" data-type="dividend" data-percentage="15">0</div>
-                            <span class="dsc-unit">DSC</span>
-                        </div>
+                </div>
+                <div class="data-item">
+                    <div class="data-label">人均分红</div>
+                    <div class="data-value">
+                        <div class="virtual placeholder" data-level="4" data-type="dividend" data-percentage="15">0</div>
+                        <span class="dsc-unit">DSC</span>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- 五级股东 -->
-            <div class="card level5-card">
-                <div class="card-header">
-                    <div class="level-info">
-                        <div class="level">五级股东</div>
-                        <div class="stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
+        <!-- 五级股东 - 紫色 -->
+        <div class="card level5-card">
+            <div class="card-header">
+                <div class="level-info">
+                    <div class="level">五级股东</div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
                     </div>
-                    <div class="percentage-badge">15% 分红</div>
                 </div>
-                <div class="card-content">
-                    <div class="data-item">
-                        <div class="data-label">股东人数</div>
-                        <div class="data-value">
-                            <div class="virtual placeholder" data-level="5" data-type="count">0</div>
-                            <span class="person-unit">人</span>
-                        </div>
+                <div class="percentage-badge">15% 分红</div>
+            </div>
+            <div class="card-content">
+                <div class="data-item">
+                    <div class="data-label">股东人数</div>
+                    <div class="data-value">
+                        <div class="virtual placeholder" data-level="5" data-type="count">0</div>
+                        <span class="person-unit">人</span>
                     </div>
-                    <div class="data-item">
-                        <div class="data-label">人均分红</div>
-                        <div class="data-value">
-                            <div class="virtual placeholder" data-level="5" data-type="dividend" data-percentage="15">0</div>
-                            <span class="dsc-unit">DSC</span>
-                        </div>
+                </div>
+                <div class="data-item">
+                    <div class="data-label">人均分红</div>
+                    <div class="data-value">
+                        <div class="virtual placeholder" data-level="5" data-type="dividend" data-percentage="15">0</div>
+                        <span class="dsc-unit">DSC</span>
                     </div>
                 </div>
             </div>
@@ -1140,7 +974,7 @@
                             <td class="level-4">10000</td>
                             <td class="level-5">20000</td>
                         </tr>
-                        <!-- 奖励永久矿机列 -->
+                        <!-- 矿机奖励和手续费分红行的文字颜色 -->
                         <tr>
                             <th class="mining-reward-header">奖励永久矿机</th>
                             <td class="level-1 mining-reward-cell">10<br>（1青铜）</td>
@@ -1231,24 +1065,24 @@
     <!-- 粒子背景库 -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // 粒子背景配置 - 修复事件检测
+        // 粒子背景配置
         particlesJS("particles-js", {
             particles: {
-                number: { value: 65, density: { enable: true, value_area: 650 } },
-                color: { value: "#ffffff" },
+                number: { value: 65, density: { enable: true, value_area: 600 } },
+                color: { value: "#4cc9f0" },
                 shape: { type: "circle" },
                 opacity: { value: 0.2, random: true },
                 size: { value: 3, random: true },
                 line_linked: {
                     enable: true,
-                    distance: 130,
-                    color: "#ba68c8",
-                    opacity: 0.2,
+                    distance: 120,
+                    color: "#4361ee",
+                    opacity: 0.15,
                     width: 1
                 },
                 move: {
                     enable: true,
-                    speed: 1.0,
+                    speed: 0.8,
                     direction: "none",
                     random: true,
                     straight: false,
@@ -1257,14 +1091,14 @@
                 }
             },
             interactivity: {
-                detectOn: "window", // 修复事件检测问题
+                detectOn: "window",
                 events: {
                     onhover: { enable: true, mode: "grab" },
                     onclick: { enable: true, mode: "push" },
                     resize: true
                 },
                 modes: {
-                    grab: { distance: 120, line_linked: { opacity: 0.3 } },
+                    grab: { distance: 120, line_linked: { opacity: 0.2 } },
                     push: { particles_nb: 4 }
                 }
             },
@@ -1333,6 +1167,27 @@
                 countElement.textContent = count;
                 countElement.className = 'virtual input-value';
             }
+        }
+
+        // 计算手续费详情
+        function calculateFeeDetails() {
+            // 交易手续费分红 = 分红池 ÷ 70%
+            const feeDividend = currentPoolAmount / 0.7;
+            
+            // 股东分红 = 交易手续费分红 × 70%
+            const shareholderDividend = feeDividend * 0.7;
+            
+            // 官方手续费 = 交易手续费分红 × 25%
+            const officialFee = feeDividend * 0.25;
+            
+            // 手续费销毁 = 交易手续费分红 × 5%
+            const feeBurn = feeDividend * 0.05;
+            
+            // 总手续费 = 交易手续费分红
+            const totalFee = feeDividend;
+            
+            // DSC交易量 = 总手续费 ÷ 25%
+            const tradeVolume = totalFee / 0.25;
         }
 
         // 反向验算分红总额
@@ -1414,6 +1269,9 @@
             
             // 反向验算
             validateTotal();
+            
+            // 计算手续费详情
+            calculateFeeDetails();
         }
 
         // 根据人均分红计算股东人数
