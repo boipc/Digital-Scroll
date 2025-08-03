@@ -56,9 +56,9 @@
         }
 
         .logo-icon {
-            font-size: 36px;
-            color: #d4af37;
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+            width: 36px;
+            height: 36px;
+            object-fit: contain;
         }
 
         h1 {
@@ -252,6 +252,12 @@
         .data-input input:focus {
             box-shadow: 0 0 8px rgba(0, 114, 255, 0.5);
             border-color: #0072ff;
+        }
+        
+        .coin-icon {
+            width: 14px;
+            height: 14px;
+            margin-right: 4px;
         }
 
         /* 卡片背景颜色 - 深色设计 */
@@ -501,6 +507,7 @@
             align-items: flex-start;
             font-size: 0.8rem;
             color: #e6e6e6;
+            line-height: 1.4;
         }
 
         .note-icon {
@@ -590,8 +597,9 @@
             align-items: flex-start;
             margin-bottom: 10px;
             padding: 6px;
-            background: rgba(25, 55, 109, 0.3);
+            background: rgba(25, 55, 109, 0.1);
             border-radius: 8px;
+            font-size: 0.85rem;
         }
 
         .modal-tip i {
@@ -693,19 +701,23 @@
                 </div>
                 <div class="modal-tip">
                     <i class="fas fa-coins"></i>
-                    <div>点击分红池可输入5个级别股东分红的总和，系统将自动计算各级股东人数</div>
+                    <div>点击分红池可输入当日股东分红总量，系统将自动计算各级股东分红</div>
                 </div>
                 <div class="modal-tip">
                     <i class="fas fa-users"></i>
-                    <div>点击股东人均分红可修改数值，系统将重新计算股东人数</div>
+                    <div>点击人均分红输入各级股东人均分红，系统将自动计算出股东人数</div>
                 </div>
                 <div class="modal-tip">
-                    <i class="fas fa-hand-holding-usd"></i>
-                    <div>股东人数 = (分红池 × 该级别比例) ÷ 该级别人均分红</div>
+                    <i class="fas fa-calculator"></i>
+                    <div>手续费分红池 = 分红池 ÷ 70%</div>
                 </div>
                 <div class="modal-tip">
-                    <i class="fas fa-lightbulb"></i>
-                    <div>输入分红池和人均分红后，系统将自动计算股东人数</div>
+                    <i class="fas fa-percentage"></i>
+                    <div>股东分红 = 手续费分红池 × 该级别股东分红比例</div>
+                </div>
+                <div class="modal-tip">
+                    <i class="fas fa-user-friends"></i>
+                    <div>股东人数 = (分红池 ÷70%) ×该级别股东分红比例÷ 该级别人均分红</div>
                 </div>
                 <div class="modal-tip">
                     <i class="fas fa-user-plus"></i>
@@ -730,7 +742,7 @@
             <!-- 添加主页链接 -->
             <a href="index.html" class="logo-link">
                 <div class="logo">
-                    <i class="fas fa-crown logo-icon"></i>
+                    <img src="images/logo.png" class="logo-icon">
                     <h1>DSC股东分红</h1>
                 </div>
             </a>
@@ -765,6 +777,7 @@
                 <div class="data-item">
                     <div class="data-label">人均分红</div>
                     <div class="data-value">
+                        <img src="images/logo.png" class="coin-icon">
                         <div class="virtual placeholder" data-level="1" data-type="dividend" data-percentage="5">0</div>
                         <span class="dsc-unit">DSC</span>
                     </div>
@@ -795,6 +808,7 @@
                 <div class="data-item">
                     <div class="data-label">人均分红</div>
                     <div class="data-value">
+                        <img src="images/logo.png" class="coin-icon">
                         <div class="virtual placeholder" data-level="2" data-type="dividend" data-percentage="15">0</div>
                         <span class="dsc-unit">DSC</span>
                     </div>
@@ -826,6 +840,7 @@
                 <div class="data-item">
                     <div class="data-label">人均分红</div>
                     <div class="data-value">
+                        <img src="images/logo.png" class="coin-icon">
                         <div class="virtual placeholder" data-level="3" data-type="dividend" data-percentage="20">0</div>
                         <span class="dsc-unit">DSC</span>
                     </div>
@@ -858,6 +873,7 @@
                 <div class="data-item">
                     <div class="data-label">人均分红</div>
                     <div class="data-value">
+                        <img src="images/logo.png" class="coin-icon">
                         <div class="virtual placeholder" data-level="4" data-type="dividend" data-percentage="15">0</div>
                         <span class="dsc-unit">DSC</span>
                     </div>
@@ -891,6 +907,7 @@
                 <div class="data-item">
                     <div class="data-label">人均分红</div>
                     <div class="data-value">
+                        <img src="images/logo.png" class="coin-icon">
                         <div class="virtual placeholder" data-level="5" data-type="dividend" data-percentage="15">0</div>
                         <span class="dsc-unit">DSC</span>
                     </div>
@@ -1057,6 +1074,19 @@
                             <span class="highlight">族群活跃度：</span>伞下十代以内所有用户活跃度总和
                         </div>
                     </div>
+                    <div class="note-item">
+                        <div class="note-icon">
+                            <i class="fas fa-circle fa-xs"></i>
+                        </div>
+                        <div>
+                            <span class="highlight">计算公式：</span>
+                            <div style="margin-top: 5px; font-size: 0.75rem;">
+                                手续费分红池 = 分红池 ÷ 70%<br>
+                                股东分红 = 手续费分红池 × 股东分红比例<br>
+                                股东人数 = 股东分红 ÷ 人均分红
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1190,7 +1220,7 @@
             const tradeVolume = totalFee / 0.25;
         }
 
-        // 反向验算分红总额
+        // 反向验算分红总额（允许±0.01的误差）
         function validateTotal() {
             const errorElement = document.getElementById('validationError');
             let totalCalculated = 0;
