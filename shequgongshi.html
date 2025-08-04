@@ -14,22 +14,12 @@
         }
 
         body {
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            color: #e6e6e6;
+            background: linear-gradient(135deg, #f5f7fa, #e4e7eb);
+            color: #333;
             min-height: 100vh;
             padding: 10px;
             overflow-x: hidden;
             position: relative;
-        }
-
-        /* 粒子背景效果 */
-        #particles-js {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
         }
 
         .container {
@@ -65,13 +55,13 @@
             font-size: 24px;
             letter-spacing: 0.8px;
             margin-bottom: 0;
-            color: #4cc9f0;
+            color: #4361ee;
             font-weight: 700;
         }
 
         .subtitle {
             font-size: 14px;
-            color: #a9d6e5;
+            color: #5c677d;
             letter-spacing: 0.3px;
             margin: 8px 0;
             font-weight: 500;
@@ -86,34 +76,34 @@
             align-items: center;
         }
 
-        /* 日期和分红池样式调整 */
+        /* 日期和分红池样式调整 - 黑色字体 */
         .date, .dividend-pool {
-            background: rgba(25, 55, 109, 0.6);
+            background: rgba(255, 255, 255, 0.9);
             padding: 4px 10px;
             border-radius: 18px;
             font-size: 13px;
             display: inline-block;
-            border: 1px solid rgba(52, 152, 219, 0.4);
+            border: 1px solid rgba(67, 97, 238, 0.2);
             user-select: none;
             min-width: 120px;
             text-align: center;
-            color: #ffffff;
+            color: #333; /* 改为黑色 */
             font-weight: 500;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* 股东卡片样式 - 深色半透明背景 */
+        /* 股东卡片样式 - 浅色背景 */
         .card {
             border-radius: 16px;
             padding: 8px 12px;
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(0, 0, 0, 0.15); /* 加深边框 */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
             backdrop-filter: blur(6px);
             margin-bottom: 8px;
-            background: rgba(30, 30, 46, 0.8);
-            color: #ffffff;
+            background: rgba(255, 255, 255, 0.85); /* 浅色背景 */
+            color: #333; /* 深色文字 */
         }
 
         .card-header {
@@ -122,7 +112,7 @@
             align-items: center;
             margin-bottom: 6px;
             padding-bottom: 4px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* 加深分隔线 */
         }
 
         .level-info {
@@ -138,24 +128,24 @@
         .stars i {
             margin-left: 2px;
             font-size: 14px;
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
         }
 
         .level {
             font-size: 15px;
             font-weight: 700;
             letter-spacing: 0.5px;
-            color: #ffffff;
+            color: #333; /* 深色文字 */
         }
 
-        /* 分红比例样式调整 - 无边框无背景 */
+        /* 分红比例样式调整 - 红色字体 */
         .percentage-badge {
             border-radius: 8px;
             padding: 2px 8px;
             font-size: 10px;
             font-weight: 600;
             background: transparent !important;
-            color: #ffffff !important;
+            color: #e74c3c !important; /* 改为红色 */
             border: none !important;
             height: 22px;
             display: flex;
@@ -176,12 +166,12 @@
             align-items: center;
             padding: 5px 3px;
             border-radius: 10px;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(0, 0, 0, 0.03); /* 浅灰色背景 */
         }
 
         .data-label {
             font-size: 11px;
-            color: #b8c2cc;
+            color: #666; /* 深灰色文字 */
             margin-bottom: 3px;
             font-weight: 500;
         }
@@ -191,39 +181,40 @@
             align-items: center;
             font-size: 14px;
             font-weight: 700;
-            color: #ffffff;
+            color: #000; /* 修改为黑色 */
         }
 
         .virtual {
             cursor: pointer;
             transition: all 0.3s;
             user-select: none;
-            color: #ffffff;
+            color: #000; /* 修改为黑色 */
             text-align: center;
             position: relative;
             z-index: 100;
             pointer-events: auto;
+            font-size: 14px; /* 统一字体大小 */
         }
 
         .virtual.placeholder {
-            color: #95a5a6;
+            color: #888; /* 深灰色占位符 */
         }
 
         .virtual.input-value {
-            color: #ffffff;
+            color: #000; /* 改为黑色 */
         }
 
         .virtual.empty-state {
-            color: #95a5a6;
+            color: #888; /* 深灰色空状态 */
             font-style: italic;
         }
 
-        /* 单位样式 */
+        /* 单位样式 - 统一字体大小 */
         .dsc-unit, .person-unit {
-            font-size: 11px;
+            font-size: 14px;
             font-weight: 600;
             margin-left: 5px;
-            color: #b8c2cc;
+            color: #666; /* 深灰色 */
         }
 
         .data-input {
@@ -236,22 +227,22 @@
         }
 
         .data-input input {
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.05);
             border-radius: 8px;
             padding: 5px 8px;
-            color: #ffffff;
+            color: #333; /* 深色文字 */
             font-size: 14px;
             font-weight: bold;
             width: 70px;
             outline: none;
             transition: all 0.3s;
             text-align: right;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(0, 0, 0, 0.15); /* 加深边框 */
         }
 
         .data-input input:focus {
-            box-shadow: 0 0 8px rgba(0, 114, 255, 0.5);
-            border-color: #0072ff;
+            box-shadow: 0 0 8px rgba(67, 97, 238, 0.3);
+            border-color: #4361ee;
         }
         
         .coin-icon {
@@ -260,75 +251,54 @@
             margin-right: 4px;
         }
 
-        /* 卡片背景颜色 - 深色设计 */
+        /* 卡片背景颜色 - 浅色设计 */
         .level1-card {
-            border: 1px solid #3498db;
-            background: linear-gradient(135deg, rgba(25, 55, 109, 0.8), rgba(10, 30, 70, 0.8));
+            border: 1px solid #1a5ca3; /* 深蓝色 */
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(255, 255, 255, 0.8));
         }
-        .level1-card .stars i { color: #3498db; }
-        .level1-card .data-input input { border: 1px solid #3498db; }
+        .level1-card .stars i { color: #1a5ca3; } /* 深蓝色 */
+        .level1-card .data-input input { border: 1px solid #1a5ca3; }
 
         .level2-card {
-            border: 1px solid #1abc9c;
-            background: linear-gradient(135deg, rgba(0, 77, 64, 0.8), rgba(0, 40, 33, 0.8));
+            border: 1px solid #0d8e72; /* 深青色 */
+            background: linear-gradient(135deg, rgba(26, 188, 156, 0.1), rgba(255, 255, 255, 0.8));
         }
-        .level2-card .stars i { color: #1abc9c; }
-        .level2-card .data-input input { border: 1px solid #1abc9c; }
+        .level2-card .stars i { color: #0d8e72; } /* 深青色 */
+        .level2-card .data-input input { border: 1px solid #0d8e72; }
 
         .level3-card {
-            border: 1px solid #f1c40f;
-            background: linear-gradient(135deg, rgba(128, 102, 0, 0.8), rgba(77, 61, 0, 0.8));
+            border: 1px solid #c19d0c; /* 深黄色 */
+            background: linear-gradient(135deg, rgba(241, 196, 15, 0.1), rgba(255, 255, 255, 0.8));
         }
-        .level3-card .stars i { color: #f1c40f; }
-        .level3-card .data-input input { border: 1px solid #f1c40f; }
+        .level3-card .stars i { color: #c19d0c; } /* 深黄色 */
+        .level3-card .data-input input { border: 1px solid #c19d0c; }
 
         .level4-card {
-            border: 1px solid #e74c3c;
-            background: linear-gradient(135deg, rgba(128, 29, 29, 0.8), rgba(77, 17, 17, 0.8));
+            border: 1px solid #c0392b; /* 深红色 */
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.1), rgba(255, 255, 255, 0.8));
         }
-        .level4-card .stars i { color: #e74c3c; }
-        .level4-card .data-input input { border: 1px solid #e74c3c; }
+        .level4-card .stars i { color: #c0392b; } /* 深红色 */
+        .level4-card .data-input input { border: 1px solid #c0392b; }
 
         /* 五级股东卡片增加底部间距 */
         .level5-card {
-            border: 1px solid #9b59b6;
-            background: linear-gradient(135deg, rgba(60, 29, 83, 0.8), rgba(37, 18, 51, 0.8));
+            border: 1px solid #8e44ad; /* 深紫色 */
+            background: linear-gradient(135deg, rgba(155, 89, 182, 0.1), rgba(255, 255, 255, 0.8));
             margin-bottom: 20px; /* 增加底部行距 */
         }
-        .level5-card .stars i { color: #9b59b6; }
-        .level5-card .data-input input { border: 1px solid #9b59b6; }
+        .level5-card .stars i { color: #8e44ad; } /* 深紫色 */
+        .level5-card .data-input input { border: 1px solid #8e44ad; }
 
         .footer {
             text-align: center;
             margin-top: 8.4px;
             font-size: 13px;
-            color: #4cc9f0;
+            color: #4361ee;
             font-weight: 700;
             padding: 6px;
-            background: rgba(0, 114, 255, 0.1);
+            background: rgba(67, 97, 238, 0.1);
             border-radius: 12px;
-            border: 1px solid rgba(0, 114, 255, 0.2);
-        }
-
-        .glow {
-            position: absolute;
-            width: 140px;
-            height: 140px;
-            background: radial-gradient(circle, rgba(0, 114, 255, 0.15), transparent 70%);
-            border-radius: 50%;
-            filter: blur(15px);
-            z-index: -1;
-        }
-
-        .glow-1 {
-            top: 5%;
-            left: 5%;
-        }
-
-        .glow-2 {
-            bottom: 5%;
-            right: 5%;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.15), transparent 70%);
+            border: 1px solid rgba(67, 97, 238, 0.2);
         }
 
         /* 股东制度表格样式 */
@@ -336,16 +306,17 @@
             margin-top: 14px;
             padding: 10px 0;
             border-radius: 16px;
-            background: rgba(30, 30, 46, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
             backdrop-filter: blur(6px);
+            color: #333;
         }
 
         .system-title {
             text-align: center;
             margin-bottom: 10px;
-            color: #4cc9f0;
+            color: #4361ee;
             font-size: 1.2rem;
             display: flex;
             align-items: center;
@@ -355,8 +326,9 @@
             font-weight: 700;
         }
 
-        .system-title i {
-            color: #d4af37;
+        .system-logo {
+            width: 24px;
+            height: 24px;
         }
 
         .table-container {
@@ -371,42 +343,42 @@
             margin-bottom: 10px;
             border-collapse: collapse;
             font-size: 0.72rem;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-            color: #e6e6e6;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            color: #333;
         }
 
         .responsive-table th, 
         .responsive-table td {
             padding: 4px 2px;
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.1);
             white-space: normal;
             word-break: break-word;
         }
 
         /* 表头颜色调整 */
         .responsive-table thead th:nth-child(2) {
-            background: rgba(52, 152, 219, 0.2);
+            background: rgba(52, 152, 219, 0.15);
         }
 
         .responsive-table thead th:nth-child(3) {
-            background: rgba(26, 188, 156, 0.2);
+            background: rgba(26, 188, 156, 0.15);
         }
 
         .responsive-table thead th:nth-child(4) {
-            background: rgba(241, 196, 15, 0.2);
+            background: rgba(241, 196, 15, 0.15);
         }
 
         .responsive-table thead th:nth-child(5) {
-            background: rgba(231, 76, 60, 0.2);
+            background: rgba(231, 76, 60, 0.15);
         }
 
         .responsive-table thead th:nth-child(6) {
-            background: rgba(155, 89, 182, 0.2);
+            background: rgba(155, 89, 182, 0.15);
         }
 
         .responsive-table thead th:first-child {
-            background-color: rgba(0, 114, 255, 0.2);
+            background-color: rgba(67, 97, 238, 0.15);
         }
 
         .responsive-table thead th {
@@ -414,54 +386,56 @@
             position: sticky;
             top: 0;
             font-size: 0.68rem;
+            color: #333;
         }
 
         /* 特殊行样式 */
         .mining-reward-header, .fee-dividend-header, .scc-limit-header {
-            color: #ff6b6b !important;
+            color: #e74c3c !important;
             font-weight: 600 !important;
         }
 
         .mining-reward-cell, .fee-dividend-cell, .scc-limit-cell {
-            color: #ff6b6b !important;
+            color: #e74c3c !important;
             font-weight: 600 !important;
         }
 
         .responsive-table tbody th {
-            background-color: rgba(0, 114, 255, 0.2);
+            background-color: rgba(67, 97, 238, 0.15);
             font-weight: 600;
             text-align: left;
             padding-left: 5px;
             font-size: 0.68rem;
+            color: #333;
         }
 
         .responsive-table tbody tr:nth-child(even) {
-            background-color: rgba(255, 255, 255, 0.05);
+            background-color: rgba(0, 0, 0, 0.03);
         }
 
         /* 不同股东级别的列样式 */
         .level-1 {
-            background: rgba(52, 152, 219, 0.15);
+            background: rgba(52, 152, 219, 0.1);
             border-left: 2px solid #3498db;
         }
 
         .level-2 {
-            background: rgba(26, 188, 156, 0.15);
+            background: rgba(26, 188, 156, 0.1);
             border-left: 2px solid #1abc9c;
         }
 
         .level-3 {
-            background: rgba(241, 196, 15, 0.15);
+            background: rgba(241, 196, 15, 0.1);
             border-left: 2px solid #f1c40f;
         }
 
         .level-4 {
-            background: rgba(231, 76, 60, 0.15);
+            background: rgba(231, 76, 60, 0.1);
             border-left: 2px solid #e74c3c;
         }
 
         .level-5 {
-            background: rgba(155, 89, 182, 0.15);
+            background: rgba(155, 89, 182, 0.1);
             border-left: 2px solid #9b59b6;
         }
 
@@ -477,57 +451,79 @@
             font-size: 0.62rem;
         }
 
+        /* 重要说明区域 - 重新设计 */
         .note-box {
-            background: rgba(25, 55, 109, 0.3);
-            border-left: 3px solid #4cc9f0;
-            padding: 10px;
-            border-radius: 0 10px 10px 0;
-            margin: 10px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            margin: 12px 8px;
+            padding: 12px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(67, 97, 238, 0.15);
         }
 
         .note-title {
             display: flex;
             align-items: center;
-            gap: 8px;
-            color: #4cc9f0;
-            margin-bottom: 6px;
-            font-size: 0.9rem;
-            font-weight: 600;
+            gap: 10px;
+            color: #4361ee;
+            margin-bottom: 8px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid rgba(67, 97, 238, 0.2);
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .note-title i {
+            font-size: 1.1rem;
         }
 
         .note-content {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 5px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
         }
 
         .note-item {
             display: flex;
             gap: 8px;
             align-items: flex-start;
-            font-size: 0.8rem;
-            color: #e6e6e6;
+            font-size: 0.78rem;
             line-height: 1.4;
+            color: #444;
+            padding: 4px 0;
         }
 
         .note-icon {
-            color: #4cc9f0;
-            margin-top: 3px;
+            background: #4361ee;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             flex-shrink: 0;
+            font-size: 0.7rem;
+            margin-top: 2px;
+        }
+
+        .note-text {
+            flex: 1;
         }
 
         .highlight {
             font-weight: 700;
-            color: #ff9e44;
+            color: #e74c3c;
         }
 
+        /* 修改公式部分：去掉背景和边框 */
         .common-formula {
-            background-color: rgba(25, 55, 109, 0.3);
+            background-color: transparent; /* 透明背景 */
+            border: none; /* 无边框 */
             font-weight: 600;
-            color: #ff6b6b;
+            color: #e74c3c;
             text-align: center;
             padding: 6px;
-            border-radius: 6px;
             margin: 6px 10px 0;
             font-size: 0.8rem;
         }
@@ -548,17 +544,17 @@
         }
 
         .modal-content {
-            background: linear-gradient(135deg, #1e1e2e, #1a1a2e);
+            background: linear-gradient(135deg, #ffffff, #f5f7fa);
             border-radius: 14px;
             width: 90%;
             max-width: 350px;
             padding: 18px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(76, 201, 240, 0.3);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(67, 97, 238, 0.2);
             position: relative;
             animation: modalAppear 0.4s ease-out;
             z-index: 10001;
-            color: #e6e6e6;
+            color: #333;
         }
 
         @keyframes modalAppear {
@@ -570,11 +566,11 @@
             text-align: center;
             margin-bottom: 15px;
             padding-bottom: 12px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         .modal-header h2 {
-            color: #4cc9f0;
+            color: #4361ee;
             font-size: 1.3rem;
             display: flex;
             align-items: center;
@@ -597,13 +593,13 @@
             align-items: flex-start;
             margin-bottom: 10px;
             padding: 6px;
-            background: rgba(25, 55, 109, 0.1);
+            background: rgba(67, 97, 238, 0.05);
             border-radius: 8px;
             font-size: 0.85rem;
         }
 
         .modal-tip i {
-            color: #4cc9f0;
+            color: #4361ee;
             margin-right: 8px;
             margin-top: 3px;
             font-size: 1.0rem;
@@ -624,19 +620,19 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 3px 10px rgba(76, 201, 240, 0.3);
+            box-shadow: 0 3px 10px rgba(67, 97, 238, 0.2);
         }
 
         .modal-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(76, 201, 240, 0.4);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
         }
 
         .modal-close {
             position: absolute;
             top: 12px;
             right: 12px;
-            color: #b8c2cc;
+            color: #888;
             font-size: 1.3rem;
             cursor: pointer;
             transition: color 0.3s;
@@ -644,7 +640,7 @@
         }
 
         .modal-close:hover {
-            color: #ff9e44;
+            color: #e74c3c;
         }
 
         /* 主页链接样式 */
@@ -664,7 +660,7 @@
         /* 提示样式 */
         .hint-text {
             font-size: 10px;
-            color: #4cc9f0;
+            color: #4361ee;
             margin-top: 4px;
             text-align: center;
         }
@@ -675,7 +671,7 @@
         }
         
         .validation-error {
-            color: #ff6b6b;
+            color: #e74c3c;
             font-size: 11px;
             text-align: center;
             margin-top: 8px;
@@ -730,18 +726,12 @@
         </div>
     </div>
 
-    <!-- 粒子背景 -->
-    <div id="particles-js"></div>
-
-    <!-- 炫光效果 -->
-    <div class="glow glow-1"></div>
-    <div class="glow glow-2"></div>
-
     <div class="container">
         <div class="header">
             <!-- 添加主页链接 -->
             <a href="index.html" class="logo-link">
                 <div class="logo">
+                    <!-- 修改logo路径 -->
                     <img src="images/logo01.png" class="logo-icon">
                     <h1>DSC股东分红</h1>
                 </div>
@@ -777,6 +767,7 @@
                 <div class="data-item">
                     <div class="data-label">人均分红</div>
                     <div class="data-value">
+                        <!-- 修改logo路径 -->
                         <img src="images/logo01.png" class="coin-icon">
                         <div class="virtual placeholder" data-level="1" data-type="dividend" data-percentage="5">0</div>
                         <span class="dsc-unit">DSC</span>
@@ -808,6 +799,7 @@
                 <div class="data-item">
                     <div class="data-label">人均分红</div>
                     <div class="data-value">
+                        <!-- 修改logo路径 -->
                         <img src="images/logo01.png" class="coin-icon">
                         <div class="virtual placeholder" data-level="2" data-type="dividend" data-percentage="15">0</div>
                         <span class="dsc-unit">DSC</span>
@@ -840,6 +832,7 @@
                 <div class="data-item">
                     <div class="data-label">人均分红</div>
                     <div class="data-value">
+                        <!-- 修改logo路径 -->
                         <img src="images/logo01.png" class="coin-icon">
                         <div class="virtual placeholder" data-level="3" data-type="dividend" data-percentage="20">0</div>
                         <span class="dsc-unit">DSC</span>
@@ -873,6 +866,7 @@
                 <div class="data-item">
                     <div class="data-label">人均分红</div>
                     <div class="data-value">
+                        <!-- 修改logo路径 -->
                         <img src="images/logo01.png" class="coin-icon">
                         <div class="virtual placeholder" data-level="4" data-type="dividend" data-percentage="15">0</div>
                         <span class="dsc-unit">DSC</span>
@@ -907,6 +901,7 @@
                 <div class="data-item">
                     <div class="data-label">人均分红</div>
                     <div class="data-value">
+                        <!-- 修改logo路径 -->
                         <img src="images/logo01.png" class="coin-icon">
                         <div class="virtual placeholder" data-level="5" data-type="dividend" data-percentage="15">0</div>
                         <span class="dsc-unit">DSC</span>
@@ -922,7 +917,8 @@
         <!-- 股东制度表格 -->
         <div class="shareholder-system">
             <h2 class="system-title">
-                <i class="fas fa-crown"></i>
+                <!-- 修改logo路径 -->
+                <img src="images/logo01.png" class="system-logo">
                 DSC股东制度表
             </h2>
 
@@ -1028,63 +1024,51 @@
                 </div>
             </div>
 
+            <!-- 重新设计的重要说明区域 -->
             <div class="note-box">
                 <div class="note-title">
                     <i class="fas fa-info-circle"></i>
-                    重要说明
+                    <span>重要说明</span>
                 </div>
                 <div class="note-content">
                     <div class="note-item">
                         <div class="note-icon">
-                            <i class="fas fa-circle fa-xs"></i>
+                            <i class="fas fa-fw fa-coins"></i>
                         </div>
-                        <div>
+                        <div class="note-text">
                             <span class="highlight">分红来源：</span>DSC交易手续费的70%，每日结算一次
                         </div>
                     </div>
                     <div class="note-item">
                         <div class="note-icon">
-                            <i class="fas fa-circle fa-xs"></i>
+                            <i class="fas fa-fw fa-crown"></i>
                         </div>
-                        <div>
+                        <div class="note-text">
                             <span class="highlight">特别权益：</span>前三名5级股东自动成为超级节点人，不受季度考核，永久分红
                         </div>
                     </div>
                     <div class="note-item">
                         <div class="note-icon">
-                            <i class="fas fa-circle fa-xs"></i>
+                            <i class="fas fa-fw fa-wallet"></i>
                         </div>
-                        <div>
+                        <div class="note-text">
                             <span class="highlight">提币额度：</span>各级股东可积累第一批上交易所时的SCC提币额度
                         </div>
                     </div>
                     <div class="note-item">
                         <div class="note-icon">
-                            <i class="fas fa-circle fa-xs"></i>
+                            <i class="fas fa-fw fa-users"></i>
                         </div>
-                        <div>
+                        <div class="note-text">
                             <span class="highlight">团队活跃度：</span>伞下二代以内所有用户活跃度总和
                         </div>
                     </div>
                     <div class="note-item">
                         <div class="note-icon">
-                            <i class="fas fa-circle fa-xs"></i>
+                            <i class="fas fa-fw fa-chart-network"></i>
                         </div>
-                        <div>
+                        <div class="note-text">
                             <span class="highlight">族群活跃度：</span>伞下十代以内所有用户活跃度总和
-                        </div>
-                    </div>
-                    <div class="note-item">
-                        <div class="note-icon">
-                            <i class="fas fa-circle fa-xs"></i>
-                        </div>
-                        <div>
-                            <span class="highlight">计算公式：</span>
-                            <div style="margin-top: 5px; font-size: 0.75rem;">
-                                手续费分红池 = 分红池 ÷ 70%<br>
-                                股东分红 = 手续费分红池 × 股东分红比例<br>
-                                股东人数 = 股东分红 ÷ 人均分红
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -1092,49 +1076,7 @@
         </div>
     </div>
 
-    <!-- 粒子背景库 -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // 粒子背景配置
-        particlesJS("particles-js", {
-            particles: {
-                number: { value: 65, density: { enable: true, value_area: 600 } },
-                color: { value: "#4cc9f0" },
-                shape: { type: "circle" },
-                opacity: { value: 0.2, random: true },
-                size: { value: 3, random: true },
-                line_linked: {
-                    enable: true,
-                    distance: 120,
-                    color: "#4361ee",
-                    opacity: 0.15,
-                    width: 1
-                },
-                move: {
-                    enable: true,
-                    speed: 0.8,
-                    direction: "none",
-                    random: true,
-                    straight: false,
-                    out_mode: "out",
-                    bounce: false
-                }
-            },
-            interactivity: {
-                detectOn: "window",
-                events: {
-                    onhover: { enable: true, mode: "grab" },
-                    onclick: { enable: true, mode: "push" },
-                    resize: true
-                },
-                modes: {
-                    grab: { distance: 120, line_linked: { opacity: 0.2 } },
-                    push: { particles_nb: 4 }
-                }
-            },
-            retina_detect: true
-        });
-
         // 显示模态框
         const modal = document.getElementById('infoModal');
         const closeBtn = document.querySelector('.modal-close');
