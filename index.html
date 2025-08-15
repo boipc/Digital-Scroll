@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>数字卷轴DSC - 创新数字资产项目</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <style>
@@ -17,7 +17,7 @@
             --guide-btn: #9C27B0;
             --model-btn: #D32F2F;
             --game-btn: #1A237E;
-            --consensus-btn: #4CAF50;
+            --shareholder-btn: #FFD700; /* 股东制度按钮改为黄色 */
         }
         
         * {
@@ -25,7 +25,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Roboto', 'Microsoft YaHei', sans-serif;
-            font-size: 0.95rem; /* 缩小全局字体 */
+            font-size: 14px; /* 整体缩小字体 */
         }
         
         body {
@@ -34,83 +34,66 @@
             min-height: 100vh;
             padding: 0;
             overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
         }
         
         .container {
-            max-width: 1200px;
+            width: 100%;
             margin: 0 auto;
-            padding: 15px;
+            padding: 10px;
+            max-width: 480px; /* 限制最大宽度 */
         }
         
         header {
             text-align: center;
-            margin-bottom: 20px;
-            padding: 20px 15px;
+            margin-bottom: 15px;
+            padding: 15px 10px;
             background: rgba(0, 0, 0, 0.2);
             border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             position: relative;
             overflow: hidden;
         }
         
-        header::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
-            z-index: 0;
-        }
-        
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .header-content {
+        .header-row {
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            z-index: 1;
-            flex-wrap: nowrap;
-            margin-bottom: 8px;
+            gap: 10px;
+            margin-bottom: 10px;
         }
         
         .logo {
-            height: 3.5rem;
-            margin-right: 12px;
+            height: 2.8rem;
+            width: auto;
         }
         
         h1 {
-            font-size: 3.2rem;
+            font-size: 1.8rem;
             margin: 0;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
             font-family: 'Montserrat', sans-serif;
-            position: relative;
-            z-index: 1;
-            line-height: 1;
             white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
         .subtitle {
-            font-size: 1.1rem;
-            margin-bottom: 10px;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
             position: relative;
             z-index: 1;
             width: 100%;
+            line-height: 1.4;
         }
         
         .timer-container {
-            margin: 15px 0;
-            padding: 15px;
+            margin: 12px 0;
+            padding: 12px 10px;
             background: rgba(0, 0, 0, 0.3);
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(8px);
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
             position: relative;
             z-index: 1;
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -118,8 +101,8 @@
         }
         
         .timer-label {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
+            font-size: 1rem;
+            margin-bottom: 8px;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
             font-weight: 500;
         }
@@ -127,12 +110,12 @@
         .timer {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 4px;
             font-family: 'Montserrat', sans-serif;
         }
         
         .days {
-            font-size: 2.8em;
+            font-size: 2.2em;
             line-height: 1.2;
             letter-spacing: 1px;
             color: #FFD700;
@@ -140,15 +123,15 @@
         }
         
         .time {
-            font-size: 1.8em;
-            letter-spacing: 2px;
+            font-size: 1.4em;
+            letter-spacing: 1px;
             color: var(--light-color);
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
         }
         
         .timer-motto {
-            font-size: 0.85rem;
-            margin-top: 12px;
+            font-size: 0.8rem;
+            margin-top: 8px;
             color: #fff;
             letter-spacing: 0.5px;
             line-height: 1.4;
@@ -157,28 +140,27 @@
         .auth-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            margin: 15px 0;
+            gap: 6px;
+            margin: 12px 0;
         }
         
-        .auth-btn, .contact-btn, .guide-btn, .model-btn, .game-btn, .consensus-btn {
+        .auth-btn, .contact-btn, .guide-btn, .model-btn, .game-btn, .shareholder-btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 10px;
-            border-radius: 10px;
+            padding: 8px 5px;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+            transition: all 0.2s ease;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
             border: none;
-            font-size: 1rem;
+            font-size: 0.85rem;
             cursor: pointer;
             position: relative;
             overflow: hidden;
             text-align: center;
-            height: 100%;
-            min-height: 50px;
+            height: 40px;
         }
         
         .auth-btn {
@@ -206,87 +188,74 @@
             color: var(--light-color);
         }
         
-        .consensus-btn {
-            background: var(--consensus-btn);
-            color: var(--light-color);
+        .shareholder-btn {
+            background: var(--shareholder-btn);
+            color: #333; /* 深色文字更易读 */
         }
         
         .auth-btn:hover, .contact-btn:hover, .guide-btn:hover, 
-        .model-btn:hover, .game-btn:hover, .consensus-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        .model-btn:hover, .game-btn:hover, .shareholder-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
         }
         
-        .auth-btn:hover {
-            background: #3e8e41;
-        }
-        
-        .contact-btn:hover {
-            background: #0b7dda;
-        }
-        
-        .guide-btn:hover {
-            background: #7b1fa2;
-        }
-        
-        .model-btn:hover {
-            background: #B71C1C;
-        }
-        
-        .game-btn:hover {
-            background: #0d1a6b;
-        }
-        
-        .consensus-btn:hover {
-            background: #3e8e41;
+        .auth-btn:active, .contact-btn:active, .guide-btn:active, 
+        .model-btn:active, .game-btn:active, .shareholder-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
         
         .button-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 8px;
-            margin-bottom: 20px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px;
+            margin-bottom: 15px;
         }
         
         .btn {
             background: rgba(255, 255, 255, 0.15);
             border: none;
             color: var(--light-color);
-            padding: 10px;
-            font-size: 0.95rem;
-            border-radius: 10px;
+            padding: 8px 5px;
+            font-size: 0.85rem;
+            border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             text-align: center;
             backdrop-filter: blur(5px);
-            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
             position: relative;
             overflow: hidden;
             z-index: 1;
             font-weight: 500;
-            min-height: 45px;
+            height: 40px;
         }
         
         .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
             background: rgba(255, 255, 255, 0.25);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
         
         .content-section {
             background: rgba(0, 0, 0, 0.2);
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 15px;
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 12px;
             display: none;
             backdrop-filter: blur(5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            animation: fadeIn 0.5s ease-out;
+            animation: fadeIn 0.3s ease-out;
         }
         
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
@@ -295,41 +264,41 @@
         }
         
         h2 {
-            margin-bottom: 12px;
-            font-size: 1.5rem;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
             border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-            padding-bottom: 8px;
+            padding-bottom: 6px;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
             font-family: 'Montserrat', sans-serif;
             color: var(--accent-color);
         }
         
         h3 {
-            margin: 15px 0 10px;
-            font-size: 1.3rem;
+            margin: 12px 0 8px;
+            font-size: 1.1rem;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
             font-family: 'Montserrat', sans-serif;
         }
         
         p {
-            margin-bottom: 10px;
-            line-height: 1.6;
-            font-size: 0.95rem;
+            margin-bottom: 8px;
+            line-height: 1.5;
+            font-size: 0.9rem;
         }
         
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 15px 0;
+            margin: 12px 0;
             background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
             overflow: hidden;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
         }
         
         th, td {
-            padding: 10px;
+            padding: 8px 6px;
             text-align: left;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
@@ -338,32 +307,34 @@
             background: rgba(0, 0, 0, 0.3);
             font-weight: bold;
             color: var(--accent-color);
+            font-size: 0.85rem;
         }
         
         tr:hover {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.1);
         }
         
         .highlight {
             background: rgba(255, 230, 76, 0.2);
-            padding: 8px 12px;
+            padding: 8px;
             border-radius: 8px;
             font-weight: bold;
             display: inline-block;
-            border-left: 4px solid var(--accent-color);
-            font-size: 0.9rem;
-            margin: 10px 0;
+            border-left: 3px solid var(--accent-color);
+            font-size: 0.85rem;
+            margin: 8px 0;
+            line-height: 1.4;
         }
         
         ul {
-            margin-left: 20px;
-            margin-bottom: 15px;
+            margin-left: 16px;
+            margin-bottom: 12px;
         }
         
         li {
-            margin-bottom: 8px;
-            line-height: 1.5;
-            font-size: 0.95rem;
+            margin-bottom: 6px;
+            line-height: 1.4;
+            font-size: 0.9rem;
         }
         
         #contactModal {
@@ -373,7 +344,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.85);
             z-index: 1000;
             justify-content: center;
             align-items: center;
@@ -384,18 +355,18 @@
         .modal-content {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             padding: 15px;
-            border-radius: 15px;
-            max-width: 90%;
-            width: 400px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 350px;
             text-align: center;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
             position: relative;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            animation: modalIn 0.5s ease-out;
+            animation: modalIn 0.4s ease-out;
         }
         
         @keyframes modalIn {
-            0% { opacity: 0; transform: scale(0.9) translateY(20px); }
+            0% { opacity: 0; transform: scale(0.95) translateY(15px); }
             100% { opacity: 1; transform: scale(1) translateY(0); }
         }
         
@@ -403,196 +374,114 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 15px 0;
+            margin: 12px 0;
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
+            border-radius: 8px;
             padding: 10px;
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
         .wechat-id {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: bold;
-            margin-right: 12px;
-            letter-spacing: 1px;
+            margin-right: 10px;
+            letter-spacing: 0.5px;
         }
         
         .copy-btn {
             background: var(--accent-color);
             color: var(--dark-color);
             border: none;
-            padding: 8px 15px;
-            border-radius: 8px;
+            padding: 6px 12px;
+            border-radius: 6px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             font-weight: bold;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
             font-size: 0.9rem;
         }
         
         .copy-btn:hover {
             background: #ffdf1a;
             transform: translateY(-2px);
-            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
         
         .copy-btn svg {
-            margin-right: 6px;
+            margin-right: 5px;
         }
         
         .copy-status {
-            height: 18px;
-            margin: 10px 0;
+            height: 16px;
+            margin: 8px 0;
             color: var(--accent-color);
             font-weight: bold;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
         }
         
         .close-btn {
-            margin-top: 15px;
-            padding: 8px 15px;
+            margin-top: 12px;
+            padding: 6px 12px;
             background: rgba(0, 0, 0, 0.3);
             color: var(--light-color);
             border: none;
-            border-radius: 50px;
+            border-radius: 20px;
             cursor: pointer;
             font-weight: bold;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             border: 1px solid rgba(255, 255, 255, 0.2);
             font-size: 0.9rem;
         }
         
         .close-btn:hover {
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.4);
         }
         
         footer {
             text-align: center;
-            margin-top: 20px;
-            padding: 15px;
+            margin-top: 15px;
+            padding: 12px;
             background: rgba(0, 0, 0, 0.2);
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
             backdrop-filter: blur(5px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
+            font-size: 0.8rem;
         }
         
-        /* 移动端优化 */
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-            
-            header {
-                padding: 15px 10px;
-            }
-            
-            .header-content {
-                flex-direction: row;
+        /* 小屏幕优化 */
+        @media (max-width: 360px) {
+            h1 {
+                font-size: 1.6rem;
             }
             
             .logo {
-                height: 2.8rem;
-                margin-right: 8px;
+                height: 2.4rem;
             }
             
-            h1 {
-                font-size: 2.2rem;
-            }
-            
-            .subtitle {
-                font-size: 0.95rem;
-            }
-            
-            .timer-container {
-                padding: 12px;
+            .auth-grid, .button-grid {
+                grid-template-columns: 1fr;
             }
             
             .timer-label {
-                font-size: 1.1rem;
+                font-size: 0.9rem;
             }
             
             .days {
-                font-size: 2.2em;
+                font-size: 2em;
             }
             
             .time {
-                font-size: 1.5em;
+                font-size: 1.2em;
             }
             
-            .timer-motto {
+            .btn, .auth-btn, .contact-btn, .guide-btn, 
+            .model-btn, .game-btn, .shareholder-btn {
+                height: 38px;
                 font-size: 0.8rem;
-            }
-            
-            .auth-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 6px;
-            }
-            
-            .auth-btn, .contact-btn, .guide-btn, 
-            .model-btn, .game-btn, .consensus-btn {
-                padding: 8px;
-                font-size: 0.9rem;
-                min-height: 45px;
-            }
-            
-            .button-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 6px;
-            }
-            
-            .btn {
-                padding: 8px;
-                font-size: 0.9rem;
-                min-height: 40px;
-            }
-            
-            .content-section {
-                padding: 12px;
-            }
-            
-            h2 {
-                font-size: 1.3rem;
-            }
-            
-            h3 {
-                font-size: 1.15rem;
-            }
-            
-            table {
-                font-size: 0.85rem;
-            }
-            
-            th, td {
-                padding: 8px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .logo {
-                margin-right: 0;
-                margin-bottom: 10px;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .auth-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .button-grid {
-                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -600,8 +489,8 @@
 <body>
     <div class="container">
         <header>
-            <div class="header-content">
-                <img src="images/logo01.png" alt="数字卷轴DSC Logo" class="logo">
+            <div class="header-row">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Ccircle cx='40' cy='40' r='38' fill='%23FFE74C' stroke='%23333' stroke-width='2'/%3E%3Cpath d='M30 25 L50 40 L30 55 Z' fill='%23333'/%3E%3C/svg%3E" alt="数字卷轴DSC Logo" class="logo">
                 <h1>数字卷轴DSC</h1>
             </div>
             <p class="subtitle">创新数字资产项目 · 每小时收益 · 多重获利方式</p>
@@ -616,12 +505,12 @@
             </div>
             
             <div class="auth-grid">
-                <a href="https://prod.digital-scroll.org/#/pages/reg?c=182N17" class="auth-btn" id="registerBtn">注册/登录</a>
+                <a href="#" class="auth-btn" id="registerBtn">注册/登录</a>
                 <button class="contact-btn" onclick="showContactModal()">快速认证</button>
-                <a href="guide.html" class="guide-btn">操作指南</a>
-                <a href="moxing.html" class="model-btn">经济模型</a>
-                <a href="youxi.html" class="game-btn">生态游戏</a>
-                <a href="gudongzhidu.html" class="consensus-btn">股东制度</a>
+                <a href="#" class="guide-btn">操作指南</a>
+                <a href="#" class="model-btn">经济模型</a>
+                <a href="#" class="game-btn">生态游戏</a>
+                <a href="gudongzhidu.html" class="shareholder-btn">股东制度</a>
             </div>
         </header>
         
@@ -639,25 +528,21 @@
             <p>数字卷轴DSC是一个创新的数字资产增值项目，基于卷界链(Scroll Chain)技术开发，为用户提供多种收益方式。</p>
             
             <h3>节点自治与共识机制</h3>
-            <p>卷界链采用节点自治的共识机制，节点每10秒打包一个区块，生成SCC燃料通证。节点通过参与区块打包和交易验证，保障网络的去中心化和安全性。总共45个节点，5个节点由官方预留，40个节点开放给全网玩家竞选，实现真正的社区自治。</p>
+            <p>卷界链采用节点自治的共识机制，节点每10秒打包一个区块，生成SCC燃料通证。总共45个节点，5个节点由官方预留，40个节点开放给全网玩家竞选。</p>
             
             <h3>SCC燃料通证</h3>
             <ul>
                 <li>燃料费用：玩家领取卷轴收益需消耗SCC作为网络燃料费</li>
                 <li>获取方式：通过DSC/USDS兑换或参与卷轴复投获得</li>
-                <li>经济模型：日产量固定8,640 SCC，用于维护网络运行和激励参与者</li>
+                <li>经济模型：日产量固定8,640 SCC</li>
             </ul>
-            
-            <h3>生态核心</h3>
-            <p>数字卷轴作为卷界链生态的核心应用，通过智能合约实现透明化资产管理。SCC作为生态燃料通证，连接用户行为与网络维护，构建可持续发展的区块链经济体系。</p>
             
             <h3>项目特色</h3>
             <ul>
                 <li>每小时自动产生收益</li>
-                <li>多重收益来源：卷轴收益、推广收益、共享矿机收益和每日分红收益</li>
+                <li>多重收益来源：卷轴收益、推广收益、共享矿机收益</li>
                 <li>透明公开的区块链技术保障</li>
                 <li>24小时全天候交易</li>
-                <li>多级别卷轴满足不同投资需求</li>
             </ul>
         </div>
         
@@ -716,17 +601,6 @@
                     <td>360天</td>
                 </tr>
             </table>
-            
-            <h3>卷轴增产设定</h3>
-            <p>高级级别卷轴可以通过推广活跃用户增加日产收益：</p>
-            <ul>
-                <li>青铜卷轴：上月直推每+1位(活跃度≥3),日产+0.01，封顶0.07(推1位)</li>
-                <li>白银卷轴：上月直推每+1位(活跃度≥3),日产+0.05，封顶0.7(推2位)</li>
-                <li>黄金卷轴：上月直推每+1位(活跃度≥3),日产+0.35，封顶7.33(推8位)</li>
-                <li>铂金卷轴：上月直推每+1位(活跃度≥3),日产+1，封顶38.33(推15位)</li>
-                <li>钻石卷轴：上月直推每+1位(活跃度≥3),日产+1.3，封顶83.32(推25位)</li>
-                <li>至尊卷轴：上月直推每+1位(活跃度≥3),日产+4.5，封顶450(推40位)</li>
-            </ul>
         </div>
         
         <div id="promotion" class="content-section">
@@ -757,16 +631,16 @@
             
             <h4>股东达成奖励</h4>
             <ul>
-                <li>1级股东：奖励10永久矿机（1青铜），交易手续费5%分红</li>
-                <li>2级股东：奖励500永久矿机（5白银），交易手续费15%分红</li>
-                <li>3级股东：奖励1000永久矿机（1黄金），交易手续费20%分红</li>
-                <li>4级股东：奖励5000永久矿机（1铂金），交易手续费15%分红</li>
-                <li>5级股东：奖励10000永久矿机（1钻石），交易手续费15%分红</li>
+                <li>1级股东：奖励10永久矿机，交易手续费5%分红</li>
+                <li>2级股东：奖励500永久矿机，交易手续费15%分红</li>
+                <li>3级股东：奖励1000永久矿机，交易手续费20%分红</li>
+                <li>4级股东：奖励5000永久矿机，交易手续费15%分红</li>
+                <li>5级股东：奖励10000永久矿机，交易手续费15%分红</li>
             </ul>
             
             <div class="highlight">
                 分红来源为DSC交易手续费的70%，每日结算一次<br>
-                前三名5级股东自动成为超级节点人，不受季度考核，永久分红
+                前三名5级股东自动成为超级节点人，不受季度考核
             </div>
         </div>
         
@@ -776,16 +650,16 @@
             <h3>DSC交易区(DSC/USDS交易对)</h3>
             <ul>
                 <li>交易时间: 24小时全天候交易</li>
-                <li>交易方式: 自由挂买单或卖单，智能合约保障安全快速交换</li>
-                <li>锁单功能: USDS余额不足可先锁单，超时不付款自动处罚停产7天</li>
-                <li>手续费优惠: 购买官方币或零撸币可积累免手续费额度</li>
+                <li>交易方式: 自由挂买单或卖单</li>
+                <li>锁单功能: USDS余额不足可先锁单</li>
+                <li>手续费优惠: 购买官方币积累免手续费额度</li>
             </ul>
             
             <h3>USDS交易区(USDS/CNY交易对)</h3>
             <ul>
                 <li>交易时间: 每日8:00至21:00</li>
                 <li>市商服务: 市商提供优质挂单服务</li>
-                <li>申诉机制: 超时未付款或未放币将自动申诉</li>
+                <li>申诉机制: 超时未付款或未放币自动申诉</li>
             </ul>
             
             <h3>交易手续费设定</h3>
@@ -800,11 +674,11 @@
                 <li>交易分红池每日处理：25%作为官方分红</li>
                 <li>70%作为股东分红</li>
                 <li>5%销毁</li>
-                <li>某级股东无人达成时，对应分红比例同样销毁</li>
+                <li>某级股东无人达成时，对应分红比例销毁</li>
             </ul>
             
             <h3>注意事项</h3>
-            <p class="highlight">若连续多次交易被申诉，恐将被判定为捣乱账户，永久禁止交易，永久停产卷轴，实名信息永久无法再次上车。</p>
+            <p class="highlight">若连续多次交易被申诉，将被判定为捣乱账户，永久禁止交易，永久停产卷轴。</p>
         </div>
         
         <div id="verification" class="content-section">
@@ -813,9 +687,9 @@
             
             <h3>验证要求</h3>
             <ul>
-                <li>注册需在10天内完成实名认证才能继续领取收益</li>
-                <li>可联系上级授予认证费用快速认证，或领满0.07 DSC余额后及时认证</li>
-                <li>纯零撸用户余额满1DSC需二次刷脸验证，兑换卷轴或复投卷轴后免刷脸</li>
+                <li>注册需在10天内完成实名认证</li>
+                <li>可联系上级授予认证费用快速认证</li>
+                <li>纯零撸用户余额满1DSC需二次刷脸验证</li>
             </ul>
             
             <h3>免刷脸验证</h3>
@@ -838,26 +712,14 @@
             
             <h3>账户安全问题</h3>
             <p><strong>Q: 忘记密码怎么办？</strong><br>
-            A: 可使用安全码重置登录密码或资金密码，请妥善保管好安全码。</p>
+            A: 可使用安全码重置登录密码或资金密码。</p>
             
             <p><strong>Q: 群组如何加入和退出？</strong><br>
-            A: 拥有某级别卷轴，自动加入该级别群组；失去该级别卷轴，自动退出该级别群组。</p>
+            A: 拥有某级别卷轴，自动加入该级别群组；失去该级别卷轴，自动退出。</p>
             
             <h3>学习资源</h3>
             <p>在"我的-常见问题"中可了解更多相关内容。<br>
             在"首页-卷轴学院"观看视频全面了解项目运作。</p>
-            <h3>重要地址</h3>
-            <ul>
-                 <li>DSC总池: SNqQZJwyMuqkHevrBlSZwYXllJ65Lq5nF8</li>
-                 <li>DSC黑洞地址: SQGfYK112x35Dm6krV57AKGp0cIFKDp5Ba</li>
-                 <li>DSC卷轴收益池: Sz3muiPYGnh8ER4QO21dIpE3vsa5HFjr1i</li>
-                 <li>DSC推广收益池: SIAORU4JFp3Snm0l5ClQVgJTO81GZTeqW4</li>
-                 <li>SCC总池：SUJP6kdCRltUJuHWUIcB8y6JU58NqDay3W</li>
-                 <li>SCC兑换分红池：Sp0fgF2Dz6gE7EQ9pDA5OAggX33cuIcjzp</li>
-                 <li>SCC销毁地址：Ss5vwf8yTtswUFMLzKZ0eoDeMc6hZ0GIdH</li> 
-                 <li>USDS总池：SjlrYjSiyvLR0muMdV1XcFohURYq64uvw0</li>
-                 <li>USDS托收池：Sjinwu8bDIrJi5wi7HM60MeyLyoSLBjw4Z</li>
-            </ul>
         </div>
         
         <div id="contactModal">
@@ -921,7 +783,7 @@
         document.body.removeChild(textarea);
         
         copyStatus.textContent = '微信号已复制到剪贴板！';
-        setTimeout(() => { copyStatus.textContent = ''; }, 3000);
+        setTimeout(() => { copyStatus.textContent = ''; }, 2000);
     }
     
     // 更新垂直计时器
@@ -940,28 +802,13 @@
             `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     }
     
-    // 微信浏览器检测
-    function isWeixinBrowser() {
-        return navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1;
-    }
-    
     // 初始化页面
     window.onload = function() {
         updateRuntime();
         setInterval(updateRuntime, 1000);
         
         document.getElementById('intro').classList.add('active');
-        
-        document.querySelectorAll('.external-link, #registerBtn').forEach(link => {
-            link.addEventListener('click', function(e) {
-                if(isWeixinBrowser()) {
-                    e.preventDefault();
-                    alert('请点击右上角菜单，选择"在浏览器打开"后再进行注册/登录操作');
-                }
-            });
-        });
     };
-
     
     // 点击模态框外部关闭
     window.onclick = function(event) {
