@@ -7,80 +7,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-    --primary-color: #FF6B35;
-    --secondary-color: #FFA630;
-    --dark-color: #333;
-    --light-color: #fff;
-    --accent-color: #FFE74C;
-    --register-btn: #4CAF50;
-    --contact-btn: #2196F3;
-    --guide-btn: #9C27B0;
-    --model-btn: #D32F2F;
-    --game-btn: #1A237E; /* 新增的生态游戏按钮颜色 */
-    --consensus-btn: #4CAF50; /* 社区共识浅绿色背景 */
-}
-           .consensus-btn {
-    background: var(--consensus-btn);
-}
-
-.consensus-btn:hover {
-    background: #3e8e41;
-}
+            --primary-color: #FF6B35;
+            --secondary-color: #FFA630;
+            --dark-color: #333;
+            --light-color: #fff;
+            --accent-color: #FFE74C;
+            --register-btn: #4CAF50;
+            --contact-btn: #2196F3;
+            --guide-btn: #9C27B0;
+            --model-btn: #D32F2F;
+            --game-btn: #1A237E;
+            --consensus-btn: #4CAF50;
+        }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Roboto', 'Microsoft YaHei', sans-serif;
+            font-size: 0.95rem; /* 缩小全局字体 */
         }
-         .model-btn {
-            display: block;
-            background: var(--model-btn);
-            color: var(--light-color);
-            padding: 12px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-            text-align: center;
-        }
-        .game-btn {
-    display: block;
-    background: var(--game-btn);
-    color: var(--light-color);
-    padding: 12px;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    text-align: center;
-}
-
-.game-btn:hover {
-    background: #0d1a6b;
-    transform: translateY(-5px);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
-}
-
-        .model-btn:hover {
-            background: #B71C1C;
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
-        }
+        
         body {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: var(--light-color);
@@ -92,16 +39,16 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 15px;
         }
         
         header {
             text-align: center;
-            margin-bottom: 30px;
-            padding: 40px 20px;
+            margin-bottom: 20px;
+            padding: 20px 15px;
             background: rgba(0, 0, 0, 0.2);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
             position: relative;
             overflow: hidden;
         }
@@ -130,16 +77,16 @@
             position: relative;
             z-index: 1;
             flex-wrap: nowrap;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
         
         .logo {
-            height: 4.48rem; /* 从2.8rem增大60%到4.48rem */
-            margin-right: 15px;
+            height: 3.5rem;
+            margin-right: 12px;
         }
         
         h1 {
-            font-size: 4.48rem; /* 从2.8rem增大60%到4.48rem */
+            font-size: 3.2rem;
             margin: 0;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
             font-family: 'Montserrat', sans-serif;
@@ -150,143 +97,196 @@
         }
         
         .subtitle {
-            font-size: 1.3rem;
-            margin-bottom: 15px;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
             position: relative;
             z-index: 1;
             width: 100%;
         }
-      
         
-/* 修改后的计时器样式 */
-.timer-container {
-    margin: 25px 0;
-    padding: 20px 15px;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(10px);
-    position: relative;
-    z-index: 1;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    text-align: center;
-}
-
-.timer-label {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-    font-weight: 500;
-}
-
-.timer {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    font-family: 'Montserrat', sans-serif;
-}
-
-.days {
-    font-size: 3.6em; /* 从1.8em增大1倍到3.6em */
-    line-height: 1.2;
-    letter-spacing: 2px;
-    color: #FFD700; /* 金色文字 */
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-}
-
-.time {
-    font-size: 2.2em;
-    letter-spacing: 3px;
-    color: var(--light-color);
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-}
-
-.timer-motto {
-    font-size: 0.9rem;
-    margin-top: 15px;
-    color: #fff; /* 白色文字 */
-    letter-spacing: 1px;
-}
-
-@keyframes pulse {
-    0% { 
-        text-shadow: 
-            0 0 5px rgba(255, 255, 255, 0.5),
-            0 0 10px rgba(255, 215, 0, 0.5);
-    }
-    100% { 
-        text-shadow: 
-            0 0 20px rgba(255, 230, 76, 0.8), 
-            0 0 30px rgba(255, 230, 76, 0.6);
-    }
-}
+        .timer-container {
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(8px);
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+        
+        .timer-label {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            font-weight: 500;
+        }
+        
+        .timer {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .days {
+            font-size: 2.8em;
+            line-height: 1.2;
+            letter-spacing: 1px;
+            color: #FFD700;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        
+        .time {
+            font-size: 1.8em;
+            letter-spacing: 2px;
+            color: var(--light-color);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        
+        .timer-motto {
+            font-size: 0.85rem;
+            margin-top: 12px;
+            color: #fff;
+            letter-spacing: 0.5px;
+            line-height: 1.4;
+        }
+        
+        .auth-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin: 15px 0;
+        }
+        
+        .auth-btn, .contact-btn, .guide-btn, .model-btn, .game-btn, .consensus-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            height: 100%;
+            min-height: 50px;
+        }
+        
+        .auth-btn {
+            background: var(--register-btn);
+            color: var(--light-color);
+        }
+        
+        .contact-btn {
+            background: var(--contact-btn);
+            color: var(--light-color);
+        }
+        
+        .guide-btn {
+            background: var(--guide-btn);
+            color: var(--light-color);
+        }
+        
+        .model-btn {
+            background: var(--model-btn);
+            color: var(--light-color);
+        }
+        
+        .game-btn {
+            background: var(--game-btn);
+            color: var(--light-color);
+        }
+        
+        .consensus-btn {
+            background: var(--consensus-btn);
+            color: var(--light-color);
+        }
+        
+        .auth-btn:hover, .contact-btn:hover, .guide-btn:hover, 
+        .model-btn:hover, .game-btn:hover, .consensus-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .auth-btn:hover {
+            background: #3e8e41;
+        }
+        
+        .contact-btn:hover {
+            background: #0b7dda;
+        }
+        
+        .guide-btn:hover {
+            background: #7b1fa2;
+        }
+        
+        .model-btn:hover {
+            background: #B71C1C;
+        }
+        
+        .game-btn:hover {
+            background: #0d1a6b;
+        }
+        
+        .consensus-btn:hover {
+            background: #3e8e41;
+        }
         
         .button-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 12px;
-            margin-bottom: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 8px;
+            margin-bottom: 20px;
         }
         
         .btn {
             background: rgba(255, 255, 255, 0.15);
             border: none;
             color: var(--light-color);
-            padding: 15px;
-            font-size: 1.5rem; /* 从1rem增大50%到1.5rem */
-            border-radius: 12px;
+            padding: 10px;
+            font-size: 0.95rem;
+            border-radius: 10px;
             cursor: pointer;
             transition: all 0.3s ease;
             text-align: center;
             backdrop-filter: blur(5px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
             position: relative;
             overflow: hidden;
             z-index: 1;
             font-weight: 500;
-        }
-        
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 100%);
-            z-index: -1;
-            transition: all 0.3s ease;
+            min-height: 45px;
         }
         
         .btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
             background: rgba(255, 255, 255, 0.25);
-        }
-        
-        .btn:hover::before {
-            background: linear-gradient(45deg, rgba(255,255,255,0.2) 0%, transparent 100%);
-        }
-        
-        .btn:active {
-            transform: translateY(0);
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
         }
         
         .content-section {
             background: rgba(0, 0, 0, 0.2);
-            border-radius: 15px;
-            padding: 20px 15px;
-            margin-bottom: 20px;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
             display: none;
             backdrop-filter: blur(5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.1);
             animation: fadeIn 0.5s ease-out;
         }
         
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
@@ -295,40 +295,41 @@
         }
         
         h2 {
-            margin-bottom: 15px;
-            font-size: 2.2rem;
+            margin-bottom: 12px;
+            font-size: 1.5rem;
             border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-            padding-bottom: 10px;
+            padding-bottom: 8px;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
             font-family: 'Montserrat', sans-serif;
             color: var(--accent-color);
         }
         
         h3 {
-            margin: 20px 0 12px;
-            font-size: 1.6rem;
+            margin: 15px 0 10px;
+            font-size: 1.3rem;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
             font-family: 'Montserrat', sans-serif;
         }
         
         p {
-            margin-bottom: 12px;
-            line-height: 1.7;
-            font-size: 1.1rem;
+            margin-bottom: 10px;
+            line-height: 1.6;
+            font-size: 0.95rem;
         }
         
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
+            margin: 15px 0;
             background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
             overflow: hidden;
+            font-size: 0.9rem;
         }
         
         th, td {
-            padding: 12px;
+            padding: 10px;
             text-align: left;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
@@ -345,112 +346,24 @@
         
         .highlight {
             background: rgba(255, 230, 76, 0.2);
-            padding: 10px 15px;
+            padding: 8px 12px;
             border-radius: 8px;
             font-weight: bold;
             display: inline-block;
             border-left: 4px solid var(--accent-color);
+            font-size: 0.9rem;
+            margin: 10px 0;
         }
         
-        .auth-box {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin: 25px 0;
-            position: relative;
-            z-index: 1;
-            width: 100%;
+        ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
         }
         
-        .auth-btn {
-            display: block;
-            background: var(--register-btn);
-            color: var(--light-color);
-            padding: 12px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            border: none;
-            font-size: 1.5rem; /* 从1rem增大50%到1.5rem */
-            cursor: button;
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-            text-align: center;
-        }
-        
-        .auth-btn::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent 0%, rgba(255,255,255,0.3) 100%);
-            transform: translateX(-100%);
-            transition: transform 0.6s ease;
-        }
-        
-        .auth-btn:hover {
-            background: #3e8e41;
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
-        }
-        
-        .auth-btn:hover::after {
-            transform: translateX(100%);
-        }
-        
-        .contact-btn {
-            display: block;
-            background: var(--contact-btn);
-            color: var(--light-color);
-            padding: 12px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            border: none;
-            font-size: 1.5rem; /* 从1rem增大50%到1.5rem */
-            cursor: button;
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-            text-align: center;
-        }
-        
-        .contact-btn:hover {
-            background: #0b7dda;
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
-        }
-
-        .guide-btn {
-            display: block;
-            background: var(--guide-btn);
-            color: var(--light-color);
-            padding: 12px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            border: none;
-            font-size: 1.5rem; /* 从1rem增大50%到1.5rem */
-            cursor: button;
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-            text-align: center;
-        }
-        
-        .guide-btn:hover {
-            background: #7b1fa2;
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+            font-size: 0.95rem;
         }
         
         #contactModal {
@@ -470,11 +383,12 @@
         
         .modal-content {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            padding: 20px 15px;
-            border-radius: 20px;
-            max-width: 500px;
+            padding: 15px;
+            border-radius: 15px;
+            max-width: 90%;
+            width: 400px;
             text-align: center;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
             position: relative;
             border: 1px solid rgba(255, 255, 255, 0.2);
             animation: modalIn 0.5s ease-out;
@@ -489,17 +403,17 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 20px 0;
+            margin: 15px 0;
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 12px;
+            border-radius: 10px;
+            padding: 10px;
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
         .wechat-id {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: bold;
-            margin-right: 15px;
+            margin-right: 12px;
             letter-spacing: 1px;
         }
         
@@ -507,38 +421,39 @@
             background: var(--accent-color);
             color: var(--dark-color);
             border: none;
-            padding: 10px 20px;
+            padding: 8px 15px;
             border-radius: 8px;
             cursor: pointer;
             display: flex;
             align-items: center;
             transition: all 0.3s ease;
             font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            font-size: 0.9rem;
         }
         
         .copy-btn:hover {
             background: #ffdf1a;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
         }
         
         .copy-btn svg {
-            margin-right: 8px;
+            margin-right: 6px;
         }
         
         .copy-status {
-            height: 20px;
-            margin: 12px 0;
+            height: 18px;
+            margin: 10px 0;
             color: var(--accent-color);
             font-weight: bold;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
         }
         
         .close-btn {
-            margin-top: 20px;
-            padding: 10px 20px;
+            margin-top: 15px;
+            padding: 8px 15px;
             background: rgba(0, 0, 0, 0.3);
             color: var(--light-color);
             border: none;
@@ -547,6 +462,7 @@
             font-weight: bold;
             transition: all 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.9rem;
         }
         
         .close-btn:hover {
@@ -555,90 +471,100 @@
         
         footer {
             text-align: center;
-            margin-top: 30px;
-            padding: 20px;
+            margin-top: 20px;
+            padding: 15px;
             background: rgba(0, 0, 0, 0.2);
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             backdrop-filter: blur(5px);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
         }
         
-        /* 移动端适配 */
+        /* 移动端优化 */
         @media (max-width: 768px) {
-            .auth-btn, .contact-btn, .guide-btn, .model-btn , .game-btn { /* 新增选择器 */
-                padding: 12px;
-                font-size: 1.2rem;
-            }
             .container {
-                padding: 15px;
+                padding: 10px;
             }
             
             header {
-                padding: 30px 15px;
+                padding: 15px 10px;
             }
             
             .header-content {
                 flex-direction: row;
-                justify-content: center;
             }
             
             .logo {
-                height: 3.2rem; /* 从2rem增大60%到3.2rem */
-                margin-right: 10px;
-                margin-bottom: 0;
+                height: 2.8rem;
+                margin-right: 8px;
             }
             
             h1 {
-                font-size: 2.56rem; /* 从1.6rem增大60%到2.56rem */
+                font-size: 2.2rem;
             }
             
             .subtitle {
-                font-size: 0.9rem;
+                font-size: 0.95rem;
             }
             
-            .button-grid {
-                grid-template-columns: 1fr;
-                gap: 8px;
-            }
-            
-            .btn {
+            .timer-container {
                 padding: 12px;
-                font-size: 1.2rem; /* 从0.9rem增大50%到1.35rem，但考虑到移动端显示，调整为1.2rem */
             }
             
-            .timer {
-                font-size: 1.8rem;
+            .timer-label {
+                font-size: 1.1rem;
             }
             
             .days {
-                font-size: 2.4em;
+                font-size: 2.2em;
             }
             
             .time {
-                font-size: 1.4em;
+                font-size: 1.5em;
             }
             
-            .auth-btn, .contact-btn, .guide-btn {
-                padding: 12px;
-                font-size: 1.2rem; /* 从0.9rem增大50%到1.35rem，但考虑到移动端显示，调整为1.2rem */
+            .timer-motto {
+                font-size: 0.8rem;
+            }
+            
+            .auth-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 6px;
+            }
+            
+            .auth-btn, .contact-btn, .guide-btn, 
+            .model-btn, .game-btn, .consensus-btn {
+                padding: 8px;
+                font-size: 0.9rem;
+                min-height: 45px;
+            }
+            
+            .button-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 6px;
+            }
+            
+            .btn {
+                padding: 8px;
+                font-size: 0.9rem;
+                min-height: 40px;
             }
             
             .content-section {
-                padding: 15px 10px;
+                padding: 12px;
             }
             
             h2 {
-                font-size: 1.4rem;
-                padding-bottom: 8px;
+                font-size: 1.3rem;
             }
             
             h3 {
-                font-size: 1.2rem;
+                font-size: 1.15rem;
             }
             
             table {
-                font-size: 0.8rem;
+                font-size: 0.85rem;
             }
             
             th, td {
@@ -647,138 +573,29 @@
         }
 
         @media (max-width: 480px) {
-            .container {
-                padding: 10px;
-            }
-            
-            header {
-                padding: 20px 10px;
+            .header-content {
+                flex-direction: column;
+                text-align: center;
             }
             
             .logo {
-                height: 2.88rem; /* 从1.8rem增大60%到2.88rem */
+                margin-right: 0;
+                margin-bottom: 10px;
             }
             
             h1 {
-                font-size: 2.24rem; /* 从1.4rem增大60%到2.24rem */
+                font-size: 2rem;
             }
             
-            .timer {
-                font-size: 1.4rem;
-                gap: 5px;
+            .auth-grid {
+                grid-template-columns: 1fr;
             }
             
-            .days {
-                font-size: 2em;
+            .button-grid {
+                grid-template-columns: 1fr;
             }
-            
-            .time {
-                font-size: 1.1em;
-            }
-            
-            .modal-content {
-                width: 95%;
-                padding: 15px 10px;
-            }
-          
-           /* 治理流程图 */
-           .governance-flow {
-    display: flex;
-    gap: 10px;
-    margin: 25px 0;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-            .flow-step {
-    background: rgba(255,255,255,0.1);
-    padding: 15px;
-    border-radius: 12px;
-    text-align: center;
-    flex: 1;
-    min-width: 160px;
-}
-            .step-number {
-    width: 40px;
-    height: 40px;
-    background: var(--accent-color);
-    color: #333;
-    border-radius: 50%;
-    margin: 0 auto 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-}
-.flow-arrow {
-    color: var(--accent-color);
-    align-self: center;
-    margin: 0 -5px;
-}
-/* 节点结构 */
-.node-structure {
-    display: grid;
-    gap: 15px;
-    margin: 20px 0;
-}
-.node-card {
-    padding: 20px;
-    border-radius: 12px;
-}
-.node-card.official {
-    background: rgba(255,76,76,0.1);
-    border-left: 4px solid var(--primary-color);
-}
-.node-card.community {
-    background: rgba(76,175,80,0.1);
-    border-left: 4px solid var(--accent-color);
-}
-.node-type {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-    color: var(--accent-color);
-}
-.count {
-    font-size: 2em;
-    font-family: 'Montserrat';
-    color: var(--accent-color);
-}
-/* 治理规则 */
-.rules-container {
-    display: grid;
-    gap: 15px;
-    margin: 20px 0;
-}
-.rule-box {
-    padding: 15px;
-    border-radius: 8px;
-}
-.rule-box.critical {
-    background: rgba(255,76,76,0.1);
-    border: 1px solid #ff4c4c;
-}
-.rule-box.normal {
-    background: rgba(76,175,80,0.1);
-    border: 1px solid #4CAF50;
-}
-/* 移动端适配 */
-@media (max-width: 768px) {
-    .governance-flow {
-        flex-direction: column;
-    }
-    .flow-arrow {
-        display: none;
-    }
-    .node-structure {
-        grid-template-columns: 1fr;
-    }
-    .rules-container {
-        grid-template-columns: 1fr;
-    }
-    .count {
-        font-size: 1.5em;
-    }
-}
-</style>
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -789,57 +606,49 @@
             </div>
             <p class="subtitle">创新数字资产项目 · 每小时收益 · 多重获利方式</p>
             
-           <div class="timer-container">
-    <div class="timer-label">DSC已稳定运行</div>
-    <div class="timer" id="runtimeTimer">
-        <div class="days" id="days">00天</div>
-        <div class="time" id="time">00:00:00</div>
-    </div>
-    <div class="timer-motto">无人扶我青云志，我自挖矿至巅峰。<br>卷轴铺就黄金路，链上乾坤掌中明。</div>
-</div>
+            <div class="timer-container">
+                <div class="timer-label">DSC已稳定运行</div>
+                <div class="timer" id="runtimeTimer">
+                    <div class="days" id="days">00天</div>
+                    <div class="time" id="time">00:00:00</div>
+                </div>
+                <div class="timer-motto">无人扶我青云志，我自挖矿至巅峰。<br>卷轴铺就黄金路，链上乾坤掌中明。</div>
+            </div>
             
-            <div class="auth-box">
+            <div class="auth-grid">
                 <a href="https://prod.digital-scroll.org/#/pages/reg?c=182N17" class="auth-btn" id="registerBtn">注册/登录</a>
                 <button class="contact-btn" onclick="showContactModal()">快速认证</button>
                 <a href="guide.html" class="guide-btn">操作指南</a>
-                <a href="moxing.html" class="model-btn">经济模型</a> 
-                <a href="youxi.html" class="game-btn">生态游戏</a> <!-- 新增的生态游戏按钮 -->
-                <button class="btn consensus-btn" onclick="window.location.href='shequgongshi.html'">股东制度</button>
+                <a href="moxing.html" class="model-btn">经济模型</a>
+                <a href="youxi.html" class="game-btn">生态游戏</a>
+                <a href="gudongzhidu.html" class="consensus-btn">股东制度</a>
             </div>
         </header>
         
         <div class="button-grid">
             <button class="btn" onclick="showSection('intro')">项目介绍</button>
-            <button class="btn" onclick="showSection('governance')">链上治理</button> 
             <button class="btn" onclick="showSection('scrolls')">卷轴收益</button>
-            <button class="btn" onclick="showSection('verification')">身份验证</button>
             <button class="btn" onclick="showSection('promotion')">推广奖励</button>
             <button class="btn" onclick="showSection('trading')">市场交易</button>
+            <button class="btn" onclick="showSection('verification')">身份验证</button>
             <button class="btn" onclick="showSection('faq')">常见问题</button>
         </div>
         
         <div id="intro" class="content-section active">
             <h2>数字卷轴DSC项目介绍</h2>
             <p>数字卷轴DSC是一个创新的数字资产增值项目，基于卷界链(Scroll Chain)技术开发，为用户提供多种收益方式。</p>
-
+            
             <h3>节点自治与共识机制</h3>
-
             <p>卷界链采用节点自治的共识机制，节点每10秒打包一个区块，生成SCC燃料通证。节点通过参与区块打包和交易验证，保障网络的去中心化和安全性。总共45个节点，5个节点由官方预留，40个节点开放给全网玩家竞选，实现真正的社区自治。</p>
-
+            
             <h3>SCC燃料通证</h3>
-
             <ul>
-
-            <li>燃料费用：玩家领取卷轴收益需消耗SCC作为网络燃料费</li>
-
-            <li>获取方式：通过DSC/USDS兑换或参与卷轴复投获得</li>
-
-            <li>经济模型：日产量固定8,640 SCC，用于维护网络运行和激励参与者</li>
-
+                <li>燃料费用：玩家领取卷轴收益需消耗SCC作为网络燃料费</li>
+                <li>获取方式：通过DSC/USDS兑换或参与卷轴复投获得</li>
+                <li>经济模型：日产量固定8,640 SCC，用于维护网络运行和激励参与者</li>
             </ul>
-
+            
             <h3>生态核心</h3>
-
             <p>数字卷轴作为卷界链生态的核心应用，通过智能合约实现透明化资产管理。SCC作为生态燃料通证，连接用户行为与网络维护，构建可持续发展的区块链经济体系。</p>
             
             <h3>项目特色</h3>
@@ -850,95 +659,8 @@
                 <li>24小时全天候交易</li>
                 <li>多级别卷轴满足不同投资需求</li>
             </ul>
-            
-            <h3>技术基础</h3>
-            <p>数字卷轴依托卷界链保障流程的公开性和透明性，所有智能合约均在链上执行，所有记录公开透明，用户可通过区块链浏览器实时查看。</p>
         </div>
-        <!-- 步骤3：新增链上治理模块 -->
-<div id="governance" class="content-section">
-    <h2>链上治理体系</h2>
-    <div class="highlight">45节点共识网络 | 提案机制 | 季度席位竞选</div>
-    <!-- 治理流程图 -->
-    <div class="governance-flow">
-        <div class="flow-step">
-            <div class="step-number">1</div>
-            <h4>提案发起</h4>
-            <p>节点/社区提交优化方案</p>
-        </div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-step">
-            <div class="step-number">2</div>
-            <h4>社区投票</h4>
-            <p>需≥75%节点通过</p>
-        </div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-step">
-            <div class="step-number">3</div>
-            <h4>技术开发</h4>
-            <p>部署智能合约升级</p>
-        </div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-step">
-            <div class="step-number">4</div>
-            <h4>节点升级</h4>
-            <p>72小时内完成更新</p>
-        </div>
-    </div>
-    <!-- 节点体系 -->
-    <h3>节点分布结构</h3>
-    <div class="node-structure">
-        <div class="node-card official">
-            <div class="node-type">官方节点</div>
-            <div class="node-info">
-                <span class="count">5席位</span>
-                <ul>
-                    <li>网络基础运维</li>
-                    <li>紧急事件处置</li>
-                </ul>
-            </div>
-        </div>
-        <div class="node-card community">
-            <div class="node-type">社区节点</div>
-            <div class="node-info">
-                <span class="count">40席位</span>
-                <ul>
-                    <li>季度推广前40名</li>
-                    <li>提案与表决权限</li>
-                </ul>
-            </div>
-          </div>
-    </div>
-
-    <!-- 治理规则 -->
-
-    <h3>治理规则说明</h3>
-    <div class="rules-container">
-        <div class="rule-box critical">
-            <h3>核心治理领域
-
-</h3>
-            <ul>
-                <li>卷轴产出规则调整</li>
-                <li>智能合约升级</li>
-                <li>链上资产分配</li>
-            </ul>
-        </div>
-        <div class="rule-box normal">
-            <h3>技术自治领域
-
-</h3>
-            <ul>
-                <li>前端界面更新</li>
-                <li>游戏参数调整</li>
-                <li>运维策略优化</li>
-            </ul>
-        </div>
-    </div>
-</div>
-
-
-
-
+        
         <div id="scrolls" class="content-section">
             <h2>卷轴收益详情</h2>
             <p>卷轴每小时产出收益，超过48小时未领取收益，卷轴会停产。领取收益后，卷轴自动恢复生产。</p>
@@ -1007,25 +729,6 @@
             </ul>
         </div>
         
-        <div id="verification" class="content-section">
-            <h2>身份验证说明</h2>
-            <p>为确保账户安全和合规性，项目实行分级身份验证制度。</p>
-            
-            <h3>验证要求</h3>
-            <ul>
-                <li>注册需在10天内完成实名认证才能继续领取收益</li>
-                <li>可联系上级授予认证费用快速认证，或领满0.07 DSC余额后及时认证</li>
-                <li>纯零撸用户余额满1DSC需二次刷脸验证，兑换卷轴或复投卷轴后免刷脸</li>
-            </ul>
-            
-            <h3>免刷脸验证</h3>
-            <p>兑换任意卷轴，可免除二次刷脸验证。</p>
-            
-            <h3>刷脸验证问题解决</h3>
-            <p>若APP二次刷脸无法通过，请尝试使用网页版：<br>
-            <a href="https://prod.digital-scroll.org" style="color: var(--accent-color); text-decoration: underline;" class="external-link">https://prod.digital-scroll.org</a></p>
-        </div>
-        
         <div id="promotion" class="content-section">
             <h2>推广奖励机制</h2>
             <p>推广下级，永久享下级收益的10%奖励。推广下级也可竞争节点，获取更多奖励。</p>
@@ -1040,6 +743,31 @@
                 <li>否则：奖励间推卷轴收益的1.5%</li>
             </ul>
             
+            <h3>股东制度</h3>
+            <p>成为股东可享受交易手续费分红：</p>
+            
+            <h4>股东达成条件</h4>
+            <ul>
+                <li>1级股东：族群活跃度500，直推活粉数3，质押量20</li>
+                <li>2级股东：族群活跃度2000，团队活跃度500，直推活粉数6，质押量1000</li>
+                <li>3级股东：族群活跃度10000，团队活跃度2000，直推活粉数10，质押量2000</li>
+                <li>4级股东：族群活跃度50000，团队活跃度10000，直推活粉数15，质押量10000</li>
+                <li>5级股东：族群活跃度100000，团队活跃度30000，直推活粉数20，质押量20000</li>
+            </ul>
+            
+            <h4>股东达成奖励</h4>
+            <ul>
+                <li>1级股东：奖励10永久矿机（1青铜），交易手续费5%分红</li>
+                <li>2级股东：奖励500永久矿机（5白银），交易手续费15%分红</li>
+                <li>3级股东：奖励1000永久矿机（1黄金），交易手续费20%分红</li>
+                <li>4级股东：奖励5000永久矿机（1铂金），交易手续费15%分红</li>
+                <li>5级股东：奖励10000永久矿机（1钻石），交易手续费15%分红</li>
+            </ul>
+            
+            <div class="highlight">
+                分红来源为DSC交易手续费的70%，每日结算一次<br>
+                前三名5级股东自动成为超级节点人，不受季度考核，永久分红
+            </div>
         </div>
         
         <div id="trading" class="content-section">
@@ -1060,17 +788,44 @@
                 <li>申诉机制: 超时未付款或未放币将自动申诉</li>
             </ul>
             
-            <h3>交易手续费</h3>
+            <h3>交易手续费设定</h3>
             <ul>
                 <li>普通玩家DSC卖出手续费为25%</li>
-                <li>玩家购买官方币，可积累免手续费额度。于额度内卖出，免手续费</li>
-                <li>市商免手续费，官方免手续</li>
-
+                <li>市商和官方免手续费</li>
+                <li>交易完成后，手续费DSC转入交易分红池</li>
+            </ul>
+            
+            <h3>交易分红规则</h3>
+            <ul>
+                <li>交易分红池每日处理：25%作为官方分红</li>
+                <li>70%作为股东分红</li>
+                <li>5%销毁</li>
+                <li>某级股东无人达成时，对应分红比例同样销毁</li>
             </ul>
             
             <h3>注意事项</h3>
             <p class="highlight">若连续多次交易被申诉，恐将被判定为捣乱账户，永久禁止交易，永久停产卷轴，实名信息永久无法再次上车。</p>
         </div>
+        
+        <div id="verification" class="content-section">
+            <h2>身份验证说明</h2>
+            <p>为确保账户安全和合规性，项目实行分级身份验证制度。</p>
+            
+            <h3>验证要求</h3>
+            <ul>
+                <li>注册需在10天内完成实名认证才能继续领取收益</li>
+                <li>可联系上级授予认证费用快速认证，或领满0.07 DSC余额后及时认证</li>
+                <li>纯零撸用户余额满1DSC需二次刷脸验证，兑换卷轴或复投卷轴后免刷脸</li>
+            </ul>
+            
+            <h3>免刷脸验证</h3>
+            <p>兑换任意卷轴，可免除二次刷脸验证。</p>
+            
+            <h3>刷脸验证问题解决</h3>
+            <p>若APP二次刷脸无法通过，请尝试使用网页版：<br>
+            <a href="https://prod.digital-scroll.org" style="color: var(--accent-color); text-decoration: underline;" class="external-link">https://prod.digital-scroll.org</a></p>
+        </div>
+        
         <div id="faq" class="content-section">
             <h2>常见问题解答</h2>
             
