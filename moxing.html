@@ -8,7 +8,6 @@
     <!-- 本地化资源加载 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
     
     <script>
         tailwind.config = {
@@ -38,13 +37,6 @@
             .content-auto {
                 content-visibility: auto;
             }
-            .card-3d {
-                transform-style: preserve-3d;
-                transition: transform 0.5s ease;
-            }
-            .card-3d:hover {
-                transform: translateY(-5px) rotateX(2deg);
-            }
             .text-shadow {
                 text-shadow: 0 2px 4px rgba(0,0,0,0.1);
             }
@@ -56,16 +48,10 @@
                 height: 4px;
                 background: linear-gradient(90deg, #4CC9F0 0%, #F72585 100%);
                 width: 0;
-                transition: width 1s ease-in-out;
             }
             .reveal {
                 opacity: 0;
                 transform: translateY(20px);
-                transition: all 0.6s ease-out;
-            }
-            .reveal.active {
-                opacity: 1;
-                transform: translateY(0);
             }
             .table-cell {
                 min-width: 40px;
@@ -80,14 +66,6 @@
             .table-data-cell {
                 font-size: 10px;
                 padding: 4px;
-            }
-            .chart-container {
-                width: 100%;
-                overflow-x: auto;
-            }
-            .scrollable-chart {
-                min-width: 1000px;
-                height: 220px;
             }
             .custom-legend li {
                 display: inline-block;
@@ -125,6 +103,27 @@
             .neon-border-tertiary {
                 border: 1px solid rgba(0, 255, 200, 0.3);
             }
+            
+            /* 动画相关的媒体查询 */
+            @media (prefers-reduced-motion: no-preference) {
+                .card-3d {
+                    transform-style: preserve-3d;
+                    transition: transform 0.5s ease;
+                }
+                .card-3d:hover {
+                    transform: translateY(-5px) rotateX(2deg);
+                }
+                .progress-bar {
+                    transition: width 1s ease-in-out;
+                }
+                .reveal {
+                    transition: all 0.6s ease-out;
+                }
+                .reveal.active {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
         }
     </style>
 </head>
@@ -138,7 +137,7 @@
                 
                 <a href="index.html" class="flex items-center justify-center mb-3 relative">
                     <!-- 修改logo路径 -->
-                    <img src="images/logo01.png" class="h-12 w-12 mr-2" alt="logo">
+                    <img src="https://via.placeholder.com/48x48?text=Logo" class="h-12 w-12 mr-2" alt="logo">
                     <h2 class="text-[1.1rem] font-bold text-accent">SCC经济模型</h2>
                 </a>
                 
