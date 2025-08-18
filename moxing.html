@@ -15,11 +15,14 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#3B82F6',
-                        secondary: '#EC4899',
-                        tertiary: '#10B981',
-                        dark: '#1E293B',
-                        light: '#F8FAFC',
+                        primary: '#5E60CE',
+                        secondary: '#F72585',
+                        tertiary: '#00FFC8',
+                        accent: '#4CC9F0',
+                        dark: '#0F172A',
+                        light: '#1E293B',
+                        glass: 'rgba(30, 41, 59, 0.8)',
+                        glassLight: 'rgba(56, 70, 100, 0.5)',
                         warning: '#F59E0B'
                     },
                     fontFamily: {
@@ -46,12 +49,12 @@
                 text-shadow: 0 2px 4px rgba(0,0,0,0.1);
             }
             .bg-glass {
-                background: rgba(255, 255, 255, 0.8);
+                background: rgba(30, 41, 59, 0.8);
                 backdrop-filter: blur(8px);
             }
             .progress-bar {
                 height: 4px;
-                background: linear-gradient(90deg, #3B82F6 0%, #EC4899 100%);
+                background: linear-gradient(90deg, #4CC9F0 0%, #F72585 100%);
                 width: 0;
                 transition: width 1s ease-in-out;
             }
@@ -98,24 +101,48 @@
                 border-radius: 50%;
                 margin-right: 5px;
             }
+            .glow {
+                box-shadow: 0 0 15px rgba(94, 96, 206, 0.5);
+            }
+            .glow-secondary {
+                box-shadow: 0 0 15px rgba(247, 37, 133, 0.5);
+            }
+            .glow-tertiary {
+                box-shadow: 0 0 15px rgba(0, 255, 200, 0.5);
+            }
+            .glow-accent {
+                box-shadow: 0 0 15px rgba(76, 201, 240, 0.5);
+            }
+            .neon-border {
+                border: 1px solid rgba(76, 201, 240, 0.3);
+            }
+            .neon-border-primary {
+                border: 1px solid rgba(94, 96, 206, 0.3);
+            }
+            .neon-border-secondary {
+                border: 1px solid rgba(247, 37, 133, 0.3);
+            }
+            .neon-border-tertiary {
+                border: 1px solid rgba(0, 255, 200, 0.3);
+            }
         }
     </style>
 </head>
-<body class="bg-gradient-to-b from-light to-blue-50 text-dark min-h-screen">
+<body class="bg-gradient-to-b from-dark to-light text-gray-200 min-h-screen">
     <main class="container mx-auto px-4 py-3">
         <!-- 头部区域 -->
         <header class="mb-4">
-            <div class="bg-white rounded-2xl shadow-lg p-4 relative overflow-hidden card-3d">
-                <div class="absolute top-0 right-0 w-24 h-24 bg-primary/10 rounded-full -mr-8 -mt-8"></div>
+            <div class="bg-glass rounded-2xl shadow-lg p-4 relative overflow-hidden card-3d glow">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-accent/10 rounded-full -mr-8 -mt-8"></div>
                 <div class="absolute bottom-0 left-0 w-16 h-16 bg-secondary/10 rounded-full -ml-4 -mb-4"></div>
                 
                 <a href="index.html" class="flex items-center justify-center mb-3 relative">
                     <!-- 修改logo路径 -->
                     <img src="images/logo01.png" class="h-12 w-12 mr-2" alt="logo">
-                    <h2 class="text-[1.1rem] font-bold text-primary">SCC经济模型</h2>
+                    <h2 class="text-[1.1rem] font-bold text-accent">SCC经济模型</h2>
                 </a>
                 
-                <p class="text-xs text-gray-500 text-center mb-3">燃料通证 · 节点治理 · 价值分配</p>
+                <p class="text-xs text-gray-400 text-center mb-3">燃料通证 · 节点治理 · 价值分配</p>
                 
                 <div class="w-full">
                     <div class="progress-bar" id="headerProgress"></div>
@@ -125,20 +152,20 @@
         
         <!-- SCC与DSC价值共生关系 -->
         <section class="mb-3 reveal">
-            <div class="bg-white rounded-xl shadow-md p-3 card-3d">
-                <h3 class="text-sm font-semibold text-primary mb-2 flex items-center">
+            <div class="bg-glass rounded-xl shadow-md p-3 card-3d glow-primary">
+                <h3 class="text-sm font-semibold text-accent mb-2 flex items-center">
                     <i class="fa fa-link text-xs mr-2 text-secondary"></i>
                     SCC与DSC价值共生关系
                 </h3>
                 
                 <!-- 价值链条可视化 -->
-                <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-2 mb-3 border-l-3 border-primary">
-                    <h4 class="text-primary text-xs font-medium mb-2">SCC燃料费驱动DSC价值增长闭环</h4>
+                <div class="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg p-2 mb-3 border-l-3 border-accent">
+                    <h4 class="text-accent text-xs font-medium mb-2">SCC燃料费驱动DSC价值增长闭环</h4>
                     
                     <!-- 垂直链条步骤 -->
                     <div class="space-y-2">
-                        <div class="bg-white rounded-lg px-2 py-1.5 shadow-sm text-xs flex items-center">
-                            <span class="w-5 h-5 rounded-full bg-primary text-white text-xs flex items-center justify-center mr-2">1</span>
+                        <div class="bg-glassLight rounded-lg px-2 py-1.5 shadow-sm text-xs flex items-center neon-border-accent">
+                            <span class="w-5 h-5 rounded-full bg-accent text-white text-xs flex items-center justify-center mr-2">1</span>
                             用户领取DSC收益
                         </div>
                         
@@ -146,8 +173,8 @@
                             <i class="fa fa-chevron-down text-xs"></i>
                         </div>
                         
-                        <div class="bg-white rounded-lg px-2 py-1.5 shadow-sm text-xs flex items-center">
-                            <span class="w-5 h-5 rounded-full bg-primary text-white text-xs flex items-center justify-center mr-2">2</span>
+                        <div class="bg-glassLight rounded-lg px-2 py-1.5 shadow-sm text-xs flex items-center neon-border-accent">
+                            <span class="w-5 h-5 rounded-full bg-accent text-white text-xs flex items-center justify-center mr-2">2</span>
                             消耗SCC作为燃料费
                         </div>
                         
@@ -155,8 +182,8 @@
                             <i class="fa fa-chevron-down text-xs"></i>
                         </div>
                         
-                        <div class="bg-white rounded-lg px-2 py-1.5 shadow-sm text-xs flex items-center">
-                            <span class="w-5 h-5 rounded-full bg-primary text-white text-xs flex items-center justify-center mr-2">3</span>
+                        <div class="bg-glassLight rounded-lg px-2 py-1.5 shadow-sm text-xs flex items-center neon-border-accent">
+                            <span class="w-5 h-5 rounded-full bg-accent text-white text-xs flex items-center justify-center mr-2">3</span>
                             70% DSC进入销毁池
                         </div>
                         
@@ -164,8 +191,8 @@
                             <i class="fa fa-chevron-down text-xs"></i>
                         </div>
                         
-                        <div class="bg-white rounded-lg px-2 py-1.5 shadow-sm text-xs flex items-center">
-                            <span class="w-5 h-5 rounded-full bg-primary text-white text-xs flex items-center justify-center mr-2">4</span>
+                        <div class="bg-glassLight rounded-lg px-2 py-1.5 shadow-sm text-xs flex items-center neon-border-accent">
+                            <span class="w-5 h-5 rounded-full bg-accent text-white text-xs flex items-center justify-center mr-2">4</span>
                             DSC流通量减少
                         </div>
                         
@@ -173,31 +200,31 @@
                             <i class="fa fa-chevron-down text-xs"></i>
                         </div>
                         
-                        <div class="bg-white rounded-lg px-2 py-1.5 shadow-sm text-xs flex items-center">
-                            <span class="w-5 h-5 rounded-full bg-primary text-white text-xs flex items-center justify-center mr-2">5</span>
+                        <div class="bg-glassLight rounded-lg px-2 py-1.5 shadow-sm text-xs flex items-center neon-border-accent">
+                            <span class="w-5 h-5 rounded-full bg-accent text-white text-xs flex items-center justify-center mr-2">5</span>
                             DSC价值提升
                         </div>
                     </div>
                 </div>
                 
-                <p class="text-xs text-gray-600 mb-2">SCC作为DSC收益领取的必备燃料，构建了DSC价值增长的永动机：</p>
+                <p class="text-xs text-gray-300 mb-2">SCC作为DSC收益领取的必备燃料，构建了DSC价值增长的永动机：</p>
                 
-                <ul class="text-xs text-gray-600 space-y-1.5 mb-2">
+                <ul class="text-xs text-gray-300 space-y-1.5 mb-2">
                     <li class="flex items-start">
                         <i class="fa fa-check-circle text-tertiary mt-0.5 mr-2 text-xs"></i>
-                        <span><strong class="text-gray-800">通缩机制</strong>：每笔DSC收益领取消耗的SCC，对应70% DSC直接销毁</span>
+                        <span><strong class="text-gray-100">通缩机制</strong>：每笔DSC收益领取消耗的SCC，对应70% DSC直接销毁</span>
                     </li>
                     <li class="flex items-start">
                         <i class="fa fa-check-circle text-tertiary mt-0.5 mr-2 text-xs"></i>
-                        <span><strong class="text-gray-800">价值捕获</strong>：DSC应用场景越活跃，SCC需求越旺盛，形成正向循环</span>
+                        <span><strong class="text-gray-100">价值捕获</strong>：DSC应用场景越活跃，SCC需求越旺盛，形成正向循环</span>
                     </li>
                     <li class="flex items-start">
                         <i class="fa fa-check-circle text-tertiary mt-0.5 mr-2 text-xs"></i>
-                        <span><strong class="text-gray-800">稀缺性增强</strong>：按当前日产量计算，年化DSC销毁量可达总量的25%以上</span>
+                        <span><strong class="text-gray-100">稀缺性增强</strong>：按当前日产量计算，年化DSC销毁量可达总量的25%以上</span>
                     </li>
                 </ul>
                 
-                <div class="bg-primary/5 rounded-lg p-2 border-l-3 border-primary text-xs">
+                <div class="bg-primary/10 rounded-lg p-2 border-l-3 border-accent text-xs text-gray-200">
                     DSC静态年化收益2.8倍，动态最高18倍的增长潜力，直接由SCC燃料机制保障
                 </div>
             </div>
@@ -205,55 +232,55 @@
         
         <!-- SCC核心机制 -->
         <section class="mb-3 reveal">
-            <div class="bg-white rounded-xl shadow-md p-3 card-3d">
-                <h3 class="text-sm font-semibold text-primary mb-2 flex items-center">
+            <div class="bg-glass rounded-xl shadow-md p-3 card-3d glow-secondary">
+                <h3 class="text-sm font-semibold text-accent mb-2 flex items-center">
                     <i class="fa fa-cogs text-xs mr-2 text-secondary"></i>
                     SCC核心机制
                 </h3>
                 
-                <p class="text-xs text-gray-600 mb-2">SCC作为卷界链生态系统的燃料通证，通过智能合约自动执行DSC通缩机制。</p>
+                <p class="text-xs text-gray-300 mb-2">SCC作为卷界链生态系统的燃料通证，通过智能合约自动执行DSC通缩机制。</p>
                 
                 <div class="grid grid-cols-1 gap-2 mb-3">
                     <!-- 生成机制 -->
-                    <div class="bg-gradient-to-r from-white to-blue-50 rounded-lg p-2 border border-blue-100 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="bg-gradient-to-r from-primary/10 to-accent/10 rounded-lg p-2 border border-accent/20 shadow-sm hover:shadow-md transition-shadow">
                         <div class="flex items-start">
-                            <div class="bg-primary/10 p-1.5 rounded-full mr-2 mt-0.5">
-                                <i class="fa fa-refresh text-primary text-xs"></i>
+                            <div class="bg-accent/20 p-1.5 rounded-full mr-2 mt-0.5">
+                                <i class="fa fa-refresh text-accent text-xs"></i>
                             </div>
                             <div>
-                                <h4 class="font-medium text-primary text-xs mb-0.5">生成机制</h4>
-                                <p class="text-[10px] text-gray-600">节点每10秒打包1个区块，恒定生成1 SCC</p>
-                                <p class="text-[10px] text-gray-600">日产量固定：8,640 SCC</p>
+                                <h4 class="font-medium text-accent text-xs mb-0.5">生成机制</h4>
+                                <p class="text-[10px] text-gray-300">节点每10秒打包1个区块，恒定生成1 SCC</p>
+                                <p class="text-[10px] text-gray-300">日产量固定：8,640 SCC</p>
                             </div>
                         </div>
                     </div>
                     
                     <!-- 消耗场景 -->
-                    <div class="bg-gradient-to-r from-white to-pink-50 rounded-lg p-2 border border-pink-100 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="bg-gradient-to-r from-secondary/10 to-pink-500/10 rounded-lg p-2 border border-secondary/20 shadow-sm hover:shadow-md transition-shadow">
                         <div class="flex items-start">
-                            <div class="bg-secondary/10 p-1.5 rounded-full mr-2 mt-0.5">
+                            <div class="bg-secondary/20 p-1.5 rounded-full mr-2 mt-0.5">
                                 <i class="fa fa-fire text-secondary text-xs"></i>
                             </div>
                             <div>
                                 <h4 class="font-medium text-secondary text-xs mb-0.5">消耗场景</h4>
-                                <p class="text-[10px] text-gray-600">领取DSC收益时强制支付燃料费</p>
-                                <p class="text-[10px] text-gray-600">智能合约执行消耗</p>
+                                <p class="text-[10px] text-gray-300">领取DSC收益时强制支付燃料费</p>
+                                <p class="text-[10px] text-gray-300">智能合约执行消耗</p>
                             </div>
                         </div>
                     </div>
                     
                     <!-- 获取途径 -->
-                    <div class="bg-gradient-to-r from-white to-green-50 rounded-lg p-2 border border-green-100 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="bg-gradient-to-r from-tertiary/10 to-emerald-500/10 rounded-lg p-2 border border-tertiary/20 shadow-sm hover:shadow-md transition-shadow">
                         <div class="flex items-start">
-                            <div class="bg-tertiary/10 p-1.5 rounded-full mr-2 mt-0.5">
+                            <div class="bg-tertiary/20 p-1.5 rounded-full mr-2 mt-0.5">
                                 <i class="fa fa-exchange text-tertiary text-xs"></i>
                             </div>
                             <div>
                                 <h4 class="font-medium text-tertiary text-xs mb-0.5">获取途径</h4>
-                                <p class="text-[10px] text-gray-600">DSC/USDS兑换</p>
-                                <p class="text-[10px] text-gray-600">卷轴兑换/复投获赠</p>
-                                <p class="text-[10px] text-gray-600">竞选节点每日SCC分红</p>
-                                <p class="text-[10px] text-gray-600">推广下级兑换/复投获赠</p>
+                                <p class="text-[10px] text-gray-300">DSC/USDS兑换</p>
+                                <p class="text-[10px] text-gray-300">卷轴兑换/复投获赠</p>
+                                <p class="text-[10px] text-gray-300">竞选节点每日SCC分红</p>
+                                <p class="text-[10px] text-gray-300">推广下级兑换/复投获赠</p>
                             </div>
                         </div>
                     </div>
@@ -263,26 +290,26 @@
         
         <!-- SCC每日赠送机制 -->
         <section class="mb-3 reveal">
-            <div class="bg-white rounded-xl shadow-md p-3 card-3d">
-                <h3 class="text-sm font-semibold text-primary mb-2 flex items-center">
+            <div class="bg-glass rounded-xl shadow-md p-3 card-3d glow-tertiary">
+                <h3 class="text-sm font-semibold text-accent mb-2 flex items-center">
                     <i class="fa fa-gift text-xs mr-2 text-secondary"></i>
                     SCC每日赠送机制
                 </h3>
                 
-                <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-3 mb-3 border-l-3 border-primary">
+                <div class="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg p-3 mb-3 border-l-3 border-accent">
                     <div class="flex items-center justify-center mb-2">
-                        <div class="bg-primary text-white rounded-full px-3 py-1 text-xs font-bold">
+                        <div class="bg-accent text-dark rounded-full px-3 py-1 text-xs font-bold glow-accent">
                             864 SCC
                         </div>
-                        <div class="text-xs text-gray-600 mx-2">每日固定赠出</div>
+                        <div class="text-xs text-gray-300 mx-2">每日固定赠出</div>
                     </div>
                     
-                    <p class="text-xs text-center text-gray-700 mb-2">
+                    <p class="text-xs text-center text-gray-300 mb-2">
                         玩家按前一日的卷轴兑换复投额度占比进行瓜分
                     </p>
                     
                     <div class="flex items-center justify-center">
-                        <div class="text-xs bg-white rounded-full px-3 py-1 shadow-sm">
+                        <div class="text-xs bg-glassLight rounded-full px-3 py-1 shadow-sm neon-border">
                             <i class="fa fa-line-chart text-tertiary mr-1"></i>
                             动态分配机制
                         </div>
@@ -290,23 +317,23 @@
                 </div>
                 
                 <div class="grid grid-cols-2 gap-2 mb-3">
-                    <div class="bg-gradient-to-r from-white to-blue-50 rounded-lg p-2 border border-blue-100 shadow-sm">
-                        <h4 class="font-medium text-primary text-xs mb-1">计算公式</h4>
-                        <p class="text-[10px] text-gray-600">
+                    <div class="bg-gradient-to-r from-primary/10 to-accent/10 rounded-lg p-2 border border-accent/20 shadow-sm">
+                        <h4 class="font-medium text-accent text-xs mb-1">计算公式</h4>
+                        <p class="text-[10px] text-gray-300">
                             玩家获赠量 = 864 × (个人复投额 ÷ 全网复投总额)
                         </p>
                     </div>
                     
-                    <div class="bg-gradient-to-r from-white to-green-50 rounded-lg p-2 border border-green-100 shadow-sm">
+                    <div class="bg-gradient-to-r from-tertiary/10 to-emerald-500/10 rounded-lg p-2 border border-tertiary/20 shadow-sm">
                         <h4 class="font-medium text-tertiary text-xs mb-1">分配时间</h4>
-                        <p class="text-[10px] text-gray-600">
+                        <p class="text-[10px] text-gray-300">
                             每日凌晨自动计算并分配前一日数据
                         </p>
                     </div>
                 </div>
                 
-                <div class="bg-primary/5 rounded-lg p-2 border-l-3 border-primary text-xs">
-                    <i class="fa fa-info-circle text-primary mr-1"></i>
+                <div class="bg-primary/10 rounded-lg p-2 border-l-3 border-accent text-xs text-gray-200">
+                    <i class="fa fa-info-circle text-accent mr-1"></i>
                     复投额度越高，获得的SCC赠额比例越大，激励用户积极参与生态建设
                 </div>
             </div>
@@ -314,18 +341,18 @@
         
         <!-- 经济循环体系 -->
         <section class="mb-3 reveal">
-            <div class="bg-white rounded-xl shadow-md p-3 card-3d">
-                <h3 class="text-sm font-semibold text-primary mb-2 flex items-center">
+            <div class="bg-glass rounded-xl shadow-md p-3 card-3d glow-primary">
+                <h3 class="text-sm font-semibold text-accent mb-2 flex items-center">
                     <i class="fa fa-refresh text-xs mr-2 text-secondary"></i>
                     经济循环体系
                 </h3>
                 
-                <h4 class="text-primary text-xs font-medium mb-1">兑换沉淀分红池</h4>
-                <p class="text-xs text-gray-600 mb-2">兑换SCC投入的DSC/USDS，沉淀出分红池用于生态激励与DSC通缩</p>
+                <h4 class="text-accent text-xs font-medium mb-1">兑换沉淀分红池</h4>
+                <p class="text-xs text-gray-300 mb-2">兑换SCC投入的DSC/USDS，沉淀出分红池用于生态激励与DSC通缩</p>
                 
                 <!-- 响应式表格 -->
                 <div class="overflow-x-auto mb-2 text-[9px]">
-                    <table class="min-w-full bg-white rounded-lg overflow-hidden border border-gray-100">
+                    <table class="min-w-full bg-glassLight rounded-lg overflow-hidden border border-accent/20">
                         <thead class="bg-primary text-white">
                             <tr class="h-8">
                                 <th class="py-1.5 px-1.5 text-left table-cell table-header w-[12%]">分红池</th>
@@ -337,7 +364,7 @@
                                 <th class="py-1.5 px-1.5 text-left table-cell table-header w-[10%]">运营</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-gray-100">
+                        <tbody class="divide-y divide-accent/20">
                             <tr class="h-8">
                                 <td class="py-1.5 px-1.5 font-medium table-data-cell">DSC</td>
                                 <td class="py-1.5 px-1.5 table-data-cell">70%</td>
@@ -361,34 +388,34 @@
                 </div>
                 
                 <div class="mb-2">
-                    <h4 class="text-primary text-xs font-medium mb-1">DSC/USDS分红说明</h4>
-                    <p class="text-xs text-gray-600">全网兑换SCC沉淀出DSC/USDS分红池，分红池次日执行分红。玩家按前一日直推卷轴的兑换占比瓜分20%，按前一日直推卷轴的复投占比瓜分3%</p>
+                    <h4 class="text-accent text-xs font-medium mb-1">DSC/USDS分红说明</h4>
+                    <p class="text-xs text-gray-300">全网兑换SCC沉淀出DSC/USDS分红池，分红池次日执行分红。玩家按前一日直推卷轴的兑换占比瓜分20%，按前一日直推卷轴的复投占比瓜分3%</p>
                 </div>
                 
-                <div class="bg-secondary/5 rounded-lg p-2 border-l-3 border-secondary text-xs mb-2">
+                <div class="bg-secondary/10 rounded-lg p-2 border-l-3 border-secondary text-xs mb-2 text-gray-200">
                     USDS分红池的70%属于间接销毁。转入炒币地址，由炒币地址回购销毁DSC，形成双重通缩机制
                 </div>
                 
-                <h4 class="text-primary text-xs font-medium mb-1">关键计算公式</h4>
+                <h4 class="text-accent text-xs font-medium mb-1">关键计算公式</h4>
                 <div class="grid grid-cols-1 gap-1.5">
-                    <div class="bg-white border border-gray-100 rounded-lg p-2 shadow-sm">
-                        <h5 class="font-medium text-primary text-xs mb-0.5">DSC兑SCC的兑换比</h5>
-                        <p class="text-[10px] text-gray-600">= 日产SCC量 ÷ (日产DSC量 ÷ 2)</p>
+                    <div class="bg-glassLight border border-accent/20 rounded-lg p-2 shadow-sm">
+                        <h5 class="font-medium text-accent text-xs mb-0.5">DSC兑SCC的兑换比</h5>
+                        <p class="text-[10px] text-gray-300">= 日产SCC量 ÷ (日产DSC量 ÷ 2)</p>
                     </div>
                     
-                    <div class="bg-white border border-gray-100 rounded-lg p-2 shadow-sm">
-                        <h5 class="font-medium text-primary text-xs mb-0.5">领取收益燃烧SCC量</h5>
-                        <p class="text-[10px] text-gray-600">= (待领收益 ÷ 2) × DSC兑SCC的兑换比</p>
+                    <div class="bg-glassLight border border-accent/20 rounded-lg p-2 shadow-sm">
+                        <h5 class="font-medium text-accent text-xs mb-0.5">领取收益燃烧SCC量</h5>
+                        <p class="text-[10px] text-gray-300">= (待领收益 ÷ 2) × DSC兑SCC的兑换比</p>
                     </div>
                     
-                    <div class="bg-white border border-gray-100 rounded-lg p-2 shadow-sm">
-                        <h5 class="font-medium text-primary text-xs mb-0.5">玩家DSC分红量</h5>
-                        <p class="text-[10px] text-gray-600">= DSC分红池23% × (玩家直推当日卷轴兑换复投总额 ÷ 全网当日卷轴兑换复投总额)</p>
+                    <div class="bg-glassLight border border-accent/20 rounded-lg p-2 shadow-sm">
+                        <h5 class="font-medium text-accent text-xs mb-0.5">玩家DSC分红量</h5>
+                        <p class="text-[10px] text-gray-300">= DSC分红池23% × (玩家直推当日卷轴兑换复投总额 ÷ 全网当日卷轴兑换复投总额)</p>
                     </div>
                     
-                    <div class="bg-white border border-gray-100 rounded-lg p-2 shadow-sm">
-                        <h5 class="font-medium text-primary text-xs mb-0.5">兑换/复投卷轴获赠SCC量</h5>
-                        <p class="text-[10px] text-gray-600">= SCC日产量×10% × (用户兑换/复投额 ÷ 全网兑换/复投额)</p>
+                    <div class="bg-glassLight border border-accent/20 rounded-lg p-2 shadow-sm">
+                        <h5 class="font-medium text-accent text-xs mb-0.5">兑换/复投卷轴获赠SCC量</h5>
+                        <p class="text-[10px] text-gray-300">= SCC日产量×10% × (用户兑换/复投额 ÷ 全网兑换/复投额)</p>
                     </div>
                 </div>
             </div>
@@ -396,127 +423,127 @@
         
         <!-- 节点治理体系 -->
         <section class="mb-3 reveal">
-            <div class="bg-white rounded-xl shadow-md p-3 card-3d">
-                <h3 class="text-sm font-semibold text-primary mb-2 flex items-center">
+            <div class="bg-glass rounded-xl shadow-md p-3 card-3d glow-secondary">
+                <h3 class="text-sm font-semibold text-accent mb-2 flex items-center">
                     <i class="fa fa-users text-xs mr-2 text-secondary"></i>
                     节点治理体系
                 </h3>
                 
                 <!-- 节点竞争规则 -->
-                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-3 mb-3 border border-blue-100">
-                    <h4 class="text-primary text-xs font-medium mb-2 flex items-center">
+                <div class="bg-gradient-to-r from-primary/10 to-accent/10 rounded-lg p-3 mb-3 border border-accent/20">
+                    <h4 class="text-accent text-xs font-medium mb-2 flex items-center">
                         <i class="fa fa-trophy text-warning mr-2"></i>
                         节点代理竞争规则
                     </h4>
                     
                     <div class="flex items-center justify-between mb-2">
                         <div class="text-center">
-                            <div class="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center mx-auto text-xs">45</div>
-                            <p class="text-[10px] text-gray-600 mt-1">总节点席位</p>
+                            <div class="bg-accent text-dark rounded-full w-8 h-8 flex items-center justify-center mx-auto text-xs glow-accent">45</div>
+                            <p class="text-[10px] text-gray-300 mt-1">总节点席位</p>
                         </div>
                         
                         <div class="text-center">
-                            <div class="bg-secondary text-white rounded-full w-8 h-8 flex items-center justify-center mx-auto text-xs">5</div>
-                            <p class="text-[10px] text-gray-600 mt-1">运营方席位</p>
+                            <div class="bg-secondary text-dark rounded-full w-8 h-8 flex items-center justify-center mx-auto text-xs glow-secondary">5</div>
+                            <p class="text-[10px] text-gray-300 mt-1">运营方席位</p>
                         </div>
                         
                         <div class="text-center">
-                            <div class="bg-tertiary text-white rounded-full w-8 h-8 flex items-center justify-center mx-auto text-xs">40</div>
-                            <p class="text-[10px] text-gray-600 mt-1">开放竞争</p>
+                            <div class="bg-tertiary text-dark rounded-full w-8 h-8 flex items-center justify-center mx-auto text-xs glow-tertiary">40</div>
+                            <p class="text-[10px] text-gray-300 mt-1">开放竞争</p>
                         </div>
                     </div>
                     
-                    <p class="text-xs text-gray-700 text-center">
+                    <p class="text-xs text-gray-300 text-center">
                         季度推广排名前40的玩家，自动获得节点代理权
                     </p>
-                    <p class="text-xs text-red-500 text-center mt-1">
+                    <p class="text-xs text-secondary text-center mt-1">
                         <span class="font-bold">特殊规则：</span>五级股东可自动成为永久节点，无需季度考核
                     </p>
                 </div>
                 
                 <!-- 节点权益 -->
-                <h4 class="text-primary text-xs font-medium mb-2">节点核心权益</h4>
+                <h4 class="text-accent text-xs font-medium mb-2">节点核心权益</h4>
                 <div class="grid grid-cols-1 gap-1.5 mb-3">
-                    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-2 border border-blue-100 shadow-sm">
+                    <div class="bg-gradient-to-r from-primary/10 to-accent/10 rounded-lg p-2 border border-accent/20 shadow-sm">
                         <div class="flex items-start">
-                            <div class="bg-primary/10 p-1.5 rounded-full mr-2 mt-0.5">
-                                <i class="fa fa-gavel text-primary text-xs"></i>
+                            <div class="bg-accent/20 p-1.5 rounded-full mr-2 mt-0.5">
+                                <i class="fa fa-gavel text-accent text-xs"></i>
                             </div>
                             <div>
-                                <h5 class="font-medium text-primary text-xs">提案权</h5>
-                                <p class="text-[10px] text-gray-600">发起公链调整提案（技术暂代发）</p>
+                                <h5 class="font-medium text-accent text-xs">提案权</h5>
+                                <p class="text-[10px] text-gray-300">发起公链调整提案（技术暂代发）</p>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="bg-gradient-to-r from-pink-50 to-rose-50 rounded-lg p-2 border border-pink-100 shadow-sm">
+                    <div class="bg-gradient-to-r from-secondary/10 to-pink-500/10 rounded-lg p-2 border border-secondary/20 shadow-sm">
                         <div class="flex items-start">
-                            <div class="bg-secondary/10 p-1.5 rounded-full mr-2 mt-0.5">
+                            <div class="bg-secondary/20 p-1.5 rounded-full mr-2 mt-0.5">
                                 <i class="fa fa-check-square text-secondary text-xs"></i>
                             </div>
                             <div>
                                 <h5 class="font-medium text-secondary text-xs">投票权</h5>
-                                <p class="text-[10px] text-gray-600">对提案进行表决（同意/不同意）</p>
+                                <p class="text-[10px] text-gray-300">对提案进行表决（同意/不同意）</p>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-2 border border-green-100 shadow-sm">
+                    <div class="bg-gradient-to-r from-tertiary/10 to-emerald-500/10 rounded-lg p-2 border border-tertiary/20 shadow-sm">
                         <div class="flex items-start">
-                            <div class="bg-tertiary/10 p-1.5 rounded-full mr-2 mt-0.5">
+                            <div class="bg-tertiary/20 p-1.5 rounded-full mr-2 mt-0.5">
                                 <i class="fa fa-refresh text-tertiary text-xs"></i>
                             </div>
                             <div>
                                 <h5 class="font-medium text-tertiary text-xs">升级权</h5>
-                                <p class="text-[10px] text-gray-600">升级节点程序执行新版本</p>
+                                <p class="text-[10px] text-gray-300">升级节点程序执行新版本</p>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="bg-gradient-to-r from-purple-50 to-violet-50 rounded-lg p-2 border border-purple-100 shadow-sm">
+                    <div class="bg-gradient-to-r from-purple-500/10 to-violet-500/10 rounded-lg p-2 border border-purple-500/20 shadow-sm">
                         <div class="flex items-start">
-                            <div class="bg-purple-500/10 p-1.5 rounded-full mr-2 mt-0.5">
-                                <i class="fa fa-money text-purple-500 text-xs"></i>
+                            <div class="bg-purple-500/20 p-1.5 rounded-full mr-2 mt-0.5">
+                                <i class="fa fa-money text-purple-400 text-xs"></i>
                             </div>
                             <div>
-                                <h5 class="font-medium text-purple-500 text-xs">SCC分红</h5>
-                                <p class="text-[10px] text-gray-600">每日获得SCC分红奖励</p>
+                                <h5 class="font-medium text-purple-400 text-xs">SCC分红</h5>
+                                <p class="text-[10px] text-gray-300">每日获得SCC分红奖励</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <!-- 节点职责与惩罚 -->
-                <div class="bg-gradient-to-r from-warning/5 to-orange-50 rounded-lg p-3 border-l-3 border-warning mb-2">
+                <div class="bg-gradient-to-r from-warning/10 to-orange-500/10 rounded-lg p-3 border-l-3 border-warning mb-2">
                     <h4 class="text-warning text-xs font-medium mb-1 flex items-center">
                         <i class="fa fa-exclamation-triangle text-warning mr-2"></i>
                         节点职责与惩罚机制
                     </h4>
                     
-                    <ul class="text-xs text-gray-700 space-y-1">
+                    <ul class="text-xs text-gray-300 space-y-1">
                         <li class="flex items-start">
-                            <span class="w-4 h-4 rounded-full bg-warning/10 text-warning text-[8px] flex items-center justify-center mr-2 mt-0.5 flex-shrink-0">!</span>
+                            <span class="w-4 h-4 rounded-full bg-warning/20 text-warning text-[8px] flex items-center justify-center mr-2 mt-0.5 flex-shrink-0">!</span>
                             节点必须履行投票职责，否则将自动失去代理权
                         </li>
                         <li class="flex items-start">
-                            <span class="w-4 h-4 rounded-full bg-warning/10 text-warning text-[8px] flex items-center justify-center mr-2 mt-0.5 flex-shrink-0">!</span>
+                            <span class="w-4 h-4 rounded-full bg-warning/20 text-warning text-[8px] flex items-center justify-center mr-2 mt-0.5 flex-shrink-0">!</span>
                             节点必须及时升级程序，否则将自动失去代理权
                         </li>
                     </ul>
                 </div>
                 
                 <!-- 提案机制说明 -->
-                <div class="bg-gradient-to-r from-primary/5 to-blue-50 rounded-lg p-3 border-l-3 border-primary">
-                    <h4 class="text-primary text-xs font-medium mb-1 flex items-center">
-                        <i class="fa fa-lightbulb-o text-primary mr-2"></i>
+                <div class="bg-gradient-to-r from-primary/10 to-accent/10 rounded-lg p-3 border-l-3 border-accent">
+                    <h4 class="text-accent text-xs font-medium mb-1 flex items-center">
+                        <i class="fa fa-lightbulb-o text-accent mr-2"></i>
                         提案机制的重要性
                     </h4>
                     
-                    <p class="text-xs text-gray-700 mb-2">
+                    <p class="text-xs text-gray-300 mb-2">
                         根据卷界链接核心协议规定，至少75%的数据节点运行相同版本，才能满足最低共识标准
                     </p>
                     
-                    <ul class="text-xs text-gray-600 space-y-1">
+                    <ul class="text-xs text-gray-300 space-y-1">
                         <li class="flex items-start">
                             <i class="fa fa-check-circle text-tertiary mt-0.5 mr-2 text-xs"></i>
                             代码修改不会自动生效：节点升级率不足75%，更新将无法激活
@@ -529,13 +556,13 @@
                     
                     <div class="mt-2 flex items-center justify-between">
                         <div class="text-center">
-                            <div class="bg-primary text-white rounded-full w-6 h-6 flex items-center justify-center mx-auto text-xs">✓</div>
-                            <p class="text-[10px] text-gray-600 mt-1">≥75% 通过</p>
+                            <div class="bg-accent text-dark rounded-full w-6 h-6 flex items-center justify-center mx-auto text-xs glow-accent">✓</div>
+                            <p class="text-[10px] text-gray-300 mt-1">≥75% 通过</p>
                         </div>
                         
                         <div class="text-center">
-                            <div class="bg-gray-300 text-white rounded-full w-6 h-6 flex items-center justify-center mx-auto text-xs">✗</div>
-                            <p class="text-[10px] text-gray-600 mt-1">＜75% 否决</p>
+                            <div class="bg-gray-500 text-dark rounded-full w-6 h-6 flex items-center justify-center mx-auto text-xs">✗</div>
+                            <p class="text-[10px] text-gray-300 mt-1">＜75% 否决</p>
                         </div>
                     </div>
                 </div>
@@ -544,68 +571,68 @@
         
         <!-- 生态发展规划 -->
         <section class="mb-5 reveal">
-            <div class="bg-white rounded-xl shadow-md p-3 card-3d">
-                <h3 class="text-sm font-semibold text-primary mb-2 flex items-center">
+            <div class="bg-glass rounded-xl shadow-md p-3 card-3d glow-tertiary">
+                <h3 class="text-sm font-semibold text-accent mb-2 flex items-center">
                     <i class="fa fa-line-chart text-xs mr-2 text-secondary"></i>
                     生态发展规划
                 </h3>
                 
                 <div class="grid grid-cols-1 gap-2 mb-3">
-                    <div class="bg-white border border-gray-100 rounded-lg p-2 shadow-sm relative overflow-hidden group hover:shadow-md transition-all">
-                        <div class="absolute top-0 right-0 w-10 h-10 bg-primary/5 rounded-full -mr-3 -mt-3 group-hover:bg-primary/10 transition-colors"></div>
+                    <div class="bg-glassLight border border-accent/20 rounded-lg p-2 shadow-sm relative overflow-hidden group hover:shadow-md transition-all">
+                        <div class="absolute top-0 right-0 w-10 h-10 bg-accent/10 rounded-full -mr-3 -mt-3 group-hover:bg-accent/20 transition-colors"></div>
                         <div class="flex items-center mb-1">
-                            <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-primary mr-2 flex-shrink-0">
+                            <div class="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center text-accent mr-2 flex-shrink-0">
                                 <i class="fa fa-exchange text-xs"></i>
                             </div>
-                            <h4 class="font-medium text-primary text-xs">交易所上线</h4>
+                            <h4 class="font-medium text-accent text-xs">交易所上线</h4>
                         </div>
-                        <p class="text-[10px] text-gray-600 ml-8">节点共识通过后，SCC作为交易所基础流通通证</p>
+                        <p class="text-[10px] text-gray-300 ml-8">节点共识通过后，SCC作为交易所基础流通通证</p>
                     </div>
                     
-                    <div class="bg-white border border-gray-100 rounded-lg p-2 shadow-sm relative overflow-hidden group hover:shadow-md transition-all">
-                        <div class="absolute top-0 right-0 w-10 h-10 bg-secondary/5 rounded-full -mr-3 -mt-3 group-hover:bg-secondary/10 transition-colors"></div>
+                    <div class="bg-glassLight border border-accent/20 rounded-lg p-2 shadow-sm relative overflow-hidden group hover:shadow-md transition-all">
+                        <div class="absolute top-0 right-0 w-10 h-10 bg-secondary/10 rounded-full -mr-3 -mt-3 group-hover:bg-secondary/20 transition-colors"></div>
                         <div class="flex items-center mb-1">
-                            <div class="w-6 h-6 rounded-full bg-secondary/10 flex items-center justify-center text-secondary mr-2 flex-shrink-0">
+                            <div class="w-6 h-6 rounded-full bg-secondary/20 flex items-center justify-center text-secondary mr-2 flex-shrink-0">
                                 <i class="fa fa-calendar text-xs"></i>
                             </div>
                             <h4 class="font-medium text-secondary text-xs">DSC引力公约日</h4>
                         </div>
-                        <p class="text-[10px] text-gray-600 ml-8">2025年4月20日确立为年度节点治理纪念日</p>
+                        <p class="text-[10px] text-gray-300 ml-8">2025年4月20日确立为年度节点治理纪念日</p>
                     </div>
                     
-                    <div class="bg-white border border-gray-100 rounded-lg p-2 shadow-sm relative overflow-hidden group hover:shadow-md transition-all">
-                        <div class="absolute top-0 right-0 w-10 h-10 bg-tertiary/5 rounded-full -mr-3 -mt-3 group-hover:bg-tertiary/10 transition-colors"></div>
+                    <div class="bg-glassLight border border-accent/20 rounded-lg p-2 shadow-sm relative overflow-hidden group hover:shadow-md transition-all">
+                        <div class="absolute top-0 right-0 w-10 h-10 bg-tertiary/10 rounded-full -mr-3 -mt-3 group-hover:bg-tertiary/20 transition-colors"></div>
                         <div class="flex items-center mb-1">
-                            <div class="w-6 h-6 rounded-full bg-tertiary/10 flex items-center justify-center text-tertiary mr-2 flex-shrink-0">
+                            <div class="w-6 h-6 rounded-full bg-tertiary/20 flex items-center justify-center text-tertiary mr-2 flex-shrink-0">
                                 <i class="fa fa-rocket text-xs"></i>
                             </div>
                             <h4 class="font-medium text-tertiary text-xs">价值升级</h4>
                         </div>
-                        <p class="text-[10px] text-gray-600 ml-8">SCC将拓展DeFi、NFT等多元应用场景</p>
+                        <p class="text-[10px] text-gray-300 ml-8">SCC将拓展DeFi、NFT等多元应用场景</p>
                     </div>
                     
-                    <div class="bg-white border border-gray-100 rounded-lg p-2 shadow-sm relative overflow-hidden group hover:shadow-md transition-all">
-                        <div class="absolute top-0 right-0 w-10 h-10 bg-warning/5 rounded-full -mr-3 -mt-3 group-hover:bg-warning/10 transition-colors"></div>
+                    <div class="bg-glassLight border border-accent/20 rounded-lg p-2 shadow-sm relative overflow-hidden group hover:shadow-md transition-all">
+                        <div class="absolute top-0 right-0 w-10 h-10 bg-warning/10 rounded-full -mr-3 -mt-3 group-hover:bg-warning/20 transition-colors"></div>
                         <div class="flex items-center mb-1">
-                            <div class="w-6 h-6 rounded-full bg-warning/10 flex items-center justify-center text-warning mr-2 flex-shrink-0">
+                            <div class="w-6 h-6 rounded-full bg-warning/20 flex items-center justify-center text-warning mr-2 flex-shrink-0">
                                 <i class="fa fa-bolt text-xs"></i>
                             </div>
                             <h4 class="font-medium text-warning text-xs">闪兑业务</h4>
                         </div>
-                        <p class="text-[10px] text-gray-600 ml-8">SCC与主流币点对点闪兑，官方提供资金池支持</p>
+                        <p class="text-[10px] text-gray-300 ml-8">SCC与主流币点对点闪兑，官方提供资金池支持</p>
                     </div>
                 </div>
                 
-                <div class="bg-gradient-to-r from-primary/5 to-tertiary/5 rounded-lg p-2 border border-primary/20 text-xs">
+                <div class="bg-gradient-to-r from-primary/10 to-tertiary/10 rounded-lg p-2 border border-accent/20 text-xs text-gray-200">
                     官方炒币地址每日出售1000 DSC用于市场调节，同时将4万DSC锁仓至2026年5月1日；SCC将支持与主流币的点对点闪兑业务。
                 </div>
             </div>
         </section>
         
         <!-- 页脚 -->
-        <footer class="bg-white rounded-xl p-3 text-center shadow-md mb-6">
-            <p class="text-[10px] text-gray-500 mb-1">© 2025 数字卷轴DSC 卷界链</p>
-            <p class="text-[10px] text-gray-500">基于节点共识机制 · 去中心化治理 · 生态共赢</p>
+        <footer class="bg-glass rounded-xl p-3 text-center shadow-md mb-6 glow">
+            <p class="text-[10px] text-gray-400 mb-1">© 2025 数字卷轴DSC 卷界链</p>
+            <p class="text-[10px] text-gray-400">基于节点共识机制 · 去中心化治理 · 生态共赢</p>
         </footer>
     </main>
 
