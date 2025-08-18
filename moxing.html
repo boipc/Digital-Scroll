@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>数字卷轴DSC - SCC经济模型</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- 本地化资源加载 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
     
     <script>
@@ -22,7 +23,7 @@
                         warning: '#F59E0B'
                     },
                     fontFamily: {
-                        inter: ['Inter', 'sans-serif'],
+                        sans: ['system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif']
                     },
                 }
             }
@@ -100,14 +101,7 @@
         }
     </style>
 </head>
-<body class="font-inter bg-gradient-to-b from-light to-blue-50 text-dark min-h-screen">
-    <!-- 顶部导航栏 - 已删除返回按钮 -->
-    <nav class="sticky top-0 z-50 bg-glass border-b border-gray-100 shadow-sm">
-        <div class="container mx-auto px-4 py-3 flex justify-center items-center">
-            <h1 class="text-xs font-semibold text-center">SCC经济模型</h1>
-        </div>
-    </nav>
-
+<body class="bg-gradient-to-b from-light to-blue-50 text-dark min-h-screen">
     <main class="container mx-auto px-4 py-3">
         <!-- 头部区域 -->
         <header class="mb-4">
@@ -116,7 +110,8 @@
                 <div class="absolute bottom-0 left-0 w-16 h-16 bg-secondary/10 rounded-full -ml-4 -mb-4"></div>
                 
                 <a href="index.html" class="flex items-center justify-center mb-3 relative">
-                    <img src="https://via.placeholder.com/48x48/3b82f6/ffffff?text=SCC" class="h-12 w-12 mr-2" alt="logo">
+                    <!-- 修改logo路径 -->
+                    <img src="images/logo01.png" class="h-12 w-12 mr-2" alt="logo">
                     <h2 class="text-[1.1rem] font-bold text-primary">SCC经济模型</h2>
                 </a>
                 
@@ -128,7 +123,7 @@
             </div>
         </header>
         
-        <!-- SCC与DSC价值共生关系 - 已调整步骤框样式 -->
+        <!-- SCC与DSC价值共生关系 -->
         <section class="mb-3 reveal">
             <div class="bg-white rounded-xl shadow-md p-3 card-3d">
                 <h3 class="text-sm font-semibold text-primary mb-2 flex items-center">
@@ -140,7 +135,7 @@
                 <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-2 mb-3 border-l-3 border-primary">
                     <h4 class="text-primary text-xs font-medium mb-2">SCC燃料费驱动DSC价值增长闭环</h4>
                     
-                    <!-- 垂直链条步骤 - 已调整圆角边框和行距 -->
+                    <!-- 垂直链条步骤 -->
                     <div class="space-y-2">
                         <div class="bg-white rounded-lg px-2 py-1.5 shadow-sm text-xs flex items-center">
                             <span class="w-5 h-5 rounded-full bg-primary text-white text-xs flex items-center justify-center mr-2">1</span>
@@ -208,7 +203,7 @@
             </div>
         </section>
         
-        <!-- SCC核心机制 - 已删除图表 -->
+        <!-- SCC核心机制 -->
         <section class="mb-3 reveal">
             <div class="bg-white rounded-xl shadow-md p-3 card-3d">
                 <h3 class="text-sm font-semibold text-primary mb-2 flex items-center">
@@ -399,7 +394,7 @@
             </div>
         </section>
         
-        <!-- 节点治理体系 - 特殊规则文字改为红色 -->
+        <!-- 节点治理体系 -->
         <section class="mb-3 reveal">
             <div class="bg-white rounded-xl shadow-md p-3 card-3d">
                 <h3 class="text-sm font-semibold text-primary mb-2 flex items-center">
@@ -434,7 +429,6 @@
                     <p class="text-xs text-gray-700 text-center">
                         季度推广排名前40的玩家，自动获得节点代理权
                     </p>
-                    <!-- 特殊规则文字改为红色 -->
                     <p class="text-xs text-red-500 text-center mt-1">
                         <span class="font-bold">特殊规则：</span>五级股东可自动成为永久节点，无需季度考核
                     </p>
