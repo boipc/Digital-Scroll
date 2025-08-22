@@ -3,622 +3,967 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DSC数字卷轴 - 生态游戏</title>
+    <title>DSC复投模拟计算系统</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* 全局样式 */
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            font-size: 12px;
+            line-height: 1.2;
         }
         
         body {
-            background: linear-gradient(135deg, #FF6B35, #FFA630);
-            color: #fff;
-            min-height: 100vh;
-            line-height: 1.6;
+            background-color: #1a1a2e;
+            color: #e6e6e6;
+            padding: 8px;
+            max-width: 100%;
+            overflow-x: hidden;
         }
         
-        /* 主标题区域 */
-        .main-title {
-            text-align: center;
-            padding: 30px 20px;
-            margin: 20px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-        }
-        
-        .main-title::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
-            z-index: 0;
-        }
-        
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .main-title-content {
+        .header {
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-wrap: wrap;
-            position: relative;
-            z-index: 1;
+            gap: 10px;
+            margin-bottom: 12px;
         }
         
-        .main-logo {
+        .header-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .logo {
+            width: 40px;
             height: 40px;
-            margin-right: 15px;
+            background-color: #4cc9f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1a1a2e;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
         }
         
-        .main-title h2 {
-            font-size: 2.2rem;
+        .container {
+            background: linear-gradient(145deg, #2d4059, #1e2a3a);
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+            margin-bottom: 12px;
+            border: 1px solid #394b61;
+        }
+        
+        h1 {
+            font-size: 18px;
+            color: #4cc9f0;
+            text-shadow: 0 0 5px rgba(76, 201, 240, 0.5);
+            cursor: pointer;
+        }
+        
+        h2 {
+            font-size: 14px;
+            margin: 8px 0;
+            color: #72ddf7;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #394b61;
+        }
+        
+        .input-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 5px;
+        }
+        
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin: 15px 0;
+        }
+        
+        .input-label {
+            color: #a0b3c6;
+            font-size: 12px;
+            white-space: nowrap;
+            width: 60px;
+            text-align: center;
+        }
+        
+        .input-field {
+            width: 100px;
+            padding: 4px 10px;
+            border: 1px solid #394b61;
+            border-radius: 16px;
+            text-align: center;
+            background: #22334d;
+            color: #fff;
+            height: 22px;
+            font-size: 12px;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border: 1px solid #4cc9f0;
+            box-shadow: 0 0 5px rgba(76, 201, 240, 0.5);
+        }
+        
+        .input-field[type="number"] {
+            -moz-appearance: textfield;
+        }
+        
+        .input-field::-webkit-outer-spin-button,
+        .input-field::-webkit-inner-spin-button {
+            -webkit-appearance: none;
             margin: 0;
-            position: relative;
-            z-index: 1;
-            color: #FFE74C;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
         
-        .main-title p {
-            font-size: 1.1rem;
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
-            margin: 15px auto 0;
+        .input-field::placeholder {
+            color: #a0b3c6;
+            font-size: 11px;
         }
         
-        .home-btn-container {
-            margin-top: 20px;
+        .conversion-info {
+            color: #a0b3c6;
+            font-size: 11px;
+            text-align: center;
+            margin: 4px 0;
+        }
+        
+        .fuel-info {
+            color: #f4a261;
+            font-size: 11px;
+            text-align: center;
+            margin: 4px 0 8px 0;
+        }
+        
+        .scroll-display {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-top: 10px;
+            padding: 6px;
+            background: rgba(57, 75, 97, 0.3);
+            border-radius: 6px;
+            min-height: 28px;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .scroll-item {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            background: rgba(76, 201, 240, 0.1);
+            padding: 2px 4px;
+            border-radius: 8px;
+            border: 1px solid #394b61;
+            font-size: 10px;
+        }
+        
+        .scroll-name {
+            color: #a0b3c6;
+        }
+        
+        .scroll-count {
+            color: #4cc9f0;
+            font-weight: bold;
+        }
+        
+        .results {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 10px;
+            border: 1px solid #394b61;
+            border-radius: 6px;
+            background: #22334d;
+        }
+        
+        .results table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .results thead {
+            position: sticky;
+            top: 0;
+            background-color: #2d4059;
+            z-index: 2;
+        }
+        
+        .results thead th {
+            color: #72ddf7;
+            font-weight: bold;
+            padding: 6px 4px;
+            text-align: left;
+            border-bottom: 1px solid #394b61;
+        }
+        
+        /* 优化滚动条样式 */
+        .results {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(160, 179, 198, 0.5) transparent;
+        }
+        
+        .results::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .results::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        .results::-webkit-scrollbar-thumb {
+            background-color: rgba(160, 179, 198, 0.5);
+            border-radius: 4px;
+            border: 2px solid transparent;
+        }
+        
+        .results::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(196, 196, 196, 0.7);
+        }
+        
+        th, td {
+            padding: 6px 4px;
+            text-align: left;
+            border-bottom: 1px solid #394b61;
+        }
+        
+        tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        tr:hover {
+            background-color: rgba(76, 201, 240, 0.1);
+            cursor: pointer;
+        }
+        
+        /* 展开/收起按钮样式 */
+        .toggle-more {
+            text-align: center;
+            margin-top: 8px;
+            padding: 4px 0;
+        }
+        
+        .toggle-more button {
+            background: transparent;
+            border: none;
+            color: #4cc9f0;
+            font-size: 16px;
+            cursor: button;
+            padding: 4px;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .toggle-more button:hover {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        
+        .toggle-more button:disabled {
+            color: #666;
+            cursor: not-allowed;
+            opacity: 0.5;
+            transform: none;
+        }
+        
+        .current-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(57, 75, 97, 0.3);
+            border-radius: 6px;
+            justify-content: center;
+            align-items: center;
+            min-height: 60px;
+        }
+        
+        .mode-notice {
+            text-align: center;
+            padding: 6px;
+            margin-top: 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            transition: all 0.3s ease;
+        }
+        
+        .activity-mode {
+            background: rgba(244, 162, 97, 0.1);
+            border-left: 3px solid #f4a261;
+            color: #f4a261;
+        }
+        
+        .daily-mode {
+            background: rgba(160, 179, 198, 0.1);
+            border-left: 3px solid #a0b3c6;
+            color: #a0b3c6;
+        }
+        
+        .fuel-cost {
+            color: #f4a261;
+            font-weight: bold;
+        }
+        
+        .calculate-button {
+            background: #4cc9f0;
+            color: #1a1a2e;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            height: 22px;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+        
+        .calculate-button:hover {
+            background: #72ddf7;
+        }
+        
+        .loading-indicator {
+            text-align: center;
+            padding: 10px;
+            color: #4cc9f0;
+        }
+        
+        .input-with-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
             width: 100%;
         }
         
-        .home-btn {
-            padding: 8px 20px;
-            background: rgba(21, 101, 192, 0.8);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .home-btn:hover {
-            background: rgba(13, 71, 161, 0.9);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-        }
-        
-        /* 游戏列表容器 */
-        .game-container {
-            max-width: 1000px;
-            margin: 20px auto;
-            padding: 0 20px;
-        }
-        
-        /* 游戏卡片样式 */
-        .game-card {
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            margin-bottom: 12px;
-            overflow: hidden;
-            position: relative;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .game-card::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
-            z-index: 0;
-        }
-        
-        .game-header {
-            padding: 12px 20px;
-            background: rgba(0, 0, 0, 0.3);
-            cursor: pointer;
+        .input-group {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .game-header:hover {
-            background: rgba(0, 0, 0, 0.4);
-        }
-        
-        .game-name {
-            font-size: 16px;
-            font-weight: bold;
-            color: #fff;
-            display: flex;
-            align-items: center;
-        }
-        
-        .game-name img {
-            height: 20px;
-            margin-right: 10px;
-        }
-        
-        .coming-soon {
-            background-color: #ff7043;
-            color: white;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            margin-left: 10px;
-        }
-        
-        .game-content {
-            padding: 0 20px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .game-content.active {
-            padding: 15px 20px;
-            max-height: 2000px;
-        }
-        
-        /* 游戏详情样式 */
-        .game-section {
-            margin-bottom: 12px;
-        }
-        
-        .section-title {
-            font-size: 15px;
-            font-weight: bold;
-            color: #FFE74C;
-            margin-bottom: 8px;
-            padding-bottom: 3px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .game-desc {
-            margin-bottom: 10px;
-            line-height: 1.6;
-            font-size: 14px;
-        }
-        
-        .game-feature {
-            margin-left: 18px;
+            flex-direction: column;
+            gap: 4px;
             margin-bottom: 8px;
         }
         
-        .game-feature li {
-            margin-bottom: 5px;
-            list-style-type: disc;
-            font-size: 14px;
+        .warning-text {
+            color: #f4a261;
         }
         
-        /* 温馨提示样式 */
-        .game-tips {
-            background: rgba(255, 248, 225, 0.2);
-            padding: 12px;
-            border-radius: 8px;
-            margin-top: 12px;
-            border-left: 4px solid #FFE74C;
-        }
-        
-        .tips-title {
-            font-weight: bold;
-            margin-bottom: 6px;
-            color: #FFE74C;
-            font-size: 14px;
-        }
-        
-        .tips-content {
-            font-size: 13px;
-        }
-        
-        /* 底部区域 */
-        .page-footer {
+        .info-text {
+            color: #a0b3c6;
+            font-size: 11px;
             text-align: center;
-            padding: 25px 20px;
-            margin: 25px 20px 20px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-        }
-        
-        .page-footer::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
-            z-index: 0;
-        }
-        
-        .footer-title {
-            font-size: 1.3rem;
-            margin-bottom: 12px;
-            position: relative;
-            z-index: 1;
-            color: #FFE74C;
-        }
-        
-        .footer-desc {
-            margin-bottom: 12px;
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            font-size: 14px;
-        }
-        
-        .footer-copyright {
-            font-size: 0.85rem;
-            position: relative;
-            z-index: 1;
-            color: rgba(255, 255, 255, 0.7);
-        }
-        
-        /* 响应式设计 */
-        @media (max-width: 768px) {
-            .main-title-content {
-                flex-direction: row;
-                align-items: center;
-                justify-content: center;
-            }
-            
-            .main-logo {
-                height: 30px;
-                margin-right: 10px;
-            }
-            
-            .main-title h2 {
-                font-size: 1.5rem;
-            }
-            
-            .main-title p {
-                font-size: 0.95rem;
-            }
-            
-            .game-name {
-                font-size: 15px;
-            }
-            
-            .game-name img {
-                height: 18px;
-            }
-            
-            .footer-title {
-                font-size: 1.1rem;
-            }
-            
-            .footer-desc {
-                font-size: 13px;
-            }
         }
     </style>
 </head>
 <body>
-    <!-- 主标题区域 -->
-    <div class="main-title">
-        <div class="main-title-content">
-            <img src="images/logo01.png" alt="DSC Logo" class="main-logo">
-            <h2>DSC生态游戏</h2>
+    <div class="header">
+        <a href="index.html" class="header-link">
+            <div class="logo">LOGO</div>
+            <h1>DSC复投模拟计算系统</h1>
+        </a>
+    </div>
+    
+    <div class="container">
+        <!-- 第一行：活跃度输入 -->
+        <div class="input-group">
+            <div class="input-row">
+                <label class="input-label" for="activity">活跃度</label>
+                <input type="number" id="activity" class="input-field" min="0" value="" step="any" placeholder="输入活跃度">
+                <button class="calculate-button" id="calc-activity">计算</button>
+            </div>
+            
+            <!-- 第二行：活跃度转换提示 -->
+            <div class="conversion-info">1活跃度 = 10 DSC</div>
         </div>
-        <p>体验基于区块链技术的创新游戏生态，参与游戏获取额外收益，享受游戏乐趣的同时增加数字资产</p>
-        <div class="home-btn-container">
-            <button class="home-btn">返回首页</button>
+        
+        <!-- 第三行：日产输入 -->
+        <div class="input-group">
+            <div class="input-row">
+                <label class="input-label" for="daily">日产量</label>
+                <input type="number" id="daily" class="input-field" min="0" value="" step="any" placeholder="输入日产量">
+                <button class="calculate-button" id="calc-daily">计算</button>
+            </div>
+            
+            <!-- 第四行：日产提示 -->
+            <div class="fuel-info warning-text">每日领取所需的燃料费约当前DSC兑换的25%</div>
+        </div>
+        
+        <!-- 矿机参数显示 -->
+        <div class="current-stats">
+            <div class="scroll-display" id="current-scrolls">
+                <div class="info-text">请输入活跃度或日产量开始复投计算</div>
+            </div>
+        </div>
+        
+        <!-- 计算模式提示 -->
+        <div class="mode-notice activity-mode warning-text" id="mode-notice">
+            请选择一种计算方式
         </div>
     </div>
-  
-    <!-- 游戏列表 -->
-    <div class="game-container">
-        <!-- 哈希竞猜游戏 -->
-        <div class="game-card">
-            <div class="game-header" onclick="toggleGame(this, 'hashGame')">
-                <span class="game-name">
-                    哈希竞猜
-                </span>
-                <span>▼</span>
-            </div>
-            <div class="game-content" id="hashGame">
-                <div class="game-section">
-                    <h3 class="section-title">游戏概述</h3>
-                    <p class="game-desc">哈希游戏是基于区块链哈希值的预测游戏，玩家可以参与猜单双、猜大小和猜特码三种玩法，体验区块链技术的公平透明。</p>
-                </div>
-                
-                <div class="game-section">
-                    <h3 class="section-title">游戏类型</h3>
-                    
-                    <div class="game-feature">
-                        <h4>1. 猜单双</h4>
-                        <ul>
-                            <li>玩法：预测特别号码是单数还是双数</li>
-                            <li>单数赔率：1.8</li>
-                            <li>双数赔率：1.85</li>
-                            <li>开奖频率：每20分钟一次</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="game-feature">
-                        <h4>2. 猜大小</h4>
-                        <ul>
-                            <li>玩法：预测特别号码的大小</li>
-                            <li>1-24为"小"，25-49为"大"</li>
-                            <li>大数赔率：1.8</li>
-                            <li>小数赔率：1.85</li>
-                            <li>开奖频率：每20分钟一次</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="game-feature">
-                        <h4>3. 猜特码</h4>
-                        <ul>
-                            <li>玩法：直接预测1-49之间的特码数字</li>
-                            <li>赔率：46</li>
-                            <li>开奖频率：每24小时一次</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="game-section">
-                    <h3 class="section-title">开奖规则</h3>
-                    <p class="game-desc">系统从指定区块哈希值右至左取连续2位数字，若在1-49范围内则为特别号码，超出则继续向左寻找。</p>
-                </div>
-                
-                <div class="game-section">
-                    <h3 class="section-title">游戏特点</h3>
-                    <ul class="game-feature">
-                        <li>基于区块链技术，公平透明</li>
-                        <li>多种玩法选择，满足不同偏好</li>
-                        <li>高中奖率与高赔率并存</li>
-                    </ul>
-                </div>
-                
-                <div class="game-tips">
-                    <p class="tips-title">温馨提示</p>
-                    <p class="tips-content">哈希游戏是一种娱乐方式，请理性参与。建议玩家在了解游戏规则后再进行参与。</p>
-                </div>
-            </div>
+    
+    <div class="container">
+        <h2>复投时间表 (<span id="days-count">0</span>天)</h2>
+        
+        <div class="results" id="results-container">
+            <table id="results-table">
+                <thead>
+                    <tr>
+                        <th>天数</th>
+                        <th id="activity-header">累计活跃度</th>
+                        <th>日产量</th>
+                        <th id="fuel-header">燃料费</th>
+                        <th>余额</th>
+                    </tr>
+                </thead>
+                <tbody id="results-body">
+                    <tr>
+                        <td colspan="5" style="text-align: center; padding: 10px;" class="info-text">暂无数据</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <!-- 掘金引擎游戏 -->
-        <div class="game-card">
-            <div class="game-header" onclick="toggleGame(this, 'miningGame')">
-                <span class="game-name">
-                    掘金Fomo3D
-                  <span class="coming-soon">新上线</span>
-                </span>
-                <span>▼</span>
-            </div>
-            <div class="game-content" id="miningGame">
-                <div class="game-section">
-                    <h3 class="section-title">游戏阶段参数表</h3>
-                    <table class="game-table">
-                        <thead>
-                            <tr>
-                                <th>游戏阶段</th>
-                                <th>奖池区间</th>
-                                <th>单次投注额</th>
-                                <th>开奖延迟</th>
-                                <th>游戏晋阶投注次数</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>阶段1</td>
-                                <td>1,000-1,999</td>
-                                <td>1币</td>
-                                <td>+3分钟</td>
-                                <td>1,000次</td>
-                            </tr>
-                            <tr>
-                                <td>阶段2</td>
-                                <td>2,000-4,999</td>
-                                <td>3币</td>
-                                <td>+2分钟</td>
-                                <td>1,500次</td>
-                            </tr>
-                            <tr>
-                                <td>阶段3</td>
-                                <td>5,000-9,999</td>
-                                <td>5币</td>
-                                <td>+2分钟</td>
-                                <td>1,000次</td>
-                            </tr>
-                            <tr>
-                                <td>阶段4</td>
-                                <td>10,000-14,999</td>
-                                <td>10币</td>
-                                <td>+2分钟</td>
-                                <td>500次</td>
-                            </tr>
-                            <tr>
-                                <td>阶段5</td>
-                                <td>15,000-19,999</td>
-                                <td>20币</td>
-                                <td>+2分钟</td>
-                                <td>250次</td>
-                            </tr>
-                            <tr>
-                                <td>决胜阶段</td>
-                                <td>≥20,000</td>
-                                <td>30币</td>
-                                <td>+1分钟</td>
-                                <td>-</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
-                <div class="game-section">
-                    <h3 class="section-title">核心规则</h3>
-                    <ul class="game-feature">
-                        <li><strong>初始设置</strong>
-                            <ul>
-                                <li>初始奖池：1,000币</li>
-                                <li>初始开奖倒计时：5小时</li>
-                            </ul>
-                        </li>
-                        <li><strong>倒计时机制</strong>
-                            <ul>
-                                <li>每次投注根据阶段延长倒计时（见上表），倒计时归零即开奖。</li>
-  <ul>
-      <li>0:00至08:00期间，暂停游戏。</li>
-      <li><strong>决胜阶段投注条件</strong>
-                                <li>玩家当期一至五阶段都参与了投注，或者当期累计投满50币，方可参与决胜局投注竞争。</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-                
-                <div class="game-section">
-                    <h3 class="section-title">奖池分配规则</h3>
-                    <ul class="game-feature">
-                        <li><strong>开奖后，先进行阶段投注资金返还，再进行奖池资金分配</strong>
-                            <ul>
-                                <li><strong>阶段投注资金返还</strong>
-                                    <table class="game-table">
-                                        <thead>
-                                            <tr>
-                                                <th>返还比例</th>
-                                                <th>覆盖范围（按投注顺序）</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>100%</td>
-                                                <td>阶段一前50%投注，阶段二至阶段四，前10%投注</td>
-                                            </tr>
-                                            <tr>
-
-<td>75%</td>
-
-<td>阶段一前75%投注<td>
-</tr>
-
-<tr>
-                                                <td>70%</td>
-                                                <td>阶段二至阶段四，前30%投注</td>
-                                            </tr>
-                                            <tr>
-                                                <td>50%</td>
-                                                <td>阶段一前100%投注，阶段二至阶段四，前70%投注</td>
-                                            </tr>
-                                            <tr>
-                                                <td>30%</td>
-                                                <td>阶段二至阶段四，前70%投注</td>
-                                            </tr>
-
-<td>100%</td>
-                                                <td>阶段五随机取1/5的投注</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                            </ul>
-                        </li>
-                        <li><strong>奖池资金分配</strong>
-                            <ul>
-                               
-                                        <li>最后投注者：48%</li>
-                                        <li>倒数2-10名投注者：10%（均分）</li>
-                                        <li>运营方：7%</li>
-                                        <li>销毁：25%</li>
-                                        <li>推荐奖励：10%</li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-                
-                <div class="game-tips">
-                    <p class="tips-title">温馨提示</p>
-                    <p>掘金Fomo3D是一种创新游戏模式，请仔细阅读规则后再参与。</p>
-                </div>
-            </div>
+        
+        <div class="toggle-more">
+            <button id="toggle-more" aria-label="加载更多天数" disabled>
+                <i class="fas fa-chevron-down"></i>
+                <span>加载更多</span>
+            </button>
         </div>
     </div>
 
-
-
-
-
-    
-    <!-- 底部区域 -->
-    <footer class="page-footer">
-        <h3 class="footer-title">DSC生态游戏边玩游戏边挖币</h3>
-        <p class="footer-desc">数字卷轴DSC致力于打造完整的区块链游戏生态系统，未来将推出更多创新游戏，为用户提供更多元的娱乐和收益方式。</p>
-        <p class="footer-desc">关注本站，获取最新游戏上线信息。</p>
-        <p class="footer-copyright">© 2023 数字卷轴DSC 卷界链 | 基于区块链技术的创新生态游戏系统</p>
-    </footer>
-    
     <script>
-        // 当前展开的游戏ID
-        let currentOpenGame = null;
-        
-        // 切换游戏详情显示/隐藏
-        function toggleGame(headerElement, gameId) {
-            const content = document.getElementById(gameId);
-            const arrow = headerElement.querySelector('span:last-child');
+        document.addEventListener('DOMContentLoaded', function() {
+            // 卷轴数据
+            const scrolls = {
+                bronze: { name: '青铜', cost: 10, daily: 0.06, count: 0, max: 10 },
+                silver: { name: '白银', cost: 100, daily: 0.6, count: 0, max: 10 },
+                gold: { name: '黄金', cost: 1000, daily: 6, count: 0, max: 10 },
+                platinum: { name: '铂金', cost: 5000, daily: 31.66, count: 0, max: 5 },
+                diamond: { name: '钻石', cost: 10000, daily: 66.66, count: 0, max: 5 },
+                supreme: { name: '至尊', cost: 50000, daily: 350, count: 0, max: Infinity }
+            };
             
-            // 如果点击的是当前已展开的游戏，则关闭它
-            if (currentOpenGame === gameId) {
-                content.classList.remove('active');
-                arrow.textContent = '▼';
-                currentOpenGame = null;
-                return;
-            }
+            // 合成规则
+            const conversionRules = [
+                { from: 'bronze', to: 'silver', rate: 10 },
+                { from: 'silver', to: 'gold', rate: 10 },
+                { from: 'gold', to: 'platinum', rate: 5 },
+                { from: 'platinum', to: 'diamond', rate: 2 },
+                { from: 'diamond', to: 'supreme', rate: 5 }
+            ];
             
-            // 关闭之前打开的游戏
-            if (currentOpenGame) {
-                const prevContent = document.getElementById(currentOpenGame);
-                const prevHeader = prevContent.previousElementSibling;
-                const prevArrow = prevHeader.querySelector('span:last-child');
+            // 存储模拟结果和状态
+            let allSimulationResults = []; // 存储所有计算结果
+            let displayedResults = [];     // 存储已显示的结果
+            let currentDisplayDays = 0;    // 当前显示的天数
+            let calculationMode = null;    // 计算模式
+            let baseDailyProduction = 0;   // 基础日产量
+            let isCalculating = false;     // 是否正在计算
+            
+            // DOM元素
+            const activityInput = document.getElementById('activity');
+            const dailyInput = document.getElementById('daily');
+            const calcActivityBtn = document.getElementById('calc-activity');
+            const calcDailyBtn = document.getElementById('calc-daily');
+            const modeNotice = document.getElementById('mode-notice');
+            const fuelHeader = document.getElementById('fuel-header');
+            const activityHeader = document.getElementById('activity-header');
+            const toggleMoreBtn = document.getElementById('toggle-more');
+            const resultsBody = document.getElementById('results-body');
+            const daysCountEl = document.getElementById('days-count');
+            const currentScrolls = document.getElementById('current-scrolls');
+            
+            // 初始化
+            function init() {
+                // 计算按钮事件
+                calcActivityBtn.addEventListener('click', function() {
+                    calculateFromActivity();
+                    activityInput.blur();
+                });
                 
-                prevContent.classList.remove('active');
-                prevArrow.textContent = '▼';
+                calcDailyBtn.addEventListener('click', function() {
+                    activityInput.value = ''; // 点击日产计算按钮时清空活跃度输入框
+                    calculateFromDaily();
+                    dailyInput.blur();
+                });
+                
+                // 活跃度输入变化时更新日产输入框
+                activityInput.addEventListener('input', function() {
+                    updateDailyFromActivity();
+                });
+                
+                // 日产输入框获得焦点时清空活跃度输入框
+                dailyInput.addEventListener('focus', function() {
+                    activityInput.value = '';
+                });
+                
+                // 输入框失去焦点时自动计算
+                activityInput.addEventListener('blur', function() {
+                    if (this.value && parseFloat(this.value) > 0) {
+                        calculateFromActivity();
+                    }
+                });
+                
+                dailyInput.addEventListener('blur', function() {
+                    if (this.value && parseFloat(this.value) > 0) {
+                        calculateFromDaily();
+                    }
+                });
+                
+                // 日产输入框点击事件 - 切换到日产模式
+                dailyInput.addEventListener('click', function() {
+                    setCalculationMode('daily');
+                    this.select();
+                });
+                
+                // 输入框回车事件 - 收回键盘并计算
+                activityInput.addEventListener('keydown', function(e) {
+                    const confirmKeys = ['Enter', 'Done', 'Go', 'NumpadEnter'];
+                    if (confirmKeys.includes(e.key)) {
+                        e.preventDefault();
+                        if (this.value && parseFloat(this.value) > 0) {
+                            calculateFromActivity();
+                        }
+                        this.blur();
+                    }
+                });
+                
+                dailyInput.addEventListener('keydown', function(e) {
+                    const confirmKeys = ['Enter', 'Done', 'Go', 'NumpadEnter'];
+                    if (confirmKeys.includes(e.key)) {
+                        e.preventDefault();
+                        if (this.value && parseFloat(this.value) > 0) {
+                            calculateFromDaily();
+                        }
+                        this.blur();
+                    }
+                });
+                
+                // 点击输入框选中内容
+                activityInput.addEventListener('click', function() {
+                    this.select();
+                });
+                
+                dailyInput.addEventListener('click', function() {
+                    this.select();
+                });
+                
+                // 加载更多按钮事件
+                toggleMoreBtn.addEventListener('click', loadMoreResults);
             }
             
-            // 打开当前点击的游戏
-            content.classList.add('active');
-            arrow.textContent = '▲';
-            currentOpenGame = gameId;
-        }
-        
-        // 返回首页按钮
-        document.querySelector('.home-btn').addEventListener('click', function() {
-            window.location.href = 'index.html';
+            // 从活跃度更新日产输入框
+            function updateDailyFromActivity() {
+                const activity = parseFloat(activityInput.value) || 0;
+                if (activity <= 0) {
+                    dailyInput.value = '';
+                    return;
+                }
+                
+                // 重置卷轴
+                resetScrolls();
+                
+                // 转换活跃度为DSC并分配卷轴
+                let remainingDSC = activity * 10;
+                const scrollTypes = ['supreme', 'diamond', 'platinum', 'gold', 'silver', 'bronze'];
+                for (const type of scrollTypes) {
+                    const scroll = scrolls[type];
+                    const count = Math.floor(remainingDSC / scroll.cost);
+                    scroll.count = Math.min(count, scroll.max);
+                    remainingDSC -= scroll.count * scroll.cost;
+                }
+                
+                // 自动合成
+                autoUpgrade();
+                
+                // 计算总日产量并更新日产输入框
+                const dailyProduction = calculateDailyProduction();
+                dailyInput.value = dailyProduction.toFixed(2);
+            }
+            
+            // 加载更多结果
+            function loadMoreResults() {
+                if (isCalculating || currentDisplayDays >= 1095) return;
+                
+                // 计算下一步要显示的天数（每次增加30天，最多到1095天）
+                const nextDays = Math.min(currentDisplayDays + 30, 1095);
+                
+                // 显示加载状态
+                toggleMoreBtn.disabled = true;
+                toggleMoreBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>加载中...</span>';
+                
+                // 模拟计算延迟，实际计算已在后台完成
+                setTimeout(() => {
+                    // 从所有结果中获取新增的30天数据
+                    const newResults = allSimulationResults.filter(
+                        result => result.day > currentDisplayDays && result.day <= nextDays
+                    );
+                    
+                    // 添加到已显示结果并更新界面
+                    displayedResults = [...displayedResults, ...newResults];
+                    currentDisplayDays = nextDays;
+                    
+                    // 更新显示
+                    displayResults();
+                    updateDaysCount();
+                    
+                    // 更新按钮状态
+                    if (currentDisplayDays >= 1095) {
+                        toggleMoreBtn.innerHTML = '<i class="fas fa-check"></i><span>已显示全部</span>';
+                        toggleMoreBtn.disabled = true;
+                    } else {
+                        toggleMoreBtn.innerHTML = '<i class="fas fa-chevron-down"></i><span>加载更多</span>';
+                        toggleMoreBtn.disabled = false;
+                    }
+                    
+                    // 滚动到表格底部
+                    const resultsContainer = document.getElementById('results-container');
+                    resultsContainer.scrollTop = resultsContainer.scrollHeight;
+                }, 500);
+            }
+            
+            // 设置计算模式
+            function setCalculationMode(mode) {
+                calculationMode = mode;
+                
+                if (mode === 'activity') {
+                    modeNotice.textContent = "当前模式: 活跃度计算复投已 (扣除约25%燃料费)";
+                    modeNotice.className = 'mode-notice activity-mode warning-text';
+                    fuelHeader.style.display = 'table-cell';
+                    activityHeader.textContent = '累计活跃度';
+                } else if (mode === 'daily') {
+                    modeNotice.textContent = "当前模式: 日产计算复投 (不扣除燃料费)适合有多种收益且有足够多的SCC用户";
+                    modeNotice.className = 'mode-notice daily-mode';
+                    fuelHeader.style.display = 'none';
+                    activityHeader.textContent = '累计活跃度';
+                    
+                    // 日产模式下更新矿机显示区域文本
+                    currentScrolls.innerHTML = '<div class="info-text">点击下面表格查看每天复投的矿机数据</div>';
+                }
+            }
+            
+            // 从活跃度计算
+            function calculateFromActivity() {
+                const activity = parseFloat(activityInput.value) || 0;
+                if (activity <= 0) return;
+                
+                setCalculationMode('activity');
+                startCalculation();
+                
+                // 重置卷轴
+                resetScrolls();
+                
+                // 转换活跃度为DSC并分配卷轴
+                let remainingDSC = activity * 10;
+                const scrollTypes = ['supreme', 'diamond', 'platinum', 'gold', 'silver', 'bronze'];
+                for (const type of scrollTypes) {
+                    const scroll = scrolls[type];
+                    const count = Math.floor(remainingDSC / scroll.cost);
+                    scroll.count = Math.min(count, scroll.max);
+                    remainingDSC -= scroll.count * scroll.cost;
+                }
+                
+                // 自动合成
+                autoUpgrade();
+                
+                // 计算初始日产量
+                const dailyProduction = calculateDailyProduction();
+                
+                // 更新显示
+                updateCurrentScrollsDisplay();
+                
+                // 计算所有1095天的数据，但先只显示30天
+                calculateAllDays('activity', dailyProduction, remainingDSC);
+            }
+            
+            // 从日产量计算
+            function calculateFromDaily() {
+                const dailyValue = parseFloat(dailyInput.value) || 0;
+                if (dailyValue <= 0) return;
+                
+                setCalculationMode('daily');
+                startCalculation();
+                
+                // 重置卷轴和基础日产量
+                resetScrolls();
+                baseDailyProduction = dailyValue;
+                
+                // 日产模式下更新矿机显示区域文本
+                currentScrolls.innerHTML = '<div class="info-text">点击下面表格查看每天复投的矿机数据</div>';
+                
+                // 计算所有1095天的数据，但先只显示30天
+                calculateAllDays('daily', 0, 0);
+            }
+            
+            // 开始计算时的准备工作
+            function startCalculation() {
+                isCalculating = true;
+                allSimulationResults = [];
+                displayedResults = [];
+                currentDisplayDays = 0;
+                
+                // 清空表格并显示加载状态
+                resultsBody.innerHTML = '<tr><td colspan="5" class="loading-indicator"><i class="fas fa-calculator"></i> 正在计算...</td></tr>';
+                toggleMoreBtn.disabled = true;
+                toggleMoreBtn.innerHTML = '<i class="fas fa-chevron-down"></i><span>加载更多</span>';
+                updateDaysCount();
+            }
+            
+            // 计算所有1095天的数据
+            function calculateAllDays(mode, initialDaily, initialBalance) {
+                // 复制初始卷轴状态
+                const initialScrolls = {};
+                for (const key in scrolls) {
+                    initialScrolls[key] = scrolls[key].count;
+                }
+                
+                let dailyProd = initialDaily;
+                let balance = initialBalance;
+                let totalActivity = calculateActivity();
+                
+                // 计算所有1095天的数据
+                for (let day = 1; day <= 1095; day++) {
+                    let fuelCost = 0;
+                    let dailyEarnings = 0;
+                    let dailyProductionFromScrolls = 0;
+                    
+                    if (mode === 'activity') {
+                        // 活跃度模式 - 扣除25%燃料费
+                        dailyProductionFromScrolls = calculateDailyProduction();
+                        fuelCost = dailyProductionFromScrolls * 0.25;
+                        dailyEarnings = dailyProductionFromScrolls * 0.75;
+                        balance += dailyEarnings;
+                    } else {
+                        // 日产模式 - 不扣除燃料费
+                        dailyProductionFromScrolls = calculateDailyProduction();
+                        dailyEarnings = baseDailyProduction + dailyProductionFromScrolls;
+                        balance += dailyEarnings;
+                    }
+                    
+                    // 计算新增活跃度
+                    const newActivity = Math.floor(balance / 10);
+                    balance -= newActivity * 10;
+                    
+                    // 计算总活跃度
+                    if (mode === 'activity') {
+                        totalActivity += newActivity;
+                    } else {
+                        totalActivity = calculateActivity() + newActivity;
+                    }
+                    
+                    // 根据总活跃度重新分配矿机
+                    allocateScrollsByActivity(totalActivity);
+                    
+                    // 保存当天结果
+                    const scrollSnapshot = {};
+                    for (const key in scrolls) {
+                        scrollSnapshot[key] = scrolls[key].count;
+                    }
+                    
+                    // 日产模式下显示总产量（基础+矿机）
+                    const displayDaily = mode === 'daily' ? baseDailyProduction + dailyProductionFromScrolls : dailyProductionFromScrolls;
+                    
+                    allSimulationResults.push({
+                        day,
+                        balance: balance,
+                        activity: totalActivity,
+                        daily: displayDaily,
+                        fuelCost: mode === 'activity' ? fuelCost : 0,
+                        scrolls: {...scrollSnapshot}
+                    });
+                }
+                
+                // 恢复初始卷轴状态
+                for (const key in scrolls) {
+                    scrolls[key].count = initialScrolls[key];
+                }
+                
+                // 完成计算后显示前30天
+                setTimeout(() => {
+                    currentDisplayDays = Math.min(30, 1095);
+                    displayedResults = allSimulationResults.filter(result => result.day <= currentDisplayDays);
+                    displayResults();
+                    updateDaysCount();
+                    
+                    // 更新加载更多按钮状态
+                    toggleMoreBtn.disabled = currentDisplayDays >= 1095;
+                    isCalculating = false;
+                }, 300);
+            }
+            
+            // 根据活跃度分配卷轴
+            function allocateScrollsByActivity(activity) {
+                resetScrolls();
+                
+                let remainingDSC = activity * 10;
+                const scrollTypes = ['supreme', 'diamond', 'platinum', 'gold', 'silver', 'bronze'];
+                
+                for (const type of scrollTypes) {
+                    const scroll = scrolls[type];
+                    const count = Math.floor(remainingDSC / scroll.cost);
+                    scroll.count = Math.min(count, scroll.max);
+                    remainingDSC -= scroll.count * scroll.cost;
+                }
+                
+                autoUpgrade();
+            }
+            
+            // 重置卷轴
+            function resetScrolls() {
+                for (const key in scrolls) {
+                    scrolls[key].count = 0;
+                }
+            }
+            
+            // 计算日产量
+            function calculateDailyProduction() {
+                return Object.values(scrolls).reduce((total, scroll) => {
+                    return total + (scroll.count * scroll.daily);
+                }, 0);
+            }
+            
+            // 计算总活跃度
+            function calculateActivity() {
+                return Math.floor(Object.values(scrolls).reduce((total, scroll) => {
+                    return total + (scroll.count * scroll.cost);
+                }, 0) / 10);
+            }
+            
+            // 自动合成函数
+            function autoUpgrade() {
+                let upgraded;
+                do {
+                    upgraded = false;
+                    for (const rule of conversionRules) {
+                        const fromScroll = scrolls[rule.from];
+                        const toScroll = scrolls[rule.to];
+                        
+                        if (fromScroll.count >= rule.rate && toScroll.count < toScroll.max) {
+                            const upgradeCount = Math.min(
+                                Math.floor(fromScroll.count / rule.rate),
+                                toScroll.max - toScroll.count
+                            );
+                            
+                            if (upgradeCount > 0) {
+                                fromScroll.count -= upgradeCount * rule.rate;
+                                toScroll.count += upgradeCount;
+                                upgraded = true;
+                            }
+                        }
+                    }
+                } while (upgraded);
+            }
+            
+            // 格式化数字显示
+            function formatNumber(num) {
+                return num % 1 === 0 ? num.toString() : num.toFixed(2);
+            }
+            
+            // 显示结果
+            function displayResults() {
+                if (displayedResults.length === 0) {
+                    resultsBody.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 10px;" class="info-text">暂无数据</td></tr>';
+                    return;
+                }
+                
+                resultsBody.innerHTML = '';
+                
+                for (const result of displayedResults) {
+                    const row = document.createElement('tr');
+                    row.setAttribute('data-day', result.day);
+                    
+                    if (calculationMode === 'activity') {
+                        row.innerHTML = `
+                            <td>${result.day}</td>
+                            <td>${formatNumber(result.activity)}</td>
+                            <td>${formatNumber(result.daily)}</td>
+                            <td class="fuel-cost">${formatNumber(result.fuelCost)}</td>
+                            <td>${formatNumber(result.balance)}</td>
+                        `;
+                    } else {
+                        row.innerHTML = `
+                            <td>${result.day}</td>
+                            <td>${formatNumber(result.activity)}</td>
+                            <td>${formatNumber(result.daily)}</td>
+                            <td>${formatNumber(result.balance)}</td>
+                        `;
+                    }
+                    
+                    resultsBody.appendChild(row);
+                    
+                    // 点击行显示卷轴详情
+                    row.addEventListener('click', function() {
+                        showScrollDetails(result);
+                    });
+                }
+            }
+            
+            // 显示卷轴详情
+            function showScrollDetails(result) {
+                const scrollDisplay = document.getElementById('current-scrolls');
+                scrollDisplay.innerHTML = '';
+                
+                for (const key in result.scrolls) {
+                    if (result.scrolls[key] > 0) {
+                        const scrollItem = document.createElement('div');
+                        scrollItem.className = 'scroll-item';
+                        scrollItem.innerHTML = `
+                            <span class="scroll-name">${scrolls[key].name.substring(0, 2)}</span>
+                            <span class="scroll-count">${result.scrolls[key]}</span>
+                        `;
+                        scrollDisplay.appendChild(scrollItem);
+                    }
+                }
+                
+                if (scrollDisplay.children.length === 0) {
+                    scrollDisplay.innerHTML = '<div class="info-text">点击下面表格查看每天复投的矿机数据</div>';
+                }
+            }
+            
+            // 更新当前矿机显示
+            function updateCurrentScrollsDisplay() {
+                const scrollDisplay = document.getElementById('current-scrolls');
+                scrollDisplay.innerHTML = '';
+                
+                for (const key in scrolls) {
+                    if (scrolls[key].count > 0) {
+                        const scrollItem = document.createElement('div');
+                        scrollItem.className = 'scroll-item';
+                        scrollItem.innerHTML = `
+                            <span class="scroll-name">${scrolls[key].name.substring(0, 2)}</span>
+                            <span class="scroll-count">${scrolls[key].count}</span>
+                        `;
+                        scrollDisplay.appendChild(scrollItem);
+                    }
+                }
+                
+                if (scrollDisplay.children.length === 0) {
+                    scrollDisplay.innerHTML = '<div class="info-text">请输入活跃度或日产量开始复投计算</div>';
+                }
+            }
+            
+            // 更新显示天数
+            function updateDaysCount() {
+                daysCountEl.textContent = currentDisplayDays;
+            }
+            
+            // 初始化应用
+            init();
         });
     </script>
 </body>
