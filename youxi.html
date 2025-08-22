@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DSC复投计算系统</title>
+    <title>DSC复投模拟计算系统</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -42,14 +42,10 @@
         .logo {
             width: 40px;
             height: 40px;
-            background-color: #4cc9f0;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #1a1a2e;
-            font-weight: bold;
-            font-size: 16px;
             cursor: pointer;
             background-image: url('images/logo01.png');
             background-size: cover;
@@ -430,7 +426,7 @@
     </div>
     
     <div class="container">
-        <h2>复投统计表 (<span id="days-count">0</span>天)</h2>
+        <h2>复投计算结果 (<span id="days-count">0</span>天)</h2>
         
         <div class="results" id="results-container">
             <table id="results-table">
@@ -438,8 +434,8 @@
                     <tr id="table-header">
                         <th>天数</th>
                         <th id="activity-header">累计活跃度</th>
-                        <th>日产量</th>
                         <th id="growth-header" style="display:none;">增长率</th>
+                        <th>日产量</th>
                         <th id="yield-header" style="display:none;">收益率</th>
                         <th id="fuel-header">燃料费</th>
                         <th>余额</th>
@@ -626,34 +622,32 @@
                 toggleMoreBtn.disabled = true;
                 toggleMoreBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>加载中...</span>';
                 
-                // 模拟计算延迟，实际计算已在后台完成
-                setTimeout(() => {
-                    // 从所有结果中获取新增的100天数据
-                    const newResults = allSimulationResults.filter(
-                        result => result.day > currentDisplayDays && result.day <= nextDays
-                    );
-                    
-                    // 添加到已显示结果并更新界面
-                    displayedResults = [...displayedResults, ...newResults];
-                    currentDisplayDays = nextDays;
-                    
-                    // 更新显示
-                    displayResults();
-                    updateDaysCount();
-                    
-                    // 更新按钮状态
-                    if (currentDisplayDays >= 1095) {
-                        toggleMoreBtn.innerHTML = '<i class="fas fa-check"></i><span>已显示全部</span>';
-                        toggleMoreBtn.disabled = true;
-                    } else {
-                        toggleMoreBtn.innerHTML = '<i class="fas fa-chevron-down"></i><span>加载更多</span>';
-                        toggleMoreBtn.disabled = false;
-                    }
-                    
-                    // 滚动到表格底部
-                    const resultsContainer = document.getElementById('results-container');
-                    resultsContainer.scrollTop = resultsContainer.scrollHeight;
-                }, 500);
+                // 立即显示结果，不延迟
+                // 从所有结果中获取新增的100天数据
+                const newResults = allSimulationResults.filter(
+                    result => result.day > currentDisplayDays && result.day <= nextDays
+                );
+                
+                // 添加到已显示结果并更新界面
+                displayedResults = [...displayedResults, ...newResults];
+                currentDisplayDays = nextDays;
+                
+                // 更新显示
+                displayResults();
+                updateDaysCount();
+                
+                // 更新按钮状态
+                if (currentDisplayDays >= 1095) {
+                    toggleMoreBtn.innerHTML = '<i class="fas fa-check"></i><span>已显示全部</span>';
+                    toggleMoreBtn.disabled = true;
+                } else {
+                    toggleMoreBtn.innerHTML = '<i class="fas fa-chevron-down"></i><span>加载更多</span>';
+                    toggleMoreBtn.disabled = false;
+                }
+                
+                // 滚动到表格底部
+                const resultsContainer = document.getElementById('results-container');
+                resultsContainer.scrollTop = resultsContainer.scrollHeight;
             }
             
             // 设置计算模式
@@ -836,16 +830,14 @@
                 }
                 
                 // 完成计算后显示前100天
-                setTimeout(() => {
-                    currentDisplayDays = Math.min(100, 1095);
-                    displayedResults = allSimulationResults.filter(result => result.day <= currentDisplayDays);
-                    displayResults();
-                    updateDaysCount();
-                    
-                    // 更新加载更多按钮状态
-                    toggleMoreBtn.disabled = currentDisplayDays >= 1095;
-                    isCalculating = false;
-                }, 300);
+                currentDisplayDays = Math.min(100, 1095);
+                displayedResults = allSimulationResults.filter(result => result.day <= currentDisplayDays);
+                displayResults();
+                updateDaysCount();
+                
+                // 更新加载更多按钮状态
+                toggleMoreBtn.disabled = currentDisplayDays >= 1095;
+                isCalculating = false;
             }
             
             // 根据活跃度分配卷轴
@@ -938,8 +930,8 @@
                         row.innerHTML = `
                             <td>${result.day}</td>
                             <td>${formatNumber(result.activity)}</td>
-                            <td>${formatNumber(result.daily)}</td>
                             <td class="growth-rate">${formatPercent(result.growthRate)}</td>
+                            <td>${formatNumber(result.daily)}</td>
                             <td class="fuel-cost">${formatNumber(result.fuelCost)}</td>
                             <td>${formatNumber(result.balance)}</td>
                         `;
