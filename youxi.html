@@ -16,8 +16,8 @@
         }
         
         body {
-            background-color: #1a1a2e;
-            color: #e6e6e6;
+            background: linear-gradient(to bottom, #f5f7fa, #e4e8f0);
+            color: #2d3748;
             padding: 8px;
             max-width: 100%;
             overflow-x: hidden;
@@ -47,33 +47,68 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            background-color: #4a90e2;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo::before {
+            content: 'DSC';
+            position: absolute;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .logo::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
             background-image: url('images/logo01.png');
             background-size: cover;
             background-position: center;
+            opacity: 1;
+            transition: opacity 0.3s;
+        }
+        
+        .logo:hover::after {
+            opacity: 0.8;
         }
         
         .container {
-            background: linear-gradient(145deg, #2d4059, #1e2a3a);
+            background: #ffffff;
             border-radius: 8px;
             padding: 12px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
             margin-bottom: 12px;
-            border: 1px solid #394b61;
+            border: 1px solid #e2e8f0;
         }
         
         h1 {
             font-size: 18px;
-            color: #4cc9f0;
-            text-shadow: 0 0 5px rgba(76, 201, 240, 0.5);
+            color: #4a90e2;
             cursor: pointer;
         }
         
         h2 {
             font-size: 14px;
             margin: 8px 0;
-            color: #72ddf7;
+            color: #4a90e2;
             padding-bottom: 4px;
-            border-bottom: 1px solid #394b61;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .days-count {
+            font-size: 12px;
+            color: #4a90e2;
+            background-color: #f7f9fc;
+            padding: 2px 8px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
         }
         
         .input-row {
@@ -92,7 +127,7 @@
         }
         
         .input-label {
-            color: #a0b3c6;
+            color: #4a5568;
             font-size: 12px;
             white-space: nowrap;
             width: 60px;
@@ -102,19 +137,19 @@
         .input-field {
             width: 100px;
             padding: 4px 10px;
-            border: 1px solid #394b61;
+            border: 1px solid #e2e8f0;
             border-radius: 16px;
             text-align: center;
-            background: #22334d;
-            color: #fff;
+            background: #f7f9fc;
+            color: #2d3748;
             height: 22px;
             font-size: 12px;
         }
         
         .input-field:focus {
             outline: none;
-            border: 1px solid #4cc9f0;
-            box-shadow: 0 0 5px rgba(76, 201, 240, 0.5);
+            border: 1px solid #4a90e2;
+            box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
         }
         
         .input-field[type="number"] {
@@ -128,22 +163,29 @@
         }
         
         .input-field::placeholder {
-            color: #a0b3c6;
+            color: #a0aec0;
             font-size: 11px;
         }
         
         .conversion-info {
-            color: #a0b3c6;
+            color: #718096;
             font-size: 11px;
             text-align: center;
             margin: 4px 0;
         }
         
         .fuel-info {
-            color: #f4a261;
+            color: #e53e3e;
             font-size: 11px;
             text-align: center;
-            margin: 4px 0 8px 0;
+            margin: 4px 0 4px 0;
+        }
+        
+        .bonus-info {
+            color: #4a90e2;
+            font-size: 11px;
+            text-align: center;
+            margin: 0 0 8px 0;
         }
         
         .scroll-display {
@@ -152,30 +194,31 @@
             gap: 4px;
             margin-top: 10px;
             padding: 6px;
-            background: rgba(57, 75, 97, 0.3);
+            background: rgba(247, 249, 252, 0.8);
             border-radius: 6px;
             min-height: 28px;
             align-items: center;
             justify-content: center;
+            border: 1px solid #e2e8f0;
         }
         
         .scroll-item {
             display: flex;
             align-items: center;
             gap: 2px;
-            background: rgba(76, 201, 240, 0.1);
+            background: rgba(74, 144, 226, 0.1);
             padding: 2px 4px;
             border-radius: 8px;
-            border: 1px solid #394b61;
+            border: 1px solid #e2e8f0;
             font-size: 10px;
         }
         
         .scroll-name {
-            color: #a0b3c6;
+            color: #4a5568;
         }
         
         .scroll-count {
-            color: #4cc9f0;
+            color: #4a90e2;
             font-weight: bold;
         }
         
@@ -183,9 +226,9 @@
             max-height: 300px;
             overflow-y: auto;
             margin-top: 10px;
-            border: 1px solid #394b61;
+            border: 1px solid #e2e8f0;
             border-radius: 6px;
-            background: #22334d;
+            background: #f7f9fc;
         }
         
         .results table {
@@ -196,22 +239,22 @@
         .results thead {
             position: sticky;
             top: 0;
-            background-color: #2d4059;
+            background-color: #edf2f7;
             z-index: 2;
         }
         
         .results thead th {
-            color: #72ddf7;
+            color: #4a5568;
             font-weight: bold;
             padding: 6px 4px;
             text-align: left;
-            border-bottom: 1px solid #394b61;
+            border-bottom: 1px solid #e2e8f0;
         }
         
         /* 优化滚动条样式 */
         .results {
             scrollbar-width: thin;
-            scrollbar-color: rgba(160, 179, 198, 0.5) transparent;
+            scrollbar-color: rgba(160, 174, 192, 0.5) transparent;
         }
         
         .results::-webkit-scrollbar {
@@ -223,28 +266,33 @@
         }
         
         .results::-webkit-scrollbar-thumb {
-            background-color: rgba(160, 179, 198, 0.5);
+            background-color: rgba(160, 174, 192, 0.5);
             border-radius: 4px;
             border: 2px solid transparent;
         }
         
         .results::-webkit-scrollbar-thumb:hover {
-            background-color: rgba(196, 196, 196, 0.7);
+            background-color: rgba(113, 128, 150, 0.7);
         }
         
         th, td {
             padding: 6px 4px;
             text-align: left;
-            border-bottom: 1px solid #394b61;
+            border-bottom: 1px solid #e2e8f0;
         }
         
         tr:nth-child(even) {
-            background-color: rgba(255, 255, 255, 0.05);
+            background-color: rgba(255, 255, 255, 0.5);
         }
         
         tr:hover {
-            background-color: rgba(76, 201, 240, 0.1);
+            background-color: rgba(74, 144, 226, 0.1);
             cursor: pointer;
+        }
+        
+        tr.selected {
+            background-color: rgba(184, 161, 227, 0.2);
+            border: 2px solid #b8a1e3;
         }
         
         /* 展开/收起按钮样式 */
@@ -257,7 +305,7 @@
         .toggle-more button {
             background: transparent;
             border: none;
-            color: #4cc9f0;
+            color: #4a90e2;
             font-size: 16px;
             cursor: pointer;
             padding: 4px;
@@ -267,6 +315,7 @@
             align-items: center;
             justify-content: center;
             gap: 5px;
+            margin: 0 auto;
         }
         
         .toggle-more button:hover {
@@ -275,7 +324,7 @@
         }
         
         .toggle-more button:disabled {
-            color: #666;
+            color: #a0aec0;
             cursor: not-allowed;
             opacity: 0.5;
             transform: none;
@@ -287,11 +336,12 @@
             gap: 8px;
             margin-top: 10px;
             padding: 10px;
-            background: rgba(57, 75, 97, 0.3);
+            background: rgba(247, 249, 252, 0.8);
             border-radius: 6px;
             justify-content: center;
             align-items: center;
             min-height: 60px;
+            border: 1px solid #e2e8f0;
         }
         
         .mode-notice {
@@ -304,35 +354,35 @@
         }
         
         .activity-mode {
-            background: rgba(244, 162, 97, 0.1);
-            border-left: 3px solid #f4a261;
-            color: #f4a261;
+            background: rgba(229, 62, 62, 0.1);
+            border-left: 3px solid #e53e3e;
+            color: #e53e3e;
         }
         
         .daily-mode {
-            background: rgba(160, 179, 198, 0.1);
-            border-left: 3px solid #a0b3c6;
-            color: #a0b3c6;
+            background: rgba(80, 227, 194, 0.1);
+            border-left: 3px solid #50e3c2;
+            color: #4a5568;
         }
         
         .fuel-cost {
-            color: #f4a261;
+            color: #e53e3e;
             font-weight: bold;
         }
         
         .growth-rate {
-            color: #72ddf7;
+            color: #4a90e2;
             font-weight: bold;
         }
         
         .yield-rate {
-            color: #72ddf7;
+            color: #4a90e2;
             font-weight: bold;
         }
         
         .calculate-button {
-            background: #4cc9f0;
-            color: #1a1a2e;
+            background: linear-gradient(to bottom, #4a90e2, #3b78c0);
+            color: white;
             border: none;
             padding: 4px 12px;
             border-radius: 16px;
@@ -341,16 +391,17 @@
             height: 22px;
             font-size: 12px;
             white-space: nowrap;
+            box-shadow: 0 2px 4px rgba(74, 144, 226, 0.3);
         }
         
         .calculate-button:hover {
-            background: #72ddf7;
+            background: linear-gradient(to bottom, #3b78c0, #2a63a5);
         }
         
         .loading-indicator {
             text-align: center;
             padding: 10px;
-            color: #4cc9f0;
+            color: #4a90e2;
         }
         
         .input-with-button {
@@ -369,11 +420,11 @@
         }
         
         .warning-text {
-            color: #f4a261;
+            color: #e53e3e;
         }
         
         .info-text {
-            color: #a0b3c6;
+            color: #718096;
             font-size: 11px;
             text-align: center;
         }
@@ -410,6 +461,7 @@
             
             <!-- 第四行：日产提示 -->
             <div class="fuel-info warning-text">每日领取所需的燃料费约是领取DSC的25%</div>
+            <div class="bonus-info">每日复投也会根据规则动态赠送DSC和SCC，实际收益会更多</div>
         </div>
         
         <!-- 矿机参数显示 -->
@@ -426,7 +478,7 @@
     </div>
     
     <div class="container">
-        <h2>复投计算结果 (<span id="days-count">0</span>天)</h2>
+        <h2>复投计算结果 <span class="days-count" id="days-count">0天</span></h2>
         
         <div class="results" id="results-container">
             <table id="results-table">
@@ -487,6 +539,7 @@
             let isCalculating = false;     // 是否正在计算
             let initialActivity = 0;       // 初始活跃度
             let initialDaily = 0;          // 初始日产量
+            let selectedRow = null;        // 当前选中的表格行
             
             // DOM元素
             const activityInput = document.getElementById('activity');
@@ -580,6 +633,29 @@
                 
                 // 加载更多按钮事件
                 toggleMoreBtn.addEventListener('click', loadMoreResults);
+                
+                // 点击页面其他区域取消选中行
+                document.addEventListener('click', function(e) {
+                    if (selectedRow && !e.target.closest('tr') && !e.target.closest('#current-scrolls')) {
+                        clearSelectedRow();
+                    }
+                });
+            }
+            
+            // 清除选中行
+            function clearSelectedRow() {
+                if (selectedRow) {
+                    selectedRow.classList.remove('selected');
+                    selectedRow = null;
+                    
+                    // 恢复默认显示
+                    const scrollDisplay = document.getElementById('current-scrolls');
+                    if (calculationMode === 'activity') {
+                        updateCurrentScrollsDisplay();
+                    } else {
+                        scrollDisplay.innerHTML = '<div class="info-text">点击下面表格查看每天复投的矿机数据</div>';
+                    }
+                }
             }
             
             // 从活跃度更新日产输入框
@@ -737,6 +813,7 @@
                 allSimulationResults = [];
                 displayedResults = [];
                 currentDisplayDays = 0;
+                clearSelectedRow();
                 
                 // 清空表格并显示加载状态
                 resultsBody.innerHTML = '<tr><td colspan="7" class="loading-indicator"><i class="fas fa-calculator"></i> 正在计算...</td></tr>';
@@ -948,7 +1025,18 @@
                     resultsBody.appendChild(row);
                     
                     // 点击行显示卷轴详情
-                    row.addEventListener('click', function() {
+                    row.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        
+                        // 清除之前选中的行
+                        if (selectedRow) {
+                            selectedRow.classList.remove('selected');
+                        }
+                        
+                        // 选中当前行
+                        this.classList.add('selected');
+                        selectedRow = this;
+                        
                         showScrollDetails(result);
                     });
                 }
@@ -1000,7 +1088,7 @@
             
             // 更新显示天数
             function updateDaysCount() {
-                daysCountEl.textContent = currentDisplayDays;
+                daysCountEl.textContent = currentDisplayDays + '天';
             }
             
             // 初始化应用
