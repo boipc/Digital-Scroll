@@ -291,8 +291,8 @@
         }
         
         tr.selected {
-            background-color: rgba(184, 161, 227, 0.2);
-            border: 2px solid #b8a1e3;
+            background-color: rgba(74, 144, 226, 0.15);
+            outline: 2px solid #4a90e2;
         }
         
         /* 展开/收起按钮样式 */
@@ -342,6 +342,21 @@
             align-items: center;
             min-height: 60px;
             border: 1px solid #e2e8f0;
+            position: relative;
+        }
+        
+        .day-indicator {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #4a90e2;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: bold;
+            display: none;
         }
         
         .mode-notice {
@@ -360,8 +375,8 @@
         }
         
         .daily-mode {
-            background: rgba(80, 227, 194, 0.1);
-            border-left: 3px solid #50e3c2;
+            background: rgba(74, 144, 226, 0.1);
+            border-left: 3px solid #4a90e2;
             color: #4a5568;
         }
         
@@ -466,6 +481,7 @@
         
         <!-- 矿机参数显示 -->
         <div class="current-stats">
+            <div class="day-indicator" id="day-indicator"></div>
             <div class="scroll-display" id="current-scrolls">
                 <div class="info-text">请输入活跃度或日产量开始复投计算</div>
             </div>
@@ -555,6 +571,7 @@
             const resultsBody = document.getElementById('results-body');
             const daysCountEl = document.getElementById('days-count');
             const currentScrolls = document.getElementById('current-scrolls');
+            const dayIndicator = document.getElementById('day-indicator');
             
             // 初始化
             function init() {
@@ -647,6 +664,10 @@
                 if (selectedRow) {
                     selectedRow.classList.remove('selected');
                     selectedRow = null;
+                    
+                    // 隐藏天数指示器
+                    dayIndicator.style.display = 'none';
+                    dayIndicator.textContent = '';
                     
                     // 恢复默认显示
                     const scrollDisplay = document.getElementById('current-scrolls');
@@ -1044,6 +1065,10 @@
             
             // 显示卷轴详情
             function showScrollDetails(result) {
+                // 显示天数指示器
+                dayIndicator.textContent = `第${result.day}天`;
+                dayIndicator.style.display = 'block';
+                
                 const scrollDisplay = document.getElementById('current-scrolls');
                 scrollDisplay.innerHTML = '';
                 
