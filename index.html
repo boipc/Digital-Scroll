@@ -12,12 +12,12 @@
             --dark-color: #333;
             --light-color: #fff;
             --accent-color: #FFE74C;
-            --register-btn: #4CAF50;
-            --contact-btn: #2196F3;
-            --guide-btn: #9C27B0;
-            --model-btn: #D32F2F;
-            --game-btn: #1A237E;
-            --shareholder-btn: #FF9800;
+            --register-btn: #D32F2F; /* 改为红色 */
+            --contact-btn: #D32F2F; /* 改为红色 */
+            --guide-btn: #D32F2F; /* 改为红色 */
+            --model-btn: #D32F2F; /* 改为红色 */
+            --game-btn: #D32F2F; /* 改为红色 */
+            --shareholder-btn: #D32F2F; /* 改为红色 */
         }
         
         * {
@@ -65,6 +65,19 @@
         .logo {
             height: 2.8rem;
             width: auto;
+        }
+        
+        .logo-fallback {
+            display: none;
+            font-weight: bold;
+            font-size: 1.8rem;
+            color: #fff;
+            background: #D32F2F;
+            width: 2.8rem;
+            height: 2.8rem;
+            border-radius: 50%;
+            line-height: 2.8rem;
+            text-align: center;
         }
         
         h1 {
@@ -581,7 +594,10 @@
     <div class="container">
         <header>
             <div class="header-row">
-                <img src="images/logo01.png" alt="数字卷轴DSC Logo" class="logo">
+                <div style="position: relative;">
+                    <img src="images/logo01.png" alt="数字卷轴DSC Logo" class="logo" onerror="this.style.display='none'; document.getElementById('logoFallback').style.display='block'">
+                    <div id="logoFallback" class="logo-fallback">DSC</div>
+                </div>
                 <h1>数字卷轴DSC</h1>
             </div>
             <p class="subtitle">创新数字资产项目 · 每小时收益 · 多重获利方式</p>
@@ -592,16 +608,16 @@
                     <div class="days" id="days">00天</div>
                     <div class="time" id="time">00:00:00</div>
                 </div>
-                <div class="timer-motto">无人扶我青云志，我自挖矿至巅峰。<br>若是命中无此运，亦可孤身登昆仑。</div>
+                <div class="timer-motto">无人扶我青云志，我自挖矿至巅峰。<br>卷轴铺就黄金路，链上乾坤掌中明。</div>
             </div>
             
             <div class="auth-grid">
-                <!-- 修复所有按钮链接 -->
+                <!-- 修改按钮链接和样式 -->
                 <a href="https://prod.digital-scroll.org/#/pages/reg?c=182N17" class="auth-btn" id="registerBtn">注册/登录</a>
-                <button class="contact-btn" onclick="showContactModal()">快速认证</button>
+                <a href="xuyuan.html" class="contact-btn">卷轴学院</a>
                 <a href="guide.html" class="guide-btn">操作指南</a>
                 <a href="moxing.html" class="model-btn">经济模型</a>
-                <a href="youxi.html" class="game-btn">复投计算</a>
+                <a href="youxi.html" class="game-btn">生态游戏</a>
                 <a href="gudongzhidu.html" class="shareholder-btn">股东制度</a>
             </div>
         </header>
@@ -633,7 +649,7 @@
             <h3>项目特色</h3>
             <ul>
                 <li>每小时自动产生收益</li>
-                <li>多重收益来源：卷轴收益、推广收益、共享矿机收益、股东分红</li>
+                <li>多重收益来源：卷轴收益、推广收益、共享矿机收益</li>
                 <li>透明公开的区块链技术保障</li>
                 <li>24小时全天候交易</li>
             </ul>
@@ -738,25 +754,25 @@
                 <tr>
                     <td>黄金</td>
                     <td>1000 DSC</td>
-                    <td>6 DSC</td>
+                    <td>4.53 DSC</td>
                     <td>120天</td>
                 </tr>
                 <tr>
                     <td>铂金</td>
                     <td>5000 DSC</td>
-                    <td>31.66 DSC</td>
+                    <td>23.33 DSC</td>
                     <td>180天</td>
                 </tr>
                 <tr>
                     <td>钻石</td>
                     <td>10000 DSC</td>
-                    <td>66.66 DSC</td>
+                    <td>50.82 DSC</td>
                     <td>280天</td>
                 </tr>
                 <tr>
                     <td>至尊</td>
                     <td>50000 DSC</td>
-                    <td>350 DSC</td>
+                    <td>270 DSC</td>
                     <td>360天</td>
                 </tr>
             </table>
