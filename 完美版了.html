@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSC复投计算系统</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            font-size: 12px;
+            line-height: 1.2;
+        }
+        
+        body {
+            background: linear-gradient(to bottom, #f5f7fa, #e4e8f0);
+            color: #2d3748;
+            padding: 8px;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        
+        .header-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background-color: #4a90e2;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo::before {
+            content: 'DSC';
+            position: absolute;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .logo::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url('images/logo01.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 1;
+            transition: opacity 0.3s;
+        }
+        
+        .logo:hover::after {
+            opacity: 0.8;
+        }
+        
+        .container {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            margin-bottom: 12px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        h1 {
+            font-size: 18px;
+            color: #4a90e2;
+            cursor: pointer;
+        }
+        
+        h2 {
+            font-size: 14px;
+            margin: 8px 0;
+            color: #4a90e2;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .days-count {
+            font-size: 12px;
+            color: #4a90e2;
+            background-color: #f7f9fc;
+            padding: 2px 8px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .input-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 5px;
+        }
+        
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin: 15px 0;
+        }
+        
+        .input-label {
+            color: #4a5568;
+            font-size: 12px;
+            white-space: nowrap;
+            width: 60px;
+            text-align: center;
+        }
+        
+        .input-field {
+            width: 100px;
+            padding: 4px 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            text-align: center;
+            background: #f7f9fc;
+            color: #2d3748;
+            height: 22px;
+            font-size: 12px;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border: 1px solid #4a90e2;
+            box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+        }
+        
+        .input-field[type="number"] {
+            -moz-appearance: textfield;
+        }
+        
+        .input-field::-webkit-outer-spin-button,
+        .input-field::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        
+        .input-field::placeholder {
+            color: #a0aec0;
+            font-size: 11px;
+        }
+        
+        .conversion-info {
+            color: #718096;
+            font-size: 11px;
+            text-align: center;
+            margin: 4px 0;
+        }
+        
+        .fuel-info {
+            color: #e53e3e;
+            font-size: 11px;
+            text-align: center;
+            margin: 4px 0 4px 0;
+        }
+        
+        .bonus-info {
+            color: #4a90e2;
+            font-size: 11px;
+            text-align: center;
+            margin: 0 0 8px 0;
+        }
+        
+        .scroll-display {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-top: 10px;
+            padding: 6px;
+            background: rgba(247, 249, 252, 0.8);
+            border-radius: 6px;
+            min-height: 28px;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .scroll-item {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            background: rgba(74, 144, 226, 0.1);
+            padding: 2px 4px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            font-size: 10px;
+        }
+        
+        .scroll-name {
+            color: #4a5568;
+        }
+        
+        .scroll-count {
+            color: #4a90e2;
+            font-weight: bold;
+        }
+        
+        .results {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            background: #f7f9fc;
+        }
+        
+        .results table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .results thead {
+            position: sticky;
+            top: 0;
+            background-color: #edf2f7;
+            z-index: 2;
+        }
+        
+        .results thead th {
+            color: #4a5568;
+            font-weight: bold;
+            padding: 6px 4px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        /* 优化滚动条样式 */
+        .results {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(160, 174, 192, 0.5) transparent;
+        }
+        
+        .results::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .results::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        .results::-webkit-scrollbar-thumb {
+            background-color: rgba(160, 174, 192, 0.5);
+            border-radius: 4px;
+            border: 2px solid transparent;
+        }
+        
+        .results::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(113, 128, 150, 0.7);
+        }
+        
+        th, td {
+            padding: 6px 4px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        tr:hover {
+            background-color: rgba(74, 144, 226, 0.1);
+            cursor: pointer;
+        }
+        
+        tr.selected {
+            background-color: rgba(74, 144, 226, 0.15);
+            outline: 2px solid #4a90e2;
+        }
+        
+        /* 展开/收起按钮样式 */
+        .toggle-more {
+            text-align: center;
+            margin-top: 8px;
+            padding: 4px 0;
+        }
+        
+        .toggle-more button {
+            background: transparent;
+            border: none;
+            color: #4a90e2;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 4px;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            margin: 0 auto;
+        }
+        
+        .toggle-more button:hover {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        
+        .toggle-more button:disabled {
+            color: #a0aec0;
+            cursor: not-allowed;
+            opacity: 0.5;
+            transform: none;
+        }
+        
+        .current-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(247, 249, 252, 0.8);
+            border-radius: 6px;
+            justify-content: center;
+            align-items: center;
+            min-height: 60px;
+            border: 1px solid #e2e8f0;
+            position: relative;
+        }
+        
+        .day-indicator {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #4a90e2;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: bold;
+            display: none;
+        }
+        
+        .mode-notice {
+            text-align: center;
+            padding: 6px;
+            margin-top: 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            transition: all 0.3s ease;
+        }
+        
+        .activity-mode {
+            background: rgba(229, 62, 62, 0.1);
+            border-left: 3px solid #e53e3e;
+            color: #e53e3e;
+        }
+        
+        .daily-mode {
+            background: rgba(74, 144, 226, 0.1);
+            border-left: 3px solid #4a90e2;
+            color: #4a5568;
+        }
+        
+        .fuel-cost {
+            color: #e53e3e;
+            font-weight: bold;
+        }
+        
+        .growth-rate {
+            color: #4a90e2;
+            font-weight: bold;
+        }
+        
+        .yield-rate {
+            color: #4a90e2;
+            font-weight: bold;
+        }
+        
+        .calculate-button {
+            background: linear-gradient(to bottom, #4a90e2, #3b78c0);
+            color: white;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            height: 22px;
+            font-size: 12px;
+            white-space: nowrap;
+            box-shadow: 0 2px 4px rgba(74, 144, 226, 0.3);
+        }
+        
+        .calculate-button:hover {
+            background: linear-gradient(to bottom, #3b78c0, #2a63a5);
+        }
+        
+        .loading-indicator {
+            text-align: center;
+            padding: 10px;
+            color: #4a90e2;
+        }
+        
+        .input-with-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+        }
+        
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-bottom: 8px;
+        }
+        
+        .warning-text {
+            color: #e53e3e;
+        }
+        
+        .info-text {
+            color: #718096;
+            font-size: 11px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="header-link">
+            <div class="logo"></div>
+            <h1>DSC复投模拟计算系统</h1>
+        </a>
+    </div>
+    
+    <div class="container">
+        <!-- 第一行：活跃度输入 -->
+        <div class="input-group">
+            <div class="input-row">
+                <label class="input-label" for="activity">活跃度</label>
+                <input type="number" id="activity" class="input-field" min="0" value="" step="any" placeholder="输入活跃度">
+                <button class="calculate-button" id="calc-activity">计算</button>
+            </div>
+            
+            <!-- 第二行：活跃度转换提示 -->
+            <div class="conversion-info">1活跃度 = 10 DSC</div>
+        </div>
+        
+        <!-- 第三行：日产输入 -->
+        <div class="input-group">
+            <div class="input-row">
+                <label class="input-label" for="daily">日产量</label>
+                <input type="number" id="daily" class="input-field" min="0" value="" step="any" placeholder="输入日产量">
+                <button class="calculate-button" id="calc-daily">计算</button>
+            </div>
+            
+            <!-- 第四行：日产提示 -->
+            <div class="fuel-info warning-text">每日领取所需的燃料费约是领取DSC的25%</div>
+            <div class="bonus-info">每日复投也会根据规则动态赠送DSC和SCC，实际收益会更多</div>
+        </div>
+        
+        <!-- 矿机参数显示 -->
+        <div class="current-stats">
+            <div class="day-indicator" id="day-indicator"></div>
+            <div class="scroll-display" id="current-scrolls">
+                <div class="info-text">请输入活跃度或日产量开始复投计算</div>
+            </div>
+        </div>
+        
+        <!-- 计算模式提示 -->
+        <div class="mode-notice activity-mode warning-text" id="mode-notice">
+            请选择一种计算方式
+        </div>
+    </div>
+    
+    <div class="container">
+        <h2>复投计算结果 <span class="days-count" id="days-count">0天</span></h2>
+        
+        <div class="results" id="results-container">
+            <table id="results-table">
+                <thead>
+                    <tr id="table-header">
+                        <th>天数</th>
+                        <th id="activity-header">累计活跃度</th>
+                        <th id="growth-header" style="display:none;">增长率</th>
+                        <th>日产量</th>
+                        <th id="yield-header" style="display:none;">收益率</th>
+                        <th id="fuel-header">燃料费</th>
+                        <th>余额</th>
+                    </tr>
+                </thead>
+                <tbody id="results-body">
+                    <tr>
+                        <td colspan="7" style="text-align: center; padding: 10px;" class="info-text">暂无数据</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="toggle-more">
+            <button id="toggle-more" aria-label="加载更多天数" disabled>
+                <i class="fas fa-chevron-down"></i>
+                <span>加载更多</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 卷轴数据
+            const scrolls = {
+                bronze: { name: '青铜', cost: 10, daily: 0.06, count: 0, max: 10 },
+                silver: { name: '白银', cost: 100, daily: 0.6, count: 0, max: 10 },
+                gold: { name: '黄金', cost: 1000, daily: 6, count: 0, max: 10 },
+                platinum: { name: '铂金', cost: 5000, daily: 31.66, count: 0, max: 5 },
+                diamond: { name: '钻石', cost: 10000, daily: 66.66, count: 0, max: 5 },
+                supreme: { name: '至尊', cost: 50000, daily: 350, count: 0, max: Infinity }
+            };
+            
+            // 合成规则
+            const conversionRules = [
+                { from: 'bronze', to: 'silver', rate: 10 },
+                { from: 'silver', to: 'gold', rate: 10 },
+                { from: 'gold', to: 'platinum', rate: 5 },
+                { from: 'platinum', to: 'diamond', rate: 2 },
+                { from: 'diamond', to: 'supreme', rate: 5 }
+            ];
+            
+            // 存储模拟结果和状态
+            let allSimulationResults = []; // 存储所有计算结果
+            let displayedResults = [];     // 存储已显示的结果
+            let currentDisplayDays = 0;    // 当前显示的天数
+            let calculationMode = null;    // 计算模式
+            let baseDailyProduction = 0;   // 基础日产量
+            let isCalculating = false;     // 是否正在计算
+            let initialActivity = 0;       // 初始活跃度
+            let initialDaily = 0;          // 初始日产量
+            let selectedRow = null;        // 当前选中的表格行
+            
+            // DOM元素
+            const activityInput = document.getElementById('activity');
+            const dailyInput = document.getElementById('daily');
+            const calcActivityBtn = document.getElementById('calc-activity');
+            const calcDailyBtn = document.getElementById('calc-daily');
+            const modeNotice = document.getElementById('mode-notice');
+            const fuelHeader = document.getElementById('fuel-header');
+            const activityHeader = document.getElementById('activity-header');
+            const growthHeader = document.getElementById('growth-header');
+            const yieldHeader = document.getElementById('yield-header');
+            const toggleMoreBtn = document.getElementById('toggle-more');
+            const resultsBody = document.getElementById('results-body');
+            const daysCountEl = document.getElementById('days-count');
+            const currentScrolls = document.getElementById('current-scrolls');
+            const dayIndicator = document.getElementById('day-indicator');
+            
+            // 初始化
+            function init() {
+                // 计算按钮事件
+                calcActivityBtn.addEventListener('click', function() {
+                    calculateFromActivity();
+                    activityInput.blur();
+                });
+                
+                calcDailyBtn.addEventListener('click', function() {
+                    activityInput.value = ''; // 点击日产计算按钮时清空活跃度输入框
+                    calculateFromDaily();
+                    dailyInput.blur();
+                });
+                
+                // 活跃度输入变化时更新日产输入框
+                activityInput.addEventListener('input', function() {
+                    updateDailyFromActivity();
+                });
+                
+                // 日产输入框获得焦点时清空活跃度输入框
+                dailyInput.addEventListener('focus', function() {
+                    activityInput.value = '';
+                });
+                
+                // 输入框失去焦点时自动计算
+                activityInput.addEventListener('blur', function() {
+                    if (this.value && parseFloat(this.value) > 0) {
+                        calculateFromActivity();
+                    }
+                });
+                
+                dailyInput.addEventListener('blur', function() {
+                    if (this.value && parseFloat(this.value) > 0) {
+                        calculateFromDaily();
+                    }
+                });
+                
+                // 日产输入框点击事件 - 切换到日产模式
+                dailyInput.addEventListener('click', function() {
+                    setCalculationMode('daily');
+                    this.select();
+                });
+                
+                // 输入框回车事件 - 收回键盘并计算
+                activityInput.addEventListener('keydown', function(e) {
+                    const confirmKeys = ['Enter', 'Done', 'Go', 'NumpadEnter'];
+                    if (confirmKeys.includes(e.key)) {
+                        e.preventDefault();
+                        if (this.value && parseFloat(this.value) > 0) {
+                            calculateFromActivity();
+                        }
+                        this.blur();
+                    }
+                });
+                
+                dailyInput.addEventListener('keydown', function(e) {
+                    const confirmKeys = ['Enter', 'Done', 'Go', 'NumpadEnter'];
+                    if (confirmKeys.includes(e.key)) {
+                        e.preventDefault();
+                        if (this.value && parseFloat(this.value) > 0) {
+                            calculateFromDaily();
+                        }
+                        this.blur();
+                    }
+                });
+                
+                // 点击输入框选中内容
+                activityInput.addEventListener('click', function() {
+                    this.select();
+                });
+                
+                dailyInput.addEventListener('click', function() {
+                    this.select();
+                });
+                
+                // 加载更多按钮事件
+                toggleMoreBtn.addEventListener('click', loadMoreResults);
+                
+                // 点击页面其他区域取消选中行
+                document.addEventListener('click', function(e) {
+                    if (selectedRow && !e.target.closest('tr') && !e.target.closest('#current-scrolls')) {
+                        clearSelectedRow();
+                    }
+                });
+            }
+            
+            // 清除选中行
+            function clearSelectedRow() {
+                if (selectedRow) {
+                    selectedRow.classList.remove('selected');
+                    selectedRow = null;
+                    
+                    // 隐藏天数指示器
+                    dayIndicator.style.display = 'none';
+                    dayIndicator.textContent = '';
+                    
+                    // 恢复默认显示
+                    const scrollDisplay = document.getElementById('current-scrolls');
+                    if (calculationMode === 'activity') {
+                        updateCurrentScrollsDisplay();
+                    } else {
+                        scrollDisplay.innerHTML = '<div class="info-text">点击下面表格查看每天复投的矿机数据</div>';
+                    }
+                }
+            }
+            
+            // 从活跃度更新日产输入框
+            function updateDailyFromActivity() {
+                const activity = parseFloat(activityInput.value) || 0;
+                if (activity <= 0) {
+                    dailyInput.value = '';
+                    return;
+                }
+                
+                // 重置卷轴
+                resetScrolls();
+                
+                // 转换活跃度为DSC并分配卷轴
+                let remainingDSC = activity * 10;
+                const scrollTypes = ['supreme', 'diamond', 'platinum', 'gold', 'silver', 'bronze'];
+                for (const type of scrollTypes) {
+                    const scroll = scrolls[type];
+                    const count = Math.floor(remainingDSC / scroll.cost);
+                    scroll.count = Math.min(count, scroll.max);
+                    remainingDSC -= scroll.count * scroll.cost;
+                }
+                
+                // 自动合成
+                autoUpgrade();
+                
+                // 计算总日产量并更新日产输入框
+                const dailyProduction = calculateDailyProduction();
+                dailyInput.value = dailyProduction.toFixed(2);
+            }
+            
+            // 加载更多结果
+            function loadMoreResults() {
+                if (isCalculating || currentDisplayDays >= 1095) return;
+                
+                // 计算下一步要显示的天数（每次增加100天，最多到1095天）
+                const nextDays = Math.min(currentDisplayDays + 100, 1095);
+                
+                // 显示加载状态
+                toggleMoreBtn.disabled = true;
+                toggleMoreBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>加载中...</span>';
+                
+                // 立即显示结果，不延迟
+                // 从所有结果中获取新增的100天数据
+                const newResults = allSimulationResults.filter(
+                    result => result.day > currentDisplayDays && result.day <= nextDays
+                );
+                
+                // 添加到已显示结果并更新界面
+                displayedResults = [...displayedResults, ...newResults];
+                currentDisplayDays = nextDays;
+                
+                // 更新显示
+                displayResults();
+                updateDaysCount();
+                
+                // 更新按钮状态
+                if (currentDisplayDays >= 1095) {
+                    toggleMoreBtn.innerHTML = '<i class="fas fa-check"></i><span>已显示全部</span>';
+                    toggleMoreBtn.disabled = true;
+                } else {
+                    toggleMoreBtn.innerHTML = '<i class="fas fa-chevron-down"></i><span>加载更多</span>';
+                    toggleMoreBtn.disabled = false;
+                }
+                
+                // 滚动到表格底部
+                const resultsContainer = document.getElementById('results-container');
+                resultsContainer.scrollTop = resultsContainer.scrollHeight;
+            }
+            
+            // 设置计算模式
+            function setCalculationMode(mode) {
+                calculationMode = mode;
+                
+                if (mode === 'activity') {
+                    modeNotice.textContent = "当前模式: 活跃度计算复投已 (扣除约25%燃料费)";
+                    modeNotice.className = 'mode-notice activity-mode warning-text';
+                    fuelHeader.style.display = 'table-cell';
+                    activityHeader.textContent = '活跃度';
+                    activityHeader.style.display = 'table-cell';
+                    growthHeader.style.display = 'table-cell';
+                    yieldHeader.style.display = 'none';
+                } else if (mode === 'daily') {
+                    modeNotice.textContent = "当前模式: 日产计算复投 (不扣除燃料费)适合有多种收益且有足够多的SCC用户";
+                    modeNotice.className = 'mode-notice daily-mode';
+                    fuelHeader.style.display = 'none';
+                    activityHeader.textContent = '增长活跃度';
+                    activityHeader.style.display = 'table-cell';
+                    growthHeader.style.display = 'none';
+                    yieldHeader.style.display = 'table-cell';
+                    
+                    // 日产模式下更新矿机显示区域文本
+                    currentScrolls.innerHTML = '<div class="info-text">点击下面表格查看每天复投的矿机数据</div>';
+                }
+            }
+            
+            // 从活跃度计算
+            function calculateFromActivity() {
+                const activity = parseFloat(activityInput.value) || 0;
+                if (activity <= 0) return;
+                
+                initialActivity = activity;
+                setCalculationMode('activity');
+                startCalculation();
+                
+                // 重置卷轴
+                resetScrolls();
+                
+                // 转换活跃度为DSC并分配卷轴
+                let remainingDSC = activity * 10;
+                const scrollTypes = ['supreme', 'diamond', 'platinum', 'gold', 'silver', 'bronze'];
+                for (const type of scrollTypes) {
+                    const scroll = scrolls[type];
+                    const count = Math.floor(remainingDSC / scroll.cost);
+                    scroll.count = Math.min(count, scroll.max);
+                    remainingDSC -= scroll.count * scroll.cost;
+                }
+                
+                // 自动合成
+                autoUpgrade();
+                
+                // 计算初始日产量
+                const dailyProduction = calculateDailyProduction();
+                
+                // 更新显示
+                updateCurrentScrollsDisplay();
+                
+                // 计算所有1095天的数据，但先只显示100天
+                calculateAllDays('activity', dailyProduction, remainingDSC);
+            }
+            
+            // 从日产量计算
+            function calculateFromDaily() {
+                const dailyValue = parseFloat(dailyInput.value) || 0;
+                if (dailyValue <= 0) return;
+                
+                initialDaily = dailyValue;
+                setCalculationMode('daily');
+                startCalculation();
+                
+                // 重置卷轴和基础日产量
+                resetScrolls();
+                baseDailyProduction = dailyValue;
+                
+                // 日产模式下更新矿机显示区域文本
+                currentScrolls.innerHTML = '<div class="info-text">点击下面表格查看每天复投的矿机数据</div>';
+                
+                // 计算所有1095天的数据，但先只显示100天
+                calculateAllDays('daily', 0, 0);
+            }
+            
+            // 开始计算时的准备工作
+            function startCalculation() {
+                isCalculating = true;
+                allSimulationResults = [];
+                displayedResults = [];
+                currentDisplayDays = 0;
+                clearSelectedRow();
+                
+                // 清空表格并显示加载状态
+                resultsBody.innerHTML = '<tr><td colspan="7" class="loading-indicator"><i class="fas fa-calculator"></i> 正在计算...</td></tr>';
+                toggleMoreBtn.disabled = true;
+                toggleMoreBtn.innerHTML = '<i class="fas fa-chevron-down"></i><span>加载更多</span>';
+                updateDaysCount();
+            }
+            
+            // 计算所有1095天的数据
+            function calculateAllDays(mode, initialDailyProd, initialBalance) {
+                // 复制初始卷轴状态
+                const initialScrolls = {};
+                for (const key in scrolls) {
+                    initialScrolls[key] = scrolls[key].count;
+                }
+                
+                let dailyProd = initialDailyProd;
+                let balance = initialBalance;
+                let totalActivity = calculateActivity();
+                
+                // 计算所有1095天的数据
+                for (let day = 1; day <= 1095; day++) {
+                    let fuelCost = 0;
+                    let dailyEarnings = 0;
+                    let dailyProductionFromScrolls = 0;
+                    
+                    if (mode === 'activity') {
+                        // 活跃度模式 - 扣除25%燃料费
+                        dailyProductionFromScrolls = calculateDailyProduction();
+                        fuelCost = dailyProductionFromScrolls * 0.25;
+                        dailyEarnings = dailyProductionFromScrolls * 0.75;
+                        balance += dailyEarnings;
+                    } else {
+                        // 日产模式 - 不扣除燃料费
+                        dailyProductionFromScrolls = calculateDailyProduction();
+                        dailyEarnings = baseDailyProduction + dailyProductionFromScrolls;
+                        balance += dailyEarnings;
+                    }
+                    
+                    // 计算新增活跃度
+                    const newActivity = Math.floor(balance / 10);
+                    balance -= newActivity * 10;
+                    
+                    // 计算总活跃度
+                    if (mode === 'activity') {
+                        totalActivity += newActivity;
+                    } else {
+                        totalActivity = calculateActivity() + newActivity;
+                    }
+                    
+                    // 根据总活跃度重新分配矿机
+                    allocateScrollsByActivity(totalActivity);
+                    
+                    // 计算增长率和收益率
+                    let growthRate = 0;
+                    let yieldRate = 0;
+                    
+                    if (mode === 'activity') {
+                        // 活跃度模式计算增长率
+                        growthRate = initialActivity > 0 ? ((totalActivity - initialActivity) / initialActivity * 100) : 0;
+                    } else {
+                        // 日产模式计算收益率
+                        const currentDaily = baseDailyProduction + dailyProductionFromScrolls;
+                        yieldRate = initialDaily > 0 ? ((currentDaily - initialDaily) / initialDaily * 100) : 0;
+                    }
+                    
+                    // 保存当天结果
+                    const scrollSnapshot = {};
+                    for (const key in scrolls) {
+                        scrollSnapshot[key] = scrolls[key].count;
+                    }
+                    
+                    // 日产模式下显示总产量（基础+矿机）
+                    const displayDaily = mode === 'daily' ? baseDailyProduction + dailyProductionFromScrolls : dailyProductionFromScrolls;
+                    
+                    allSimulationResults.push({
+                        day,
+                        balance: balance,
+                        activity: totalActivity,
+                        daily: displayDaily,
+                        fuelCost: mode === 'activity' ? fuelCost : 0,
+                        scrolls: {...scrollSnapshot},
+                        growthRate: growthRate,
+                        yieldRate: yieldRate
+                    });
+                }
+                
+                // 恢复初始卷轴状态
+                for (const key in scrolls) {
+                    scrolls[key].count = initialScrolls[key];
+                }
+                
+                // 完成计算后显示前100天
+                currentDisplayDays = Math.min(100, 1095);
+                displayedResults = allSimulationResults.filter(result => result.day <= currentDisplayDays);
+                displayResults();
+                updateDaysCount();
+                
+                // 更新加载更多按钮状态
+                toggleMoreBtn.disabled = currentDisplayDays >= 1095;
+                isCalculating = false;
+            }
+            
+            // 根据活跃度分配卷轴
+            function allocateScrollsByActivity(activity) {
+                resetScrolls();
+                
+                let remainingDSC = activity * 10;
+                const scrollTypes = ['supreme', 'diamond', 'platinum', 'gold', 'silver', 'bronze'];
+                
+                for (const type of scrollTypes) {
+                    const scroll = scrolls[type];
+                    const count = Math.floor(remainingDSC / scroll.cost);
+                    scroll.count = Math.min(count, scroll.max);
+                    remainingDSC -= scroll.count * scroll.cost;
+                }
+                
+                autoUpgrade();
+            }
+            
+            // 重置卷轴
+            function resetScrolls() {
+                for (const key in scrolls) {
+                    scrolls[key].count = 0;
+                }
+            }
+            
+            // 计算日产量
+            function calculateDailyProduction() {
+                return Object.values(scrolls).reduce((total, scroll) => {
+                    return total + (scroll.count * scroll.daily);
+                }, 0);
+            }
+            
+            // 计算总活跃度
+            function calculateActivity() {
+                return Math.floor(Object.values(scrolls).reduce((total, scroll) => {
+                    return total + (scroll.count * scroll.cost);
+                }, 0) / 10);
+            }
+            
+            // 自动合成函数
+            function autoUpgrade() {
+                let upgraded;
+                do {
+                    upgraded = false;
+                    for (const rule of conversionRules) {
+                        const fromScroll = scrolls[rule.from];
+                        const toScroll = scrolls[rule.to];
+                        
+                        if (fromScroll.count >= rule.rate && toScroll.count < toScroll.max) {
+                            const upgradeCount = Math.min(
+                                Math.floor(fromScroll.count / rule.rate),
+                                toScroll.max - toScroll.count
+                            );
+                            
+                            if (upgradeCount > 0) {
+                                fromScroll.count -= upgradeCount * rule.rate;
+                                toScroll.count += upgradeCount;
+                                upgraded = true;
+                            }
+                        }
+                    }
+                } while (upgraded);
+            }
+            
+            // 格式化数字显示
+            function formatNumber(num) {
+                return num % 1 === 0 ? num.toString() : num.toFixed(2);
+            }
+            
+            // 格式化百分比显示
+            function formatPercent(num) {
+                return num.toFixed(2) + '%';
+            }
+            
+            // 显示结果
+            function displayResults() {
+                if (displayedResults.length === 0) {
+                    resultsBody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 10px;" class="info-text">暂无数据</td></tr>';
+                    return;
+                }
+                
+                resultsBody.innerHTML = '';
+                
+                for (const result of displayedResults) {
+                    const row = document.createElement('tr');
+                    row.setAttribute('data-day', result.day);
+                    
+                    if (calculationMode === 'activity') {
+                        row.innerHTML = `
+                            <td>${result.day}</td>
+                            <td>${formatNumber(result.activity)}</td>
+                            <td class="growth-rate">${formatPercent(result.growthRate)}</td>
+                            <td>${formatNumber(result.daily)}</td>
+                            <td class="fuel-cost">${formatNumber(result.fuelCost)}</td>
+                            <td>${formatNumber(result.balance)}</td>
+                        `;
+                    } else {
+                        row.innerHTML = `
+                            <td>${result.day}</td>
+                            <td>${formatNumber(result.activity)}</td>
+                            <td>${formatNumber(result.daily)}</td>
+                            <td class="yield-rate">${formatPercent(result.yieldRate)}</td>
+                            <td>${formatNumber(result.balance)}</td>
+                        `;
+                    }
+                    
+                    resultsBody.appendChild(row);
+                    
+                    // 点击行显示卷轴详情
+                    row.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        
+                        // 清除之前选中的行
+                        if (selectedRow) {
+                            selectedRow.classList.remove('selected');
+                        }
+                        
+                        // 选中当前行
+                        this.classList.add('selected');
+                        selectedRow = this;
+                        
+                        showScrollDetails(result);
+                    });
+                }
+            }
+            
+            // 显示卷轴详情
+            function showScrollDetails(result) {
+                // 显示天数指示器
+                dayIndicator.textContent = `第${result.day}天`;
+                dayIndicator.style.display = 'block';
+                
+                const scrollDisplay = document.getElementById('current-scrolls');
+                scrollDisplay.innerHTML = '';
+                
+                for (const key in result.scrolls) {
+                    if (result.scrolls[key] > 0) {
+                        const scrollItem = document.createElement('div');
+                        scrollItem.className = 'scroll-item';
+                        scrollItem.innerHTML = `
+                            <span class="scroll-name">${scrolls[key].name.substring(0, 2)}</span>
+                            <span class="scroll-count">${result.scrolls[key]}</span>
+                        `;
+                        scrollDisplay.appendChild(scrollItem);
+                    }
+                }
+                
+                if (scrollDisplay.children.length === 0) {
+                    scrollDisplay.innerHTML = '<div class="info-text">点击下面表格查看每天复投的矿机数据</div>';
+                }
+            }
+            
+            // 更新当前矿机显示
+            function updateCurrentScrollsDisplay() {
+                const scrollDisplay = document.getElementById('current-scrolls');
+                scrollDisplay.innerHTML = '';
+                
+                for (const key in scrolls) {
+                    if (scrolls[key].count > 0) {
+                        const scrollItem = document.createElement('div');
+                        scrollItem.className = 'scroll-item';
+                        scrollItem.innerHTML = `
+                            <span class="scroll-name">${scrolls[key].name.substring(0, 2)}</span>
+                            <span class="scroll-count">${scrolls[key].count}</span>
+                        `;
+                        scrollDisplay.appendChild(scrollItem);
+                    }
+                }
+                
+                if (scrollDisplay.children.length === 0) {
+                    scrollDisplay.innerHTML = '<div class="info-text">请输入活跃度或日产量开始复投计算</div>';
+                }
+            }
+            
+            // 更新显示天数
+            function updateDaysCount() {
+                daysCountEl.textContent = currentDisplayDays + '天';
+            }
+            
+            // 初始化应用
+            init();
+        });
+    </script>
+</body>
+</html>
