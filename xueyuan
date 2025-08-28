@@ -428,7 +428,7 @@
     </div>
     
     <script>
-        // 视频播放功能
+        // 视频播放功能啊
         function openVideo(url) {
             document.getElementById('videoPlayer').src = url;
             document.getElementById('videoModal').style.display = 'flex';
