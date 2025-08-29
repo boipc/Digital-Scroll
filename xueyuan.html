@@ -290,15 +290,37 @@
             }
         }
 
-        /* 加载指示器 */
-        .loading {
+        /* 加载指示器和错误提示 */
+        .loading, .error-message {
             display: none;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             color: white;
+            text-align: center;
+            z-index: 1002;
+        }
+        
+        .loading {
             font-size: 14px;
+        }
+        
+        .error-message {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+        
+        .error-message button {
+            margin-top: 15px;
+            padding: 8px 16px;
+            background: #ff7e00;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -321,7 +343,7 @@
             <div class="videos-container">
                 <!-- 视频1 -->
                 <div class="video-card">
-                    <div class="video-wrapper" onclick="openVideo('https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll@main/01.mp4')">
+                    <div class="video-wrapper" onclick="openVideo('https://github.com/boipc/Digital-Scroll/raw/main/01.mp4')">
                         <div class="video-placeholder">
                             <div class="video-placeholder-text">数字卷轴DSC注册操作</div>
                         </div>
@@ -332,7 +354,7 @@
                 
                 <!-- 视频2 -->
                 <div class="video-card">
-                    <div class="video-wrapper" onclick="openVideo('https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll@main/02.mp4')">
+                    <div class="video-wrapper" onclick="openVideo('https://github.com/boipc/Digital-Scroll/raw/main/02.mp4')">
                         <div class="video-placeholder">
                             <div class="video-placeholder-text">数字卷轴DSC人脸识别操作</div>
                         </div>
@@ -343,7 +365,7 @@
                 
                 <!-- 视频3 -->
                 <div class="video-card">
-                    <div class="video-wrapper" onclick="openVideo('https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll@main/03.mp4')">
+                    <div class="video-wrapper" onclick="openVideo('https://github.com/boipc/Digital-Scroll/raw/main/03.mp4')">
                         <div class="video-placeholder">
                             <div class="video-placeholder-text">数字卷轴DSC分享操作</div>
                         </div>
@@ -354,7 +376,7 @@
                 
                 <!-- 视频4 -->
                 <div class="video-card">
-                    <div class="video-wrapper" onclick="openVideo('https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll@main/04.mp4')">
+                    <div class="video-wrapper" onclick="openVideo('https://github.com/boipc/Digital-Scroll/raw/main/04.mp4')">
                         <div class="video-placeholder">
                             <div class="video-placeholder-text">数学卷轴DSC购买操作</div>
                         </div>
@@ -365,7 +387,7 @@
                 
                 <!-- 视频5 -->
                 <div class="video-card">
-                    <div class="video-wrapper" onclick="openVideo('https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll@main/05.mp4')">
+                    <div class="video-wrapper" onclick="openVideo('https://github.com/boipc/Digital-Scroll/raw/main/05.mp4')">
                         <div class="video-placeholder">
                             <div class="video-placeholder-text">数学卷轴DSC出售操作</div>
                         </div>
@@ -376,7 +398,7 @@
                 
                 <!-- 视频6 -->
                 <div class="video-card">
-                    <div class="video-wrapper" onclick="openVideo('https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll@main/06.mp4')">
+                    <div class="video-wrapper" onclick="openVideo('https://github.com/boipc/Digital-Scroll/raw/main/06.mp4')">
                         <div class="video-placeholder">
                             <div class="video-placeholder-text">数字卷轴DSC激励操作</div>
                         </div>
@@ -428,6 +450,10 @@
         <div class="modal-content">
             <span class="close-modal" onclick="closeVideo()">&times;</span>
             <div class="loading" id="videoLoading">视频加载中...</div>
+            <div class="error-message" id="videoError" style="display: none;">
+                <p>视频加载失败，请检查网络连接或稍后再试</p>
+                <button onclick="closeVideo()">关闭</button>
+            </div>
             <video class="video-frame" id="videoPlayer" controls playsinline webkit-playsinline style="display:none;"></video>
         </div>
     </div>
@@ -438,11 +464,15 @@
             const modal = document.getElementById('videoModal');
             const videoPlayer = document.getElementById('videoPlayer');
             const loading = document.getElementById('videoLoading');
+            const errorMessage = document.getElementById('videoError');
             
-            // 显示加载提示
-            modal.style.display = 'flex';
+            // 重置状态
             loading.style.display = 'block';
+            errorMessage.style.display = 'none';
             videoPlayer.style.display = 'none';
+            
+            // 显示模态框
+            modal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
             
             // 设置视频源
@@ -451,22 +481,22 @@
             // 尝试加载和播放视频
             videoPlayer.load();
             
+            // 设置超时检查
+            const loadTimeout = setTimeout(() => {
+                if (videoPlayer.readyState < 3) { // 0=未初始化, 1=已加载元数据, 2=已加载当前帧数据, 3=已加载未来数据, 4=已加载全部数据
+                    showError();
+                }
+            }, 10000); // 10秒超时
+            
             videoPlayer.onloadeddata = function() {
+                clearTimeout(loadTimeout);
                 loading.style.display = 'none';
                 videoPlayer.style.display = 'block';
                 
                 // 尝试播放
                 videoPlayer.play().then(() => {
                     // 尝试进入全屏模式
-                    if (videoPlayer.requestFullscreen) {
-                        videoPlayer.requestFullscreen().catch(err => {
-                            console.log('全屏请求错误: ', err);
-                        });
-                    } else if (videoPlayer.webkitRequestFullscreen) {
-                        videoPlayer.webkitRequestFullscreen();
-                    } else if (videoPlayer.msRequestFullscreen) {
-                        videoPlayer.msRequestFullscreen();
-                    }
+                    enterFullscreen(videoPlayer);
                 }).catch(err => {
                     console.log('自动播放失败: ', err);
                     // 显示控制条让用户手动播放
@@ -475,10 +505,15 @@
             };
             
             videoPlayer.onerror = function() {
-                loading.style.display = 'none';
-                alert('视频加载失败，请检查网络连接或稍后再试');
-                closeVideo();
+                clearTimeout(loadTimeout);
+                showError();
             };
+            
+            function showError() {
+                loading.style.display = 'none';
+                errorMessage.style.display = 'block';
+                videoPlayer.style.display = 'none';
+            }
         }
         
         function closeVideo() {
@@ -487,9 +522,26 @@
             videoPlayer.src = '';
             videoPlayer.controls = false;
             document.getElementById('videoModal').style.display = 'none';
+            document.getElementById('videoError').style.display = 'none';
             document.body.style.overflow = 'auto';
             
             // 退出全屏
+            exitFullscreen();
+        }
+        
+        function enterFullscreen(element) {
+            if (element.requestFullscreen) {
+                element.requestFullscreen().catch(err => {
+                    console.log('全屏请求错误: ', err);
+                });
+            } else if (element.webkitRequestFullscreen) {
+                element.webkitRequestFullscreen();
+            } else if (element.msRequestFullscreen) {
+                element.msRequestFullscreen();
+            }
+        }
+        
+        function exitFullscreen() {
             if (document.exitFullscreen) {
                 document.exitFullscreen();
             } else if (document.webkitExitFullscreen) {
