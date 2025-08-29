@@ -83,24 +83,6 @@
             width: 100%;
         }
         
-        /* 提示信息样式 */
-        .notice {
-            background: #fff8e1;
-            border: 1px solid #ffc107;
-            padding: 10px 15px;
-            margin: 15px auto;
-            border-radius: 8px;
-            font-size: 13px;
-            color: #856404;
-            max-width: 600px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        
-        .notice strong {
-            color: #ff7e00;
-        }
-        
         /* 主内容区样式 */
         .main-content {
             padding: 10px 0;
@@ -306,11 +288,6 @@
             .sub-title {
                 font-size: 18px;
             }
-            
-            .notice {
-                font-size: 14px;
-                padding: 12px 20px;
-            }
         }
     </style>
 </head>
@@ -327,18 +304,13 @@
         <div class="sub-title">数字卷轴DSC操作视频</div>
     </header>
     
-    <!-- 提示信息 -->
-    <div class="notice">
-        <strong>温馨提示：</strong>点击视频播放会跳转到快手播放，在快手播放时不要乱动，否则很容易点到下载快手App
-    </div>
-    
     <!-- 主内容区 -->
     <main class="main-content">
         <div class="container">
             <div class="videos-container">
                 <!-- 视频1 -->
                 <div class="video-card">
-                    <div class="video-wrapper" onclick="openVideo('https://v.kuaishou.com/KAzDs0kH')">
+                    <div class="video-wrapper" onclick="openVideo('https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll/01.mp4')">
                         <div class="video-placeholder">
                             <div class="video-placeholder-text">数字卷轴DSC注册操作</div>
                         </div>
@@ -349,7 +321,7 @@
                 
                 <!-- 视频2 -->
                 <div class="video-card">
-                    <div class="video-wrapper" onclick="openVideo('https://v.kuaishou.com/KVQUY66n')">
+                    <div class="video-wrapper" onclick="openVideo('https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll/02.mp4')">
                         <div class="video-placeholder">
                             <div class="video-placeholder-text">数字卷轴DSC人脸识别操作</div>
                         </div>
@@ -360,7 +332,7 @@
                 
                 <!-- 视频3 -->
                 <div class="video-card">
-                    <div class="video-wrapper" onclick="openVideo('https://v.kuaishou.com/KDKrGlwN')">
+                    <div class="video-wrapper" onclick="openVideo('https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll/03.mp4')">
                         <div class="video-placeholder">
                             <div class="video-placeholder-text">数字卷轴DSC分享操作</div>
                         </div>
@@ -371,7 +343,7 @@
                 
                 <!-- 视频4 -->
                 <div class="video-card">
-                    <div class="video-wrapper" onclick="openVideo('https://v.kuaishou.com/JnMW4Za9')">
+                    <div class="video-wrapper" onclick="openVideo('https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll/04.mp4')">
                         <div class="video-placeholder">
                             <div class="video-placeholder-text">数学卷轴DSC购买操作</div>
                         </div>
@@ -382,7 +354,7 @@
                 
                 <!-- 视频5 -->
                 <div class="video-card">
-                    <div class="video-wrapper" onclick="openVideo('https://v.kuaishou.com/Ky8NHKAN')">
+                    <div class="video-wrapper" onclick="openVideo('https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll/05.mp4')">
                         <div class="video-placeholder">
                             <div class="video-placeholder-text">数学卷轴DSC出售操作</div>
                         </div>
@@ -393,7 +365,7 @@
                 
                 <!-- 视频6 -->
                 <div class="video-card">
-                    <div class="video-wrapper" onclick="openVideo('https://v.kuaishou.com/JQUWMz4R')">
+                    <div class="video-wrapper" onclick="openVideo('https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll/06.mp4')">
                         <div class="video-placeholder">
                             <div class="video-placeholder-text">数字卷轴DSC激励操作</div>
                         </div>
@@ -444,22 +416,49 @@
     <div class="modal" id="videoModal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeVideo()">&times;</span>
-            <iframe class="video-frame" id="videoPlayer" src="" frameborder="0" allowfullscreen></iframe>
+            <video class="video-frame" id="videoPlayer" controls playsinline webkit-playsinline></video>
         </div>
     </div>
     
     <script>
         // 视频播放功能
         function openVideo(url) {
-            document.getElementById('videoPlayer').src = url;
+            const videoPlayer = document.getElementById('videoPlayer');
+            videoPlayer.src = url;
             document.getElementById('videoModal').style.display = 'flex';
             document.body.style.overflow = 'hidden';
+            
+            // 尝试全屏播放
+            videoPlayer.play().then(() => {
+                if (videoPlayer.requestFullscreen) {
+                    videoPlayer.requestFullscreen().catch(err => {
+                        console.log('全屏请求错误: ', err);
+                    });
+                } else if (videoPlayer.webkitRequestFullscreen) {
+                    videoPlayer.webkitRequestFullscreen();
+                } else if (videoPlayer.msRequestFullscreen) {
+                    videoPlayer.msRequestFullscreen();
+                }
+            }).catch(err => {
+                console.log('自动播放失败: ', err);
+            });
         }
         
         function closeVideo() {
-            document.getElementById('videoPlayer').src = '';
+            const videoPlayer = document.getElementById('videoPlayer');
+            videoPlayer.pause();
+            videoPlayer.src = '';
             document.getElementById('videoModal').style.display = 'none';
             document.body.style.overflow = 'auto';
+            
+            // 退出全屏
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            }
         }
         
         // 检测logo加载失败
@@ -493,6 +492,20 @@
                 closeVideo();
             }
         };
+        
+        // 监听全屏变化
+        document.addEventListener('fullscreenchange', handleFullscreenChange);
+        document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+        document.addEventListener('msfullscreenchange', handleFullscreenChange);
+        
+        function handleFullscreenChange() {
+            const videoPlayer = document.getElementById('videoPlayer');
+            const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
+            
+            if (!isFullscreen && document.getElementById('videoModal').style.display === 'flex') {
+                closeVideo();
+            }
+        }
     </script>
 </body>
 </html>
