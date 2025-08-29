@@ -2,1024 +2,553 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>数字卷轴DSC - 创新数字资产项目</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>卷轴学院 - 数字卷轴DSC学习平台</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary-color: #FF6B35;
-            --secondary-color: #FFA630;
-            --dark-color: #333;
-            --light-color: #fff;
-            --accent-color: #FFE74C;
-            --register-btn: #D32F2F; /* 改为红色 */
-            --contact-btn: #D32F2F; /* 改为红色 */
-            --guide-btn: #D32F2F; /* 改为红色 */
-            --model-btn: #D32F2F; /* 改为红色 */
-            --game-btn: #D32F2F; /* 改为红色 */
-            --shareholder-btn: #D32F2F; /* 改为红色 */
-        }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Roboto', 'Microsoft YaHei', sans-serif;
+            font-family: 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
         }
         
         body {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: var(--light-color);
-            min-height: 100vh;
-            padding: 0;
-            overflow-x: hidden;
-            -webkit-tap-highlight-color: transparent;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            padding-bottom: 80px;
         }
         
         .container {
-            width: 100%;
-            margin: 0 auto;
-            padding: 10px;
-            max-width: 480px;
+            max-width: 100%;
+            padding: 0 15px;
         }
         
+        /* 头部样式 */
         header {
+            background: transparent;
+            color: #2c3e50;
+            padding: 15px 0 5px;
             text-align: center;
-            margin-bottom: 15px;
-            padding: 15px 10px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .header-row {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
             margin-bottom: 10px;
         }
         
-        .logo-container {
-            position: relative;
-            width: 2.8rem;
-            height: 2.8rem;
+        .header-top {
             display: flex;
             align-items: center;
             justify-content: center;
+            margin-bottom: 10px;
+            gap: 12px;
         }
         
         .logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            overflow: hidden;
+            flex-shrink: 0;
+            background: #ff7e00; /* 橙色背景 */
+        }
+        
+        .logo img {
+            width: 100%;
             height: 100%;
-            width: auto;
-            max-width: 100%;
             object-fit: contain;
         }
         
         .logo-fallback {
-            display: none;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        .main-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #2c3e50;
+            line-height: 1.2;
+        }
+        
+        .sub-title {
+            font-size: 16px;
+            color: #6a11cb;
+            font-weight: 500;
+            text-align: center;
+            width: 100%;
+        }
+        
+        /* 主内容区样式 */
+        .main-content {
+            padding: 10px 0;
+        }
+        
+        /* 视频区域样式 */
+        .videos-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+            padding: 0 5px;
+        }
+        
+        .video-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .video-card:active {
+            transform: scale(0.98);
+        }
+        
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            height: 25vh;
+            background: linear-gradient(135deg, #ff7e00 0%, #ff5500 100%);
+            cursor: pointer;
+        }
+        
+        .video-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            border-radius: 50%;
-            background: #2196F3;
-            color: white;
-            font-weight: bold;
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-        
-        h1 {
-            font-size: 1.8rem;
-            margin: 0;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-            font-family: 'Montserrat', sans-serif;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        
-        .subtitle {
-            font-size: 0.9rem;
-            margin-bottom: 8px;
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            line-height: 1.4;
-        }
-        
-        .timer-container {
-            margin: 12px 0;
-            padding: 12px 10px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(5px);
-            position: relative;
-            z-index: 1;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-        }
-        
-        .timer-label {
-            font-size: 1rem;
-            margin-bottom: 8px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-            font-weight: 500;
-        }
-        
-        .timer {
             display: flex;
             flex-direction: column;
-            gap: 4px;
-            font-family: 'Montserrat', sans-serif;
-        }
-        
-        .days {
-            font-size: 2.2em;
-            line-height: 1.2;
-            letter-spacing: 1px;
-            color: #FFD700;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-        }
-        
-        .time {
-            font-size: 1.4em;
-            letter-spacing: 1px;
-            color: var(--light-color);
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-        }
-        
-        .timer-motto {
-            font-size: 0.8rem;
-            margin-top: 8px;
-            color: #fff;
-            letter-spacing: 0.5px;
-            line-height: 1.4;
-        }
-        
-        .auth-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 6px;
-            margin: 12px 0;
-        }
-        
-        .auth-btn, .contact-btn, .guide-btn, .model-btn, .game-btn, .shareholder-btn {
-            display: flex;
             align-items: center;
             justify-content: center;
-            padding: 8px 5px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.2s ease;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-            border: none;
-            /* 增大字体 */
-            font-size: 1rem;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
+            color: white;
+            padding: 15px;
             text-align: center;
-            height: 42px;
         }
         
-        .auth-btn {
-            background: var(--register-btn);
-            color: var(--light-color);
+        .video-placeholder-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffeb3b;
+            text-shadow: 
+                -1px -1px 0 #000,  
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;
+            line-height: 1.4;
         }
         
-        .contact-btn {
-            background: var(--contact-btn);
-            color: var(--light-color);
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
+            color: white;
+            opacity: 0.85;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
         
-        .guide-btn {
-            background: var(--guide-btn);
-            color: var(--light-color);
+        .video-title {
+            padding: 12px 15px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c3e50;
+            border-top: 1px solid #f0f0f0;
         }
         
-        .model-btn {
-            background: var(--model-btn);
-            color: var(--light-color);
-        }
-        
-        .game-btn {
-            background: var(--game-btn);
-            color: var(--light-color);
-        }
-        
-        .shareholder-btn {
-            background: var(--shareholder-btn);
-            color: #fff;
-        }
-        
-        .auth-btn:hover, .contact-btn:hover, .guide-btn:hover, 
-        .model-btn:hover, .game-btn:hover, .shareholder-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-        }
-        
-        .auth-btn:active, .contact-btn:active, .guide-btn:active, 
-        .model-btn:active, .game-btn:active, .shareholder-btn:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-        
-        .button-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 6px;
-            margin-bottom: 15px;
-        }
-        
-        .btn {
-            background: rgba(255, 255, 255, 0.15);
-            border: none;
-            /* 黑色字体，增大字号 */
-            color: #333;
-            padding: 8px 5px;
-            font-size: 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-align: center;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            font-weight: 500;
-            height: 42px;
-        }
-        
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-            background: rgba(255, 255, 255, 0.25);
-        }
-        
-        .btn:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-        
-        .content-section {
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-            padding: 12px;
-            margin-bottom: 12px;
-            display: none;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            animation: fadeIn 0.3s ease-out;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .active {
-            display: block;
-        }
-        
-        h2 {
-            margin-bottom: 10px;
-            font-size: 1.3rem;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-            padding-bottom: 6px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-            font-family: 'Montserrat', sans-serif;
-            color: var(--accent-color);
-        }
-        
-        h3 {
-            margin: 12px 0 8px;
-            font-size: 1.1rem;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-            font-family: 'Montserrat', sans-serif;
-        }
-        
-        p {
-            margin-bottom: 8px;
-            line-height: 1.5;
-            font-size: 0.9rem;
-        }
-        
-        table {
+        /* 底部导航样式 */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
             width: 100%;
-            border-collapse: collapse;
-            margin: 12px 0;
-            background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            overflow: hidden;
-            font-size: 0.8rem;
+            background: white;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            padding: 10px 0;
         }
         
-        th, td {
-            padding: 8px 6px;
+        .nav-items {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #555;
+            font-size: 12px;
+            flex: 1;
+        }
+        
+        .nav-icon {
+            font-size: 18px;
+            margin-bottom: 4px;
+            color: #6a11cb;
+        }
+        
+        .nav-text {
+            font-size: 11px;
             text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        th {
-            background: rgba(0, 0, 0, 0.3);
-            font-weight: bold;
-            color: var(--accent-color);
-            font-size: 0.85rem;
+        .nav-item.active {
+            color: #2575fc;
         }
         
-        tr:hover {
-            background: rgba(255, 255, 255, 0.1);
+        .nav-item.active .nav-icon {
+            color: #2575fc;
         }
         
-        .highlight {
-            background: rgba(255, 230, 76, 0.2);
-            padding: 8px;
-            border-radius: 8px;
-            font-weight: bold;
-            display: inline-block;
-            border-left: 3px solid var(--accent-color);
-            font-size: 0.85rem;
-            margin: 8px 0;
-            line-height: 1.4;
-        }
-        
-        ul {
-            margin-left: 16px;
-            margin-bottom: 12px;
-        }
-        
-        li {
-            margin-bottom: 6px;
-            line-height: 1.4;
-            font-size: 0.9rem;
-        }
-        
-        #contactModal {
+        /* 视频模态框样式 */
+        .modal {
             display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            background-color: rgba(0, 0, 0, 0.95);
             z-index: 1000;
-            justify-content: center;
             align-items: center;
-            animation: fadeIn 0.3s ease-out;
-            backdrop-filter: blur(5px);
+            justify-content: center;
         }
         
         .modal-content {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            padding: 15px;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 350px;
-            text-align: center;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
             position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            animation: modalIn 0.4s ease-out;
-        }
-        
-        @keyframes modalIn {
-            0% { opacity: 0; transform: scale(0.95) translateY(15px); }
-            100% { opacity: 1; transform: scale(1) translateY(0); }
-        }
-        
-        .wechat-container {
+            width: 100%;
+            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 12px 0;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            padding: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
-        .wechat-id {
-            font-size: 1rem;
-            font-weight: bold;
-            margin-right: 10px;
-            letter-spacing: 0.5px;
-        }
-        
-        .copy-btn {
-            background: var(--accent-color);
-            color: var(--dark-color);
-            border: none;
-            padding: 6px 12px;
-            border-radius: 6px;
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 30px;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            transition: all 0.2s ease;
-            font-weight: bold;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-            font-size: 0.9rem;
-        }
-        
-        .copy-btn:hover {
-            background: #ffdf1a;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
-        
-        .copy-btn svg {
-            margin-right: 5px;
-        }
-        
-        .copy-status {
-            height: 16px;
-            margin: 8px 0;
-            color: var(--accent-color);
-            font-weight: bold;
-            font-size: 0.8rem;
-            text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-        }
-        
-        .close-btn {
-            margin-top: 12px;
-            padding: 6px 12px;
-            background: rgba(0, 0, 0, 0.3);
-            color: var(--light-color);
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 极速版 0.2s ease;
-            border: 1px solid rgba(255, 255, 255, 极速版 0.2);
-            font-size: 0.9rem;
-        }
-        
-        .close-btn:hover {
-            background: rgba(0, 0, 0, 0.4);
-        }
-        
-        footer {
-            text-align: center;
-            margin-top: 15px;
-            padding: 极速版 12px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.8rem;
-        }
-        
-        /* 链上治理样式 */
-        .governance-flow {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin: 15px 0;
-        }
-        
-        .flow-step {
-            background: rgba(255,255,255,0.1);
-            padding: 12px;
-            border-radius: 8px;
-            text-align: center;
-        }
-        
-        .step-number {
-            width: 30px;
-            height: 30px;
-            background: var(--accent-color);
-            color: #333;
+            z-index: 1001;
+            background: rgba(0, 0, 0, 0.5);
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            margin: 极速版 0 auto 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
         }
         
-        .node-structure {
-            display: grid;
-            gap: 10px;
-            margin: 15px 0;
+        .video-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
         
-        .node-card {
-            padding: 12px;
-            border-radius: 8px;
-        }
-        
-        .node-card.official {
-            background: rgba(255,76,76,0.1);
-            border-left: 3px solid var(--primary-color);
-        }
-        
-        .node-card.community {
-            background: rgba(76,175,80,0.1);
-            border-left: 3px solid var(--accent-color);
-        }
-        
-        .node-type {
-            font-size: 1rem;
-            margin-bottom: 8px;
-            color: var(--accent-color);
-        }
-        
-        .rules-container {
-            display: grid;
-            gap: 10px;
-            margin: 15px 极速版 0;
-        }
-        
-        .rule-box {
-            padding: 12px;
-            border-radius: 8px;
-        }
-        
-        .rule-box.critical {
-            background: rgba(255,极速版76,76,0.1);
-            border: 1px solid #ff4c4c;
-        }
-        
-        .rule-box.normal {
-            background: rgba(76,175,80,0.1);
-            border: 1极速版px solid #4CAF50;
-        }
-        
-        /* 小屏幕优化 */
-        @media (max-width: 360px) {
-            h1 {
-                font-size: 1.6rem;
+        /* 响应式设计 */
+        @media (min-width: 768px) {
+            .videos-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+                padding: 0 15px;
             }
             
-            .logo-container {
-                width: 2.4rem;
-                height: 2.4rem;
+            .container {
+                max-width: 768px;
+                margin: 0 auto;
             }
             
-            .timer-label {
-                font-size: 0.9rem;
+            .video-wrapper {
+                border-radius: 10px 10px 0 0;
+            }
+
+            .video-placeholder-text {
+                font-size: 24px;
             }
             
-            .days {
-                font-size: 2em;
+            .header-top {
+                gap: 15px;
             }
             
-极速版 .time {
-                font-size: 1.2em;
+            .main-title {
+                font-size: 24px;
             }
             
-            .btn, .auth-btn, .contact-btn, .guide-btn, 
-            .model-btn, .game-btn, .shareholder-btn {
-                height: 40px;
-                font-size: 0.9rem;
-                padding: 6px 4px;
+            .sub-title {
+                font-size: 18px;
             }
         }
-        
-        /* 超小屏幕优化 */
-        @media (max-width: 320px) {
-            h1 {
-                font-size: 1.4rem;
-            }
-            
-            .logo-container {
-                width: 2.2rem;
-                height: 2.2rem;
-            }
-            
-            .btn, .auth-btn, .contact-btn, .guide-btn, 
-            .model-btn, .game-btn, .shareholder-btn {
-                font-size: 0.85rem;
-                height: 38px;
-            }
+
+        /* 加载指示器 */
+        .loading {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="header-row">
-                <div class="logo-container">
-                    <img src="images/logo01.png" alt="数字卷轴DSC Logo" class="logo" onerror="this.style.display='none'; document.getElementById('logoFallback').style.display='flex'">
-                    <div id="logoFallback" class="logo-fallback">DSC</div>
-                </div>
-                <h1>数字卷轴DSC</h1>
-            </div>
-            <p class="subtitle">创新数字资产项目 · 每小时收益 · 多重获利方式</p>
-            
-            <div class="timer-container">
-                <div class="timer-label">DSC已稳定运行</div>
-                <div极速版 class="timer" id="runtimeTimer">
-                    <div class="days" id="days">00天</div>
-                    <div class="time" id="time">00:00:00</div>
-                </div>
-                <div class="timer-motto">无人扶我青云志，我自挖矿至巅峰。<br>卷轴铺就黄金路，链上乾坤掌中明。</div>
-            </div>
-            
-            <div class="auth-grid">
-                <!-- 修改按钮链接和样式 -->
-                <a href="https://prod.digital-scroll.org/#/pages/reg?c=182N17" class="auth-btn" id="registerBtn">注册/登录</a>
-                <a href="xueyuan.html" class="contact-btn">卷轴学院</a>
-                <a href="guide.html" class="guide-btn">操作指南</a>
-                <a href="moxing.html" class="model-btn">经济模型</a>
-                <a href="youxi.html" class="game-btn">生态游戏</a>
-                <a href="gudongzhidu.html" class="shareholder-btn">股东制度</a>
-            </div>
-        </header>
-        
-        <div class="button-grid">
-            <button class="btn" onclick="showSection('intro')">项目介绍</button>
-            <button class="btn" onclick="showSection('governance')">链上治理</button>
-            <button class="btn" onclick极速版="showSection('scrolls')">卷轴收益</button>
-            <button class="btn" onclick="showSection('verification')">身份验证</button>
-            <button class="btn" onclick="showSection('promotion')">推广奖励</button>
-            <button class="btn" onclick="showSection('trading')">市场交易</button>
-            <button class="btn" onclick="showSection('faq')">常见问题</button>
+    <!-- 头部 -->
+    <header>
+        <div class="header-top">
+            <a href="index.html" class="logo">
+                <img src="images/logo01.png" alt="卷轴学院Logo" onerror="this.style.display='none'; this.parentElement.querySelector('.logo-fallback').style.display='flex'">
+                <span class="logo-fallback" style="display: none;">DSC</span>
+            </a>
+            <h1 class="main-title">卷轴学院</h1>
         </div>
-        
-        <div id="intro" class="content-section active">
-            <h2>数字卷轴DSC项目介绍</h2>
-            <p>数字卷轴DSC是一个创新的数字资产增值项目，基于卷界链(Scroll Chain)技术开发，为用户提供多种收益方式。</p>
-            
-            <h3>节点自治与共识机制</h3>
-            <p>卷界链采用节点自治的共识机制，节点每10秒打包一个区块，生成SCC燃料通证。总共45个极速版节点，5个节点由官方预留，40个节点开放给全网玩家竞选。</p>
-            
-            <极速版h3>SCC燃料通证</h3>
-            <ul>
-                <li>燃料费用：玩家领取卷轴收益需消耗SCC作为网络燃料极速版费</li>
-                <li>获取方式：通过DSC/USDS兑换或参与卷轴复投获得</li>
-                <li>经济模型：日产量固定8,640 SCC</li>
-            </ul>
-            
-            <h3>项目特色</h3>
-            <ul>
-                <li>每小时自动产生收益</li>
-                <li>多重收益来源：卷轴收益、推广收益、共享矿机收益</li>
-                <li>透明公开的区块链技术保障</li>
-                <li>24小时全天候交易</极速版li>
-            </ul>
-        </div>
-        
-        <div id="governance" class="content-section">
-            <h2>链上治理体系</h2>
-            <div class="highlight">45节点共识网络 | 提案机制 | 季度席位竞选</div>
-            
-            <div class="governance-flow">
-                <div class="flow-step">
-                    <div class="step-number">1</div>
-                    <h4>提案发起</h4>
-                    <p>节点/社区提交优化方案</p>
-                </div>
-                <div class="flow-step">
-                    <div class="step-number">2</div>
-                    <h4>社区投票</h4>
-                    <p>需≥75%节点通过</p>
-                </div>
-                <div class="flow-step">
-                    <div class="step-number">3</div>
-                    <h4>技术开发</h4>
-                    <p>部署智能合约升级</p>
-                </div>
-                <div class="flow-step">
-                    <div class="step-number">4</div>
-                    <h4>极速版节点升级</h4>
-                    <p>72小时内完成更新</p>
-                </div>
-            </div>
-            
-            <h3>节点分布结构</h3>
-            <div class="node-structure">
-                <div class="node-card official">
-                    <div class="node-type">官方节点</div>
-                    <div class="node-info">
-                        <span class="count">5席位</span>
-                        <ul>
-                            <li>网络基础运维</li>
-                            <li>紧急事件处置</li>
-                        </ul>
+        <div class="sub-title">数字卷轴DSC操作视频</div>
+    </header>
+    
+    <!-- 主内容区 -->
+    <main class="main-content">
+        <div class="container">
+            <div class="videos-container">
+                <!-- 视频1 -->
+                <div class="video-card">
+                    <div class="video-wrapper" onclick="openVideo('https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll@main/01.mp4')">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-text">数字卷轴DSC注册操作</div>
+                        </div>
+                        <div class="play-button"><i class="fas fa-play-circle"></i></div>
                     </div>
+                    <div class="video-title">数字卷轴DSC注册</div>
                 </div>
-                <div class="node-card community">
-                    <div class="node-type">社区节点</div>
-                    <div class="node-info">
-                        <span class="count">40席位</span>
-                        <ul>
-                            <li>季度推广前40名</li>
-                            <li>提案与表决权限</li>
-                        </ul>
+                
+                <!-- 视频2 -->
+                <div class="video-card">
+                    <div class="video-wrapper" onclick="openVideo('https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll@main/02.mp4')">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-text">数字卷轴DSC人脸识别操作</div>
+                        </div>
+                        <div class="play-button"><i class="fas fa-play-circle"></i></div>
                     </div>
+                    <div class="video-title">数字卷轴DSC人脸识别</div>
+                </div>
+                
+                <!-- 视频3 -->
+                <div class="video-card">
+                    <div class="video-wrapper" onclick="openVideo('https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll@main/03.mp4')">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-text">数字卷轴DSC分享操作</div>
+                        </div>
+                        <div class="play-button"><i class="fas fa-play-circle"></i></div>
+                    </div>
+                    <div class="video-title">数字卷轴DSC分享</div>
+                </div>
+                
+                <!-- 视频4 -->
+                <div class="video-card">
+                    <div class="video-wrapper" onclick="openVideo('https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll@main/04.mp4')">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-text">数学卷轴DSC购买操作</div>
+                        </div>
+                        <div class="play-button"><i class="fas fa-play-circle"></i></div>
+                    </div>
+                    <div class="video-title">数学卷轴DSC购买</div>
+                </div>
+                
+                <!-- 视频5 -->
+                <div class="video-card">
+                    <div class="video-wrapper" onclick="openVideo('https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll@main/05.mp4')">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-text">数学卷轴DSC出售操作</div>
+                        </div>
+                        <div class="play-button"><i class="fas fa-play-circle"></i></div>
+                    </div>
+                    <div class="video-title">数学卷轴DSC出售</div>
+                </div>
+                
+                <!-- 视频6 -->
+                <div class="video-card">
+                    <div class="video-wrapper" onclick="openVideo('https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll@main/06.mp4')">
+                        <div class="video-placeholder">
+                            <div class="video-placeholder-text">数字卷轴DSC激励操作</div>
+                        </div>
+                        <div class="play-button"><i class="fas fa-play-circle"></i></div>
+                    </div>
+                    <div class="video-title">数字卷轴DSC打鸡血</div>
                 </div>
             </div>
-
-            <h3>治理规则说明</h3>
-            <div class="rules-container">
-                <div class极速版="rule-box critical">
-                    <h3极速版>核心治理领域</h3>
-                    <ul>
-                        <li>卷轴产出规则调整</li>
-                        <li>智能合约升级</li>
-                        <li>链上资产分配</li>
-                    </ul>
-                </div>
-                <div class="rule-box normal">
-                    <h3>技术自治领域</极速版h3>
-                    <ul>
-                        <li>前端界面更新</li>
-                        <li>游戏参数调整</li>
-                        <li>运维策略优化</li>
-                    </ul>
-                </div>
-            </div>
         </div>
-        
-        <div id="scrolls" class="content-section">
-            <h2>卷轴收益详情</h2>
-            <p>卷轴每小时产出收益，超过48小时未领取收益，卷轴会停产。领取收益后，卷轴自动恢复生产。</p>
+    </main>
+    
+    <!-- 底部导航 -->
+    <nav class="bottom-nav">
+        <div class="nav-items">
+            <a href="index.html" class="nav-item active">
+                <div class="nav-icon"><i class="fas fa-home"></i></div>
+                <div class="nav-text">首页</div>
+            </a>
             
-            <h3>卷轴级别与收益</h3>
-            <table>
-                <tr>
-                    <th>卷轴级别</th>
-                    <th>租金</th>
-                    <th>日产</th>
-                    <th>周期</th>
-                </tr>
-                <tr>
-                    <td>青铜</td>
-                    <td>10 DSC</td>
-                    <td>0.06 DSC</td>
-                    <td>60天</td>
-                </tr>
-                <tr>
-                    <td>白银</td>
-                    <td>100 DSC</td>
-                    <td>0.6 DSC</td>
-                    <td>极速版60天</td>
-                </tr>
-                <tr>
-                    <td>黄金</极速版td>
-                    <td>1000 DSC</td>
-                    <td>4.53 DSC</td>
-                    <td>120天</td>
-                </tr>
-                <tr>
-                    <td>铂金</td>
-                    <td>5000 DSC</td>
-                    <td>23.33 DSC</td>
-                    <td>180极速版天</td>
-                </tr>
-                <tr>
-                    <td>钻石</td>
-                    <td>10000 DSC</td>
-                    <td>50.82 DSC</td>
-                    <td>280天</td>
-                </tr>
-                <tr>
-                    <td>至尊</td>
-                    <td>50000 DSC</td>
-                    <td>270 DSC</td>
-                    <td>360天</td>
-                </tr>
-            </table>
+            <a href="https://prod.digital-scroll.org/#/pages/reg?c=182N17" target="_blank" class="nav-item">
+                <div class="nav-icon"><i class="fas fa-user-plus"></i></div>
+                <div class="nav-text">注册/登录</div>
+            </a>
+            
+            <a href="guide.html" class="nav-item">
+                <div class="nav-icon"><i class="fas fa-file-alt"></i></div>
+                <div class="nav-text">图文注册</div>
+            </a>
+            
+            <a href="moxing.html" class="nav-item">
+                <div class="nav-icon"><i class="fas fa-chart-line"></i></div>
+                <div class="nav-text">经济模型</div>
+            </a>
+            
+            <a href="gudongzhidu.html" class="nav-item">
+                <div class="nav-icon"><i class="fas fa-handshake"></i></div>
+                <div class="nav-text">股东制度</div>
+            </a>
+            
+            <a href="youxi.html" class="nav-item">
+                <div class="nav-icon"><i class="fas fa-calculator"></i></div>
+                <div class="nav-text">复投计算</div>
+            </a>
         </div>
-        
-        <div id="verification" class="content-section">
-            <h2>身份验证说明</h2>
-            <p>为确保账户安全和合规性，项目实行分级身份验证制度。</p>
-            
-            <h3>验证要求</h3>
-            <ul>
-                <li>注册需在10天内完成实名认证</li>
-                <li>可联系上级授予认证费用快速认证</li>
-                <li>纯零撸用户余额满1DSC需二次刷脸验证</li>
-            </ul>
-            
-            <h3>免刷脸验证</h3>
-            <p>兑换任意卷轴，可免除二次刷脸验证。</p>
-            
-            <h3>刷脸验证问题解决</h3>
-            <p>若APP二次刷脸无法通过，请尝试使用网页版：<br>
-            <a href="https://prod.digital-scroll.org" style="color: var(--accent-color); text-decoration: underline;" class="external-link">https://prod.digital-scroll.org</a></p>
+    </nav>
+    
+    <!-- 视频模态框 -->
+    <div class="modal" id="videoModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeVideo()">&times;</span>
+            <div class="loading" id="videoLoading">视频加载中...</div>
+            <video class="video-frame" id="videoPlayer" controls playsinline webkit-playsinline style="display:none;"></video>
         </div>
-        
-        <div id="promotion" class="content-section">
-            <h2>推广奖励机制</h2>
-            <p>推广下级，永久享下级收益的10%奖励。推广下级也可竞争节点，获取更多奖励。</p>
-            <p>下级兑换卷轴或复投卷轴上级可享每日分红。</极速版p>
-            
-            <h3>推广收益规则</h3>
-            <p>推广收益采用烧伤机制：</p>
-            <ul>
-                <li>个人活跃度 > 直推活跃度：奖励直推卷轴收益的5%</li>
-                <li>否则：奖励直推卷轴收益的3%</li>
-                <li>个人活跃度 > 间推活跃度：奖励间推卷轴收益的3%</li>
-                <li>否则：奖励间推卷轴收益的1.5%</li>
-            </ul>
-            
-            <h3>股东制度</h3>
-            <p>成为股东可享受交易手续费分红：</p>
-            
-            <h4>股东达成条件</h4>
-            <ul>
-                <li>1级股东：族群活跃度500，直推活粉数3，质押量20</li>
-                <li>2级股东：族群活跃度2000，团队活跃度500，直推活粉数6，质押量1000</li>
-                <li>3级股东：族群活跃度10000，团队活跃极速版度2000，直推活粉极速版数10，质押量2000</li>
-                <li>4级股东：族群活跃度50000，团队活跃度10000，直推活粉数15，质押量10000</li>
-                <li>5级股东：族群活跃度100000，团队活跃度30000，直推活粉数20，质押量20000</极速版li>
-            </ul>
-            
-            <h4>股东达成奖励</h4>
-            <ul>
-                <li极速版>1级股东：奖励10永久矿机，交易手续费5%分红</li>
-                <li>2级股东：奖励500永久矿机，交易手续费15%分红</li>
-                <li>3级股东：奖励1000永久矿机，交易手续费20%分红</li>
-                <li>4级股东：奖励5000永久矿机，交易手续费15%分红</li>
-                <li>5级股东：奖励10000永久矿机，交易手续费15%分红</li>
-            </ul>
-            
-            <div class="highlight">
-                分红来源为DSC交易手续费的70%，每日结算一次<br>
-                前三名5级股东自动成为超级节点人，不受季度考核
-            </div>
-        </div>
-        
-        <div id="trading" class="content-section">
-            <h2>市场交易说明</h2>
-            
-            <h3>DSC交易区(DSC/USDS交易对)</h3>
-            <ul>
-                <li>交易时间: 24小时全天候交易</li>
-                <li>交易方式: 自由挂买单或卖单</li>
-                <li>锁单功能: USDS余额不足极速版可先锁单</li>
-                <li>手续费优惠: 购买官方币积累免手续费额度</li>
-            </ul>
-            
-            <h3>USDS交易区(USDS/CNY交易对)</h3>
-            <ul>
-                <li>交易时间: 每日8:00至21:00</li>
-                <li>市商服务: 市商提供优质挂单服务</li>
-                <li>申诉机制: 超时未付款或未放币自动申诉</li>
-            </ul>
-            
-            <h3>交易手续费设定</h3>
-            <ul>
-                <li>普通玩家DSC卖出手续费为25%</li>
-                <li>市商和官方免手续费</li>
-                <li>交易完成后，手续费DSC转入交易分红池</li>
-            </ul>
-            
-            <h3>交易分红规则</h3>
-            <ul>
-                <li>交易分红池每日处理：25%作为官方分红</li>
-                <li>70%作为股东分红</li>
-                <li>5%销毁</li>
-                <li>某级股东无人达成时，对应分红比例销毁</li>
-            </ul>
-            
-            <h3>注意事项</h3>
-            <p class="highlight">若连续多次交易被申诉，将被判定为捣乱账户，永久禁止交易，永久停产卷轴。</p>
-        </div>
-        
-        <div id="faq" class="content-section">
-            <h2>常见问题解答</h2>
-            
-            <h3>卷轴收益问题</h3>
-            <p><strong>Q: 卷轴收益多久发放一次？</strong><br>
-            A: 极速版卷轴收益每小时发放，计算公式为：每小时卷轴收益=运行中的卷轴日产1/24。</p>
-            
-            <p><strong>Q: 为什么我的卷轴停产了？</strong><br>
-            A: 超过48小时未领取收益会导致卷轴停产，领取收益后会自动恢复。</p>
-            
-            <h3>账户安全问题</h3>
-            <p><strong>Q: 忘记密码怎么办？</strong><br>
-            A: 可使用安全码重置登录密码或资金密码。</p>
-            
-            <p><strong>Q: 群组如何加入和退出？</strong><br>
-            A: 拥有某级别卷轴，自动加入该级别群组；失去该级别卷轴，自动退出。</p>
-            
-            <h3>学习资源</h3>
-            <p>在"我的-常见问题"中可了解更多相关内容。<br>
-            在"首页-卷轴学院"观看视频全面了解项目运作。</p>
-        </div>
-        
-        <div id="contactModal">
-            <div class="modal-content">
-                <h3>联系推荐人获取快速认证</h3>
-                <p>请复制以下微信号联系推荐人：</p>
-                <div class="wechat-container">
-                    <span class="wechat-id" id="wechat极速版Id">dsc_2025</span>
-                    <button class="copy-btn" onclick="copyWechatId()">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M4 1.5H3a2 2 极速版0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
-                            <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5极速版v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 极速版0 9.5 0h-3z"/>
-                        </svg>
-                        复制
-                    </button>
-                </div>
-                <div class="copy-status" id="copyStatus"></div>
-                <button class="close-btn" onclick="hideContactModal()">关闭</button>
-            </div>
-        </div>
-        
-        <footer>
-            <p>© 2025 数字卷轴DSC 卷界链</p>
-            <p>基于卷界链技术构建 · 安全透明 · 多重收益</p>
-        </footer>
     </div>
     
     <script>
-    // 显示指定内容区域
-    function showSection(sectionId) {
-        const sections = document.querySelectorAll('.content-section');
-        sections.forEach(section => {
-            section.classList.remove('active');
-        });
+        // 视频播放功能
+        function openVideo(url) {
+            const modal = document.getElementById('videoModal');
+            const videoPlayer = document.getElementById('videoPlayer');
+            const loading = document.getElementById('videoLoading');
+            
+            // 显示加载提示
+            modal.style.display = 'flex';
+            loading.style.display = 'block';
+            videoPlayer.style.display = 'none';
+            document.body.style.overflow = 'hidden';
+            
+            // 设置视频源
+            videoPlayer.src = url;
+            
+            // 尝试加载和播放视频
+            videoPlayer.load();
+            
+            videoPlayer.onloadeddata = function() {
+                loading.style.display = 'none';
+                videoPlayer.style.display = 'block';
+                
+                // 尝试播放
+                videoPlayer.play().then(() => {
+                    // 尝试进入全屏模式
+                    if (videoPlayer.requestFullscreen) {
+                        videoPlayer.requestFullscreen().catch(err => {
+                            console.log('全屏请求错误: ', err);
+                        });
+                    } else if (videoPlayer.webkitRequestFullscreen) {
+                        videoPlayer.webkitRequestFullscreen();
+                    } else if (videoPlayer.msRequestFullscreen) {
+                        videoPlayer.msRequestFullscreen();
+                    }
+                }).catch(err => {
+                    console.log('自动播放失败: ', err);
+                    // 显示控制条让用户手动播放
+                    videoPlayer.controls = true;
+                });
+            };
+            
+            videoPlayer.onerror = function() {
+                loading.style.display = 'none';
+                alert('视频加载失败，请检查网络连接或稍后再试');
+                closeVideo();
+            };
+        }
         
-        const activeSection = document.getElementById(sectionId);
-        activeSection.classList.add('active');
-        activeSection.scrollIntoView({ behavior: 'smooth' });
-    }
-    
-    // 显示联系推荐人模态框
-    function showContactModal() {
-        document.getElementById('contactModal').style.display = 'flex';
-    }
-    
-    // 隐藏联系推荐人模态框
-    function hideContactModal() {
-        document.getElementById('contactModal').style.display = 'none';
-    }
-    
-    // 复制微信号到剪贴板
-    function copyWechatId() {
-        const wechatId = document.getElementById('wechatId');
-        const copyStatus = document.getElementById('copyStatus');
+        function closeVideo() {
+            const videoPlayer = document.getElementById('videoPlayer');
+            videoPlayer.pause();
+            videoPlayer.src = '';
+            videoPlayer.controls = false;
+            document.getElementById('videoModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            
+            // 退出全屏
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            }
+        }
         
-        const textarea = document.createElement('textarea');
-        textarea.value = wechatId.textContent;
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textarea);
-        
-        copyStatus.textContent = '微信号已复制到剪贴板！';
-        setTimeout(() => { copyStatus.textContent = ''; }, 2000);
-    }
-    
-    // 更新垂直计时器
-    function updateRuntime() {
-        const startDate = new Date('2023-09-25T00:00:00');
-        const now = new Date();
-        const diff = now - startDate;
-        
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (极速版1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-        
-        document.getElementById('days').textContent = `${days}天`;
-        document.getElementById('time').textContent = 
-            `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    }
-    
-    // 微信浏览器检测
-    function isWeixinBrowser() {
-        return navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1;
-    }
-    
-    // 初始化页面
-    window.onload = function() {
-        updateRuntime();
-        setInterval(updateRuntime, 1000);
-        
-        document.getElementById('intro').classList.add('active');
-        
-        // 添加微信浏览器检测
-        document.querySelectorAll('.external-link, #registerBtn').forEach(link => {
-            link.addEventListener('click', function(e) {
-                if(isWeixinBrowser()) {
-                    e.preventDefault();
-                    alert('请点击右上角菜单，选择"在浏览器打开"后再进行操作');
+        // 检测logo加载失败
+        document.addEventListener('DOMContentLoaded', function() {
+            const logoImg = document.querySelector('.logo img');
+            if (!logoImg || !logoImg.complete || logoImg.naturalHeight === 0) {
+                const fallback = document.querySelector('.logo-fallback');
+                if (fallback) {
+                    fallback.style.display = 'flex';
+                }
+            }
+            
+            // 设置当前页面的导航项为active
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const navItems = document.querySelectorAll('.nav-item');
+            
+            navItems.forEach(item => {
+                const href = item.getAttribute('href');
+                if (href === currentPage || (currentPage === 'index.html' && href === 'index.html')) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
                 }
             });
         });
-    };
-    
-    // 点击模态框外部关闭
-    window.onclick = function(event) {
-        const modal = document.getElementById('contactModal');
-        if (event.target == modal) hideContactModal();
-    }
+        
+        // 点击模态框外部关闭
+        window.onclick = function(event) {
+            const modal = document.getElementById('videoModal');
+            if (event.target === modal) {
+                closeVideo();
+            }
+        };
+        
+        // 监听全屏变化
+        document.addEventListener('fullscreenchange', handleFullscreenChange);
+        document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+        document.addEventListener('msfullscreenchange', handleFullscreenChange);
+        
+        function handleFullscreenChange() {
+            const videoPlayer = document.getElementById('videoPlayer');
+            const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
+            
+            if (!isFullscreen && document.getElementById('videoModal').style.display === 'flex') {
+                closeVideo();
+            }
+        }
+
+        // 监听视频结束
+        document.getElementById('videoPlayer').addEventListener('ended', function() {
+            closeVideo();
+        });
     </script>
 </body>
 </html>
