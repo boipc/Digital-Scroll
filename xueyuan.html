@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
+<!DOCTYPE html><html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,20 +11,13 @@
             box-sizing: border-box;
             font-family: 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
         }
-        
         body {
             background-color: #f8f9fa;
             color: #333;
             line-height: 1.6;
             padding-bottom: 80px;
         }
-        
-        .container {
-            max-width: 100%;
-            padding: 0 15px;
-        }
-        
-        /* 头部样式 */
+        .container { max-width: 100%; padding: 0 15px; }
         header {
             background: transparent;
             color: #2c3e50;
@@ -33,299 +25,44 @@
             text-align: center;
             margin-bottom: 10px;
         }
-        
-        .header-top {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 10px;
-            gap: 12px;
-        }
-        
-        .logo {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: white;
-            text-decoration: none;
-            overflow: hidden;
-            flex-shrink: 0;
-            background: #ff7e00; /* 橙色背景 */
-        }
-        
-        .logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-        
-        .logo-fallback {
-            font-size: 16px;
-            font-weight: bold;
-        }
-        
-        .main-title {
-            font-size: 22px;
-            font-weight: 700;
-            color: #2c3e50;
-            line-height: 1.2;
-        }
-        
-        .sub-title {
-            font-size: 16px;
-            color: #6a11cb;
-            font-weight: 500;
-            text-align: center;
-            width: 100%;
-        }
-        
-        /* 主内容区样式 */
-        .main-content {
-            padding: 10px 0;
-        }
-        
-        /* 视频区域样式 */
-        .videos-container {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-            margin-bottom: 30px;
-            padding: 0 5px;
-        }
-        
-        .video-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .video-card:active {
-            transform: scale(0.98);
-        }
-        
-        .video-wrapper {
-            position: relative;
-            width: 100%;
-            height: 25vh;
-            background: linear-gradient(135deg, #ff7e00 0%, #ff5500 100%);
-            cursor: pointer;
-        }
-        
-        .video-placeholder {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            padding: 15px;
-            text-align: center;
-        }
-        
-        .video-placeholder-text {
-            font-size: 22px;
-            font-weight: 700;
-            color: #ffeb3b;
-            text-shadow: 
-                -1px -1px 0 #000,  
-                1px -1px 0 #000,
-                -1px 1px 0 #000,
-                1px 1px 0 #000;
-            line-height: 1.4;
-        }
-        
-        .play-button {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 40px;
-            color: white;
-            opacity: 0.85;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-        
-        .video-title {
-            padding: 12px 15px;
-            font-size: 14px;
-            font-weight: 600;
-            color: #2c3e50;
-            border-top: 1px solid #f0f0f0;
-        }
-        
-        /* 底部导航样式 */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: white;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-            z-index: 100;
-            padding: 10px 0;
-        }
-        
-        .nav-items {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
-        
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: #555;
-            font-size: 12px;
-            flex: 1;
-        }
-        
-        .nav-icon {
-            font-size: 18px;
-            margin-bottom: 4px;
-            color: #6a11cb;
-        }
-        
-        .nav-text {
-            font-size: 11px;
-            text-align: center;
-        }
-        
-        .nav-item.active {
-            color: #2575fc;
-        }
-        
-        .nav-item.active .nav-icon {
-            color: #2575fc;
-        }
-        
-        /* 视频模态框样式 */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.95);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .modal-content {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .close-modal {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            color: white;
-            font-size: 30px;
-            cursor: pointer;
-            z-index: 1001;
-            background: rgba(0, 0, 0, 0.5);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .video-frame {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        
-        /* 响应式设计 */
+        .header-top { display: flex; align-items: center; justify-content: center; margin-bottom: 10px; gap: 12px; }
+        .logo { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: white; text-decoration: none; overflow: hidden; flex-shrink: 0; background: #ff7e00; }
+        .logo img { width: 100%; height: 100%; object-fit: contain; }
+        .logo-fallback { font-size: 16px; font-weight: bold; }
+        .main-title { font-size: 22px; font-weight: 700; color: #2c3e50; line-height: 1.2; }
+        .sub-title { font-size: 16px; color: #6a11cb; font-weight: 500; text-align: center; width: 100%; }
+        .main-content { padding: 10px 0; }
+        .videos-container { display: grid; grid-template-columns: 1fr; gap: 15px; margin-bottom: 30px; padding: 0 5px; }
+        .video-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.08); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .video-card:active { transform: scale(0.98); }
+        .video-wrapper { position: relative; width: 100%; height: 25vh; background: linear-gradient(135deg,#ff7e00 0%,#ff5500 100%); cursor: pointer; }
+        .video-placeholder { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; padding: 15px; text-align: center; }
+        .video-placeholder-text { font-size: 22px; font-weight: 700; color: #ffeb3b; text-shadow: -1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000; line-height: 1.4; }
+        .play-button { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: 40px; color: white; opacity: 0.85; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        .video-title { padding: 12px 15px; font-size: 14px; font-weight: 600; color: #2c3e50; border-top: 1px solid #f0f0f0; }
+        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: white; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 100; padding: 10px 0; }
+        .nav-items { display: flex; justify-content: space-around; align-items: center; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; text-decoration: none; color: #555; font-size: 12px; flex: 1; }
+        .nav-icon { font-size: 18px; margin-bottom: 4px; color: #6a11cb; }
+        .nav-text { font-size: 11px; text-align: center; }
+        .nav-item.active { color: #2575fc; }
+        .nav-item.active .nav-icon { color: #2575fc; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.95); z-index: 1000; align-items: center; justify-content: center; }
+        .modal-content { position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+        .close-modal { position: absolute; top: 20px; right: 20px; color: white; font-size: 30px; cursor: pointer; z-index: 1001; background: rgba(0,0,0,0.5); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .video-frame { width: 100%; height: 100%; border: none; }
         @media (min-width: 768px) {
-            .videos-container {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-                padding: 0 15px;
-            }
-            
-            .container {
-                max-width: 768px;
-                margin: 0 auto;
-            }
-            
-            .video-wrapper {
-                border-radius: 10px 10px 0 0;
-            }
-
-            .video-placeholder-text {
-                font-size: 24px;
-            }
-            
-            .header-top {
-                gap: 15px;
-            }
-            
-            .main-title {
-                font-size: 24px;
-            }
-            
-            .sub-title {
-                font-size: 18px;
-            }
-        }
-
-        /* 加载指示器和错误提示 */
-        .loading, .error-message {
-            display: none;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            text-align: center;
-            z-index: 1002;
-        }
-        
-        .loading {
-            font-size: 14px;
-        }
-        
-        .error-message {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 80%;
-        }
-        
-        .error-message button {
-            margin-top: 15px;
-            padding: 8px 16px;
-            background: #ff7e00;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+            .videos-container { grid-template-columns: repeat(2,1fr); gap: 20px; padding: 0 15px; }
+            .container { max-width: 768px; margin: 0 auto; }
+            .video-wrapper { border-radius: 10px 10px 0 0; }
+            .video-placeholder-text { font-size: 24px; }
+            .header-top { gap: 15px; }
+            .main-title { font-size: 24px; }
+            .sub-title { font-size: 18px; }
         }
     </style>
 </head>
 <body>
-    <!-- 头部 -->
     <header>
         <div class="header-top">
             <a href="index.html" class="logo">
@@ -335,272 +72,128 @@
             <h1 class="main-title">卷轴学院</h1>
         </div>
         <div class="sub-title">数字卷轴DSC操作视频</div>
-    </header>
-    
-    <!-- 主内容区 -->
-    <main class="main-content">
-        <div class="container">
-            <div class="videos-container">
-                <!-- 视频1 -->
-                <div class="video-card">
-                    <div class="video-wrapper" onclick="openVideo('https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll@main/01.mp4')">
-                        <div class="video-placeholder">
-                            <div class="video-placeholder-text">数字卷轴DSC注册操作</div>
-                        </div>
-                        <div class="play-button"><i class="fas fa-play-circle"></i></div>
-                    </div>
-                    <div class="video-title">数字卷轴DSC注册</div>
+    </header><main class="main-content">
+    <div class="container">
+        <div class="videos-container">
+            <div class="video-card">
+                <div class="video-wrapper" onclick="openVideo('https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll@main/01.mp4')">
+                    <div class="video-placeholder"><div class="video-placeholder-text">数字卷轴DSC注册操作</div></div>
+                    <div class="play-button"><i class="fas fa-play-circle"></i></div>
                 </div>
-                
-                <!-- 视频2 -->
-                <div class="video-card">
-                    <div class="video-wrapper" onclick="openVideo('https://github.com/boipc/Digital-Scroll/raw/main/02.mp4')">
-                        <div class="video-placeholder">
-                            <div class="video-placeholder-text">数字卷轴DSC人脸识别操作</div>
-                        </div>
-                        <div class="play-button"><i class="fas fa-play-circle"></i></div>
-                    </div>
-                    <div class="video-title">数字卷轴DSC人脸识别</div>
-                </div>
-                
-                <!-- 视频3 -->
-                <div class="video-card">
-                    <div class="video-wrapper" onclick="openVideo('https://github.com/boipc/Digital-Scroll/raw/main/03.mp4')">
-                        <div class="video-placeholder">
-                            <div class="video-placeholder-text">数字卷轴DSC分享操作</div>
-                        </div>
-                        <div class="play-button"><i class="fas fa-play-circle"></i></div>
-                    </div>
-                    <div class="video-title">数字卷轴DSC分享</div>
-                </div>
-                
-                <!-- 视频4 -->
-                <div class="video-card">
-                    <div class="video-wrapper" onclick="openVideo('https://github.com/boipc/Digital-Scroll/raw/main/04.mp4')">
-                        <div class="video-placeholder">
-                            <div class="video-placeholder-text">数学卷轴DSC购买操作</div>
-                        </div>
-                        <div class="play-button"><i class="fas fa-play-circle"></i></div>
-                    </div>
-                    <div class="video-title">数学卷轴DSC购买</div>
-                </div>
-                
-                <!-- 视频5 -->
-                <div class="video-card">
-                    <div class="video-wrapper" onclick="openVideo('https://github.com/boipc/Digital-Scroll/raw/main/05.mp4')">
-                        <div class="video-placeholder">
-                            <div class="video-placeholder-text">数学卷轴DSC出售操作</div>
-                        </div>
-                        <div class="play-button"><i class="fas fa-play-circle"></i></div>
-                    </div>
-                    <div class="video-title">数学卷轴DSC出售</div>
-                </div>
-                
-                <!-- 视频6 -->
-                <div class="video-card">
-                    <div class="video-wrapper" onclick="openVideo('https://github.com/boipc/Digital-Scroll/raw/main/06.mp4')">
-                        <div class="video-placeholder">
-                            <div class="video-placeholder-text">数字卷轴DSC激励操作</div>
-                        </div>
-                        <div class="play-button"><i class="fas fa-play-circle"></i></div>
-                    </div>
-                    <div class="video-title">数字卷轴DSC打鸡血</div>
-                </div>
+                <div class="video-title">数字卷轴DSC注册</div>
             </div>
-        </div>
-    </main>
-    
-    <!-- 底部导航 -->
-    <nav class="bottom-nav">
-        <div class="nav-items">
-            <a href="index.html" class="nav-item active">
-                <div class="nav-icon"><i class="fas fa-home"></i></div>
-                <div class="nav-text">首页</div>
-            </a>
-            
-            <a href="https://prod.digital-scroll.org/#/pages/reg?c=182N17" target="_blank" class="nav-item">
-                <div class="nav-icon"><i class="fas fa-user-plus"></i></div>
-                <div class="nav-text">注册/登录</div>
-            </a>
-            
-            <a href="guide.html" class="nav-item">
-                <div class="nav-icon"><i class="fas fa-file-alt"></i></div>
-                <div class="nav-text">图文注册</div>
-            </a>
-            
-            <a href="moxing.html" class="nav-item">
-                <div class="nav-icon"><i class="fas fa-chart-line"></i></div>
-                <div class="nav-text">经济模型</div>
-            </a>
-            
-            <a href="gudongzhidu.html" class="nav-item">
-                <div class="nav-icon"><i class="fas fa-handshake"></i></div>
-                <div class="nav-text">股东制度</div>
-            </a>
-            
-            <a href="youxi.html" class="nav-item">
-                <div class="nav-icon"><i class="fas fa-calculator"></i></div>
-                <div class="nav-text">复投计算</div>
-            </a>
-        </div>
-    </nav>
-    
-    <!-- 视频模态框 -->
-    <div class="modal" id="videoModal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeVideo()">&times;</span>
-            <div class="loading" id="videoLoading">视频加载中...</div>
-            <div class="error-message" id="videoError" style="display: none;">
-                <p>视频加载失败，请检查网络连接或稍后再试</p>
-                <button onclick="closeVideo()">关闭</button>
+            <div class="video-card">
+                <div class="video-wrapper" onclick="openVideo('https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll@main/02.mp4')">
+                    <div class="video-placeholder"><div class="video-placeholder-text">数字卷轴DSC人脸识别操作</div></div>
+                    <div class="play-button"><i class="fas fa-play-circle"></i></div>
+                </div>
+                <div class="video-title">数字卷轴DSC人脸识别</div>
             </div>
-            <video class="video-frame" id="videoPlayer" controls playsinline webkit-playsinline style="display:none;"></video>
+            <div class="video-card">
+                <div class="video-wrapper" onclick="openVideo('https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll@main/03.mp4')">
+                    <div class="video-placeholder"><div class="video-placeholder-text">数字卷轴DSC分享操作</div></div>
+                    <div class="play-button"><i class="fas fa-play-circle"></i></div>
+                </div>
+                <div class="video-title">数字卷轴DSC分享</div>
+            </div>
+            <div class="video-card">
+                <div class="video-wrapper" onclick="openVideo('https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll@main/04.mp4')">
+                    <div class="video-placeholder"><div class="video-placeholder-text">数字卷轴DSC购买操作</div></div>
+                    <div class="play-button"><i class="fas fa-play-circle"></i></div>
+                </div>
+                <div class="video-title">数字卷轴DSC购买</div>
+            </div>
+            <div class="video-card">
+                <div class="video-wrapper" onclick="openVideo('https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll@main/05.mp4')">
+                    <div class="video-placeholder"><div class="video-placeholder-text">数字卷轴DSC出售操作</div></div>
+                    <div class="play-button"><i class="fas fa-play-circle"></i></div>
+                </div>
+                <div class="video-title">数字卷轴DSC出售</div>
+            </div>
+            <div class="video-card">
+                <div class="video-wrapper" onclick="openVideo('https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll@main/06.mp4')">
+                    <div class="video-placeholder"><div class="video-placeholder-text">数字卷轴DSC激励操作</div></div>
+                    <div class="play-button"><i class="fas fa-play-circle"></i></div>
+                </div>
+                <div class="video-title">数字卷轴DSC激励</div>
+            </div>
         </div>
     </div>
-    
-    <script>
-        // 视频播放功能
-        function openVideo(url) {
-            const modal = document.getElementById('videoModal');
-            const videoPlayer = document.getElementById('videoPlayer');
-            const loading = document.getElementById('videoLoading');
-            const errorMessage = document.getElementById('videoError');
-            
-            // 重置状态
-            loading.style.display = 'block';
-            errorMessage.style.display = 'none';
-            videoPlayer.style.display = 'none';
-            
-            // 显示模态框
-            modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-            
-            // 设置视频源
-            videoPlayer.src = url;
-            
-            // 尝试加载和播放视频
-            videoPlayer.load();
-            
-            // 设置超时检查
-            const loadTimeout = setTimeout(() => {
-                if (videoPlayer.readyState < 3) { // 0=未初始化, 1=已加载元数据, 2=已加载当前帧数据, 3=已加载未来数据, 4=已加载全部数据
-                    showError();
-                }
-            }, 10000); // 10秒超时
-            
-            videoPlayer.onloadeddata = function() {
-                clearTimeout(loadTimeout);
-                loading.style.display = 'none';
-                videoPlayer.style.display = 'block';
-                
-                // 尝试播放
-                videoPlayer.play().then(() => {
-                    // 尝试进入全屏模式
-                    enterFullscreen(videoPlayer);
-                }).catch(err => {
-                    console.log('自动播放失败: ', err);
-                    // 显示控制条让用户手动播放
-                    videoPlayer.controls = true;
-                });
-            };
-            
-            videoPlayer.onerror = function() {
-                clearTimeout(loadTimeout);
-                showError();
-            };
-            
-            function showError() {
-                loading.style.display = 'none';
-                errorMessage.style.display = 'block';
-                videoPlayer.style.display = 'none';
-            }
-        }
-        
-        function closeVideo() {
-            const videoPlayer = document.getElementById('videoPlayer');
-            videoPlayer.pause();
-            videoPlayer.src = '';
-            videoPlayer.controls = false;
-            document.getElementById('videoModal').style.display = 'none';
-            document.getElementById('videoError').style.display = 'none';
-            document.body.style.overflow = 'auto';
-            
-            // 退出全屏
-            exitFullscreen();
-        }
-        
-        function enterFullscreen(element) {
-            if (element.requestFullscreen) {
-                element.requestFullscreen().catch(err => {
-                    console.log('全屏请求错误: ', err);
-                });
-            } else if (element.webkitRequestFullscreen) {
-                element.webkitRequestFullscreen();
-            } else if (element.msRequestFullscreen) {
-                element.msRequestFullscreen();
-            }
-        }
-        
-        function exitFullscreen() {
-            if (document.exitFullscreen) {
-                document.exitFullscreen();
-            } else if (document.webkitExitFullscreen) {
-                document.webkitExitFullscreen();
-            } else if (document.msExitFullscreen) {
-                document.msExitFullscreen();
-            }
-        }
-        
-        // 检测logo加载失败
-        document.addEventListener('DOMContentLoaded', function() {
-            const logoImg = document.querySelector('.logo img');
-            if (!logoImg || !logoImg.complete || logoImg.naturalHeight === 0) {
-                const fallback = document.querySelector('.logo-fallback');
-                if (fallback) {
-                    fallback.style.display = 'flex';
-                }
-            }
-            
-            // 设置当前页面的导航项为active
-            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-            const navItems = document.querySelectorAll('.nav-item');
-            
-            navItems.forEach(item => {
-                const href = item.getAttribute('href');
-                if (href === currentPage || (currentPage === 'index.html' && href === 'index.html')) {
-                    item.classList.add('active');
-                } else {
-                    item.classList.remove('active');
-                }
-            });
-        });
-        
-        // 点击模态框外部关闭
-        window.onclick = function(event) {
-            const modal = document.getElementById('videoModal');
-            if (event.target === modal) {
-                closeVideo();
-            }
-        };
-        
-        // 监听全屏变化
-        document.addEventListener('fullscreenchange', handleFullscreenChange);
-        document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
-        document.addEventListener('msfullscreenchange', handleFullscreenChange);
-        
-        function handleFullscreenChange() {
-            const videoPlayer = document.getElementById('videoPlayer');
-            const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
-            
-            if (!isFullscreen && document.getElementById('videoModal').style.display === 'flex') {
-                closeVideo();
-            }
-        }
+</main>
 
-        // 监听视频结束
-        document.getElementById('videoPlayer').addEventListener('ended', function() {
-            closeVideo();
+<nav class="bottom-nav">
+    <div class="nav-items">
+        <a href="index.html" class="nav-item active">
+            <div class="nav-icon"><i class="fas fa-home"></i></div>
+            <div class="nav-text">首页</div>
+        </a>
+        <a href="https://prod.digital-scroll.org/#/pages/reg?c=182N17" target="_blank" class="nav-item">
+            <div class="nav-icon"><i class="fas fa-user-plus"></i></div>
+            <div class="nav-text">注册/登录</div>
+        </a>
+        <a href="guide.html" class="nav-item">
+            <div class="nav-icon"><i class="fas fa-file-alt"></i></div>
+            <div class="nav-text">图文注册</div>
+        </a>
+        <a href="moxing.html" class="nav-item">
+            <div class="nav-icon"><i class="fas fa-chart-line"></i></div>
+            <div class="nav-text">经济模型</div>
+        </a>
+        <a href="gudongzhidu.html" class="nav-item">
+            <div class="nav-icon"><i class="fas fa-handshake"></i></div>
+            <div class="nav-text">股东制度</div>
+        </a>
+        <a href="youxi.html" class="nav-item">
+            <div class="nav-icon"><i class="fas fa-calculator"></i></div>
+            <div class="nav-text">复投计算</div>
+        </a>
+    </div>
+</nav>
+
+<div class="modal" id="videoModal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeVideo()">&times;</span>
+        <video class="video-frame" id="videoPlayer" controls playsinline webkit-playsinline></video>
+    </div>
+</div>
+
+<script>
+    function openVideo(url) {
+        const videoPlayer = document.getElementById('videoPlayer');
+        videoPlayer.src = url;
+        document.getElementById('videoModal').style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        videoPlayer.play().catch(err => console.log('自动播放失败:', err));
+    }
+    function closeVideo() {
+        const videoPlayer = document.getElementById('videoPlayer');
+        videoPlayer.pause();
+        videoPlayer.src = '';
+        document.getElementById('videoModal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        const logoImg = document.querySelector('.logo img');
+        if (!logoImg || !logoImg.complete || logoImg.naturalHeight === 0) {
+            const fallback = document.querySelector('.logo-fallback');
+            if (fallback) fallback.style.display = 'flex';
+        }
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(item => {
+            const href = item.getAttribute('href');
+            if (href === currentPage || (currentPage === 'index.html' && href === 'index.html')) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
         });
-    </script>
+    });
+    window.onclick = function(event) {
+        const modal = document.getElementById('videoModal');
+        if (event.target === modal) closeVideo();
+    };
+</script>
+
 </body>
 </html>
