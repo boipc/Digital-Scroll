@@ -52,6 +52,19 @@
             object-fit: contain;
         }
 
+        .logo-fallback {
+            display: none;
+            width: 36px;
+            height: 36px;
+            background: #4361ee;
+            color: white;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
         h1 {
             font-size: 24px;
             letter-spacing: 0.8px;
@@ -252,6 +265,20 @@
             margin-right: 4px;
         }
 
+        .coin-fallback {
+            display: none;
+            width: 14px;
+            height: 14px;
+            background: #4361ee;
+            color: white;
+            border-radius: 50%;
+            font-size: 10px;
+            margin-right: 4px;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
         /* 卡片背景颜色 - 浅色设计 */
         .level1-card {
             border: 1px solid #1a5ca3; /* 深蓝色 */
@@ -330,6 +357,20 @@
         .system-logo {
             width: 24px;
             height: 24px;
+        }
+
+        .system-logo-fallback {
+            display: none;
+            width: 24px;
+            height: 24px;
+            background: #4361ee;
+            color: white;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 8px;
+            font-size: 12px;
         }
 
         .table-container {
@@ -811,8 +852,8 @@
             <a href="index.html" class="logo-link">
                 <div class="logo">
                     <!-- 修改logo路径，添加错误处理 -->
-                    <img src="images/logo01.png" class="logo-icon" onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='block';">
-                    <span id="logo-fallback" style="display:none; width:36px; height:36px; background:#4361ee; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold;">DSC</span>
+                    <img src="images/logo01.png" class="logo-icon" onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='flex';">
+                    <div id="logo-fallback" class="logo-fallback">DSC</div>
                     <h1>DSC股东分红</h1>
                 </div>
             </a>
@@ -849,7 +890,7 @@
                     <div class="data-value">
                         <!-- 修改logo路径，添加错误处理 -->
                         <img src="images/logo01.png" class="coin-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <span style="display:none; width:14px; height:14px; background:#4361ee; color:white; border-radius:50%; font-size:10px; margin-right:4px; display:flex; align-items:center; justify-content:center; font-weight:bold;">D</span>
+                        <div class="coin-fallback">D</div>
                         <div class="virtual placeholder" data-level="1" data-type="dividend" data-percentage="5">0</div>
                         <span class="dsc-unit">DSC</span>
                     </div>
@@ -882,7 +923,7 @@
                     <div class="data-value">
                         <!-- 修改logo路径，添加错误处理 -->
                         <img src="images/logo01.png" class="coin-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <span style="display:none; width:14px; height:14px; background:#4361ee; color:white; border-radius:50%; font-size:10px; margin-right:4px; display:flex; align-items:center; justify-content:center; font-weight:bold;">D</span>
+                        <div class="coin-fallback">D</div>
                         <div class="virtual placeholder" data-level="2" data-type="dividend" data-percentage="15">0</div>
                         <span class="dsc-unit">DSC</span>
                     </div>
@@ -916,7 +957,7 @@
                     <div class="data-value">
                         <!-- 修改logo路径，添加错误处理 -->
                         <img src="images/logo01.png" class="coin-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <span style="display:none; width:14px; height:14px; background:#4361ee; color:white; border-radius:50%; font-size:10px; margin-right:4px; display:flex; align-items:center; justify-content:center; font-weight:bold;">D</span>
+                        <div class="coin-fallback">D</div>
                         <div class="virtual placeholder" data-level="3" data-type="dividend" data-percentage="20">0</div>
                         <span class="dsc-unit">DSC</span>
                     </div>
@@ -951,7 +992,7 @@
                     <div class="data-value">
                         <!-- 修改logo路径，添加错误处理 -->
                         <img src="images/logo01.png" class="coin-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <span style="display:none; width:14px; height:14px; background:#4361ee; color:white; border-radius:50%; font-size:10px; margin-right:4px; display:flex; align-items:center; justify-content:center; font-weight:bold;">D</span>
+                        <div class="coin-fallback">D</div>
                         <div class="virtual placeholder" data-level="4" data-type="dividend" data-percentage="15">0</div>
                         <span class="dsc-unit">DSC</span>
                     </div>
@@ -987,7 +1028,7 @@
                     <div class="data-value">
                         <!-- 修改logo路径，添加错误处理 -->
                         <img src="images/logo01.png" class="coin-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <span style="display:none; width:14px; height:14px; background:#4361ee; color:white; border-radius:50%; font-size:10px; margin-right:4px; display:flex; align-items:center; justify-content:center; font-weight:bold;">D</span>
+                        <div class="coin-fallback">D</div>
                         <div class="virtual placeholder" data-level="5" data-type="dividend" data-percentage="15">0</div>
                         <span class="dsc-unit">DSC</span>
                     </div>
@@ -1003,8 +1044,8 @@
         <div class="shareholder-system">
             <h2 class="system-title">
                 <!-- 修改logo路径，添加错误处理 -->
-                <img src="images/logo01.png" class="system-logo" onerror="this.style.display='none'; document.getElementById('system-logo-fallback').style.display='block';">
-                <span id="system-logo-fallback" style="display:none; width:24px; height:24px; background:#4361ee; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; margin-right:8px;">D</span>
+                <img src="images/logo01.png" class="system-logo" onerror="this.style.display='none'; document.getElementById('system-logo-fallback').style.display='flex';">
+                <div id="system-logo-fallback" class="system-logo-fallback">D</div>
                 DSC股东制度表
             </h2>
 
@@ -1647,6 +1688,32 @@
             const wechatModal = document.getElementById('wechatModal');
             if (event.target === wechatModal) {
                 closeWechatModal();
+            }
+        });
+
+        // 图片加载检测
+        document.addEventListener('DOMContentLoaded', function() {
+            // 检测logo图片加载
+            const logoImg = document.querySelector('.logo-icon');
+            if (logoImg) {
+                // 如果图片已经加载完成
+                if (logoImg.complete && logoImg.naturalHeight !== 0) {
+                    document.getElementById('logo-fallback').style.display = 'none';
+                }
+            }
+
+            // 检测coin-icon图片加载
+            const coinIcons = document.querySelectorAll('.coin-icon');
+            coinIcons.forEach(icon => {
+                if (icon.complete && icon.naturalHeight !== 0) {
+                    icon.nextElementSibling.style.display = 'none';
+                }
+            });
+
+            // 检测system-logo图片加载
+            const systemLogo = document.querySelector('.system-logo');
+            if (systemLogo && systemLogo.complete && systemLogo.naturalHeight !== 0) {
+                document.getElementById('system-logo-fallback').style.display = 'none';
             }
         });
     </script>
