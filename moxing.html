@@ -37,21 +37,11 @@
             .content-auto {
                 content-visibility: auto;
             }
-            .text-shadow {
-                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            }
-            .bg-glass {
-                background: rgba(30, 41, 59, 0.8);
-                backdrop-filter: blur(8px);
-            }
             .progress-bar {
                 height: 4px;
                 background: linear-gradient(90deg, #4CC9F0 0%, #F72585 100%);
                 width: 0;
-            }
-            .reveal {
-                opacity: 0;
-                transform: translateY(20px);
+                transition: width 1s ease-in-out;
             }
             .table-cell {
                 min-width: 40px;
@@ -66,6 +56,10 @@
             .table-data-cell {
                 font-size: 10px;
                 padding: 4px;
+            }
+            .chart-container {
+                width: 100%;
+                overflow-x: auto;
             }
             .custom-legend li {
                 display: inline-block;
@@ -103,27 +97,135 @@
             .neon-border-tertiary {
                 border: 1px solid rgba(0, 255, 200, 0.3);
             }
-            
-            /* 动画相关的媒体查询 */
-            @media (prefers-reduced-motion: no-preference) {
-                .card-3d {
-                    transform-style: preserve-3d;
-                    transition: transform 0.5s ease;
-                }
-                .card-3d:hover {
-                    transform: translateY(-5px) rotateX(2deg);
-                }
-                .progress-bar {
-                    transition: width 1s ease-in-out;
-                }
-                .reveal {
-                    transition: all 0.6s ease-out;
-                }
-                .reveal.active {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
+            .bg-glass {
+                background: rgba(30, 41, 59, 0.8);
+                backdrop-filter: blur(8px);
             }
+        }
+        
+        /* 仅在支持运动且不减少运动时应用动画 */
+        @media (prefers-reduced-motion: no-preference) {
+            .card-3d {
+                transform-style: preserve-3d;
+                transition: transform 0.5s ease;
+            }
+            .card-3d:hover {
+                transform: translateY(-5px) rotateX(2deg);
+            }
+            .reveal {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: all 0.6s ease-out;
+            }
+            .reveal.active {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 底部导航栏样式 */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            padding: 10px 0;
+            border-top: 1px solid rgba(76, 201, 240, 0.2);
+        }
+        
+        .nav-items {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #cbd5e1;
+            font-size: 12px;
+            flex: 1;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-icon {
+            font-size: 18px;
+            margin-bottom: 4px;
+            color: #4CC9F0;
+        }
+        
+        .nav-text {
+            font-size: 11px;
+            text-align: center;
+        }
+        
+        .nav-item:hover {
+            color: #4CC9F0;
+        }
+
+        /* 微信提示弹窗样式 */
+        .wechat-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .wechat-modal-content {
+            background-color: rgba(30, 41, 59, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 80%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(76, 201, 240, 0.3);
+        }
+        
+        .wechat-modal h3 {
+            color: #4CC9F0;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .wechat-modal p {
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.4;
+            color: #cbd5e1;
+        }
+        
+        .wechat-modal-close {
+            background-color: #4CC9F0;
+            color: #0F172A;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .wechat-modal-steps {
+            text-align: left;
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+        
+        .wechat-modal-steps li {
+            margin-bottom: 8px;
+            font-size: 13px;
+            color: #cbd5e1;
         }
     </style>
 </head>
@@ -136,8 +238,11 @@
                 <div class="absolute bottom-0 left-0 w-16 h-16 bg-secondary/10 rounded-full -ml-4 -mb-4"></div>
                 
                 <a href="index.html" class="flex items-center justify-center mb-3 relative">
-                    <!-- 修改logo路径 -->
-                    <img src="images/logo01.png" class="h-12 w-12 mr-2" alt="logo">
+                    <!-- 修改logo路径，添加备用显示 -->
+                    <div class="h-12 w-12 mr-2 bg-accent rounded-full flex items-center justify-center text-white font-bold text-lg relative overflow-hidden">
+                        <img src="images/logo01.png" class="absolute inset-0 w-full h-full object-cover" alt="logo" onerror="this.style.display='none'; this.parentNode.querySelector('.logo-fallback').style.display='flex';">
+                        <div class="logo-fallback" style="display: none;">DSC</div>
+                    </div>
                     <h2 class="text-[1.1rem] font-bold text-accent">SCC经济模型</h2>
                 </a>
                 
@@ -629,11 +734,56 @@
         </section>
         
         <!-- 页脚 -->
-        <footer class="bg-glass rounded-xl p-3 text-center shadow-md mb-6 glow">
+        <footer class="bg-glass rounded-xl p-3 text-center shadow-md mb-20 glow">
             <p class="text-[10px] text-gray-400 mb-1">© 2025 数字卷轴DSC 卷界链</p>
             <p class="text-[10px] text-gray-400">基于节点共识机制 · 去中心化治理 · 生态共赢</p>
         </footer>
     </main>
+
+    <!-- 底部导航栏 -->
+    <nav class="bottom-nav">
+        <div class="nav-items">
+            <a href="index.html" class="nav-item">
+                <div class="nav-icon"><i class="fa fa-home"></i></div>
+                <div class="nav-text">首页</div>
+            </a>
+            <a href="https://prod.digital-scroll.org/#/pages/reg?c=182N17" target="_blank" class="nav-item" id="register-link">
+                <div class="nav-icon"><i class="fa fa-user-plus"></i></div>
+                <div class="nav-text">注册/登录</div>
+            </a>
+            <a href="guide.html" class="nav-item">
+                <div class="nav-icon"><i class="fa fa-file-text"></i></div>
+                <div class="nav-text">图文注册</div>
+            </a>
+            <a href="youxi.html" class="nav-item">
+                <div class="nav-icon"><i class="fa fa-calculator"></i></div>
+                <div class="nav-text">复投计算</div>
+            </a>
+            <a href="gudongzhidu.html" class="nav-item">
+                <div class="nav-icon"><i class="fa fa-handshake-o"></i></div>
+                <div class="nav-text">股东制度</div>
+            </a>
+            <a href="xueyuan.html" class="nav-item">
+                <div class="nav-icon"><i class="fa fa-graduation-cap"></i></div>
+                <div class="nav-text">卷轴学院</div>
+            </a>
+        </div>
+    </nav>
+
+    <!-- 微信提示弹窗 -->
+    <div class="wechat-modal" id="wechat-modal">
+        <div class="wechat-modal-content">
+            <h3>微信浏览器限制提示</h3>
+            <p>检测到您在微信内打开，部分功能可能受限。</p>
+            <p>请点击右上角菜单，选择"在浏览器打开"以获得完整功能体验。</p>
+            <ol class="wechat-modal-steps">
+                <li>点击右上角"..."菜单</li>
+                <li>选择"在浏览器打开"</li>
+                <li>在系统浏览器中完成注册/登录</li>
+            </ol>
+            <button class="wechat-modal-close" id="wechat-modal-close">我知道了</button>
+        </div>
+    </div>
 
     <script>
         // 页面加载动画
@@ -662,6 +812,40 @@
             
             // 滚动时检查
             window.addEventListener('scroll', checkReveal);
+
+            // 微信浏览器检测
+            function isWeixinBrowser() {
+                const ua = navigator.userAgent.toLowerCase();
+                return ua.indexOf('micromessenger') !== -1;
+            }
+            
+            // 显示微信提示
+            function showWechatModal() {
+                document.getElementById('wechat-modal').style.display = 'flex';
+            }
+            
+            // 隐藏微信提示
+            function hideWechatModal() {
+                document.getElementById('wechat-modal').style.display = 'none';
+            }
+            
+            // 注册/登录链接点击事件
+            document.getElementById('register-link').addEventListener('click', function(e) {
+                if (isWeixinBrowser()) {
+                    e.preventDefault();
+                    showWechatModal();
+                }
+            });
+            
+            // 关闭微信提示
+            document.getElementById('wechat-modal-close').addEventListener('click', hideWechatModal);
+            
+            // 点击模态框外部关闭
+            document.getElementById('wechat-modal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    hideWechatModal();
+                }
+            });
         });
     </script>
 </body>
