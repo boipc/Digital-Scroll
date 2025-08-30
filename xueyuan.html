@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="zh-CN">
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,6 +52,71 @@
         .modal-content { position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
         .close-modal { position: absolute; top: 20px; right: 20px; color: white; font-size: 30px; cursor: pointer; z-index: 1001; background: rgba(0,0,0,0.5); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
         .video-frame { width: 100%; height: 100%; border: none; }
+        
+        /* 微信提示弹窗样式 */
+        .wechat-modal { 
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background-color: rgba(0,0,0,0.85); 
+            z-index: 2000; 
+            align-items: center; 
+            justify-content: center; 
+        }
+        .wechat-modal-content { 
+            background: white; 
+            border-radius: 16px; 
+            padding: 25px; 
+            width: 85%; 
+            max-width: 350px; 
+            text-align: center; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
+        }
+        .wechat-modal-header { 
+            font-size: 20px; 
+            font-weight: bold; 
+            color: #e64340; 
+            margin-bottom: 15px; 
+        }
+        .wechat-modal-body { 
+            margin-bottom: 20px; 
+            line-height: 1.6; 
+            color: #333; 
+        }
+        .wechat-modal-icon {
+            font-size: 50px;
+            color: #e64340;
+            margin-bottom: 15px;
+        }
+        .wechat-modal-footer { 
+            display: flex; 
+            justify-content: center; 
+            gap: 15px; 
+        }
+        .wechat-modal-btn { 
+            padding: 10px 20px; 
+            border-radius: 8px; 
+            border: none; 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: all 0.3s; 
+        }
+        .wechat-modal-btn-primary { 
+            background: #e64340; 
+            color: white; 
+        }
+        .wechat-modal-btn-default { 
+            background: #f1f1f1; 
+            color: #333; 
+        }
+        .wechat-modal-btn:hover { 
+            opacity: 0.9; 
+            transform: translateY(-2px); 
+        }
+        
         @media (min-width: 768px) {
             .videos-container { grid-template-columns: repeat(2,1fr); gap: 20px; padding: 0 15px; }
             .container { max-width: 768px; margin: 0 auto; }
@@ -72,128 +138,188 @@
             <h1 class="main-title">卷轴学院</h1>
         </div>
         <div class="sub-title">数字卷轴DSC操作视频</div>
-    </header><main class="main-content">
-    <div class="container">
-        <div class="videos-container">
-            <div class="video-card">
-                <div class="video-wrapper" onclick="openVideo('https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll@main/01.mp4')">
-                    <div class="video-placeholder"><div class="video-placeholder-text">数字卷轴DSC注册操作</div></div>
-                    <div class="play-button"><i class="fas fa-play-circle"></i></div>
+    </header>
+    
+    <main class="main-content">
+        <div class="container">
+            <div class="videos-container">
+                <div class="video-card">
+                    <div class="video-wrapper" onclick="openVideo('https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll@main/01.mp4')">
+                        <div class="video-placeholder"><div class="video-placeholder-text">数字卷轴DSC注册操作</div></div>
+                        <div class="play-button"><i class="fas fa-play-circle"></i></div>
+                    </div>
+                    <div class="video-title">数字卷轴DSC注册</div>
                 </div>
-                <div class="video-title">数字卷轴DSC注册</div>
+                <div class="video-card">
+                    <div class="video-wrapper" onclick="openVideo('https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll@main/02.mp4')">
+                        <div class="video-placeholder"><div class="video-placeholder-text">数字卷轴DSC人脸识别操作</div></div>
+                        <div class="play-button"><i class="fas fa-play-circle"></i></div>
+                    </div>
+                    <div class="video-title">数字卷轴DSC人脸识别</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-wrapper" onclick="openVideo('https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll@main/03.mp4')">
+                        <div class="video-placeholder"><div class="video-placeholder-text">数字卷轴DSC分享操作</div></div>
+                        <div class="play-button"><i class="fas fa-play-circle"></i></div>
+                    </div>
+                    <div class="video-title">数字卷轴DSC分享</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-wrapper" onclick="openVideo('https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll@main/04.mp4')">
+                        <div class="video-placeholder"><div class="video-placeholder-text">数字卷轴DSC购买操作</div></div>
+                        <div class="play-button"><i class="fas fa-play-circle"></i></div>
+                    </div>
+                    <div class="video-title">数字卷轴DSC购买</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-wrapper" onclick="openVideo('https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll@main/05.mp4')">
+                        <div class="video-placeholder"><div class="video-placeholder-text">数字卷轴DSC出售操作</div></div>
+                        <div class="play-button"><i class="fas fa-play-circle"></i></div>
+                    </div>
+                    <div class="video-title">数字卷轴DSC出售</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-wrapper" onclick="openVideo('https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll@main/06.mp4')">
+                        <div class="video-placeholder"><div class="video-placeholder-text">数字卷轴DSC激励操作</div></div>
+                        <div class="play-button"><i class="fas fa-play-circle"></i></div>
+                    </div>
+                    <div class="video-title">数字卷轴DSC激励</div>
+                </div>
             </div>
-            <div class="video-card">
-                <div class="video-wrapper" onclick="openVideo('https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll@main/02.mp4')">
-                    <div class="video-placeholder"><div class="video-placeholder-text">数字卷轴DSC人脸识别操作</div></div>
-                    <div class="play-button"><i class="fas fa-play-circle"></i></div>
-                </div>
-                <div class="video-title">数字卷轴DSC人脸识别</div>
+        </div>
+    </main>
+
+    <nav class="bottom-nav">
+        <div class="nav-items">
+            <a href="index.html" class="nav-item active">
+                <div class="nav-icon"><i class="fas fa-home"></i></div>
+                <div class="nav-text">首页</div>
+            </a>
+            <a href="https://prod.digital-scroll.org/#/pages/reg?c=182N17" target="_blank" class="nav-item" id="register-link">
+                <div class="nav-icon"><i class="fas fa-user-plus"></i></div>
+                <div class="nav-text">注册/登录</div>
+            </a>
+            <a href="guide.html" class="nav-item">
+                <div class="nav-icon"><i class="fas fa-file-alt"></i></div>
+                <div class="nav-text">图文注册</div>
+            </a>
+            <a href="moxing.html" class="nav-item">
+                <div class="nav-icon"><i class="fas fa-chart-line"></i></div>
+                <div class="nav-text">经济模型</div>
+            </a>
+            <a href="gudongzhidu.html" class="nav-item">
+                <div class="nav-icon"><i class="fas fa-handshake"></i></div>
+                <div class="nav-text">股东制度</div>
+            </a>
+            <a href="youxi.html" class="nav-item">
+                <div class="nav-icon"><i class="fas fa-calculator"></i></div>
+                <div class="nav-text">复投计算</div>
+            </a>
+        </div>
+    </nav>
+
+    <div class="modal" id="videoModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeVideo()">&times;</span>
+            <video class="video-frame" id="videoPlayer" controls playsinline webkit-playsinline></video>
+        </div>
+    </div>
+    
+    <!-- 微信提示弹窗 -->
+    <div class="wechat-modal" id="wechatModal">
+        <div class="wechat-modal-content">
+            <div class="wechat-modal-icon">
+                <i class="fab fa-weixin"></i>
             </div>
-            <div class="video-card">
-                <div class="video-wrapper" onclick="openVideo('https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll@main/03.mp4')">
-                    <div class="video-placeholder"><div class="video-placeholder-text">数字卷轴DSC分享操作</div></div>
-                    <div class="play-button"><i class="fas fa-play-circle"></i></div>
-                </div>
-                <div class="video-title">数字卷轴DSC分享</div>
+            <div class="wechat-modal-header">微信访问限制</div>
+            <div class="wechat-modal-body">
+                微信内访问受限，请点击右上角"..." <br>
+                选择"在浏览器打开"继续访问
             </div>
-            <div class="video-card">
-                <div class="video-wrapper" onclick="openVideo('https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll@main/04.mp4')">
-                    <div class="video-placeholder"><div class="video-placeholder-text">数字卷轴DSC购买操作</div></div>
-                    <div class="play-button"><i class="fas fa-play-circle"></i></div>
-                </div>
-                <div class="video-title">数字卷轴DSC购买</div>
-            </div>
-            <div class="video-card">
-                <div class="video-wrapper" onclick="openVideo('https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll@main/05.mp4')">
-                    <div class="video-placeholder"><div class="video-placeholder-text">数字卷轴DSC出售操作</div></div>
-                    <div class="play-button"><i class="fas fa-play-circle"></i></div>
-                </div>
-                <div class="video-title">数字卷轴DSC出售</div>
-            </div>
-            <div class="video-card">
-                <div class="video-wrapper" onclick="openVideo('https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll@main/06.mp4')">
-                    <div class="video-placeholder"><div class="video-placeholder-text">数字卷轴DSC激励操作</div></div>
-                    <div class="play-button"><i class="fas fa-play-circle"></i></div>
-                </div>
-                <div class="video-title">数字卷轴DSC激励</div>
+            <div class="wechat-modal-footer">
+                <button class="wechat-modal-btn wechat-modal-btn-default" onclick="closeWechatModal()">稍后再说</button>
+                <button class="wechat-modal-btn wechat-modal-btn-primary" onclick="closeWechatModal()">我知道了</button>
             </div>
         </div>
     </div>
-</main>
 
-<nav class="bottom-nav">
-    <div class="nav-items">
-        <a href="index.html" class="nav-item active">
-            <div class="nav-icon"><i class="fas fa-home"></i></div>
-            <div class="nav-text">首页</div>
-        </a>
-        <a href="https://prod.digital-scroll.org/#/pages/reg?c=182N17" target="_blank" class="nav-item">
-            <div class="nav-icon"><i class="fas fa-user-plus"></i></div>
-            <div class="nav-text">注册/登录</div>
-        </a>
-        <a href="guide.html" class="nav-item">
-            <div class="nav-icon"><i class="fas fa-file-alt"></i></div>
-            <div class="nav-text">图文注册</div>
-        </a>
-        <a href="moxing.html" class="nav-item">
-            <div class="nav-icon"><i class="fas fa-chart-line"></i></div>
-            <div class="nav-text">经济模型</div>
-        </a>
-        <a href="gudongzhidu.html" class="nav-item">
-            <div class="nav-icon"><i class="fas fa-handshake"></i></div>
-            <div class="nav-text">股东制度</div>
-        </a>
-        <a href="youxi.html" class="nav-item">
-            <div class="nav-icon"><i class="fas fa-calculator"></i></div>
-            <div class="nav-text">复投计算</div>
-        </a>
-    </div>
-</nav>
-
-<div class="modal" id="videoModal">
-    <div class="modal-content">
-        <span class="close-modal" onclick="closeVideo()">&times;</span>
-        <video class="video-frame" id="videoPlayer" controls playsinline webkit-playsinline></video>
-    </div>
-</div>
-
-<script>
-    function openVideo(url) {
-        const videoPlayer = document.getElementById('videoPlayer');
-        videoPlayer.src = url;
-        document.getElementById('videoModal').style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-        videoPlayer.play().catch(err => console.log('自动播放失败:', err));
-    }
-    function closeVideo() {
-        const videoPlayer = document.getElementById('videoPlayer');
-        videoPlayer.pause();
-        videoPlayer.src = '';
-        document.getElementById('videoModal').style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
-    document.addEventListener('DOMContentLoaded', function() {
-        const logoImg = document.querySelector('.logo img');
-        if (!logoImg || !logoImg.complete || logoImg.naturalHeight === 0) {
-            const fallback = document.querySelector('.logo-fallback');
-            if (fallback) fallback.style.display = 'flex';
+    <script>
+        // 检测是否为微信浏览器
+        function isWechatBrowser() {
+            var ua = navigator.userAgent.toLowerCase();
+            return ua.indexOf('micromessenger') !== -1;
         }
-        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-        const navItems = document.querySelectorAll('.nav-item');
-        navItems.forEach(item => {
-            const href = item.getAttribute('href');
-            if (href === currentPage || (currentPage === 'index.html' && href === 'index.html')) {
-                item.classList.add('active');
-            } else {
-                item.classList.remove('active');
+        
+        // 打开微信提示弹窗
+        function openWechatModal() {
+            document.getElementById('wechatModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // 关闭微信提示弹窗
+        function closeWechatModal() {
+            document.getElementById('wechatModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // 注册链接点击事件处理
+        function handleRegisterClick(e) {
+            if (isWechatBrowser()) {
+                e.preventDefault();
+                openWechatModal();
+                return false;
+            }
+            return true;
+        }
+        
+        function openVideo(url) {
+            const videoPlayer = document.getElementById('videoPlayer');
+            videoPlayer.src = url;
+            document.getElementById('videoModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            videoPlayer.play().catch(err => console.log('自动播放失败:', err));
+        }
+        
+        function closeVideo() {
+            const videoPlayer = document.getElementById('videoPlayer');
+            videoPlayer.pause();
+            videoPlayer.src = '';
+            document.getElementById('videoModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const logoImg = document.querySelector('.logo img');
+            if (!logoImg || !logoImg.complete || logoImg.naturalHeight === 0) {
+                const fallback = document.querySelector('.logo-fallback');
+                if (fallback) fallback.style.display = 'flex';
+            }
+            
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                const href = item.getAttribute('href');
+                if (href === currentPage || (currentPage === 'index.html' && href === 'index.html')) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+            
+            // 为注册链接添加点击事件监听
+            const registerLink = document.getElementById('register-link');
+            if (registerLink) {
+                registerLink.addEventListener('click', handleRegisterClick);
             }
         });
-    });
-    window.onclick = function(event) {
-        const modal = document.getElementById('videoModal');
-        if (event.target === modal) closeVideo();
-    };
-</script>
-
+        
+        window.onclick = function(event) {
+            const modal = document.getElementById('videoModal');
+            if (event.target === modal) closeVideo();
+            
+            const wechatModal = document.getElementById('wechatModal');
+            if (event.target === wechatModal) closeWechatModal();
+        };
+    </script>
 </body>
 </html>
