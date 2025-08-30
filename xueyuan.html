@@ -163,27 +163,17 @@
         .ipfs-status.online { background: rgba(40, 167, 69, 0.8); }
         .ipfs-status.offline { background: rgba(220, 53, 69, 0.8); }
         
-        /* 网关选择器 */
-        .gateway-selector {
+        /* 视频源指示器 */
+        .video-source-indicator {
             position: absolute;
-            bottom: 20px;
-            left: 20px;
+            bottom: 10px;
+            right: 10px;
             background: rgba(0,0,0,0.7);
             color: white;
-            padding: 8px 12px;
+            padding: 4px 8px;
             border-radius: 4px;
-            font-size: 12px;
-            z-index: 1001;
-            display: none;
-        }
-        
-        .gateway-selector select {
-            background: #333;
-            color: white;
-            border: 1px solid #555;
-            border-radius: 3px;
-            padding: 3px;
-            margin-left: 5px;
+            font-size: 10px;
+            z-index: 10;
         }
         
         @media (min-width: 768px) {
@@ -210,63 +200,69 @@
             </a>
             <h1 class="main-title">卷轴学院</h1>
         </div>
-        <div class="sub-title">数字卷轴DSC操作视频 - 多源备用方案</div>
+        <div class="sub-title">数字卷轴DSC操作视频 - 双源加速版</div>
     </header>
     
     <main class="main-content">
         <div class="container">
             <div class="videos-container">
                 <div class="video-card">
-                    <div class="video-wrapper" onclick="openVideo('bafybeigdvczbjzmu5ar5jfijnhl4yfd34e6hrxn3v7eyc5aade7fo6gxva', '数字卷轴DSC注册操作')">
+                    <div class="video-wrapper" onclick="openVideo('bafybeigdvczbjzmu5ar5jfijnhl4yfd34e6hrxn3v7eyc5aade7fo6gxva', 1)">
                         <div class="video-placeholder"><div class="video-placeholder-text">数字卷轴DSC注册操作</div></div>
                         <div class="play-button"><i class="fas fa-play-circle"></i></div>
                         <div class="loading" id="loading1"><i class="fas fa-spinner fa-spin"></i><br>视频加载中...</div>
                         <div class="error-message" id="error1"></div>
+                        <div class="video-source-indicator" id="sourceIndicator1">IPFS源</div>
                     </div>
                     <div class="video-title">数字卷轴DSC注册</div>
                 </div>
                 <div class="video-card">
-                    <div class="video-wrapper" onclick="openVideo('bafybeiflpjrpcdvftmbezgvqsvbsdkgwx7cd7x7ggw2krwzof6pcu7kvqm', '数字卷轴DSC人脸识别操作')">
+                    <div class="video-wrapper" onclick="openVideo('bafybeiflpjrpcdvftmbezgvqsvbsdkgwx7cd7x7ggw2krwzof6pcu7kvqm', 2)">
                         <div class="video-placeholder"><div class="video-placeholder-text">数字卷轴DSC人脸识别操作</div></div>
                         <div class="play-button"><i class="fas fa-play-circle"></i></div>
                         <div class="loading" id="loading2"><i class="fas fa-spinner fa-spin"></i><br>视频加载中...</div>
                         <div class="error-message" id="error2"></div>
+                        <div class="video-source-indicator" id="sourceIndicator2">IPFS源</div>
                     </div>
                     <div class="video-title">数字卷轴DSC人脸识别</div>
                 </div>
                 <div class="video-card">
-                    <div class="video-wrapper" onclick="openVideo('bafybeiezek4habwfyl53pgvz3mmks3fvxla6sz47ji3vvpcm2gz26whu4m', '数字卷轴DSC分享操作')">
+                    <div class="video-wrapper" onclick="openVideo('bafybeiezek4habwfyl53pgvz3mmks3fvxla6sz47ji3vvpcm2gz26whu4m', 3)">
                         <div class="video-placeholder"><div class="video-placeholder-text">数字卷轴DSC分享操作</div></div>
                         <div class="play-button"><i class="fas fa-play-circle"></i></div>
                         <div class="loading" id="loading3"><i class="fas fa-spinner fa-spin"></i><br>视频加载中...</div>
                         <div class="error-message" id="error3"></div>
+                        <div class="video-source-indicator" id="sourceIndicator3">IPFS源</div>
                     </div>
                     <div class="video-title">数字卷轴DSC分享</div>
                 </div>
                 <div class="video-card">
-                    <div class="video-wrapper" onclick="openVideo('bafybeicxk6jlwqqebririrkkj2aqra2yxelv4uyjptr7knadva7x3yql7u', '数字卷轴DSC购买操作')">
+                    <div class="video-wrapper" onclick="openVideo('bafybeicxk6jlwqqebririrkkj2aqra2yxelv4uyjptr7knadva7x3yql7u', 4)">
                         <div class="video-placeholder"><div class="video-placeholder-text">数字卷轴DSC购买操作</div></div>
                         <div class="play-button"><i class="fas fa-play-circle"></i></div>
                         <div class="loading" id="loading4"><i class="fas fa-spinner fa-spin"></i><br>视频加载中...</div>
                         <div class="error-message" id="error4"></div>
+                        <div class="video-source-indicator" id="sourceIndicator4">IPFS源</div>
                     </div>
                     <div class="video-title">数字卷轴DSC购买</div>
                 </div>
                 <div class="video-card">
-                    <div class="video-wrapper" onclick="openVideo('bafybeiclpepqpiex6nymp4of3ahck2hn4ji7tenpooc2qjbucuelgi2qwa', '数字卷轴DSC出售操作')">
+                    <div class="video-wrapper" onclick="openVideo('bafybeiclpepqpiex6nymp4of3ahck2hn4ji7tenpooc2qjbucuelgi2qwa', 5)">
                         <div class="video-placeholder"><div class="video-placeholder-text">数字卷轴DSC出售操作</div></div>
                         <div class="play-button"><i class="fas fa-play-circle"></i></div>
                         <div class="loading" id="loading5"><i class="fas fa-spinner fa-spin"></i><br>视频加载中...</div>
                         <div class="error-message" id="error5"></div>
+                        <div class="video-source-indicator" id="sourceIndicator5">IPFS源</div>
                     </div>
                     <div class="video-title">数字卷轴DSC出售</div>
                 </div>
                 <div class="video-card">
-                    <div class="video-wrapper" onclick="openVideo('bafybeic5pbkysbuo4k3ytha7rlqiz3wmqejtpqryhwljk6uowtqswghj3y', '数字卷轴DSC激励操作')">
+                    <div class="video-wrapper" onclick="openVideo('bafybeic5pbkysbuo4k3ytha7rlqiz3wmqejtpqryhwljk6uowtqswghj3y', 6)">
                         <div class="video-placeholder"><div class="video-placeholder-text">数字卷轴DSC激励操作</div></div>
                         <div class="play-button"><i class="fas fa-play-circle"></i></div>
                         <div class="loading" id="loading6"><i class="fas fa-spinner fa-spin"></i><br>视频加载中...</div>
                         <div class="error-message" id="error6"></div>
+                        <div class="video-source-indicator" id="sourceIndicator6">IPFS源</div>
                     </div>
                     <div class="video-title">数字卷轴DSC激励</div>
                 </div>
@@ -306,21 +302,10 @@
     <div class="modal" id="videoModal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeVideo()">&times;</span>
-            <video class="video-frame" id="videoPlayer" controls playsinline webkit-playsinline>
-                <!-- 多个source标签将在这里动态添加 -->
-            </video>
+            <video class="video-frame" id="videoPlayer" controls playsinline webkit-playsinline></video>
             <div class="loading" id="modalLoading"><i class="fas fa-spinner fa-spin"></i><br>视频加载中，请稍候...</div>
             <div class="error-message" id="modalError"></div>
-            <div class="gateway-selector" id="gatewaySelector">
-                当前网关: 
-                <select id="gatewaySelect" onchange="changeGateway()">
-                    <option value="0">Pinata网关</option>
-                    <option value="1">IPFS.io网关</option>
-                    <option value="2">Cloudflare网关</option>
-                    <option value="3">4everland网关</option>
-                    <option value="4">dweb.link网关</option>
-                </select>
-            </div>
+            <div class="video-source-indicator" id="modalSourceIndicator">IPFS源</div>
         </div>
     </div>
     
@@ -343,18 +328,59 @@
     </div>
 
     <script>
-        // 定义多个IPFS网关
+        // 使用多个IPFS网关和GitHub备用源
         const IPFS_GATEWAYS = [
             'https://gateway.pinata.cloud/ipfs/',
             'https://ipfs.io/ipfs/',
-            'https://cloudflare-ipfs.com/ipfs/',
-            'https://4everland.io/ipfs/',
-            'https://dweb.link/ipfs/'
+            'https://cloudflare-ipfs.com/ipfs/'
         ];
         
-        // 当前选中的网关索引
+        const GITHUB_BASE_URL = 'https://raw.githubusercontent.com/boipc/Digital-Scroll/main/';
+        
+        // 视频映射表：CID到GitHub文件名
+        const videoMap = {
+            'bafybeigdvczbjzmu5ar5jfijnhl4yfd34e6hrxn3v7eyc5aade7fo6gxva': '01.mp4',
+            'bafybeiflpjrpcdvftmbezgvqsvbsdkgwx7cd7x7ggw2krwzof6pcu7kvqm': '02.mp4',
+            'bafybeiezek4habwfyl53pgvz3mmks3fvxla6sz47ji3vvpcm2gz26whu4m': '03.mp4',
+            'bafybeicxk6jlwqqebririrkkj2aqra2yxelv4uyjptr7knadva7x3yql7u': '04.mp4',
+            'bafybeiclpepqpiex6nymp4of3ahck2hn4ji7tenpooc2qjbucuelgi2qwa': '05.mp4',
+            'bafybeic5pbkysbuo4k3ytha7rlqiz3wmqejtpqryhwljk6uowtqswghj3y': '06.mp4'
+        };
+        
+        // 当前使用的网关索引
         let currentGatewayIndex = 0;
-        let currentVideoCid = '';
+        
+        // 预加载视频
+        function preloadVideos() {
+            Object.keys(videoMap).forEach((cid, index) => {
+                const videoNumber = index + 1;
+                const githubUrl = GITHUB_BASE_URL + videoMap[cid];
+                
+                // 创建隐藏的video元素进行预加载
+                const preloadVideo = document.createElement('video');
+                preloadVideo.style.display = 'none';
+                preloadVideo.preload = 'metadata';
+                preloadVideo.src = githubUrl;
+                document.body.appendChild(preloadVideo);
+                
+                // 更新指示器显示预加载状态
+                const indicator = document.getElementById(`sourceIndicator${videoNumber}`);
+                if (indicator) {
+                    indicator.textContent = '预加载中...';
+                    indicator.style.backgroundColor = 'rgba(255, 193, 7, 0.8)';
+                    
+                    preloadVideo.addEventListener('loadedmetadata', () => {
+                        indicator.textContent = 'GitHub源(已缓存)';
+                        indicator.style.backgroundColor = 'rgba(40, 167, 69, 0.8)';
+                    });
+                    
+                    preloadVideo.addEventListener('error', () => {
+                        indicator.textContent = 'GitHub源(加载失败)';
+                        indicator.style.backgroundColor = 'rgba(220, 53, 69, 0.8)';
+                    });
+                }
+            });
+        }
         
         // 检测是否为微信浏览器
         function isWechatBrowser() {
@@ -387,108 +413,137 @@
         // 测试IPFS网关连接状态
         function testIPFSGateway() {
             const statusElement = document.getElementById('ipfsStatus');
-            // 测试第一个网关
-            const testUrl = IPFS_GATEWAYS[0] + 'bafybeigdvczbjzmu5ar5jfijnhl4yfd34e6hrxn3v7eyc5aade7fo6gxva';
+            // 测试第一个视频的CID
+            const testUrl = IPFS_GATEWAYS[currentGatewayIndex] + 'bafybeigdvczbjzmu5ar5jfijnhl4yfd34e6hrxn3v7eyc5aade7fo6gxva';
             
-            fetch(testUrl, { method: 'HEAD' })
+            fetch(testUrl, { method: 'HEAD', cache: 'no-store' })
             .then(response => {
                 if (response.ok) {
                     statusElement.className = 'ipfs-status online';
-                    statusElement.innerHTML = '<i class="fas fa-check-circle"></i> IPFS连接正常';
+                    statusElement.innerHTML = `<i class="fas fa-check-circle"></i> IPFS连接正常 (网关 ${currentGatewayIndex + 1})`;
                 } else {
-                    statusElement.className = 'ipfs-status offline';
-                    statusElement.innerHTML = '<i class="fas fa-exclamation-circle"></i> IPFS连接缓慢';
+                    tryNextGateway();
                 }
             })
             .catch(error => {
                 console.error('IPFS网关测试失败:', error);
-                statusElement.className = 'ipfs-status offline';
-                statusElement.innerHTML = '<i class="fas fa-exclamation-circle"></i> IPFS连接问题';
+                tryNextGateway();
             });
+            
+            function tryNextGateway() {
+                currentGatewayIndex = (currentGatewayIndex + 1) % IPFS_GATEWAYS.length;
+                if (currentGatewayIndex === 0) {
+                    // 所有网关都尝试过了，都失败了
+                    statusElement.className = 'ipfs-status offline';
+                    statusElement.innerHTML = '<i class="fas fa-exclamation-circle"></i> IPFS连接问题，使用GitHub源';
+                } else {
+                    // 尝试下一个网关
+                    testIPFSGateway();
+                }
+            }
         }
         
-        // 切换网关
-        function changeGateway() {
-            const select = document.getElementById('gatewaySelect');
-            currentGatewayIndex = parseInt(select.value);
-            reloadVideoWithCurrentGateway();
-        }
-        
-        // 使用当前选中的网关重新加载视频
-        function reloadVideoWithCurrentGateway() {
+        // 打开视频
+        function openVideo(cid, videoNumber) {
             const videoPlayer = document.getElementById('videoPlayer');
             const modalLoading = document.getElementById('modalLoading');
             const modalError = document.getElementById('modalError');
+            const modalSourceIndicator = document.getElementById('modalSourceIndicator');
             
             // 显示加载中
             modalLoading.style.display = 'block';
             modalError.style.display = 'none';
-            
-            // 清除现有source
-            videoPlayer.innerHTML = '';
-            
-            // 添加新的source
-            const source = document.createElement('source');
-            source.src = IPFS_GATEWAYS[currentGatewayIndex] + currentVideoCid;
-            source.type = 'video/mp4';
-            videoPlayer.appendChild(source);
-            
-            // 重新加载视频
-            videoPlayer.load();
-            
-            // 尝试播放
-            videoPlayer.play().catch(err => {
-                console.log('自动播放失败:', err);
-                // 不需要显示错误，用户可手动播放
-            });
-        }
-        
-        // 打开视频
-        function openVideo(cid, title) {
-            currentVideoCid = cid;
-            const videoPlayer = document.getElementById('videoPlayer');
-            const modalLoading = document.getElementById('modalLoading');
-            const modalError = document.getElementById('modalError');
-            const gatewaySelector = document.getElementById('gatewaySelector');
-            
-            // 显示加载中和网关选择器
-            modalLoading.style.display = 'block';
-            modalError.style.display = 'none';
-            gatewaySelector.style.display = 'block';
+            modalSourceIndicator.textContent = '尝试连接IPFS...';
+            modalSourceIndicator.style.display = 'block';
             
             document.getElementById('videoModal').style.display = 'flex';
             document.body.style.overflow = 'hidden';
             
-            // 清除现有source
-            videoPlayer.innerHTML = '';
+            // 构建IPFS和GitHub视频URL
+            const ipfsUrl = IPFS_GATEWAYS[currentGatewayIndex] + cid;
+            const githubUrl = GITHUB_BASE_URL + videoMap[cid];
             
-            // 添加多个source作为备用
-            for (let i = 0; i < IPFS_GATEWAYS.length; i++) {
-                const source = document.createElement('source');
-                source.src = IPFS_GATEWAYS[i] + cid;
-                source.type = 'video/mp4';
-                videoPlayer.appendChild(source);
+            console.log('正在加载视频:', ipfsUrl);
+            
+            // 先尝试IPFS源
+            let ipfsAttempted = false;
+            let githubAttempted = false;
+            
+            function tryIpfsSource() {
+                if (ipfsAttempted) return;
+                ipfsAttempted = true;
+                
+                modalSourceIndicator.textContent = `IPFS源 (网关 ${currentGatewayIndex + 1})`;
+                modalSourceIndicator.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+                
+                videoPlayer.src = ipfsUrl;
+                videoPlayer.load();
+                
+                const ipfsTimeout = setTimeout(() => {
+                    if (!githubAttempted) {
+                        console.log('IPFS源加载超时，尝试GitHub源');
+                        tryGithubSource();
+                    }
+                }, 5000); // 5秒超时
+                
+                videoPlayer.onloadeddata = function() {
+                    clearTimeout(ipfsTimeout);
+                    modalLoading.style.display = 'none';
+                    videoPlayer.play().catch(err => {
+                        console.log('自动播放失败:', err);
+                        modalError.textContent = '自动播放失败，请手动点击播放';
+                        modalError.style.display = 'block';
+                    });
+                };
+                
+                videoPlayer.onerror = function() {
+                    clearTimeout(ipfsTimeout);
+                    if (!githubAttempted) {
+                        console.log('IPFS源加载失败，尝试GitHub源');
+                        tryGithubSource();
+                    }
+                };
             }
             
-            // 添加事件监听器
-            videoPlayer.onloadeddata = function() {
-                modalLoading.style.display = 'none';
-                videoPlayer.play().catch(err => {
-                    console.log('自动播放失败:', err);
-                    // 不需要显示错误，用户可手动播放
-                });
-            };
-            
-            videoPlayer.onerror = function() {
-                modalLoading.style.display = 'none';
-                modalError.textContent = '视频加载失败，正在尝试备用网关...';
-                modalError.style.display = 'block';
+            function tryGithubSource() {
+                if (githubAttempted) return;
+                githubAttempted = true;
                 
-                // 更新状态指示器
-                const statusElement = document.getElementById('ipfsStatus');
-                statusElement.className = 'ipfs-status offline';
-                statusElement.innerHTML = '<i class="fas fa-exclamation-circle"></i> IPFS连接问题';
-            };
+                modalSourceIndicator.textContent = 'GitHub源';
+                modalSourceIndicator.style.backgroundColor = 'rgba(40, 167, 69, 0.8)';
+                
+                console.log('尝试GitHub源:', githubUrl);
+                videoPlayer.src = githubUrl;
+                videoPlayer.load();
+                
+                videoPlayer.onloadeddata = function() {
+                    modalLoading.style.display = 'none';
+                    videoPlayer.play().catch(err => {
+                        console.log('自动播放失败:', err);
+                        modalError.textContent = '自动播放失败，请手动点击播放';
+                        modalError.style.display = 'block';
+                    });
+                };
+                
+                videoPlayer.onerror = function() {
+                    modalLoading.style.display = 'none';
+                    modalError.textContent = '所有视频源加载失败，请检查网络连接或刷新页面重试';
+                    modalError.style.display = 'block';
+                    
+                    // 更新状态指示器
+                    const statusElement = document.getElementById('ipfsStatus');
+                    statusElement.className = 'ipfs-status offline';
+                    statusElement.innerHTML = '<i class="fas fa-exclamation-circle"></i> 所有视频源加载失败';
+                };
+            }
+            
+            // 开始尝试IPFS源
+            tryIpfsSource();
+            
+            // 同时预加载GitHub源
+            const preloadVideo = document.createElement('video');
+            preloadVideo.preload = 'auto';
+            preloadVideo.src = githubUrl;
             
             // 监听视频缓冲
             videoPlayer.onwaiting = function() {
@@ -497,7 +552,6 @@
             
             videoPlayer.onplaying = function() {
                 modalLoading.style.display = 'none';
-                modalError.style.display = 'none';
             };
         }
         
@@ -505,14 +559,13 @@
             const videoPlayer = document.getElementById('videoPlayer');
             videoPlayer.pause();
             videoPlayer.src = '';
-            videoPlayer.innerHTML = '';
             document.getElementById('videoModal').style.display = 'none';
             document.body.style.overflow = 'auto';
             
             // 重置错误和加载状态
             document.getElementById('modalLoading').style.display = 'none';
             document.getElementById('modalError').style.display = 'none';
-            document.getElementById('gatewaySelector').style.display = 'none';
+            document.getElementById('modalSourceIndicator').style.display = 'none';
         }
         
         document.addEventListener('DOMContentLoaded', function() {
@@ -541,6 +594,9 @@
             
             // 测试IPFS网关连接状态
             testIPFSGateway();
+            
+            // 预加载GitHub视频
+            preloadVideos();
         });
         
         window.onclick = function(event) {
