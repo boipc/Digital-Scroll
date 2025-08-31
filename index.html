@@ -5,19 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>数字卷轴DSC - 创新数字资产项目</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #FF6B35;
-            --secondary-color: #FFA630;
-            --dark-color: #333;
-            --light-color: #fff;
-            --accent-color: #FFE74C;
-            --register-btn: #D32F2F; /* 改为红色 */
-            --contact-btn: #D32F2F; /* 改为红色 */
-            --guide-btn: #D32F2F; /* 改为红色 */
-            --model-btn: #D32F2F; /* 改为红色 */
-            --game-btn: #D32F2F; /* 改为红色 */
-            --shareholder-btn: #D32F2F; /* 改为红色 */
+            --primary-color: #4a6cf7;
+            --secondary-color: #6b8aff;
+            --accent-color: #ff6b35;
+            --light-bg: #f8faff;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --text-primary: #1d2b53;
+            --text-secondary: #4a5568;
+            --border-color: #e2e8f0;
+            --shadow: 0 10px 30px rgba(74, 108, 247, 0.15);
+            --timer-glow: 0 0 20px rgba(74, 108, 247, 0.4);
         }
         
         * {
@@ -28,43 +28,48 @@
         }
         
         body {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: var(--light-color);
+            background: linear-gradient(135deg, #f0f4ff, #e6ecff);
+            color: var(--text-primary);
             min-height: 100vh;
             padding: 0;
             overflow-x: hidden;
             -webkit-tap-highlight-color: transparent;
+            padding-bottom: 80px;
+            font-size: 14px;
+            line-height: 1.4;
         }
         
         .container {
             width: 100%;
             margin: 0 auto;
-            padding: 10px;
+            padding: 15px;
             max-width: 480px;
         }
         
         header {
             text-align: center;
-            margin-bottom: 15px;
-            padding: 15px 10px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            margin-bottom: 15px; /* 缩小header底部间距 */
+            padding: 20px 15px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
             position: relative;
             overflow: hidden;
+            border: 1px solid var(--border-color);
         }
         
         .header-row {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            margin-bottom: 10px;
+            gap: 12px;
+            margin-bottom: 12px;
         }
         
         .logo {
-            height: 2.8rem;
+            height: 3rem;
             width: auto;
+            filter: drop-shadow(0 3px 5px rgba(0,0,0,0.1));
         }
         
         .logo-fallback {
@@ -72,7 +77,7 @@
             font-weight: bold;
             font-size: 1.8rem;
             color: #fff;
-            background: #D32F2F;
+            background: var(--primary-color);
             width: 2.8rem;
             height: 2.8rem;
             border-radius: 50%;
@@ -81,9 +86,9 @@
         }
         
         h1 {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             margin: 0;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            color: var(--text-primary);
             font-family: 'Montserrat', sans-serif;
             white-space: nowrap;
             overflow: hidden;
@@ -91,180 +96,165 @@
         }
         
         .subtitle {
-            font-size: 0.9rem;
-            margin-bottom: 8px;
+            font-size: 0.8rem; /* 进一步缩小副标题字体 */
+            margin-bottom: 15px;
             position: relative;
             z-index: 1;
             width: 100%;
             line-height: 1.4;
+            color: var(--text-secondary);
         }
         
+        /* 重新设计的计时器 */
         .timer-container {
-            margin: 12px 0;
-            padding: 12px 10px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(5px);
+            margin: 20px 0;
+            padding: 20px 15px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
             position: relative;
             z-index: 1;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-color);
             text-align: center;
         }
         
         .timer-label {
-            font-size: 1rem;
-            margin-bottom: 8px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            color: var(--text-secondary);
             font-weight: 500;
         }
         
         .timer {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
             font-family: 'Montserrat', sans-serif;
         }
         
         .days {
-            font-size: 2.2em;
-            line-height: 1.2;
-            letter-spacing: 1px;
-            color: #FFD700;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            font-size: 3.5rem;
+            line-height: 1;
+            font-weight: 800;
+            color: var(--primary-color); /* 保持原始颜色 */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding: 5px 0;
+            position: relative;
+            margin-bottom: 5px;
+        }
+        
+        .days::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            animation: breath 2s infinite ease-in-out;
+        }
+        
+        @keyframes breath {
+            0%, 100% { 
+                opacity: 0.5;
+                background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            }
+            50% { 
+                opacity: 1;
+                background: linear-gradient(90deg, transparent, var(--secondary-color), transparent);
+            }
         }
         
         .time {
-            font-size: 1.4em;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-secondary);
             letter-spacing: 1px;
-            color: var(--light-color);
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-        }
-        
-        .timer-motto {
-            font-size: 0.8rem;
-            margin-top: 8px;
-            color: #fff;
-            letter-spacing: 0.5px;
-            line-height: 1.4;
-        }
-        
-        .auth-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 6px;
-            margin: 12px 0;
-        }
-        
-        .auth-btn, .contact-btn, .guide-btn, .model-btn, .game-btn, .shareholder-btn {
             display: flex;
+            gap: 5px;
+        }
+        
+        .time-unit {
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 8px 5px;
+            min-width: 35px;
+        }
+        
+        .time-value {
+            background: var(--light-bg);
+            padding: 5px;
             border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.2s ease;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-            border: none;
-            /* 增大字体 */
-            font-size: 1rem;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
+            min-width: 30px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+        }
+        
+        .time-label {
+            font-size: 0.55rem;
+            margin-top: 3px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+        
+        /* 独立出来的格言文本 */
+        .motto-text {
+            font-size: 0.85rem;
+            margin: 15px 0;
+            color: var(--text-secondary);
+            line-height: 1.4;
+            font-weight: bold; /* 粗体 */
             text-align: center;
-            height: 42px;
-        }
-        
-        .auth-btn {
-            background: var(--register-btn);
-            color: var(--light-color);
-        }
-        
-        .contact-btn {
-            background: var(--contact-btn);
-            color: var(--light-color);
-        }
-        
-        .guide-btn {
-            background: var(--guide-btn);
-            color: var(--light-color);
-        }
-        
-        .model-btn {
-            background: var(--model-btn);
-            color: var(--light-color);
-        }
-        
-        .game-btn {
-            background: var(--game-btn);
-            color: var(--light-color);
-        }
-        
-        .shareholder-btn {
-            background: var(--shareholder-btn);
-            color: #fff;
-        }
-        
-        .auth-btn:hover, .contact-btn:hover, .guide-btn:hover, 
-        .model-btn:hover, .game-btn:hover, .shareholder-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-        }
-        
-        .auth-btn:active, .contact-btn:active, .guide-btn:active, 
-        .model-btn:active, .game-btn:active, .shareholder-btn:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
         
         .button-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 6px;
-            margin-bottom: 15px;
+            gap: 8px;
+            margin-bottom: 15px; /* 缩小按钮网格底部间距 */
         }
         
         .btn {
-            background: rgba(255, 255, 255, 0.15);
-            border: none;
-            /* 黑色字体，增大字号 */
-            color: #333;
-            padding: 8px 5px;
-            font-size: 1rem;
-            border-radius: 8px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 10px 5px;
+            font-size: 0.85rem;
+            border-radius: 10px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             text-align: center;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.1);
             font-weight: 500;
-            height: 42px;
+            height: 40px;
         }
         
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.15);
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
         }
         
         .btn:active {
             transform: translateY(0);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
         }
         
         .content-section {
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-            padding: 12px;
-            margin-bottom: 12px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 12px; /* 缩小内容区块之间的间距 */
             display: none;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
             animation: fadeIn 0.3s ease-out;
         }
         
@@ -278,77 +268,80 @@
         }
         
         h2 {
-            margin-bottom: 10px;
-            font-size: 1.3rem;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-            padding-bottom: 6px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 8px;
+            color: var(--primary-color);
             font-family: 'Montserrat', sans-serif;
-            color: var(--accent-color);
         }
         
         h3 {
-            margin: 12px 0 8px;
-            font-size: 1.1rem;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            margin: 15px 0 10px;
+            font-size: 1rem;
+            color: var(--text-primary);
             font-family: 'Montserrat', sans-serif;
         }
         
         p {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             line-height: 1.5;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
         }
         
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 12px 0;
-            background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+            margin: 15px 0;
+            background: var(--light-bg);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
             overflow: hidden;
             font-size: 0.8rem;
+            border: 1px solid var(--border-color);
         }
         
         th, td {
             padding: 8px 6px;
             text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
         }
         
         th {
-            background: rgba(0, 0, 0, 0.3);
+            background: var(--primary-color);
             font-weight: bold;
-            color: var(--accent-color);
+            color: white;
             font-size: 0.85rem;
         }
         
         tr:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(74, 108, 247, 0.05);
         }
         
         .highlight {
-            background: rgba(255, 230, 76, 0.2);
-            padding: 8px;
-            border-radius: 8px;
-            font-weight: bold;
-            display: inline-block;
-            border-left: 3px solid var(--accent-color);
+            background: rgba(74, 108, 247, 0.1);
+            padding: 10px;
+            border-radius: 10px;
+            font-weight: 500;
+            border-left: 3px solid var(--primary-color);
             font-size: 0.85rem;
-            margin: 8px 0;
+            margin: 10px 0;
             line-height: 1.4;
+            color: var(--text-primary);
         }
         
         ul {
-            margin-left: 16px;
-            margin-bottom: 12px;
+            margin-left: 18px;
+            margin-bottom: 15px;
         }
         
         li {
             margin-bottom: 6px;
             line-height: 1.4;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
         }
         
         #contactModal {
@@ -358,7 +351,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.7);
             z-index: 1000;
             justify-content: center;
             align-items: center;
@@ -367,15 +360,15 @@
         }
         
         .modal-content {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            padding: 15px;
-            border-radius: 12px;
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 16px;
             width: 90%;
             max-width: 350px;
             text-align: center;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            box-shadow: var(--shadow);
             position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid var(--border-color);
             animation: modalIn 0.4s ease-out;
         }
         
@@ -388,39 +381,40 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 12px 0;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            padding: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin: 15px 0;
+            background: var(--light-bg);
+            border-radius: 10px;
+            padding: 12px;
+            border: 1px solid var(--border-color);
         }
         
         .wechat-id {
             font-size: 1rem;
             font-weight: bold;
-            margin-right: 10px;
+            margin-right: 12px;
             letter-spacing: 0.5px;
+            color: var(--text-primary);
         }
         
         .copy-btn {
-            background: var(--accent-color);
-            color: var(--dark-color);
+            background: var(--primary-color);
+            color: white;
             border: none;
-            padding: 6px 12px;
-            border-radius: 6px;
+            padding: 8px 15px;
+            border-radius: 8px;
             cursor: pointer;
             display: flex;
             align-items: center;
             transition: all 0.2s ease;
-            font-weight: bold;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-            font-size: 0.9rem;
+            font-weight: 500;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            font-size: 0.85rem;
         }
         
         .copy-btn:hover {
-            background: #ffdf1a;
+            background: var(--secondary-color);
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
         }
         
         .copy-btn svg {
@@ -428,42 +422,43 @@
         }
         
         .copy-status {
-            height: 16px;
-            margin: 8px 0;
-            color: var(--accent-color);
+            height: 18px;
+            margin: 10px 0;
+            color: var(--primary-color);
             font-weight: bold;
             font-size: 0.8rem;
-            text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
         }
         
         .close-btn {
-            margin-top: 12px;
-            padding: 6px 12px;
-            background: rgba(0, 0, 0, 0.3);
-            color: var(--light-color);
+            margin-top: 15px;
+            padding: 8px 16px;
+            background: var(--primary-color);
+            color: white;
             border: none;
             border-radius: 20px;
             cursor: pointer;
-            font-weight: bold;
+            font-weight: 500;
             transition: all 0.2s ease;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
         
         .close-btn:hover {
-            background: rgba(0, 0, 0, 0.4);
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         
+        /* 底部版权信息 - 移除卡片样式 */
         footer {
             text-align: center;
-            margin-top: 15px;
-            padding: 12px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 20px;
+            padding: 10px 0; /* 调整内边距 */
             font-size: 0.8rem;
+            color: var(--text-secondary);
+            /* 移除背景、阴影和边框 */
+            background: transparent;
+            box-shadow: none;
+            border: none;
         }
         
         /* 链上治理样式 */
@@ -475,23 +470,25 @@
         }
         
         .flow-step {
-            background: rgba(255,255,255,0.1);
+            background: var(--light-bg);
             padding: 12px;
-            border-radius: 8px;
+            border-radius: 10px;
             text-align: center;
+            border: 1px solid var(--border-color);
         }
         
         .step-number {
             width: 30px;
             height: 30px;
-            background: var(--accent-color);
-            color: #333;
+            background: var(--primary-color);
+            color: white;
             border-radius: 50%;
             margin: 0 auto 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
         }
         
         .node-structure {
@@ -502,23 +499,25 @@
         
         .node-card {
             padding: 12px;
-            border-radius: 8px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
         }
         
         .node-card.official {
-            background: rgba(255,76,76,0.1);
-            border-left: 3px solid var(--primary-color);
+            background: rgba(74, 108, 247, 0.1);
+            border-left: 4px solid var(--primary-color);
         }
         
         .node-card.community {
-            background: rgba(76,175,80,0.1);
-            border-left: 3px solid var(--accent-color);
+            background: rgba(255, 107, 53, 0.1);
+            border-left: 4px solid var(--accent-color);
         }
         
         .node-type {
             font-size: 1rem;
             margin-bottom: 8px;
-            color: var(--accent-color);
+            color: var(--primary-color);
+            font-weight: 600;
         }
         
         .rules-container {
@@ -529,23 +528,76 @@
         
         .rule-box {
             padding: 12px;
-            border-radius: 8px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
         }
         
         .rule-box.critical {
-            background: rgba(255,76,76,0.1);
-            border: 1px solid #ff4c4c;
+            background: rgba(255, 107, 53, 0.1);
+            border-left: 4px solid var(--accent-color);
         }
         
         .rule-box.normal {
-            background: rgba(76,175,80,0.1);
-            border: 1px solid #4CAF50;
+            background: rgba(74, 108, 247, 0.1);
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        /* 底部导航栏样式 */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--card-bg);
+            box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
+            z-index: 100;
+            padding: 10px 0;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .nav-items {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-size: 11px;
+            flex: 1;
+            transition: all 0.2s ease;
+        }
+        
+        .nav-item:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-icon {
+            font-size: 16px;
+            margin-bottom: 4px;
+            color: var(--primary-color);
+            transition: all 0.2s ease;
+        }
+        
+        .nav-item:hover .nav-icon {
+            color: var(--secondary-color);
+        }
+        
+        .nav-text {
+            font-size: 10px;
+            text-align: center;
         }
         
         /* 小屏幕优化 */
         @media (max-width: 360px) {
             h1 {
-                font-size: 1.6rem;
+                font-size: 1.4rem;
             }
             
             .logo {
@@ -553,39 +605,61 @@
             }
             
             .timer-label {
-                font-size: 0.9rem;
+                font-size: 0.85rem;
             }
             
             .days {
-                font-size: 2em;
+                font-size: 2.8rem;
             }
             
             .time {
-                font-size: 1.2em;
+                font-size: 1.1rem;
             }
             
-            .btn, .auth-btn, .contact-btn, .guide-btn, 
-            .model-btn, .game-btn, .shareholder-btn {
-                height: 40px;
-                font-size: 0.9rem;
-                padding: 6px 4px;
+            .btn {
+                height: 38px;
+                font-size: 0.8rem;
+                padding: 8px 4px;
+            }
+            
+            .nav-text {
+                font-size: 9px;
+            }
+            
+            .nav-icon {
+                font-size: 14px;
             }
         }
         
         /* 超小屏幕优化 */
         @media (max-width: 320px) {
             h1 {
-                font-size: 1.4rem;
+                font-size: 1.3rem;
             }
             
             .logo {
                 height: 2.2rem;
             }
             
-            .btn, .auth-btn, .contact-btn, .guide-btn, 
-            .model-btn, .game-btn, .shareholder-btn {
-                font-size: 0.85rem;
-                height: 38px;
+            .days {
+                font-size: 2.4rem;
+            }
+            
+            .time {
+                font-size: 1rem;
+            }
+            
+            .btn {
+                font-size: 0.75rem;
+                height: 36px;
+            }
+            
+            .nav-text {
+                font-size: 8px;
+            }
+            
+            .nav-icon {
+                font-size: 13px;
             }
         }
     </style>
@@ -606,21 +680,26 @@
                 <div class="timer-label">DSC已稳定运行</div>
                 <div class="timer" id="runtimeTimer">
                     <div class="days" id="days">00天</div>
-                    <div class="time" id="time">00:00:00</div>
+                    <div class="time">
+                        <div class="time-unit">
+                            <div class="time-value" id="hours">00</div>
+                            <div class="time-label">时</div>
+                        </div>
+                        <div class="time-unit">
+                            <div class="time-value" id="minutes">00</div>
+                            <div class="time-label">分</div>
+                        </div>
+                        <div class="time-unit">
+                            <div class="time-value" id="seconds">00</div>
+                            <div class="time-label">秒</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="timer-motto">无人扶我青云志，我自挖矿至巅峰。<br>卷轴铺就黄金路，链上乾坤掌中明。</div>
-            </div>
-            
-            <div class="auth-grid">
-                <!-- 修改按钮链接和样式 -->
-                <a href="https://prod.digital-scroll.org/#/pages/reg?c=182N17" class="auth-btn" id="registerBtn">注册/登录</a>
-                <a href="xueyuan.html" class="contact-btn">卷轴学院</a>
-                <a href="guide.html" class="guide-btn">操作指南</a>
-                <a href="moxing.html" class="model-btn">经济模型</a>
-                <a href="youxi.html" class="game-btn">复投计算</a>
-                <a href="gudongzhidu.html" class="shareholder-btn">股东制度</a>
             </div>
         </header>
+        
+        <!-- 独立出来的格言文本 -->
+        <div class="motto-text">无人扶我青云志，我自挖矿到巅峰，<br>卷轴在手不曾弃，坚持持有创辉煌。</div>
         
         <div class="button-grid">
             <button class="btn" onclick="showSection('intro')">项目介绍</button>
@@ -794,7 +873,7 @@
             
             <h3>刷脸验证问题解决</h3>
             <p>若APP二次刷脸无法通过，请尝试使用网页版：<br>
-            <a href="https://prod.digital-scroll.org" style="color: var(--accent-color); text-decoration: underline;" class="external-link">https://prod.digital-scroll.org</a></p>
+            <a href="https://prod.digital-scroll.org" style="color: var(--primary-color); text-decoration: underline;" class="external-link">https://prod.digital-scroll.org</a></p>
         </div>
         
         <div id="promotion" class="content-section">
@@ -916,11 +995,42 @@
             </div>
         </div>
         
+        <!-- 修改后的底部版权信息 -->
         <footer>
             <p>© 2025 数字卷轴DSC 卷界链</p>
             <p>基于卷界链技术构建 · 安全透明 · 多重收益</p>
         </footer>
     </div>
+    
+    <!-- 底部导航栏 -->
+    <nav class="bottom-nav">
+        <div class="nav-items">
+            <a href="https://prod.digital-scroll.org/#/pages/reg?c=182N17" class="nav-item">
+                <div class="nav-icon"><i class="fas fa-user-plus"></i></div>
+                <div class="nav-text">注册/登录</div>
+            </a>
+            <a href="guide.html" class="nav-item">
+                <div class="nav-icon"><i class="fas fa-file-alt"></i></div>
+                <div class="nav-text">图文注册</div>
+            </a>
+            <a href="xueyuan.html" class="nav-item">
+                <div class="nav-icon"><i class="fas fa-graduation-cap"></i></div>
+                <div class="nav-text">卷轴学院</div>
+            </a>
+            <a href="youxi.html" class="nav-item">
+                <div class="nav-icon"><i class="fas fa-calculator"></i></div>
+                <div class="nav-text">复投计算</div>
+            </a>
+            <a href="moxing.html" class="nav-item">
+                <div class="nav-icon"><i class="fas fa-chart-line"></i></div>
+                <div class="nav-text">经济模型</div>
+            </a>
+            <a href="gudongzhidu.html" class="nav-item">
+                <div class="nav-icon"><i class="fas fa-handshake"></i></div>
+                <div class="nav-text">股东制度</div>
+            </a>
+        </div>
+    </nav>
     
     <script>
     // 显示指定内容区域
@@ -973,8 +1083,9 @@
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
         
         document.getElementById('days').textContent = `${days}天`;
-        document.getElementById('time').textContent = 
-            `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+        document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+        document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
     }
     
     // 微信浏览器检测
