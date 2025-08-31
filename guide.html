@@ -30,7 +30,7 @@
             background: linear-gradient(-45deg, #f5f7fb, #e4e8f5, #f0f5ff, #e8f0fe);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
-            font-size: 16px;
+            font-size: 14px; /* 缩小字体大小 */
             margin: 0;
             padding: 0;
             min-height: 100vh;
@@ -39,21 +39,21 @@
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
-            padding-bottom: 80px; /* 为底部导航栏留出空间 */
+            padding: 15px;
+            padding-bottom: 70px; /* 为底部导航栏留出空间 */
         }
         
         header {
             display: flex;
             align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
             border-bottom: 1px solid rgba(0,0,0,0.1);
         }
         
         .logo {
-            height: 40px;
-            margin-right: 15px;
+            height: 36px;
+            margin-right: 12px;
             cursor: pointer;
             background: none;
         }
@@ -61,15 +61,15 @@
         h1 {
             margin: 0;
             color: var(--primary-blue);
-            font-size: 24px;
+            font-size: 20px; /* 缩小字体大小 */
         }
         
         .card {
             background: rgba(255,255,255,0.9);
             border-radius: var(--radius);
             box-shadow: var(--shadow);
-            padding: 25px;
-            margin-bottom: 30px;
+            padding: 20px;
+            margin-bottom: 25px;
             transition: all 0.3s ease;
             border: 1px solid rgba(0,0,0,0.05);
         }
@@ -82,8 +82,8 @@
         h2 {
             color: var(--primary-blue);
             margin-top: 0;
-            font-size: 20px;
-            padding-bottom: 10px;
+            font-size: 18px; /* 缩小字体大小 */
+            padding-bottom: 8px;
             border-bottom: 1px solid rgba(0,0,0,0.1);
         }
         
@@ -100,34 +100,37 @@
         .warning-box {
             background-color: var(--warning-bg);
             border-left: 4px solid var(--highlight-orange);
-            padding: 15px;
-            margin: 20px 0;
+            padding: 12px;
+            margin: 15px 0;
             border-radius: 0 var(--radius) var(--radius) 0;
+            font-size: 13px; /* 缩小字体大小 */
         }
         
         .info-box {
             background-color: var(--info-bg);
             border-left: 4px solid var(--primary-blue);
-            padding: 15px;
-            margin: 20px 0;
+            padding: 12px;
+            margin: 15px 0;
             border-radius: 0 var(--radius) var(--radius) 0;
+            font-size: 13px; /* 缩小字体大小 */
         }
         
         .register-link {
             font-weight: bold;
             color: var(--highlight-orange);
             text-decoration: underline;
+            font-size: 13px; /* 缩小字体大小 */
         }
         
         .copy-btn {
             background-color: var(--primary-blue);
             color: white;
             border: none;
-            padding: 5px 10px;
+            padding: 4px 8px;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 14px;
-            margin-left: 10px;
+            font-size: 12px; /* 缩小字体大小 */
+            margin-left: 8px;
             transition: all 0.2s ease;
         }
         
@@ -141,7 +144,7 @@
             height: auto;
             border-radius: var(--radius);
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            margin: 15px 0;
+            margin: 12px 0;
             border: 1px solid rgba(0,0,0,0.05);
             transition: all 0.3s ease;
         }
@@ -153,19 +156,20 @@
         
         footer {
             text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
+            margin-top: 30px;
+            padding-top: 15px;
             border-top: 1px solid rgba(0,0,0,0.1);
             color: #666;
-            font-size: 14px;
+            font-size: 12px; /* 缩小字体大小 */
         }
         
         ol, ul {
-            padding-left: 20px;
+            padding-left: 18px;
         }
         
         li {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            font-size: 14px; /* 缩小字体大小 */
         }
         
         .security-code {
@@ -173,8 +177,9 @@
             font-weight: bold;
             color: var(--important-red);
             background: rgba(0,0,0,0.03);
-            padding: 2px 6px;
+            padding: 2px 5px;
             border-radius: 4px;
+            font-size: 13px; /* 缩小字体大小 */
         }
         
         /* 底部导航栏样式 */
@@ -186,7 +191,7 @@
             background: white;
             box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
             z-index: 100;
-            padding: 10px 0;
+            padding: 8px 0;
         }
         
         .nav-items {
@@ -203,25 +208,25 @@
             align-items: center;
             text-decoration: none;
             color: var(--primary-blue);
-            font-size: 12px;
+            font-size: 11px; /* 缩小字体大小 */
             flex: 1;
         }
         
         .nav-icon {
-            font-size: 18px;
-            margin-bottom: 4px;
+            font-size: 16px; /* 缩小字体大小 */
+            margin-bottom: 3px;
             color: var(--primary-blue);
         }
         
         .nav-text {
-            font-size: 11px;
+            font-size: 10px; /* 缩小字体大小 */
             text-align: center;
             color: var(--primary-blue);
         }
         
         @media (min-width: 768px) {
             .nav-items {
-                padding: 0 15px;
+                padding: 0 12px;
             }
         }
     </style>
@@ -363,7 +368,7 @@
                 <div class="nav-icon"><i class="fas fa-home"></i></div>
                 <div class="nav-text">首页</div>
             </a>
-            <a href="https://prod.digital-scroll.org/#/pages/reg?c=182N17" target="_blank" class="nav-item">
+            <a href="https://prod.digital-scroll.org/#/pages/reg?c=182N17" target="_blank" class="nav-item" id="navRegisterLink">
                 <div class="nav-icon"><i class="fas fa-user-plus"></i></div>
                 <div class="nav-text">注册/登录</div>
             </a>
@@ -411,11 +416,22 @@
         }
         
         // 微信浏览器中点击注册链接提示
-        document.getElementById('registerLink').addEventListener('click', function(e) {
+        function handleWeixinLinkClick(e) {
             if (isWeixinBrowser()) {
                 e.preventDefault();
                 alert('请点击右上角菜单，选择"在浏览器中打开"后再进行注册操作');
+                return false;
             }
+            return true;
+        }
+        
+        // 页面加载完成后绑定事件
+        document.addEventListener('DOMContentLoaded', function() {
+            // 主注册链接
+            document.getElementById('registerLink').addEventListener('click', handleWeixinLinkClick);
+            
+            // 导航栏注册链接
+            document.getElementById('navRegisterLink').addEventListener('click', handleWeixinLinkClick);
         });
     </script>
 </body>
