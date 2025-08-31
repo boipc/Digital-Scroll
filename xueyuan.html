@@ -36,10 +36,38 @@
         .videos-container { display: grid; grid-template-columns: 1fr; gap: 15px; margin-bottom: 30px; padding: 0 5px; }
         .video-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.08); transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .video-card:active { transform: scale(0.98); }
-        .video-wrapper { position: relative; width: 100%; height: 25vh; background: linear-gradient(135deg,#ff7e00 0%,#ff5500 100%); cursor: pointer; }
-        .video-placeholder { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; padding: 15px; text-align: center; }
-        .video-placeholder-text { font-size: 22px; font-weight: 700; color: #ffeb3b; text-shadow: -1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000; line-height: 1.4; }
-        .play-button { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: 40px; color: white; opacity: 0.85; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        .video-wrapper { 
+            position: relative; 
+            width: 100%; 
+            height: 25vh; 
+            cursor: pointer; 
+            overflow: hidden;
+        }
+        .video-cover {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .video-card:hover .video-cover {
+            transform: scale(1.05);
+        }
+        .play-button { 
+            position: absolute; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%,-50%); 
+            font-size: 40px; 
+            color: white; 
+            opacity: 0.85; 
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3); 
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+        .video-card:hover .play-button {
+            transform: translate(-50%,-50%) scale(1.1);
+            opacity: 1;
+        }
         .video-title { padding: 12px 15px; font-size: 14px; font-weight: 600; color: #2c3e50; border-top: 1px solid #f0f0f0; }
         .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: white; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 100; padding: 10px 0; }
         .nav-items { display: flex; justify-content: space-around; align-items: center; }
@@ -127,6 +155,7 @@
             color: white;
             font-size: 16px;
             text-align: center;
+            z-index: 3;
         }
         
         /* 错误提示 */
@@ -142,26 +171,8 @@
             border-radius: 8px;
             text-align: center;
             max-width: 80%;
+            z-index: 3;
         }
-        
-        /* IPFS状态指示器 */
-        .ipfs-status {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            background: rgba(0,0,0,0.7);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 4px;
-            font-size: 12px;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .ipfs-status.online { background: rgba(40, 167, 69, 0.8); }
-        .ipfs-status.offline { background: rgba(220, 53, 69, 0.8); }
         
         /* 视频源指示器 */
         .video-source-indicator {
@@ -176,11 +187,40 @@
             z-index: 10;
         }
         
+        /* Wave播放器容器 */
+        .wave-player-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            background: black;
+        }
+        
+        /* 封面图加载失败时的备用样式 */
+        .cover-fallback {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            padding: 15px;
+        }
+        
         @media (min-width: 768px) {
             .videos-container { grid-template-columns: repeat(2,1fr); gap: 20px; padding: 0 15px; }
             .container { max-width: 768px; margin: 0 auto; }
             .video-wrapper { border-radius: 10px 10px 0 0; }
-            .video-placeholder-text { font-size: 24px; }
             .header-top { gap: 15px; }
             .main-title { font-size: 24px; }
             .sub-title { font-size: 18px; }
@@ -188,10 +228,6 @@
     </style>
 </head>
 <body>
-    <div class="ipfs-status online" id="ipfsStatus">
-        <i class="fas fa-check-circle"></i> IPFS连接正常
-    </div>
-    
     <header>
         <div class="header-top">
             <a href="index.html" class="logo">
@@ -200,69 +236,75 @@
             </a>
             <h1 class="main-title">卷轴学院</h1>
         </div>
-        <div class="sub-title">数字卷轴DSC操作视频 - 双源加速版</div>
+        <div class="sub-title">数字卷轴DSC操作视频 - Wave视频版</div>
     </header>
     
     <main class="main-content">
         <div class="container">
             <div class="videos-container">
                 <div class="video-card">
-                    <div class="video-wrapper" onclick="openVideo('bafybeigdvczbjzmu5ar5jfijnhl4yfd34e6hrxn3v7eyc5aade7fo6gxva', 1)">
-                        <div class="video-placeholder"><div class="video-placeholder-text">数字卷轴DSC注册操作</div></div>
+                    <div class="video-wrapper" data-wave-id="BFFASf6idBtdmYht" data-video-num="1">
+                        <img class="video-cover" src="https://embed.wave.video/BFFASf6idBtdmYht/preview.jpg?width=1080&height=1920" alt="数字卷轴DSC注册操作" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="cover-fallback" style="display: none;">数字卷轴DSC注册操作</div>
                         <div class="play-button"><i class="fas fa-play-circle"></i></div>
                         <div class="loading" id="loading1"><i class="fas fa-spinner fa-spin"></i><br>视频加载中...</div>
                         <div class="error-message" id="error1"></div>
-                        <div class="video-source-indicator" id="sourceIndicator1">IPFS源</div>
+                        <div class="video-source-indicator" id="sourceIndicator1">Wave源</div>
                     </div>
                     <div class="video-title">数字卷轴DSC注册</div>
                 </div>
                 <div class="video-card">
-                    <div class="video-wrapper" onclick="openVideo('bafybeiflpjrpcdvftmbezgvqsvbsdkgwx7cd7x7ggw2krwzof6pcu7kvqm', 2)">
-                        <div class="video-placeholder"><div class="video-placeholder-text">数字卷轴DSC人脸识别操作</div></div>
+                    <div class="video-wrapper" data-wave-id="EJwpsUd5icFGQxVE" data-video-num="2">
+                        <img class="video-cover" src="https://embed.wave.video/EJwpsUd5icFGQxVE/preview.jpg?width=1080&height=1920" alt="数字卷轴DSC人脸识别操作" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="cover-fallback" style="display: none;">数字卷轴DSC人脸识别操作</div>
                         <div class="play-button"><i class="fas fa-play-circle"></i></div>
                         <div class="loading" id="loading2"><i class="fas fa-spinner fa-spin"></i><br>视频加载中...</div>
                         <div class="error-message" id="error2"></div>
-                        <div class="video-source-indicator" id="sourceIndicator2">IPFS源</div>
+                        <div class="video-source-indicator" id="sourceIndicator2">Wave源</div>
                     </div>
                     <div class="video-title">数字卷轴DSC人脸识别</div>
                 </div>
                 <div class="video-card">
-                    <div class="video-wrapper" onclick="openVideo('bafybeiezek4habwfyl53pgvz3mmks3fvxla6sz47ji3vvpcm2gz26whu4m', 3)">
-                        <div class="video-placeholder"><div class="video-placeholder-text">数字卷轴DSC分享操作</div></div>
+                    <div class="video-wrapper" data-wave-id="4SPTKJoMqUuj5HA8" data-video-num="3">
+                        <img class="video-cover" src="https://embed.wave.video/4SPTKJoMqUuj5HA8/preview.jpg?width=1080&height=1920" alt="数字卷轴DSC分享操作" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="cover-fallback" style="display: none;">数字卷轴DSC分享操作</div>
                         <div class="play-button"><i class="fas fa-play-circle"></i></div>
                         <div class="loading" id="loading3"><i class="fas fa-spinner fa-spin"></i><br>视频加载中...</div>
                         <div class="error-message" id="error3"></div>
-                        <div class="video-source-indicator" id="sourceIndicator3">IPFS源</div>
+                        <div class="video-source-indicator" id="sourceIndicator3">Wave源</div>
                     </div>
                     <div class="video-title">数字卷轴DSC分享</div>
                 </div>
                 <div class="video-card">
-                    <div class="video-wrapper" onclick="openVideo('bafybeicxk6jlwqqebririrkkj2aqra2yxelv4uyjptr7knadva7x3yql7u', 4)">
-                        <div class="video-placeholder"><div class="video-placeholder-text">数字卷轴DSC购买操作</div></div>
+                    <div class="video-wrapper" data-wave-id="erDv93zB6gDwwsm9" data-video-num="4">
+                        <img class="video-cover" src="https://embed.wave.video/erDv93zB6gDwwsm9/preview.jpg?width=1080&height=1920" alt="数字卷轴DSC购买操作" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="cover-fallback" style="display: none;">数字卷轴DSC购买操作</div>
                         <div class="play-button"><i class="fas fa-play-circle"></i></div>
                         <div class="loading" id="loading4"><i class="fas fa-spinner fa-spin"></i><br>视频加载中...</div>
                         <div class="error-message" id="error4"></div>
-                        <div class="video-source-indicator" id="sourceIndicator4">IPFS源</div>
+                        <div class="video-source-indicator" id="sourceIndicator4">Wave源</div>
                     </div>
                     <div class="video-title">数字卷轴DSC购买</div>
                 </div>
                 <div class="video-card">
-                    <div class="video-wrapper" onclick="openVideo('bafybeiclpepqpiex6nymp4of3ahck2hn4ji7tenpooc2qjbucuelgi2qwa', 5)">
-                        <div class="video-placeholder"><div class="video-placeholder-text">数字卷轴DSC出售操作</div></div>
+                    <div class="video-wrapper" data-wave-id="h3JKyON1m3tpR15W" data-video-num="5">
+                        <img class="video-cover" src="https://embed.wave.video/h3JKyON1m3tpR15W/preview.jpg?width=1080&height=1920" alt="数字卷轴DSC出售操作" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="cover-fallback" style="display: none;">数字卷轴DSC出售操作</div>
                         <div class="play-button"><i class="fas fa-play-circle"></i></div>
                         <div class="loading" id="loading5"><i class="fas fa-spinner fa-spin"></i><br>视频加载中...</div>
                         <div class="error-message" id="error5"></div>
-                        <div class="video-source-indicator" id="sourceIndicator5">IPFS源</div>
+                        <div class="video-source-indicator" id="sourceIndicator5">Wave源</div>
                     </div>
                     <div class="video-title">数字卷轴DSC出售</div>
                 </div>
                 <div class="video-card">
-                    <div class="video-wrapper" onclick="openVideo('bafybeic5pbkysbuo4k3ytha7rlqiz3wmqejtpqryhwljk6uowtqswghj3y', 6)">
-                        <div class="video-placeholder"><div class="video-placeholder-text">数字卷轴DSC激励操作</div></div>
+                    <div class="video-wrapper" data-wave-id="8Xv4qeUUZca7Dcgm" data-video-num="6">
+                        <img class="video-cover" src="https://embed.wave.video/8Xv4qeUUZca7Dcgm/preview.jpg?width=1080&height=1920" alt="数字卷轴DSC激励操作" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="cover-fallback" style="display: none;">数字卷轴DSC激励操作</div>
                         <div class="play-button"><i class="fas fa-play-circle"></i></div>
                         <div class="loading" id="loading6"><i class="fas fa-spinner fa-spin"></i><br>视频加载中...</div>
                         <div class="error-message" id="error6"></div>
-                        <div class="video-source-indicator" id="sourceIndicator6">IPFS源</div>
+                        <div class="video-source-indicator" id="sourceIndicator6">Wave源</div>
                     </div>
                     <div class="video-title">数字卷轴DSC激励</div>
                 </div>
@@ -305,9 +347,12 @@
             <video class="video-frame" id="videoPlayer" controls playsinline webkit-playsinline></video>
             <div class="loading" id="modalLoading"><i class="fas fa-spinner fa-spin"></i><br>视频加载中，请稍候...</div>
             <div class="error-message" id="modalError"></div>
-            <div class="video-source-indicator" id="modalSourceIndicator">IPFS源</div>
+            <div class="video-source-indicator" id="modalSourceIndicator">GitHub源</div>
         </div>
     </div>
+    
+    <!-- Wave播放器容器 -->
+    <div class="wave-player-container" id="wavePlayerContainer"></div>
     
     <!-- 微信提示弹窗 -->
     <div class="wechat-modal" id="wechatModal">
@@ -328,59 +373,28 @@
     </div>
 
     <script>
-        // 使用多个IPFS网关和GitHub备用源
-        const IPFS_GATEWAYS = [
-            'https://gateway.pinata.cloud/ipfs/',
-            'https://ipfs.io/ipfs/',
-            'https://cloudflare-ipfs.com/ipfs/'
-        ];
-        
+        // GitHub备用视频源
         const GITHUB_BASE_URL = 'https://raw.githubusercontent.com/boipc/Digital-Scroll/main/';
         
-        // 视频映射表：CID到GitHub文件名
+        // 视频映射表：视频编号到GitHub文件名
         const videoMap = {
-            'bafybeigdvczbjzmu5ar5jfijnhl4yfd34e6hrxn3v7eyc5aade7fo6gxva': '01.mp4',
-            'bafybeiflpjrpcdvftmbezgvqsvbsdkgwx7cd7x7ggw2krwzof6pcu7kvqm': '02.mp4',
-            'bafybeiezek4habwfyl53pgvz3mmks3fvxla6sz47ji3vvpcm2gz26whu4m': '03.mp4',
-            'bafybeicxk6jlwqqebririrkkj2aqra2yxelv4uyjptr7knadva7x3yql7u': '04.mp4',
-            'bafybeiclpepqpiex6nymp4of3ahck2hn4ji7tenpooc2qjbucuelgi2qwa': '05.mp4',
-            'bafybeic5pbkysbuo4k3ytha7rlqiz3wmqejtpqryhwljk6uowtqswghj3y': '06.mp4'
+            1: '01.mp4',
+            2: '02.mp4',
+            3: '03.mp4',
+            4: '04.mp4',
+            5: '05.mp4',
+            6: '06.mp4'
         };
         
-        // 当前使用的网关索引
-        let currentGatewayIndex = 0;
-        
-        // 预加载视频
-        function preloadVideos() {
-            Object.keys(videoMap).forEach((cid, index) => {
-                const videoNumber = index + 1;
-                const githubUrl = GITHUB_BASE_URL + videoMap[cid];
-                
-                // 创建隐藏的video元素进行预加载
-                const preloadVideo = document.createElement('video');
-                preloadVideo.style.display = 'none';
-                preloadVideo.preload = 'metadata';
-                preloadVideo.src = githubUrl;
-                document.body.appendChild(preloadVideo);
-                
-                // 更新指示器显示预加载状态
-                const indicator = document.getElementById(`sourceIndicator${videoNumber}`);
-                if (indicator) {
-                    indicator.textContent = '预加载中...';
-                    indicator.style.backgroundColor = 'rgba(255, 193, 7, 0.8)';
-                    
-                    preloadVideo.addEventListener('loadedmetadata', () => {
-                        indicator.textContent = 'GitHub源(已缓存)';
-                        indicator.style.backgroundColor = 'rgba(40, 167, 69, 0.8)';
-                    });
-                    
-                    preloadVideo.addEventListener('error', () => {
-                        indicator.textContent = 'GitHub源(加载失败)';
-                        indicator.style.backgroundColor = 'rgba(220, 53, 69, 0.8)';
-                    });
-                }
-            });
-        }
+        // Wave视频ID映射
+        const waveVideoMap = {
+            1: 'BFFASf6idBtdmYht',
+            2: 'EJwpsUd5icFGQxVE',
+            3: '4SPTKJoMqUuj5HA8',
+            4: 'erDv93zB6gDwwsm9',
+            5: 'h3JKyON1m3tpR15W',
+            6: '8Xv4qeUUZca7Dcgm'
+        };
         
         // 检测是否为微信浏览器
         function isWechatBrowser() {
@@ -410,41 +424,118 @@
             return true;
         }
         
-        // 测试IPFS网关连接状态
-        function testIPFSGateway() {
-            const statusElement = document.getElementById('ipfsStatus');
-            // 测试第一个视频的CID
-            const testUrl = IPFS_GATEWAYS[currentGatewayIndex] + 'bafybeigdvczbjzmu5ar5jfijnhl4yfd34e6hrxn3v7eyc5aade7fo6gxva';
-            
-            fetch(testUrl, { method: 'HEAD', cache: 'no-store' })
-            .then(response => {
-                if (response.ok) {
-                    statusElement.className = 'ipfs-status online';
-                    statusElement.innerHTML = `<i class="fas fa-check-circle"></i> IPFS连接正常 (网关 ${currentGatewayIndex + 1})`;
-                } else {
-                    tryNextGateway();
+        // 预加载GitHub视频
+        function preloadVideos() {
+            Object.keys(videoMap).forEach((videoNum) => {
+                const githubUrl = GITHUB_BASE_URL + videoMap[videoNum];
+                
+                // 创建隐藏的video元素进行预加载
+                const preloadVideo = document.createElement('video');
+                preloadVideo.style.display = 'none';
+                preloadVideo.preload = 'metadata';
+                preloadVideo.src = githubUrl;
+                document.body.appendChild(preloadVideo);
+                
+                // 更新指示器显示预加载状态
+                const indicator = document.getElementById(`sourceIndicator${videoNum}`);
+                if (indicator) {
+                    preloadVideo.addEventListener('loadedmetadata', () => {
+                        indicator.textContent = 'Wave源(GitHub备用)';
+                    });
+                    
+                    preloadVideo.addEventListener('error', () => {
+                        indicator.textContent = 'Wave源(无备用)';
+                        indicator.style.backgroundColor = 'rgba(220, 53, 69, 0.8)';
+                    });
                 }
-            })
-            .catch(error => {
-                console.error('IPFS网关测试失败:', error);
-                tryNextGateway();
             });
+        }
+        
+        // 打开Wave视频
+        function openWaveVideo(waveId, videoNum) {
+            const waveContainer = document.getElementById('wavePlayerContainer');
+            waveContainer.innerHTML = `
+                <div class="wave_popover_embed" data-id="${waveId}" data-width="360" data-height="800">
+                    <div>
+                        <img src="https://embed.wave.video/${waveId}/preview.jpg?width=1080&height=1920" alt="" 
+                             style="cursor: pointer; display: block; max-width: 100%; object-fit: cover;" 
+                             data-target="target" />
+                    </div>
+                </div>
+            `;
             
-            function tryNextGateway() {
-                currentGatewayIndex = (currentGatewayIndex + 1) % IPFS_GATEWAYS.length;
-                if (currentGatewayIndex === 0) {
-                    // 所有网关都尝试过了，都失败了
-                    statusElement.className = 'ipfs-status offline';
-                    statusElement.innerHTML = '<i class="fas fa-exclamation-circle"></i> IPFS连接问题，使用GitHub源';
-                } else {
-                    // 尝试下一个网关
-                    testIPFSGateway();
-                }
+            // 显示Wave容器
+            waveContainer.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            
+            // 添加关闭按钮
+            const closeButton = document.createElement('div');
+            closeButton.innerHTML = '&times;';
+            closeButton.style.position = 'absolute';
+            closeButton.style.top = '15px';
+            closeButton.style.right = '15px';
+            closeButton.style.color = 'white';
+            closeButton.style.fontSize = '30px';
+            closeButton.style.cursor = 'pointer';
+            closeButton.style.zIndex = '1001';
+            closeButton.style.backgroundColor = 'rgba(0,0,0,0.5)';
+            closeButton.style.width = '40px';
+            closeButton.style.height = '40px';
+            closeButton.style.borderRadius = '50%';
+            closeButton.style.display = 'flex';
+            closeButton.style.alignItems = 'center';
+            closeButton.style.justifyContent = 'center';
+            closeButton.onclick = closeWaveVideo;
+            
+            waveContainer.appendChild(closeButton);
+            
+            // 加载Wave脚本
+            if (!window.waveScriptLoaded) {
+                const script = document.createElement('script');
+                script.src = 'https://wave.video/embed/popover-embed.js';
+                script.onload = function() {
+                    window.waveScriptLoaded = true;
+                    // 触发Wave播放器
+                    setTimeout(() => {
+                        const waveElement = waveContainer.querySelector('.wave_popover_embed');
+                        if (waveElement && typeof window.WavePopoverEmbed !== 'undefined') {
+                            window.WavePopoverEmbed.init();
+                        } else {
+                            // Wave加载失败，使用GitHub备用源
+                            closeWaveVideo();
+                            openGitHubVideo(videoNum);
+                        }
+                    }, 500);
+                };
+                script.onerror = function() {
+                    // Wave脚本加载失败，使用GitHub备用源
+                    closeWaveVideo();
+                    openGitHubVideo(videoNum);
+                };
+                document.body.appendChild(script);
+            } else {
+                // 如果脚本已加载，直接初始化
+                setTimeout(() => {
+                    if (typeof window.WavePopoverEmbed !== 'undefined') {
+                        window.WavePopoverEmbed.init();
+                    } else {
+                        closeWaveVideo();
+                        openGitHubVideo(videoNum);
+                    }
+                }, 500);
             }
         }
         
-        // 打开视频
-        function openVideo(cid, videoNumber) {
+        // 关闭Wave视频
+        function closeWaveVideo() {
+            const waveContainer = document.getElementById('wavePlayerContainer');
+            waveContainer.style.display = 'none';
+            waveContainer.innerHTML = '';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // 打开GitHub备用视频
+        function openGitHubVideo(videoNum) {
             const videoPlayer = document.getElementById('videoPlayer');
             const modalLoading = document.getElementById('modalLoading');
             const modalError = document.getElementById('modalError');
@@ -453,97 +544,34 @@
             // 显示加载中
             modalLoading.style.display = 'block';
             modalError.style.display = 'none';
-            modalSourceIndicator.textContent = '尝试连接IPFS...';
+            modalSourceIndicator.textContent = 'GitHub源';
             modalSourceIndicator.style.display = 'block';
             
             document.getElementById('videoModal').style.display = 'flex';
             document.body.style.overflow = 'hidden';
             
-            // 构建IPFS和GitHub视频URL
-            const ipfsUrl = IPFS_GATEWAYS[currentGatewayIndex] + cid;
-            const githubUrl = GITHUB_BASE_URL + videoMap[cid];
+            // 构建GitHub视频URL
+            const githubUrl = GITHUB_BASE_URL + videoMap[videoNum];
             
-            console.log('正在加载视频:', ipfsUrl);
+            console.log('使用GitHub备用源:', githubUrl);
             
-            // 先尝试IPFS源
-            let ipfsAttempted = false;
-            let githubAttempted = false;
+            videoPlayer.src = githubUrl;
+            videoPlayer.load();
             
-            function tryIpfsSource() {
-                if (ipfsAttempted) return;
-                ipfsAttempted = true;
-                
-                modalSourceIndicator.textContent = `IPFS源 (网关 ${currentGatewayIndex + 1})`;
-                modalSourceIndicator.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-                
-                videoPlayer.src = ipfsUrl;
-                videoPlayer.load();
-                
-                const ipfsTimeout = setTimeout(() => {
-                    if (!githubAttempted) {
-                        console.log('IPFS源加载超时，尝试GitHub源');
-                        tryGithubSource();
-                    }
-                }, 5000); // 5秒超时
-                
-                videoPlayer.onloadeddata = function() {
-                    clearTimeout(ipfsTimeout);
-                    modalLoading.style.display = 'none';
-                    videoPlayer.play().catch(err => {
-                        console.log('自动播放失败:', err);
-                        modalError.textContent = '自动播放失败，请手动点击播放';
-                        modalError.style.display = 'block';
-                    });
-                };
-                
-                videoPlayer.onerror = function() {
-                    clearTimeout(ipfsTimeout);
-                    if (!githubAttempted) {
-                        console.log('IPFS源加载失败，尝试GitHub源');
-                        tryGithubSource();
-                    }
-                };
-            }
-            
-            function tryGithubSource() {
-                if (githubAttempted) return;
-                githubAttempted = true;
-                
-                modalSourceIndicator.textContent = 'GitHub源';
-                modalSourceIndicator.style.backgroundColor = 'rgba(40, 167, 69, 0.8)';
-                
-                console.log('尝试GitHub源:', githubUrl);
-                videoPlayer.src = githubUrl;
-                videoPlayer.load();
-                
-                videoPlayer.onloadeddata = function() {
-                    modalLoading.style.display = 'none';
-                    videoPlayer.play().catch(err => {
-                        console.log('自动播放失败:', err);
-                        modalError.textContent = '自动播放失败，请手动点击播放';
-                        modalError.style.display = 'block';
-                    });
-                };
-                
-                videoPlayer.onerror = function() {
-                    modalLoading.style.display = 'none';
-                    modalError.textContent = '所有视频源加载失败，请检查网络连接或刷新页面重试';
+            videoPlayer.onloadeddata = function() {
+                modalLoading.style.display = 'none';
+                videoPlayer.play().catch(err => {
+                    console.log('自动播放失败:', err);
+                    modalError.textContent = '自动播放失败，请手动点击播放';
                     modalError.style.display = 'block';
-                    
-                    // 更新状态指示器
-                    const statusElement = document.getElementById('ipfsStatus');
-                    statusElement.className = 'ipfs-status offline';
-                    statusElement.innerHTML = '<i class="fas fa-exclamation-circle"></i> 所有视频源加载失败';
-                };
-            }
+                });
+            };
             
-            // 开始尝试IPFS源
-            tryIpfsSource();
-            
-            // 同时预加载GitHub源
-            const preloadVideo = document.createElement('video');
-            preloadVideo.preload = 'auto';
-            preloadVideo.src = githubUrl;
+            videoPlayer.onerror = function() {
+                modalLoading.style.display = 'none';
+                modalError.textContent = '视频加载失败，请检查网络连接或刷新页面重试';
+                modalError.style.display = 'block';
+            };
             
             // 监听视频缓冲
             videoPlayer.onwaiting = function() {
@@ -592,8 +620,15 @@
                 registerLink.addEventListener('click', handleRegisterClick);
             }
             
-            // 测试IPFS网关连接状态
-            testIPFSGateway();
+            // 为视频卡片添加点击事件
+            const videoWrappers = document.querySelectorAll('.video-wrapper');
+            videoWrappers.forEach(wrapper => {
+                wrapper.addEventListener('click', function() {
+                    const waveId = this.getAttribute('data-wave-id');
+                    const videoNum = this.getAttribute('data-video-num');
+                    openWaveVideo(waveId, videoNum);
+                });
+            });
             
             // 预加载GitHub视频
             preloadVideos();
@@ -605,6 +640,9 @@
             
             const wechatModal = document.getElementById('wechatModal');
             if (event.target === wechatModal) closeWechatModal();
+            
+            const waveContainer = document.getElementById('wavePlayerContainer');
+            if (event.target === waveContainer) closeWaveVideo();
         };
     </script>
 </body>
