@@ -32,6 +32,18 @@
         .logo-fallback { font-size: 16px; font-weight: bold; }
         .main-title { font-size: 22px; font-weight: 700; color: #2c3e50; line-height: 1.2; }
         .sub-title { font-size: 16px; color: #6a11cb; font-weight: 500; text-align: center; width: 100%; }
+        .source-tip {
+            text-align: center;
+            font-size: 13px;
+            color: #6c757d;
+            margin-bottom: 15px;
+            background: rgba(108, 117, 125, 0.1);
+            padding: 8px 12px;
+            border-radius: 8px;
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
         .main-content { padding: 10px 0; }
         .videos-container { display: grid; grid-template-columns: 1fr; gap: 15px; margin-bottom: 30px; padding: 0 5px; }
         .video-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.08); transition: transform 0.3s ease, box-shadow 0.3s ease; }
@@ -68,7 +80,23 @@
             transform: translate(-50%,-50%) scale(1.1);
             opacity: 1;
         }
-        .video-title { padding: 12px 15px; font-size: 14px; font-weight: 600; color: #2c3e50; border-top: 1px solid #f0f0f0; }
+        .video-title { 
+            padding: 12px 15px; 
+            font-size: 14px; 
+            font-weight: 600; 
+            color: #2c3e50; 
+            border-top: 1px solid #f0f0f0; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .video-duration {
+            font-size: 12px;
+            color: #6c757d;
+            background: #f8f9fa;
+            padding: 3px 8px;
+            border-radius: 10px;
+        }
         .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: white; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 100; padding: 10px 0; }
         .nav-items { display: flex; justify-content: space-around; align-items: center; }
         .nav-item { display: flex; flex-direction: column; align-items: center; text-decoration: none; color: #555; font-size: 12px; flex: 1; }
@@ -80,6 +108,32 @@
         .modal-content { position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
         .close-modal { position: absolute; top: 20px; right: 20px; color: white; font-size: 30px; cursor: pointer; z-index: 1001; background: rgba(0,0,0,0.5); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
         .video-frame { width: 100%; height: 100%; border: none; }
+        
+        /* 源选择器 */
+        .source-selector {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 1002;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .source-selector select {
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 8px;
+            font-size: 12px;
+            outline: none;
+        }
         
         /* 微信提示弹窗样式 */
         .wechat-modal { 
@@ -126,7 +180,7 @@
         }
         .wechat-modal-btn { 
             padding: 10px 20px; 
-            border-radius: 8px; 
+            borderRadius: 8px; 
             border: none; 
             font-weight: bold; 
             cursor: pointer; 
@@ -187,18 +241,6 @@
             z-index: 10;
         }
         
-        /* Wave播放器容器 */
-        .wave-player-container {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1000;
-            background: black;
-        }
-        
         /* 封面图加载失败时的备用样式 */
         .cover-fallback {
             position: absolute;
@@ -236,77 +278,110 @@
             </a>
             <h1 class="main-title">卷轴学院</h1>
         </div>
-        <div class="sub-title">数字卷轴DSC操作视频 - Wave视频版</div>
+        <div class="sub-title">数字卷轴DSC操作视频 - 多源加速版</div>
+        <div class="source-tip">
+            <i class="fas fa-info-circle"></i> 如无法播放，请尝试切换播放源
+        </div>
     </header>
     
     <main class="main-content">
         <div class="container">
             <div class="videos-container">
                 <div class="video-card">
-                    <div class="video-wrapper" data-wave-id="BFFASf6idBtdmYht" data-video-num="1">
-                        <img class="video-cover" src="https://embed.wave.video/BFFASf6idBtdmYht/preview.jpg?width=1080&height=1920" alt="数字卷轴DSC注册操作" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="video-wrapper" data-video-num="1" 
+                         data-cloudflare="https://pub-19bc0ce8c8524750be48dcbb7ca04a73.r2.dev/01.mp4"
+                         data-github="https://raw.githubusercontent.com/boipc/Digital-Scroll/main/01.mp4">
+                        <img class="video-cover" src="https://embed.wave.video/BFrASf6idBtdmYht/preview.jpg?width=1080&height=1920" alt="数字卷轴DSC注册操作" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                         <div class="cover-fallback" style="display: none;">数字卷轴DSC注册操作</div>
                         <div class="play-button"><i class="fas fa-play-circle"></i></div>
                         <div class="loading" id="loading1"><i class="fas fa-spinner fa-spin"></i><br>视频加载中...</div>
                         <div class="error-message" id="error1"></div>
-                        <div class="video-source-indicator" id="sourceIndicator1">Wave源</div>
+                        <div class="video-source-indicator" id="sourceIndicator1">Cloudflare源</div>
                     </div>
-                    <div class="video-title">数字卷轴DSC注册</div>
+                    <div class="video-title">
+                        <span>数字卷轴DSC注册</span>
+                        <span class="video-duration">02:15</span>
+                    </div>
                 </div>
                 <div class="video-card">
-                    <div class="video-wrapper" data-wave-id="EJwpsUd5icFGQxVE" data-video-num="2">
-                        <img class="video-cover" src="https://embed.wave.video/EJwpsUd5icFGQxVE/preview.jpg?width=1080&height=1920" alt="数字卷轴DSC人脸识别操作" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="video-wrapper" data-video-num="2"
+                         data-cloudflare="https://pub-19bc0ce8c8524750be48dcbb7ca04a73.r2.dev/02.mp4"
+                         data-github="https://raw.githubusercontent.com/boipc/Digital-Scroll/main/02.mp4">
+                        <img class="video-cover" src="https://embed.wave.video/EJwpsUd5icFGQxvE/preview.jpg?width=1080&height=1920" alt="数字卷轴DSC人脸识别操作" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                         <div class="cover-fallback" style="display: none;">数字卷轴DSC人脸识别操作</div>
                         <div class="play-button"><i class="fas fa-play-circle"></i></div>
                         <div class="loading" id="loading2"><i class="fas fa-spinner fa-spin"></i><br>视频加载中...</div>
                         <div class="error-message" id="error2"></div>
-                        <div class="video-source-indicator" id="sourceIndicator2">Wave源</div>
+                        <div class="video-source-indicator" id="sourceIndicator2">Cloudflare源</div>
                     </div>
-                    <div class="video-title">数字卷轴DSC人脸识别</div>
+                    <div class="video-title">
+                        <span>数字卷轴DSC人脸识别</span>
+                        <span class="video-duration">01:45</span>
+                    </div>
                 </div>
                 <div class="video-card">
-                    <div class="video-wrapper" data-wave-id="4SPTKJoMqUuj5HA8" data-video-num="3">
+                    <div class="video-wrapper" data-video-num="3"
+                         data-cloudflare="https://pub-19bc0ce8c8524750be48dcbb7ca04a73.r2.dev/03.mp4"
+                         data-github="https://raw.githubusercontent.com/boipc/Digital-Scroll/main/03.mp4">
                         <img class="video-cover" src="https://embed.wave.video/4SPTKJoMqUuj5HA8/preview.jpg?width=1080&height=1920" alt="数字卷轴DSC分享操作" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                         <div class="cover-fallback" style="display: none;">数字卷轴DSC分享操作</div>
                         <div class="play-button"><i class="fas fa-play-circle"></i></div>
                         <div class="loading" id="loading3"><i class="fas fa-spinner fa-spin"></i><br>视频加载中...</div>
                         <div class="error-message" id="error3"></div>
-                        <div class="video-source-indicator" id="sourceIndicator3">Wave源</div>
+                        <div class="video-source-indicator" id="sourceIndicator3">Cloudflare源</div>
                     </div>
-                    <div class="video-title">数字卷轴DSC分享</div>
+                    <div class="video-title">
+                        <span>数字卷轴DSC分享</span>
+                        <span class="video-duration">02:30</span>
+                    </div>
                 </div>
                 <div class="video-card">
-                    <div class="video-wrapper" data-wave-id="erDv93zB6gDwwsm9" data-video-num="4">
-                        <img class="video-cover" src="https://embed.wave.video/erDv93zB6gDwwsm9/preview.jpg?width=1080&height=1920" alt="数字卷轴DSC购买操作" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="video-wrapper" data-video-num="4"
+                         data-cloudflare="https://pub-19bc0ce8c8524750be48dcbb7ca04a73.r2.dev/04.mp4"
+                         data-github="https://raw.githubusercontent.com/boipc/Digital-Scroll/main/04.mp4">
+                        <img class="video-cover" src="https://embed.wave.video/erDv93zB6gDwWsm9/preview.jpg?width=1080&height=1920" alt="数字卷轴DSC购买操作" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                         <div class="cover-fallback" style="display: none;">数字卷轴DSC购买操作</div>
                         <div class="play-button"><i class="fas fa-play-circle"></i></div>
                         <div class="loading" id="loading4"><i class="fas fa-spinner fa-spin"></i><br>视频加载中...</div>
                         <div class="error-message" id="error4"></div>
-                        <div class="video-source-indicator" id="sourceIndicator4">Wave源</div>
+                        <div class="video-source-indicator" id="sourceIndicator4">Cloudflare源</div>
                     </div>
-                    <div class="video-title">数字卷轴DSC购买</div>
+                    <div class="video-title">
+                        <span>数字卷轴DSC购买</span>
+                        <span class="video-duration">03:15</span>
+                    </div>
                 </div>
                 <div class="video-card">
-                    <div class="video-wrapper" data-wave-id="h3JKyON1m3tpR15W" data-video-num="5">
-                        <img class="video-cover" src="https://embed.wave.video/h3JKyON1m3tpR15W/preview.jpg?width=1080&height=1920" alt="数字卷轴DSC出售操作" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="video-wrapper" data-video-num="5"
+                         data-cloudflare="https://pub-19bc0ce8c8524750be48dcbb7ca04a73.r2.dev/05.mp4"
+                         data-github="https://raw.githubusercontent.com/boipc/Digital-Scroll/main/05.mp4">
+                        <img class="video-cover" src="https://embed.wave.video/h3JKy0N1m3tpR15W/preview.jpg?width=1080&height=1920" alt="数字卷轴DSC出售操作" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                         <div class="cover-fallback" style="display: none;">数字卷轴DSC出售操作</div>
                         <div class="play-button"><i class="fas fa-play-circle"></i></div>
                         <div class="loading" id="loading5"><i class="fas fa-spinner fa-spin"></i><br>视频加载中...</div>
                         <div class="error-message" id="error5"></div>
-                        <div class="video-source-indicator" id="sourceIndicator5">Wave源</div>
+                        <div class="video-source-indicator" id="sourceIndicator5">Cloudflare源</div>
                     </div>
-                    <div class="video-title">数字卷轴DSC出售</div>
+                    <div class="video-title">
+                        <span>数字卷轴DSC出售</span>
+                        <span class="video-duration">02:45</span>
+                    </div>
                 </div>
                 <div class="video-card">
-                    <div class="video-wrapper" data-wave-id="8Xv4qeUUZca7Dcgm" data-video-num="6">
+                    <div class="video-wrapper" data-video-num="6"
+                         data-cloudflare="https://pub-19bc0ce8c8524750be48dcbb7ca04a73.r2.dev/06.mp4"
+                         data-github="https://raw.githubusercontent.com/boipc/Digital-Scroll/main/06.mp4">
                         <img class="video-cover" src="https://embed.wave.video/8Xv4qeUUZca7Dcgm/preview.jpg?width=1080&height=1920" alt="数字卷轴DSC激励操作" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                         <div class="cover-fallback" style="display: none;">数字卷轴DSC激励操作</div>
                         <div class="play-button"><i class="fas fa-play-circle"></i></div>
                         <div class="loading" id="loading6"><i class="fas fa-spinner fa-spin"></i><br>视频加载中...</div>
                         <div class="error-message" id="error6"></div>
-                        <div class="video-source-indicator" id="sourceIndicator6">Wave源</div>
+                        <div class="video-source-indicator" id="sourceIndicator6">Cloudflare源</div>
                     </div>
-                    <div class="video-title">数字卷轴DSC激励</div>
+                    <div class="video-title">
+                        <span>数字卷轴DSC激励</span>
+                        <span class="video-duration">03:00</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -344,15 +419,19 @@
     <div class="modal" id="videoModal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeVideo()">&times;</span>
+            <div class="source-selector">
+                <span>视频源:</span>
+                <select id="sourceSelect">
+                    <option value="cloudflare">Cloudflare R2</option>
+                    <option value="github">GitHub</option>
+                </select>
+            </div>
             <video class="video-frame" id="videoPlayer" controls playsinline webkit-playsinline></video>
             <div class="loading" id="modalLoading"><i class="fas fa-spinner fa-spin"></i><br>视频加载中，请稍候...</div>
             <div class="error-message" id="modalError"></div>
-            <div class="video-source-indicator" id="modalSourceIndicator">GitHub源</div>
+            <div class="video-source-indicator" id="modalSourceIndicator">Cloudflare源</div>
         </div>
     </div>
-    
-    <!-- Wave播放器容器 -->
-    <div class="wave-player-container" id="wavePlayerContainer"></div>
     
     <!-- 微信提示弹窗 -->
     <div class="wechat-modal" id="wechatModal">
@@ -373,28 +452,8 @@
     </div>
 
     <script>
-        // GitHub备用视频源
-        const GITHUB_BASE_URL = 'https://raw.githubusercontent.com/boipc/Digital-Scroll/main/';
-        
-        // 视频映射表：视频编号到GitHub文件名
-        const videoMap = {
-            1: '01.mp4',
-            2: '02.mp4',
-            3: '03.mp4',
-            4: '04.mp4',
-            5: '05.mp4',
-            6: '06.mp4'
-        };
-        
-        // Wave视频ID映射
-        const waveVideoMap = {
-            1: 'BFFASf6idBtdmYht',
-            2: 'EJwpsUd5icFGQxVE',
-            3: '4SPTKJoMqUuj5HA8',
-            4: 'erDv93zB6gDwwsm9',
-            5: 'h3JKyON1m3tpR15W',
-            6: '8Xv4qeUUZca7Dcgm'
-        };
+        // 当前视频信息
+        let currentVideoElement = null;
         
         // 检测是否为微信浏览器
         function isWechatBrowser() {
@@ -424,142 +483,94 @@
             return true;
         }
         
-        // 预加载GitHub视频
-        function preloadVideos() {
-            Object.keys(videoMap).forEach((videoNum) => {
-                const githubUrl = GITHUB_BASE_URL + videoMap[videoNum];
-                
-                // 创建隐藏的video元素进行预加载
-                const preloadVideo = document.createElement('video');
-                preloadVideo.style.display = 'none';
-                preloadVideo.preload = 'metadata';
-                preloadVideo.src = githubUrl;
-                document.body.appendChild(preloadVideo);
-                
-                // 更新指示器显示预加载状态
-                const indicator = document.getElementById(`sourceIndicator${videoNum}`);
-                if (indicator) {
-                    preloadVideo.addEventListener('loadedmetadata', () => {
-                        indicator.textContent = 'Wave源(GitHub备用)';
-                    });
-                    
-                    preloadVideo.addEventListener('error', () => {
-                        indicator.textContent = 'Wave源(无备用)';
-                        indicator.style.backgroundColor = 'rgba(220, 53, 69, 0.8)';
-                    });
-                }
-            });
-        }
-        
-        // 打开Wave视频
-        function openWaveVideo(waveId, videoNum) {
-            const waveContainer = document.getElementById('wavePlayerContainer');
-            waveContainer.innerHTML = `
-                <div class="wave_popover_embed" data-id="${waveId}" data-width="360" data-height="800">
-                    <div>
-                        <img src="https://embed.wave.video/${waveId}/preview.jpg?width=1080&height=1920" alt="" 
-                             style="cursor: pointer; display: block; max-width: 100%; object-fit: cover;" 
-                             data-target="target" />
-                    </div>
-                </div>
-            `;
+        // 打开视频
+        function openVideo(element) {
+            currentVideoElement = element;
+            const videoNum = element.getAttribute('data-video-num');
             
-            // 显示Wave容器
-            waveContainer.style.display = 'block';
+            const modal = document.getElementById('videoModal');
+            const videoPlayer = document.getElementById('videoPlayer');
+            const modalLoading = document.getElementById('modalLoading');
+            const modalError = document.getElementById('modalError');
+            const modalSourceIndicator = document.getElementById('modalSourceIndicator');
+            const sourceSelect = document.getElementById('sourceSelect');
+            
+            // 显示加载中
+            modalLoading.style.display = 'block';
+            modalError.style.display = 'none';
+            
+            modal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
             
-            // 添加关闭按钮
-            const closeButton = document.createElement('div');
-            closeButton.innerHTML = '&times;';
-            closeButton.style.position = 'absolute';
-            closeButton.style.top = '15px';
-            closeButton.style.right = '15px';
-            closeButton.style.color = 'white';
-            closeButton.style.fontSize = '30px';
-            closeButton.style.cursor = 'pointer';
-            closeButton.style.zIndex = '1001';
-            closeButton.style.backgroundColor = 'rgba(0,0,0,0.5)';
-            closeButton.style.width = '40px';
-            closeButton.style.height = '40px';
-            closeButton.style.borderRadius = '50%';
-            closeButton.style.display = 'flex';
-            closeButton.style.alignItems = 'center';
-            closeButton.style.justifyContent = 'center';
-            closeButton.onclick = closeWaveVideo;
+            // 根据选择的源加载视频
+            loadVideoBySource(sourceSelect.value, element);
             
-            waveContainer.appendChild(closeButton);
-            
-            // 加载Wave脚本
-            if (!window.waveScriptLoaded) {
-                const script = document.createElement('script');
-                script.src = 'https://wave.video/embed/popover-embed.js';
-                script.onload = function() {
-                    window.waveScriptLoaded = true;
-                    // 触发Wave播放器
-                    setTimeout(() => {
-                        const waveElement = waveContainer.querySelector('.wave_popover_embed');
-                        if (waveElement && typeof window.WavePopoverEmbed !== 'undefined') {
-                            window.WavePopoverEmbed.init();
-                        } else {
-                            // Wave加载失败，使用GitHub备用源
-                            closeWaveVideo();
-                            openGitHubVideo(videoNum);
-                        }
-                    }, 500);
-                };
-                script.onerror = function() {
-                    // Wave脚本加载失败，使用GitHub备用源
-                    closeWaveVideo();
-                    openGitHubVideo(videoNum);
-                };
-                document.body.appendChild(script);
-            } else {
-                // 如果脚本已加载，直接初始化
-                setTimeout(() => {
-                    if (typeof window.WavePopoverEmbed !== 'undefined') {
-                        window.WavePopoverEmbed.init();
-                    } else {
-                        closeWaveVideo();
-                        openGitHubVideo(videoNum);
-                    }
-                }, 500);
-            }
+            // 监听源选择变化
+            sourceSelect.onchange = function() {
+                loadVideoBySource(this.value, element);
+            };
         }
         
-        // 关闭Wave视频
-        function closeWaveVideo() {
-            const waveContainer = document.getElementById('wavePlayerContainer');
-            waveContainer.style.display = 'none';
-            waveContainer.innerHTML = '';
-            document.body.style.overflow = 'auto';
-        }
-        
-        // 打开GitHub备用视频
-        function openGitHubVideo(videoNum) {
+        // 根据源加载视频
+        function loadVideoBySource(sourceType, element) {
             const videoPlayer = document.getElementById('videoPlayer');
             const modalLoading = document.getElementById('modalLoading');
             const modalError = document.getElementById('modalError');
             const modalSourceIndicator = document.getElementById('modalSourceIndicator');
             
-            // 显示加载中
             modalLoading.style.display = 'block';
             modalError.style.display = 'none';
-            modalSourceIndicator.textContent = 'GitHub源';
-            modalSourceIndicator.style.display = 'block';
+            videoPlayer.style.display = 'block';
             
-            document.getElementById('videoModal').style.display = 'flex';
-            document.body.style.overflow = 'hidden';
+            let videoUrl = '';
+            let sourceName = '';
             
-            // 构建GitHub视频URL
-            const githubUrl = GITHUB_BASE_URL + videoMap[videoNum];
+            switch(sourceType) {
+                case 'cloudflare':
+                    videoUrl = element.dataset.cloudflare;
+                    sourceName = 'Cloudflare源';
+                    break;
+                case 'github':
+                    videoUrl = element.dataset.github;
+                    sourceName = 'GitHub源';
+                    break;
+                default:
+                    videoUrl = element.dataset.cloudflare;
+                    sourceName = 'Cloudflare源';
+                    break;
+            }
             
-            console.log('使用GitHub备用源:', githubUrl);
+            modalSourceIndicator.textContent = sourceName;
             
-            videoPlayer.src = githubUrl;
+            console.log('正在加载视频:', videoUrl);
+            
+            videoPlayer.src = videoUrl;
             videoPlayer.load();
             
-            videoPlayer.onloadeddata = function() {
+            const loadTimeout = setTimeout(() => {
                 modalLoading.style.display = 'none';
+                modalError.textContent = '视频加载超时，请尝试切换其他视频源';
+                modalError.style.display = 'block';
+                
+                // 更新卡片上的指示器
+                const indicator = element.querySelector('.video-source-indicator');
+                if (indicator) {
+                    indicator.textContent = sourceName + '(失败)';
+                    indicator.style.background = 'rgba(220, 53, 69, 0.8)';
+                }
+            }, 10000); // 10秒超时
+            
+            videoPlayer.onloadeddata = function() {
+                clearTimeout(loadTimeout);
+                modalLoading.style.display = 'none';
+                
+                // 更新卡片上的指示器
+                const indicator = element.querySelector('.video-source-indicator');
+                if (indicator) {
+                    indicator.textContent = sourceName;
+                    indicator.style.background = 'rgba(40, 167, 69, 0.8)';
+                }
+                
                 videoPlayer.play().catch(err => {
                     console.log('自动播放失败:', err);
                     modalError.textContent = '自动播放失败，请手动点击播放';
@@ -568,18 +579,17 @@
             };
             
             videoPlayer.onerror = function() {
+                clearTimeout(loadTimeout);
                 modalLoading.style.display = 'none';
-                modalError.textContent = '视频加载失败，请检查网络连接或刷新页面重试';
+                modalError.textContent = '视频加载失败，请尝试切换其他视频源';
                 modalError.style.display = 'block';
-            };
-            
-            // 监听视频缓冲
-            videoPlayer.onwaiting = function() {
-                modalLoading.style.display = 'block';
-            };
-            
-            videoPlayer.onplaying = function() {
-                modalLoading.style.display = 'none';
+                
+                // 更新卡片上的指示器
+                const indicator = element.querySelector('.video-source-indicator');
+                if (indicator) {
+                    indicator.textContent = sourceName + '(失败)';
+                    indicator.style.background = 'rgba(220, 53, 69, 0.8)';
+                }
             };
         }
         
@@ -593,7 +603,6 @@
             // 重置错误和加载状态
             document.getElementById('modalLoading').style.display = 'none';
             document.getElementById('modalError').style.display = 'none';
-            document.getElementById('modalSourceIndicator').style.display = 'none';
         }
         
         document.addEventListener('DOMContentLoaded', function() {
@@ -624,14 +633,9 @@
             const videoWrappers = document.querySelectorAll('.video-wrapper');
             videoWrappers.forEach(wrapper => {
                 wrapper.addEventListener('click', function() {
-                    const waveId = this.getAttribute('data-wave-id');
-                    const videoNum = this.getAttribute('data-video-num');
-                    openWaveVideo(waveId, videoNum);
+                    openVideo(this);
                 });
             });
-            
-            // 预加载GitHub视频
-            preloadVideos();
         });
         
         window.onclick = function(event) {
@@ -640,9 +644,6 @@
             
             const wechatModal = document.getElementById('wechatModal');
             if (event.target === wechatModal) closeWechatModal();
-            
-            const waveContainer = document.getElementById('wavePlayerContainer');
-            if (event.target === waveContainer) closeWaveVideo();
         };
     </script>
 </body>
