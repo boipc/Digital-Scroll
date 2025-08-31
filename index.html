@@ -34,7 +34,7 @@
             padding: 0;
             overflow-x: hidden;
             -webkit-tap-highlight-color: transparent;
-            padding-bottom: 80px;
+            padding-bottom: 65px; /* 进一步减少底部内边距 */
             font-size: 14px;
             line-height: 1.4;
         }
@@ -48,7 +48,7 @@
         
         header {
             text-align: center;
-            margin-bottom: 15px; /* 缩小header底部间距 */
+            margin-bottom: 15px;
             padding: 20px 15px;
             background: var(--card-bg);
             border-radius: 16px;
@@ -96,7 +96,7 @@
         }
         
         .subtitle {
-            font-size: 0.8rem; /* 进一步缩小副标题字体 */
+            font-size: 0.8rem;
             margin-bottom: 15px;
             position: relative;
             z-index: 1;
@@ -138,7 +138,7 @@
             font-size: 3.5rem;
             line-height: 1;
             font-weight: 800;
-            color: var(--primary-color); /* 保持原始颜色 */
+            color: var(--primary-color);
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             -webkit-background-clip: text;
@@ -202,21 +202,25 @@
             text-transform: uppercase;
         }
         
-        /* 独立出来的格言文本 */
+        /* 格言文本 - 移动到header内部 */
         .motto-text {
             font-size: 0.85rem;
-            margin: 15px 0;
+            margin: 15px 0 5px;
             color: var(--text-secondary);
             line-height: 1.4;
-            font-weight: bold; /* 粗体 */
+            font-weight: bold;
             text-align: center;
+            /* 移除背景和边框 */
+            background: transparent;
+            border: none;
+            padding: 0;
         }
         
         .button-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 8px;
-            margin-bottom: 15px; /* 缩小按钮网格底部间距 */
+            margin-bottom: 15px;
         }
         
         .btn {
@@ -251,7 +255,7 @@
             background: var(--card-bg);
             border-radius: 12px;
             padding: 15px;
-            margin-bottom: 12px; /* 缩小内容区块之间的间距 */
+            margin-bottom: 12px;
             display: none;
             box-shadow: var(--shadow);
             border: 1px solid var(--border-color);
@@ -448,17 +452,22 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         
-        /* 底部版权信息 - 移除卡片样式 */
+        /* 底部版权信息 - 移除卡片样式并缩小间距 */
         footer {
             text-align: center;
-            margin-top: 20px;
-            padding: 10px 0; /* 调整内边距 */
+            margin-top: 8px; /* 进一步减少顶部间距 */
+            padding: 5px 0; /* 调整内边距 */
             font-size: 0.8rem;
             color: var(--text-secondary);
             /* 移除背景、阴影和边框 */
             background: transparent;
             box-shadow: none;
             border: none;
+            line-height: 1.2; /* 减小行距 */
+        }
+        
+        footer p {
+            margin-bottom: 3px; /* 减小段落间距 */
         }
         
         /* 链上治理样式 */
@@ -696,10 +705,10 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- 移动格言文本到header内部，计时器下方 -->
+            <div class="motto-text">无人扶我青云志，我自挖矿到巅峰，<br>卷轴在手不曾弃，坚持持有创辉煌。</div>
         </header>
-        
-        <!-- 独立出来的格言文本 -->
-        <div class="motto-text">无人扶我青云志，我自挖矿到巅峰，<br>卷轴在手不曾弃，坚持持有创辉煌。</div>
         
         <div class="button-grid">
             <button class="btn" onclick="showSection('intro')">项目介绍</button>
@@ -820,37 +829,37 @@
                 </tr>
                 <tr>
                     <td>青铜</td>
-                    <td>10 DSC</td>
+                    <td>极低</td>
                     <td>0.06 DSC</td>
                     <td>60天</td>
                 </tr>
                 <tr>
                     <td>白银</td>
-                    <td>100 DSC</td>
+                    <td>低</td>
                     <td>0.6 DSC</td>
                     <td>60天</td>
                 </tr>
                 <tr>
                     <td>黄金</td>
-                    <td>1000 DSC</td>
+                    <td>中等</td>
                     <td>4.53 DSC</td>
                     <td>120天</td>
                 </tr>
                 <tr>
                     <td>铂金</td>
-                    <td>5000 DSC</td>
+                    <td>较高</td>
                     <td>23.33 DSC</td>
                     <td>180天</td>
                 </tr>
                 <tr>
                     <td>钻石</td>
-                    <td>10000 DSC</td>
+                    <td>高</td>
                     <td>50.82 DSC</td>
                     <td>280天</td>
                 </tr>
                 <tr>
                     <td>至尊</td>
-                    <td>50000 DSC</td>
+                    <td>极高</td>
                     <td>270 DSC</td>
                     <td>360天</td>
                 </tr>
@@ -1005,7 +1014,7 @@
     <!-- 底部导航栏 -->
     <nav class="bottom-nav">
         <div class="nav-items">
-            <a href="https://prod.digital-scroll.org/#/pages/reg?c=182N17" class="nav-item">
+            <a href="https://prod.digital-scroll.org/#/pages/reg?c=182N17" class="nav-item external-link" id="registerBtn">
                 <div class="nav-icon"><i class="fas fa-user-plus"></i></div>
                 <div class="nav-text">注册/登录</div>
             </a>
@@ -1100,7 +1109,7 @@
         
         document.getElementById('intro').classList.add('active');
         
-        // 添加微信浏览器检测
+        // 添加微信浏览器检测 - 包括底部导航栏的注册链接
         document.querySelectorAll('.external-link, #registerBtn').forEach(link => {
             link.addEventListener('click', function(e) {
                 if(isWeixinBrowser()) {
