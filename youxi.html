@@ -588,7 +588,8 @@
             </div>
             
             <!-- 第四行：日产提示 -->
-            <div class="fuel-info warning-text">每日领取所需的燃料费约是领取DSC的25%</div>
+            <div class="fuel-info warning-text">每日领取所需的燃料费约是领取DSC的25%
+（实际可用复投量=日产量DSC×80%）</div>
             <div class="bonus-info">每日复投也会根据规则动态赠送DSC和SCC，实际收益会更多</div>
         </div>
         
@@ -954,7 +955,7 @@
                 calculationMode = mode;
                 
                 if (mode === 'activity') {
-                    modeNotice.textContent = "当前模式: 活跃度计算复投已 (扣除约25%燃料费)";
+                    modeNotice.textContent = "当前模式: 活跃度计算复投 (扣除约25%燃料费)";
                     modeNotice.className = 'mode-notice activity-mode warning-text';
                     fuelHeader.style.display = 'table-cell';
                     activityHeader.textContent = '活跃度';
@@ -1072,10 +1073,12 @@
                     let dailyProductionFromScrolls = 0;
                     
                     if (mode === 'activity') {
-                        // 活跃度模式 - 扣除25%燃料费
+                        // 活跃度模式 - 修正燃料费计算方式
                         dailyProductionFromScrolls = calculateDailyProduction();
-                        fuelCost = dailyProductionFromScrolls * 0.25;
-                        dailyEarnings = dailyProductionFromScrolls * 0.75;
+                        // 燃料费 = 领取的DSC的25% = (日产量/1.25)*0.25
+                        fuelCost = (dailyProductionFromScrolls / 1.25) * 0.25;
+                        // 实际领取的DSC = 日产量/1.25
+                        dailyEarnings = dailyProductionFromScrolls / 1.25;
                         balance += dailyEarnings;
                     } else {
                         // 日产模式 - 不扣除燃料费
