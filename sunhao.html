@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSC挖矿变现分析系统</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.5;
+            padding: 8px;
+            max-width: 500px;
+            margin: 0 auto;
+            font-size: 0.9rem;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+        
+        .page-title {
+            background: #f8f9fa;
+            color: #000;
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        h1 {
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 0.7rem;
+            opacity: 0.8;
+        }
+        
+        .input-section {
+            padding: 12px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        .input-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        
+        .input-group {
+            margin-bottom: 0;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 4px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            color: #2c3e50;
+        }
+        
+        input {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background: white;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+            height: 28px;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
+        }
+        
+        .optional {
+            color: #7f8c8d;
+            font-size: 0.65rem;
+            margin-top: 2px;
+        }
+        
+        .balance-hint {
+            color: #27ae60;
+            font-size: 0.65rem;
+            margin-top: 2px;
+            font-weight: 600;
+        }
+        
+        .results-section {
+            padding: 12px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 10px;
+            overflow: hidden;
+            border-left: 4px solid #3498db;
+        }
+        
+        .card-header {
+            padding: 8px 10px;
+            background: #f8f9fa;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-header i {
+            margin-right: 6px;
+            color: #3498db;
+        }
+        
+        .card-content {
+            padding: 10px;
+        }
+        
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3px;
+            padding-bottom: 3px;
+            border-bottom: 1px dashed #f0f0f0;
+        }
+        
+        .result-row:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .result-label {
+            font-size: 0.75rem;
+            color: #555;
+        }
+        
+        .result-value {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .green {
+            color: #27ae60;
+        }
+        
+        .red {
+            color: #e74c3c;
+        }
+        
+        .blue {
+            color: #3498db;
+        }
+        
+        .orange {
+            color: #f39c12;
+        }
+        
+        .highlight {
+            background-color: #e8f4fd;
+            border-radius: 5px;
+            padding: 6px 8px;
+            margin-top: 4px;
+        }
+        
+        .loss-card {
+            border-left-color: #e74c3c;
+        }
+        
+        .loss-card .card-header {
+            color: #e74c3c;
+        }
+        
+        .loss-card .card-header i {
+            color: #e74c3c;
+        }
+        
+        .claim-card {
+            border-left-color: #27ae60;
+        }
+        
+        .claim-card .card-header {
+            color: #27ae60;
+        }
+        
+        .claim-card .card-header i {
+            color: #27ae60;
+        }
+        
+        .sell-card {
+            border-left-color: #f39c12;
+        }
+        
+        .sell-card .card-header {
+            color: #f39c12;
+        }
+        
+        .sell-card .card-header i {
+            color: #f39c12;
+        }
+        
+        .exchange-card {
+            border-left-color: #3498db;
+        }
+        
+        .exchange-card .card-header {
+            color: #3498db;
+        }
+        
+        .exchange-card .card-header i {
+            color: #3498db;
+        }
+        
+        .final-card {
+            border-left-color: #9b59b6;
+        }
+        
+        .final-card .card-header {
+            color: #9b59b6;
+        }
+        
+        .final-card .card-header i {
+            color: #9b59b6;
+        }
+        
+        .loss-percentage {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin: 6px 0;
+            color: #e74c3c;
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background: #ecf0f1;
+            border-radius: 4px;
+            margin: 8px 0;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(to right, #27ae60, #f39c12, #e74c3c);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+        
+        .legend {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.6rem;
+            color: #7f8c8d;
+        }
+        
+        .note {
+            font-size: 0.65rem;
+            color: #7f8c8d;
+            margin-top: 8px;
+            padding: 6px;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+        
+        /* 新增样式：主目录和子目录 */
+        .main-category {
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: #2c3e50;
+            padding: 6px 0 3px 0;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 6px;
+        }
+        
+        .main-category .result-row {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .sub-category {
+            margin-left: 10px;
+            padding: 6px 0;
+        }
+        
+        .sub-category .result-row {
+            margin-bottom: 4px;
+        }
+        
+        .sub-category .result-row:last-child {
+            margin-bottom: 0;
+        }
+        
+        .sub-category .result-label {
+            font-size: 0.7rem;
+        }
+        
+        .sub-category .result-value {
+            font-size: 0.75rem;
+        }
+        
+        /* 第一个主目录也需要上边框 */
+        .main-category:first-child {
+            margin-top: 0;
+        }
+        
+        /* 只在最后一个子目录添加下边框 */
+        .sub-category:last-child {
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 8px;
+        }
+        
+        /* 特定条目去掉下方横线 */
+        #dscLossPercentage, #actualValue {
+            border-bottom: none !important;
+        }
+        
+        /* 确保其他条目保持横线 */
+        .sub-category .result-row:not(#dscLossPercentage):not(#actualValue) {
+            border-bottom: 1px dashed #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="page-title">
+            <h1>DSC挖矿计算分析系统</h1>
+            <p class="subtitle">输入产出量或账户余额自动计算收益</p>
+        </div>
+        
+        <div class="input-section">
+            <div class="input-grid">
+                <div class="input-group">
+                    <label for="output"><i class="fas fa-cube"></i> 产出量 (DSC)</label>
+                    <input type="number" id="output" placeholder="输入产出量" min="0" step="1">
+                    <div class="optional">输入产出量计算领取阶段</div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="balance"><i class="fas fa-wallet"></i> 账户余额 (DSC)</label>
+                    <input type="number" id="balance" placeholder="输入账户余额" min="0" step="0.01">
+                    <div class="optional">输入余额跳过领取阶段</div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="price"><i class="fas fa-tag"></i> DSC单价 (CNY)</label>
+                    <input type="number" id="price" placeholder="--" min="0" step="0.01">
+                    <div class="optional">可选，不填不计算价格</div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="exchangeRate"><i class="fas fa-exchange-alt"></i> USDS汇率 (CNY)</label>
+                    <input type="number" id="exchangeRate" placeholder="输入USDS汇率" min="0" step="0.01" value="7.10">
+                    <div class="optional">默认7.10</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="results-section">
+            <div class="card claim-card">
+                <div class="card-header"><i class="fas fa-download"></i> 领取阶段</div>
+                <div class="card-content">
+                    <div class="result-row">
+                        <div class="result-label">产出DSC数量</div>
+                        <div class="result-value" id="outputDsc">-- DSC</div>
+                    </div>
+                    <div class="result-row">
+                        <div class="result-label">可领取DSC数量</div>
+                        <div class="result-value green" id="claimableDsc">-- DSC</div>
+                    </div>
+                    <div class="result-row">
+                        <div class="result-label">领取燃烧数量 (25%兑换SCC燃料费)</div>
+                        <div class="result-value red" id="destroyedDsc">-- DSC</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card sell-card">
+                <div class="card-header"><i class="fas fa-shopping-cart"></i> 出售阶段</div>
+                <div class="card-content">
+                    <div class="result-row">
+                        <div class="result-label">账户余额DSC</div>
+                        <div class="result-value" id="balanceDsc">0.00 DSC</div>
+                    </div>
+                    <div class="result-row">
+                        <div class="result-label">可出售DSC数量</div>
+                        <div class="result-value green" id="sellableDsc">0.00 DSC</div>
+                    </div>
+                    <div class="result-row">
+                        <div class="result-label">手续费DSC数量 (25%)</div>
+                        <div class="result-value red" id="feeDsc">0.00 DSC</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card exchange-card">
+                <div class="card-header"><i class="fas fa-money-bill-wave"></i> 稳定币结算</div>
+                <div class="card-content">
+                    <div class="result-row">
+                        <div class="result-label">出售DSC获得CNY</div>
+                        <div class="result-value" id="cnyFromSale">0.00 CNY</div>
+                    </div>
+                    <div class="result-row">
+                        <div class="result-label">结算为USDS数量</div>
+                        <div class="result-value" id="usdsAmount">0.00 USDS</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card final-card">
+                <div class="card-header"><i class="fas fa-wallet"></i> 最终变现</div>
+                <div class="card-content">
+                    <div class="result-row">
+                        <div class="result-label">USDS市场汇率</div>
+                        <div class="result-value" id="marketRate">7.10 CNY</div>
+                    </div>
+                    <div class="result-row">
+                        <div class="result-label">市商收购汇率 (减0.5)</div>
+                        <div class="result-value" id="merchantRate">6.60 CNY</div>
+                    </div>
+                    <div class="result-row highlight">
+                        <div class="result-label">最终法币收益 (CNY)</div>
+                        <div class="result-value blue" id="finalIncome">0.00 CNY</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card loss-card">
+                <div class="card-header"><i class="fas fa-chart-line"></i> 损耗分析</div>
+                <div class="card-content">
+                    <!-- 初始DSC数量分类 -->
+                    <div class="main-category">
+                        <div class="result-row">
+                            <div class="result-label">初始DSC数量</div>
+                            <div class="result-value" id="initialDsc">0.00 DSC</div>
+                        </div>
+                    </div>
+                    <div class="sub-category">
+                        <div class="result-row">
+                            <div class="result-label">最终DSC数量</div>
+                            <div class="result-value blue" id="finalDsc">0.00 DSC</div>
+                        </div>
+                        <div class="result-row">
+                            <div class="result-label">DSC数量损耗</div>
+                            <div class="result-value red" id="dscLoss">0.00 DSC</div>
+                        </div>
+                        <div class="result-row">
+                            <div class="result-label">DSC损耗率</div>
+                            <div class="result-value red" id="dscLossPercentage">0.00%</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 理想总价值分类 -->
+                    <div class="main-category">
+                        <div class="result-row">
+                            <div class="result-label">理想总价值 (CNY)</div>
+                            <div class="result-value" id="idealValue">0.00 CNY</div>
+                        </div>
+                    </div>
+                    <div class="sub-category">
+                        <div class="result-row">
+                            <div class="result-label">出售DSC价值 (CNY)</div>
+                            <div class="result-value green" id="saleIncome">0.00 CNY</div>
+                        </div>
+                        <div class="result-row">
+                            <div class="result-label">实际所得总价值 (CNY)</div>
+                            <div class="result-value blue" id="actualValue">0.00 CNY</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 总损耗金额分类 -->
+                    <div class="main-category">
+                        <div class="result-row">
+                            <div class="result-label">总损耗金额 (CNY)</div>
+                            <div class="result-value red" id="totalLossAmount">0.00 CNY</div>
+                        </div>
+                    </div>
+                    <div class="sub-category">
+                        <div class="result-row">
+                            <div class="result-label">领取DSC燃烧损耗金额 (CNY)</div>
+                            <div class="result-value red" id="claimLossAmount">0.00 CNY</div>
+                        </div>
+                        <div class="result-row">
+                            <div class="result-label">交易DSC损耗金额 (CNY)</div>
+                            <div class="result-value red" id="tradeLossAmount">0.00 CNY</div>
+                        </div>
+                        <div class="result-row">
+                            <div class="result-label">USDS变现损耗金额 (CNY)</div>
+                            <div class="result-value red" id="merchantLossAmount">0.00 CNY</div>
+                        </div>
+                        <div class="result-row">
+                            <div class="result-label">USDS变现损耗率</div>
+                            <div class="result-value red" id="merchantLossPercentage">0.00%</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 总损耗率显示 -->
+                    <div class="loss-percentage" id="totalLoss">总损耗率: 0%</div>
+                    
+                    <div class="progress-bar">
+                        <div class="progress" id="lossProgress" style="width: 0%"></div>
+                    </div>
+                    
+                    <div class="legend">
+                        <span>低损耗</span>
+                        <span>中等损耗</span>
+                        <span>高损耗</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="note">
+                <p><strong>计算说明：</strong>领取阶段燃烧25%DSC兑换SCC作为燃料费，出售阶段收取25%手续费，USDS变现时汇率减0.5。</p>
+                <p><strong>计算规则：</strong>可领取数量保留2位小数（不四舍五入），可出售数量为整数（舍弃小数）。</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 获取DOM元素
+        const outputInput = document.getElementById('output');
+        const balanceInput = document.getElementById('balance');
+        const priceInput = document.getElementById('price');
+        const exchangeRateInput = document.getElementById('exchangeRate');
+        
+        // 为所有输入框添加点击全选功能
+        const allInputs = document.querySelectorAll('input[type="number"]');
+        allInputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.select();
+            });
+        });
+        
+        // 添加输入事件监听
+        outputInput.addEventListener('input', function() {
+            // 当产出量输入时，清空余额输入框
+            balanceInput.value = '';
+            calculate();
+            
+            // 如果产出量有值，在余额输入框中显示可领取数量
+            const output = parseFloat(outputInput.value) || 0;
+            if (output > 0) {
+                const claimableDsc = truncateToTwoDecimals(output / 1.25);
+                balanceInput.placeholder = `可领取DSC数量: ${claimableDsc.toFixed(2)}`;
+            } else {
+                balanceInput.placeholder = "输入账户余额";
+            }
+        });
+        
+        balanceInput.addEventListener('input', function() {
+            // 当余额输入时，清空产出量输入框
+            outputInput.value = '';
+            calculate();
+            
+            // 恢复余额输入框的placeholder
+            balanceInput.placeholder = "输入账户余额";
+        });
+        
+        // 添加焦点事件监听
+        balanceInput.addEventListener('focus', function() {
+            // 当余额输入框获得焦点时，将产出量输入框的placeholder改为横杠
+            outputInput.placeholder = "--";
+        });
+        
+        outputInput.addEventListener('focus', function() {
+            // 当产出量输入框获得焦点时，将placeholder改回默认值
+            outputInput.placeholder = "输入产出量";
+        });
+        
+        priceInput.addEventListener('input', calculate);
+        exchangeRateInput.addEventListener('input', calculate);
+        
+        // 添加键盘事件监听，点击确定或外部区域收起键盘
+        document.addEventListener('click', function(e) {
+            if (e.target.tagName !== 'INPUT') {
+                document.activeElement.blur();
+            }
+        });
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                document.activeElement.blur();
+            }
+        });
+        
+        // 初始计算
+        calculate();
+        
+        // 截断到两位小数（不四舍五入）
+        function truncateToTwoDecimals(num) {
+            return Math.floor(num * 100) / 100;
+        }
+        
+        function calculate() {
+            // 获取输入值
+            const output = parseFloat(outputInput.value) || 0;
+            const balance = parseFloat(balanceInput.value) || 0;
+            const price = parseFloat(priceInput.value) || 0;
+            const exchangeRate = parseFloat(exchangeRateInput.value) || 7.1;
+            
+            // 判断使用产出量还是账户余额
+            let claimableDsc, destroyedDsc, initialDsc;
+            
+            if (output > 0) {
+                // 使用产出量，计算领取阶段 - 关键修改：可领取数量截断到2位小数
+                claimableDsc = truncateToTwoDecimals(output / 1.25);
+                destroyedDsc = output - claimableDsc;
+                initialDsc = output; // 初始DSC数量始终是产出量
+                
+                // 领取阶段正常显示
+                document.getElementById('outputDsc').textContent = output.toFixed(2) + " DSC";
+                document.getElementById('claimableDsc').textContent = claimableDsc.toFixed(2) + " DSC";
+                document.getElementById('destroyedDsc').textContent = destroyedDsc.toFixed(2) + " DSC";
+                
+                // 出售阶段账户余额显示为可领取数量
+                document.getElementById('balanceDsc').textContent = claimableDsc.toFixed(2) + " DSC";
+            } else if (balance > 0) {
+                // 使用账户余额，跳过领取阶段
+                claimableDsc = balance;
+                destroyedDsc = 0;
+                initialDsc = balance; // 初始DSC数量始终是账户余额
+                
+                // 领取阶段显示横杠
+                document.getElementById('outputDsc').textContent = "-- DSC";
+                document.getElementById('claimableDsc').textContent = "-- DSC";
+                document.getElementById('destroyedDsc').textContent = "-- DSC";
+                
+                // 出售阶段账户余额显示为输入的余额
+                document.getElementById('balanceDsc').textContent = balance.toFixed(2) + " DSC";
+            } else {
+                // 没有输入任何值，显示横杠
+                claimableDsc = 0;
+                destroyedDsc = 0;
+                initialDsc = 0;
+                
+                document.getElementById('outputDsc').textContent = "-- DSC";
+                document.getElementById('claimableDsc').textContent = "-- DSC";
+                document.getElementById('destroyedDsc').textContent = "-- DSC";
+                document.getElementById('balanceDsc').textContent = "0.00 DSC";
+            }
+            
+            // 计算出售阶段 - 关键修改：可出售数量为整数，小数部分舍弃
+            const sellableDsc = Math.floor(claimableDsc / 1.25);
+            const feeDsc = sellableDsc * 0.25;
+            const finalDsc = sellableDsc;
+            const dscLoss = initialDsc - finalDsc;
+            const dscLossPercentage = initialDsc > 0 ? (dscLoss / initialDsc * 100).toFixed(2) : 0;
+            
+            // 计算稳定币兑换
+            const cnyFromSale = sellableDsc * price;
+            const usdsAmount = price > 0 ? cnyFromSale / exchangeRate : 0;
+            
+            // 计算最终变现
+            const merchantRate = exchangeRate - 0.5;
+            const finalIncome = usdsAmount * merchantRate;
+            
+            // 计算损耗分析
+            const idealValue = initialDsc * price;
+            const totalLossAmount = idealValue - finalIncome;
+            const totalLoss = idealValue > 0 ? (totalLossAmount / idealValue * 100).toFixed(2) : 0;
+            
+            // 计算新增的两个损耗金额
+            const claimLossAmount = destroyedDsc * price; // 领取燃烧损耗金额
+            const tradeLossAmount = feeDsc * price; // 交易DSC损耗金额
+            
+            // 计算市商变现损耗率
+            const sellableValue = sellableDsc * price;
+            const merchantLossPercentage = sellableValue > 0 ? ((sellableValue - finalIncome) / sellableValue * 100).toFixed(2) : 0;
+            
+            // 计算市商损耗金额
+            const merchantLossAmount = cnyFromSale - finalIncome;
+            
+            // 更新UI
+            document.getElementById('sellableDsc').textContent = sellableDsc.toFixed(0) + " DSC";
+            document.getElementById('feeDsc').textContent = feeDsc.toFixed(2) + " DSC";
+            document.getElementById('initialDsc').textContent = initialDsc.toFixed(2) + " DSC";
+            document.getElementById('finalDsc').textContent = finalDsc.toFixed(0) + " DSC";
+            document.getElementById('dscLoss').textContent = dscLoss.toFixed(2) + " DSC";
+            document.getElementById('dscLossPercentage').textContent = dscLossPercentage + "%";
+            document.getElementById('merchantLossPercentage').textContent = merchantLossPercentage + "%";
+            document.getElementById('merchantLossAmount').textContent = merchantLossAmount.toFixed(2) + " CNY";
+            
+            // 如果单价为0，不显示价格相关数据
+            if (price > 0) {
+                document.getElementById('cnyFromSale').textContent = cnyFromSale.toFixed(2) + " CNY";
+                document.getElementById('usdsAmount').textContent = usdsAmount.toFixed(2) + " USDS";
+                document.getElementById('marketRate').textContent = exchangeRate.toFixed(2) + " CNY";
+                document.getElementById('merchantRate').textContent = merchantRate.toFixed(2) + " CNY";
+                document.getElementById('finalIncome').textContent = finalIncome.toFixed(2) + " CNY";
+                document.getElementById('idealValue').textContent = idealValue.toFixed(2) + " CNY";
+                document.getElementById('saleIncome').textContent = cnyFromSale.toFixed(2) + " CNY";
+                document.getElementById('actualValue').textContent = finalIncome.toFixed(2) + " CNY";
+                document.getElementById('totalLossAmount').textContent = totalLossAmount.toFixed(2) + " CNY";
+                
+                // 更新新增的两个损耗金额
+                document.getElementById('claimLossAmount').textContent = claimLossAmount.toFixed(2) + " CNY";
+                document.getElementById('tradeLossAmount').textContent = tradeLossAmount.toFixed(2) + " CNY";
+                
+                // 更新总损耗率显示格式
+                document.getElementById('totalLoss').textContent = "总损耗率: " + totalLoss + "%";
+                
+                // 更新进度条
+                document.getElementById('lossProgress').style.width = totalLoss + "%";
+            } else {
+                document.getElementById('cnyFromSale').textContent = "-- CNY";
+                document.getElementById('usdsAmount').textContent = "-- USDS";
+                document.getElementById('marketRate').textContent = exchangeRate.toFixed(2) + " CNY";
+                document.getElementById('merchantRate').textContent = merchantRate.toFixed(2) + " CNY";
+                document.getElementById('finalIncome').textContent = "-- CNY";
+                document.getElementById('idealValue').textContent = "-- CNY";
+                document.getElementById('saleIncome').textContent = "-- CNY";
+                document.getElementById('actualValue').textContent = "-- CNY";
+                document.getElementById('totalLossAmount').textContent = "-- CNY";
+                document.getElementById('claimLossAmount').textContent = "-- CNY";
+                document.getElementById('tradeLossAmount').textContent = "-- CNY";
+                document.getElementById('merchantLossPercentage').textContent = "--%";
+                document.getElementById('merchantLossAmount').textContent = "-- CNY";
+                
+                // 更新总损耗率显示格式
+                document.getElementById('totalLoss').textContent = "总损耗率: --%";
+                
+                // 重置进度条
+                document.getElementById('lossProgress').style.width = "0%";
+            }
+        }
+    </script>
+</body>
+</html>
