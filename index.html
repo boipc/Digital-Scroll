@@ -230,6 +230,84 @@
             padding: 0;
         }
         
+        /* 优化后的音乐播放器样式 */
+        .music-player {
+            background: linear-gradient(135deg, #6b8aff, #4a6cf7);
+            border-radius: 10px;
+            padding: 10px 15px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 10px rgba(74, 108, 247, 0.3);
+            height: 50px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .music-info {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+        
+        .music-icon {
+            font-size: 1.2rem;
+            margin-right: 10px;
+        }
+        
+        .music-title {
+            font-size: 0.85rem;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .music-controls {
+            display: flex;
+            align-items: center;
+            gap: 6px; /* 减小按钮间距 */
+        }
+        
+        .control-btn {
+            background: transparent;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+        
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* 底部进度条 */
+        .progress-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: white;
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+        
         .button-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -652,6 +730,21 @@
             .nav-icon {
                 font-size: 14px;
             }
+            
+            .music-player {
+                padding: 8px 12px;
+                height: 45px;
+            }
+            
+            .music-controls {
+                gap: 4px; /* 更小的按钮间距 */
+            }
+            
+            .control-btn {
+                width: 28px;
+                height: 28px;
+                font-size: 0.9rem;
+            }
         }
         
         /* 超小屏幕优化 */
@@ -684,10 +777,31 @@
             .nav-icon {
                 font-size: 13px;
             }
+            
+            .music-player {
+                padding: 7px 10px;
+                height: 42px;
+            }
+            
+            .music-controls {
+                gap: 3px; /* 最小的按钮间距 */
+            }
+            
+            .control-btn {
+                width: 26px;
+                height: 26px;
+                font-size: 0.85rem;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- 背景音乐 -->
+    <audio id="bgMusic" loop>
+        <source src="https://pub-19bc0ce8c8524750be48dcbb7ca04a73.r2.dev/%E6%95%B0%E5%AD%97%E5%8D%B7%E8%BD%B4-%E4%BF%A1%E4%BB%B0%E4%B9%8B%E5%85%89.mp3" type="audio/mp3">
+        您的浏览器不支持音频元素。
+    </audio>
+    
     <div class="container">
         <header>
             <div class="header-row">
@@ -722,6 +836,35 @@
             
             <!-- 移动格言文本到header内部，计时器下方 -->
             <div class="motto-text">无人扶我青云志，我自挖矿到山巅，<br>卷轴在手不曾弃，他日登顶笑苍穹。</div>
+            
+            <!-- 优化后的音乐播放器 -->
+            <div class="music-player">
+                <div class="music-info">
+                    <div class="music-icon">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <div class="music-title">数字卷轴-信仰之光</div>
+                </div>
+                
+                <div class="music-controls">
+                    <button class="control-btn" id="prevBtn">
+                        <i class="fas fa-step-backward"></i>
+                    </button>
+                    
+                    <button class="control-btn" id="playPauseBtn">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    
+                    <button class="control-btn" id="nextBtn">
+                        <i class="fas fa-step-forward"></i>
+                    </button>
+                </div>
+                
+                <!-- 底部进度条 -->
+                <div class="progress-container" id="progressContainer">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+            </div>
         </header>
         
         <div class="button-grid">
@@ -907,8 +1050,7 @@
         <div id="promotion" class="content-section">
             <h2>推广奖励机制</h2>
             <p>推广下级，永久享下级收益的10%奖励。推广下级也可竞争节点，获取更多奖励。</p>
-            <p>下级兑换卷轴或复投卷轴上级可享每日分红。</p>
-            <p>季度推广排名前37名可自动成为节点人，节点人可参与投票、提案，享有节点分红权。</p>
+            <p>下级兑换卷轴或复投卷轴上级可享每日分红。季度推广排名前37名可自动成为节点人，节点人可参与投票、提案，享有节点分红权。</p>
             
             <h3>推广收益规则</h3>
             <p>推广收益采用烧伤机制：</p>
@@ -1148,6 +1290,50 @@
         return navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1;
     }
     
+    // 音乐播放器功能
+    const bgMusic = document.getElementById('bgMusic');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const progressBar = document.getElementById('progressBar');
+    const progressContainer = document.getElementById('progressContainer');
+    
+    // 更新播放/暂停按钮
+    function updatePlayPauseButton() {
+        if (bgMusic.paused) {
+            playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+        } else {
+            playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+        }
+    }
+    
+    // 更新进度条
+    function updateProgress() {
+        if (bgMusic.duration) {
+            const progressPercent = (bgMusic.currentTime / bgMusic.duration) * 100;
+            progressBar.style.width = `${progressPercent}%`;
+        }
+    }
+    
+    // 设置进度
+    function setProgress(e) {
+        const width = this.clientWidth;
+        const clickX = e.offsetX;
+        const duration = bgMusic.duration;
+        
+        bgMusic.currentTime = (clickX / width) * duration;
+    }
+    
+    // 切换播放/暂停
+    function togglePlayPause() {
+        if (bgMusic.paused) {
+            bgMusic.play();
+        } else {
+            bgMusic.pause();
+        }
+        updatePlayPauseButton();
+    }
+    
     // 初始化页面
     window.onload = function() {
         updateRuntime();
@@ -1164,6 +1350,43 @@
                 }
             });
         });
+        
+        // 设置音乐播放器事件
+        playPauseBtn.addEventListener('click', togglePlayPause);
+        prevBtn.addEventListener('click', () => {
+            // 上一首功能，这里简单实现为回到开头
+            bgMusic.currentTime = 0;
+        });
+        nextBtn.addEventListener('click', () => {
+            // 下一首功能，这里简单实现为跳到结尾
+            bgMusic.currentTime = bgMusic.duration;
+        });
+        bgMusic.addEventListener('timeupdate', updateProgress);
+        bgMusic.addEventListener('ended', () => {
+            playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+        });
+        progressContainer.addEventListener('click', setProgress);
+        
+        // 设置默认音量
+        bgMusic.volume = 0.7;
+        
+        // 尝试自动播放
+        function tryAutoPlay() {
+            const playPromise = bgMusic.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    // 自动播放成功
+                    updatePlayPauseButton();
+                }).catch(() => {
+                    // 自动播放失败
+                    console.log('自动播放被阻止，等待用户交互');
+                });
+            }
+        }
+        
+        // 页面加载后尝试自动播放
+        tryAutoPlay();
     };
     
     // 点击模态框外部关闭
