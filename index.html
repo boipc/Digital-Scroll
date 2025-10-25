@@ -695,6 +695,35 @@
             text-align: center;
         }
         
+        /* 公众号信息样式 */
+        .official-account {
+            text-align: center;
+            margin: 15px 0 8px;
+            padding: 12px;
+            background: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+        
+        .official-account h3 {
+            margin-bottom: 8px;
+            color: var(--primary-color);
+            font-size: 1rem;
+        }
+        
+        .official-account p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 0;
+        }
+        
+        .account-name {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 0.9rem;
+        }
+        
         /* 小屏幕优化 */
         @media (max-width: 360px) {
             h1 {
@@ -799,6 +828,7 @@
     <!-- 背景音乐 -->
     <audio id="bgMusic" loop>
         <source src="https://pub-19bc0ce8c8524750be48dcbb7ca04a73.r2.dev/%E6%95%B0%E5%AD%97%E5%8D%B7%E8%BD%B4-%E4%BF%A1%E4%BB%B0%E4%B9%8B%E5%85%89.mp3" type="audio/mp3">
+        <source src="https://pub-19bc0ce8c8524750be48dcbb7ca04a73.r2.dev/%E6%95%B0%E5%AD%97%E5%8D%B7%E8%BD%B4-%E9%93%BE%E4%B8%8A%E4%B9%8B%E5%85%89.mp3" type="audio/mp3">
         您的浏览器不支持音频元素。
     </audio>
     
@@ -843,7 +873,7 @@
                     <div class="music-icon">
                         <i class="fas fa-music"></i>
                     </div>
-                    <div class="music-title">数字卷轴-信仰之光</div>
+                    <div class="music-title" id="currentSongTitle">数字卷轴-信仰之光</div>
                 </div>
                 
                 <div class="music-controls">
@@ -1192,6 +1222,12 @@
             </div>
         </div>
         
+        <!-- 公众号信息 -->
+        <div class="official-account">
+            <h3>关注公众号</h3>
+            <p><span class="account-name">【卷界探索】</span> - 获取最新项目资讯与教程</p>
+        </div>
+        
         <!-- 修改后的底部版权信息 -->
         <footer>
             <p>© 2025 数字卷轴DSC 卷界链</p>
@@ -1297,6 +1333,34 @@
     const nextBtn = document.getElementById('nextBtn');
     const progressBar = document.getElementById('progressBar');
     const progressContainer = document.getElementById('progressContainer');
+    const currentSongTitle = document.getElementById('currentSongTitle');
+    
+    // 音乐列表
+    const songs = [
+        {
+            title: '数字卷轴-信仰之光',
+            url: 'https://pub-19bc0ce8c8524750be48dcbb7ca04a73.r2.dev/%E6%95%B0%E5%AD%97%E5%8D%B7%E8%BD%B4-%E4%BF%A1%E4%BB%B0%E4%B9%8B%E5%85%89.mp3'
+        },
+        {
+            title: '数字卷轴-链上之光',
+            url: 'https://pub-19bc0ce8c8524750be48dcbb7ca04a73.r2.dev/%E6%95%B0%E5%AD%97%E5%8D%B7%E8%BD%B4-%E9%93%BE%E4%B8%8A%E4%B9%8B%E5%85%89.mp3'
+        }
+    ];
+    
+    let currentSongIndex = 0;
+    let autoPlayAttempted = false;
+    
+    // 加载并播放指定索引的歌曲
+    function loadSong(index) {
+        currentSongIndex = index;
+        bgMusic.src = songs[currentSongIndex].url;
+        currentSongTitle.textContent = songs[currentSongIndex].title;
+        
+        // 尝试自动播放
+        if (!autoPlayAttempted) {
+            tryAutoPlay();
+        }
+    }
     
     // 更新播放/暂停按钮
     function updatePlayPauseButton() {
@@ -1334,6 +1398,50 @@
         updatePlayPauseButton();
     }
     
+    // 上一首
+    function prevSong() {
+        currentSongIndex--;
+        if (currentSongIndex < 0) {
+            currentSongIndex = songs.length - 1;
+        }
+        loadSong(currentSongIndex);
+        // 切换歌曲后自动播放
+        if (bgMusic.paused) {
+            bgMusic.play();
+            updatePlayPauseButton();
+        }
+    }
+    
+    // 下一首
+    function nextSong() {
+        currentSongIndex++;
+        if (currentSongIndex >= songs.length) {
+            currentSongIndex = 0;
+        }
+        loadSong(currentSongIndex);
+        // 切换歌曲后自动播放
+        if (bgMusic.paused) {
+            bgMusic.play();
+            updatePlayPauseButton();
+        }
+    }
+    
+    // 尝试自动播放
+    function tryAutoPlay() {
+        const playPromise = bgMusic.play();
+        autoPlayAttempted = true;
+        
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                // 自动播放成功
+                updatePlayPauseButton();
+            }).catch(() => {
+                // 自动播放失败
+                console.log('自动播放被阻止，等待用户交互');
+            });
+        }
+    }
+    
     // 初始化页面
     window.onload = function() {
         updateRuntime();
@@ -1353,40 +1461,26 @@
         
         // 设置音乐播放器事件
         playPauseBtn.addEventListener('click', togglePlayPause);
-        prevBtn.addEventListener('click', () => {
-            // 上一首功能，这里简单实现为回到开头
-            bgMusic.currentTime = 0;
-        });
-        nextBtn.addEventListener('click', () => {
-            // 下一首功能，这里简单实现为跳到结尾
-            bgMusic.currentTime = bgMusic.duration;
-        });
+        prevBtn.addEventListener('click', prevSong);
+        nextBtn.addEventListener('click', nextSong);
         bgMusic.addEventListener('timeupdate', updateProgress);
         bgMusic.addEventListener('ended', () => {
-            playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            nextSong();
         });
         progressContainer.addEventListener('click', setProgress);
         
         // 设置默认音量
         bgMusic.volume = 0.7;
         
-        // 尝试自动播放
-        function tryAutoPlay() {
-            const playPromise = bgMusic.play();
-            
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    // 自动播放成功
-                    updatePlayPauseButton();
-                }).catch(() => {
-                    // 自动播放失败
-                    console.log('自动播放被阻止，等待用户交互');
-                });
-            }
-        }
+        // 加载第一首歌曲
+        loadSong(0);
         
-        // 页面加载后尝试自动播放
-        tryAutoPlay();
+        // 添加点击页面任意位置播放音乐的功能
+        document.body.addEventListener('click', function() {
+            if (bgMusic.paused && !autoPlayAttempted) {
+                tryAutoPlay();
+            }
+        });
     };
     
     // 点击模态框外部关闭
