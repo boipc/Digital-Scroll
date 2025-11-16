@@ -716,19 +716,6 @@
             transform: translateY(-3px);
         }
         
-        /* 新增：社交图标图片样式 */
-        .social-icon img {
-            width: 32px;
-            height: 32px;
-            object-fit: contain;
-            transition: all 0.3s ease;
-        }
-        
-        .social-icon:hover img {
-            transform: translateY(-3px);
-            filter: brightness(1.2);
-        }
-        
         /* 二维码模态框样式 */
         #wechatModal {
             display: none;
@@ -773,11 +760,6 @@
             
             .social-icon {
                 font-size: 24px;
-            }
-            
-            .social-icon img {
-                width: 28px;
-                height: 28px;
             }
         }
         
@@ -838,11 +820,6 @@
             .social-icons {
                 gap: 12px;
             }
-            
-            .social-icon img {
-                width: 24px;
-                height: 24px;
-            }
         }
         
         /* 超小屏幕优化 */
@@ -897,11 +874,6 @@
             
             .social-icons {
                 gap: 10px;
-            }
-            
-            .social-icon img {
-                width: 22px;
-                height: 22px;
             }
         }
     </style>
@@ -1032,22 +1004,22 @@
             </div>
         </div>
         
-        <!-- 纯图标社交链接 - 已更新为SVG图片 -->
+        <!-- 纯图标社交链接 -->
         <div class="social-icons">
             <a href="javascript:void(0)" class="social-icon" onclick="showWechatModal()">
-                <img src="https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/微信.svg" alt="微信">
+                <i class="fab fa-weixin"></i>
             </a>
             <a href="https://qun.qq.com/universal-share/share?ac=1&authKey=c6BM5DK3yY4L%2FReRW6oZW1Xj1QRPZ1desNqKWhP%2BdM7aielhRw%2Fuj12A3CxlBek0&busi_data=eyJncm91cENvZGUiOiIxMzQ0NDI4NTciLCJ0b2tlbiI6Ii9JM0FIb0NmUzdqLzdlOCtZMS9BbDc3U1RxWW40TlU0c29KYllzaDFiZGdHVmQzYWgzSnMzUERuVk91V2pJZlMiLCJ1aW4iOiIxMDY1NDk5MzM4In0%3D&data=jSmAVa3wONc_R2BPx0dMXOJdW1Ag_dVVlHiB9C3JE3sRisQppuhjn4U2URjBRxwcmB-jE4MMn6F5-lognlRqTw&svctype=4&tempid=h5_group_info" class="social-icon" target="_blank">
-                <img src="https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/QQ.svg" alt="QQ">
+                <i class="fab fa-qq"></i>
             </a>
             <a href="https://v.douyin.com/88b5P13AgBM/" class="social-icon" target="_blank">
-                <img src="https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/抖音.svg" alt="抖音">
+                <i class="fab fa-tiktok"></i>
             </a>
             <a href="https://v.kuaishou.com/KZP1eYG1" class="social-icon" target="_blank">
-                <img src="https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/快手.svg" alt="快手">
+                <i class="fas fa-play-circle"></i>
             </a>
             <a href="https://t.me/+I7NqdrjUVsA2OTU5" class="social-icon external-link" target="_blank">
-                <img src="https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/电报.svg" alt="电报">
+                <i class="fab fa-telegram"></i>
             </a>
         </div>
         
