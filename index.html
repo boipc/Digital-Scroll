@@ -1002,7 +1002,7 @@
             <a href="https://qun.qq.com/universal-share/share?ac=1&authKey=c6BM5DK3yY4L%2FReRW6oZW1Xj1QRPZ1desNqKWhP%2BdM7aielhRw%2Fuj12A3CxlBek0&busi_data=eyJncm91cENvZGUiOiIxMzQ0NDI4NTciLCJ0b2tlbiI6Ii9JM0FIb0NmUzdqLzdlOCtZMS9BbDc3U1RxWW40TlU0c29KYllzaDFiZGdHVmQzYWgzSnMzUERuVk91V2pJZlMiLCJ1aW4iOiIxMDY1NDk5MzM4In0%3D&data=jSmAVa3wONc_R2BPx0dMXOJdW1Ag_dVVlHiB9C3JE3sRisQppuhjn4U2URjBRxwcmB-jE4MMn6F5-lognlRqTw&svctype=4&tempid=h5_group_info" class="social-icon" target="_blank">
                 <i class="fab fa-qq"></i>
             </a>
-            <a href="https://t.me/+I7NqdrjUVsA2OTU5" class="social-icon" target="_blank">
+            <a href="https://t.me/+I7NqdrjUVsA2OTU5" class="social-icon external-link" target="_blank">
                 <i class="fab fa-telegram"></i>
             </a>
         </div>
@@ -1242,7 +1242,7 @@
         
         document.getElementById('intro').classList.add('active');
         
-        // 添加微信浏览器检测 - 包括底部导航栏的注册链接
+        // 添加微信浏览器检测 - 包括底部导航栏的注册链接和电报链接
         document.querySelectorAll('.external-link, #registerBtn').forEach(link => {
             link.addEventListener('click', function(e) {
                 if(isWeixinBrowser()) {
