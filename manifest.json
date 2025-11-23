@@ -1,28 +1,118 @@
 {
-  "background_color": "#ffffff",
-  "description": "你的财富卷轴已展开！DSC创新数字项目，多重收益等你来拿，点击了解详情。",
-  "dir": "ltr",
-  "display": "standalone",
   "name": "数字卷轴DSC - 创新数字资产项目",
-  "orientation": "any",
-  "scope": "/",
   "short_name": "数字卷轴DSC",
-  "start_url": "/",
-  "theme_color": "#ffffff",
+  "description": "你的财富卷轴已展开！DSC创新数字项目，多重收益等你来拿",
+  "start_url": "/Digital-Scroll/",
+  "display": "standalone",
+  "theme_color": "#4a6cf7",
+  "background_color": "#f8faff",
+  "orientation": "portrait",
+  "scope": "/Digital-Scroll/",
+  "categories": ["finance", "business"],
+  "lang": "zh-CN",
+  "dir": "ltr",
   "icons": [
     {
       "src": "https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/logo.png",
+      "sizes": "72x72",
       "type": "image/png",
-      "sizes": "1483x1483",
-      "isSquare": true,
-      "isPng": true,
-      "isWebp": false,
-      "isJpg": false,
-      "width": 1483,
-      "is512x512": false,
-      "is256x256": false,
-      "is192x192": false
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/logo.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/logo.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/logo.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/logo.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/logo.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ],
-  "id": "dsc"
+  "screenshots": [
+    {
+      "src": "https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/screenshot1.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/screenshot2.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "shortcuts": [
+    {
+      "name": "项目介绍",
+      "short_name": "介绍",
+      "description": "查看数字卷轴DSC项目详情",
+      "url": "/Digital-Scroll/#intro",
+      "icons": [
+        {
+          "src": "https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/icon-intro.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "卷轴收益",
+      "short_name": "收益",
+      "description": "查看卷轴收益详情",
+      "url": "/Digital-Scroll/#scrolls",
+      "icons": [
+        {
+          "src": "https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/icon-profit.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "推广奖励",
+      "short_name": "推广",
+      "description": "查看推广奖励机制",
+      "url": "/Digital-Scroll/#promotion",
+      "icons": [
+        {
+          "src": "https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/icon-promotion.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
 }
