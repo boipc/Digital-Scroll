@@ -1,0 +1,28 @@
+{
+  "background_color": "#ffffff",
+  "description": "你的财富卷轴已展开！DSC创新数字项目，多重收益等你来拿，点击了解详情。",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "数字卷轴DSC - 创新数字资产项目",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "数字卷轴DSC",
+  "start_url": "/",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/logo.png",
+      "type": "image/png",
+      "sizes": "1483x1483",
+      "isSquare": true,
+      "isPng": true,
+      "isWebp": false,
+      "isJpg": false,
+      "width": 1483,
+      "is512x512": false,
+      "is256x256": false,
+      "is192x192": false
+    }
+  ],
+  "id": "dsc"
+}
