@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>波塞冬链全球升级 - 极致紧凑华丽海报</title>
+    <title>波塞冬链</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -15,36 +15,13 @@
             --light-blue: #caf0f8;
         }
         
-        /* 隐藏滚动条但保持滚动功能 */
+        /* 修复滚动条问题 - 设置为与背景色相同 */
         html, body {
-            overflow: hidden;
-            height: 100%;
             margin: 0;
             padding: 0;
-            position: relative;
-        }
-        
-        .scroll-container {
-            position: absolute;
-            top: 0;
-            left: 0;
+            height: 100%;
             width: 100%;
-            height: 100%;
-            overflow-y: auto;
             overflow-x: hidden;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none; /* IE and Edge */
-        }
-        
-        .scroll-container::-webkit-scrollbar {
-            display: none; /* Chrome, Safari, Opera */
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
         }
         
         body {
@@ -53,6 +30,33 @@
             color: white;
             min-height: 100vh;
             position: relative;
+            -webkit-overflow-scrolling: touch;
+            overflow-y: auto;
+        }
+        
+        /* 透明滚动条 - 与背景颜色融合 */
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: rgba(0, 18, 51, 0.9);
+            border-radius: 0px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 18, 51, 1);
+        }
+        
+        /* Firefox滚动条样式 - 与背景色融合 */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(0, 18, 51, 0.9) transparent;
         }
         
         /* 背景装饰 */
@@ -264,10 +268,10 @@
             line-height: 1.2;
         }
         
-        /* 代币展示 */
+        /* 代币展示 - 修复超出问题 */
         .token-display {
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
             flex-wrap: wrap;
             gap: 12px;
             margin: 15px 0;
@@ -275,7 +279,6 @@
         
         .token-card {
             flex: 1;
-            min-width: 150px;
             background: linear-gradient(145deg, rgba(0, 102, 255, 0.15), rgba(0, 212, 255, 0.1));
             border-radius: 12px;
             padding: 15px;
@@ -283,6 +286,8 @@
             border: 1px solid rgba(0, 212, 255, 0.3);
             position: relative;
             overflow: hidden;
+            min-width: 0; /* 修复flexbox溢出问题 */
+            box-sizing: border-box;
         }
         
         .token-card::after {
@@ -428,6 +433,12 @@
             .slogan {
                 font-size: 1.1rem;
             }
+            
+            /* 修复代币框在中等屏幕上的布局 */
+            .token-display {
+                flex-direction: column;
+                gap: 10px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -451,10 +462,6 @@
             .token-display {
                 flex-direction: column;
                 gap: 10px;
-            }
-            
-            .token-card {
-                min-width: 100%;
             }
         }
         
@@ -498,192 +505,190 @@
     <div class="decoration" style="bottom: 30%; left: 10%;"><i class="fas fa-ship"></i></div>
     <div class="decoration" style="bottom: 25%; right: 7%;"><i class="fas fa-wind"></i></div>
     
-    <!-- 滚动容器（隐藏滚动条） -->
-    <div class="scroll-container" id="scrollContainer">
-        <div class="poster-container">
-            <!-- 主视觉区域 -->
-            <section class="hero-section">
-                <div class="trident-icon animate-slide-up">
-                    <i class="fas fa-crown"></i> <!-- 使用皇冠图标替代三叉戟 -->
+    <!-- 滚动容器（透明滚动条） -->
+    <div class="poster-container">
+        <!-- 主视觉区域 -->
+        <section class="hero-section">
+            <div class="trident-icon animate-slide-up">
+                <i class="fas fa-crown"></i>
+            </div>
+            <h1 class="main-title animate-slide-up delay-1">波塞冬链</h1>
+            <p class="subtitle animate-slide-up delay-2">这不是一次简单的更名，而是一场从技术架构到全局战略的全面跃迁，一场属于所有参与者的新纪元启程！</p>
+        </section>
+        
+        <!-- 从"卷界"到"波塞冬" - 更换了图标 -->
+        <section class="poster-card animate-slide-up delay-1">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-crown"></i> <!-- 更换为皇冠图标 -->
                 </div>
-                <h1 class="main-title animate-slide-up delay-1">波塞冬链全球升级</h1>
-                <p class="subtitle animate-slide-up delay-2">这不是一次简单的更名，而是一场从技术架构到全球战略的全面跃迁，一场属于所有参与者的新纪元启程！</p>
-            </section>
-            
-            <!-- 从"卷界"到"波塞冬" - 更换了图标 -->
-            <section class="poster-card animate-slide-up delay-1">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <i class="fas fa-crown"></i> <!-- 更换为皇冠图标 -->
+                <h2 class="card-title">从"卷界"到"波塞冬"</h2>
+            </div>
+            <div class="card-content">
+                <p>我们曾以"卷界链"为名，凝聚一群热爱探索、追求自由的伙伴，共同构建去中心化生态。如今，我们以<span class="highlight-text">波塞冬——希腊神话中掌管海洋与力量的神祇</span>，命名全新系统，寓意：</p>
+                <div class="features-grid" style="margin-top: 12px;">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-fist-raised"></i>
+                        </div>
+                        <h3 class="feature-title">力量</h3>
+                        <p class="feature-desc">全球化的技术与生态实力</p>
                     </div>
-                    <h2 class="card-title">从"卷界"到"波塞冬"</h2>
-                </div>
-                <div class="card-content">
-                    <p>我们曾以"卷界链"为名，凝聚一群热爱探索、追求自由的伙伴，共同构建去中心化生态。如今，我们以<span class="highlight-text">波塞冬——希腊神话中掌管海洋与力量的神祇</span>，命名全新系统，寓意：</p>
-                    <div class="features-grid" style="margin-top: 12px;">
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-fist-raised"></i>
-                            </div>
-                            <h3 class="feature-title">力量</h3>
-                            <p class="feature-desc">全球化的技术与生态实力</p>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-layer-group"></i>
                         </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-layer-group"></i>
-                            </div>
-                            <h3 class="feature-title">秩序</h3>
-                            <p class="feature-desc">清晰、可扩展的链上架构</p>
+                        <h3 class="feature-title">秩序</h3>
+                        <p class="feature-desc">清晰、可扩展的链上架构</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-link"></i>
                         </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-link"></i>
-                            </div>
-                            <h3 class="feature-title">连接</h3>
-                            <p class="feature-desc">打破地域、连接全球社区</p>
-                        </div>
+                        <h3 class="feature-title">连接</h3>
+                        <p class="feature-desc">打破地域、连接全球社区</p>
                     </div>
                 </div>
-            </section>
-            
-            <!-- 全新国际化系统 -->
-            <section class="poster-card animate-slide-up delay-2">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <i class="fas fa-globe-americas"></i>
+            </div>
+        </section>
+        
+        <!-- 全新国际化系统 -->
+        <section class="poster-card animate-slide-up delay-2">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-globe-americas"></i>
+                </div>
+                <h2 class="card-title">全新国际化系统，计划于四月份上线！</h2>
+            </div>
+            <div class="card-content">
+                <p>我们正全力开发全新国际版本平台，即将迎来四大核心升级：</p>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <h3 class="feature-title">多语言支持</h3>
+                        <p class="feature-desc">中、英、日、韩、法、西等多语种界面</p>
                     </div>
-                    <h2 class="card-title">全新国际化系统，计划于四月份上线！</h2>
-                </div>
-                <div class="card-content">
-                    <p>我们正全力开发全新国际版本平台，即将迎来四大核心升级：</p>
-                    <div class="features-grid">
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-language"></i>
-                            </div>
-                            <h3 class="feature-title">多语言支持</h3>
-                            <p class="feature-desc">中、英、日、韩、法、西等多语种界面</p>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-check"></i>
                         </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-user-check"></i>
-                            </div>
-                            <h3 class="feature-title">全球注册与认证</h3>
-                            <p class="feature-desc">支持各国用户合规入驻</p>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-paint-brush"></i>
-                            </div>
-                            <h3 class="feature-title">全新界面与交互</h3>
-                            <p class="feature-desc">更流畅、更易用的使用体验</p>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-robot"></i>
-                            </div>
-                            <h3 class="feature-title">加持AI大模型</h3>
-                            <p class="feature-desc">更方便、更智能的交互体验</p>
-                        </div>
+                        <h3 class="feature-title">全球注册与认证</h3>
+                        <p class="feature-desc">支持各国用户合规入驻</p>
                     </div>
-                </div>
-            </section>
-            
-            <!-- 无需迁移 -->
-            <section class="poster-card animate-slide-up delay-2">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <i class="fas fa-exchange-alt"></i>
-                    </div>
-                    <h2 class="card-title">无需迁移，无需换号！</h2>
-                </div>
-                <div class="card-content">
-                    <p style="font-size: 0.9rem; text-align: center; margin: 12px 0;">新系统上线时，所有用户凭当前账号直接登录新系统即可！</p>
-                    <p style="text-align: center; font-size: 1rem;" class="highlight-text">你的数据、资产、等级、权益——全部保留！</p>
-                </div>
-            </section>
-            
-            <!-- 代币不变，玩法升级 -->
-            <section class="poster-card animate-slide-up delay-3">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <i class="fas fa-coins"></i>
-                    </div>
-                    <h2 class="card-title">代币不变，玩法升级</h2>
-                </div>
-                <div class="card-content">
-                    <p>新系统将在保留原有玩法的基础上，对界面、交互、体验进行全面优化，带来更高使用体验！</p>
-                    
-                    <div class="token-display">
-                        <div class="token-card">
-                            <h3 class="token-name">POS <span class="token-old-name">(原SCC)</span></h3>
-                            <p class="token-desc">波塞冬原生代币</p>
-                            <p style="margin-top: 8px; font-size: 0.8rem;" class="highlight-text">将正式从SCC更名为POS</p>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-paint-brush"></i>
                         </div>
-                        <div class="token-card">
-                            <h3 class="token-name">DSC</h3>
-                            <p class="token-desc">保持不变</p>
-                            <p style="margin-top: 8px; font-size: 0.8rem;" class="highlight-text">所有玩法、激励规则、权益全量保留</p>
+                        <h3 class="feature-title">全新界面与交互</h3>
+                        <p class="feature-desc">更流畅、更易用的使用体验</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-robot"></i>
                         </div>
+                        <h3 class="feature-title">加持AI大模型</h3>
+                        <p class="feature-desc">更方便、更智能的交互体验</p>
                     </div>
                 </div>
-            </section>
-            
-            <!-- 特别预告 -->
-            <section class="poster-card animate-slide-up delay-4">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <i class="fas fa-crown"></i>
-                    </div>
-                    <h2 class="card-title">三级股东，国家级运营权保留！</h2>
+            </div>
+        </section>
+        
+        <!-- 无需迁移 -->
+        <section class="poster-card animate-slide-up delay-2">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-exchange-alt"></i>
                 </div>
-                <div class="card-content">
-                    <div class="features-grid">
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-user-tie"></i>
-                            </div>
-                            <h3 class="feature-title">自动获得权限</h3>
-                            <p class="feature-desc">所有三级股东，自动获得国家级独立或联合运营权限资格！</p>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-flag"></i>
-                            </div>
-                            <h3 class="feature-title">开放申请通道</h3>
-                            <p class="feature-desc">未来将开放国家级运营申请通道，支持更多伙伴成为区域领袖！</p>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-globe"></i>
-                            </div>
-                            <h3 class="feature-title">全球化机遇</h3>
-                            <p class="feature-desc">这是属于每一位参与者的全球化机遇！</p>
-                        </div>
-                    </div>
+                <h2 class="card-title">无需迁移，无需换号！</h2>
+            </div>
+            <div class="card-content">
+                <p style="font-size: 0.9rem; text-align: center; margin: 12px 0;">新系统上线时，所有用户凭当前账号直接登录新系统即可！</p>
+                <p style="text-align: center; font-size: 1rem;" class="highlight-text">你的数据、资产、等级、权益——全部保留！</p>
+            </div>
+        </section>
+        
+        <!-- 代币不变，玩法升级 -->
+        <section class="poster-card animate-slide-up delay-3">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-coins"></i>
                 </div>
-            </section>
-            
-            <!-- 行动号召 - 改为链接按钮 -->
-            <section class="cta-section">
-                <a href="index.html" class="link-button animate-slide-up delay-5">
-                    <i class="fas fa-ship"></i> 立即加入新纪元
-                </a>
-            </section>
-            
-            <!-- 底部区域 - 统一文本颜色 -->
-            <footer class="footer-section">
-                <h2 class="slogan animate-slide-up delay-5">波塞冬已至，风暴将起。我们，即将启航！</h2>
-                <p class="final-statement animate-slide-up delay-1">我们不再是"链"，而是全球分布式社区的缔造者；</p>
-                <p class="final-statement animate-slide-up delay-2">我们不再是"玩家"，而是新生态的共建者！</p>
-                <p class="final-statement animate-slide-up delay-3">这不是结束，而是新的开始！</p>
+                <h2 class="card-title">代币不变，玩法升级</h2>
+            </div>
+            <div class="card-content">
+                <p>新系统将在保留原有玩法的基础上，对界面、交互、体验进行全面优化，带来更高使用体验！</p>
                 
-                <div class="team-info animate-slide-up delay-4">
-                    <p>——波塞冬链运营团队</p>
-                    <p>2026年 | 全球预告发布</p>
+                <div class="token-display">
+                    <div class="token-card">
+                        <h3 class="token-name">POS <span class="token-old-name">(原SCC)</span></h3>
+                        <p class="token-desc">波塞冬原生代币</p>
+                        <p style="margin-top: 8px; font-size: 0.8rem;" class="highlight-text">将正式从SCC更名为POS</p>
+                    </div>
+                    <div class="token-card">
+                        <h3 class="token-name">DSC</h3>
+                        <p class="token-desc">保持不变</p>
+                        <p style="margin-top: 8px; font-size: 0.8rem;" class="highlight-text">所有玩法、激励规则、权益全量保留</p>
+                    </div>
                 </div>
-            </footer>
-        </div>
+            </div>
+        </section>
+        
+        <!-- 特别预告 -->
+        <section class="poster-card animate-slide-up delay-4">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <h2 class="card-title">三级股东，国家级运营权保留！</h2>
+            </div>
+            <div class="card-content">
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h3 class="feature-title">自动获得权限</h3>
+                        <p class="feature-desc">所有三级股东，自动获得国家级独立或联合运营权限资格！</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-flag"></i>
+                        </div>
+                        <h3 class="feature-title">开放申请通道</h3>
+                        <p class="feature-desc">未来将开放国家级运营申请通道，支持更多伙伴成为区域领袖！</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h3 class="feature-title">全球化机遇</h3>
+                        <p class="feature-desc">这是属于每一位参与者的全球化机遇！</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 行动号召 - 改为链接按钮 -->
+        <section class="cta-section">
+            <a href="index.html" class="link-button animate-slide-up delay-5">
+                <i class="fas fa-ship"></i> 立即加入新纪元
+            </a>
+        </section>
+        
+        <!-- 底部区域 - 统一文本颜色 -->
+        <footer class="footer-section">
+            <h2 class="slogan animate-slide-up delay-5">波塞冬已至，风暴将起。我们，即将启航！</h2>
+            <p class="final-statement animate-slide-up delay-1">我们不再是"链"，而是全球分布式社区的缔造者；</p>
+            <p class="final-statement animate-slide-up delay-2">我们不再是"玩家"，而是新生态的共建者！</p>
+            <p class="final-statement animate-slide-up delay-3">这不是结束，而是新的开始！</p>
+            
+            <div class="team-info animate-slide-up delay-4">
+                <p>——波塞冬链运营团队</p>
+                <p>2026年 | 全球预告发布</p>
+            </div>
+        </footer>
     </div>
     
     <script>
@@ -733,6 +738,9 @@
             document.querySelectorAll('.poster-card, .link-button, .slogan, .final-statement').forEach(el => {
                 observer.observe(el);
             });
+            
+            // 确保页面加载时滚动到顶部
+            window.scrollTo(0, 0);
         });
     </script>
 </body>
