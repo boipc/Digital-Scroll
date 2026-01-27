@@ -323,6 +323,64 @@
             line-height: 1.2;
         }
         
+        /* 全球布局卡片 - 新增样式 */
+        .global-layout-section {
+            text-align: center;
+            padding: 15px 0 10px;
+        }
+        
+        .global-layout-card {
+            background: linear-gradient(145deg, rgba(0, 102, 255, 0.25), rgba(0, 18, 51, 0.4));
+            border-radius: 14px;
+            padding: 18px;
+            margin: 0 10px 12px;
+            box-shadow: 0 10px 25px rgba(0, 102, 255, 0.3),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+                        0 0 0 1px rgba(0, 212, 255, 0.4);
+            border: 1px solid rgba(0, 212, 255, 0.4);
+            position: relative;
+            overflow: hidden;
+            border-top: 2px solid var(--gold);
+            border-bottom: 2px solid var(--gold);
+        }
+        
+        .global-layout-title {
+            font-size: 1.2rem;
+            font-weight: 900;
+            margin-bottom: 12px;
+            background: linear-gradient(90deg, var(--gold), #ff9d00, var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            line-height: 1.2;
+        }
+        
+        .global-layout-content {
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        
+        .partnership-highlight {
+            background: linear-gradient(145deg, rgba(255, 215, 0, 0.1), rgba(255, 46, 99, 0.05));
+            border-radius: 10px;
+            padding: 12px;
+            margin: 12px 0;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+        
+        .community-power {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 3px solid var(--accent);
+            text-align: left;
+        }
+        
         /* 行动按钮 - 减少与下方文本的间距 */
         .cta-section {
             text-align: center;
@@ -429,6 +487,15 @@
                 font-size: 1.1rem;
             }
             
+            .global-layout-card {
+                padding: 15px;
+                margin: 0 8px 10px;
+            }
+            
+            .global-layout-title {
+                font-size: 1.1rem;
+            }
+            
             /* 修复代币卡片在移动端的显示 */
             .token-display {
                 flex-direction: column; /* 移动端改为垂直排列 */
@@ -475,6 +542,14 @@
                 font-size: 0.85rem;
             }
             
+            .global-layout-title {
+                font-size: 1rem;
+            }
+            
+            .global-layout-content {
+                font-size: 0.8rem;
+            }
+            
             /* 进一步减少移动端的间距 */
             .cta-section {
                 padding: 12px 12px 8px;
@@ -514,6 +589,10 @@
             .token-desc {
                 font-size: 0.65rem;
             }
+            
+            .global-layout-title {
+                font-size: 0.95rem;
+            }
         }
         
         /* 装饰性元素 */
@@ -541,6 +620,7 @@
         .delay-4 { animation-delay: 0.4s; }
         .delay-5 { animation-delay: 0.5s; }
         .delay-6 { animation-delay: 0.6s; }
+        .delay-7 { animation-delay: 0.7s; }
     </style>
 </head>
 <body>
@@ -686,8 +766,36 @@
             </div>
         </section>
         
+        <!-- 新增：全球布局，携手共赢 -->
+        <section class="global-layout-section animate-slide-up delay-4">
+            <div class="global-layout-card">
+                <h2 class="global-layout-title">全球布局，携手共赢</h2>
+                <div class="global-layout-content">
+                    <p>为布局全球化市场，我们将与<span class="highlight-text">顶尖运营团队展开战略合作</span>，共同推动波塞冬链在全球的传播与落地。</p>
+                    
+                    <div class="partnership-highlight">
+                        <p style="text-align: center; margin: 0;">
+                            <i class="fas fa-handshake" style="color: var(--gold); margin-right: 8px;"></i>
+                            <strong>全球战略合作网络</strong>
+                        </p>
+                    </div>
+                    
+                    <p>通过与全球顶尖技术团队、生态建设者和市场开拓者的深度合作，我们将共同打造一个真正国际化、多元化的区块链生态系统。</p>
+                    
+                    <div class="community-power">
+                        <i class="fas fa-bullhorn" style="color: var(--accent); margin-right: 8px;"></i>
+                        <span>但最重要的是：<span class="highlight-text">我们始终相信，真正的力量，源于每一个独立而强大的社区！</span></span>
+                    </div>
+                    
+                    <p style="margin-top: 12px; font-size: 0.8rem; color: var(--light-blue);">
+                        波塞冬链不仅是技术升级，更是全球生态共建的起点。我们期待与全球伙伴一起，开启区块链技术应用的新篇章！
+                    </p>
+                </div>
+            </div>
+        </section>
+        
         <!-- 特别预告 -->
-        <section class="poster-card animate-slide-up delay-4">
+        <section class="poster-card animate-slide-up delay-5">
             <div class="card-header">
                 <div class="card-icon">
                     <i class="fas fa-crown"></i>
@@ -723,14 +831,14 @@
         
         <!-- 行动号召 - 改为链接按钮，减少下方间距 -->
         <section class="cta-section">
-            <a href="index.html" class="link-button animate-slide-up delay-5">
+            <a href="index.html" class="link-button animate-slide-up delay-6">
                 <i class="fas fa-ship"></i> 立即加入新纪元
             </a>
         </section>
         
         <!-- 底部区域 - 统一文本颜色，减少上方间距 -->
         <footer class="footer-section">
-            <h2 class="slogan animate-slide-up delay-5">波塞冬已至，风暴将起。我们，即将启航！</h2>
+            <h2 class="slogan animate-slide-up delay-6">波塞冬已至，风暴将起。我们，即将启航！</h2>
             <p class="final-statement animate-slide-up delay-1">我们不再是"链"，而是全球分布式社区的缔造者；</p>
             <p class="final-statement animate-slide-up delay-2">我们不再是"玩家"，而是新生态的共建者！</p>
             <p class="final-statement animate-slide-up delay-3">这不是结束，而是新的开始！</p>
@@ -786,7 +894,7 @@
             }, observerOptions);
             
             // 观察所有卡片
-            document.querySelectorAll('.poster-card, .link-button, .slogan, .final-statement').forEach(el => {
+            document.querySelectorAll('.poster-card, .link-button, .slogan, .final-statement, .global-layout-card').forEach(el => {
                 observer.observe(el);
             });
             
