@@ -70,6 +70,7 @@
             background-color: #f1f5f9;
             font-weight: 700;
         }
+        /* 百分比数字使用红色 */
         .red-percent {
             color: #b91c1c;
             font-weight: 600;
@@ -109,6 +110,7 @@
             color: #d32f2f;
             font-weight: 600;
         }
+        /* 无序列表样式（圆点） */
         .dot-list {
             list-style-type: disc;
             margin-left: 24px;
@@ -117,36 +119,64 @@
             margin: 4px 0;
         }
 
-        /* 返回首页按钮：右下角悬浮，滚动时淡入/淡出 */
+        /* ------------- 返回首页按钮样式 (滑动出现，停止滚动后2秒隐藏) ------------- */
         .back-home-btn {
             position: fixed;
             bottom: 24px;
-            right: 24px;
-            background-color: #1e6fdf;
-            color: white;
-            border: none;
-            border-radius: 40px;
-            padding: 10px 20px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            transition: opacity 0.3s ease, transform 0.2s;
-            opacity: 0;
-            visibility: hidden;
-            z-index: 999;
-            text-decoration: none;
+            right: 20px;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            justify-content: center;
+            background: #1e6fdf;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 10px 18px;
+            border-radius: 48px;
+            text-decoration: none;
+            font-family: inherit;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+            transition: opacity 0.25s ease, transform 0.2s ease, box-shadow 0.2s;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 1000;
+            border: none;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            line-height: 1;
         }
-        .back-home-btn:hover {
-            background-color: #0f4b8a;
-            transform: scale(1.02);
-        }
+        /* 显示状态 */
         .back-home-btn.show {
             opacity: 1;
-            visibility: visible;
+            pointer-events: auto;
+            transform: scale(1);
+        }
+        /* 悬停/触摸反馈 */
+        .back-home-btn:hover {
+            background: #0f58b5;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+        }
+        .back-home-btn:active {
+            transform: translateY(1px);
+        }
+        /* 针对移动端优化点击区域 */
+        @media (max-width: 640px) {
+            .back-home-btn {
+                padding: 10px 16px;
+                font-size: 13px;
+                bottom: 20px;
+                right: 16px;
+            }
+        }
+        @media (max-width: 480px) {
+            .back-home-btn {
+                bottom: 16px;
+                right: 12px;
+                padding: 8px 14px;
+                font-size: 12.5px;
+            }
         }
     </style>
 </head>
@@ -169,13 +199,13 @@
         <tr><th>矿机等级</th><th>月收益率</th><th>说明</th> </tr
     </thead>
     <tbody>
-        <tr><td>试产矿机</td><td class="red-percent">18%</td><td>初始体验矿机</td> </tr
-        <tr><td>青铜矿机</td><td class="red-percent">18%</td><td>入门级矿机</td> </tr
-        <tr><td>白银矿机</td><td class="red-percent">18%</td><td>进阶级矿机</td> </tr
-        <tr><td>黄金矿机</td><td class="red-percent">18%</td><td>中等级矿机</td> </tr
-        <tr><td>铂金矿机</td><td class="red-percent">19%</td><td>高级矿机</td> </tr
-        <tr><td>钻石矿机</td><td class="red-percent">20%</td><td>专家级矿机</td> </tr
-        <tr><td>至尊矿机</td><td class="red-percent">21%</td><td>顶级矿机</td> </tr
+        <tr><td>试产矿机</td><td class="red-percent">18%</td><td>初始体验矿机</td> </tr>
+        <tr><td>青铜矿机</td><td class="red-percent">18%</td><td>入门级矿机</td> </tr>
+        <tr><td>白银矿机</td><td class="red-percent">18%</td><td>进阶级矿机</td> </tr>
+        <tr><td>黄金矿机</td><td class="red-percent">18%</td><td>中等级矿机</td> </tr>
+        <tr><td>铂金矿机</td><td class="red-percent">19%</td><td>高级矿机</td> </tr>
+        <tr><td>钻石矿机</td><td class="red-percent">20%</td><td>专家级矿机</td> </tr>
+        <tr><td>至尊矿机</td><td class="red-percent">21%</td><td>顶级矿机</td> </tr>
     </tbody>
 </table>
 
@@ -252,14 +282,14 @@
 
 <h3>3. 导师收益</h3>
 <p><strong>收益来源</strong><br>交易手续费的导师分红，根据不同等级享不同比例：</p>
-</table>
-    <thead><tr><th>等级</th><th>分红比例</th> </tr</thead>
+<table>
+    <thead> <tr><th>等级</th><th>分红比例</th> </tr></thead>
     <tbody>
-        <tr><td>M1</td><td class="red-percent">5%</td> </tr
-        <tr><td>M2</td><td class="red-percent">15%</td> </tr
-        <tr><td>M3</td><td class="red-percent">20%</td> </tr
-        <tr><td>M4</td><td class="red-percent">15%</td> </tr
-        <tr><td>M5</td><td class="red-percent">15%</td> </tr
+        <tr><td>M1</td><td class="red-percent">5%</td> </tr>
+        <tr><td>M2</td><td class="red-percent">15%</td> </tr>
+        <tr><td>M3</td><td class="red-percent">20%</td> </tr>
+        <tr><td>M4</td><td class="red-percent">15%</td> </tr>
+        <tr><td>M5</td><td class="red-percent">15%</td> </tr>
     </tbody>
 </table>
 <p><strong>领取规则</strong><br>- 发放频率：每天一次<br>- 领取频率：每天一次<br>- 达成导师后自动享受交易手续费的导师分红</p>
@@ -294,25 +324,25 @@
 
 <h3>1. 等级体系：导师达成条件</h3>
 <table>
-    <thead><tr><th>等级</th><th>族群算力</th><th>团队算力</th><th>直推活粉</th><th>自身算力</th> </tr</thead>
+    <thead> <tr><th>等级</th><th>族群算力</th><th>团队算力</th><th>直推活粉</th><th>自身算力</th> </tr></thead>
     <tbody>
-        <tr><td>M1</td><td>≥ 5K</td><td>-</td><td>≥ 3</td><td>≥ 20</td> </tr
-        <tr><td>M2</td><td>≥ 20K</td><td>≥ 5K</td><td>≥ 6</td><td>≥ 1K</td> </tr
-        <tr><td>M3</td><td>≥ 100K</td><td>≥ 20K</td><td>≥ 10</td><td>≥ 2K</td> </tr
-        <tr><td>M4</td><td>≥ 500K</td><td>≥ 100K</td><td>≥ 15</td><td>≥ 10K</td> </tr
-        <tr><td>M5</td><td>≥ 1000K</td><td>≥ 300K</td><td>≥ 20</td><td>≥ 20K</td> </tr
+        <tr><td>M1</td><td>≥ 5K</td><td>-</td><td>≥ 3</td><td>≥ 20</td> </tr>
+        <tr><td>M2</td><td>≥ 20K</td><td>≥ 5K</td><td>≥ 6</td><td>≥ 1K</td> </tr>
+        <tr><td>M3</td><td>≥ 100K</td><td>≥ 20K</td><td>≥ 10</td><td>≥ 2K</td> </tr>
+        <tr><td>M4</td><td>≥ 500K</td><td>≥ 100K</td><td>≥ 15</td><td>≥ 10K</td> </tr>
+        <tr><td>M5</td><td>≥ 1000K</td><td>≥ 300K</td><td>≥ 20</td><td>≥ 20K</td> </tr>
     </tbody>
 </table>
 
 <h3>2. 导师达成奖励</h3>
 <table>
-    <thead></tr><th>等级</th><th>导师算力</th><th>交易分红</th> </tr</thead>
+    <thead><tr><th>等级</th><th>导师算力</th><th>交易分红</th></tr></thead>
     <tbody>
-        <tr><td>M1</td><td>+10</td><td class="red-percent">5%</td> </tr
-        <tr><td>M2</td><td>+500</td><td class="red-percent">15%</td> </tr
-        <tr><td>M3</td><td>+1000</td><td class="red-percent">20%</td> </tr
-        <tr><td>M4</td><td>+5000</td><td class="red-percent">15%</td> </tr
-        <tr><td>M5</td><td>+10000</td><td class="red-percent">15%</td> </tr
+        <tr><td>M1</td><td>+10</td><td class="red-percent">5%</td> </tr>
+        <tr><td>M2</td><td>+500</td><td class="red-percent">15%</td> </tr>
+        <tr><td>M3</td><td>+1000</td><td class="red-percent">20%</td> </tr>
+        <tr><td>M4</td><td>+5000</td><td class="red-percent">15%</td> </tr>
+        <tr><td>M5</td><td>+10000</td><td class="red-percent">15%</td> </tr>
     </tbody>
 </table>
 
@@ -430,47 +460,65 @@
 <p><strong>需发提案的范围：</strong><br>- 波塞冬产出规则、奖励、收益分配<br>- 智能合约核心逻辑调整<br>- 链上资产分配规则</p>
 <p><strong>无需提案的修改：</strong><br>- 应用层参数调整<br>- 系统界面优化更新</p>
 
-<!-- 返回首页按钮：滚动时显示，停止滚动后自动隐藏 -->
-<a href="https://boipc.github.io/Digital-Scroll/index.html" class="back-home-btn" id="backHomeBtn">
+<!-- ========= 返回首页智能浮动按钮（滑动出现，停止滚动2秒隐藏，无图标图案，仅含返回符号+文字） ========= -->
+<a href="https://boipc.github.io/Digital-Scroll" class="back-home-btn" id="backHomeBtn" target="_self" rel="noopener noreferrer">
     ← 返回首页
 </a>
 
 <script>
     (function() {
-        const btn = document.getElementById('backHomeBtn');
-        if (!btn) return;
+        const backBtn = document.getElementById('backHomeBtn');
+        if (!backBtn) return;
         
-        let timer = null;
-        let isVisible = false;
+        let hideTimer = null;
+        // 初始隐藏（未滑动时不可见）
+        backBtn.classList.remove('show');
         
-        function hideBtn() {
-            if (!isVisible) return;
-            btn.classList.remove('show');
-            isVisible = false;
+        // 显示按钮（移除之前的隐藏计划）
+        function showButton() {
+            if (hideTimer) {
+                clearTimeout(hideTimer);
+                hideTimer = null;
+            }
+            if (!backBtn.classList.contains('show')) {
+                backBtn.classList.add('show');
+            }
         }
         
-        function showBtn() {
-            if (isVisible) return;
-            btn.classList.add('show');
-            isVisible = true;
+        // 停止滚动后延迟2秒隐藏
+        function scheduleHide() {
+            if (hideTimer) {
+                clearTimeout(hideTimer);
+            }
+            hideTimer = setTimeout(() => {
+                if (backBtn.classList.contains('show')) {
+                    backBtn.classList.remove('show');
+                }
+                hideTimer = null;
+            }, 2000);  // 2秒延迟
         }
         
-        function resetTimer() {
-            if (timer) clearTimeout(timer);
-            showBtn();
-            timer = setTimeout(function() {
-                hideBtn();
-            }, 2000);
+        // 滚动/滑动时：显示按钮，并重新计时隐藏
+        function onScrollHandler() {
+            showButton();
+            scheduleHide();
         }
         
-        window.addEventListener('scroll', function() {
-            resetTimer();
+        // 监听滚动事件 (支持PC滚轮、移动端触摸滑动)
+        window.addEventListener('scroll', onScrollHandler, { passive: true });
+        
+        // 页面初始化时若有滚动（例如刷新后滚动条位置不为0），保证按钮显示逻辑合理
+        if (window.scrollY > 0) {
+            showButton();
+            scheduleHide();
+        }
+        
+        // 可选: 清理定时器，避免内存残留 (页面关闭时清除)
+        window.addEventListener('beforeunload', function() {
+            if (hideTimer) {
+                clearTimeout(hideTimer);
+            }
         });
-        
-        hideBtn();
-        if (window.scrollY > 50) {
-            resetTimer();
-        }
     })();
 </script>
 </body>
