@@ -70,7 +70,6 @@
             background-color: #f1f5f9;
             font-weight: 700;
         }
-        /* 百分比数字使用红色，不影响布局 */
         .red-percent {
             color: #b91c1c;
             font-weight: 600;
@@ -110,6 +109,45 @@
             color: #d32f2f;
             font-weight: 600;
         }
+        .dot-list {
+            list-style-type: disc;
+            margin-left: 24px;
+        }
+        .dot-list li {
+            margin: 4px 0;
+        }
+
+        /* 返回首页按钮：右下角悬浮，滚动时淡入/淡出 */
+        .back-home-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background-color: #1e6fdf;
+            color: white;
+            border: none;
+            border-radius: 40px;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: opacity 0.3s ease, transform 0.2s;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 999;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .back-home-btn:hover {
+            background-color: #0f4b8a;
+            transform: scale(1.02);
+        }
+        .back-home-btn.show {
+            opacity: 1;
+            visibility: visible;
+        }
     </style>
 </head>
 <body>
@@ -128,23 +166,23 @@
 <h3>3. 矿机等级</h3>
 <table>
     <thead>
-        <tr><th>矿机等级</th><th>月收益率</th><th>说明</th></tr>
+        <tr><th>矿机等级</th><th>月收益率</th><th>说明</th> </tr
     </thead>
     <tbody>
-        <tr><td>试产矿机</td><td><span class="red-percent">18%</span></td><td>初始体验矿机</td></tr>
-        <tr><td>青铜矿机</td><td><span class="red-percent">18%</span></td><td>入门级矿机</td></tr>
-        <tr><td>白银矿机</td><td><span class="red-percent">18%</span></td><td>进阶级矿机</td></tr>
-        <tr><td>黄金矿机</td><td><span class="red-percent">18%</span></td><td>中等级矿机</td></tr>
-        <tr><td>铂金矿机</td><td><span class="red-percent">19%</span></td><td>高级矿机</td></tr>
-        <tr><td>钻石矿机</td><td><span class="red-percent">20%</span></td><td>专家级矿机</td></tr>
-        <tr><td>至尊矿机</td><td><span class="red-percent">21%</span></td><td>顶级矿机</td></tr>
+        <tr><td>试产矿机</td><td class="red-percent">18%</td><td>初始体验矿机</td> </tr
+        <tr><td>青铜矿机</td><td class="red-percent">18%</td><td>入门级矿机</td> </tr
+        <tr><td>白银矿机</td><td class="red-percent">18%</td><td>进阶级矿机</td> </tr
+        <tr><td>黄金矿机</td><td class="red-percent">18%</td><td>中等级矿机</td> </tr
+        <tr><td>铂金矿机</td><td class="red-percent">19%</td><td>高级矿机</td> </tr
+        <tr><td>钻石矿机</td><td class="red-percent">20%</td><td>专家级矿机</td> </tr
+        <tr><td>至尊矿机</td><td class="red-percent">21%</td><td>顶级矿机</td> </tr
     </tbody>
 </table>
 
 <h3>4. 综合算力构成</h3>
 <ul>
     <li><strong>基础算力</strong>：仅试产矿机拥有，提供 10 算力保障零撸基础产能</li>
-    <li><strong>质能算力</strong>：质押 1:1 提升算力（质押 1 个 DSC 提升 1 点算力）</li>
+    <li><strong>质押算力</strong>：质押 1:1 提升算力（质押 1 个 DSC 提升 1 点算力）</li>
     <li><strong>导师算力</strong>：达成导师等级后自动加持</li>
 </ul>
 
@@ -154,7 +192,7 @@
 <!-- ========= 二、如何提升算力 ========= -->
 <div class="chapter-title">如何提升算力</div>
 
-<h3>1. 质能算力</h3>
+<h3>1. 质押算力</h3>
 <ul>
     <li>质押比例：<strong>1:1</strong>（质押 1 个 DSC 提升 1 点算力）</li>
     <li>各等级矿机有独立的质押上限</li>
@@ -173,7 +211,10 @@
 
 <h3>3. 操作建议</h3>
 <div class="info-note">
-    <p>1. 初期可通过质押快速提升算力<br>2. 长期发展建议冲击导师等级</p>
+    <ul class="dot-list">
+        <li>初期可通过质押快速提升算力</li>
+        <li>长期发展建议冲击导师等级</li>
+    </ul>
 </div>
 
 <!-- ========= 三、收益说明 ========= -->
@@ -211,14 +252,14 @@
 
 <h3>3. 导师收益</h3>
 <p><strong>收益来源</strong><br>交易手续费的导师分红，根据不同等级享不同比例：</p>
-<table>
-    <thead><tr><th>等级</th><th>分红比例</th></tr></thead>
+</table>
+    <thead><tr><th>等级</th><th>分红比例</th> </tr</thead>
     <tbody>
-        <tr><td>M1</td><td><span class="red-percent">5%</span></td></tr>
-        <tr><td>M2</td><td><span class="red-percent">15%</span></td></tr>
-        <tr><td>M3</td><td><span class="red-percent">20%</span></td></tr>
-        <tr><td>M4</td><td><span class="red-percent">15%</span></td></tr>
-        <tr><td>M5</td><td><span class="red-percent">15%</span></td></tr>
+        <tr><td>M1</td><td class="red-percent">5%</td> </tr
+        <tr><td>M2</td><td class="red-percent">15%</td> </tr
+        <tr><td>M3</td><td class="red-percent">20%</td> </tr
+        <tr><td>M4</td><td class="red-percent">15%</td> </tr
+        <tr><td>M5</td><td class="red-percent">15%</td> </tr
     </tbody>
 </table>
 <p><strong>领取规则</strong><br>- 发放频率：每天一次<br>- 领取频率：每天一次<br>- 达成导师后自动享受交易手续费的导师分红</p>
@@ -253,25 +294,25 @@
 
 <h3>1. 等级体系：导师达成条件</h3>
 <table>
-    <thead><tr><th>等级</th><th>族群算力</th><th>团队算力</th><th>直推活粉</th><th>自身算力</th></tr></thead>
+    <thead><tr><th>等级</th><th>族群算力</th><th>团队算力</th><th>直推活粉</th><th>自身算力</th> </tr</thead>
     <tbody>
-        <tr><td>M1</td><td>≥ 5K</td><td>-</td><td>≥ 3</td><td>≥ 20</td></tr>
-        <tr><td>M2</td><td>≥ 20K</td><td>≥ 5K</td><td>≥ 6</td><td>≥ 1K</td></tr>
-        <tr><td>M3</td><td>≥ 100K</td><td>≥ 20K</td><td>≥ 10</td><td>≥ 2K</td></tr>
-        <tr><td>M4</td><td>≥ 500K</td><td>≥ 100K</td><td>≥ 15</td><td>≥ 10K</td></tr>
-        <tr><td>M5</td><td>≥ 1000K</td><td>≥ 300K</td><td>≥ 20</td><td>≥ 20K</td></tr>
+        <tr><td>M1</td><td>≥ 5K</td><td>-</td><td>≥ 3</td><td>≥ 20</td> </tr
+        <tr><td>M2</td><td>≥ 20K</td><td>≥ 5K</td><td>≥ 6</td><td>≥ 1K</td> </tr
+        <tr><td>M3</td><td>≥ 100K</td><td>≥ 20K</td><td>≥ 10</td><td>≥ 2K</td> </tr
+        <tr><td>M4</td><td>≥ 500K</td><td>≥ 100K</td><td>≥ 15</td><td>≥ 10K</td> </tr
+        <tr><td>M5</td><td>≥ 1000K</td><td>≥ 300K</td><td>≥ 20</td><td>≥ 20K</td> </tr
     </tbody>
 </table>
 
 <h3>2. 导师达成奖励</h3>
 <table>
-    <thead><tr><th>等级</th><th>导师算力</th><th>交易分红</th></tr></thead>
+    <thead></tr><th>等级</th><th>导师算力</th><th>交易分红</th> </tr</thead>
     <tbody>
-        <tr><td>M1</td><td>+10</td><td><span class="red-percent">5%</span></td></tr>
-        <tr><td>M2</td><td>+500</td><td><span class="red-percent">15%</span></td></tr>
-        <tr><td>M3</td><td>+1000</td><td><span class="red-percent">20%</span></td></tr>
-        <tr><td>M4</td><td>+5000</td><td><span class="red-percent">15%</span></td></tr>
-        <tr><td>M5</td><td>+10000</td><td><span class="red-percent">15%</span></td></tr>
+        <tr><td>M1</td><td>+10</td><td class="red-percent">5%</td> </tr
+        <tr><td>M2</td><td>+500</td><td class="red-percent">15%</td> </tr
+        <tr><td>M3</td><td>+1000</td><td class="red-percent">20%</td> </tr
+        <tr><td>M4</td><td>+5000</td><td class="red-percent">15%</td> </tr
+        <tr><td>M5</td><td>+10000</td><td class="red-percent">15%</td> </tr
     </tbody>
 </table>
 
@@ -288,7 +329,11 @@
 
 <h3>5. 升级建议</h3>
 <div class="info-note">
-    <p>1. M1 门槛较低，适合新手入门<br>2. M2-M3 需要一定团队基础<br>3. M4-M5 为高级导师，需要强大的团队支撑</p>
+    <ul class="dot-list">
+        <li>M1 门槛较低，适合新手入门</li>
+        <li>M2-M3 需要一定团队基础</li>
+        <li>M4-M5 为高级导师，需要强大的团队支撑</li>
+    </ul>
 </div>
 
 <!-- ========= 五、POS 机制 ========= -->
@@ -351,9 +396,11 @@
 </ul>
 
 <h3>4. 参与建议</h3>
-<div class="info-note">
-    <p>1. 1号矿机适合持有 DSC 的用户<br>2. 2号矿机适合持有 USDT 的用户，收益率更高<br>3. 收益每日结算，可随时查看</p>
-</div>
+<ul class="dot-list">
+    <li>1号矿机适合持有 DSC 的用户</li>
+    <li>2号矿机适合持有 USDT 的用户，收益率更高</li>
+    <li>收益每日结算，可随时查看</li>
+</ul>
 
 <!-- ========= 八、节点机制 ========= -->
 <div class="chapter-title">节点机制</div>
@@ -383,5 +430,48 @@
 <p><strong>需发提案的范围：</strong><br>- 波塞冬产出规则、奖励、收益分配<br>- 智能合约核心逻辑调整<br>- 链上资产分配规则</p>
 <p><strong>无需提案的修改：</strong><br>- 应用层参数调整<br>- 系统界面优化更新</p>
 
+<!-- 返回首页按钮：滚动时显示，停止滚动后自动隐藏 -->
+<a href="https://boipc.github.io/Digital-Scroll/index.html" class="back-home-btn" id="backHomeBtn">
+    ← 返回首页
+</a>
+
+<script>
+    (function() {
+        const btn = document.getElementById('backHomeBtn');
+        if (!btn) return;
+        
+        let timer = null;
+        let isVisible = false;
+        
+        function hideBtn() {
+            if (!isVisible) return;
+            btn.classList.remove('show');
+            isVisible = false;
+        }
+        
+        function showBtn() {
+            if (isVisible) return;
+            btn.classList.add('show');
+            isVisible = true;
+        }
+        
+        function resetTimer() {
+            if (timer) clearTimeout(timer);
+            showBtn();
+            timer = setTimeout(function() {
+                hideBtn();
+            }, 2000);
+        }
+        
+        window.addEventListener('scroll', function() {
+            resetTimer();
+        });
+        
+        hideBtn();
+        if (window.scrollY > 50) {
+            resetTimer();
+        }
+    })();
+</script>
 </body>
 </html>
