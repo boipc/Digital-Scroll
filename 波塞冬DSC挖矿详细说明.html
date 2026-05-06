@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>波塞冬DSC挖矿详细说明</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #ffffff;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.45;
+            color: #1e2a3e;
+            padding: 18px 16px 40px;
+            font-size: 13px;
+        }
+        .main-title {
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #0c4a6e;
+            margin: 0 0 20px 0;
+            padding-bottom: 6px;
+            border-bottom: none;
+        }
+        .chapter-title {
+            background-color: #1e6fdf;
+            border: 2px solid #1e6fdf;
+            color: #ffffff;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.15rem;
+            padding: 3px 12px;
+            margin: 28px 0 18px 0;
+            letter-spacing: 1px;
+            border-radius: 0px;
+        }
+        h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: 20px 0 10px 0;
+            color: #1e6fdf;
+            border-left: 3px solid #1e6fdf;
+            padding-left: 12px;
+        }
+        h4 {
+            font-weight: 600;
+            font-size: 1.02rem;
+            margin: 14px 0 6px;
+            color: #2c3e50;
+        }
+        /* 表格完整边框、强制居中 */
+        table {
+            width: 100%;
+            margin: 18px 0;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+        th, td {
+            border: 1px solid #8b9eb0;
+            padding: 8px 6px;
+            text-align: center;
+            vertical-align: middle;
+        }
+        th {
+            background-color: #f1f5f9;
+            font-weight: 700;
+        }
+        /* 百分比数字使用红色，不影响布局 */
+        .red-percent {
+            color: #b91c1c;
+            font-weight: 600;
+        }
+        .highlight-num {
+            color: #b91c1c;
+            font-weight: 600;
+        }
+        ul {
+            margin: 8px 0 8px 24px;
+        }
+        li {
+            margin: 4px 0;
+            font-size: 12.5px;
+        }
+        p {
+            margin: 8px 0;
+            font-size: 12.5px;
+            line-height: 1.45;
+        }
+        .info-note {
+            background: #fef9e6;
+            border-left: 4px solid #f59e0b;
+            padding: 10px 14px;
+            margin: 16px 0;
+            font-size: 12.5px;
+            border-radius: 6px;
+        }
+        .mono {
+            font-family: monospace;
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-size: 11px;
+        }
+        .warning-red {
+            color: #d32f2f;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-title">波塞冬DSC挖矿详细说明</div>
+
+<!-- ========= 一、矿机说明 ========= -->
+<div class="chapter-title">矿机说明</div>
+
+<h3>1. 矿机概述</h3>
+<p>每位用户可拥有 <span class="highlight-num">7台</span> 不同等级的 DSC 矿机，运行中的矿机持续产出 DSC 代币。</p>
+
+<h3>2. 矿机能力</h3>
+<p>矿机产能基于矿机等级和综合算力计算，参见「收益说明 - 产出收益」。</p>
+
+<h3>3. 矿机等级</h3>
+<table>
+    <thead>
+        <tr><th>矿机等级</th><th>月收益率</th><th>说明</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>试产矿机</td><td><span class="red-percent">18%</span></td><td>初始体验矿机</td></tr>
+        <tr><td>青铜矿机</td><td><span class="red-percent">18%</span></td><td>入门级矿机</td></tr>
+        <tr><td>白银矿机</td><td><span class="red-percent">18%</span></td><td>进阶级矿机</td></tr>
+        <tr><td>黄金矿机</td><td><span class="red-percent">18%</span></td><td>中等级矿机</td></tr>
+        <tr><td>铂金矿机</td><td><span class="red-percent">19%</span></td><td>高级矿机</td></tr>
+        <tr><td>钻石矿机</td><td><span class="red-percent">20%</span></td><td>专家级矿机</td></tr>
+        <tr><td>至尊矿机</td><td><span class="red-percent">21%</span></td><td>顶级矿机</td></tr>
+    </tbody>
+</table>
+
+<h3>4. 综合算力构成</h3>
+<ul>
+    <li><strong>基础算力</strong>：仅试产矿机拥有，提供 10 算力保障零撸基础产能</li>
+    <li><strong>质能算力</strong>：质押 1:1 提升算力（质押 1 个 DSC 提升 1 点算力）</li>
+    <li><strong>导师算力</strong>：达成导师等级后自动加持</li>
+</ul>
+
+<h3>5. 质押特点</h3>
+<p>不同等级矿机有对应的额定质押上限，等级越高，可质押额度越高。</p>
+
+<!-- ========= 二、如何提升算力 ========= -->
+<div class="chapter-title">如何提升算力</div>
+
+<h3>1. 质能算力</h3>
+<ul>
+    <li>质押比例：<strong>1:1</strong>（质押 1 个 DSC 提升 1 点算力）</li>
+    <li>各等级矿机有独立的质押上限</li>
+    <li>质押额度：定额质押，不同矿机额度不同</li>
+</ul>
+
+<h3>2. 导师算力</h3>
+<p>达成不同等级导师后，矿机自动获得导师算力加持：</p>
+<ul>
+    <li>M1导师：青铜矿机 <span class="highlight-num">+10</span> 导师算力</li>
+    <li>M2导师：白银矿机 <span class="highlight-num">+500</span> 导师算力</li>
+    <li>M3导师：黄金矿机 <span class="highlight-num">+1000</span> 导师算力</li>
+    <li>M4导师：铂金矿机 <span class="highlight-num">+5000</span> 导师算力</li>
+    <li>M5导师：钻石矿机 <span class="highlight-num">+10000</span> 导师算力</li>
+</ul>
+
+<h3>3. 操作建议</h3>
+<div class="info-note">
+    <p>1. 初期可通过质押快速提升算力<br>2. 长期发展建议冲击导师等级</p>
+</div>
+
+<!-- ========= 三、收益说明 ========= -->
+<div class="chapter-title">收益说明</div>
+
+<h3>1. 产出收益</h3>
+<p><strong>收益概览</strong></p>
+<ul>
+    <li>月收益率：<br>试产~黄金矿机：<span class="red-percent">18%</span><br>铂金矿机：<span class="red-percent">19%</span><br>钻石矿机：<span class="red-percent">20%</span><br>至尊矿机：<span class="red-percent">21%</span></li>
+    <li>产出频率：每小时自动产出</li>
+    <li>领取频率：每 6 小时可领取一次</li>
+</ul>
+<p><strong>计算公式</strong><br>小时产出 = (综合算力 × 月收益率) ÷ 30 ÷ 24</p>
+<p><strong>示例</strong><br>综合算力 1000 的白银矿机：<br>小时产出 = (1000 × 0.18) ÷ 30 ÷ 24 = <span class="highlight-num">0.25 DSC</span></p>
+<p><strong>领取消耗</strong><br>领取产出收益需要消耗 POS 燃料费。</p>
+<div class="info-note">
+    <p><strong>重要提醒</strong><br>- 收益会自动积累，无需准时蹲守<br>- <span class="warning-red">超过 48 小时不领取，矿机将自动停产</span><br>- 建议订阅收益托管服务，自动代领各类收益</p>
+</div>
+
+<h3>2. 发展收益</h3>
+<p><strong>收益机制</strong><br>当下级领取产出收益时，上级自动获得发展收益：</p>
+<ul>
+    <li>直推奖励：下级领取额的 <span class="red-percent">5%</span></li>
+    <li>间推奖励：下级领取额的 <span class="red-percent">3%</span></li>
+</ul>
+<p><strong>烧伤机制</strong><br>当上级质押算力不如该后代玩家时，获赠发展收益减半。</p>
+<p><strong>示例</strong><br>发展链：A → B → C（A发展B，B发展C）</p>
+<ul>
+    <li>C 领取 100 DSC 产出收益</li>
+    <li>B（直推上级）获得 5 DSC</li>
+    <li>A（间推上级）获得 3 DSC</li>
+    <li>若 B 的质能算力 < C，则 B 仅获得 <span class="highlight-num">2.5 DSC</span></li>
+</ul>
+<p><strong>收益规则</strong><br>- 发放要求：下级非零撸（有质押）<br>- 发放频率：实时发放（下级领取时）<br>- 领取频率：每天可领取一次</p>
+
+<h3>3. 导师收益</h3>
+<p><strong>收益来源</strong><br>交易手续费的导师分红，根据不同等级享不同比例：</p>
+<table>
+    <thead><tr><th>等级</th><th>分红比例</th></tr></thead>
+    <tbody>
+        <tr><td>M1</td><td><span class="red-percent">5%</span></td></tr>
+        <tr><td>M2</td><td><span class="red-percent">15%</span></td></tr>
+        <tr><td>M3</td><td><span class="red-percent">20%</span></td></tr>
+        <tr><td>M4</td><td><span class="red-percent">15%</span></td></tr>
+        <tr><td>M5</td><td><span class="red-percent">15%</span></td></tr>
+    </tbody>
+</table>
+<p><strong>领取规则</strong><br>- 发放频率：每天一次<br>- 领取频率：每天一次<br>- 达成导师后自动享受交易手续费的导师分红</p>
+
+<h3>4. 股东收益</h3>
+<p>当前状态：DSC 未开放股东机制，暂无此收益。</p>
+
+<h3>5. 共享收益</h3>
+<p><strong>共享矿机介绍</strong><br>比常规矿机更高的收益率，开放 2 台 DSC 共享矿机：</p>
+<ul>
+    <li><strong>1号共享矿机（接收 DSC 转入）</strong><br>- 月收益率：<span class="red-percent">20%</span><br>- 运作方式：每日自动质押；产出按玩家质押占比（即转入占比）瓜分</li>
+    <li><strong>2号共享矿机（接收 USDT 转入）</strong><br>- 月收益率：<span class="red-percent">30%</span><br>- 运作方式：回购市场 DSC 后自动质押；产出按玩家质押占比（即转入占比）瓜分</li>
+</ul>
+<p><strong>参与方式</strong><br>转入 DSC 或 USDT 至对应矿机，每日产出自动结算。</p>
+
+<h3>6. 分红收益</h3>
+<p><strong>分红来源</strong><br>兑换 POS 产生的 USDT 资金池</p>
+<p><strong>USDT 资金池分红分配比例</strong></p>
+<ul>
+    <li>节点分红：<span class="red-percent">5%</span></li>
+    <li>DSC质押者自身分红：<span class="red-percent">5.75%</span></li>
+    <li>DSC质押者上级分红：<span class="red-percent">5.75%</span></li>
+    <li>MAC质押者自身分红：<span class="red-percent">5.75%</span></li>
+    <li>MAC质押者上级分红：<span class="red-percent">5.75%</span></li>
+    <li>运营：<span class="red-percent">17%</span></li>
+    <li>回购地址：<span class="red-percent">55%</span>（回购市场DSC进行销毁）</li>
+</ul>
+<p><strong>发放方式</strong><br>无需领取，每日直接发放到账。</p>
+
+<!-- ========= 四、导师等级 ========= -->
+<div class="chapter-title">导师等级</div>
+
+<h3>1. 等级体系：导师达成条件</h3>
+<table>
+    <thead><tr><th>等级</th><th>族群算力</th><th>团队算力</th><th>直推活粉</th><th>自身算力</th></tr></thead>
+    <tbody>
+        <tr><td>M1</td><td>≥ 5K</td><td>-</td><td>≥ 3</td><td>≥ 20</td></tr>
+        <tr><td>M2</td><td>≥ 20K</td><td>≥ 5K</td><td>≥ 6</td><td>≥ 1K</td></tr>
+        <tr><td>M3</td><td>≥ 100K</td><td>≥ 20K</td><td>≥ 10</td><td>≥ 2K</td></tr>
+        <tr><td>M4</td><td>≥ 500K</td><td>≥ 100K</td><td>≥ 15</td><td>≥ 10K</td></tr>
+        <tr><td>M5</td><td>≥ 1000K</td><td>≥ 300K</td><td>≥ 20</td><td>≥ 20K</td></tr>
+    </tbody>
+</table>
+
+<h3>2. 导师达成奖励</h3>
+<table>
+    <thead><tr><th>等级</th><th>导师算力</th><th>交易分红</th></tr></thead>
+    <tbody>
+        <tr><td>M1</td><td>+10</td><td><span class="red-percent">5%</span></td></tr>
+        <tr><td>M2</td><td>+500</td><td><span class="red-percent">15%</span></td></tr>
+        <tr><td>M3</td><td>+1000</td><td><span class="red-percent">20%</span></td></tr>
+        <tr><td>M4</td><td>+5000</td><td><span class="red-percent">15%</span></td></tr>
+        <tr><td>M5</td><td>+10000</td><td><span class="red-percent">15%</span></td></tr>
+    </tbody>
+</table>
+
+<h3>3. 名词解释</h3>
+<ul>
+    <li><strong>族群算力</strong>：十代质能算力总和</li>
+    <li><strong>团队算力</strong>：二代质能算力总和</li>
+    <li><strong>直推活粉</strong>：直推活跃的用户数</li>
+    <li><strong>自身算力</strong>：个人矿机的质能算力综合</li>
+</ul>
+
+<h3>4. 活粉界定</h3>
+<p>质能算力 > 0，且存在运行中的矿机。</p>
+
+<h3>5. 升级建议</h3>
+<div class="info-note">
+    <p>1. M1 门槛较低，适合新手入门<br>2. M2-M3 需要一定团队基础<br>3. M4-M5 为高级导师，需要强大的团队支撑</p>
+</div>
+
+<!-- ========= 五、POS 机制 ========= -->
+<div class="chapter-title">POS机制</div>
+
+<h3>1. POS 用途</h3>
+<p>POS 用于领取 DSC 产出收益的燃料费。</p>
+
+<h3>2. POS 生成</h3>
+<p>打包生成</p>
+<ul>
+    <li>区块链每 <span class="highlight-num">15 秒</span> 打包一次</li>
+    <li>每次生成 <span class="highlight-num">1.5 POS</span> 至总池地址</li>
+    <li>每日生成约 <span class="highlight-num">8640 POS</span></li>
+</ul>
+
+<h3>3. 获取方式</h3>
+<ul>
+    <li><strong>质押获赠</strong><br>每日向全网DSC玩家赠出 <span class="highlight-num">432 POS</span><br>玩家按前一日质押量占比瓜分<br>赠送 POS 直接到账，无需领取</li>
+    <li><strong>主动兑换</strong><br>玩家主动通过 USDT 兑换 POS<br>兑换比例：8640 × 110% ÷ 双代币昨日总产USDT价值</li>
+</ul>
+
+<h3>4. POS 消耗</h3>
+<p>领取产出收益燃烧 POS = 领取数量 × 市场价 ÷ USDT汇率 × 25% × 兑换比例</p>
+
+<h3>5. 资金池分红</h3>
+<p>兑换 POS 沉淀的 USDT 资金池，次日按规则分红（详见「收益说明」-「分红收益」）。</p>
+
+<!-- ========= 六、官方说明 ========= -->
+<div class="chapter-title">官方说明</div>
+
+<h3>1. 官方收益来源</h3>
+<p>DSC 官方团队不参与质押挖矿，收益来自以下渠道：</p>
+<ul>
+    <li>交易手续费分红：<span class="red-percent">25%</span></li>
+    <li>POS 资金池分红：兑换 POS 沉淀的 USDT 资金池，分红 <span class="red-percent">5%</span></li>
+</ul>
+
+<h3>2. 用途</h3>
+<p>官方收益用于平台运营、技术开发、节点服务器维护等。</p>
+
+<!-- ========= 七、共享矿机 ========= -->
+<div class="chapter-title">共享矿机</div>
+
+<h3>1. 什么是共享矿机</h3>
+<p>共享矿机是比常规矿机收益率更高的集体矿机，玩家按投入占比瓜分每日产出。</p>
+
+<h3>2. 1号共享矿机</h3>
+<ul>
+    <li>投入币种：DSC</li>
+    <li>月收益率：<span class="red-percent">20%</span></li>
+    <li>运作方式：<br>每日自动质押<br>产出按玩家转入占比瓜分<br>每日自动结算至共享收益</li>
+</ul>
+
+<h3>3. 2号共享矿机</h3>
+<ul>
+    <li>投入币种：USDT</li>
+    <li>月收益率：<span class="red-percent">30%</span></li>
+    <li>运作方式：<br>回购市场 DSC 后自动质押<br>产出按玩家转入占比瓜分<br>每日自动结算至共享收益</li>
+</ul>
+
+<h3>4. 参与建议</h3>
+<div class="info-note">
+    <p>1. 1号矿机适合持有 DSC 的用户<br>2. 2号矿机适合持有 USDT 的用户，收益率更高<br>3. 收益每日结算，可随时查看</p>
+</div>
+
+<!-- ========= 八、节点机制 ========= -->
+<div class="chapter-title">节点机制</div>
+
+<h3>1. 节点概述</h3>
+<p>波塞冬链采用节点治理模式，共 <span class="highlight-num">45个</span> 节点：</p>
+<ul>
+    <li>官方运营团队占据 5 个</li>
+    <li>前 3 名达成 DSC M5 导师永久锁定 3 个</li>
+    <li>剩余 37 个自由竞争</li>
+</ul>
+
+<h3>2. 节点权益</h3>
+<ul>
+    <li>发布提案：节点人可发起波塞冬调整的提案</li>
+    <li>提案投票：参与社区提案投票表决</li>
+    <li>节点升级：投票通过后操作节点程序升级</li>
+</ul>
+
+<h3>3. 竞争规则</h3>
+<p>季度排名制：每季度推广排名前 37 的玩家，于下一季度 1 号自动获得节点席位</p>
+<p>失去席位条件：<br>- 提案规定时间内不履行投票职责<br>- 程序升级职责未履行<br>将自动失去本期节点代理权</p>
+
+<h3>4. 为什么要发提案</h3>
+<p>根据波塞冬链核心协议，至少 <span class="highlight-num">75%</span> 的数据节点运行相同版本，才能满足最低共识标准。</p>
+<p><strong>提案的必要性：</strong><br>- 提前评估社区对优化的支持度<br>- 投票通过 → 启动开发并推动节点升级<br>- 投票未通过 → 放弃优化，避免无效开发</p>
+<p><strong>需发提案的范围：</strong><br>- 波塞冬产出规则、奖励、收益分配<br>- 智能合约核心逻辑调整<br>- 链上资产分配规则</p>
+<p><strong>无需提案的修改：</strong><br>- 应用层参数调整<br>- 系统界面优化更新</p>
+
+</body>
+</html>
