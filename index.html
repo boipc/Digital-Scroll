@@ -8,7 +8,6 @@
     <meta property="og:title" content="波塞冬DSC - 创新数字资产挖矿系统">
     <meta property="og:description" content="波塞冬DSC矿机系统 | 多重收益机制 | 节点自治 | POS共识挖矿">
     <meta property="og:image" content="https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/logo.png">
-    <meta property="og:type" content="website">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -20,7 +19,6 @@
         
         body {
             background: #ffffff;
-            /* 系统字体保证中英文/数字高度一致 */
             font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', sans-serif;
             color: #1f2937;
             min-height: 100vh;
@@ -46,9 +44,10 @@
             border: none;
         }
         
+        /* 关键修改：垂直居中对齐，使标题与 logo 高度视觉一致 */
         .header-row {
             display: flex;
-            align-items: baseline;
+            align-items: center;      /* center 而非 baseline，实现垂直居中 */
             justify-content: center;
             gap: 12px;
             margin-bottom: 8px;
@@ -58,6 +57,7 @@
             height: 2.8rem; 
             width: auto; 
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.08)); 
+            display: block;
         }
         h1 {
             font-size: 2.2rem;
@@ -65,7 +65,7 @@
             margin: 0;
             color: #0a66b9;
             letter-spacing: 1px;
-            line-height: 1.2;
+            line-height: 1.2;       /* 保证标题自身高度适中 */
             display: inline-flex;
             align-items: baseline;
             gap: 2px;
@@ -80,7 +80,7 @@
         
         .subtitle {
             font-size: 0.8rem;
-            margin-bottom: 5px;
+            margin-top: 4px;
             color: #4b5563;
             font-weight: 500;
         }
@@ -124,7 +124,6 @@
             transform: translateY(1px);
         }
         
-        /* 时间部分：无边框，动态跳动，修正冒号垂直居中 */
         .plain-time {
             display: inline-flex;
             align-items: center;
@@ -150,7 +149,6 @@
             font-size: 1.8rem;
             line-height: 1;
             color: #0f3b6f;
-            /* 修正冒号垂直位置，使其与数字居中 */
             position: relative;
             top: -0.08em;
             vertical-align: middle;
@@ -248,7 +246,6 @@
         li { margin-bottom: 5px; }
         .red-percent { color: #dc2626; font-weight: bold; }
         
-        /* 链上治理样式 */
         .governance-flow {
             display: flex;
             flex-direction: column;
@@ -469,14 +466,16 @@
             <p>每位用户最多同时拥有<strong class="red-percent">7台</strong>不同等级矿机，月收益率固定18%~21%，综合算力决定最终产出。</p>
             <h3>矿机月收益率表</h3>
             <table>
-                <tr><th>矿机等级</th><th>月收益率</th><th>质押上限</th></tr>
-                <tr><td>试产/青铜/白银/黄金</td><td class="red-percent">18%</td><td>按等级递增</td> </tr>
-                <tr><td>铂金矿机</td><td class="red-percent">19%</td><td>高额质押额度</td> </tr>
-                <tr><td>钻石矿机</td><td class="red-percent">20%</td><td>专家级算力容器</td> </tr>
-                <tr><td>至尊矿机</td><td class="red-percent">21%</td><td>顶级矿机，最高质押</td> </tr>
+                <thead><tr><th>矿机等级</th><th>月收益率</th><th>质押上限</th></tr></thead>
+                <tbody>
+                    <tr><td>试产/青铜/白银/黄金</td><td class="red-percent">18%</td><td>按等级递增</td></tr>
+                    <tr><td>铂金矿机</td><td class="red-percent">19%</td><td>高额质押额度</td></tr>
+                    <tr><td>钻石矿机</td><td class="red-percent">20%</td><td>专家级算力容器</td></tr>
+                    <tr><td>至尊矿机</td><td class="red-percent">21%</td><td>顶级矿机，最高质押</td></tr>
+                </tbody>
             </table>
             <h3>综合算力构成</h3>
-            <ul><li><strong>基础算力</strong>：试产矿机自带10点算力保障零撸基础</li><li><strong>质能算力</strong>：质押 1 DSC = 1 算力（各矿机独立质押上限）</li><li><strong>导师算力</strong>：达成M1~M5 额外增加10~10000点算力</li></ul>
+            <ul><li><strong>基础算力</strong>：试产矿机自带10点算力</li><li><strong>质能算力</strong>：质押 1 DSC = 1 算力</li><li><strong>导师算力</strong>：达成M1~M5 额外增加10~10000点算力</li></ul>
             <div class="highlight">小技巧：初期通过质押拉升算力更快回本，中期冲刺导师享受长期被动加持！</div>
         </div>
         
@@ -497,14 +496,16 @@
             <h2>导师等级体系</h2>
             <p>达成导师不仅获得额外算力加持，还能分享交易手续费的巨额分红。</p>
             <table>
-                <tr><th>等级</th><th>族群算力</th><th>团队算力</th><th>直推活粉</th><th>自身算力</th><th>导师算力奖励</th> </tr>
-                <tr><td>M1</td><td>≥5K</td><td>-</td><td>≥3</td><td>≥20</td><td>+10</td> </tr>
-                <tr><td>M2</td><td>≥20K</td><td>≥5K</td><td>≥6</td><td>≥1K</td><td>+500</td> </tr>
-                <tr><td>M3</td><td>≥100K</td><td>≥20K</td><td>≥10</td><td>≥2K</td><td>+1000</td> </tr>
-                <tr><td>M4</td><td>≥500K</td><td>≥100K</td><td>≥15</td><td>≥10K</td><td>+5000</td> </tr>
-                <tr><td>M5</td><td>≥1000K</td><td>≥300K</td><td>≥20</td><td>≥20K</td><td>+10000</td> </tr>
+                <thead><tr><th>等级</th><th>族群算力</th><th>团队算力</th><th>直推活粉</th><th>自身算力</th><th>导师算力奖励</th></tr></thead>
+                <tbody>
+                    <tr><td>M1</td><td>≥5K</td><td>-</td><td>≥3</td><td>≥20</td><td>+10</td></tr>
+                    <tr><td>M2</td><td>≥20K</td><td>≥5K</td><td>≥6</td><td>≥1K</td><td>+500</td></tr>
+                    <tr><td>M3</td><td>≥100K</td><td>≥20K</td><td>≥10</td><td>≥2K</td><td>+1000</td></tr>
+                    <tr><td>M4</td><td>≥500K</td><td>≥100K</td><td>≥15</td><td>≥10K</td><td>+5000</td></tr>
+                    <tr><td>M5</td><td>≥1000K</td><td>≥300K</td><td>≥20</td><td>≥20K</td><td>+10000</td></tr>
+                </tbody>
             </table>
-            <p><strong>活粉定义：</strong> 质能算力>0 且拥有运行中的矿机。达成对应等级立即激活导师算力，且每日享受交易分红。</p>
+            <p><strong>活粉定义：</strong> 质能算力>0 且拥有运行中的矿机。</p>
         </div>
         
         <div id="pos" class="content-section">
@@ -513,7 +514,7 @@
             <h3>POS生成</h3>
             <p>区块链每15秒打包一次，每次生成1.5 POS至总池，每日约生成8640 POS。</p>
             <h3>获取方式</h3>
-            <ul><li><strong>质押获赠</strong>：每日向全网DSC质押玩家赠送432 POS，按前一日质押量占比分配。</li><li><strong>主动兑换</strong>：使用USDT兑换POS，兑换比例动态计算（8640×110% ÷ 双代币昨日总产USDT价值）。</li></ul>
+            <ul><li><strong>质押获赠</strong>：每日向全网DSC质押玩家赠送432 POS，按前一日质押量占比分配。</li><li><strong>主动兑换</strong>：使用USDT兑换POS，兑换比例动态计算。</li></ul>
             <h3>消耗规则</h3>
             <p>领取产出时燃烧POS = 领取数量 × 市场价 ÷ USDT汇率 × 25% × 兑换比例。</p>
             <div class="highlight">资金池分红：所有兑换POS沉淀的USDT每日按比例分发给节点、质押者及回购销毁，构建通缩飞轮。</div>
@@ -524,7 +525,7 @@
             <p>共享矿机提供远超普通矿机的收益，玩家按投入占比瓜分每日产出，无需自己维护矿机。</p>
             <div class="rule-box"><strong>1号共享矿机 (DSC池)</strong><br>投入币种：DSC<br>月收益率：<span class="red-percent">20%</span><br>运作：每日自动质押，产出按玩家转入占比自动结算至共享收益账户。</div>
             <div class="rule-box"><strong>2号共享矿机 (USDT池)</strong><br>投入币种：USDT<br>月收益率：<span class="red-percent">30%</span><br>运作：系统回购市场DSC后自动质押，产出按占比每日发放。</div>
-            <p>参与建议：持有USDT的用户建议参与2号矿机，持有DSC长线用户参与1号矿机，收益每日结算，灵活存取。</p>
+            <p>参与建议：持有USDT的用户建议参与2号矿机，持有DSC长线用户参与1号矿机。</p>
         </div>
         
         <div id="node" class="content-section">
