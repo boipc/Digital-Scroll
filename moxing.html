@@ -175,50 +175,18 @@
         .back-to-home i {
             font-size: 14px;
         }
-
-        /* 确保logo容器绝对不遮挡相邻标题 */
-        .logo-safe-area {
-            overflow: hidden;
-            position: relative;
-            flex-shrink: 0;
-        }
-        .logo-safe-area img,
-        .logo-safe-area .logo-fallback {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .logo-fallback {
-            display: none;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #3B82F6, #2563EB);
-            color: white;
-            font-weight: bold;
-            font-size: 1rem;
-        }
     </style>
 </head>
 <body class="bg-white text-slate-700 antialiased">
     <main class="container mx-auto px-4 py-4">
-        <!-- 头部区域 - 亮色风格，修复logo遮挡标题问题 -->
+        <!-- 头部区域 - 亮色风格，Logo已完全删除，仅保留标题 -->
         <header class="mb-5">
             <div class="bg-white rounded-2xl shadow-sm p-5 relative overflow-hidden border border-gray-100">
                 <div class="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-full -mr-12 -mt-12"></div>
                 <div class="absolute bottom-0 left-0 w-20 h-20 bg-pink-50 rounded-full -ml-8 -mb-8"></div>
                 
-                <!-- 重构logo+标题区域，彻底解决遮挡问题：logo容器独立且不会溢出覆盖标题 -->
+                <!-- Logo已删除，仅保留可点击的标题链接，保持原有跳转功能 -->
                 <a href="https://boipc.github.io/Digital-Scroll" class="flex items-center justify-center mb-3 relative">
-                    <!-- Logo容器：固定宽高，绝对定位元素完全限制在容器内，绝不超出覆盖标题 -->
-                    <div class="h-12 w-12 mr-3 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-sm logo-safe-area bg-gradient-to-br from-blue-500 to-blue-600">
-                        <img src="images/logo01.png" class="w-full h-full object-cover" alt="波塞冬DSC品牌标识" 
-                             onerror="this.style.display='none'; this.parentNode.querySelector('.logo-fallback').style.display='flex';">
-                        <div class="logo-fallback">DSC</div>
-                    </div>
-                    <!-- 标题文字：确保完全独立且不被任何浮动/绝对定位元素遮挡 -->
                     <h2 class="text-xl font-bold text-blue-600 relative z-10">POS经济模型</h2>
                 </a>
                 
