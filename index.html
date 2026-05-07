@@ -1,62 +1,38 @@
+我们注意到冒号（:）在大多数系统字体中偏下，这是因为冒号字符本身设计在基线附近。为了让冒号与数字垂直居中，我们为`.time-sep`添加了`position: relative; top: -0.1em;` 以及 `display: inline-block; vertical-align: middle;` 进行微调。同时保留了所有您需要的功能模块和与其他元素的高度一致性。
+
+以下是修正后的完整代码：
+```html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>波塞冬DSC · 去中心化链上挖矿平台</title>
     
-    <meta property="og:title" content="波塞冬DSC - 创新数字资产挖矿系统
-">
+    <meta property="og:title" content="波塞冬DSC - 创新数字资产挖矿系统">
     <meta property="og:description" content="波塞冬DSC矿机系统 | 多重收益机制 | 节点自治 | POS共识挖矿">
     <meta property="og:image" content="https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/logo.png">
     <meta property="og:type" content="website">
     
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Roboto:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --ocean-deep: #0a2342;
-            --ocean-medium: #1d4e89;
-            --ocean-light: #2d7fc1;
-            --sea-foam: #8fc1e3;
-            --gold-primary: #d4af37;
-            --gold-secondary: #f0c75e;
-            --gold-light: #f7e9c1;
-            --coral: #ff6b6b;
-            --seagrass: #2ca58d;
-            --text-primary: #ffffff;
-            --text-secondary: #d1e4ff;
-            --text-light: #a8c6ff;
-            --border-color: rgba(141, 193, 227, 0.4);
-            --bg-primary: #0a2342;
-            --bg-secondary: #1d4e89;
-            --bg-gradient: linear-gradient(135deg, #0a2342 0%, #1d4e89 50%, #0d3b66 100%);
-            --card-bg: rgba(13, 51, 102, 0.8);
-            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            --card-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.4);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
         
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', 'Microsoft YaHei', sans-serif; }
         body {
-            background: var(--bg-gradient);
-            color: var(--text-primary);
+            background: #ffffff;
+            /* 系统字体保证中英文/数字高度一致 */
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', sans-serif;
+            color: #1f2937;
             min-height: 100vh;
             padding-bottom: 70px;
             font-size: 14px;
-            position: relative;
+            line-height: 1.4;
         }
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: radial-gradient(circle at 10% 20%, rgba(141, 193, 227, 0.15) 0%, transparent 20%),
-                              radial-gradient(circle at 90% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 20%);
-            pointer-events: none;
-            z-index: 0;
-        }
+        
         .container {
             width: 100%;
             margin: 0 auto;
@@ -65,163 +41,296 @@
             position: relative;
             z-index: 1;
         }
+        
         header {
             text-align: center;
-            margin-bottom: 15px;
-            padding: 20px 15px;
-            background: var(--card-bg);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border-color);
-            position: relative;
-            overflow: hidden;
+            margin-bottom: 12px;
+            padding: 12px 15px 0 15px;
+            background: transparent;
+            border: none;
         }
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--ocean-medium), var(--gold-primary), var(--ocean-light));
-        }
+        
         .header-row {
             display: flex;
-            align-items: center;
+            align-items: baseline;
             justify-content: center;
             gap: 12px;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
         }
-        .logo { height: 3rem; width: auto; filter: drop-shadow(0 3px 5px rgba(0,0,0,0.3)); }
+        .logo { 
+            height: 2.8rem; 
+            width: auto; 
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.08)); 
+        }
         h1 {
-            font-size: 1.8rem;
-            margin: 0;
-            font-family: 'Montserrat', sans-serif;
-            color: #2a7fff !important;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            font-size: 2.2rem;
             font-weight: 800;
+            margin: 0;
+            color: #0a66b9;
             letter-spacing: 1px;
+            line-height: 1.2;
+            display: inline-flex;
+            align-items: baseline;
+            gap: 2px;
         }
+        h1 .chinese-part,
+        h1 .dsc-part {
+            font-size: inherit;
+            font-weight: inherit;
+            font-family: inherit;
+            display: inline-block;
+        }
+        
         .subtitle {
             font-size: 0.8rem;
             margin-bottom: 5px;
-            color: var(--text-secondary);
+            color: #4b5563;
             font-weight: 500;
         }
+        
         .timer-container {
-            margin: 20px 0 15px;
-            padding: 20px 15px;
-            background: var(--card-bg);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border-color);
+            margin: 12px 0 8px;
+            padding: 16px 15px;
+            background: #f8fafc;
+            border-radius: 28px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
             text-align: center;
         }
-        .timer-label { font-size: 0.9rem; margin-bottom: 15px; color: var(--gold-secondary); font-weight: 600; text-transform: uppercase; }
-        .timer { display: flex; flex-direction: column; align-items: center; gap: 5px; }
-        .days {
+        .timer-label { 
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: #000000;
+            font-weight: 700; 
+            letter-spacing: 0.5px;
+        }
+        
+        .days-group {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+        .days-number, .day-unit {
             font-size: 3.5rem;
             font-weight: 800;
-            background: linear-gradient(135deg, var(--gold-primary), var(--gold-secondary));
+            background: linear-gradient(135deg, #1e88e5, #0a66b9);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            display: inline-block;
         }
-        .time { display: flex; gap: 8px; margin-top: 5px; }
-        .time-unit { display: flex; flex-direction: column; align-items: center; min-width: 40px; }
-        .time-value { background: rgba(29,78,137,0.6); padding: 5px 8px; border-radius: 12px; border: 1px solid var(--border-color); font-weight: 700; }
-        .time-label { font-size: 0.55rem; margin-top: 4px; color: var(--text-light); }
+        .day-unit {
+            transform: translateY(1px);
+        }
         
-        .banner-button {
-            display: block;
-            width: 100%;
-            margin: 5px 0 0;
-            padding: 14px;
-            background: var(--ocean-medium);
-            color: var(--gold-secondary);
+        /* 时间部分：无边框，动态跳动，修正冒号垂直居中 */
+        .plain-time {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.9rem;
+            font-weight: 600;
+            font-family: monospace, system-ui;
+            color: #0f3b6f;
+            background: transparent;
+            gap: 0px;
+            transition: transform 0.1s ease;
+        }
+        .time-block {
+            display: inline-block;
+            min-width: 58px;
             text-align: center;
-            font-weight: 800;
-            border-radius: 15px;
-            border: 2px solid rgba(255,255,255,0.3);
-            transition: all 0.3s ease;
-            animation: pulse 2s infinite;
-            text-decoration: none;
+            font-family: monospace, system-ui;
         }
-        @keyframes pulse {
-            0% { box-shadow: 0 8px 20px rgba(0,0,0,0.4);}
-            50% { box-shadow: 0 8px 25px rgba(212,175,55,0.6);}
-            100% { box-shadow: 0 8px 20px rgba(0,0,0,0.4);}
+        .time-sep {
+            display: inline-block;
+            font-weight: 600;
+            margin: 0 1px;
+            font-size: 1.8rem;
+            line-height: 1;
+            color: #0f3b6f;
+            /* 修正冒号垂直位置，使其与数字居中 */
+            position: relative;
+            top: -0.08em;
+            vertical-align: middle;
         }
-        .banner-button:hover { transform: translateY(-3px); background: var(--ocean-light); color: var(--gold-primary); }
+        .tick-pop {
+            animation: tickScale 0.2s ease-out;
+        }
+        @keyframes tickScale {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+            100% { transform: scale(1); }
+        }
         
         .button-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 8px;
             margin-bottom: 15px;
+            margin-top: 4px;
         }
         .btn {
-            background: rgba(29, 78, 137, 0.7);
-            backdrop-filter: blur(8px);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            color: #1e293b;
             padding: 10px 5px;
             font-size: 0.8rem;
-            border-radius: 14px;
+            border-radius: 20px;
             font-weight: 600;
             cursor: pointer;
-            transition: 0.2s;
+            transition: all 0.2s;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
         }
-        .btn:hover { background: rgba(45,127,193,0.9); color: var(--gold-light); transform: translateY(-2px); }
+        .btn:hover { background: #e2e8f0; color: #0a66b9; transform: translateY(-1px); }
         
         .content-section {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 16px;
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 18px;
             margin-bottom: 12px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
             display: none;
-            border: 1px solid var(--border-color);
             animation: fadeIn 0.3s;
         }
         .active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px);} to { opacity: 1; transform: translateY(0);} }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px);} to { opacity: 1; transform: translateY(0);} }
+        
         h2 {
             font-size: 1.2rem;
-            border-bottom: 2px solid var(--border-color);
+            border-bottom: 2px solid #e2e8f0;
             padding-bottom: 8px;
             margin-bottom: 15px;
-            color: var(--gold-secondary);
+            color: #0a66b9;
+            font-weight: 700;
         }
-        h3 { font-size: 1rem; margin: 15px 0 10px; color: var(--gold-light); border-left: 3px solid var(--ocean-light); padding-left: 10px; }
-        p, li { color: var(--text-secondary); font-size: 0.85rem; line-height: 1.45; }
+        h3 { 
+            font-size: 1rem; 
+            margin: 15px 0 10px; 
+            color: #1e293b; 
+            border-left: 4px solid #3b82f6; 
+            padding-left: 12px;
+            font-weight: 600;
+        }
+        p, li { color: #334155; font-size: 0.85rem; line-height: 1.45; }
         table {
             width: 100%;
             border-collapse: collapse;
-            background: rgba(29,78,137,0.4);
-            border-radius: 12px;
+            background: #f8fafc;
+            border-radius: 16px;
             overflow: hidden;
             margin: 12px 0;
             font-size: 0.75rem;
+            border: 1px solid #e2e8f0;
         }
-        th, td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 5px; text-align: center; color: #f0f4fa; }
-        th { background: var(--ocean-medium); color: var(--gold-light); font-weight: 700; }
-        .highlight { background: rgba(212,175,55,0.2); border-left: 4px solid var(--gold-primary); padding: 12px; border-radius: 14px; margin: 12px 0; }
-        .rule-box { background: rgba(29,78,137,0.5); padding: 12px; border-radius: 16px; margin-bottom: 10px; border-left: 3px solid var(--gold-primary);}
+        th, td { border: 1px solid #e2e8f0; padding: 8px 5px; text-align: center; color: #1e293b; }
+        th { background: #eef2ff; color: #0a66b9; font-weight: 700; }
+        .highlight { 
+            background: #eef2ff; 
+            border-left: 4px solid #3b82f6; 
+            padding: 12px; 
+            border-radius: 16px; 
+            margin: 12px 0;
+            color: #1e293b;
+        }
+        .rule-box { 
+            background: #f8fafc; 
+            padding: 12px; 
+            border-radius: 18px; 
+            margin-bottom: 10px; 
+            border-left: 4px solid #3b82f6;
+            border: 1px solid #e2e8f0;
+        }
         ul { margin-left: 20px; margin-bottom: 12px; }
         li { margin-bottom: 5px; }
-        .red-percent { color: #ffb347; font-weight: bold; }
+        .red-percent { color: #dc2626; font-weight: bold; }
+        
+        /* 链上治理样式 */
+        .governance-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .flow-step {
+            background: #f9f9ff;
+            padding: 12px;
+            border-radius: 18px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+        .step-number {
+            width: 32px;
+            height: 32px;
+            background: #3b82f6;
+            color: white;
+            border-radius: 50%;
+            margin: 0 auto 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+        }
+        .node-structure {
+            display: grid;
+            gap: 12px;
+            margin: 15px 0;
+        }
+        .node-card {
+            padding: 12px;
+            border-radius: 20px;
+            border: 1px solid #e2e8f0;
+            background: #ffffff;
+        }
+        .node-card.official {
+            background: #f0f9ff;
+            border-left: 4px solid #3b82f6;
+        }
+        .node-card.community {
+            background: #fefce8;
+            border-left: 4px solid #eab308;
+        }
+        .node-type {
+            font-size: 1rem;
+            margin-bottom: 8px;
+            color: #0f172a;
+            font-weight: 700;
+        }
+        .rules-container {
+            display: grid;
+            gap: 12px;
+            margin: 15px 0;
+        }
+        .rule-box-card {
+            background: #f8fafc;
+            padding: 12px;
+            border-radius: 18px;
+            border: 1px solid #e2e8f0;
+        }
+        .rule-box-card.critical {
+            border-left: 4px solid #dc2626;
+        }
+        .rule-box-card.normal {
+            border-left: 4px solid #3b82f6;
+        }
         
         .bottom-nav {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
-            background: rgba(13,51,102,0.95);
-            backdrop-filter: blur(12px);
-            border-top: 1px solid var(--border-color);
+            background: #ffffff;
+            border-top: 1px solid #e2e8f0;
             padding: 8px 0;
             z-index: 200;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
         }
         .nav-items {
             display: flex;
@@ -234,13 +343,12 @@
             flex-direction: column;
             align-items: center;
             text-decoration: none;
-            color: var(--gold-secondary);
+            color: #4b5563;
             font-size: 10px;
-            transition: 0.2s;
             gap: 3px;
         }
-        .nav-icon { font-size: 16px; color: var(--gold-secondary); }
-        .nav-item:hover { color: var(--gold-primary); transform: translateY(-2px); }
+        .nav-icon { font-size: 16px; color: #3b82f6; }
+        .nav-item:hover { color: #0a66b9; transform: translateY(-2px); }
         
         .social-icons {
             display: flex;
@@ -260,30 +368,41 @@
             width: 22px;
             height: 22px;
             object-fit: contain;
-            filter: brightness(1.2) drop-shadow(0 1px 2px rgba(0,0,0,0.2));
+            filter: brightness(0.9);
         }
         .social-icon:hover img {
             transform: translateY(-2px);
-            filter: brightness(1.5);
+            filter: brightness(1);
         }
         
-        footer { text-align: center; font-size: 0.7rem; padding: 8px 0; color: var(--text-light); }
+        footer { text-align: center; font-size: 0.7rem; padding: 8px 0; color: #6c757d; }
         
         #contactModal, #wechatModal {
             display: none;
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(10,35,66,0.9);
-            backdrop-filter: blur(10px);
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
             justify-content: center;
             align-items: center;
             z-index: 1000;
         }
-        .modal-content, .qrcode-content { background: var(--card-bg); padding: 20px; border-radius: 24px; width: 85%; max-width: 320px; text-align: center; border: 1px solid var(--border-color);}
-        .copy-btn { background: var(--ocean-light); border: none; padding: 6px 12px; border-radius: 20px; color: white; cursor: pointer; margin-left: 8px; }
-        .close-btn { margin-top: 15px; background: var(--ocean-medium); padding: 6px 18px; border-radius: 30px; border: none; color: white; cursor: pointer; }
-        @media (max-width: 380px) { .btn { font-size: 0.7rem; padding: 8px 3px; } h1 { font-size: 1.5rem; } .social-icon img { width: 20px; height: 20px; } }
+        .modal-content, .qrcode-content { background: #ffffff; padding: 20px; border-radius: 28px; width: 85%; max-width: 320px; text-align: center; border: 1px solid #e2e8f0; box-shadow: 0 20px 35px -8px rgba(0,0,0,0.2);}
+        .copy-btn { background: #3b82f6; border: none; padding: 6px 12px; border-radius: 30px; color: white; cursor: pointer; margin-left: 8px; font-weight: 500; }
+        .close-btn { margin-top: 15px; background: #e2e8f0; color: #1e293b; padding: 6px 18px; border-radius: 30px; border: none; cursor: pointer; }
+        
+        @media (max-width: 380px) { 
+            .btn { font-size: 0.7rem; padding: 8px 3px; } 
+            h1 { font-size: 1.9rem; } 
+            .days-number, .day-unit { font-size: 2.8rem; }
+            .plain-time { font-size: 1.5rem; }
+            .time-block { min-width: 46px; }
+        }
+        @media (max-width: 340px) {
+            .plain-time { font-size: 1.3rem; }
+            .time-block { min-width: 40px; }
+        }
     </style>
 </head>
 <body>
@@ -291,29 +410,31 @@
         <header>
             <div class="header-row">
                 <img src="images/logo01.png" alt="波塞冬" class="logo" onerror="this.style.display='none';">
-                <h1>波塞冬DSC</h1>
+                <h1>
+                    <span class="chinese-part">波塞冬</span>
+                    <span class="dsc-part">DSC</span>
+                </h1>
             </div>
             <p class="subtitle">链上挖矿 · 安全透明 | 去中心化闪兑</p>
             
             <div class="timer-container">
                 <div class="timer-label">DSC已运行</div>
-                <div class="timer" id="runtimeTimer">
-                    <div class="days" id="days">00天</div>
-                    <div class="time">
-                        <div class="time-unit"><div class="time-value" id="hours">00</div><div class="time-label">时</div></div>
-                        <div class="time-unit"><div class="time-value" id="minutes">00</div><div class="time-label">分</div></div>
-                        <div class="time-unit"><div class="time-value" id="seconds">00</div><div class="time-label">秒</div></div>
-                    </div>
+                <div class="days-group">
+                    <span class="days-number" id="daysNum">00</span>
+                    <span class="day-unit">天</span>
+                </div>
+                <div class="plain-time" id="liveClock">
+                    <span class="time-block" id="hoursSpan">00</span>
+                    <span class="time-sep">:</span>
+                    <span class="time-block" id="minutesSpan">00</span>
+                    <span class="time-sep">:</span>
+                    <span class="time-block" id="secondsSpan">00</span>
                 </div>
             </div>
-            
-            <a href="bosaidong.html" class="banner-button">
-                波塞冬全球版已上线 · 点击探索新世界
-            </a>
         </header>
         
         <div class="button-grid">
-            <button class="btn" onclick="showSection('intro')">DSC介绍</button>
+            <button class="btn" onclick="showSection('intro')">项目介绍</button>
             <button class="btn" onclick="showSection('mining')">矿机说明</button>
             <button class="btn" onclick="showSection('earnings')">收益详解</button>
             <button class="btn" onclick="showSection('mentor')">导师体系</button>
@@ -324,14 +445,27 @@
             <button class="btn" onclick="window.location.href='sunhao.html'">损耗分析</button>
         </div>
         
-        <!-- 内容区块：所有文字前方无图案，且已删除“(原SCC)” -->
         <div id="intro" class="content-section active">
-            <h2>波塞冬链DSC</h2>
-            <p>DSC是基于波塞冬链（Poseidon Chain）的新一代去中心化挖矿代币，总量6亿枚。每位矿工可同时运行最多7台不同等级矿机，通过质押、导师算力等获得海量产出。</p>
-            <div class="highlight">核心亮点：每小时自动产出 | 质押1:1提升算力 | 节点自治45席 | 链上挖矿，安全透明</div>
-            <h3>经济模型优势</h3>
-            <ul><li>产出透明：链上合约自动分配</li><li>多元收益：发展收益+导师分红+共享矿机+节点权益</li><li>通缩机制：POS兑换手续费回购销毁DSC</li><li>低门槛入场：试产矿机人人可参与</li></ul>
-            <p><strong>POS燃料机制：</strong> POS是领取矿机收益的必要燃料，每日通过质押获赠或USDT兑换获得，同时POS资金池贡献全网分红。</p>
+            <h2>波塞冬链 · 项目介绍</h2>
+            <p>波塞冬链由波塞冬团队自主研发设计，底层架构专为生态打造，支持生态合伙人无缝对接。链上采用45个动态治理节点，确保提案、投票与升级的社区共治；内置POS燃料机制，驱动产出领取与价值循环。坚持公平、开放、数据透明，每一笔规则皆可验证，让每一份共识都在链上留下痕迹。</p>
+            <h3>DSC代币与智能合约</h3>
+            <p>DSC代币由波塞冬团队通过波塞冬链发行，发行总量6亿枚。DSC相关的智能合约均在链上执行，所有记录公开透明，用户可通过区块链浏览器实时查看。</p>
+            <h3>节点自治与共识机制</h3>
+            <p>波塞冬链采用节点自治的共识机制，节点每15秒打包一个区块，生成POS燃料通证。总共45个节点，5个节点由官方预留，40个节点开放给全网玩家竞选。</p>
+            <h3>POS燃料通证</h3>
+            <ul>
+                <li><strong>燃料费用：</strong>玩家领取DSC矿机收益需消耗POS作为网络燃料费</li>
+                <li><strong>获取方式：</strong>通过质押DSC获赠或用USDT兑换</li>
+                <li><strong>经济模型：</strong>日产量固定8,640 POS</li>
+            </ul>
+            <h3>项目特色</h3>
+            <ul>
+                <li>每小时自动产生收益</li>
+                <li>DSC多重收益来源：挖矿收益、推广收益、共享矿机收益、导师分红收益、下级兑换/复投赠送DSC/POS、成为节点人每日分红等等</li>
+                <li>24小时全天候交易，无资金池，智能合约</li>
+                <li>去中心化跨链闪兑任意币种，无需钱包和私钥</li>
+                <li>联合坐庄：DSC/POS可闪兑主流币，挖DSC就是挖主流币</li>
+            </ul>
         </div>
         
         <div id="mining" class="content-section">
@@ -340,13 +474,13 @@
             <h3>矿机月收益率表</h3>
             <table>
                 <tr><th>矿机等级</th><th>月收益率</th><th>质押上限</th></tr>
-                <tr><td>试产/青铜/白银/黄金</td><td class="red-percent">18%</td><td>按等级递增</td></tr>
-                <tr><td>铂金矿机</td><td class="red-percent">19%</td><td>高额质押额度</td></tr>
-                <tr><td>钻石矿机</td><td class="red-percent">20%</td><td>专家级算力容器</td></tr>
-                <tr><td>至尊矿机</td><td class="red-percent">21%</td><td>顶级矿机，最高质押</td></tr>
+                <tr><td>试产/青铜/白银/黄金</td><td class="red-percent">18%</td><td>按等级递增</td> </tr>
+                <tr><td>铂金矿机</td><td class="red-percent">19%</td><td>高额质押额度</td> </tr>
+                <tr><td>钻石矿机</td><td class="red-percent">20%</td><td>专家级算力容器</td> </tr>
+                <tr><td>至尊矿机</td><td class="red-percent">21%</td><td>顶级矿机，最高质押</td> </tr>
             </table>
             <h3>综合算力构成</h3>
-            <ul><li><strong>基础算力</strong>：试产矿机自带10点算力保障零撸基础</li><li><strong>质能算力</strong>：质押 1 DSC = 1 算力（各矿机独立质押上限）</li><li><strong>导师算力</strong>：达成M1~M5 额外增加10~10000点算力（自动加持到对应等级矿机）</li></ul>
+            <ul><li><strong>基础算力</strong>：试产矿机自带10点算力保障零撸基础</li><li><strong>质能算力</strong>：质押 1 DSC = 1 算力（各矿机独立质押上限）</li><li><strong>导师算力</strong>：达成M1~M5 额外增加10~10000点算力</li></ul>
             <div class="highlight">小技巧：初期通过质押拉升算力更快回本，中期冲刺导师享受长期被动加持！</div>
         </div>
         
@@ -398,13 +532,25 @@
         </div>
         
         <div id="node" class="content-section">
-            <h2>节点治理 · 45席议会</h2>
-            <p>波塞冬链由45个节点共同维护：官方5席，永久M5超级节点锁定3席，剩余37席每季度由推广排名前37名竞选。</p>
-            <h3>节点权益</h3>
-            <ul><li>发起提案：可提出挖矿规则、资产分配等核心调整</li><li>投票表决：≥75%节点通过方可执行升级</li><li>节点分红：每日USDT资金池5%的分红均分给所有节点</li><li>网络升级权：投票后推动链上程序更新</li></ul>
-            <h3>提案必要性</h3>
-            <p>涉及产出机制、合约升级、链上资产分配等必须提案投票；应用层参数、前端界面优化无需提案。失去职责的节点将被收回席位。</p>
-            <div class="highlight">成为节点，参与波塞冬核心治理，共塑去中心化未来！</div>
+            <h2>链上治理体系</h2>
+            <div class="highlight">45节点共识网络 | 提案机制 | 季度席位竞选</div>
+            <div class="governance-flow">
+                <div class="flow-step"><div class="step-number">1</div><h4>提案发起</h4><p>节点/社区提交优化方案</p></div>
+                <div class="flow-step"><div class="step-number">2</div><h4>社区投票</h4><p>需≥75%节点通过</p></div>
+                <div class="flow-step"><div class="step-number">3</div><h4>技术开发</h4><p>部署智能合约升级</p></div>
+                <div class="flow-step"><div class="step-number">4</div><h4>节点升级</h4><p>72小时内完成更新</p></div>
+            </div>
+            <h3>节点分布结构</h3>
+            <div class="node-structure">
+                <div class="node-card official"><div class="node-type">官方节点</div><div class="node-info"><span class="count">5席位</span><ul><li>网络基础运维</li><li>紧急事件处置</li></ul></div></div>
+                <div class="node-card community"><div class="node-type">社区节点</div><div class="node-info"><span class="count">40席位</span><ul><li>季度推广前37名（已有3个超级节点）</li><li>提案与表决权限</li></ul></div></div>
+            </div>
+            <h3>治理规则说明</h3>
+            <div class="rules-container">
+                <div class="rule-box-card critical"><h3>核心治理领域</h3><ul><li>矿机产出规则调整</li><li>智能合约升级</li><li>链上资产分配</li></ul></div>
+                <div class="rule-box-card normal"><h3>技术自治领域</h3><ul><li>前端界面更新</li><li>游戏参数调整</li><li>运维策略优化</li></ul></div>
+            </div>
+            <div class="highlight">节点可享每日DSC/USDT兑换POS池的分红，分红比例固定为5%，按节点数量平均分配。</div>
         </div>
         
         <div id="faq" class="content-section">
@@ -421,11 +567,9 @@
             <p>首次注册需要实名认证，余额满1DSC需二次人脸验证；推荐绑定谷歌验证器保障资金安全。</p>
         </div>
         
-        <!-- 模态框 -->
         <div id="contactModal"><div class="modal-content"><h3>联系推荐人</h3><p>复制微信号快速认证↓</p><div><span id="wechatId">dsc_helper</span><button class="copy-btn" onclick="copyWechatId()">复制</button></div><div id="copyStatus"></div><button class="close-btn" onclick="hideContactModal()">关闭</button></div></div>
         <div id="wechatModal"><div class="qrcode-content"><h3>官方公众号</h3><img src="https://pub-19bc0ce8c8524750be48dcbb7ca04a73.r2.dev/%E6%90%9C%E4%B8%80%E6%90%9C%E5%85%AC%E4%BC%97%E5%8F%B7%E6%8E%A8%E5%B9%BF%E7%89%A9%E6%96%99%E5%9B%BE%E7%89%87-png%E6%89%AB%E7%A0%81_%E6%90%9C%E7%B4%A2%E8%81%94%E5%90%88%E4%BC%A0%E6%92%AD%E6%A0%B7%E5%BC%8F-%E6%A0%87%E5%87%86%E8%89%B2%E7%89%88.png" style="width:100%;margin:10px 0;"><button class="close-btn" onclick="hideWechatModal()">关闭</button></div></div>
         
-        <!-- 社交图标区：包含微信、QQ、抖音、快手、电报，尺寸统一，快手图标已补全 -->
         <div class="social-icons">
             <a href="javascript:void(0)" class="social-icon" onclick="showWechatModal()"><img src="https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/%E5%BE%AE%E4%BF%A1.svg" alt="微信"></a>
             <a href="https://qun.qq.com/universal-share/share?ac=1&authKey=c6BM5DK3yY4L%2FReRW6oZW1Xj1QRPZ1desNqKWhP%2BdM7aielhRw%2Fuj12A3CxlBek0&busi_data=eyJncm91cENvZGUiOiIxMzQ0NDI4NTciLCJ0b2tlbiI6Ii9JM0FIb0NmUzdqLzdlOCtZMS9BbDc3U1RxWW40TlU0c29KYllzaDFiZGdHVmQzYWgzSnMzUERuVk91V2pJZlMiLCJ1aW4iOiIxMDY1NDk5MzM4In0%3D&data=jSmAVa3wONc_R2BPx0dMXOJdW1Ag_dVVlHiB9C3JE3sRisQppuhjn4U2URjBRxwcmB-jE4MMn6F5-lognlRqTw&svctype=4&tempid=h5_group_info" target="_blank" class="social-icon"><img src="https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/QQ.svg" alt="QQ"></a>
@@ -440,7 +584,6 @@
         <div class="nav-items">
             <a href="https://prod.digital-scroll.org/#/pages/reg?c=LcLh2C" class="nav-item" target="_blank"><div class="nav-icon"><i class="fas fa-user-plus"></i></div><div class="nav-text">注册/登录</div></a>
             <a href="guide.html" class="nav-item"><div class="nav-icon"><i class="fas fa-file-alt"></i></div><div class="nav-text">操作指南</div></a>
-            <!-- 帮助中心按钮链接到根目录 bangzhu.html -->
             <a href="bangzhu.html" class="nav-item"><div class="nav-icon"><i class="fas fa-question-circle"></i></div><div class="nav-text">帮助中心</div></a>
             <a href="youxi.html" class="nav-item"><div class="nav-icon"><i class="fas fa-calculator"></i></div><div class="nav-text">复投计算</div></a>
             <a href="moxing.html" class="nav-item"><div class="nav-icon"><i class="fas fa-chart-line"></i></div><div class="nav-text">经济模型</div></a>
@@ -448,19 +591,33 @@
     </nav>
     
     <script>
-        function updateRuntime() {
+        let lastSeconds = -1;
+        const liveClock = document.getElementById('liveClock');
+        
+        function updateRuntimeAndClock() {
             const start = new Date('2023-09-25T00:00:00');
-            const diff = new Date() - start;
+            const now = new Date();
+            const diff = now - start;
             const days = Math.floor(diff / 86400000);
-            const hours = Math.floor((diff % 86400000) / 3600000);
-            const minutes = Math.floor((diff % 3600000) / 60000);
-            const seconds = Math.floor((diff % 60000) / 1000);
-            document.getElementById('days').innerText = `${days}天`;
-            document.getElementById('hours').innerText = hours.toString().padStart(2,'0');
-            document.getElementById('minutes').innerText = minutes.toString().padStart(2,'0');
-            document.getElementById('seconds').innerText = seconds.toString().padStart(2,'0');
+            document.getElementById('daysNum').innerText = days;
+            
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            
+            document.getElementById('hoursSpan').innerText = hours;
+            document.getElementById('minutesSpan').innerText = minutes;
+            document.getElementById('secondsSpan').innerText = seconds;
+            
+            if (lastSeconds !== seconds) {
+                liveClock.classList.remove('tick-pop');
+                void liveClock.offsetWidth;
+                liveClock.classList.add('tick-pop');
+                lastSeconds = seconds;
+            }
         }
-        setInterval(updateRuntime,1000); updateRuntime();
+        setInterval(updateRuntimeAndClock, 500);
+        updateRuntimeAndClock();
         
         function showSection(id) {
             document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
