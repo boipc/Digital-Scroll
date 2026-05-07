@@ -22,7 +22,7 @@
             font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', sans-serif;
             color: #1f2937;
             min-height: 100vh;
-            padding-bottom: 70px;
+            padding-bottom: 70px;   /* 为底部导航预留空间 (隐藏时仍有占位感) */
             font-size: 14px;
             line-height: 1.4;
         }
@@ -44,10 +44,10 @@
             border: none;
         }
         
-        /* 关键修改：垂直居中对齐，使标题与 logo 高度视觉一致 */
+        /* 标题与 logo 垂直居中对齐 */
         .header-row {
             display: flex;
-            align-items: center;      /* center 而非 baseline，实现垂直居中 */
+            align-items: center;      /* 垂直居中 */
             justify-content: center;
             gap: 12px;
             margin-bottom: 8px;
@@ -65,7 +65,7 @@
             margin: 0;
             color: #0a66b9;
             letter-spacing: 1px;
-            line-height: 1.2;       /* 保证标题自身高度适中 */
+            line-height: 1.2;
             display: inline-flex;
             align-items: baseline;
             gap: 2px;
@@ -314,6 +314,7 @@
             border-left: 4px solid #3b82f6;
         }
         
+        /* ========== 动态底部导航栏 ========== */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -323,7 +324,18 @@
             border-top: 1px solid #e2e8f0;
             padding: 8px 0;
             z-index: 200;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+            
+            /* 动态切换：默认隐藏 */
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+        }
+        .bottom-nav.visible {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
         }
         .nav-items {
             display: flex;
@@ -438,6 +450,7 @@
             <button class="btn" onclick="window.location.href='sunhao.html'">损耗分析</button>
         </div>
         
+        <!-- 内容卡片（保持不变） -->
         <div id="intro" class="content-section active">
             <h2>波塞冬链 · 项目介绍</h2>
             <p>波塞冬链由波塞冬团队自主研发设计，底层架构专为生态打造，支持生态合伙人无缝对接。链上采用45个动态治理节点，确保提案、投票与升级的社区共治；内置POS燃料机制，驱动产出领取与价值循环。坚持公平、开放、数据透明，每一笔规则皆可验证，让每一份共识都在链上留下痕迹。</p>
@@ -564,6 +577,7 @@
             <p>首次注册需要实名认证，余额满1DSC需二次人脸验证；推荐绑定谷歌验证器保障资金安全。</p>
         </div>
         
+        <!-- 模态框 -->
         <div id="contactModal"><div class="modal-content"><h3>联系推荐人</h3><p>复制微信号快速认证↓</p><div><span id="wechatId">dsc_helper</span><button class="copy-btn" onclick="copyWechatId()">复制</button></div><div id="copyStatus"></div><button class="close-btn" onclick="hideContactModal()">关闭</button></div></div>
         <div id="wechatModal"><div class="qrcode-content"><h3>官方公众号</h3><img src="https://pub-19bc0ce8c8524750be48dcbb7ca04a73.r2.dev/%E6%90%9C%E4%B8%80%E6%90%9C%E5%85%AC%E4%BC%97%E5%8F%B7%E6%8E%A8%E5%B9%BF%E7%89%A9%E6%96%99%E5%9B%BE%E7%89%87-png%E6%89%AB%E7%A0%81_%E6%90%9C%E7%B4%A2%E8%81%94%E5%90%88%E4%BC%A0%E6%92%AD%E6%A0%B7%E5%BC%8F-%E6%A0%87%E5%87%86%E8%89%B2%E7%89%88.png" style="width:100%;margin:10px 0;"><button class="close-btn" onclick="hideWechatModal()">关闭</button></div></div>
         
@@ -577,7 +591,8 @@
         <footer><p>波塞冬已至，暗流中升起曙光；算力为信，共识为舟，我们一同靠岸。</p></footer>
     </div>
     
-    <nav class="bottom-nav">
+    <!-- 动态底部导航栏（默认隐藏） -->
+    <nav class="bottom-nav" id="dynamicNav">
         <div class="nav-items">
             <a href="https://prod.digital-scroll.org/#/pages/reg?c=LcLh2C" class="nav-item" target="_blank"><div class="nav-icon"><i class="fas fa-user-plus"></i></div><div class="nav-text">注册/登录</div></a>
             <a href="guide.html" class="nav-item"><div class="nav-icon"><i class="fas fa-file-alt"></i></div><div class="nav-text">操作指南</div></a>
@@ -588,6 +603,35 @@
     </nav>
     
     <script>
+        // 动态显示/隐藏底部导航栏 (滚动时显示, 2秒后隐藏)
+        const nav = document.getElementById('dynamicNav');
+        let hideNavTimer = null;
+
+        function showNavTemporarily() {
+            if (!nav) return;
+            // 清除之前的隐藏计时
+            if (hideNavTimer) clearTimeout(hideNavTimer);
+            nav.classList.add('visible');
+            // 设置2秒后隐藏
+            hideNavTimer = setTimeout(() => {
+                nav.classList.remove('visible');
+                hideNavTimer = null;
+            }, 2000);
+        }
+
+        // 监听滚动事件 (移动端滑动也会触发scroll)
+        window.addEventListener('scroll', () => {
+            showNavTemporarily();
+        });
+        // 可选: 监听touchmove以增强响应 (scroll已涵盖大部分情况)
+        window.addEventListener('touchmove', () => {
+            showNavTemporarily();
+        });
+        // 页面初始化时，默认隐藏，不打扰用户；首次滚动即出现
+        // 如果希望一开始就显示一下可以取消注释，但为符合需求（滑动才出现），不主动显示。
+        // 但为了用户知道有导航栏，也可以通过 toast示意，不作额外处理。
+
+        // 原有脚本区
         let lastSeconds = -1;
         const liveClock = document.getElementById('liveClock');
         
