@@ -295,6 +295,7 @@
             transition: transform 0.2s ease;
             background: transparent;
             border: none;
+            cursor: pointer;
         }
         .social-icon img {
             width: 22px;
@@ -307,7 +308,9 @@
             filter: brightness(1);
         }
         footer { text-align: center; font-size: 0.7rem; padding: 8px 0; color: #6c757d; }
-        #contactModal, #wechatModal {
+        
+        /* 微信模态框 */
+        #wechatModal {
             display: none;
             position: fixed;
             top: 0; left: 0;
@@ -318,9 +321,9 @@
             align-items: center;
             z-index: 1000;
         }
-        .modal-content, .qrcode-content { background: #ffffff; padding: 20px; border-radius: 28px; width: 85%; max-width: 320px; text-align: center; border: 1px solid #e2e8f0; box-shadow: 0 20px 35px -8px rgba(0,0,0,0.2);}
-        .copy-btn { background: #3b82f6; border: none; padding: 6px 12px; border-radius: 30px; color: white; cursor: pointer; margin-left: 8px; font-weight: 500; }
+        .qrcode-content { background: #ffffff; padding: 20px; border-radius: 28px; width: 85%; max-width: 320px; text-align: center; border: 1px solid #e2e8f0; box-shadow: 0 20px 35px -8px rgba(0,0,0,0.2);}
         .close-btn { margin-top: 15px; background: #e2e8f0; color: #1e293b; padding: 6px 18px; border-radius: 30px; border: none; cursor: pointer; }
+        
         .table-wrapper {
             overflow-x: auto;
             margin: 12px 0;
@@ -352,40 +355,49 @@
             transform: scale(1.02);
             background-color: #2563eb;
         }
-        /* 自定义提示框 */
-        .custom-alert {
+        /* 自定义弹窗 - 蓝框白底，缩放动画，提示文字红色 */
+        .custom-modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(4px);
+            background: transparent;
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 2000;
         }
-        .alert-box {
-            background: #3b82f6;
-            color: white;
+        .modal-card {
+            background: white;
+            border: 2px solid #3b82f6;
             border-radius: 28px;
             padding: 24px 28px;
             text-align: center;
             max-width: 280px;
             width: 80%;
-            box-shadow: 0 20px 35px -8px rgba(0,0,0,0.3);
-            animation: fadeIn 0.2s;
+            box-shadow: 0 20px 30px rgba(0,0,0,0.15);
+            animation: zoomIn 0.2s ease-out;
         }
-        .alert-box p {
-            color: white;
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        .modal-card p {
+            color: #dc2626;  /* 红色字体 */
             font-size: 1rem;
             margin-bottom: 20px;
             font-weight: 500;
         }
-        .alert-confirm {
-            background: white;
-            color: #3b82f6;
+        .modal-confirm {
+            background: #3b82f6;
+            color: white;
             border: none;
             padding: 8px 24px;
             border-radius: 40px;
@@ -394,8 +406,8 @@
             cursor: pointer;
             transition: 0.1s;
         }
-        .alert-confirm:hover {
-            background: #f0f9ff;
+        .modal-confirm:hover {
+            background: #2563eb;
         }
         @media (max-width: 380px) { 
             .btn { font-size: 0.7rem; padding: 8px 3px; } 
@@ -435,7 +447,7 @@
             </div>
         </header>
         
-        <!-- 顶部按钮：项目介绍、矿机说明、收益详解、导师体系、燃料机制、节点治理、注册流程、帮助中心、经济模型 -->
+        <!-- 顶部按钮 -->
         <div class="button-grid">
             <button class="btn" onclick="showSection('intro')">项目介绍</button>
             <button class="btn" onclick="showSection('mining')">矿机说明</button>
@@ -448,7 +460,7 @@
             <button class="btn" onclick="location.href='moxing.html'">经济模型</button>
         </div>
         
-        <!-- 以下为本地内容模块，仅保留6个核心板块（其他3个跳转外部，已删除对应内容块） -->
+        <!-- 内容模块 -->
         <div id="intro" class="content-section active">
             <h2>波塞冬链 · 项目介绍</h2>
             <p>波塞冬链由波塞冬团队自主研发设计，底层架构专为生态打造，支持生态合伙人无缝对接。链上采用45个动态治理节点，确保提案、投票与升级的社区共治；内置POS燃料机制，驱动产出领取与价值循环。坚持公平、开放、数据透明，每一笔规则皆可验证，让每一份共识都在链上留下痕迹。</p>
@@ -478,15 +490,15 @@
             <p>每位用户最多同时拥有<strong class="red-percent">7台</strong>不同等级矿机，月收益率固定18%~21%，综合算力决定最终产出。</p>
             <div class="table-wrapper">
                 <table>
-                    <thead><tr><th>矿机等级</th><th>月收益率</th><th>说明</th></tr></thead>
+                    <thead><tr><th>矿机等级</th><th>月收益率</th><th>说明</th> </tr</thead>
                     <tbody>
-                        <tr><td>试产矿机</td><td class="red-percent">18%</td><td>初始体验矿机</td></tr>
-                        <tr><td>青铜矿机</td><td class="red-percent">18%</td><td>入门级矿机</td></tr>
-                        <tr><td>白银矿机</td><td class="red-percent">18%</td><td>进阶级矿机</td></tr>
-                        <tr><td>黄金矿机</td><td class="red-percent">18%</td><td>中等级矿机</td></tr>
-                        <tr><td>铂金矿机</td><td class="red-percent">19%</td><td>高级矿机</td></tr>
-                        <tr><td>钻石矿机</td><td class="red-percent">20%</td><td>专家级矿机</td></tr>
-                        <tr><td>至尊矿机</td><td class="red-percent">21%</td><td>顶级矿机</td></tr>
+                        <tr><td>试产矿机</td><td class="red-percent">18%</td><td>初始体验矿机</td> </tr
+                        <tr><td>青铜矿机</td><td class="red-percent">18%</td><td>入门级矿机</td> </tr
+                        <tr><td>白银矿机</td><td class="red-percent">18%</td><td>进阶级矿机</td> </tr
+                        <tr><td>黄金矿机</td><td class="red-percent">18%</td><td>中等级矿机</td> </tr
+                        <tr><td>铂金矿机</td><td class="red-percent">19%</td><td>高级矿机</td> </tr
+                        <tr><td>钻石矿机</td><td class="red-percent">20%</td><td>专家级矿机</td> </tr
+                        <tr><td>至尊矿机</td><td class="red-percent">21%</td><td>顶级矿机</td> </tr
                     </tbody>
                 </table>
             </div>
@@ -534,13 +546,13 @@
             <h3>导师晋升条件与算力奖励</h3>
             <div class="table-wrapper">
                 <table>
-                    <thead><tr><th>等级</th><th>族群算力</th><th>团队算力</th><th>直推活粉</th><th>自身算力</th><th>导师算力奖励</th></tr></thead>
+                    <thead><tr><th>等级</th><th>族群算力</th><th>团队算力</th><th>直推活粉</th><th>自身算力</th><th>导师算力奖励</th> </tr</thead>
                     <tbody>
-                        <tr><td>M1</td><td>≥5K</td><td>-</td><td>≥3</td><td>≥20</td><td>+10</td></tr>
-                        <tr><td>M2</td><td>≥20K</td><td>≥5K</td><td>≥6</td><td>≥1K</td><td>+500</td></tr>
-                        <tr><td>M3</td><td>≥100K</td><td>≥20K</td><td>≥10</td><td>≥2K</td><td>+1000</td></tr>
-                        <tr><td>M4</td><td>≥500K</td><td>≥100K</td><td>≥15</td><td>≥10K</td><td>+5000</td></tr>
-                        <tr><td>M5</td><td>≥1000K</td><td>≥300K</td><td>≥20</td><td>≥20K</td><td>+10000</td></tr>
+                        <tr><td>M1</td><td>≥5K</td><td>-</td><td>≥3</td><td>≥20</td><td>+10</td> </tr
+                        <tr><td>M2</td><td>≥20K</td><td>≥5K</td><td>≥6</td><td>≥1K</td><td>+500</td> </tr
+                        <tr><td>M3</td><td>≥100K</td><td>≥20K</td><td>≥10</td><td>≥2K</td><td>+1000</td> </tr
+                        <tr><td>M4</td><td>≥500K</td><td>≥100K</td><td>≥15</td><td>≥10K</td><td>+5000</td> </tr
+                        <tr><td>M5</td><td>≥1000K</td><td>≥300K</td><td>≥20</td><td>≥20K</td><td>+10000</td> </tr
                     </tbody>
                 </table>
             </div>
@@ -548,13 +560,13 @@
             <h3>导师手续费分红比例</h3>
             <div class="table-wrapper">
                 <table>
-                    <thead><tr><th>等级</th><th>手续费分红比例</th></tr></thead>
+                    <thead><tr><th>等级</th><th>手续费分红比例</th> </tr</thead>
                     <tbody>
-                        <tr><td>M1</td><td class="red-percent">5%</td></tr>
-                        <tr><td>M2</td><td class="red-percent">15%</td></tr>
-                        <tr><td>M3</td><td class="red-percent">20%</td></tr>
-                        <tr><td>M4</td><td class="red-percent">15%</td></tr>
-                        <tr><td>M5</td><td class="red-percent">15%</td></tr>
+                        <tr><td>M1</td><td class="red-percent">5%</td> </tr
+                        <tr><td>M2</td><td class="red-percent">15%</td> </tr
+                        <tr><td>M3</td><td class="red-percent">20%</td> </tr
+                        <tr><td>M4</td><td class="red-percent">15%</td> </tr
+                        <tr><td>M5</td><td class="red-percent">15%</td> </tr
                     </tbody>
                 </table>
             </div>
@@ -594,16 +606,22 @@
             <div class="highlight">节点可享每日DSC/USDT兑换POS池的分红，分红比例固定为5%，按节点数量平均分配。</div>
         </div>
         
-        <!-- 联系与微信模态框 (保留社交功能) -->
-        <div id="contactModal"><div class="modal-content"><h3>联系推荐人</h3><p>复制微信号快速认证↓</p><div><span id="wechatId">dsc_helper</span><button class="copy-btn" onclick="copyWechatId()">复制</button></div><div id="copyStatus"></div><button class="close-btn" onclick="hideContactModal()">关闭</button></div></div>
-        <div id="wechatModal"><div class="qrcode-content"><h3>官方公众号</h3><img src="images/weixing1.png" style="width:100%;margin:10px 0;" alt="微信公众号二维码"><button class="close-btn" onclick="hideWechatModal()">关闭</button></div></div>
+        <!-- 微信模态框 -->
+        <div id="wechatModal">
+            <div class="qrcode-content">
+                <h3>官方公众号</h3>
+                <img src="images/weixing1.png" style="width:100%;margin:10px 0;" alt="微信公众号二维码">
+                <button class="close-btn" onclick="hideWechatModal()">关闭</button>
+            </div>
+        </div>
         
         <div class="social-icons">
             <a href="javascript:void(0)" class="social-icon" onclick="showWechatModal()"><img src="https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/%E5%BE%AE%E4%BF%A1.svg" alt="微信"></a>
             <a href="https://qun.qq.com/universal-share/share?ac=1&authKey=c6BM5DK3yY4L%2FReRW6oZW1Xj1QRPZ1desNqKWhP%2BdM7aielhRw%2Fuj12A3CxlBek0&busi_data=eyJncm91cENvZGUiOiIxMzQ0NDI4NTciLCJ0b2tlbiI6Ii9JM0FIb0NmUzdqLzdlOCtZMS9BbDc3U1RxWW40TlU0c29KYllzaDFiZGdHVmQzYWgzSnMzUERuVk91V2pJZlMiLCJ1aW4iOiIxMDY1NDk5MzM4In0%3D&data=jSmAVa3wONc_R2BPx0dMXOJdW1Ag_dVVlHiB9C3JE3sRisQppuhjn4U2URjBRxwcmB-jE4MMn6F5-lognlRqTw&svctype=4&tempid=h5_group_info" target="_blank" class="social-icon"><img src="https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/QQ.svg" alt="QQ"></a>
             <a href="https://v.douyin.com/88b5P13AgBM/" target="_blank" class="social-icon"><img src="https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/%E6%8A%96%E9%9F%B3.svg" alt="抖音"></a>
             <a href="https://v.kuaishou.com/KZP1eYG1" target="_blank" class="social-icon"><img src="https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/%E5%BF%AB%E6%89%8B.svg" alt="快手"></a>
-            <a href="https://t.me/+I7NqdrjUVsA2OTU5" target="_blank" class="social-icon"><img src="https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/%E7%94%B5%E6%8A%A5.svg" alt="电报"></a>
+            <!-- 电报图标 - 绑定弹窗 -->
+            <a href="javascript:void(0)" class="social-icon" id="telegramBtn"><img src="https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/%E7%94%B5%E6%8A%A5.svg" alt="电报"></a>
         </div>
         <footer><p>波塞冬已至，暗流中升起曙光；算力为信，共识为舟，我们一同靠岸。</p></footer>
     </div>
@@ -612,7 +630,7 @@
     <div id="floatingRegBtn" class="floating-reg">注册 / 登录</div>
     
     <script>
-        // 计时与动画
+        // 计时器
         let lastSeconds = -1;
         const liveClock = document.getElementById('liveClock');
         function updateRuntimeAndClock() {
@@ -644,19 +662,11 @@
             if (target) target.scrollIntoView({ behavior: 'smooth' });
         }
         
-        // 模态框函数
+        // 微信模态框
         function showWechatModal() { document.getElementById('wechatModal').style.display = 'flex'; }
         function hideWechatModal() { document.getElementById('wechatModal').style.display = 'none'; }
-        function hideContactModal() { document.getElementById('contactModal').style.display = 'none'; }
-        function copyWechatId() { 
-            const text = document.getElementById('wechatId').innerText; 
-            navigator.clipboard.writeText(text); 
-            const statusDiv = document.getElementById('copyStatus');
-            statusDiv.innerHTML = '已复制！'; 
-            setTimeout(()=>statusDiv.innerHTML='',1500);
-        }
         
-        // 浮动按钮逻辑：滑动时显示2秒
+        // 浮动按钮逻辑
         const floatingBtn = document.getElementById('floatingRegBtn');
         let hideFloatTimer = null;
         function showFloatTemporarily() {
@@ -672,40 +682,51 @@
         window.addEventListener('touchmove', showFloatTemporarily);
         setTimeout(showFloatTemporarily, 500);
         
-        // 自定义蓝色提示框（居中，仅确定键）
-        function showCustomAlert(message, onConfirm) {
-            // 移除已存在的弹窗
-            const existing = document.querySelector('.custom-alert');
+        // 通用弹窗函数（蓝框白底，红色文字，缩放动画）
+        function showCustomModal(message, onConfirm) {
+            const existing = document.querySelector('.custom-modal');
             if (existing) existing.remove();
             const overlay = document.createElement('div');
-            overlay.className = 'custom-alert';
-            const alertBox = document.createElement('div');
-            alertBox.className = 'alert-box';
+            overlay.className = 'custom-modal';
+            const card = document.createElement('div');
+            card.className = 'modal-card';
             const p = document.createElement('p');
             p.innerText = message;
             const confirmBtn = document.createElement('button');
-            confirmBtn.innerText = '知道了';
-            confirmBtn.className = 'alert-confirm';
+            confirmBtn.innerText = '确定';
+            confirmBtn.className = 'modal-confirm';
             confirmBtn.onclick = () => {
                 overlay.remove();
                 if (onConfirm) onConfirm();
             };
-            alertBox.appendChild(p);
-            alertBox.appendChild(confirmBtn);
-            overlay.appendChild(alertBox);
+            card.appendChild(p);
+            card.appendChild(confirmBtn);
+            overlay.appendChild(card);
             document.body.appendChild(overlay);
         }
         
-        // 注册/登录按钮点击：弹出蓝色提示框，点击确定后跳转
+        // 注册/登录按钮：红色提示弹窗，确认后跳转指定链接
         floatingBtn.addEventListener('click', () => {
-            showCustomAlert('国内用户请自备加速器，否则可能无法打开网页', () => {
+            showCustomModal('温馨提示：国内用户请开加速器访问，否则可能无法打开网页。', () => {
                 window.location.href = 'https://boipc.github.io/Digital-Scroll';
             });
         });
         
-        window.onclick = function(e){
-            if(e.target == document.getElementById('contactModal')) hideContactModal();
-            if(e.target == document.getElementById('wechatModal')) hideWechatModal();
+        // 电报图标：同样红色提示弹窗，确认后跳转电报链接
+        const telegramBtn = document.getElementById('telegramBtn');
+        if (telegramBtn) {
+            telegramBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                showCustomModal('温馨提示：国内用户请开加速器访问，否则可能无法打开网页。', () => {
+                    window.open('https://t.me/+I7NqdrjUVsA2OTU5', '_blank');
+                });
+            });
+        }
+        
+        // 点击微信模态框背景关闭
+        window.onclick = function(e) {
+            const wechatModal = document.getElementById('wechatModal');
+            if(e.target == wechatModal) hideWechatModal();
         };
     </script>
 </body>
