@@ -2,437 +2,241 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DSC注册与挖矿图文教程</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>波塞冬账号注册流程</title>
     <style>
-        :root {
-            --primary-bg: #f5f7fb;
-            --primary-blue: #2a7fff;
-            --highlight-orange: #ff6b35;
-            --important-red: #e63946;
-            --warning-bg: #fff3cd;
-            --info-bg: #e7f5ff;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            --radius: 8px;
-        }
-        
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        body {
-            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(-45deg, #f5f7fb, #e4e8f5, #f0f5ff, #e8f0fe);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            font-size: 14px; /* 缩小字体大小 */
+        * {
             margin: 0;
             padding: 0;
-            min-height: 100vh;
+            box-sizing: border-box;
         }
-        
+
+        body {
+            background: white;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: #1a2c3e;
+            padding: 2rem 1.5rem 4rem 1.5rem;
+            min-height: 100vh;
+            line-height: 1.5;
+        }
+
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 15px;
-            padding-bottom: 70px; /* 为底部导航栏留出空间 */
         }
-        
-        header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1E88E5;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.3px;
         }
-        
-        .logo {
-            height: 36px;
-            margin-right: 12px;
-            cursor: pointer;
-            background: none;
+
+        /* 红色边框提示：边框已窄，内边距进一步缩小使边框贴近文字 */
+        .alert-tip {
+            color: #dc2626;
+            background-color: #fff2f0;
+            border: 0.7px solid #dc2626;
+            border-radius: 8px;
+            padding: 0.2rem 0.8rem;    /* 上下内边距大幅减小，左右保持舒适 */
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-align: center;
         }
-        
-        h1 {
-            margin: 0;
-            color: var(--primary-blue);
-            font-size: 20px; /* 缩小字体大小 */
+
+        /* 注册链接区域：无边框，行距与步骤项一致 */
+        .register-link-area {
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+            line-height: 1.5;
         }
-        
-        .card {
-            background: rgba(255,255,255,0.9);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            padding: 20px;
-            margin-bottom: 25px;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(0,0,0,0.05);
+        .register-link-text {
+            color: #2c3e50;
         }
-        
-        .card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        .register-link-text a {
+            color: #1E88E5;
+            text-decoration: none;
+            font-weight: 600;
+            word-break: break-all;
         }
-        
-        h2 {
-            color: var(--primary-blue);
-            margin-top: 0;
-            font-size: 18px; /* 缩小字体大小 */
-            padding-bottom: 8px;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
-        }
-        
-        .highlight {
-            color: var(--highlight-orange);
-            font-weight: bold;
-        }
-        
-        .important {
-            color: var(--important-red);
-            font-weight: bold;
-        }
-        
-        .warning-box {
-            background-color: var(--warning-bg);
-            border-left: 4px solid var(--highlight-orange);
-            padding: 12px;
-            margin: 15px 0;
-            border-radius: 0 var(--radius) var(--radius) 0;
-            font-size: 13px; /* 缩小字体大小 */
-        }
-        
-        .info-box {
-            background-color: var(--info-bg);
-            border-left: 4px solid var(--primary-blue);
-            padding: 12px;
-            margin: 15px 0;
-            border-radius: 0 var(--radius) var(--radius) 0;
-            font-size: 13px; /* 缩小字体大小 */
-        }
-        
-        .register-link {
-            font-weight: bold;
-            color: var(--highlight-orange);
+        .register-link-text a:hover {
             text-decoration: underline;
-            font-size: 13px; /* 缩小字体大小 */
         }
-        
-        .copy-btn {
-            background-color: var(--primary-blue);
+
+        .steps {
+            list-style: none;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+            align-items: flex-start;
+        }
+
+        .step-num {
+            width: 32px;
+            height: 32px;
+            background: #E9F2FA;
+            color: #1E88E5;
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .step-text {
+            flex: 1;
+            font-size: 1rem;
+            color: #2c3e50;
+        }
+
+        .step-text strong {
+            color: #1E88E5;
+            font-weight: 600;
+        }
+
+        /* 返回首页按钮样式 */
+        .back-home-btn {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            background: #1E88E5;
             color: white;
             border: none;
-            padding: 4px 8px;
-            border-radius: 4px;
+            padding: 10px 22px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.95rem;
             cursor: pointer;
-            font-size: 12px; /* 缩小字体大小 */
-            margin-left: 8px;
-            transition: all 0.2s ease;
-        }
-        
-        .copy-btn:hover {
-            opacity: 0.9;
-            transform: scale(1.05);
-        }
-        
-        img.tutorial-img {
-            max-width: 100%;
-            height: auto;
-            border-radius: var(--radius);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            margin: 12px 0;
-            border: 1px solid rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-        }
-        
-        img.tutorial-img:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-        }
-        
-        footer {
-            text-align: center;
-            margin-top: 30px;
-            padding-top: 15px;
-            border-top: 1px solid rgba(0,0,0,0.1);
-            color: #666;
-            font-size: 12px; /* 缩小字体大小 */
-        }
-        
-        ol, ul {
-            padding-left: 18px;
-        }
-        
-        li {
-            margin-bottom: 8px;
-            font-size: 14px; /* 缩小字体大小 */
-        }
-        
-        .security-code {
-            font-family: monospace;
-            font-weight: bold;
-            color: var(--important-red);
-            background: rgba(0,0,0,0.03);
-            padding: 2px 5px;
-            border-radius: 4px;
-            font-size: 13px; /* 缩小字体大小 */
-        }
-        
-        /* 底部导航栏样式 */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: white;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-            z-index: 100;
-            padding: 8px 0;
-        }
-        
-        .nav-items {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+            font-family: inherit;
             text-decoration: none;
-            color: var(--primary-blue);
-            font-size: 11px; /* 缩小字体大小 */
-            flex: 1;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
         }
-        
-        .nav-icon {
-            font-size: 16px; /* 缩小字体大小 */
-            margin-bottom: 3px;
-            color: var(--primary-blue);
+
+        .back-home-btn.show {
+            opacity: 1;
+            visibility: visible;
         }
-        
-        .nav-text {
-            font-size: 10px; /* 缩小字体大小 */
-            text-align: center;
-            color: var(--primary-blue);
-        }
-        
-        @media (min-width: 768px) {
-            .nav-items {
-                padding: 0 12px;
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1.5rem 1rem 4rem 1rem;
+            }
+            .page-title {
+                font-size: 1.6rem;
+            }
+            .alert-tip {
+                font-size: 1rem;
+                padding: 0.15rem 0.7rem;  /* 移动端同步缩小内边距 */
+            }
+            .step-item {
+                gap: 0.8rem;
+                margin-bottom: 1rem;
+            }
+            .step-num {
+                width: 28px;
+                height: 28px;
+                font-size: 0.9rem;
+            }
+            .back-home-btn {
+                bottom: 20px;
+                right: 20px;
+                padding: 8px 18px;
+                font-size: 0.85rem;
+            }
+            .register-link-text {
+                font-size: 0.9rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <img src="images/logo.png" alt="DSC Logo" class="logo" onclick="window.location.href='index.html'" onerror="this.style.display='none'">
-            <h1>DSC注册与挖矿图文教程</h1>
-        </header>
-        
-        <div class="card">
-            <h2>一、注册账号</h2>
-            <p>注册链接：<a href="https://prod.digital-scroll.org/#/pages/reg?c=LcLh2C" class="register-link" target="_blank" id="registerLink">https://prod.digital-scroll.org/#/pages/reg?c=LcLh2C</a></p>
-            <img src="images/zuce_01.jpg" alt="注册账号界面" class="tutorial-img">
-            <ol>
-                <li><span class="important">选择账号类型</span>：手机号或邮箱（勾选其一）。</li>
-                <li><span class="important">填写账号信息</span>：
-                    <ul>
-                        <li>输入账号（手机号或邮箱）。</li>
-                        <li>设置登录密码（需输入两次确认）。</li>
-                    </ul>
-                </li>
-                <li><span class="important">填写邀请码</span>：输入推荐人提供的邀请码，必填（例如：<span class="highlight">LcLh2C</span>）。</li>
-                <li><span class="important">验证码</span>：根据右侧算式输入答案（示例中算式为<code>0*7=?</code>，需输入<code>0</code>）。</li>
-                <li>提交完成注册。</li>
-            </ol>
-        </div>
-        
-        <div class="card">
-            <h2>二、设置资金密码与保存安全码</h2>
-            <img src="images/anquanma_02.jpg" alt="安全设置界面" class="tutorial-img">
-            <ol>
-                <li><span class="important">登录后进入【我的】页面</span>，系统会弹出"保存安全码"提示。先点击红色字体【资金密码未设置？】。</li>
-                <li><span class="important">设置6位数字资金密码</span>（例如：<code>123456</code>）。</li>
-                <li><span class="important">获取安全码</span>：
-                    <ul>
-                        <li>输入资金密码点击获取安全码，系统弹出"保存安全码"提示（示例安全码：<span class="security-code">JC2zLBvtXH</span>）。</li>
-                        <li><span class="important">截屏或复制保存安全码</span>（用于找回密码，切勿泄露）。</li>
-                    </ul>
-                </li>
-                <li>勾选【我已保存好安全码】完成验证。</li>
-            </ol>
-            
-            <div class="warning-box">
-                <strong class="important">重要提示：</strong> 安全码和资金密码是账户核心凭证，丢失可能导致资产无法找回。
-            </div>
-        </div>
-        
-        <div class="card">
-            <h2>三、完成实名认证</h2>
-            <img src="images/shiming_03.jpg" alt="实名认证界面" class="tutorial-img">
-            <ol>
-                <li><span class="important">联系推荐人授权认证可快速实名</span>：
-                    点击你的账号进入个人信息页面，复制<strong>卷界地址</strong>发送给推荐人授权认证，等推荐人授权后，账户余额显示0.12DSC才可以认证。你也可以不联系推荐人，每天领取，等领取到余额有0.12DSC就可以实名了。</li>
-                <li><span class="important">进入实名认证</span>：
-                    <ul>
-                        <li>点击【我的】→【未实名】。</li>
-                        <li>填写真实姓名、身份证号等信息提交。【采集人脸】完成人脸识别。最后点击【人证对比】。</li>
-                    </ul>
-                </li>
-                <li><span class="important">加入社区</span>：
-                    <ul>
-                        <li>实名通过后，联系推荐人，进入社区群聊，一起共识。<span class="highlight">（最好是保存推荐人联系方式，遇到问题可及时联系！）</span></li>
-                        
-                    </ul>
-                </li>
-            </ol>
-            
-            <div class="warning-box">
-                <strong class="important">注意：</strong> 必须使用本人真实信息，否则无法通过审核。
-            </div>
-        </div>
-        
-        <div class="card">
-            <h2>四、日常操作与领取收益</h2>
-            <img src="images/chaozuo_04.jpg" alt="日常操作界面" class="tutorial-img">
-            <ol>
-                <li><span class="important">每日领取收益</span>：
-                    <ul>
-                        <li>进入【我的】页面→ 查看"卷轴收益"、"推广收益"、“股东分红”“。</li>
-                        <li><span class="important">点击红色数字领取</span>（卷轴收益每天至少领取一次，48小时未领取将停产）。</li>
-                    </ul>
-                </li>
-                <li><span class="important">查看个人资产信息</span>：
-                    <ul>
-                        <li>在【我的】页面中查看当前DSC可用余额、质押数量及收益详情。点击【活跃度】或【DSC质押】可查看所有已有卷轴。</li>
-                    </ul>
-                </li>
-                <li><span class="important">保存网页</span>：
-                    <ul>
-                        <li>把网页保存书签，以免丢失。再把网页发送到桌面就和APP一样了。APP现已暂停更新，等国际版上线后一起更新。</li>
-                    </ul>
-                </li>
-            </ol>
-            
-            <div class="warning-box">
-                <strong class="important">收益领取提醒：</strong> 每天操作避免停产，建议设置每日提醒。
-            </div>
-        </div>
-        
-        <div class="card">
-            <h2>注意事项</h2>
-            <ol>
-                <li><span class="important">安全码与密码</span>：安全码和资金密码是账户核心凭证，丢失可能导致资产无法找回。</li>
-                <li><span class="important">实名认证</span>：必须使用本人真实信息，否则无法通过审核。</li>
-                <li><span class="important">收益领取</span>：每天操作避免停产，建议设置每日提醒。</li>
-                <li><span class="important">兑换SCC</span>：领取收益需要燃烧SCC，建议兑换充足的SCC。</li>
-                <li><span class="important">联系推荐人</span>：完成注册后，添加推荐人微信，获取后续支持。</li>
-            </ol>
-        </div>
-        
-        <div class="info-box">
-            <strong>友情提示：</strong>
-            <ul>
-                <li>注册时需填写正确邀请码（如<span class="highlight">LcLh2C</span>）。</li>
-                <li>安全码页面需复制或截屏保存（示例：<span class="security-code">JC2zLBvtXH</span>）。</li>
-                <li>人脸识别时需保持整个头部在识别框内，根据提示做相应的动作，不要有多余的动作，避免逆光拍摄。</li>
-                <li>兑换、复投卷轴系统次日会赠送SCC，领取收益时会燃烧SCC。</li>
+<div class="container">
+    <h1 class="page-title">波塞冬账号注册流程</h1>
 
-            </ul>
-        </div>
-        
-        <div class="warning-box">
-            <strong class="important">遇到问题？联系推荐人！</strong><br>
-            微信号：<span id="wechatId">dsc_2025</span>
-            <button class="copy-btn" onclick="copyWechatId()">复制</button>
-        </div>
-        
-        <footer>
-            <p>祝您挖矿顺利，收益倍增！</p>
-        </footer>
+    <!-- 红色边框提示：内边距已大幅缩小，边框更贴近文字 -->
+    <div class="alert-tip">
+        国内用户请先打开加速器后再注册
     </div>
-    
-    <!-- 底部导航栏 -->
-    <nav class="bottom-nav">
-        <div class="nav-items">
-            <a href="index.html" class="nav-item">
-                <div class="nav-icon"><i class="fas fa-home"></i></div>
-                <div class="nav-text">首页</div>
-            </a>
-            <a href="https://prod.digital-scroll.org/#/pages/reg?c=LcLh2C" target="_blank" class="nav-item" id="navRegisterLink">
-                <div class="nav-icon"><i class="fas fa-user-plus"></i></div>
-                <div class="nav-text">注册/登录</div>
-            </a>
-            <a href="xueyuan.html" class="nav-item">
-                <div class="nav-icon"><i class="fas fa-graduation-cap"></i></div>
-                <div class="nav-text">卷轴学院</div>
-            </a>
-            <a href="moxing.html" class="nav-item">
-                <div class="nav-icon"><i class="fas fa-chart-line"></i></div>
-                <div class="nav-text">经济模型</div>
-            </a>
-            <a href="gudongzhidu.html" class="nav-item">
-                <div class="nav-icon"><i class="fas fa-handshake"></i></div>
-                <div class="nav-text">股东制度</div>
-            </a>
-            <a href="youxi.html" class="nav-item">
-                <div class="nav-icon"><i class="fas fa-calculator"></i></div>
-                <div class="nav-text">复投计算</div>
-            </a>
+
+    <!-- 注册链接：无边框，行距与步骤一致 -->
+    <div class="register-link-area">
+        <div class="register-link-text">
+            注册链接：<a href="https://test.poseidonchain.io/reg" target="_blank" rel="noopener noreferrer">https://test.poseidonchain.io/reg</a>
         </div>
-    </nav>
-    
-    <script>
-        // 检测微信浏览器
-        function isWeixinBrowser() {
-            return /MicroMessenger/i.test(navigator.userAgent);
+    </div>
+
+    <ul class="steps">
+        <li class="step-item">
+            <span class="step-num">1</span>
+            <span class="step-text"><strong>填写邮箱地址</strong> — 输入常用电子邮箱，用于接收验证码和账户通知。</span>
+        </li>
+        <li class="step-item">
+            <span class="step-num">2</span>
+            <span class="step-text"><strong>获取验证码</strong> — 点击“获取验证码”，系统将发送6位数字至您的邮箱。</span>
+        </li>
+        <li class="step-item">
+            <span class="step-num">3</span>
+            <span class="step-text"><strong>输入验证码</strong> — 查收邮件中的验证码，准确填入验证码输入框。</span>
+        </li>
+        <li class="step-item">
+            <span class="step-num">4</span>
+            <span class="step-text"><strong>设置密码</strong> — 密码至少8位，建议包含大小写字母+数字。两次输入需一致。</span>
+        </li>
+        <li class="step-item">
+            <span class="step-num">5</span>
+            <span class="step-text"><strong>填写邀请码（必填）</strong> — 请输入有效邀请码，方可完成注册。</span>
+        </li>
+        <li class="step-item">
+            <span class="step-num">6</span>
+            <span class="step-text"><strong>选择国家/地区</strong> — 根据所在地选择正确国家/地区。</span>
+        </li>
+        <li class="step-item">
+            <span class="step-num">7</span>
+            <span class="step-text"><strong>点击注册</strong> — 确认信息无误后，点击“注册”按钮即可完成账号创建。</span>
+        </li>
+        <li class="step-item">
+            <span class="step-num">8</span>
+            <span class="step-text"><strong>登录系统</strong> — 注册完成后，使用已设置的<strong>邮箱和密码</strong>登录波塞冬账号。</span>
+        </li>
+    </ul>
+</div>
+
+<!-- 返回首页按钮：链接到指定地址，滑动时显示2秒后隐藏 -->
+<a href="https://boipc.github.io/Digital-Scroll" class="back-home-btn" id="backHomeBtn" target="_self">← 返回首页</a>
+
+<script>
+    (function() {
+        const backBtn = document.getElementById('backHomeBtn');
+        let hideTimer = null;
+
+        function showButtonTemporarily() {
+            if (hideTimer) clearTimeout(hideTimer);
+            backBtn.classList.add('show');
+            hideTimer = setTimeout(() => {
+                backBtn.classList.remove('show');
+                hideTimer = null;
+            }, 2000);
         }
-        
-        // 复制微信号
-        function copyWechatId() {
-            const wechatId = document.getElementById('wechatId').textContent;
-            navigator.clipboard.writeText(wechatId).then(() => {
-                alert('微信号已复制: ' + wechatId);
-            }).catch(err => {
-                console.error('复制失败:', err);
-                // 备用复制方法
-                const textarea = document.createElement('textarea');
-                textarea.value = wechatId;
-                document.body.appendChild(textarea);
-                textarea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textarea);
-                alert('微信号已复制: ' + wechatId);
-            });
-        }
-        
-        // 微信浏览器中点击注册链接提示
-        function handleWeixinLinkClick(e) {
-            if (isWeixinBrowser()) {
-                e.preventDefault();
-                alert('请点击右上角菜单，选择"在浏览器中打开"后再进行注册操作');
-                return false;
-            }
-            return true;
-        }
-        
-        // 页面加载完成后绑定事件
-        document.addEventListener('DOMContentLoaded', function() {
-            // 主注册链接
-            document.getElementById('registerLink').addEventListener('click', handleWeixinLinkClick);
-            
-            // 导航栏注册链接
-            document.getElementById('navRegisterLink').addEventListener('click', handleWeixinLinkClick);
-        });
-    </script>
+
+        window.addEventListener('scroll', showButtonTemporarily);
+        window.addEventListener('touchmove', showButtonTemporarily);
+    })();
+</script>
 </body>
 </html>
