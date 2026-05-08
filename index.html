@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>波塞冬DSC · 去中心化链上挖矿平台</title>
-    
     <meta property="og:title" content="波塞冬DSC - 创新数字资产挖矿系统">
     <meta property="og:description" content="波塞冬DSC矿机系统 | 多重收益机制 | 节点自治 | POS共识挖矿">
-    <meta property="og:image" content="https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/logo.png">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -16,17 +13,15 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
         body {
             background: #ffffff;
             font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', sans-serif;
             color: #1f2937;
             min-height: 100vh;
-            padding-bottom: 70px;
+            padding-bottom: 30px;
             font-size: 14px;
             line-height: 1.4;
         }
-        
         .container {
             width: 100%;
             margin: 0 auto;
@@ -35,15 +30,11 @@
             position: relative;
             z-index: 1;
         }
-        
         header {
             text-align: center;
             margin-bottom: 12px;
             padding: 12px 15px 0 15px;
-            background: transparent;
-            border: none;
         }
-        
         .header-row {
             display: flex;
             align-items: center;
@@ -69,21 +60,17 @@
             align-items: baseline;
             gap: 2px;
         }
-        h1 .chinese-part,
-        h1 .dsc-part {
+        h1 .chinese-part, h1 .dsc-part {
             font-size: inherit;
             font-weight: inherit;
-            font-family: inherit;
             display: inline-block;
         }
-        
         .subtitle {
             font-size: 0.8rem;
             margin-top: 4px;
             color: #4b5563;
             font-weight: 500;
         }
-        
         .timer-container {
             margin: 12px 0 8px;
             padding: 16px 15px;
@@ -98,9 +85,7 @@
             margin-bottom: 8px;
             color: #000000;
             font-weight: 700; 
-            letter-spacing: 0.5px;
         }
-        
         .days-group {
             display: flex;
             align-items: baseline;
@@ -116,13 +101,7 @@
             background-clip: text;
             -webkit-text-fill-color: transparent;
             line-height: 1.1;
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            display: inline-block;
         }
-        .day-unit {
-            transform: translateY(1px);
-        }
-        
         .plain-time {
             display: inline-flex;
             align-items: center;
@@ -131,9 +110,7 @@
             font-weight: 600;
             font-family: monospace, system-ui;
             color: #0f3b6f;
-            background: transparent;
             gap: 0px;
-            transition: transform 0.1s ease;
         }
         .time-block {
             display: inline-block;
@@ -148,8 +125,6 @@
             font-size: 1.8rem;
             line-height: 1;
             color: #0f3b6f;
-            position: relative;
-            top: -0.08em;
             vertical-align: middle;
         }
         .tick-pop {
@@ -160,7 +135,6 @@
             50% { transform: scale(1.08); }
             100% { transform: scale(1); }
         }
-        
         .button-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -179,10 +153,8 @@
             cursor: pointer;
             transition: all 0.2s;
             box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-            font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
         }
         .btn:hover { background: #e2e8f0; color: #0a66b9; transform: translateY(-1px); }
-        
         .content-section {
             background: #ffffff;
             border-radius: 24px;
@@ -195,7 +167,6 @@
         }
         .active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(6px);} to { opacity: 1; transform: translateY(0);} }
-        
         h2 {
             font-size: 1.2rem;
             border-bottom: 2px solid #e2e8f0;
@@ -244,7 +215,6 @@
         ul { margin-left: 20px; margin-bottom: 12px; }
         li { margin-bottom: 5px; }
         .red-percent { color: #dc2626; font-weight: bold; }
-        
         .governance-flow {
             display: flex;
             flex-direction: column;
@@ -312,45 +282,6 @@
         .rule-box-card.normal {
             border-left: 4px solid #3b82f6;
         }
-        
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: #ffffff;
-            border-top: 1px solid #e2e8f0;
-            padding: 8px 0;
-            z-index: 200;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-            transition: opacity 0.25s ease, visibility 0.25s ease;
-        }
-        .bottom-nav.visible {
-            opacity: 1;
-            visibility: visible;
-            pointer-events: auto;
-        }
-        .nav-items {
-            display: flex;
-            justify-content: space-around;
-            max-width: 480px;
-            margin: 0 auto;
-        }
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: #4b5563;
-            font-size: 10px;
-            gap: 3px;
-        }
-        .nav-icon { font-size: 16px; color: #3b82f6; }
-        .nav-item:hover { color: #0a66b9; transform: translateY(-2px); }
-        
         .social-icons {
             display: flex;
             justify-content: center;
@@ -375,9 +306,7 @@
             transform: translateY(-2px);
             filter: brightness(1);
         }
-        
         footer { text-align: center; font-size: 0.7rem; padding: 8px 0; color: #6c757d; }
-        
         #contactModal, #wechatModal {
             display: none;
             position: fixed;
@@ -392,13 +321,89 @@
         .modal-content, .qrcode-content { background: #ffffff; padding: 20px; border-radius: 28px; width: 85%; max-width: 320px; text-align: center; border: 1px solid #e2e8f0; box-shadow: 0 20px 35px -8px rgba(0,0,0,0.2);}
         .copy-btn { background: #3b82f6; border: none; padding: 6px 12px; border-radius: 30px; color: white; cursor: pointer; margin-left: 8px; font-weight: 500; }
         .close-btn { margin-top: 15px; background: #e2e8f0; color: #1e293b; padding: 6px 18px; border-radius: 30px; border: none; cursor: pointer; }
-        
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 12px 0;
+        }
+        /* 浮动注册按钮 */
+        .floating-reg {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #3b82f6;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 300;
+            border: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.2s;
+        }
+        .floating-reg.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .floating-reg:hover {
+            transform: scale(1.02);
+            background-color: #2563eb;
+        }
+        /* 自定义提示框 */
+        .custom-alert {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+        .alert-box {
+            background: #3b82f6;
+            color: white;
+            border-radius: 28px;
+            padding: 24px 28px;
+            text-align: center;
+            max-width: 280px;
+            width: 80%;
+            box-shadow: 0 20px 35px -8px rgba(0,0,0,0.3);
+            animation: fadeIn 0.2s;
+        }
+        .alert-box p {
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        .alert-confirm {
+            background: white;
+            color: #3b82f6;
+            border: none;
+            padding: 8px 24px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.1s;
+        }
+        .alert-confirm:hover {
+            background: #f0f9ff;
+        }
         @media (max-width: 380px) { 
             .btn { font-size: 0.7rem; padding: 8px 3px; } 
             h1 { font-size: 1.9rem; } 
             .days-number, .day-unit { font-size: 2.8rem; }
             .plain-time { font-size: 1.5rem; }
             .time-block { min-width: 46px; }
+            .floating-reg { padding: 8px 16px; font-size: 0.8rem; }
         }
         @media (max-width: 340px) {
             .plain-time { font-size: 1.3rem; }
@@ -411,13 +416,9 @@
         <header>
             <div class="header-row">
                 <img src="images/logo01.png" alt="波塞冬" class="logo" onerror="this.style.display='none';">
-                <h1>
-                    <span class="chinese-part">波塞冬</span>
-                    <span class="dsc-part">DSC</span>
-                </h1>
+                <h1><span class="chinese-part">波塞冬</span><span class="dsc-part">DSC</span></h1>
             </div>
-            <p class="subtitle">链上挖矿 · 安全透︎明 · 去中心化闪兑</p>
-            
+            <p class="subtitle">链上挖矿 · 安全透明 · 去中心化闪兑</p>
             <div class="timer-container">
                 <div class="timer-label">DSC已运行</div>
                 <div class="days-group">
@@ -434,18 +435,20 @@
             </div>
         </header>
         
+        <!-- 顶部按钮：项目介绍、矿机说明、收益详解、导师体系、燃料机制、节点治理、注册流程、帮助中心、经济模型 -->
         <div class="button-grid">
             <button class="btn" onclick="showSection('intro')">项目介绍</button>
             <button class="btn" onclick="showSection('mining')">矿机说明</button>
             <button class="btn" onclick="showSection('earnings')">收益详解</button>
             <button class="btn" onclick="showSection('mentor')">导师体系</button>
-            <button class="btn" onclick="showSection('pos')">POS机制</button>
-            <button class="btn" onclick="showSection('sharing')">共享矿机</button>
+            <button class="btn" onclick="showSection('fuel')">燃料机制</button>
             <button class="btn" onclick="showSection('node')">节点治理</button>
-            <button class="btn" onclick="showSection('faq')">常见问题</button>
-            <button class="btn" onclick="window.location.href='sunhao.html'">损耗分析</button>
+            <button class="btn" onclick="location.href='guide.html'">注册流程</button>
+            <button class="btn" onclick="location.href='bangzhu.html'">帮助中心</button>
+            <button class="btn" onclick="location.href='moxing.html'">经济模型</button>
         </div>
         
+        <!-- 以下为本地内容模块，仅保留6个核心板块（其他3个跳转外部，已删除对应内容块） -->
         <div id="intro" class="content-section active">
             <h2>波塞冬链 · 项目介绍</h2>
             <p>波塞冬链由波塞冬团队自主研发设计，底层架构专为生态打造，支持生态合伙人无缝对接。链上采用45个动态治理节点，确保提案、投票与升级的社区共治；内置POS燃料机制，驱动产出领取与价值循环。坚持公平、开放、数据透明，每一笔规则皆可验证，让每一份共识都在链上留下痕迹。</p>
@@ -465,25 +468,34 @@
                 <li>DSC多重收益来源：挖矿收益、推广收益、共享矿机收益、导师分红收益、下级质押赠送DSC/POS、成为节点人每日分红等等</li>
                 <li>24小时全天候交易，无资金池，智能合约</li>
                 <li>去中心化跨链闪兑任意币种，无需钱包和私钥</li>
-                <li>跨链闪兑：DSC/POS可闪兑任意主流币，挖DSC就是挖主流币</li>
+                <li>全球注册建立全球共识</li>
+                <li>Ai大模型加持</li>
             </ul>
         </div>
         
         <div id="mining" class="content-section">
             <h2>矿机等级与算力规则</h2>
             <p>每位用户最多同时拥有<strong class="red-percent">7台</strong>不同等级矿机，月收益率固定18%~21%，综合算力决定最终产出。</p>
-            <h3>矿机月收益率表</h3>
-            <table>
-                <thead><tr><th>矿机等级</th><th>月收益率</th><th>质押上限</th> </tr</thead>
-                <tbody>
-                    <tr><td>试产/青铜/白银/黄金</td><td class="red-percent">18%</td><td>按等级递增</td> </tr
-                    <tr><td>铂金矿机</td><td class="red-percent">19%</td><td>高级矿机，质押额度</td> </tr
-                    <tr><td>钻石矿机</td><td class="red-percent">20%</td><td>专家级矿机，算力强大</td> </tr
-                    <tr><td>至尊矿机</td><td class="red-percent">21%</td><td>顶级矿机，最高质押</td> </tr
-                </tbody>
-            </table>
+            <div class="table-wrapper">
+                <table>
+                    <thead><tr><th>矿机等级</th><th>月收益率</th><th>说明</th></tr></thead>
+                    <tbody>
+                        <tr><td>试产矿机</td><td class="red-percent">18%</td><td>初始体验矿机</td></tr>
+                        <tr><td>青铜矿机</td><td class="red-percent">18%</td><td>入门级矿机</td></tr>
+                        <tr><td>白银矿机</td><td class="red-percent">18%</td><td>进阶级矿机</td></tr>
+                        <tr><td>黄金矿机</td><td class="red-percent">18%</td><td>中等级矿机</td></tr>
+                        <tr><td>铂金矿机</td><td class="red-percent">19%</td><td>高级矿机</td></tr>
+                        <tr><td>钻石矿机</td><td class="red-percent">20%</td><td>专家级矿机</td></tr>
+                        <tr><td>至尊矿机</td><td class="red-percent">21%</td><td>顶级矿机</td></tr>
+                    </tbody>
+                </table>
+            </div>
             <h3>综合算力构成</h3>
-            <ul><li><strong>基础算力</strong>：试产矿机自带10点算力</li><li><strong>质能算力</strong>：质押 1 DSC = 1 算力</li><li><strong>导师算力</strong>：达成M1~M5 额外增加10~10000点算力</li></ul>
+            <ul>
+                <li><strong>基础算力</strong>：试产矿机自带10点算力</li>
+                <li><strong>质能算力</strong>：质押 1 DSC = 1 算力</li>
+                <li><strong>导师算力</strong>：达成M1~M5 额外增加10~10000点算力</li>
+            </ul>
             <div class="highlight">小技巧：初期通过质押拉升算力更快回本，中期冲刺导师享受长期被动加持！</div>
         </div>
         
@@ -494,30 +506,62 @@
             <h3>发展收益（直推/间推）</h3>
             <p>直推下级领取产出时，上级获得<strong class="red-percent">5%</strong>奖励；间推获得<strong class="red-percent">3%</strong>。烧伤机制：若上级质能算力<下级，收益减半。</p>
             <h3>导师收益</h3>
-            <p>交易手续费分红池按导师等级分配：M1享5%，M2享15%，M3享20%，M4享15%，M5享15%。每日结算。</p>
+            <p>交易手续费分红池按导师等级分配，每日结算：</p>
+            <ul>
+                <li>M1导师：享 <span class="red-percent">5%</span> 手续费分红</li>
+                <li>M2导师：享 <span class="red-percent">15%</span> 手续费分红</li>
+                <li>M3导师：享 <span class="red-percent">20%</span> 手续费分红</li>
+                <li>M4导师：享 <span class="red-percent">15%</span> 手续费分红</li>
+                <li>M5导师：享 <span class="red-percent">15%</span> 手续费分红</li>
+            </ul>
             <h3>分红收益（POS资金池）</h3>
-            <p>USDT资金池每日分配比例如下：节点分红5%，DSC质押者自身5.75%，DSC质押上级5.75%，MAC质押者自身5.75%，MAC上级5.75%，运营17%，回购销毁55%。</p>
-            <div class="highlight">共享矿机收益属于额外叠加，详见“共享矿机”板块，综合年化最高可达30%+。</div>
+            <p>USDT资金池每日分配比例如下：</p>
+            <ul>
+                <li>节点分红：<span class="red-percent">5%</span></li>
+                <li>DSC质押者自身：<span class="red-percent">5.75%</span></li>
+                <li>DSC质押上级：<span class="red-percent">5.75%</span></li>
+                <li>MAC质押者自身：<span class="red-percent">5.75%</span></li>
+                <li>MAC质押上级：<span class="red-percent">5.75%</span></li>
+                <li>运营：<span class="red-percent">17%</span></li>
+                <li>回购销毁：<span class="red-percent">55%</span></li>
+            </ul>
+            <div class="highlight">共享矿机收益属于额外叠加，详见“帮助中心”板块，综合年化最高可达30%+。</div>
         </div>
         
         <div id="mentor" class="content-section">
             <h2>导师等级体系</h2>
             <p>达成导师不仅获得额外算力加持，还能分享交易手续费的巨额分红。</p>
-            <table>
-                <thead><tr><th>等级</th><th>族群算力</th><th>团队算力</th><th>直推活粉</th><th>自身算力</th><th>导师算力奖励</th> </tr</thead>
-                <tbody>
-                    <tr><td>M1</td><td>≥5K</td><td>-</td><td>≥3</td><td>≥20</td><td>+10</td> </tr
-                    <tr><td>M2</td><td>≥20K</td><td>≥5K</td><td>≥6</td><td>≥1K</td><td>+500</td> </tr
-                    <tr><td>M3</td><td>≥100K</td><td>≥20K</td><td>≥10</td><td>≥2K</td><td>+1000</td> </tr
-                    <tr><td>M4</td><td>≥500K</td><td>≥100K</td><td>≥15</td><td>≥10K</td><td>+5000</td> </tr
-                    <tr><td>M5</td><td>≥1000K</td><td>≥300K</td><td>≥20</td><td>≥20K</td><td>+10000</td> </tr
-                </tbody>
-            </table>
+            <h3>导师晋升条件与算力奖励</h3>
+            <div class="table-wrapper">
+                <table>
+                    <thead><tr><th>等级</th><th>族群算力</th><th>团队算力</th><th>直推活粉</th><th>自身算力</th><th>导师算力奖励</th></tr></thead>
+                    <tbody>
+                        <tr><td>M1</td><td>≥5K</td><td>-</td><td>≥3</td><td>≥20</td><td>+10</td></tr>
+                        <tr><td>M2</td><td>≥20K</td><td>≥5K</td><td>≥6</td><td>≥1K</td><td>+500</td></tr>
+                        <tr><td>M3</td><td>≥100K</td><td>≥20K</td><td>≥10</td><td>≥2K</td><td>+1000</td></tr>
+                        <tr><td>M4</td><td>≥500K</td><td>≥100K</td><td>≥15</td><td>≥10K</td><td>+5000</td></tr>
+                        <tr><td>M5</td><td>≥1000K</td><td>≥300K</td><td>≥20</td><td>≥20K</td><td>+10000</td></tr>
+                    </tbody>
+                </table>
+            </div>
             <p><strong>活粉定义：</strong> 质能算力>0 且拥有运行中的矿机。</p>
+            <h3>导师手续费分红比例</h3>
+            <div class="table-wrapper">
+                <table>
+                    <thead><tr><th>等级</th><th>手续费分红比例</th></tr></thead>
+                    <tbody>
+                        <tr><td>M1</td><td class="red-percent">5%</td></tr>
+                        <tr><td>M2</td><td class="red-percent">15%</td></tr>
+                        <tr><td>M3</td><td class="red-percent">20%</td></tr>
+                        <tr><td>M4</td><td class="red-percent">15%</td></tr>
+                        <tr><td>M5</td><td class="red-percent">15%</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         
-        <div id="pos" class="content-section">
-            <h2>POS燃料机制</h2>
+        <div id="fuel" class="content-section">
+            <h2>燃料机制 · POS</h2>
             <p>POS是领取矿机产出收益的必要燃料，同时构建了资金池分红模型。</p>
             <h3>POS生成</h3>
             <p>区块链每15秒打包一次，每次生成1.5 POS至总池，每日约生成8640 POS。</p>
@@ -526,14 +570,6 @@
             <h3>消耗规则</h3>
             <p>领取产出时燃烧POS = 领取数量 × 市场价 ÷ USDT汇率 × 25% × 兑换比例。</p>
             <div class="highlight">资金池分红：所有兑换POS沉淀的USDT每日按比例分发给节点、质押者及回购销毁，构建通缩飞轮。</div>
-        </div>
-        
-        <div id="sharing" class="content-section">
-            <h2>共享矿机 · 集体算力金库</h2>
-            <p>共享矿机提供远超普通矿机的收益，玩家按投入占比瓜分每日产出，无需自己维护矿机。</p>
-            <div class="rule-box"><strong>1号共享矿机 (DSC池)</strong><br>投入币种：DSC<br>月收益率：<span class="red-percent">20%</span><br>运作：每日自动质押，产出按玩家转入占比自动结算至共享收益账户。</div>
-            <div class="rule-box"><strong>2号共享矿机 (USDT池)</strong><br>投入币种：USDT<br>月收益率：<span class="red-percent">30%</span><br>运作：系统回购市场DSC后自动质押，产出按占比每日发放。</div>
-            <p>参与建议：持有USDT的用户建议参与2号矿机，持有DSC长线用户参与1号矿机。</p>
         </div>
         
         <div id="node" class="content-section">
@@ -558,30 +594,9 @@
             <div class="highlight">节点可享每日DSC/USDT兑换POS池的分红，分红比例固定为5%，按节点数量平均分配。</div>
         </div>
         
-        <div id="faq" class="content-section">
-            <h2>波塞冬DSC常见问题</h2>
-            <h3>矿机为什么停产？如何恢复？</h3>
-            <p>超过48小时未领取收益会导致矿机停产，重新领取后自动恢复生产，建议每日定时领取或使用收益托管服务。</p>
-            <h3>发展收益烧伤机制具体怎么算？</h3>
-            <p>例如直推下级领100 DSC，若上级质能算力<下级，则上级获得2.5% (减半)，反之获得5%满额奖励。</p>
-            <h3>POS不够怎么办？</h3>
-            <p>可通过质押DSC每日获赠POS，或者在兑换市场用USDT直接购买POS。</p>
-            <h3>共享矿机会不会亏损本金？</h3>
-            <p>共享矿机是链上协议自动执行，每日产出按占比分配，不会产生本金损失，但产出随全网算力浮动，历史年化稳定在20%~30%区间。</p>
-            <h3>账户安全与认证</h3>
-            <p>首次注册需要实名认证，余额满1DSC需二次人脸验证；推荐绑定谷歌验证器保障资金安全。</p>
-        </div>
-        
+        <!-- 联系与微信模态框 (保留社交功能) -->
         <div id="contactModal"><div class="modal-content"><h3>联系推荐人</h3><p>复制微信号快速认证↓</p><div><span id="wechatId">dsc_helper</span><button class="copy-btn" onclick="copyWechatId()">复制</button></div><div id="copyStatus"></div><button class="close-btn" onclick="hideContactModal()">关闭</button></div></div>
-        
-        <!-- 微信模态框 - 图片链接已替换为本地 images/weixing1.png -->
-        <div id="wechatModal">
-            <div class="qrcode-content">
-                <h3>官方公众号</h3>
-                <img src="images/weixing1.png" style="width:100%;margin:10px 0;" alt="微信公众号二维码">
-                <button class="close-btn" onclick="hideWechatModal()">关闭</button>
-            </div>
-        </div>
+        <div id="wechatModal"><div class="qrcode-content"><h3>官方公众号</h3><img src="images/weixing1.png" style="width:100%;margin:10px 0;" alt="微信公众号二维码"><button class="close-btn" onclick="hideWechatModal()">关闭</button></div></div>
         
         <div class="social-icons">
             <a href="javascript:void(0)" class="social-icon" onclick="showWechatModal()"><img src="https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/%E5%BE%AE%E4%BF%A1.svg" alt="微信"></a>
@@ -593,35 +608,25 @@
         <footer><p>波塞冬已至，暗流中升起曙光；算力为信，共识为舟，我们一同靠岸。</p></footer>
     </div>
     
-    <nav class="bottom-nav" id="dynamicNav">
-        <div class="nav-items">
-            <a href="https://prod.digital-scroll.org/#/pages/reg?c=LcLh2C" class="nav-item" target="_blank"><div class="nav-icon"><i class="fas fa-user-plus"></i></div><div class="nav-text">注册/登录</div></a>
-            <a href="guide.html" class="nav-item"><div class="nav-icon"><i class="fas fa-file-alt"></i></div><div class="nav-text">操作指南</div></a>
-            <a href="bangzhu.html" class="nav-item"><div class="nav-icon"><i class="fas fa-question-circle"></i></div><div class="nav-text">帮助中心</div></a>
-            <a href="youxi.html" class="nav-item"><div class="nav-icon"><i class="fas fa-calculator"></i></div><div class="nav-text">复投计算</div></a>
-            <a href="moxing.html" class="nav-item"><div class="nav-icon"><i class="fas fa-chart-line"></i></div><div class="nav-text">经济模型</div></a>
-        </div>
-    </nav>
+    <!-- 浮动注册/登录按钮 -->
+    <div id="floatingRegBtn" class="floating-reg">注册 / 登录</div>
     
     <script>
+        // 计时与动画
         let lastSeconds = -1;
         const liveClock = document.getElementById('liveClock');
-        
         function updateRuntimeAndClock() {
             const start = new Date('2023-09-25T00:00:00');
             const now = new Date();
             const diff = now - start;
             const days = Math.floor(diff / 86400000);
             document.getElementById('daysNum').innerText = days;
-            
             const hours = now.getHours().toString().padStart(2, '0');
             const minutes = now.getMinutes().toString().padStart(2, '0');
             const seconds = now.getSeconds().toString().padStart(2, '0');
-            
             document.getElementById('hoursSpan').innerText = hours;
             document.getElementById('minutesSpan').innerText = minutes;
             document.getElementById('secondsSpan').innerText = seconds;
-            
             if (lastSeconds !== seconds) {
                 liveClock.classList.remove('tick-pop');
                 void liveClock.offsetWidth;
@@ -634,9 +639,12 @@
         
         function showSection(id) {
             document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+            const target = document.getElementById(id);
+            if (target) target.classList.add('active');
+            if (target) target.scrollIntoView({ behavior: 'smooth' });
         }
+        
+        // 模态框函数
         function showWechatModal() { document.getElementById('wechatModal').style.display = 'flex'; }
         function hideWechatModal() { document.getElementById('wechatModal').style.display = 'none'; }
         function hideContactModal() { document.getElementById('contactModal').style.display = 'none'; }
@@ -648,20 +656,52 @@
             setTimeout(()=>statusDiv.innerHTML='',1500);
         }
         
-        // 动态导航栏逻辑
-        const nav = document.getElementById('dynamicNav');
-        let hideNavTimer = null;
-        function showNavTemporarily() {
-            if (!nav) return;
-            if (hideNavTimer) clearTimeout(hideNavTimer);
-            nav.classList.add('visible');
-            hideNavTimer = setTimeout(() => {
-                nav.classList.remove('visible');
-                hideNavTimer = null;
+        // 浮动按钮逻辑：滑动时显示2秒
+        const floatingBtn = document.getElementById('floatingRegBtn');
+        let hideFloatTimer = null;
+        function showFloatTemporarily() {
+            if (!floatingBtn) return;
+            if (hideFloatTimer) clearTimeout(hideFloatTimer);
+            floatingBtn.classList.add('visible');
+            hideFloatTimer = setTimeout(() => {
+                floatingBtn.classList.remove('visible');
+                hideFloatTimer = null;
             }, 2000);
         }
-        window.addEventListener('scroll', showNavTemporarily);
-        window.addEventListener('touchmove', showNavTemporarily);
+        window.addEventListener('scroll', showFloatTemporarily);
+        window.addEventListener('touchmove', showFloatTemporarily);
+        setTimeout(showFloatTemporarily, 500);
+        
+        // 自定义蓝色提示框（居中，仅确定键）
+        function showCustomAlert(message, onConfirm) {
+            // 移除已存在的弹窗
+            const existing = document.querySelector('.custom-alert');
+            if (existing) existing.remove();
+            const overlay = document.createElement('div');
+            overlay.className = 'custom-alert';
+            const alertBox = document.createElement('div');
+            alertBox.className = 'alert-box';
+            const p = document.createElement('p');
+            p.innerText = message;
+            const confirmBtn = document.createElement('button');
+            confirmBtn.innerText = '知道了';
+            confirmBtn.className = 'alert-confirm';
+            confirmBtn.onclick = () => {
+                overlay.remove();
+                if (onConfirm) onConfirm();
+            };
+            alertBox.appendChild(p);
+            alertBox.appendChild(confirmBtn);
+            overlay.appendChild(alertBox);
+            document.body.appendChild(overlay);
+        }
+        
+        // 注册/登录按钮点击：弹出蓝色提示框，点击确定后跳转
+        floatingBtn.addEventListener('click', () => {
+            showCustomAlert('国内用户请自备加速器，否则可能无法打开网页', () => {
+                window.location.href = 'https://boipc.github.io/Digital-Scroll';
+            });
+        });
         
         window.onclick = function(e){
             if(e.target == document.getElementById('contactModal')) hideContactModal();
