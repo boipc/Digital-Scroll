@@ -149,11 +149,12 @@
             50% { transform: scale(1.08); }
             100% { transform: scale(1); }
         }
+        /* 原有9按钮网格，下边距调小使与新增按钮组更紧凑 */
         .button-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 8px;
-            margin-bottom: 15px;
+            margin-bottom: 8px;   /* 从15px减小到8px，缩小行距 */
             margin-top: 4px;
         }
         .btn {
@@ -169,6 +170,36 @@
             box-shadow: 0 1px 2px rgba(0,0,0,0.05);
         }
         .btn:hover { background: #e2e8f0; color: #0a66b9; transform: translateY(-1px); }
+        
+        /* 新增三个蓝色按钮样式，行距进一步紧凑（上边距归零，下边距微小） */
+        .button-grid-new {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            margin: 2px 0 8px 0;   /* 上边距2px，使得与上方“注册流程”按钮行距明显减小 */
+        }
+        .btn-new {
+            background: #3b82f6;
+            border: none;
+            color: white;
+            padding: 9px 5px;
+            font-size: 0.8rem;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+        .btn-new:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+        }
+        .btn-new:active {
+            transform: scale(0.96);
+        }
+        
         .content-section {
             background: #ffffff;
             border-radius: 24px;
@@ -357,20 +388,20 @@
         .qrcode-content { background: #ffffff; padding: 20px; border-radius: 28px; width: 85%; max-width: 320px; text-align: center; border: 1px solid #e2e8f0; box-shadow: 0 20px 35px -8px rgba(0,0,0,0.2);}
         .close-btn { margin-top: 15px; background: #e2e8f0; color: #1e293b; padding: 6px 18px; border-radius: 30px; border: none; cursor: pointer; }
         
-        /* 新的浮动双按钮组样式 (屏幕中下方并排，位置上调，便于点击) */
+        /* 浮动双按钮组 - 位置移到屏幕底部 (bottom设为较小值，紧贴底部) ，且初始隐藏，滚动灵敏出现 */
         .floating-buttons-group {
             position: fixed;
-            bottom: 85px;          /* 从原先28px上调至85px，更利于拇指点击 */
+            bottom: 20px;          /* 靠近底部，符合“往屏幕底部移动”要求 */
             left: 0;
             right: 0;
             display: flex;
             justify-content: center;
-            gap: 16px;
+            gap: 18px;
             z-index: 300;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.2s;
-            pointer-events: none; /* 隐藏时完全不可交互 */
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+            pointer-events: none;
         }
         .floating-buttons-group.visible {
             opacity: 1;
@@ -399,10 +430,10 @@
             background-color: #2563eb;
             transform: translateY(-2px);
         }
-        /* 针对较小屏幕，按钮位置略微调整，依然保持较方便点击的高度 */
+        /* 小屏幕时底部留出安全边距，但依然靠近底部 */
         @media (max-width: 480px) {
             .floating-buttons-group {
-                bottom: 72px;
+                bottom: 16px;
                 gap: 14px;
             }
             .floating-action-btn {
@@ -413,7 +444,7 @@
         }
         @media (max-width: 380px) {
             .floating-buttons-group {
-                bottom: 65px;
+                bottom: 12px;
                 gap: 12px;
             }
         }
@@ -507,6 +538,7 @@
             </div>
         </header>
         
+        <!-- 原有9个功能按钮 -->
         <div class="button-grid">
             <button class="btn" onclick="showSection('intro')">项目介绍</button>
             <button class="btn" onclick="showSection('mining')">矿机说明</button>
@@ -514,12 +546,19 @@
             <button class="btn" onclick="showSection('mentor')">导师体系</button>
             <button class="btn" onclick="showSection('fuel')">燃料机制</button>
             <button class="btn" onclick="showSection('node')">节点治理</button>
-            <button class="btn" onclick="location.href='guide.html'">注册流程</button>
+            <button class="btn" id="guideBtn">注册流程</button>   <!-- 注册流程按钮，ID便于保持交互，使用location跳转 -->
             <button class="btn" onclick="location.href='bangzhu.html'">帮助中心</button>
             <button class="btn" onclick="location.href='moxing.html'">经济模型</button>
         </div>
         
-        <!-- 项目介绍板块：替换为全新的Web3生态介绍内容 -->
+        <!-- 新增三个蓝色按钮：复投计算 / 资料App / 波塞冬App（行距已调小） -->
+        <div class="button-grid-new">
+            <button class="btn-new" id="compoundBtn">复投计算</button>
+            <button class="btn-new" id="materialBtn">资料App</button>
+            <button class="btn-new" id="appDownloadBtn">波塞冬App</button>
+        </div>
+        
+        <!-- 项目介绍板块 -->
         <div id="intro" class="content-section active">
             <h2>波塞冬链 · 项目介绍</h2>
             <p>波塞冬 DSC 是面向 Web3 时代打造的新一代数字生态体系，致力于构建开放、透明、协同发展的全球化社区网络。</p>
@@ -619,7 +658,7 @@
             <div class="highlight">节点可享每日DSC/USDT兑换POS池的分红，分红比例固定为5%，按节点数量平均分配。</div>
         </div>
         
-        <!-- 微信公众号模态框：标题已改为“微信公众号” -->
+        <!-- 微信公众号模态框 -->
         <div id="wechatModal">
             <div class="qrcode-content">
                 <h3>微信公众号</h3>
@@ -638,32 +677,65 @@
         <footer><p>波塞冬已至，暗流中升起曙光；算力为信，共识为舟，我们一同靠岸。</p></footer>
     </div>
     
-    <!-- 双按钮组（注册/登录）位置已向上调整，便于点击 -->
+    <!-- 浮动双按钮组（注册/登录）现在在底部，滚动灵敏出现停留2秒 -->
     <div id="floatingBtnGroup" class="floating-buttons-group">
         <button id="regFloatBtn" class="floating-action-btn">注册</button>
         <button id="loginFloatBtn" class="floating-action-btn">登录</button>
     </div>
     
     <script>
-        let hideFloatTimer = null;
-        const floatingGroup = document.getElementById('floatingBtnGroup');
+        // 注册流程按钮的跳转（原有按钮单独处理）
+        const guideBtn = document.getElementById('guideBtn');
+        if (guideBtn) {
+            guideBtn.addEventListener('click', () => {
+                window.location.href = 'guide.html';
+            });
+        }
         
-        function showFloatGroup() {
+        // 浮动按钮组：滚动出现逻辑 —— 非常灵敏，滚动超过5px即显示，停留2秒后自动隐藏
+        const floatingGroup = document.getElementById('floatingBtnGroup');
+        let hideFloatTimer = null;
+        let lastScrollY = window.scrollY || window.pageYOffset;
+        const SCROLL_SENSITIVITY = 5;  // 只需滚动5px就触发显示
+        
+        function hideFloatGroup() {
+            if (floatingGroup) {
+                floatingGroup.classList.remove('visible');
+            }
+            if (hideFloatTimer) {
+                clearTimeout(hideFloatTimer);
+                hideFloatTimer = null;
+            }
+        }
+        
+        function showFloatGroupTemporary() {
             if (!floatingGroup) return;
-            if (hideFloatTimer) clearTimeout(hideFloatTimer);
+            if (hideFloatTimer) {
+                clearTimeout(hideFloatTimer);
+            }
             floatingGroup.classList.add('visible');
             hideFloatTimer = setTimeout(() => {
                 floatingGroup.classList.remove('visible');
                 hideFloatTimer = null;
-            }, 2200);
+            }, 2000);   // 停留2秒后消失
         }
         
-        // 滚动/触摸时显示浮组
-        window.addEventListener('scroll', showFloatGroup);
-        window.addEventListener('touchmove', showFloatGroup);
-        setTimeout(showFloatGroup, 600);
+        function onScrollHandler() {
+            const currentScroll = window.scrollY || window.pageYOffset;
+            const delta = Math.abs(currentScroll - lastScrollY);
+            if (delta >= SCROLL_SENSITIVITY) {
+                showFloatGroupTemporary();
+            }
+            lastScrollY = currentScroll;
+        }
         
-        // 自定义模态框复用
+        // 初始隐藏，无自动显示
+        window.addEventListener('scroll', onScrollHandler);
+        window.addEventListener('touchmove', onScrollHandler);
+        // 确保页面加载完成时没有显示浮动按钮
+        hideFloatGroup();
+        
+        // 自定义模态框 (仅用于电报)
         function showCustomModal(message, onConfirm) {
             const existing = document.querySelector('.custom-modal');
             if (existing) existing.remove();
@@ -686,31 +758,25 @@
             document.body.appendChild(overlay);
         }
         
-        // 注册链接（含推荐码）与登录链接
         const regUrl = 'https://app.poseidonchain.io/reg?c=182N17';
         const loginUrl = 'https://app.poseidonchain.io';
+        const regFloat = document.getElementById('regFloatBtn');
+        const loginFloat = document.getElementById('loginFloatBtn');
         
-        const regBtn = document.getElementById('regFloatBtn');
-        const loginBtn = document.getElementById('loginFloatBtn');
-        
-        if (regBtn) {
-            regBtn.addEventListener('click', (e) => {
+        if (regFloat) {
+            regFloat.addEventListener('click', (e) => {
                 e.preventDefault();
-                showCustomModal('温馨提示：国内用户请开加速器访问，否则可能无法打开网页。', () => {
-                    window.location.href = regUrl;
-                });
+                window.location.href = regUrl;
             });
         }
-        if (loginBtn) {
-            loginBtn.addEventListener('click', (e) => {
+        if (loginFloat) {
+            loginFloat.addEventListener('click', (e) => {
                 e.preventDefault();
-                showCustomModal('温馨提示：国内用户请开加速器访问，否则可能无法打开网页。', () => {
-                    window.location.href = loginUrl;
-                });
+                window.location.href = loginUrl;
             });
         }
         
-        // Telegram 按钮交互
+        // 电报保留模态框
         const telegramBtnElem = document.getElementById('telegramBtn');
         if (telegramBtnElem) {
             telegramBtnElem.addEventListener('click', (e) => {
@@ -721,7 +787,7 @@
             });
         }
         
-        // 计时器逻辑
+        // 计时器
         let lastSeconds = -1;
         const liveClock = document.getElementById('liveClock');
         function updateRuntimeAndClock() {
@@ -755,11 +821,24 @@
         
         function showWechatModal() { document.getElementById('wechatModal').style.display = 'flex'; }
         function hideWechatModal() { document.getElementById('wechatModal').style.display = 'none'; }
-        
         window.onclick = function(e) {
             const wechatModal = document.getElementById('wechatModal');
             if(e.target == wechatModal) hideWechatModal();
         };
+        
+        // 新增三按钮
+        const compoundBtn = document.getElementById('compoundBtn');
+        const materialBtn = document.getElementById('materialBtn');
+        const appDownloadBtn = document.getElementById('appDownloadBtn');
+        if (compoundBtn) {
+            compoundBtn.addEventListener('click', () => { window.location.href = 'jisuan.html'; });
+        }
+        if (materialBtn) {
+            materialBtn.addEventListener('click', () => { window.location.href = 'https://github.com/boipc/poseidon/releases/download/ziliao/ziliao_v1.5.0.APK'; });
+        }
+        if (appDownloadBtn) {
+            appDownloadBtn.addEventListener('click', () => { window.location.href = 'https://github.com/boipc/poseidon/releases/download/Poseidon/Poseidon_v1.2.0.APK'; });
+        }
     </script>
 </body>
 </html>
