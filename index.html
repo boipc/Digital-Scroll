@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>波塞冬DSC · 去中心化链上挖矿平台</title>
-    
+
     <!-- 社交分享元数据 (Open Graph) -->
     <meta property="og:title" content="波塞冬DSC - 创新数字资产挖矿平台">
     <meta property="og:description" content="波塞冬DSC链上挖矿，多重收益等你来拿，点击了解详情。">
@@ -13,13 +13,13 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="波塞冬DSC">
     <meta property="og:locale" content="zh_CN">
-    
+
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="波塞冬DSC - 创新数字资产挖矿平台">
     <meta name="twitter:description" content="波塞冬DSC链上挖矿，多重收益等你来拿，点击了解详情。">
     <meta name="twitter:image" content="https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/logo.png">
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -57,10 +57,10 @@
             margin-bottom: 8px;
             flex-wrap: wrap;
         }
-        .logo { 
-            height: 2.8rem; 
-            width: auto; 
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.08)); 
+        .logo {
+            height: 2.8rem;
+            width: auto;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.08));
             display: block;
         }
         h1 {
@@ -74,7 +74,8 @@
             align-items: baseline;
             gap: 2px;
         }
-        h1 .chinese-part, h1 .dsc-part {
+        h1 .chinese-part,
+        h1 .dsc-part {
             font-size: inherit;
             font-weight: inherit;
             display: inline-block;
@@ -94,11 +95,11 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
             text-align: center;
         }
-        .timer-label { 
+        .timer-label {
             font-size: 1.1rem;
             margin-bottom: 8px;
             color: #000000;
-            font-weight: 700; 
+            font-weight: 700;
         }
         .days-group {
             display: flex;
@@ -107,7 +108,8 @@
             gap: 6px;
             margin-bottom: 8px;
         }
-        .days-number, .day-unit {
+        .days-number,
+        .day-unit {
             font-size: 3.5rem;
             font-weight: 800;
             background: linear-gradient(135deg, #1e88e5, #0a66b9);
@@ -145,16 +147,22 @@
             animation: tickScale 0.2s ease-out;
         }
         @keyframes tickScale {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.08); }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.08);
+            }
+            100% {
+                transform: scale(1);
+            }
         }
-        /* 原有9按钮网格，下边距调小使与新增按钮组更紧凑 */
+        /* 原有9按钮网格 */
         .button-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 8px;
-            margin-bottom: 8px;   /* 从15px减小到8px，缩小行距 */
+            margin-bottom: 8px;
             margin-top: 4px;
         }
         .btn {
@@ -167,16 +175,20 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         }
-        .btn:hover { background: #e2e8f0; color: #0a66b9; transform: translateY(-1px); }
-        
-        /* 新增三个蓝色按钮样式，行距进一步紧凑（上边距归零，下边距微小） */
+        .btn:hover {
+            background: #e2e8f0;
+            color: #0a66b9;
+            transform: translateY(-1px);
+        }
+
+        /* 三个蓝色按钮（复投计算 / 注册 / 登录） */
         .button-grid-new {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 6px;
-            margin: 2px 0 8px 0;   /* 上边距2px，使得与上方“注册流程”按钮行距明显减小 */
+            margin: 2px 0 8px 0;
         }
         .btn-new {
             background: #3b82f6;
@@ -199,7 +211,7 @@
         .btn-new:active {
             transform: scale(0.96);
         }
-        
+
         .content-section {
             background: #ffffff;
             border-radius: 24px;
@@ -210,8 +222,19 @@
             display: none;
             animation: fadeIn 0.3s;
         }
-        .active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px);} to { opacity: 1; transform: translateY(0);} }
+        .active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(6px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
         h2 {
             font-size: 1.2rem;
             border-bottom: 2px solid #e2e8f0;
@@ -220,16 +243,21 @@
             color: #0a66b9;
             font-weight: 700;
         }
-        h3 { 
-            font-size: 1rem; 
-            margin: 15px 0 10px; 
-            color: #1e293b; 
-            border-left: 4px solid #3b82f6; 
+        h3 {
+            font-size: 1rem;
+            margin: 15px 0 10px;
+            color: #1e293b;
+            border-left: 4px solid #3b82f6;
             padding-left: 12px;
             font-weight: 600;
         }
-        p, li { color: #334155; font-size: 0.85rem; line-height: 1.45; }
-        
+        p,
+        li {
+            color: #334155;
+            font-size: 0.85rem;
+            line-height: 1.45;
+        }
+
         .table-wrapper {
             overflow-x: visible;
             margin: 12px 0;
@@ -243,7 +271,8 @@
             font-size: 0.7rem;
             border: 1px solid #e2e8f0;
         }
-        th, td {
+        th,
+        td {
             border: 1px solid #e2e8f0;
             padding: 6px 4px;
             text-align: center;
@@ -257,29 +286,42 @@
             font-weight: 700;
         }
         @media (max-width: 450px) {
-            table { font-size: 0.65rem; }
-            th, td { padding: 5px 2px; }
+            table {
+                font-size: 0.65rem;
+            }
+            th,
+            td {
+                padding: 5px 2px;
+            }
         }
-        
-        .highlight { 
-            background: #eef2ff; 
-            border-left: 4px solid #3b82f6; 
-            padding: 12px; 
-            border-radius: 16px; 
+
+        .highlight {
+            background: #eef2ff;
+            border-left: 4px solid #3b82f6;
+            padding: 12px;
+            border-radius: 16px;
             margin: 12px 0;
             color: #1e293b;
         }
-        .rule-box { 
-            background: #f8fafc; 
-            padding: 12px; 
-            border-radius: 18px; 
-            margin-bottom: 10px; 
+        .rule-box {
+            background: #f8fafc;
+            padding: 12px;
+            border-radius: 18px;
+            margin-bottom: 10px;
             border-left: 4px solid #3b82f6;
             border: 1px solid #e2e8f0;
         }
-        ul { margin-left: 20px; margin-bottom: 12px; }
-        li { margin-bottom: 5px; }
-        .red-percent { color: #dc2626; font-weight: bold; }
+        ul {
+            margin-left: 20px;
+            margin-bottom: 12px;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+        .red-percent {
+            color: #dc2626;
+            font-weight: bold;
+        }
         .governance-flow {
             display: flex;
             flex-direction: column;
@@ -372,83 +414,175 @@
             transform: translateY(-2px);
             filter: brightness(1);
         }
-        footer { text-align: center; font-size: 0.7rem; padding: 8px 0; color: #6c757d; }
-        
+        footer {
+            text-align: center;
+            font-size: 0.7rem;
+            padding: 8px 0;
+            color: #6c757d;
+        }
+
         #wechatModal {
             display: none;
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(4px);
             justify-content: center;
             align-items: center;
             z-index: 1000;
         }
-        .qrcode-content { background: #ffffff; padding: 20px; border-radius: 28px; width: 85%; max-width: 320px; text-align: center; border: 1px solid #e2e8f0; box-shadow: 0 20px 35px -8px rgba(0,0,0,0.2);}
-        .close-btn { margin-top: 15px; background: #e2e8f0; color: #1e293b; padding: 6px 18px; border-radius: 30px; border: none; cursor: pointer; }
-        
-        /* 浮动双按钮组 - 位置移到屏幕底部 (bottom设为较小值，紧贴底部) ，且初始隐藏，滚动灵敏出现 */
-        .floating-buttons-group {
+        .qrcode-content {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 28px;
+            width: 85%;
+            max-width: 320px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.2);
+        }
+        .close-btn {
+            margin-top: 15px;
+            background: #e2e8f0;
+            color: #1e293b;
+            padding: 6px 18px;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* -------- 自定义链接模态框 -------- */
+        .links-modal-overlay {
             position: fixed;
-            bottom: 20px;          /* 靠近底部，符合“往屏幕底部移动”要求 */
+            top: 0;
             left: 0;
-            right: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(4px);
             display: flex;
             justify-content: center;
-            gap: 18px;
-            z-index: 300;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.25s ease, visibility 0.25s ease;
-            pointer-events: none;
+            align-items: center;
+            z-index: 3000;
+            animation: fadeInOverlay 0.2s ease;
         }
-        .floating-buttons-group.visible {
-            opacity: 1;
-            visibility: visible;
-            pointer-events: auto;
+        @keyframes fadeInOverlay {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
-        .floating-action-btn {
-            background-color: #3b82f6;
-            color: white;
-            border: none;
-            padding: 12px 28px;
-            border-radius: 48px;
+        .links-modal-box {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 28px 26px 24px;
+            max-width: 380px;
+            width: 92%;
+            box-shadow: 0 24px 40px -12px rgba(0, 0, 0, 0.3);
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: zoomInModal 0.2s ease-out;
+            border: 1px solid #e2e8f0;
+        }
+        @keyframes zoomInModal {
+            from {
+                transform: scale(0.92);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        .links-modal-box .modal-title {
+            font-size: 1rem;
             font-weight: 700;
-            font-size: 0.95rem;
-            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-            transition: all 0.2s ease;
+            color: #0a66b9;
+            margin-bottom: 14px;
             text-align: center;
-            min-width: 100px;
-            letter-spacing: 1px;
+            border-bottom: 2px solid #eef2ff;
+            padding-bottom: 10px;
         }
-        .floating-action-btn:active {
+        .links-modal-box .modal-desc {
+            color: #1e293b;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin: 6px 0 10px 0;
+            font-weight: 500;
+        }
+        .links-modal-box .modal-desc .highlight-text {
+            color: #dc2626;
+            font-weight: 600;
+        }
+        .links-modal-box .link-item {
+            display: block;
+            color: #2563eb;
+            font-weight: 600;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            padding: 6px 0;
+            font-size: 0.85rem;
+            word-break: break-all;
+            transition: color 0.15s;
+            cursor: pointer;
+        }
+        .links-modal-box .link-item:hover {
+            color: #1d4ed8;
+            text-decoration: underline;
+        }
+        .links-modal-box .link-item:active {
+            color: #1e40af;
+        }
+        .links-modal-box .modal-divider {
+            height: 1px;
+            background: #e2e8f0;
+            margin: 10px 0;
+        }
+        .links-modal-box .modal-close-btn {
+            display: block;
+            margin: 18px auto 0;
+            background: #e2e8f0;
+            color: #1e293b;
+            border: none;
+            padding: 8px 32px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .links-modal-box .modal-close-btn:hover {
+            background: #cbd5e1;
+        }
+        .links-modal-box .modal-close-btn:active {
             transform: scale(0.96);
         }
-        .floating-action-btn:hover {
-            background-color: #2563eb;
-            transform: translateY(-2px);
+        /* 链接前的小圆点装饰 */
+        .links-modal-box .link-wrap {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+            padding: 2px 0;
         }
-        /* 小屏幕时底部留出安全边距，但依然靠近底部 */
-        @media (max-width: 480px) {
-            .floating-buttons-group {
-                bottom: 16px;
-                gap: 14px;
-            }
-            .floating-action-btn {
-                padding: 10px 20px;
-                font-size: 0.85rem;
-                min-width: 85px;
-            }
+        .links-modal-box .link-wrap .link-dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: #3b82f6;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-right: 2px;
         }
-        @media (max-width: 380px) {
-            .floating-buttons-group {
-                bottom: 12px;
-                gap: 12px;
-            }
+        .links-modal-box .link-wrap .link-item {
+            padding: 4px 0;
         }
-        
+
+        /* 自定义模态框 (电报用) */
         .custom-modal {
             position: fixed;
             top: 0;
@@ -469,7 +603,7 @@
             text-align: center;
             max-width: 280px;
             width: 80%;
-            box-shadow: 0 20px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
             animation: zoomIn 0.2s ease-out;
         }
         @keyframes zoomIn {
@@ -501,16 +635,36 @@
         .modal-confirm:hover {
             background: #2563eb;
         }
-        @media (max-width: 380px) { 
-            .btn { font-size: 0.7rem; padding: 8px 3px; } 
-            h1 { font-size: 1.9rem; } 
-            .days-number, .day-unit { font-size: 2.8rem; }
-            .plain-time { font-size: 1.5rem; }
-            .time-block { min-width: 46px; }
+
+        @media (max-width: 380px) {
+            .btn {
+                font-size: 0.7rem;
+                padding: 8px 3px;
+            }
+            h1 {
+                font-size: 1.9rem;
+            }
+            .days-number,
+            .day-unit {
+                font-size: 2.8rem;
+            }
+            .plain-time {
+                font-size: 1.5rem;
+            }
+            .time-block {
+                min-width: 46px;
+            }
+            .links-modal-box {
+                padding: 22px 18px 20px;
+            }
         }
         @media (max-width: 340px) {
-            .plain-time { font-size: 1.3rem; }
-            .time-block { min-width: 40px; }
+            .plain-time {
+                font-size: 1.3rem;
+            }
+            .time-block {
+                min-width: 40px;
+            }
         }
     </style>
 </head>
@@ -537,7 +691,7 @@
                 </div>
             </div>
         </header>
-        
+
         <!-- 原有9个功能按钮 -->
         <div class="button-grid">
             <button class="btn" onclick="showSection('intro')">项目介绍</button>
@@ -546,18 +700,18 @@
             <button class="btn" onclick="showSection('mentor')">导师体系</button>
             <button class="btn" onclick="showSection('fuel')">燃料机制</button>
             <button class="btn" onclick="showSection('node')">节点治理</button>
-            <button class="btn" id="guideBtn">注册流程</button>   <!-- 注册流程按钮，ID便于保持交互，使用location跳转 -->
+            <button class="btn" id="guideBtn">注册流程</button>
             <button class="btn" onclick="location.href='bangzhu.html'">帮助中心</button>
             <button class="btn" onclick="location.href='moxing.html'">经济模型</button>
         </div>
-        
-        <!-- 新增三个蓝色按钮：复投计算 / 资料App / 波塞冬App（行距已调小） -->
+
+        <!-- 三个蓝色按钮：复投计算 / 注册 / 登录 -->
         <div class="button-grid-new">
             <button class="btn-new" id="compoundBtn">复投计算</button>
-            <button class="btn-new" id="materialBtn">资料App</button>
-            <button class="btn-new" id="appDownloadBtn">波塞冬App</button>
+            <button class="btn-new" id="registerBtn">注册</button>
+            <button class="btn-new" id="loginBtn">登录</button>
         </div>
-        
+
         <!-- 项目介绍板块 -->
         <div id="intro" class="content-section active">
             <h2>波塞冬链 · 项目介绍</h2>
@@ -566,7 +720,7 @@
             <p>DSC 作为波塞冬生态中的核心通证，将贯穿整个生态体系，连接社区共识、生态价值与未来数字化场景。</p>
             <p>在 Web3 快速发展的新时代，波塞冬 DSC 希望通过全球社区协作，共同打造更加开放、公平、透明的数字生态未来。</p>
             <p>未来，波塞冬生态将持续拓展更多应用场景，推动数字价值真正实现全球化流通与协同发展。</p>
-            
+
             <h3>DSC代币与智能合约</h3>
             <p>DSC代币由波塞冬团队通过波塞冬链发行，发行总量10亿枚。DSC相关的智能合约均在链上执行，所有记录公开透明，用户可通过区块链浏览器实时查看。</p>
             <h3>节点自治与共识机制</h3>
@@ -588,7 +742,7 @@
                 <li>POS可闪兑任意币种，挖DSC就是挖主流币</li>
             </ul>
         </div>
-        
+
         <div id="mining" class="content-section">
             <h2>矿机等级与算力规则</h2>
             <p>每位用户最多同时拥有<strong class="red-percent">7台</strong>不同等级矿机，月收益率固定18%~21%，综合算力决定最终产出。</p>
@@ -612,7 +766,7 @@
             <ul><li><strong>基础算力</strong>：试产矿机自带10点算力</li><li><strong>质能算力</strong>：质押 1 DSC = 1 算力</li><li><strong>导师算力</strong>：达成M1~M5 额外增加10~10000点算力</li></ul>
             <div class="highlight">小技巧：初期通过质押拉升算力更快回本，中期冲刺导师享受长期被动加持！</div>
         </div>
-        
+
         <div id="earnings" class="content-section">
             <h2>多元收益引擎</h2>
             <h3>产出收益（基础挖矿）</h3>
@@ -625,9 +779,9 @@
             <h3>分红收益（POS资金池）</h3>
             <p>USDT资金池每日分配比例如下：</p>
             <ul><li>节点分红：<span class="red-percent">5%</span></li><li>DSC质押者自身：<span class="red-percent">5.75%</span></li><li>DSC质押上级：<span class="red-percent">5.75%</span></li><li>MAC质押者自身：<span class="red-percent">5.75%</span></li><li>MAC质押上级：<span class="red-percent">5.75%</span></li><li>运营：<span class="red-percent">17%</span></li><li>回购销毁：<span class="red-percent">55%</span></li></ul>
-            <div class="highlight">共享矿机收益属于额外叠加，详见“帮助中心”板块，综合年化最高可达30%+。</div>
+            <div class="highlight">共享矿机收益属于额外叠加，详见"帮助中心"板块，综合年化最高可达30%+。</div>
         </div>
-        
+
         <div id="mentor" class="content-section">
             <h2>导师等级体系</h2>
             <p>达成导师不仅获得额外算力加持，还能分享交易手续费的巨额分红。</p>
@@ -637,7 +791,7 @@
             <h3>导师手续费分红比例</h3>
             <div class="table-wrapper"><table><thead><tr><th>等级</th><th>手续费分红比例</th></tr></thead><tbody><tr><td>M1</td><td class="red-percent">5%</td></tr><tr><td>M2</td><td class="red-percent">15%</td></tr><tr><td>M3</td><td class="red-percent">20%</td></tr><tr><td>M4</td><td class="red-percent">15%</td></tr><tr><td>M5</td><td class="red-percent">15%</td></tr></tbody></table></div>
         </div>
-        
+
         <div id="fuel" class="content-section">
             <h2>燃料机制 · POS</h2>
             <p>POS是领取矿机产出收益的必要燃料，同时构建了资金池分红模型。</p>
@@ -647,7 +801,7 @@
             <h3>消耗规则</h3><p>领取产出时燃烧POS = 领取数量 × 市场价 ÷ USDT汇率 × 25% × 兑换比例。</p>
             <div class="highlight">资金池分红：所有兑换POS沉淀的USDT每日按比例分发给节点、质押者及回购销毁，构建通缩飞轮。</div>
         </div>
-        
+
         <div id="node" class="content-section">
             <h2>链上治理体系</h2>
             <div class="highlight">45节点共识网络 | 提案机制 | 季度席位竞选</div>
@@ -658,7 +812,7 @@
             <div class="rules-container"><div class="rule-box-card critical"><h3>核心治理领域</h3><ul><li>矿机产出规则调整</li><li>智能合约升级</li><li>链上资产分配</li></ul></div><div class="rule-box-card normal"><h3>技术自治领域</h3><ul><li>前端界面更新</li><li>游戏参数调整</li><li>运维策略优化</li></ul></div></div>
             <div class="highlight">节点可享每日DSC/USDT兑换POS池的分红，分红比例固定为5%，按节点数量平均分配。</div>
         </div>
-        
+
         <!-- 微信公众号模态框 -->
         <div id="wechatModal">
             <div class="qrcode-content">
@@ -667,76 +821,134 @@
                 <button class="close-btn" onclick="hideWechatModal()">关闭</button>
             </div>
         </div>
-        
+
         <div class="social-icons">
             <a href="javascript:void(0)" class="social-icon" onclick="showWechatModal()"><img src="https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/%E5%BE%AE%E4%BF%A1.svg" alt="微信"></a>
             <a href="https://qun.qq.com/universal-share/share?ac=1&authKey=c6BM5DK3yY4L%2FReRW6oZW1Xj1QRPZ1desNqKWhP%2BdM7aielhRw%2Fuj12A3CxlBek0&busi_data=eyJncm91cENvZGUiOiIxMzQ0NDI4NTciLCJ0b2tlbiI6Ii9JM0FIb0NmUzdqLzdlOCtZMS9BbDc3U1RxWW40TlU0c29KYllzaDFiZGdHVmQzYWgzSnMzUERuVk91V2pJZlMiLCJ1aW4iOiIxMDY1NDk5MzM4In0%3D&data=jSmAVa3wONc_R2BPx0dMXOJdW1Ag_dVVlHiB9C3JE3sRisQppuhjn4U2URjBRxwcmB-jE4MMn6F5-lognlRqTw&svctype=4&tempid=h5_group_info" target="_blank" class="social-icon"><img src="https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/QQ.svg" alt="QQ"></a>
-            <a href="https://v.douyin.com/88b5P13AgBM/" target="_blank" class="social-icon"><img src="https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/%E6%8A%96%E9%9F%B3.svg" alt="抖音"></a>
+            <a href="https://v.douyin.com/88b5P13AgBM/" target="_blank" class="social-icon"><img src="https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/%E6%96%97%E9%9F%B3.svg" alt="抖音"></a>
             <a href="https://v.kuaishou.com/KZP1eYG1" target="_blank" class="social-icon"><img src="https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/%E5%BF%AB%E6%89%8B.svg" alt="快手"></a>
             <a href="javascript:void(0)" class="social-icon" id="telegramBtn"><img src="https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/%E7%94%B5%E6%8A%A5.svg" alt="电报"></a>
         </div>
         <footer><p>波塞冬已至，暗流中升起曙光；算力为信，共识为舟，我们一同靠岸。</p></footer>
     </div>
-    
-    <!-- 浮动双按钮组（注册/登录）现在在底部，滚动灵敏出现停留2秒 -->
-    <div id="floatingBtnGroup" class="floating-buttons-group">
-        <button id="regFloatBtn" class="floating-action-btn">注册</button>
-        <button id="loginFloatBtn" class="floating-action-btn">登录</button>
-    </div>
-    
+
     <script>
-        // 注册流程按钮的跳转（原有按钮单独处理）
+        // ========== 注册流程按钮跳转 ==========
         const guideBtn = document.getElementById('guideBtn');
         if (guideBtn) {
             guideBtn.addEventListener('click', () => {
                 window.location.href = 'guide.html';
             });
         }
-        
-        // 浮动按钮组：滚动出现逻辑 —— 非常灵敏，滚动超过5px即显示，停留2秒后自动隐藏
-        const floatingGroup = document.getElementById('floatingBtnGroup');
-        let hideFloatTimer = null;
-        let lastScrollY = window.scrollY || window.pageYOffset;
-        const SCROLL_SENSITIVITY = 5;  // 只需滚动5px就触发显示
-        
-        function hideFloatGroup() {
-            if (floatingGroup) {
-                floatingGroup.classList.remove('visible');
-            }
-            if (hideFloatTimer) {
-                clearTimeout(hideFloatTimer);
-                hideFloatTimer = null;
-            }
+
+        // ========== 链接模态框组件 ==========
+        function showLinksModal(items) {
+            // items: [{ type: 'text', content: '...' }, { type: 'link', url: '...' }, ...]
+            const existing = document.querySelector('.links-modal-overlay');
+            if (existing) existing.remove();
+
+            const overlay = document.createElement('div');
+            overlay.className = 'links-modal-overlay';
+
+            const box = document.createElement('div');
+            box.className = 'links-modal-box';
+
+            // 标题
+            const title = document.createElement('div');
+            title.className = 'modal-title';
+            title.textContent = '🌊 波塞冬入口';
+            box.appendChild(title);
+
+            // 遍历 items
+            items.forEach(item => {
+                if (item.type === 'text') {
+                    const p = document.createElement('p');
+                    p.className = 'modal-desc';
+                    p.textContent = item.content;
+                    box.appendChild(p);
+                } else if (item.type === 'link') {
+                    const wrap = document.createElement('div');
+                    wrap.className = 'link-wrap';
+
+                    const dot = document.createElement('span');
+                    dot.className = 'link-dot';
+                    wrap.appendChild(dot);
+
+                    const a = document.createElement('a');
+                    a.className = 'link-item';
+                    a.href = item.url;
+                    a.target = '_blank';
+                    a.rel = 'noopener noreferrer';
+                    a.textContent = item.url;
+                    wrap.appendChild(a);
+
+                    box.appendChild(wrap);
+                } else if (item.type === 'divider') {
+                    const hr = document.createElement('div');
+                    hr.className = 'modal-divider';
+                    box.appendChild(hr);
+                }
+            });
+
+            // 关闭按钮
+            const closeBtn = document.createElement('button');
+            closeBtn.className = 'modal-close-btn';
+            closeBtn.textContent = '关闭';
+            closeBtn.addEventListener('click', () => {
+                overlay.remove();
+            });
+            box.appendChild(closeBtn);
+
+            overlay.appendChild(box);
+            document.body.appendChild(overlay);
+
+            // 点击遮罩关闭
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) {
+                    overlay.remove();
+                }
+            });
         }
-        
-        function showFloatGroupTemporary() {
-            if (!floatingGroup) return;
-            if (hideFloatTimer) {
-                clearTimeout(hideFloatTimer);
-            }
-            floatingGroup.classList.add('visible');
-            hideFloatTimer = setTimeout(() => {
-                floatingGroup.classList.remove('visible');
-                hideFloatTimer = null;
-            }, 2000);   // 停留2秒后消失
+
+        // ========== 注册按钮 ==========
+        const registerBtn = document.getElementById('registerBtn');
+        if (registerBtn) {
+            registerBtn.addEventListener('click', () => {
+                showLinksModal([
+                    { type: 'text', content: '📌 官方备用链接（不用开加速器，可能随时失效）' },
+                    { type: 'link', url: 'https://pos.just-poseidon.com/reg?c=182N17' },
+                    { type: 'link', url: 'https://app.just-poseidon.com/reg?c=182N17' },
+                    { type: 'divider' },
+                    { type: 'text', content: '🔗 主链接（需要开加速器，长期有效）' },
+                    { type: 'link', url: 'https://app.poseidonchain.io/reg?c=182N17' }
+                ]);
+            });
         }
-        
-        function onScrollHandler() {
-            const currentScroll = window.scrollY || window.pageYOffset;
-            const delta = Math.abs(currentScroll - lastScrollY);
-            if (delta >= SCROLL_SENSITIVITY) {
-                showFloatGroupTemporary();
-            }
-            lastScrollY = currentScroll;
+
+        // ========== 登录按钮 ==========
+        const loginBtn = document.getElementById('loginBtn');
+        if (loginBtn) {
+            loginBtn.addEventListener('click', () => {
+                showLinksModal([
+                    { type: 'text', content: '📌 官方备用链接（不用开加速器，可能随时失效）' },
+                    { type: 'link', url: 'https://pos.just-poseidon.com' },
+                    { type: 'link', url: 'https://app.just-poseidon.com' },
+                    { type: 'divider' },
+                    { type: 'text', content: '🔗 主链接（需要开加速器，长期有效）' },
+                    { type: 'link', url: 'https://app.poseidonchain.io' }
+                ]);
+            });
         }
-        
-        // 初始隐藏，无自动显示
-        window.addEventListener('scroll', onScrollHandler);
-        window.addEventListener('touchmove', onScrollHandler);
-        // 确保页面加载完成时没有显示浮动按钮
-        hideFloatGroup();
-        
-        // 自定义模态框 (仅用于电报)
+
+        // ========== 复投计算按钮 ==========
+        const compoundBtn = document.getElementById('compoundBtn');
+        if (compoundBtn) {
+            compoundBtn.addEventListener('click', () => {
+                window.location.href = 'jisuan.html';
+            });
+        }
+
+        // ========== 电报模态框 (保留) ==========
         function showCustomModal(message, onConfirm) {
             const existing = document.querySelector('.custom-modal');
             if (existing) existing.remove();
@@ -758,26 +970,7 @@
             overlay.appendChild(card);
             document.body.appendChild(overlay);
         }
-        
-        const regUrl = 'https://app.poseidonchain.io/reg?c=182N17';
-        const loginUrl = 'https://app.poseidonchain.io';
-        const regFloat = document.getElementById('regFloatBtn');
-        const loginFloat = document.getElementById('loginFloatBtn');
-        
-        if (regFloat) {
-            regFloat.addEventListener('click', (e) => {
-                e.preventDefault();
-                window.location.href = regUrl;
-            });
-        }
-        if (loginFloat) {
-            loginFloat.addEventListener('click', (e) => {
-                e.preventDefault();
-                window.location.href = loginUrl;
-            });
-        }
-        
-        // 电报保留模态框
+
         const telegramBtnElem = document.getElementById('telegramBtn');
         if (telegramBtnElem) {
             telegramBtnElem.addEventListener('click', (e) => {
@@ -787,10 +980,11 @@
                 });
             });
         }
-        
-        // 计时器
+
+        // ========== 计时器 ==========
         let lastSeconds = -1;
         const liveClock = document.getElementById('liveClock');
+
         function updateRuntimeAndClock() {
             const start = new Date('2023-09-25T00:00:00');
             const now = new Date();
@@ -812,34 +1006,30 @@
         }
         setInterval(updateRuntimeAndClock, 500);
         updateRuntimeAndClock();
-        
+
+        // ========== 板块切换 ==========
         function showSection(id) {
             document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
             const target = document.getElementById(id);
             if (target) target.classList.add('active');
             if (target) target.scrollIntoView({ behavior: 'smooth' });
         }
-        
-        function showWechatModal() { document.getElementById('wechatModal').style.display = 'flex'; }
-        function hideWechatModal() { document.getElementById('wechatModal').style.display = 'none'; }
+
+        // ========== 微信模态框 ==========
+        function showWechatModal() {
+            document.getElementById('wechatModal').style.display = 'flex';
+        }
+
+        function hideWechatModal() {
+            document.getElementById('wechatModal').style.display = 'none';
+        }
         window.onclick = function(e) {
             const wechatModal = document.getElementById('wechatModal');
-            if(e.target == wechatModal) hideWechatModal();
+            if (e.target == wechatModal) hideWechatModal();
         };
-        
-        // 新增三按钮
-        const compoundBtn = document.getElementById('compoundBtn');
-        const materialBtn = document.getElementById('materialBtn');
-        const appDownloadBtn = document.getElementById('appDownloadBtn');
-        if (compoundBtn) {
-            compoundBtn.addEventListener('click', () => { window.location.href = 'jisuan.html'; });
-        }
-        if (materialBtn) {
-            materialBtn.addEventListener('click', () => { window.location.href = 'https://github.com/boipc/poseidon/releases/download/ziliao/ziliao_v1.5.0.APK'; });
-        }
-        if (appDownloadBtn) {
-            appDownloadBtn.addEventListener('click', () => { window.location.href = 'https://github.com/boipc/poseidon/releases/download/Poseidon/Poseidon_v1.2.0.APK'; });
-        }
+
+        // ========== 注意：浮动按钮已完全移除 ==========
+        console.log('浮动注册/登录按钮已删除。');
     </script>
 </body>
 </html>
