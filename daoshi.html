@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSC导师分红系统</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa, #e4e7eb);
+            color: #333;
+            min-height: 100vh;
+            padding: 10px;
+            overflow-x: hidden;
+            position: relative;
+            padding-bottom: 30px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            padding-bottom: 15px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+            margin-bottom: 8px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 6px;
+            gap: 8px;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            object-fit: contain;
+        }
+
+        .logo-fallback {
+            display: none;
+            width: 36px;
+            height: 36px;
+            background: #4361ee;
+            color: white;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        h1 {
+            font-size: 24px;
+            letter-spacing: 0.8px;
+            margin-bottom: 0;
+            color: #4361ee;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #5c677d;
+            letter-spacing: 0.3px;
+            margin: 8px 0;
+            font-weight: 500;
+        }
+
+        .date-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 6px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .date,
+        .dividend-pool {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 4px 10px;
+            border-radius: 18px;
+            font-size: 13px;
+            display: inline-block;
+            border: 1px solid rgba(67, 97, 238, 0.2);
+            user-select: none;
+            min-width: 120px;
+            text-align: center;
+            color: #333;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card {
+            border-radius: 16px;
+            padding: 8px 12px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            backdrop-filter: blur(6px);
+            margin-bottom: 8px;
+            background: rgba(255, 255, 255, 0.85);
+            color: #333;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .level-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .stars {
+            display: flex;
+        }
+
+        .stars i {
+            margin-left: 2px;
+            font-size: 14px;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .level {
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #333;
+        }
+
+        .percentage-badge {
+            border-radius: 8px;
+            padding: 2px 8px;
+            font-size: 10px;
+            font-weight: 600;
+            background: transparent !important;
+            color: #e74c3c !important;
+            border: none !important;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            min-width: 60px;
+        }
+
+        .card-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+        }
+
+        .data-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 5px 3px;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.03);
+        }
+
+        .data-label {
+            font-size: 11px;
+            color: #666;
+            margin-bottom: 3px;
+            font-weight: 500;
+        }
+
+        .data-value {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 700;
+            color: #000;
+        }
+
+        .virtual {
+            cursor: pointer;
+            transition: all 0.3s;
+            user-select: none;
+            color: #000;
+            text-align: center;
+            position: relative;
+            z-index: 100;
+            pointer-events: auto;
+            font-size: 14px;
+        }
+
+        .virtual.placeholder {
+            color: #888;
+        }
+
+        .virtual.input-value {
+            color: #000;
+        }
+
+        .virtual.empty-state {
+            color: #888;
+            font-style: italic;
+        }
+
+        .dsc-unit,
+        .person-unit {
+            font-size: 14px;
+            font-weight: 600;
+            margin-left: 5px;
+            color: #666;
+        }
+
+        .data-input {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            justify-content: center;
+            z-index: 100;
+            pointer-events: auto;
+        }
+
+        .data-input input {
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            padding: 5px 8px;
+            color: #333;
+            font-size: 14px;
+            font-weight: bold;
+            width: 70px;
+            outline: none;
+            transition: all 0.3s;
+            text-align: right;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+        }
+
+        .data-input input:focus {
+            box-shadow: 0 0 8px rgba(67, 97, 238, 0.3);
+            border-color: #4361ee;
+        }
+
+        .coin-icon {
+            width: 14px;
+            height: 14px;
+            margin-right: 4px;
+        }
+
+        .coin-fallback {
+            display: none;
+            width: 14px;
+            height: 14px;
+            background: #4361ee;
+            color: white;
+            border-radius: 50%;
+            font-size: 10px;
+            margin-right: 4px;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .level1-card {
+            border: 1px solid #1a5ca3;
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(255, 255, 255, 0.8));
+        }
+        .level1-card .stars i {
+            color: #1a5ca3;
+        }
+        .level1-card .data-input input {
+            border: 1px solid #1a5ca3;
+        }
+
+        .level2-card {
+            border: 1px solid #0d8e72;
+            background: linear-gradient(135deg, rgba(26, 188, 156, 0.1), rgba(255, 255, 255, 0.8));
+        }
+        .level2-card .stars i {
+            color: #0d8e72;
+        }
+        .level2-card .data-input input {
+            border: 1px solid #0d8e72;
+        }
+
+        .level3-card {
+            border: 1px solid #c19d0c;
+            background: linear-gradient(135deg, rgba(241, 196, 15, 0.1), rgba(255, 255, 255, 0.8));
+        }
+        .level3-card .stars i {
+            color: #c19d0c;
+        }
+        .level3-card .data-input input {
+            border: 1px solid #c19d0c;
+        }
+
+        .level4-card {
+            border: 1px solid #c0392b;
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.1), rgba(255, 255, 255, 0.8));
+        }
+        .level4-card .stars i {
+            color: #c0392b;
+        }
+        .level4-card .data-input input {
+            border: 1px solid #c0392b;
+        }
+
+        .level5-card {
+            border: 1px solid #8e44ad;
+            background: linear-gradient(135deg, rgba(155, 89, 182, 0.1), rgba(255, 255, 255, 0.8));
+            margin-bottom: 20px;
+        }
+        .level5-card .stars i {
+            color: #8e44ad;
+        }
+        .level5-card .data-input input {
+            border: 1px solid #8e44ad;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 8.4px;
+            font-size: 13px;
+            color: #4361ee;
+            font-weight: 700;
+            padding: 6px;
+            background: rgba(67, 97, 238, 0.1);
+            border-radius: 12px;
+            border: 1px solid rgba(67, 97, 238, 0.2);
+        }
+
+        .shareholder-system {
+            margin-top: 14px;
+            padding: 10px 0;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            backdrop-filter: blur(6px);
+            color: #333;
+        }
+
+        .system-title {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #4361ee;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 0 12px;
+            font-weight: 700;
+        }
+
+        .system-logo {
+            width: 24px;
+            height: 24px;
+        }
+
+        .system-logo-fallback {
+            display: none;
+            width: 24px;
+            height: 24px;
+            background: #4361ee;
+            color: white;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 8px;
+            font-size: 12px;
+        }
+
+        .table-container {
+            padding: 0 4px;
+            overflow-x: hidden;
+        }
+
+        .responsive-table {
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+            border-collapse: collapse;
+            font-size: 0.72rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            color: #333;
+        }
+
+        .responsive-table th,
+        .responsive-table td {
+            padding: 4px 2px;
+            text-align: center;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            white-space: normal;
+            word-break: break-word;
+        }
+
+        .responsive-table thead th:nth-child(2) {
+            background: rgba(52, 152, 219, 0.15);
+        }
+
+        .responsive-table thead th:nth-child(3) {
+            background: rgba(26, 188, 156, 0.15);
+        }
+
+        .responsive-table thead th:nth-child(4) {
+            background: rgba(241, 196, 15, 0.15);
+        }
+
+        .responsive-table thead th:nth-child(5) {
+            background: rgba(231, 76, 60, 0.15);
+        }
+
+        .responsive-table thead th:nth-child(6) {
+            background: rgba(155, 89, 182, 0.15);
+        }
+
+        .responsive-table thead th:first-child {
+            background-color: rgba(67, 97, 238, 0.15);
+        }
+
+        .responsive-table thead th {
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            font-size: 0.68rem;
+            color: #333;
+        }
+
+        .mining-reward-header,
+        .fee-dividend-header,
+        .scc-limit-header {
+            color: #e74c3c !important;
+            font-weight: 600 !important;
+        }
+
+        .mining-reward-cell,
+        .fee-dividend-cell,
+        .scc-limit-cell {
+            color: #e74c3c !important;
+            font-weight: 600 !important;
+        }
+
+        .responsive-table tbody th {
+            background-color: rgba(67, 97, 238, 0.15);
+            font-weight: 600;
+            text-align: left;
+            padding-left: 5px;
+            font-size: 0.68rem;
+            color: #333;
+        }
+
+        .responsive-table tbody tr:nth-child(even) {
+            background-color: rgba(0, 0, 0, 0.03);
+        }
+
+        .level-1 {
+            background: rgba(52, 152, 219, 0.1);
+            border-left: 2px solid #3498db;
+        }
+
+        .level-2 {
+            background: rgba(26, 188, 156, 0.1);
+            border-left: 2px solid #1abc9c;
+        }
+
+        .level-3 {
+            background: rgba(241, 196, 15, 0.1);
+            border-left: 2px solid #f1c40f;
+        }
+
+        .level-4 {
+            background: rgba(231, 76, 60, 0.1);
+            border-left: 2px solid #e74c3c;
+        }
+
+        .level-5 {
+            background: rgba(155, 89, 182, 0.1);
+            border-left: 2px solid #9b59b6;
+        }
+
+        .level-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .level-title {
+            font-weight: 600;
+            font-size: 0.62rem;
+        }
+
+        .note-box {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(67, 97, 238, 0.2);
+            border-radius: 12px;
+            padding: 12px;
+            margin: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .note-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #4361ee;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            padding-bottom: 6px;
+            border-bottom: 1px solid rgba(67, 97, 238, 0.2);
+        }
+
+        .note-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .note-item {
+            display: flex;
+            gap: 8px;
+            padding: 6px 0;
+            font-size: 0.75rem;
+            line-height: 1.5;
+            border-bottom: 1px dashed rgba(0, 0, 0, 0.05);
+        }
+
+        .note-item:last-child {
+            border-bottom: none;
+        }
+
+        .note-icon {
+            color: #4361ee;
+            flex-shrink: 0;
+            font-size: 0.6rem;
+            margin-top: 5px;
+        }
+
+        .note-text {
+            flex: 1;
+        }
+
+        .highlight {
+            font-weight: 700;
+            color: #e74c3c;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #ffffff, #f5f7fa);
+            border-radius: 14px;
+            width: 90%;
+            max-width: 350px;
+            padding: 18px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(67, 97, 238, 0.2);
+            position: relative;
+            animation: modalAppear 0.4s ease-out;
+            z-index: 10001;
+            color: #333;
+        }
+
+        @keyframes modalAppear {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 15px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-header h2 {
+            color: #4361ee;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .modal-header i {
+            color: #d4af37;
+            font-size: 1.5rem;
+        }
+
+        .modal-body {
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .modal-tip {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            padding: 6px;
+            background: rgba(67, 97, 238, 0.05);
+            border-radius: 8px;
+            font-size: 0.85rem;
+        }
+
+        .modal-tip i {
+            color: #4361ee;
+            margin-right: 8px;
+            margin-top: 3px;
+            font-size: 1.0rem;
+        }
+
+        .modal-footer {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .modal-btn {
+            background: linear-gradient(90deg, #4361ee, #4cc9f0);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 10px 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(67, 97, 238, 0.2);
+        }
+
+        .modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            color: #888;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: color 0.3s;
+            z-index: 10002;
+        }
+
+        .modal-close:hover {
+            color: #e74c3c;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .logo-link:hover {
+            cursor: pointer;
+        }
+
+        .hint-text {
+            font-size: 10px;
+            color: #4361ee;
+            margin-top: 4px;
+            text-align: center;
+        }
+
+        .virtual[data-type="count"] {
+            pointer-events: none;
+        }
+
+        .validation-error {
+            color: #e74c3c;
+            font-size: 11px;
+            text-align: center;
+            margin-top: 8px;
+            padding: 4px;
+            background: rgba(231, 76, 60, 0.1);
+            border-radius: 6px;
+            display: none;
+        }
+
+        /* 底部激励文案 - 无边框背景，直接显示 */
+        .inspire-footer {
+            text-align: center;
+            margin-top: 18px;
+            padding: 0;
+            font-size: 16px;
+            font-weight: 600;
+            color: #4361ee;
+            letter-spacing: 2px;
+            background: transparent !important;
+            border: none !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            backdrop-filter: none !important;
+        }
+
+        .inspire-footer .inspire-sub {
+            display: block;
+            font-size: 12px;
+            font-weight: 400;
+            color: #888;
+            margin-top: 4px;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 480px) {
+            .responsive-table {
+                font-size: 0.6rem;
+            }
+            .responsive-table th,
+            .responsive-table td {
+                padding: 3px 1px;
+            }
+            .level-title {
+                font-size: 0.55rem;
+            }
+            .inspire-footer {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 信息模态框 -->
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="modal-header">
+                <h2><i class="fas fa-info-circle"></i> 网页提示</h2>
+            </div>
+            <div class="modal-body">
+                <div class="modal-tip">
+                    <i class="fas fa-calendar-alt"></i>
+                    <div>点击日期可修改当前分红日期，格式为：YYYY年MM月DD日</div>
+                </div>
+                <div class="modal-tip">
+                    <i class="fas fa-coins"></i>
+                    <div>点击分红池可输入当日导师分红总量，系统将自动计算各级导师分红</div>
+                </div>
+                <div class="modal-tip">
+                    <i class="fas fa-users"></i>
+                    <div>点击人均分红输入各级导师人均分红，系统将自动计算出导师人数</div>
+                </div>
+                <div class="modal-tip">
+                    <i class="fas fa-calculator"></i>
+                    <div>手续费分红池 = 导师分红池 ÷ 70%</div>
+                </div>
+                <div class="modal-tip">
+                    <i class="fas fa-percentage"></i>
+                    <div>导师分红 = 手续费分红池 × 该级别导师分红比例</div>
+                </div>
+                <div class="modal-tip">
+                    <i class="fas fa-user-friends"></i>
+                    <div>导师人数 = (分红池 ÷70%) ×该级别导师分红比例÷ 该级别人均分红</div>
+                </div>
+                <div class="modal-tip">
+                    <i class="fas fa-user-plus"></i>
+                    <div>当导师人数为0时，系统会自动设置为1人独享该级别全部分红</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn">我知道了</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <img src="images/logo02.png" class="logo-icon" onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='flex';">
+                    <div id="logo-fallback" class="logo-fallback">DSC</div>
+                    <h1>DSC导师分红</h1>
+                </div>
+            </a>
+            <div class="subtitle">五级导师尊享计划</div>
+            <div class="date-container">
+                <div class="date" id="dateDisplay">2025年7月30日</div>
+                <div class="dividend-pool" id="poolDisplay">分红池: 0 DSC</div>
+            </div>
+            <div class="validation-error" id="validationError"></div>
+        </div>
+
+        <!-- 一级导师 - 蓝色 -->
+        <div class="card level1-card">
+            <div class="card-header">
+                <div class="level-info">
+                    <div class="level">一级导师</div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="percentage-badge">5% 分红</div>
+            </div>
+            <div class="card-content">
+                <div class="data-item">
+                    <div class="data-label">导师人数</div>
+                    <div class="data-value">
+                        <div class="virtual placeholder" data-level="1" data-type="count">0</div>
+                        <span class="person-unit">人</span>
+                    </div>
+                </div>
+                <div class="data-item">
+                    <div class="data-label">人均分红</div>
+                    <div class="data-value">
+                        <img src="images/logo02.png" class="coin-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="coin-fallback">D</div>
+                        <div class="virtual placeholder" data-level="1" data-type="dividend" data-percentage="5">0</div>
+                        <span class="dsc-unit">DSC</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 二级导师 - 青色 -->
+        <div class="card level2-card">
+            <div class="card-header">
+                <div class="level-info">
+                    <div class="level">二级导师</div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="percentage-badge">10% 分红</div>
+            </div>
+            <div class="card-content">
+                <div class="data-item">
+                    <div class="data-label">导师人数</div>
+                    <div class="data-value">
+                        <div class="virtual placeholder" data-level="2" data-type="count">0</div>
+                        <span class="person-unit">人</span>
+                    </div>
+                </div>
+                <div class="data-item">
+                    <div class="data-label">人均分红</div>
+                    <div class="data-value">
+                        <img src="images/logo02.png" class="coin-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="coin-fallback">D</div>
+                        <div class="virtual placeholder" data-level="2" data-type="dividend" data-percentage="10">0</div>
+                        <span class="dsc-unit">DSC</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 三级导师 - 黄色 -->
+        <div class="card level3-card">
+            <div class="card-header">
+                <div class="level-info">
+                    <div class="level">三级导师</div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="percentage-badge">30% 分红</div>
+            </div>
+            <div class="card-content">
+                <div class="data-item">
+                    <div class="data-label">导师人数</div>
+                    <div class="data-value">
+                        <div class="virtual placeholder" data-level="3" data-type="count">0</div>
+                        <span class="person-unit">人</span>
+                    </div>
+                </div>
+                <div class="data-item">
+                    <div class="data-label">人均分红</div>
+                    <div class="data-value">
+                        <img src="images/logo02.png" class="coin-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="coin-fallback">D</div>
+                        <div class="virtual placeholder" data-level="3" data-type="dividend" data-percentage="30">0</div>
+                        <span class="dsc-unit">DSC</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 四级导师 - 红色 -->
+        <div class="card level4-card">
+            <div class="card-header">
+                <div class="level-info">
+                    <div class="level">四级导师</div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="percentage-badge">30% 分红</div>
+            </div>
+            <div class="card-content">
+                <div class="data-item">
+                    <div class="data-label">导师人数</div>
+                    <div class="data-value">
+                        <div class="virtual placeholder" data-level="4" data-type="count">0</div>
+                        <span class="person-unit">人</span>
+                    </div>
+                </div>
+                <div class="data-item">
+                    <div class="data-label">人均分红</div>
+                    <div class="data-value">
+                        <img src="images/logo02.png" class="coin-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="coin-fallback">D</div>
+                        <div class="virtual placeholder" data-level="4" data-type="dividend" data-percentage="30">0</div>
+                        <span class="dsc-unit">DSC</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 五级导师 - 紫色 -->
+        <div class="card level5-card">
+            <div class="card-header">
+                <div class="level-info">
+                    <div class="level">五级导师</div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="percentage-badge">30% 分红</div>
+            </div>
+            <div class="card-content">
+                <div class="data-item">
+                    <div class="data-label">导师人数</div>
+                    <div class="data-value">
+                        <div class="virtual placeholder" data-level="5" data-type="count">0</div>
+                        <span class="person-unit">人</span>
+                    </div>
+                </div>
+                <div class="data-item">
+                    <div class="data-label">人均分红</div>
+                    <div class="data-value">
+                        <img src="images/logo02.png" class="coin-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="coin-fallback">D</div>
+                        <div class="virtual placeholder" data-level="5" data-type="dividend" data-percentage="30">0</div>
+                        <span class="dsc-unit">DSC</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            星级导师升星计划 · 尊享每日分红
+        </div>
+
+        <!-- 导师制度表格 -->
+        <div class="shareholder-system">
+            <h2 class="system-title">
+                <img src="images/logo02.png" class="system-logo" onerror="this.style.display='none'; document.getElementById('system-logo-fallback').style.display='flex';">
+                <div id="system-logo-fallback" class="system-logo-fallback">D</div>
+                DSC导师制度表
+            </h2>
+
+            <div class="table-container">
+                <table class="responsive-table">
+                    <thead>
+                        <tr>
+                            <th width="18%">条件/奖励</th>
+                            <th width="16%" class="level-1">
+                                <div class="level-header">
+                                    <div class="level-title">一级导师</div>
+                                </div>
+                            </th>
+                            <th width="16%" class="level-2">
+                                <div class="level-header">
+                                    <div class="level-title">二级导师</div>
+                                </div>
+                            </th>
+                            <th width="16%" class="level-3">
+                                <div class="level-header">
+                                    <div class="level-title">三级导师</div>
+                                </div>
+                            </th>
+                            <th width="16%" class="level-4">
+                                <div class="level-header">
+                                    <div class="level-title">四级导师</div>
+                                </div>
+                            </th>
+                            <th width="16%" class="level-5">
+                                <div class="level-header">
+                                    <div class="level-title">五级导师</div>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>族群活跃度</th>
+                            <td class="level-1">5000</td>
+                            <td class="level-2">20000</td>
+                            <td class="level-3">100000</td>
+                            <td class="level-4">500000</td>
+                            <td class="level-5">1000000</td>
+                        </tr>
+                        <tr>
+                            <th>团队活跃度</th>
+                            <td class="level-1">-</td>
+                            <td class="level-2">5000</td>
+                            <td class="level-3">20000</td>
+                            <td class="level-4">100000</td>
+                            <td class="level-5">300000</td>
+                        </tr>
+                        <tr>
+                            <th>直推活粉数</th>
+                            <td class="level-1">3</td>
+                            <td class="level-2">6</td>
+                            <td class="level-3">10</td>
+                            <td class="level-4">15</td>
+                            <td class="level-5">20</td>
+                        </tr>
+                        <tr>
+                            <th>质押量</th>
+                            <td class="level-1">20</td>
+                            <td class="level-2">1000</td>
+                            <td class="level-3">2000</td>
+                            <td class="level-4">10000</td>
+                            <td class="level-5">20000</td>
+                        </tr>
+                        <tr>
+                            <th class="mining-reward-header">奖励永久矿机</th>
+                            <td class="level-1 mining-reward-cell">10<br>（1青铜）</td>
+                            <td class="level-2 mining-reward-cell">500<br>（5白银）</td>
+                            <td class="level-3 mining-reward-cell">1000<br>（1黄金）</td>
+                            <td class="level-4 mining-reward-cell">5000<br>（1铂金）</td>
+                            <td class="level-5 mining-reward-cell">10000<br>（1钻石）</td>
+                        </tr>
+                        <tr>
+                            <th class="fee-dividend-header">交易手续费每日分红</th>
+                            <td class="level-1 fee-dividend-cell">5%</td>
+                            <td class="level-2 fee-dividend-cell">10%</td>
+                            <td class="level-3 fee-dividend-cell">30%</td>
+                            <td class="level-4 fee-dividend-cell">30%</td>
+                            <td class="level-5 fee-dividend-cell">30%</td>
+                        </tr>
+                        <tr>
+                            <th class="scc-limit-header">每日按比例分红432枚POS</th>
+                            <td class="level-1 scc-limit-cell">-</td>
+                            <td class="level-2 scc-limit-cell">10%</td>
+                            <td class="level-3 scc-limit-cell">30%</td>
+                            <td class="level-4 scc-limit-cell">30%</td>
+                            <td class="level-5 scc-limit-cell">30%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 重要说明（已删除提币额度条目） -->
+            <div class="note-box">
+                <div class="note-title">
+                    <i class="fas fa-info-circle"></i>
+                    重要说明
+                </div>
+                <ul class="note-list">
+                    <li class="note-item">
+                        <div class="note-icon">●</div>
+                        <div class="note-text">
+                            <span class="highlight">分红来源：</span>DSC交易手续费的70%，每日结算一次
+                        </div>
+                    </li>
+                    <li class="note-item">
+                        <div class="note-icon">●</div>
+                        <div class="note-text">
+                            <span class="highlight">特别权益：</span>前三名5级导师自动成为超级节点人，不受季度考核，永久分红
+                        </div>
+                    </li>
+                    <!-- 提币额度条目已删除 -->
+                    <li class="note-item">
+                        <div class="note-icon">●</div>
+                        <div class="note-text">
+                            <span class="highlight">团队活跃度：</span>伞下二代以内所有用户活跃度总和
+                        </div>
+                    </li>
+                    <li class="note-item">
+                        <div class="note-icon">●</div>
+                        <div class="note-text">
+                            <span class="highlight">族群活跃度：</span>伞下十代以内所有用户活跃度总和
+                        </div>
+                    </li>
+                    <li class="note-item">
+                        <div class="note-icon">●</div>
+                        <div class="note-text">
+                            <span class="highlight">计算公式：</span>
+                            <div style="margin-top: 5px; font-size: 0.7rem; color: #555;">
+                                手续费分红池 = 导师分红池 ÷ 70%<br>
+                                导师分红 = 手续费分红池 × 导师分红比例<br>
+                                导师人数 = 导师分红 ÷ 人均分红
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 底部激励文案（无边框背景，直接显示） -->
+        <div class="inspire-footer">
+            星级导师 · 共创未来
+            <span class="inspire-sub">同心同行 · 共享辉煌</span>
+        </div>
+
+    </div>
+
+    <script>
+        // 显示模态框
+        const modal = document.getElementById('infoModal');
+        const closeBtn = document.querySelector('.modal-close');
+        const startBtn = document.querySelector('.modal-btn');
+
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                modal.style.display = 'flex';
+            }, 500);
+        });
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        closeBtn.addEventListener('click', closeModal);
+        startBtn.addEventListener('click', closeModal);
+
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        // 导师级别比例（与原始代码一致）
+        const levelPercentages = {
+            1: 0.05,
+            2: 0.10,
+            3: 0.30,
+            4: 0.30,
+            5: 0.30
+        };
+
+        let currentPoolAmount = 0;
+        const manualDividendSet = {1: false, 2: false, 3: false, 4: false, 5: false};
+        const levelTotals = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0};
+
+        function formatNumber(num) {
+            if (isNaN(num)) return "0";
+            const rounded = Math.round(num * 100) / 100;
+            return Number.isInteger(rounded) ? rounded.toString() : rounded.toFixed(2);
+        }
+
+        function updateEmptyState(level) {
+            const countElement = document.querySelector(`.virtual[data-level="${level}"][data-type="count"]`);
+            const count = parseInt(countElement.textContent) || 0;
+
+            if (count === 0) {
+                countElement.textContent = "虚位以待";
+                countElement.className = 'virtual empty-state';
+            } else {
+                countElement.textContent = count;
+                countElement.className = 'virtual input-value';
+            }
+        }
+
+        function calculateFeeDetails() {
+            const feeDividend = currentPoolAmount / 0.7;
+            const shareholderDividend = feeDividend * 0.7;
+            const officialFee = feeDividend * 0.25;
+            const feeBurn = feeDividend * 0.05;
+            const totalFee = feeDividend;
+            const tradeVolume = totalFee / 0.25;
+        }
+
+        function validateTotal() {
+            const errorElement = document.getElementById('validationError');
+            let totalCalculated = 0;
+
+            for (let level = 1; level <= 5; level++) {
+                totalCalculated += levelTotals[level];
+            }
+
+            const theoreticalPool = totalCalculated;
+            const error = Math.abs(currentPoolAmount - theoreticalPool);
+
+            if (error > 0.01) {
+                errorElement.textContent = `验算误差：${formatNumber(error)} DSC (输入: ${formatNumber(currentPoolAmount)} DSC, 计算: ${formatNumber(theoreticalPool)} DSC)`;
+                errorElement.style.display = 'block';
+            } else {
+                errorElement.style.display = 'none';
+            }
+        }
+
+        function calculateDividendsFromPool() {
+            for (let level = 1; level <= 5; level++) {
+                levelTotals[level] = (currentPoolAmount / 0.7) * levelPercentages[level];
+
+                const countElement = document.querySelector(`.virtual[data-level="${level}"][data-type="count"]`);
+                const dividendElement = document.querySelector(`.virtual[data-level="${level}"][data-type="dividend"]`);
+
+                let currentCount = 0;
+                if (countElement.textContent !== "虚位以待") {
+                    currentCount = parseInt(countElement.textContent) || 0;
+                }
+
+                if (!manualDividendSet[level]) {
+                    if (levelTotals[level] > 0) {
+                        if (currentCount === 0) {
+                            currentCount = 1;
+                            countElement.textContent = currentCount;
+                            countElement.className = 'virtual input-value';
+                        }
+
+                        const perDividend = levelTotals[level] / currentCount;
+                        dividendElement.textContent = formatNumber(perDividend);
+                        dividendElement.className = 'virtual input-value';
+                    } else {
+                        dividendElement.textContent = '0';
+                        dividendElement.className = 'virtual input-value';
+                        countElement.textContent = '0';
+                        updateEmptyState(level);
+                    }
+                } else {
+                    const perDividend = parseFloat(dividendElement.textContent) || 0;
+                    let newCount = 0;
+
+                    if (perDividend > 0) {
+                        newCount = Math.floor(levelTotals[level] / perDividend);
+                        if (newCount === 0 && levelTotals[level] > 0) {
+                            newCount = 1;
+                        }
+                    }
+
+                    countElement.textContent = newCount;
+                    updateEmptyState(level);
+                }
+            }
+
+            validateTotal();
+            calculateFeeDetails();
+        }
+
+        function calculateCountFromDividend(level) {
+            const dividendElement = document.querySelector(`.virtual[data-level="${level}"][data-type="dividend"]`);
+            const perDividend = parseFloat(dividendElement.textContent) || 0;
+            const countElement = document.querySelector(`.virtual[data-level="${level}"][data-type="count"]`);
+
+            let newCount = 0;
+
+            if (perDividend > 0) {
+                newCount = Math.floor(levelTotals[level] / perDividend);
+                if (newCount === 0 && levelTotals[level] > 0) {
+                    newCount = 1;
+                }
+            }
+
+            countElement.textContent = newCount;
+            updateEmptyState(level);
+            validateTotal();
+        }
+
+        const dateDisplay = document.getElementById('dateDisplay');
+        let isDateEditing = false;
+
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = now.getMonth() + 1;
+        const day = now.getDate();
+        dateDisplay.textContent = `${year}年${month}月${day}日`;
+
+        if (dateDisplay) {
+            dateDisplay.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (!isDateEditing) {
+                    isDateEditing = true;
+                    const currentDate = this.textContent.trim();
+
+                    const existingInput = this.querySelector('input');
+                    if (existingInput) {
+                        existingInput.remove();
+                    }
+
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.className = 'date-input';
+                    input.value = currentDate;
+                    input.placeholder = '输入日期';
+
+                    this.textContent = '';
+                    this.appendChild(input);
+
+                    setTimeout(() => {
+                        input.focus();
+                    }, 10);
+
+                    const handleBlur = function() {
+                        const newDate = input.value.trim() || currentDate;
+                        dateDisplay.textContent = newDate;
+                        isDateEditing = false;
+                        input.removeEventListener('blur', handleBlur);
+                        input.removeEventListener('keyup', handleKeyUp);
+                    };
+
+                    const handleKeyUp = function(e) {
+                        if (e.key === 'Enter') {
+                            input.blur();
+                        } else if (e.key === 'Escape') {
+                            dateDisplay.textContent = currentDate;
+                            isDateEditing = false;
+                            input.removeEventListener('blur', handleBlur);
+                            input.removeEventListener('keyup', handleKeyUp);
+                        }
+                    };
+
+                    input.addEventListener('blur', handleBlur);
+                    input.addEventListener('keyup', handleKeyUp);
+                }
+            });
+        }
+
+        const poolDisplay = document.getElementById('poolDisplay');
+        let isPoolEditing = false;
+
+        if (poolDisplay) {
+            poolDisplay.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (!isPoolEditing) {
+                    isPoolEditing = true;
+                    const currentText = this.textContent.trim();
+                    const currentValue = currentText.replace(/[^0-9.]/g, '');
+
+                    const existingInput = this.querySelector('input');
+                    if (existingInput) {
+                        existingInput.remove();
+                    }
+
+                    const input = document.createElement('input');
+                    input.type = 'number';
+                    input.className = 'pool-input';
+                    input.value = currentValue;
+                    input.placeholder = '输入数量';
+                    input.step = 'any';
+                    input.min = '0';
+
+                    this.textContent = '';
+                    this.appendChild(input);
+
+                    setTimeout(() => {
+                        input.focus();
+                        input.select();
+                    }, 10);
+
+                    const handleBlur = function() {
+                        const value = parseFloat(input.value.trim()) || 0;
+                        currentPoolAmount = value;
+                        const formattedValue = formatNumber(value);
+                        poolDisplay.textContent = `分红池: ${formattedValue} DSC`;
+                        isPoolEditing = false;
+
+                        calculateDividendsFromPool();
+
+                        input.removeEventListener('blur', handleBlur);
+                        input.removeEventListener('keyup', handleKeyUp);
+                    };
+
+                    const handleKeyUp = function(e) {
+                        if (e.key === 'Enter') {
+                            input.blur();
+                        } else if (e.key === 'Escape') {
+                            const currentValueNum = parseFloat(currentValue) || 0;
+                            const currentValueFormatted = formatNumber(currentValueNum);
+                            poolDisplay.textContent = `分红池: ${currentValueFormatted} DSC`;
+                            isPoolEditing = false;
+                            input.removeEventListener('blur', handleBlur);
+                            input.removeEventListener('keyup', handleKeyUp);
+                        }
+                    };
+
+                    input.addEventListener('blur', handleBlur);
+                    input.addEventListener('keyup', handleKeyUp);
+                }
+            });
+        }
+
+        document.querySelectorAll('.virtual[data-type="dividend"]').forEach(element => {
+            setupEditableElement(element);
+        });
+
+        function setupEditableElement(element) {
+            element.addEventListener('click', function(e) {
+                e.stopPropagation();
+
+                const type = this.getAttribute('data-type');
+                const level = this.getAttribute('data-level');
+                const currentValue = this.textContent.trim() === "虚位以待" ? "0" : this.textContent.trim();
+                const parent = this.parentElement;
+
+                const input = document.createElement('input');
+                input.className = 'data-input';
+                input.value = currentValue;
+                input.placeholder = '输入数量';
+                input.min = '0';
+                input.step = 'any';
+
+                const originalClass = this.className;
+
+                parent.replaceChild(input, this);
+
+                setTimeout(() => {
+                    input.focus();
+                    input.select();
+                }, 10);
+
+                const handleBlur = () => {
+                    let value = input.value.trim();
+
+                    if (value === '') {
+                        value = '0';
+                    }
+
+                    let numValue = parseFloat(value);
+
+                    if (isNaN(numValue)) {
+                        numValue = 0;
+                    }
+
+                    numValue = Math.max(0, Math.round(numValue * 100) / 100);
+                    value = formatNumber(numValue);
+
+                    const newDiv = document.createElement('div');
+                    newDiv.className = 'virtual input-value';
+                    newDiv.textContent = value;
+                    newDiv.setAttribute('data-level', level);
+                    newDiv.setAttribute('data-type', type);
+                    newDiv.setAttribute('data-percentage', element.getAttribute('data-percentage'));
+
+                    parent.replaceChild(newDiv, input);
+
+                    setupEditableElement(newDiv);
+
+                    manualDividendSet[level] = true;
+
+                    calculateCountFromDividend(level);
+                };
+
+                const handleKeyUp = (e) => {
+                    if (e.key === 'Enter') {
+                        input.blur();
+                    } else if (e.key === 'Escape') {
+                        const newDiv = document.createElement('div');
+                        newDiv.className = originalClass;
+                        newDiv.textContent = currentValue === "0" && type === 'count' ? "虚位以待" : currentValue;
+                        newDiv.setAttribute('data-level', level);
+                        newDiv.setAttribute('data-type', type);
+
+                        if (type === 'dividend') {
+                            newDiv.setAttribute('data-percentage', element.getAttribute('data-percentage'));
+                        }
+
+                        parent.replaceChild(newDiv, input);
+                        setupEditableElement(newDiv);
+                    }
+                };
+
+                input.addEventListener('blur', handleBlur);
+                input.addEventListener('keyup', handleKeyUp);
+            });
+        }
+
+        for (let level = 1; level <= 5; level++) {
+            updateEmptyState(level);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const logoImg = document.querySelector('.logo-icon');
+            if (logoImg) {
+                if (logoImg.complete && logoImg.naturalHeight !== 0) {
+                    document.getElementById('logo-fallback').style.display = 'none';
+                }
+            }
+
+            const coinIcons = document.querySelectorAll('.coin-icon');
+            coinIcons.forEach(icon => {
+                if (icon.complete && icon.naturalHeight !== 0) {
+                    icon.nextElementSibling.style.display = 'none';
+                }
+            });
+
+            const systemLogo = document.querySelector('.system-logo');
+            if (systemLogo && systemLogo.complete && systemLogo.naturalHeight !== 0) {
+                document.getElementById('system-logo-fallback').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
