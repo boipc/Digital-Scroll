@@ -157,7 +157,6 @@
                 transform: scale(1);
             }
         }
-        /* 原有9按钮网格 */
         .button-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -182,8 +181,6 @@
             color: #0a66b9;
             transform: translateY(-1px);
         }
-
-        /* 三个蓝色按钮（复投计算 / 注册 / 登录） */
         .button-grid-new {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -211,7 +208,6 @@
         .btn-new:active {
             transform: scale(0.96);
         }
-
         .content-section {
             background: #ffffff;
             border-radius: 24px;
@@ -257,7 +253,6 @@
             font-size: 0.85rem;
             line-height: 1.45;
         }
-
         .table-wrapper {
             overflow-x: visible;
             margin: 12px 0;
@@ -294,7 +289,6 @@
                 padding: 5px 2px;
             }
         }
-
         .highlight {
             background: #eef2ff;
             border-left: 4px solid #3b82f6;
@@ -515,10 +509,6 @@
             margin: 6px 0 10px 0;
             font-weight: 500;
         }
-        .links-modal-box .modal-desc .highlight-text {
-            color: #dc2626;
-            font-weight: 600;
-        }
         .links-modal-box .link-item {
             display: block;
             color: #2563eb;
@@ -533,10 +523,6 @@
         }
         .links-modal-box .link-item:hover {
             color: #1d4ed8;
-            text-decoration: underline;
-        }
-        .links-modal-box .link-item:active {
-            color: #1e40af;
         }
         .links-modal-box .modal-divider {
             height: 1px;
@@ -559,10 +545,6 @@
         .links-modal-box .modal-close-btn:hover {
             background: #cbd5e1;
         }
-        .links-modal-box .modal-close-btn:active {
-            transform: scale(0.96);
-        }
-        /* 链接前的小圆点装饰 */
         .links-modal-box .link-wrap {
             display: flex;
             align-items: baseline;
@@ -825,7 +807,7 @@
         <div class="social-icons">
             <a href="javascript:void(0)" class="social-icon" onclick="showWechatModal()"><img src="https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/%E5%BE%AE%E4%BF%A1.svg" alt="微信"></a>
             <a href="https://qun.qq.com/universal-share/share?ac=1&authKey=c6BM5DK3yY4L%2FReRW6oZW1Xj1QRPZ1desNqKWhP%2BdM7aielhRw%2Fuj12A3CxlBek0&busi_data=eyJncm91cENvZGUiOiIxMzQ0NDI4NTciLCJ0b2tlbiI6Ii9JM0FIb0NmUzdqLzdlOCtZMS9BbDc3U1RxWW40TlU0c29KYllzaDFiZGdHVmQzYWgzSnMzUERuVk91V2pJZlMiLCJ1aW4iOiIxMDY1NDk5MzM4In0%3D&data=jSmAVa3wONc_R2BPx0dMXOJdW1Ag_dVVlHiB9C3JE3sRisQppuhjn4U2URjBRxwcmB-jE4MMn6F5-lognlRqTw&svctype=4&tempid=h5_group_info" target="_blank" class="social-icon"><img src="https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/QQ.svg" alt="QQ"></a>
-            <a href="https://v.douyin.com/88b5P13AgBM/" target="_blank" class="social-icon"><img src="https://cdn.jsdelivr.net/gh/boipc/Digital-Scroll/images/抖音.svg" alt="抖音"></a>
+            <a href="https://v.douyin.com/88b5P13AgBM/" target="_blank" class="social-icon"><img src="https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/%E6%96%97%E9%9F%B3.svg" alt="抖音"></a>
             <a href="https://v.kuaishou.com/KZP1eYG1" target="_blank" class="social-icon"><img src="https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/%E5%BF%AB%E6%89%8B.svg" alt="快手"></a>
             <a href="javascript:void(0)" class="social-icon" id="telegramBtn"><img src="https://raw.githubusercontent.com/boipc/Digital-Scroll/main/images/%E7%94%B5%E6%8A%A5.svg" alt="电报"></a>
         </div>
@@ -841,9 +823,8 @@
             });
         }
 
-        // ========== 链接模态框组件 ==========
-        function showLinksModal(items) {
-            // items: [{ type: 'text', content: '...' }, { type: 'link', url: '...' }, ...]
+        // ========== 链接模态框组件（支持自定义标题） ==========
+        function showLinksModal(items, title = '🌊 波塞冬入口') {
             const existing = document.querySelector('.links-modal-overlay');
             if (existing) existing.remove();
 
@@ -854,10 +835,10 @@
             box.className = 'links-modal-box';
 
             // 标题
-            const title = document.createElement('div');
-            title.className = 'modal-title';
-            title.textContent = '🌊 波塞冬入口';
-            box.appendChild(title);
+            const titleEl = document.createElement('div');
+            titleEl.className = 'modal-title';
+            titleEl.textContent = title;
+            box.appendChild(titleEl);
 
             // 遍历 items
             items.forEach(item => {
@@ -921,7 +902,7 @@
                     { type: 'divider' },
                     { type: 'text', content: '🔗 主链接（需要开加速器，长期有效）' },
                     { type: 'link', url: 'https://app.poseidonchain.io/reg?c=182N17' }
-                ]);
+                ], '🌊 波塞冬注册入口');
             });
         }
 
@@ -936,7 +917,7 @@
                     { type: 'divider' },
                     { type: 'text', content: '🔗 主链接（需要开加速器，长期有效）' },
                     { type: 'link', url: 'https://app.poseidonchain.io' }
-                ]);
+                ], '🌊 波塞冬登录入口');
             });
         }
 
@@ -948,7 +929,7 @@
             });
         }
 
-        // ========== 电报模态框 (保留) ==========
+        // ========== 电报模态框 ==========
         function showCustomModal(message, onConfirm) {
             const existing = document.querySelector('.custom-modal');
             if (existing) existing.remove();
@@ -1027,9 +1008,6 @@
             const wechatModal = document.getElementById('wechatModal');
             if (e.target == wechatModal) hideWechatModal();
         };
-
-        // ========== 注意：浮动按钮已完全移除 ==========
-        console.log('浮动注册/登录按钮已删除。');
     </script>
 </body>
 </html>
