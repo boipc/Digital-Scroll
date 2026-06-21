@@ -92,15 +92,28 @@
         .register-link-text {
             color: #2c3e50;
             display: flex;
-            flex-wrap: wrap;
-            align-items: baseline;
-            gap: 0.2rem;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+        .register-link-text .link-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+        }
+        .register-link-text .link-group+.link-group {
+            margin-top: 0.3rem;
+        }
+        .register-link-text .link-desc {
+            color: #1a2c3e;
+            font-weight: 500;
         }
         .register-link-text a {
             color: #1E88E5;
             text-decoration: none;
             font-weight: 600;
             word-break: break-all;
+            padding: 0.1rem 0;
+            display: inline-block;
         }
         .register-link-text a:hover {
             text-decoration: underline;
@@ -205,7 +218,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(0,0,0,0.7);
+            background: rgba(0, 0, 0, 0.7);
             color: white;
             padding: 0.3rem 0.8rem;
             border-radius: 40px;
@@ -453,7 +466,8 @@
             .login-hint-center {
                 font-size: 0.85rem;
             }
-            .wechat-id, .copy-btn {
+            .wechat-id,
+            .copy-btn {
                 padding: 0.15rem 0.6rem;
             }
             .copy-toast {
@@ -464,238 +478,243 @@
                 font-size: 0.7rem;
                 white-space: nowrap;
             }
+            .register-link-text a {
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <h1 class="page-title">波塞冬账号注册流程</h1>
+    <div class="container">
+        <h1 class="page-title">波塞冬账号注册流程</h1>
 
-    <div class="alert-tip">
-        国内用户无法打开时请先打开加速器后再注册
-    </div>
+        <div class="alert-tip">
+            国内用户无法打开时请先打开加速器后再注册
+        </div>
 
-    <!-- 注册账号卡片 -->
-    <div class="card">
-        <div class="card-title">注册账号</div>
-        <div class="register-link-area">
-            <div class="register-link-text">
-                <strong>注册/登录链接：</strong><a href="https://app.poseidonchain.io/reg?c=LcLh2C" target="_blank" rel="noopener noreferrer">https://app.poseidonchain.io/reg?c=LcLh2C</a>
+        <!-- 注册账号卡片 -->
+        <div class="card">
+            <div class="card-title">注册账号</div>
+            <div class="register-link-area">
+                <div class="register-link-text">
+                    <div class="link-group">
+                        <span class="link-desc">官方备用链接（不用开加速器，可能随时失效）</span>
+                        <a href="https://pos.just-poseidon.com/reg?c=LcLh2C" target="_blank" rel="noopener noreferrer">https://pos.just-poseidon.com/reg?c=LcLh2C</a>
+                        <a href="https://app.just-poseidon.com/reg?c=LcLh2C" target="_blank" rel="noopener noreferrer">https://app.just-poseidon.com/reg?c=LcLh2C</a>
+                    </div>
+                    <div class="link-group">
+                        <span class="link-desc">主链接（需要开加速器，长期有效）</span>
+                        <a href="https://app.poseidonchain.io/reg?c=LcLh2C" target="_blank" rel="noopener noreferrer">https://app.poseidonchain.io/reg?c=LcLh2C</a>
+                    </div>
+                </div>
+                <div class="login-hint-center">老用户直接用DSC账号登录</div>
             </div>
-            <div class="login-hint-center">老用户直接用DSC账号登录</div>
-        </div>
 
-        <ul class="steps">
-            <li class="step-item">
-                <span class="step-num">1</span>
-                <span class="step-text"><strong>填写邮箱地址</strong> — 输入常用电子邮箱，用于接收验证码和账户通知。</span>
-            </li>
-            <li class="step-item">
-                <span class="step-num">2</span>
-                <span class="step-text"><strong>获取验证码</strong> — 点击“获取验证码”，系统将发送6位数字至您的邮箱。</span>
-            </li>
-            <li class="step-item">
-                <span class="step-num">3</span>
-                <span class="step-text"><strong>输入验证码</strong> — 查收邮件中的验证码，准确填入验证码输入框。</span>
-            </li>
-            <li class="step-item">
-                <span class="step-num">4</span>
-                <span class="step-text"><strong>设置密码</strong> — 密码至少8位，建议包含大小写字母+数字。两次输入需一致。</span>
-            </li>
-            <li class="step-item">
-                <span class="step-num">5</span>
-                <span class="step-text"><strong>填写邀请码（必填）</strong> — 请输入有效邀请码：<strong class="highlight">LcLh2C</strong>，方可完成注册。</span>
-            </li>
-            <li class="step-item">
-                <span class="step-num">6</span>
-                <span class="step-text"><strong>选择国家/地区</strong> — 根据所在地选择正确国家/地区。</span>
-            </li>
-            <li class="step-item">
-                <span class="step-num">7</span>
-                <span class="step-text"><strong>点击注册</strong> — 确认信息无误后，点击“注册”按钮即可完成账号创建。</span>
-            </li>
-            <li class="step-item">
-                <span class="step-num">8</span>
-                <span class="step-text"><strong>登录系统</strong> — 注册完成后，使用已设置的<strong>邮箱和密码</strong>登录波塞冬账号。</span>
-            </li>
-        </ul>
-    </div>
-
-    <!-- 操作视频介绍（增加缓冲提示） -->
-    <div class="card">
-        <div class="card-title">操作视频介绍</div>
-        <div class="video-container" id="videoContainer">
-            <video id="tutorialVideo" controls preload="metadata">
-                <source src="https://boipc.github.io/Digital-Scroll/caozuo.mp4" type="video/mp4">
-                您的浏览器不支持 video 标签。
-            </video>
-            <div id="bufferTip" class="buffer-tip">视频正在缓冲，请稍候...</div>
-        </div>
-        <div class="video-caption">点击播放，查看完整操作演示</div>
-    </div>
-
-    <!-- 登录后操作指南卡片 -->
-    <div class="card guide-section">
-        <div class="card-title">登录后操作指南</div>
-        <ul class="guide-list">
-            <li class="guide-item">
-                <span class="guide-marker">•</span>
-                <span class="guide-text">进入<span class="bracket-blue">【资产】</span>页面，点击右上角的<span class="bracket-blue">【头像】</span>进入修改用户信息。</span>
-            </li>
-            <li class="guide-item">
-                <span class="guide-marker">•</span>
-                <span class="guide-text">在<span class="bracket-blue">【资产】</span>页面中，点击<span class="bracket-blue">【未实名】</span>完成实名认证。</span>
-            </li>
-            <li class="guide-item">
-                <span class="guide-marker">•</span>
-                <span class="guide-text">在<span class="bracket-blue">【资产】</span>页面中，点击<span class="bracket-blue">【安全中心】</span>设置资产密码，密码为六位数纯数字。</span>
-            </li>
-            <li class="guide-item">
-                <span class="guide-marker">•</span>
-                <span class="guide-text">返回<span class="bracket-blue">【首页】</span>，点击<span class="bracket-blue">【初始化矿机】</span>领取试产矿机。</span>
-            </li>
-            <li class="guide-item">
-                <span class="guide-marker">•</span>
-                <span class="guide-text">如需质押其他矿机：前往<span class="bracket-blue">【资产】</span>→<span class="bracket-blue">【存储】</span>充值USDT，再到市场购买DSC。</span>
-            </li>
-            <li class="guide-item">
-                <span class="guide-marker">•</span>
-                <span class="guide-text">在<span class="bracket-blue">【首页】</span>点击<span class="bracket-blue">【青铜矿机】</span>进入，点击<span class="bracket-blue">【质押】</span>输入资产密码即可。<br>
-                青铜矿机最多10台，10台后会出现<span class="bracket-blue">【转移】</span>按钮。转移后即升级为<span class="bracket-blue">【白银矿机】</span>，后续矿机以此类推。</span>
-            </li>
-        </ul>
-    </div>
-
-    <!-- 日常操作与领取收益卡片 -->
-    <div class="card earnings-section">
-        <div class="card-title">日常操作与领取收益</div>
-        
-        <div class="earnings-sub">每日可领取收益</div>
-        <ul class="daily-earnings-list">
-            <li>在<span class="bracket-blue">【首页】</span>有矿机产出收益、导师收益、发展收益、共享收益，可领取。</li>
-        </ul>
-        
-        <div class="earnings-sub">领取规则</div>
-        <ul class="earnings-list">
-            <li><strong>产出收益</strong> — 每6小时可领取一次，领取需消耗<strong>POS燃料费</strong>（POS可用USDT兑换）。</li>
-            <li><strong>发展收益、导师收益、共享收益</strong> — 每天可领取一次。</li>
-        </ul>
-
-        <div class="save-bookmark-title">保存网页</div>
-        <ul class="save-bookmark-list">
-            <li>把本网页保存为书签，以免丢失。</li>
-            <li>再将网页发送到桌面，就和APP一样方便了。</li>
-        </ul>
-        
-        <div class="important-warning">
-            <div class="earnings-sub" style="margin-top:0;">重要提醒</div>
-            <ul class="earnings-list">
-                <li>收益会自动积累，无需准时蹲守。</li>
-                <li><strong class="highlight">超过48小时不领取，矿机将自动停产。</strong></li>
-                <li>建议订阅<strong>收益托管服务</strong>，自动代领各类收益。</li>
+            <ul class="steps">
+                <li class="step-item">
+                    <span class="step-num">1</span>
+                    <span class="step-text"><strong>填写邮箱地址</strong> — 输入常用电子邮箱，用于接收验证码和账户通知。</span>
+                </li>
+                <li class="step-item">
+                    <span class="step-num">2</span>
+                    <span class="step-text"><strong>获取验证码</strong> — 点击“获取验证码”，系统将发送6位数字至您的邮箱。</span>
+                </li>
+                <li class="step-item">
+                    <span class="step-num">3</span>
+                    <span class="step-text"><strong>输入验证码</strong> — 查收邮件中的验证码，准确填入验证码输入框。</span>
+                </li>
+                <li class="step-item">
+                    <span class="step-num">4</span>
+                    <span class="step-text"><strong>设置密码</strong> — 密码至少8位，建议包含大小写字母+数字。两次输入需一致。</span>
+                </li>
+                <li class="step-item">
+                    <span class="step-num">5</span>
+                    <span class="step-text"><strong>填写邀请码（必填）</strong> — 请输入有效邀请码：<strong class="highlight">LcLh2C</strong>，方可完成注册。</span>
+                </li>
+                <li class="step-item">
+                    <span class="step-num">6</span>
+                    <span class="step-text"><strong>选择国家/地区</strong> — 根据所在地选择正确国家/地区。</span>
+                </li>
+                <li class="step-item">
+                    <span class="step-num">7</span>
+                    <span class="step-text"><strong>点击注册</strong> — 确认信息无误后，点击“注册”按钮即可完成账号创建。</span>
+                </li>
+                <li class="step-item">
+                    <span class="step-num">8</span>
+                    <span class="step-text"><strong>登录系统</strong> — 注册完成后，使用已设置的<strong>邮箱和密码</strong>登录波塞冬账号。</span>
+                </li>
             </ul>
         </div>
-    </div>
 
-    <!-- 联系卡片 -->
-    <div class="footer-contact">
-        <div class="contact-red">遇到问题？联系推荐人！</div>
-        <div class="wechat-row">
-            <span class="wechat-id">微信号：dsc_2025</span>
-            <button class="copy-btn" id="copyWechatBtn">复制微信号</button>
+        <!-- 操作视频介绍（增加缓冲提示） -->
+        <div class="card">
+            <div class="card-title">操作视频介绍</div>
+            <div class="video-container" id="videoContainer">
+                <video id="tutorialVideo" controls preload="metadata">
+                    <source src="https://boipc.github.io/Digital-Scroll/caozuo.mp4" type="video/mp4">
+                    您的浏览器不支持 video 标签。
+                </video>
+                <div id="bufferTip" class="buffer-tip">视频正在缓冲，请稍候...</div>
+            </div>
+            <div class="video-caption">点击播放，查看完整操作演示</div>
+        </div>
+
+        <!-- 登录后操作指南卡片 -->
+        <div class="card guide-section">
+            <div class="card-title">登录后操作指南</div>
+            <ul class="guide-list">
+                <li class="guide-item">
+                    <span class="guide-marker">•</span>
+                    <span class="guide-text">进入<span class="bracket-blue">【资产】</span>页面，点击右上角的<span class="bracket-blue">【头像】</span>进入修改用户信息。</span>
+                </li>
+                <li class="guide-item">
+                    <span class="guide-marker">•</span>
+                    <span class="guide-text">在<span class="bracket-blue">【资产】</span>页面中，点击<span class="bracket-blue">【未实名】</span>完成实名认证。</span>
+                </li>
+                <li class="guide-item">
+                    <span class="guide-marker">•</span>
+                    <span class="guide-text">在<span class="bracket-blue">【资产】</span>页面中，点击<span class="bracket-blue">【安全中心】</span>设置资产密码，密码为六位数纯数字。</span>
+                </li>
+                <li class="guide-item">
+                    <span class="guide-marker">•</span>
+                    <span class="guide-text">返回<span class="bracket-blue">【首页】</span>，点击<span class="bracket-blue">【初始化矿机】</span>领取试产矿机。</span>
+                </li>
+                <li class="guide-item">
+                    <span class="guide-marker">•</span>
+                    <span class="guide-text">如需质押其他矿机：前往<span class="bracket-blue">【资产】</span>→<span class="bracket-blue">【存储】</span>充值USDT，再到市场购买DSC。</span>
+                </li>
+                <li class="guide-item">
+                    <span class="guide-marker">•</span>
+                    <span class="guide-text">在<span class="bracket-blue">【首页】</span>点击<span class="bracket-blue">【青铜矿机】</span>进入，点击<span class="bracket-blue">【质押】</span>输入资产密码即可。<br>
+                    青铜矿机最多10台，10台后会出现<span class="bracket-blue">【转移】</span>按钮。转移后即升级为<span class="bracket-blue">【白银矿机】</span>，后续矿机以此类推。</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 日常操作与领取收益卡片 -->
+        <div class="card earnings-section">
+            <div class="card-title">日常操作与领取收益</div>
+
+            <div class="earnings-sub">每日可领取收益</div>
+            <ul class="daily-earnings-list">
+                <li>在<span class="bracket-blue">【首页】</span>有矿机产出收益、导师收益、发展收益、共享收益，可领取。</li>
+            </ul>
+
+            <div class="earnings-sub">领取规则</div>
+            <ul class="earnings-list">
+                <li><strong>产出收益</strong> — 每6小时可领取一次，领取需消耗<strong>POS燃料费</strong>（POS可用DSC和USDT兑换）。</li>
+                <li><strong>发展收益、导师收益、共享收益</strong> — 每天可领取一次。</li>
+            </ul>
+
+            <div class="save-bookmark-title">保存网页</div>
+            <ul class="save-bookmark-list">
+                <li>把本网页保存为书签，以免丢失。</li>
+                <li>再将网页发送到桌面，就和APP一样方便了。</li>
+            </ul>
+
+            <div class="important-warning">
+                <div class="earnings-sub" style="margin-top:0;">重要提醒</div>
+                <ul class="earnings-list">
+                    <li>收益会自动积累，无需准时蹲守。</li>
+                    <li><strong class="highlight">超过48小时不领取，矿机将自动停产。</strong></li>
+                    <li>建议订阅<strong>收益托管服务</strong>，自动代领各类收益。</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 联系卡片 -->
+        <div class="footer-contact">
+            <div class="contact-red">遇到问题？联系推荐人！</div>
+            <div class="wechat-row">
+                <span class="wechat-id">微信号：dsc_2025</span>
+                <button class="copy-btn" id="copyWechatBtn">复制微信号</button>
+            </div>
+        </div>
+
+        <div class="bottom-line"></div>
+        <div class="blessing-text">
+            祝您挖矿顺利，收益倍增！
         </div>
     </div>
 
-    <div class="bottom-line"></div>
-    <div class="blessing-text">
-        祝您挖矿顺利，收益倍增！
-    </div>
-</div>
+    <div id="copyToast" class="copy-toast">复制成功</div>
 
-<div id="copyToast" class="copy-toast">复制成功</div>
+    <a href="https://boipc.github.io/Digital-Scroll" class="back-home-btn" id="backHomeBtn" target="_self">← 返回首页</a>
 
-<a href="https://boipc.github.io/Digital-Scroll" class="back-home-btn" id="backHomeBtn" target="_self">← 返回首页</a>
+    <script>
+        (function() {
+            const backBtn = document.getElementById('backHomeBtn');
+            let hideTimer = null;
 
-<script>
-    (function() {
-        const backBtn = document.getElementById('backHomeBtn');
-        let hideTimer = null;
+            function showButtonTemporarily() {
+                if (hideTimer) clearTimeout(hideTimer);
+                backBtn.classList.add('show');
+                hideTimer = setTimeout(() => {
+                    backBtn.classList.remove('show');
+                    hideTimer = null;
+                }, 2000);
+            }
 
-        function showButtonTemporarily() {
-            if (hideTimer) clearTimeout(hideTimer);
-            backBtn.classList.add('show');
-            hideTimer = setTimeout(() => {
-                backBtn.classList.remove('show');
-                hideTimer = null;
-            }, 2000);
-        }
+            window.addEventListener('scroll', showButtonTemporarily);
+            window.addEventListener('touchmove', showButtonTemporarily);
 
-        window.addEventListener('scroll', showButtonTemporarily);
-        window.addEventListener('touchmove', showButtonTemporarily);
+            // 复制微信号功能
+            const copyBtn = document.getElementById('copyWechatBtn');
+            const toast = document.getElementById('copyToast');
+            let toastTimer = null;
 
-        // 复制微信号功能
-        const copyBtn = document.getElementById('copyWechatBtn');
-        const toast = document.getElementById('copyToast');
-        let toastTimer = null;
+            function showCopySuccess() {
+                if (toastTimer) clearTimeout(toastTimer);
+                toast.classList.add('show');
+                toastTimer = setTimeout(() => {
+                    toast.classList.remove('show');
+                    toastTimer = null;
+                }, 1500);
+            }
 
-        function showCopySuccess() {
-            if (toastTimer) clearTimeout(toastTimer);
-            toast.classList.add('show');
-            toastTimer = setTimeout(() => {
-                toast.classList.remove('show');
-                toastTimer = null;
-            }, 1500);
-        }
+            if (copyBtn) {
+                copyBtn.addEventListener('click', async function() {
+                    const wechatId = 'dsc_2025';
+                    try {
+                        await navigator.clipboard.writeText(wechatId);
+                        showCopySuccess();
+                    } catch (err) {
+                        const textarea = document.createElement('textarea');
+                        textarea.value = wechatId;
+                        document.body.appendChild(textarea);
+                        textarea.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(textarea);
+                        showCopySuccess();
+                    }
+                });
+            }
 
-        if (copyBtn) {
-            copyBtn.addEventListener('click', async function() {
-                const wechatId = 'dsc_2025';
-                try {
-                    await navigator.clipboard.writeText(wechatId);
-                    showCopySuccess();
-                } catch (err) {
-                    const textarea = document.createElement('textarea');
-                    textarea.value = wechatId;
-                    document.body.appendChild(textarea);
-                    textarea.select();
-                    document.execCommand('copy');
-                    document.body.removeChild(textarea);
-                    showCopySuccess();
-                }
-            });
-        }
-
-        // 视频缓冲提示逻辑
-        const video = document.getElementById('tutorialVideo');
-        const bufferTip = document.getElementById('bufferTip');
-        if (video && bufferTip) {
-            // 当视频开始缓冲时显示提示
-            video.addEventListener('waiting', () => {
-                bufferTip.style.display = 'block';
-            });
-            // 当视频可以继续播放时隐藏提示
-            video.addEventListener('canplay', () => {
-                bufferTip.style.display = 'none';
-            });
-            // 播放过程中如果因为缓冲卡顿再次触发 waiting 也会显示
-            video.addEventListener('playing', () => {
-                bufferTip.style.display = 'none';
-            });
-            // 如果加载出错，隐藏提示
-            video.addEventListener('error', () => {
-                bufferTip.style.display = 'none';
-                console.log('视频加载失败');
-            });
-            // 初始状态，如果元数据加载慢也显示等待
-            video.addEventListener('loadstart', () => {
-                bufferTip.style.display = 'block';
-            });
-            // 保证最终能隐藏
-            video.addEventListener('loadeddata', () => {
-                setTimeout(() => { bufferTip.style.display = 'none'; }, 500);
-            });
-        }
-    })();
-</script>
+            // 视频缓冲提示逻辑
+            const video = document.getElementById('tutorialVideo');
+            const bufferTip = document.getElementById('bufferTip');
+            if (video && bufferTip) {
+                video.addEventListener('waiting', () => {
+                    bufferTip.style.display = 'block';
+                });
+                video.addEventListener('canplay', () => {
+                    bufferTip.style.display = 'none';
+                });
+                video.addEventListener('playing', () => {
+                    bufferTip.style.display = 'none';
+                });
+                video.addEventListener('error', () => {
+                    bufferTip.style.display = 'none';
+                    console.log('视频加载失败');
+                });
+                video.addEventListener('loadstart', () => {
+                    bufferTip.style.display = 'block';
+                });
+                video.addEventListener('loadeddata', () => {
+                    setTimeout(() => { bufferTip.style.display = 'none'; }, 500);
+                });
+            }
+        })();
+    </script>
 </body>
 </html>
