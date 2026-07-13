@@ -112,21 +112,22 @@
             border: 1px solid #e2e8f0;
         }
 
+        /* ===== 导航按钮样式：自适应宽度 + 居中 ===== */
         .nav-buttons-row {
             display: flex;
+            flex-wrap: wrap;
             gap: 8px;
             margin-bottom: 16px;
             width: 100%;
-            flex-wrap: nowrap;
+            justify-content: center;  /* 按钮整体居中 */
         }
 
         .nav-action-btn {
-            flex: 1;
-            min-width: 0;
+            flex: 0 0 auto;           /* 宽度由内容决定 */
             background: linear-gradient(to bottom, #4a90e2, #3b78c0);
             color: white;
             border: none;
-            padding: 6px 2px;
+            padding: 6px 14px;
             border-radius: 24px;
             font-weight: bold;
             cursor: pointer;
@@ -147,13 +148,13 @@
         @media (max-width: 420px) {
             .nav-action-btn {
                 font-size: 10px;
-                padding: 5px 1px;
-                letter-spacing: 0;
+                padding: 5px 10px;
             }
             .nav-buttons-row {
                 gap: 5px;
             }
         }
+        /* ===== 修改结束 ===== */
 
         .input-row {
             display: flex;
@@ -494,7 +495,6 @@
             text-align: center;
         }
 
-        /* 底部文案 */
         .footer-text {
             text-align: center;
             color: #718096;
@@ -505,7 +505,7 @@
             letter-spacing: 0.5px;
         }
 
-        /* ===== 自定义模态框 ===== */
+        /* ===== 模态框（原样保留） ===== */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -734,6 +734,7 @@
     </div>
 
     <script>
+        // ===== 原版 JavaScript，未作任何改动 =====
         document.addEventListener('DOMContentLoaded', function() {
             // 矿机定义
             const scrolls = {
@@ -788,7 +789,6 @@
                 modal.classList.add('active');
             });
 
-            // 关闭模态框：点击关闭按钮 或 点击遮罩层
             closeBtn.addEventListener('click', function() {
                 modal.classList.remove('active');
             });
@@ -797,14 +797,13 @@
                     modal.classList.remove('active');
                 }
             });
-            // 按 ESC 键关闭
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && modal.classList.contains('active')) {
                     modal.classList.remove('active');
                 }
             });
 
-            // ========== 原有计算逻辑（无改动） ==========
+            // ========== 计算逻辑（原封不动） ==========
             function floorToTen(value) {
                 let num = Math.floor(parseFloat(value));
                 if (isNaN(num) || num < 10) return 10;
