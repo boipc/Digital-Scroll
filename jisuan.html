@@ -6,6 +6,7 @@
     <title>波塞冬DSC复投计算系统</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* ===== 全局重置 ===== */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -15,21 +16,44 @@
             line-height: 1.2;
         }
 
+        /* ===== 深色主题变量（与 00.html 配色一致） ===== */
+        :root {
+            --bg-body: #060a16;
+            --bg-container: rgba(255, 255, 255, 0.02);
+            --border-color: rgba(79, 124, 255, 0.08);
+            --text-primary: #f0f4ff;
+            --text-secondary: #b0c4ff;
+            --text-muted: #6a7fa0;
+            --blue: #4f7cff;
+            --purple: #8b5cf6;
+            --pink: #f472b6;
+            --cyan: #22d3ee;
+            --orange: #fb923c;
+            --shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            --input-bg: rgba(0, 0, 0, 0.35);
+            --table-bg: rgba(0, 0, 0, 0.3);
+            --hover-bg: rgba(79, 124, 255, 0.04);
+            --selected-bg: rgba(79, 124, 255, 0.06);
+        }
+
         body {
-            background: linear-gradient(to bottom, #f5f7fa, #e4e8f0);
-            color: #2d3748;
+            background: var(--bg-body);
+            color: var(--text-primary);
             padding: 8px;
-            max-width: 100%;
+            width: min(100%, calc(100vh * 1.333));
+            max-width: 800px;
+            margin: 0 auto;
             overflow-x: hidden;
             padding-bottom: 20px;
         }
 
+        /* ===== 所有尺寸完全保留原版 default.html 的值 ===== */
         .header {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            margin-bottom: 12px;
+            margin-bottom: 6px;
         }
 
         .header-link {
@@ -48,7 +72,7 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            background-color: #4a90e2;
+            background-color: var(--blue);
             position: relative;
             overflow: hidden;
         }
@@ -59,6 +83,7 @@
             color: white;
             font-weight: bold;
             font-size: 14px;
+            z-index: 1;
         }
 
         .logo::after {
@@ -69,35 +94,45 @@
             background-image: url('images/logo01.png');
             background-size: cover;
             background-position: center;
-            opacity: 1;
+            opacity: 0.6;
             transition: opacity 0.3s;
         }
 
         .logo:hover::after {
-            opacity: 0.8;
+            opacity: 0.9;
         }
 
         .container {
-            background: #ffffff;
+            background: var(--bg-container);
             border-radius: 8px;
             padding: 12px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow);
             margin-bottom: 12px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--border-color);
         }
 
         h1 {
             font-size: 18px;
-            color: #4a90e2;
+            color: var(--blue);
             cursor: pointer;
+            background: linear-gradient(135deg, var(--blue), var(--purple), var(--pink));
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradShift 5s ease-in-out infinite;
+        }
+        @keyframes gradShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
         h2 {
             font-size: 14px;
             margin: 8px 0;
-            color: #4a90e2;
+            color: var(--blue);
             padding-bottom: 4px;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid var(--border-color);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -105,132 +140,168 @@
 
         .days-count {
             font-size: 12px;
-            color: #4a90e2;
-            background-color: #f7f9fc;
+            color: var(--text-secondary);
+            background-color: var(--input-bg);
             padding: 2px 8px;
             border-radius: 12px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--border-color);
         }
 
-        /* ===== 导航按钮样式：自适应宽度 + 居中 ===== */
+        /* ===== 导航栏（尺寸原版） ===== */
         .nav-buttons-row {
             display: flex;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             gap: 8px;
-            margin-bottom: 16px;
+            margin-bottom: 8px;
             width: 100%;
-            justify-content: center;  /* 按钮整体居中 */
+            justify-content: center;
+            overflow-x: auto;
+            padding-bottom: 4px;
         }
 
         .nav-action-btn {
-            flex: 0 0 auto;           /* 宽度由内容决定 */
-            background: linear-gradient(to bottom, #4a90e2, #3b78c0);
-            color: white;
-            border: none;
-            padding: 6px 14px;
+            flex: 0 0 auto;
+            background: transparent;
+            border: 1px solid var(--blue);
+            color: var(--blue);
+            padding: 6px 18px;
             border-radius: 24px;
             font-weight: bold;
             cursor: pointer;
-            font-size: 11px;
+            font-size: 14px;
             text-align: center;
             text-decoration: none;
             transition: 0.2s;
-            box-shadow: 0 1px 3px rgba(74, 144, 226, 0.3);
+            box-shadow: none;
             white-space: nowrap;
             letter-spacing: 0.3px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 32px;
+            line-height: 1;
         }
 
         .nav-action-btn:hover {
-            background: linear-gradient(to bottom, #3b78c0, #2a63a5);
+            background: var(--hover-bg);
             transform: translateY(-1px);
+            border-color: var(--purple);
+            color: var(--cyan);
         }
 
-        @media (max-width: 420px) {
-            .nav-action-btn {
-                font-size: 10px;
-                padding: 5px 10px;
-            }
-            .nav-buttons-row {
-                gap: 5px;
-            }
+        /* ===== 燃料切换器 ===== */
+        .fuel-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 6px;
+            padding: 0;
+            background: transparent;
+            border: 1px solid var(--blue);
+            border-radius: 20px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
         }
-        /* ===== 修改结束 ===== */
 
+        .toggle-group {
+            display: flex;
+            gap: 2px;
+        }
+
+        .toggle-option {
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--blue);
+            background: transparent;
+            user-select: none;
+            white-space: nowrap;
+            border: none;
+        }
+
+        .toggle-option.active {
+            background: var(--blue);
+            color: #ffffff;
+            box-shadow: 0 1px 4px rgba(79, 124, 255, 0.3);
+        }
+
+        .toggle-option:not(.active):hover {
+            background: var(--hover-bg);
+        }
+
+        /* ===== 输入区域（尺寸原版） ===== */
         .input-row {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
             margin-bottom: 5px;
         }
 
-        .input-container {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin: 15px 0;
-        }
-
         .input-label {
-            color: #4a5568;
+            color: var(--text-secondary);
             font-size: 12px;
             white-space: nowrap;
             width: 60px;
-            text-align: center;
+            text-align: right;
+            padding-right: 4px;
         }
 
         .input-field {
             width: 100px;
             padding: 4px 10px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--border-color);
             border-radius: 16px;
             text-align: center;
-            background: #f7f9fc;
-            color: #2d3748;
+            background: var(--input-bg);
+            color: var(--text-primary);
             height: 22px;
             font-size: 12px;
         }
 
         .input-field:focus {
             outline: none;
-            border: 1px solid #4a90e2;
-            box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+            border: 1px solid var(--blue);
+            box-shadow: 0 0 5px rgba(79, 124, 255, 0.3);
         }
 
         .input-field[type="number"] {
             -moz-appearance: textfield;
         }
-
         .input-field::-webkit-outer-spin-button,
         .input-field::-webkit-inner-spin-button {
             -webkit-appearance: none;
             margin: 0;
         }
-
         .input-field::placeholder {
-            color: #a0aec0;
+            color: var(--text-muted);
             font-size: 11px;
         }
 
         .conversion-info {
-            color: #718096;
+            color: var(--text-muted);
             font-size: 11px;
             text-align: center;
             margin: 4px 0;
         }
 
         .fuel-info {
-            color: #e53e3e;
+            color: var(--pink);
             font-size: 11px;
             text-align: center;
             margin: 4px 0 4px 0;
         }
 
         .bonus-info {
-            color: #4a90e2;
+            color: var(--cyan);
             font-size: 11px;
             text-align: center;
             margin: 0 0 8px 0;
+            transition: all 0.2s;
         }
 
         .scroll-display {
@@ -239,31 +310,30 @@
             gap: 4px;
             margin-top: 10px;
             padding: 6px;
-            background: rgba(247, 249, 252, 0.8);
+            background: rgba(0, 0, 0, 0.2);
             border-radius: 6px;
             min-height: 28px;
             align-items: center;
             justify-content: center;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--border-color);
         }
 
         .scroll-item {
             display: flex;
             align-items: center;
             gap: 2px;
-            background: rgba(74, 144, 226, 0.1);
+            background: var(--hover-bg);
             padding: 2px 4px;
             border-radius: 8px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--border-color);
             font-size: 10px;
         }
 
         .scroll-name {
-            color: #4a5568;
+            color: var(--text-secondary);
         }
-
         .scroll-count {
-            color: #4a90e2;
+            color: var(--cyan);
             font-weight: bold;
         }
 
@@ -271,9 +341,9 @@
             max-height: 300px;
             overflow-y: auto;
             margin-top: 10px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--border-color);
             border-radius: 6px;
-            background: #f7f9fc;
+            background: var(--table-bg);
         }
 
         .results table {
@@ -284,60 +354,53 @@
         .results thead {
             position: sticky;
             top: 0;
-            background-color: #edf2f7;
+            background-color: var(--bg-body);
             z-index: 2;
         }
 
         .results thead th {
-            color: #4a5568;
+            color: var(--text-secondary);
             font-weight: bold;
             padding: 6px 4px;
             text-align: left;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .results {
             scrollbar-width: thin;
-            scrollbar-color: rgba(160, 174, 192, 0.5) transparent;
+            scrollbar-color: rgba(79, 124, 255, 0.15) transparent;
         }
-
         .results::-webkit-scrollbar {
             width: 8px;
         }
-
         .results::-webkit-scrollbar-track {
             background: transparent;
         }
-
         .results::-webkit-scrollbar-thumb {
-            background-color: rgba(160, 174, 192, 0.5);
+            background-color: rgba(79, 124, 255, 0.15);
             border-radius: 4px;
             border: 2px solid transparent;
         }
-
         .results::-webkit-scrollbar-thumb:hover {
-            background-color: rgba(113, 128, 150, 0.7);
+            background-color: rgba(79, 124, 255, 0.3);
         }
 
-        th,
-        td {
+        th, td {
             padding: 6px 4px;
             text-align: left;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid var(--border-color);
         }
 
         tr:nth-child(even) {
-            background-color: rgba(255, 255, 255, 0.5);
+            background-color: rgba(255, 255, 255, 0.01);
         }
-
         tr:hover {
-            background-color: rgba(74, 144, 226, 0.1);
+            background-color: var(--hover-bg);
             cursor: pointer;
         }
-
         tr.selected {
-            background-color: rgba(74, 144, 226, 0.08);
-            box-shadow: inset 0 0 0 1px #4a90e2;
+            background-color: var(--selected-bg);
+            box-shadow: inset 0 0 0 1px var(--blue);
         }
 
         .toggle-more {
@@ -349,7 +412,7 @@
         .toggle-more button {
             background: transparent;
             border: none;
-            color: #4a90e2;
+            color: var(--blue);
             font-size: 16px;
             cursor: pointer;
             padding: 4px;
@@ -362,13 +425,13 @@
             margin: 0 auto;
         }
 
-        .toggle-more button:hover {
+        .toggle-more button:hover:not(:disabled) {
             opacity: 1;
             transform: scale(1.05);
+            color: var(--cyan);
         }
-
         .toggle-more button:disabled {
-            color: #a0aec0;
+            color: var(--text-muted);
             cursor: not-allowed;
             opacity: 0.5;
             transform: none;
@@ -380,12 +443,12 @@
             gap: 8px;
             margin-top: 10px;
             padding: 10px;
-            background: rgba(247, 249, 252, 0.8);
+            background: rgba(0, 0, 0, 0.2);
             border-radius: 6px;
             justify-content: center;
             align-items: center;
             min-height: 60px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--border-color);
             position: relative;
         }
 
@@ -394,15 +457,15 @@
             top: -10px;
             left: 50%;
             transform: translateX(-50%);
-            background-color: #f7f9fc;
-            color: #4a90e2;
+            background-color: var(--bg-body);
+            color: var(--cyan);
             padding: 2px 8px;
             border-radius: 10px;
             font-size: 11px;
             font-weight: bold;
             display: none;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 2px 4px rgba(74, 144, 226, 0.2);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 4px rgba(79, 124, 255, 0.2);
         }
 
         .mode-notice {
@@ -415,36 +478,34 @@
         }
 
         .activity-mode {
-            background: rgba(229, 62, 62, 0.1);
-            border-left: 3px solid #e53e3e;
-            color: #e53e3e;
+            background: rgba(244, 114, 182, 0.04);
+            border-left: 3px solid var(--pink);
+            color: var(--pink);
         }
 
         .daily-mode {
-            background: rgba(74, 144, 226, 0.1);
-            border-left: 3px solid #4a90e2;
-            color: #4a5568;
+            background: rgba(79, 124, 255, 0.04);
+            border-left: 3px solid var(--blue);
+            color: var(--text-secondary);
         }
 
         .fuel-cost {
-            color: #e53e3e;
+            color: var(--pink);
             font-weight: bold;
         }
-
         .growth-rate {
-            color: #4a90e2;
+            color: var(--cyan);
             font-weight: bold;
         }
-
         .yield-rate {
-            color: #4a90e2;
+            color: var(--cyan);
             font-weight: bold;
         }
 
         .calculate-button {
-            background: linear-gradient(to bottom, #4a90e2, #3b78c0);
-            color: white;
-            border: none;
+            background: transparent;
+            border: 1px solid var(--blue);
+            color: var(--blue);
             padding: 4px 12px;
             border-radius: 16px;
             font-weight: bold;
@@ -452,17 +513,19 @@
             height: 22px;
             font-size: 12px;
             white-space: nowrap;
-            box-shadow: 0 2px 4px rgba(74, 144, 226, 0.3);
+            box-shadow: none;
+            transition: 0.2s;
         }
-
         .calculate-button:hover {
-            background: linear-gradient(to bottom, #3b78c0, #2a63a5);
+            background: var(--hover-bg);
+            border-color: var(--purple);
+            color: var(--cyan);
         }
 
         .loading-indicator {
             text-align: center;
             padding: 10px;
-            color: #4a90e2;
+            color: var(--cyan);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -486,26 +549,25 @@
         }
 
         .warning-text {
-            color: #e53e3e;
+            color: var(--pink);
         }
-
         .info-text {
-            color: #718096;
+            color: var(--text-muted);
             font-size: 11px;
             text-align: center;
         }
 
         .footer-text {
             text-align: center;
-            color: #718096;
+            color: var(--text-muted);
             font-size: 13px;
             padding: 16px 0 6px 0;
-            border-top: 1px solid #e2e8f0;
+            border-top: 1px solid var(--border-color);
             margin-top: 8px;
             letter-spacing: 0.5px;
         }
 
-        /* ===== 模态框（原样保留） ===== */
+        /* ===== 模态框（深色） ===== */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -513,19 +575,20 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             z-index: 999;
             justify-content: center;
             align-items: center;
             animation: fadeIn 0.2s ease;
         }
-
         .modal-overlay.active {
             display: flex;
         }
 
         .modal-box {
-            background: #ffffff;
+            background: #0a0e1e;
             border-radius: 12px;
             padding: 24px 20px 20px;
             max-width: 380px;
@@ -533,6 +596,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             position: relative;
             animation: slideUp 0.25s ease;
+            border: 1px solid var(--border-color);
         }
 
         .modal-close {
@@ -540,24 +604,27 @@
             top: 10px;
             right: 16px;
             font-size: 22px;
-            color: #a0aec0;
+            color: var(--text-muted);
             cursor: pointer;
             transition: color 0.2s;
             line-height: 1;
             background: none;
             border: none;
         }
-
         .modal-close:hover {
-            color: #4a5568;
+            color: var(--text-primary);
         }
 
         .modal-title {
             font-size: 16px;
             font-weight: bold;
-            color: #2d3748;
+            color: var(--text-primary);
             margin-bottom: 14px;
             text-align: center;
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .modal-link-group {
@@ -568,63 +635,67 @@
         }
 
         .modal-link-item {
-            background: #f7f9fc;
+            background: var(--input-bg);
             border-radius: 8px;
             padding: 10px 12px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--border-color);
             transition: background 0.15s;
         }
-
         .modal-link-item:hover {
-            background: #edf2f7;
+            background: var(--hover-bg);
         }
 
         .modal-link-item a {
-            color: #4a90e2;
+            color: var(--cyan);
             text-decoration: none;
             font-size: 13px;
             font-weight: 500;
             display: block;
             word-break: break-all;
         }
-
         .modal-link-item a:hover {
             text-decoration: underline;
+            color: #ffffff;
         }
-
         .modal-link-item .label {
             font-size: 11px;
-            color: #718096;
+            color: var(--text-muted);
             display: block;
             margin-bottom: 2px;
         }
 
         .modal-footer-note {
             font-size: 11px;
-            color: #a0aec0;
+            color: var(--text-muted);
             text-align: center;
-            border-top: 1px solid #e2e8f0;
+            border-top: 1px solid var(--border-color);
             padding-top: 12px;
             margin-top: 4px;
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes gradShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
-        @keyframes slideUp {
-            from {
-                transform: translateY(30px);
-                opacity: 0;
+        /* ===== 媒体查询保留原版尺寸 ===== */
+        @media (max-width: 420px) {
+            .nav-action-btn {
+                font-size: 12px;
+                padding: 5px 12px;
+                height: 28px;
+                line-height: 1;
             }
-            to {
-                transform: translateY(0);
-                opacity: 1;
+            .nav-buttons-row {
+                gap: 5px;
             }
         }
     </style>
@@ -638,7 +709,7 @@
     </div>
 
     <div class="container">
-        <!-- ========== 导航栏：4个按钮 ========== -->
+        <!-- 导航栏 -->
         <div class="nav-buttons-row">
             <a href="index.html" class="nav-action-btn">返回首页</a>
             <a href="sunhao.html" class="nav-action-btn">损耗分析</a>
@@ -646,16 +717,22 @@
             <a href="#" id="loginLink" class="nav-action-btn">登录波塞冬</a>
         </div>
 
+        <!-- 输入区域 -->
         <div class="input-group">
+            <div class="fuel-toggle" id="fuelToggle">
+                <div class="toggle-group">
+                    <span class="toggle-option active" data-mode="normal" id="toggleNormal">不扣燃料费</span>
+                    <span class="toggle-option" data-mode="fuel" id="toggleFuel">扣除燃料费</span>
+                </div>
+            </div>
+
             <div class="input-row">
                 <label class="input-label" for="activity">算力</label>
                 <input type="number" id="activity" class="input-field" value="" placeholder="输入算力">
                 <button class="calculate-button" id="calc-activity">计算</button>
             </div>
             <div class="conversion-info">1算力 = 1 DSC</div>
-        </div>
 
-        <div class="input-group">
             <div class="input-row">
                 <label class="input-label" for="daily">日产量</label>
                 <input type="number" id="daily" class="input-field" min="0" value="" step="any" placeholder="输入日产量">
@@ -663,7 +740,7 @@
             </div>
 
             <div class="fuel-info warning-text">每日领取所需的燃料费约是领取DSC价值的25%</div>
-            <div class="bonus-info">此复投计算系统没计算领取燃料费，请自备POS</div>
+            <div class="bonus-info" id="bonusInfo">此复投计算系统没计算领取燃料费，请自备POS</div>
         </div>
 
         <div class="current-stats">
@@ -689,8 +766,8 @@
                         <th id="activity-header">累计算力</th>
                         <th id="growth-header" style="display:none;">算力增长率</th>
                         <th>日产量</th>
+                        <th id="fuel-deduct-header" style="display:none;">燃料费</th>
                         <th id="yield-header" style="display:none;">收益率</th>
-                        <th id="fuel-header" style="display:none;">燃料费</th>
                         <th>余额</th>
                     </tr>
                 </thead>
@@ -710,10 +787,9 @@
         </div>
     </div>
 
-    <!-- 底部文案 -->
     <div class="footer-text">每日复投一点点，算力增长看得见。</div>
 
-    <!-- ===== 自定义模态框 ===== -->
+    <!-- 模态框 -->
     <div class="modal-overlay" id="loginModal">
         <div class="modal-box">
             <button class="modal-close" id="modalCloseBtn">&times;</button>
@@ -734,9 +810,8 @@
     </div>
 
     <script>
-        // ===== 原版 JavaScript，未作任何改动 =====
         document.addEventListener('DOMContentLoaded', function() {
-            // 矿机定义
+            // ===== 矿机定义 =====
             const scrolls = {
                 bronze: { name: '青铜矿机', cost: 10, daily: 0.06, count: 0, max: 10 },
                 silver: { name: '白银矿机', cost: 100, daily: 0.6, count: 0, max: 10 },
@@ -765,22 +840,28 @@
             let selectedRow = null;
             let autoTimer = null;
 
+            let fuelMode = 'normal';
+
             const activityInput = document.getElementById('activity');
             const dailyInput = document.getElementById('daily');
             const calcActivityBtn = document.getElementById('calc-activity');
             const calcDailyBtn = document.getElementById('calc-daily');
             const modeNotice = document.getElementById('mode-notice');
-            const fuelHeader = document.getElementById('fuel-header');
             const activityHeader = document.getElementById('activity-header');
             const growthHeader = document.getElementById('growth-header');
             const yieldHeader = document.getElementById('yield-header');
+            const fuelDeductHeader = document.getElementById('fuel-deduct-header');
             const toggleMoreBtn = document.getElementById('toggle-more');
             const resultsBody = document.getElementById('results-body');
             const daysCountEl = document.getElementById('days-count');
             const currentScrolls = document.getElementById('current-scrolls');
             const dayIndicator = document.getElementById('day-indicator');
+            const bonusInfo = document.getElementById('bonusInfo');
 
-            // ========== 登录波塞冬 模态框控制 ==========
+            const toggleNormal = document.getElementById('toggleNormal');
+            const toggleFuel = document.getElementById('toggleFuel');
+
+            // ===== 登录模态框 =====
             const modal = document.getElementById('loginModal');
             const closeBtn = document.getElementById('modalCloseBtn');
 
@@ -803,7 +884,7 @@
                 }
             });
 
-            // ========== 计算逻辑（原封不动） ==========
+            // ========== 工具函数 ==========
             function floorToTen(value) {
                 let num = Math.floor(parseFloat(value));
                 if (isNaN(num) || num < 10) return 10;
@@ -844,8 +925,7 @@
                         const fromScroll = scrolls[rule.from];
                         const toScroll = scrolls[rule.to];
                         if (fromScroll.count >= rule.rate && toScroll.count < toScroll.max) {
-                            const upgradeCount = Math.min(Math.floor(fromScroll.count / rule.rate), toScroll.max - toScroll
-                            .count);
+                            const upgradeCount = Math.min(Math.floor(fromScroll.count / rule.rate), toScroll.max - toScroll.count);
                             if (upgradeCount > 0) {
                                 fromScroll.count -= upgradeCount * rule.rate;
                                 toScroll.count += upgradeCount;
@@ -877,6 +957,7 @@
                 return { newTotalPower, remainingBalance };
             }
 
+            // ===== 更新预览 =====
             function updatePreviewFromActivity() {
                 let rawPower = parseFloat(activityInput.value) || 0;
                 if (rawPower <= 0) {
@@ -892,12 +973,12 @@
                 updateCurrentScrollsDisplay();
             }
 
+            // ===== 设置计算模式 =====
             function setCalculationMode(mode) {
                 calculationMode = mode;
                 if (mode === 'activity') {
                     modeNotice.textContent = "当前模式: 算力计算复投，适合固定算力用户";
                     modeNotice.className = 'mode-notice activity-mode warning-text';
-                    fuelHeader.style.display = 'none';
                     activityHeader.textContent = '累计算力';
                     activityHeader.style.display = 'table-cell';
                     growthHeader.style.display = 'table-cell';
@@ -905,15 +986,48 @@
                 } else {
                     modeNotice.textContent = "当前模式: 日产计算复投，适合多种收益的产出大户";
                     modeNotice.className = 'mode-notice daily-mode';
-                    fuelHeader.style.display = 'none';
                     activityHeader.textContent = '增长算力';
                     activityHeader.style.display = 'table-cell';
                     growthHeader.style.display = 'none';
                     yieldHeader.style.display = 'table-cell';
                     currentScrolls.innerHTML = '<div class="info-text">点击下面表格查看每天复投的矿机数据</div>';
                 }
+                updateFuelText();
             }
 
+            function updateFuelText() {
+                if (fuelMode === 'normal') {
+                    bonusInfo.textContent = '此复投计算系统没计算领取燃料费，请自备POS';
+                    toggleNormal.classList.add('active');
+                    toggleFuel.classList.remove('active');
+                } else {
+                    bonusInfo.textContent = '此复投计算模式，系统已扣除了领取燃料费';
+                    toggleNormal.classList.remove('active');
+                    toggleFuel.classList.add('active');
+                }
+            }
+
+            function switchFuelMode(mode) {
+                if (fuelMode === mode) return;
+                fuelMode = mode;
+                updateFuelText();
+
+                if (calculationMode === 'activity') {
+                    const rawPower = parseFloat(activityInput.value) || 0;
+                    if (rawPower > 0) {
+                        calculateFromActivity();
+                    } else {
+                        currentScrolls.innerHTML = '<div class="info-text">请输入算力开始计算</div>';
+                        resultsBody.innerHTML = '<tr><td colspan="6" class="info-text">请输入算力</td></tr>';
+                        daysCountEl.textContent = '0天';
+                    }
+                } else if (calculationMode === 'daily') {
+                    modeNotice.textContent = "燃料费模式仅在算力模式下生效，当前为日产量模式（文案已更新）";
+                    modeNotice.className = 'mode-notice daily-mode';
+                }
+            }
+
+            // ===== 从算力计算 =====
             function calculateFromActivity() {
                 let rawPower = parseFloat(activityInput.value) || 0;
                 if (rawPower <= 0) {
@@ -932,6 +1046,7 @@
                 calculateAllDays('activity');
             }
 
+            // ===== 从日产量计算 =====
             function calculateFromDaily() {
                 const dailyVal = parseFloat(dailyInput.value) || 0;
                 if (dailyVal <= 0) return;
@@ -960,6 +1075,7 @@
                 updateDaysCount();
             }
 
+            // ===== 核心计算 =====
             function calculateAllDays(mode) {
                 const initialScrollsSnapshot = {};
                 for (let key in scrolls) initialScrollsSnapshot[key] = scrolls[key].count;
@@ -976,8 +1092,23 @@
 
                 for (let day = 1; day <= 1095; day++) {
                     let mineDaily = calculateDailyProduction();
-                    let totalDaily = (mode === 'activity') ? mineDaily : (baseDailyProduction + mineDaily);
-                    balance += totalDaily;
+                    let displayDaily = 0;
+                    let reinvestDaily = 0;
+
+                    if (mode === 'activity') {
+                        displayDaily = mineDaily;
+                        if (fuelMode === 'fuel') {
+                            reinvestDaily = mineDaily * 0.75;
+                        } else {
+                            reinvestDaily = mineDaily;
+                        }
+                    } else {
+                        displayDaily = baseDailyProduction + mineDaily;
+                        reinvestDaily = displayDaily;
+                    }
+
+                    balance += reinvestDaily;
+
                     const { newTotalPower, remainingBalance } = reinvest(balance, totalPower);
                     totalPower = newTotalPower;
                     balance = remainingBalance;
@@ -985,8 +1116,7 @@
                     const scrollSnapshot = {};
                     for (let key in scrolls) scrollSnapshot[key] = scrolls[key].count;
 
-                    let growthRate = 0,
-                        yieldRate = 0;
+                    let growthRate = 0, yieldRate = 0;
                     if (mode === 'activity') {
                         growthRate = initialActivity > 0 ? ((totalPower - initialActivity) / initialActivity * 100) : 0;
                     } else {
@@ -998,10 +1128,12 @@
                         day,
                         balance,
                         activity: totalPower,
-                        daily: totalDaily,
+                        daily: displayDaily,
+                        reinvestDaily: reinvestDaily,
                         scrolls: { ...scrollSnapshot },
                         growthRate,
-                        yieldRate
+                        yieldRate,
+                        fuelDeducted: (mode === 'activity' && fuelMode === 'fuel') ? (mineDaily * 0.25) : 0
                     });
                 }
 
@@ -1015,33 +1147,44 @@
                 isCalculating = false;
             }
 
+            // ===== 显示结果 =====
             function displayResults() {
                 if (!displayedResults.length) {
                     resultsBody.innerHTML = '<tr><td colspan="6" style="text-align:center" class="info-text">暂无数据</td></tr>';
                     return;
                 }
                 resultsBody.innerHTML = '';
+                const showFuelDeduct = (calculationMode === 'activity' && fuelMode === 'fuel');
+                const theadRow = document.querySelector('#results-table thead tr');
+                let headerHtml = '';
+                if (calculationMode === 'activity') {
+                    headerHtml = `<th>天数</th><th>累计算力</th><th>算力增长率</th><th>日产量</th>`;
+                    if (showFuelDeduct) {
+                        headerHtml += `<th>燃料费</th>`;
+                    }
+                    headerHtml += `<th>余额</th>`;
+                } else {
+                    headerHtml = `<th>天数</th><th>增长算力</th><th>日产量</th><th>收益率</th><th>余额</th>`;
+                }
+                theadRow.innerHTML = headerHtml;
+
                 for (const res of displayedResults) {
                     const row = document.createElement('tr');
                     let activityInt = Math.floor(res.activity);
                     let dailyStr = res.daily.toFixed(2);
+                    let balanceStr = res.balance.toFixed(2);
+
+                    let rowHtml = '';
                     if (calculationMode === 'activity') {
-                        row.innerHTML = `
-                            <td>${res.day}</td>
-                            <td>${activityInt}</td>
-                            <td class="growth-rate">${res.growthRate.toFixed(2)}%</td>
-                            <td>${dailyStr}</td>
-                            <td>${res.balance.toFixed(2)}</td>
-                        `;
+                        rowHtml = `<td>${res.day}</td><td>${activityInt}</td><td class="growth-rate">${res.growthRate.toFixed(2)}%</td><td>${dailyStr}</td>`;
+                        if (showFuelDeduct) {
+                            rowHtml += `<td>${res.fuelDeducted.toFixed(2)}</td>`;
+                        }
+                        rowHtml += `<td>${balanceStr}</td>`;
                     } else {
-                        row.innerHTML = `
-                            <td>${res.day}</td>
-                            <td>${activityInt}</td>
-                            <td>${dailyStr}</td>
-                            <td class="yield-rate">${res.yieldRate.toFixed(2)}%</td>
-                            <td>${res.balance.toFixed(2)}</td>
-                        `;
+                        rowHtml = `<td>${res.day}</td><td>${activityInt}</td><td>${dailyStr}</td><td class="yield-rate">${res.yieldRate.toFixed(2)}%</td><td>${balanceStr}</td>`;
                     }
+                    row.innerHTML = rowHtml;
                     row.addEventListener('click', (e) => {
                         e.stopPropagation();
                         if (selectedRow) selectedRow.classList.remove('selected');
@@ -1051,15 +1194,9 @@
                     });
                     resultsBody.appendChild(row);
                 }
-                const theadRow = document.querySelector('#results-table thead tr');
-                if (calculationMode === 'activity') {
-                    theadRow.innerHTML =
-                    `<th>天数</th><th>累计算力</th><th>算力增长率</th><th>日产量</th><th>余额</th>`;
-                } else {
-                    theadRow.innerHTML = `<th>天数</th><th>增长算力</th><th>日产量</th><th>收益率</th><th>余额</th>`;
-                }
             }
 
+            // ===== 显示矿机详情 =====
             function showScrollDetails(result) {
                 dayIndicator.textContent = `第${result.day}天`;
                 dayIndicator.style.display = 'block';
@@ -1070,12 +1207,18 @@
                         const item = document.createElement('div');
                         item.className = 'scroll-item';
                         let shortName = scrolls[key].name.substring(0, 2);
-                        item.innerHTML =
-                            `<span class="scroll-name">${shortName}</span><span class="scroll-count">${result.scrolls[key]}</span>`;
+                        item.innerHTML = `<span class="scroll-name">${shortName}</span><span class="scroll-count">${result.scrolls[key]}</span>`;
                         container.appendChild(item);
                     }
                 }
                 if (container.children.length === 0) container.innerHTML = '<div class="info-text">无矿机</div>';
+
+                if (calculationMode === 'activity' && fuelMode === 'fuel' && result.fuelDeducted > 0) {
+                    const info = document.createElement('div');
+                    info.style.cssText = 'font-size:10px;color:var(--pink);margin-top:4px;width:100%;text-align:center;';
+                    info.textContent = `🔥 当日燃料费: ${result.fuelDeducted.toFixed(2)} DSC (已扣除)`;
+                    container.appendChild(info);
+                }
             }
 
             function updateCurrentScrollsDisplay() {
@@ -1086,8 +1229,7 @@
                         const item = document.createElement('div');
                         item.className = 'scroll-item';
                         let shortName = scrolls[key].name.substring(0, 2);
-                        item.innerHTML =
-                            `<span class="scroll-name">${shortName}</span><span class="scroll-count">${scrolls[key].count}</span>`;
+                        item.innerHTML = `<span class="scroll-name">${shortName}</span><span class="scroll-count">${scrolls[key].count}</span>`;
                         container.appendChild(item);
                     }
                 }
@@ -1119,7 +1261,33 @@
                 container.scrollTop = container.scrollHeight;
             }
 
-            // 事件绑定
+            // ========== 事件绑定 ==========
+
+            toggleNormal.addEventListener('click', function() {
+                switchFuelMode('normal');
+            });
+
+            toggleFuel.addEventListener('click', function() {
+                switchFuelMode('fuel');
+            });
+
+            dailyInput.addEventListener('focus', function() {
+                if (fuelMode === 'fuel') {
+                    fuelMode = 'normal';
+                    updateFuelText();
+                    if (calculationMode === 'activity') {
+                        const rawPower = parseFloat(activityInput.value) || 0;
+                        if (rawPower > 0) {
+                            calculateFromActivity();
+                        } else {
+                            resultsBody.innerHTML = '<tr><td colspan="6" class="info-text">请输入算力</td></tr>';
+                            daysCountEl.textContent = '0天';
+                            currentScrolls.innerHTML = '<div class="info-text">请输入算力开始计算</div>';
+                        }
+                    }
+                }
+            });
+
             activityInput.addEventListener('input', function() {
                 if (this.value !== '') {
                     dailyInput.value = '';
@@ -1147,7 +1315,11 @@
             dailyInput.addEventListener('input', function() {
                 let val = this.value;
                 if (val !== '' && parseFloat(val) > 0) {
-                    activityInput.value = '';
+                    if (fuelMode === 'fuel') {
+                        fuelMode = 'normal';
+                        updateFuelText();
+                        activityInput.value = '';
+                    }
                     if (autoTimer) clearTimeout(autoTimer);
                     autoTimer = setTimeout(() => {
                         if (dailyInput.value !== '' && parseFloat(dailyInput.value) > 0) {
@@ -1161,8 +1333,13 @@
                 if (autoTimer) clearTimeout(autoTimer);
                 calculateFromActivity();
             });
+
             calcDailyBtn.addEventListener('click', () => {
                 if (autoTimer) clearTimeout(autoTimer);
+                if (fuelMode === 'fuel') {
+                    fuelMode = 'normal';
+                    updateFuelText();
+                }
                 calculateFromDaily();
             });
 
@@ -1170,6 +1347,7 @@
             dailyInput.addEventListener('click', function() { this.select(); });
 
             toggleMoreBtn.addEventListener('click', loadMoreResults);
+
             document.addEventListener('click', function(e) {
                 if (selectedRow && !e.target.closest('tr') && !e.target.closest('#current-scrolls')) {
                     selectedRow.classList.remove('selected');
@@ -1179,6 +1357,11 @@
                         '<div class="info-text">点击下面表格查看每天复投的矿机数据</div>';
                 }
             });
+
+            // ===== 初始化 =====
+            fuelMode = 'normal';
+            updateFuelText();
+            activityInput.focus();
         });
     </script>
 </body>
